@@ -1,5 +1,9 @@
 ﻿package view;
+import controll.MainController;
 
-public class MainView extends ViewMaster {
-
+public class MainView {
+    private MainController mainController;
+    MainView(){
+        mainController = new MainController();
+    }
 }

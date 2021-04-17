@@ -1,7 +1,12 @@
 ﻿package view;
+import controll.ProfileController;
 
-public class ProfileView extends ViewMaster {
+public class ProfileView {
+    private ProfileController profileController;
 
+    ProfileView(){
+        profileController = new ProfileController();
+    }
     public void printNicknameChanged() {
 
     }

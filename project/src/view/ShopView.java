@@ -1,21 +1,23 @@
 ﻿package view;
 
-import model.User;
+import controll.ShopController;
 
-public class ShopView extends ViewMaster {
-    private User user;
-    public void printNotEnoughMoney() 		
-    {
-        
-    }		
-    
-    public void printInvalidCard() 		
-    {
-        
-    }		
-    
-    public void showAllCards() 		
-    {
-        
-    }		
+public class ShopView {
+    private ShopController shopController;
+
+    ShopView() {
+        shopController = new ShopController();
+    }
+
+    public void printNotEnoughMoney() {
+
+    }
+
+    public void printInvalidCard() {
+
+    }
+
+    public void showAllCards() {
+
+    }
 }

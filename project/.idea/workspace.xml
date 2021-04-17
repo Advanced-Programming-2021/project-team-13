@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="02aec0f9-efc0-40c6-943e-b8931c98d556" name="Default Changelist" comment="" />
+    <list default="true" id="02aec0f9-efc0-40c6-943e-b8931c98d556" name="Default Changelist" comment="creating classes">
+      <change beforePath="$PROJECT_DIR$/../UML/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controll/GameMaster.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/DeckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ProfileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ScoreboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ShopView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewMaster.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -32,15 +45,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -55,8 +66,19 @@
       <option name="presentableId" value="Default" />
       <updated>1618602389963</updated>
       <workItem from="1618602391628" duration="786000" />
-      <workItem from="1618663745671" duration="1941000" />
+      <workItem from="1618663745671" duration="2638000" />
+      <workItem from="1618668881020" duration="46000" />
+      <workItem from="1618670152300" duration="404000" />
+      <workItem from="1618682062560" duration="1205000" />
     </task>
+    <task id="LOCAL-00001" summary="creating classes">
+      <created>1618665792012</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618665792012</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,5 +95,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="creating classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating classes" />
   </component>
 </project>

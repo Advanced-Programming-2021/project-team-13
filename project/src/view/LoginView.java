@@ -1,7 +1,10 @@
 ﻿package view;
-
-public class LoginView extends ViewMaster {
-
+import controll.LoginController;
+public class LoginView {
+    private LoginController loginController;
+    LoginView(){
+        loginController = new LoginController();
+    }
     public void printUsernameExists(String username) {
 
     }

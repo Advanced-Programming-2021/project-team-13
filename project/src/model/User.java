@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 
 public class User {
-    private ArrayList<User> allUsers;
+    private static ArrayList<User> allUsers;
     protected String username;
     protected String nickname;
     private String password;
@@ -13,6 +13,8 @@ public class User {
     private int drawNum;
     private ArrayList<Card> allCards;
     private ArrayList<Deck> userDecks;
+
+
 
 //
 //    public User findUserByUsername(String username) {

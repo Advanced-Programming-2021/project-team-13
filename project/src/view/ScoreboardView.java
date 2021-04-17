@@ -1,7 +1,12 @@
 ﻿package view;
 
-public class ScoreboardView extends ViewMaster {
+import controll.ScoreboardController;
+public class ScoreboardView {
+    private ScoreboardController scoreboardController;
 
+    ScoreboardView(){
+        scoreboardController = new ScoreboardController();
+    }
     public void printScoreBoard() {
 
     }
