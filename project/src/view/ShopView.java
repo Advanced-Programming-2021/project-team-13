@@ -4,6 +4,7 @@ import controll.ShopController;
 
 public class ShopView {
     private ShopController shopController;
+    private String command;
 
     ShopView() {
         shopController = new ShopController();

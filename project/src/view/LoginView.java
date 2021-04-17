@@ -2,6 +2,8 @@
 import controll.LoginController;
 public class LoginView {
     private LoginController loginController;
+    private String command;
+
     LoginView(){
         loginController = new LoginController();
     }

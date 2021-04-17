@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class DeckView {
     private DeckController deckController;
+    private String command;
+
     DeckView(){
         deckController = new DeckController();
     }

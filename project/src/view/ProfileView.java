@@ -3,6 +3,7 @@ import controll.ProfileController;
 
 public class ProfileView {
     private ProfileController profileController;
+    private String command;
 
     ProfileView(){
         profileController = new ProfileController();

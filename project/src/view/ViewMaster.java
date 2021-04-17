@@ -27,4 +27,8 @@ public class ViewMaster {
     public void printCurrentMenu() {
 
     }
+
+    public void run(){
+
+    }
 }
