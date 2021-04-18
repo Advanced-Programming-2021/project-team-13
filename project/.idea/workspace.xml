@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df15de39-7078-43b3-9264-938428b8b23f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/DeckView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ProfileView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ScoreboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ShopView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +40,21 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
