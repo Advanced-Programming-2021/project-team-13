@@ -11,4 +11,7 @@ public class ScoreboardView {
     public void printScoreBoard() {
 
     }
+
+    public void run(String command) {
+    }
 }

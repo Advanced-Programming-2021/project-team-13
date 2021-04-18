@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df15de39-7078-43b3-9264-938428b8b23f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enums/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/DeckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ProfileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ScoreboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ShopView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewMaster.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

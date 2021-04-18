@@ -8,4 +8,7 @@ public class MainView {
     MainView(){
         mainController = new MainController();
     }
+
+    public void run(String command) {
+    }
 }

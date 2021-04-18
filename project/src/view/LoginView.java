@@ -30,4 +30,7 @@ public class LoginView {
     public void showLoginMenu() {
 
     }
+
+    public void run(String command) {
+    }
 }

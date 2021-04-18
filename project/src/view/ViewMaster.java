@@ -15,7 +15,18 @@ public class ViewMaster {
     private ProfileView profileView;
     private MainView mainView;
     private DeckView deckView;
-    //
+
+    public ViewMaster()
+    {
+        loginView = new LoginView();
+        shopView = new ShopView();
+        scoreboardView = new ScoreboardView();
+        profileView = new ProfileView();
+        mainView = new MainView();
+        deckView = new DeckView();
+        currentMenu = Menu.LOGIN_MENU;
+    }
+
     public static void setUser(User user) {
         ViewMaster.user = user;
     }
@@ -29,6 +40,24 @@ public class ViewMaster {
     }
 
     public void run(){
+        String command = scanner.nextLine().trim();
+        while (currentMenu != Menu.EXIT_MENU)
+        {
+            if (currentMenu == Menu.LOGIN_MENU)
+                loginView.run(command);
+            else if (currentMenu == Menu.MAIN_MENU)
+                mainView.run(command);
+            else if (currentMenu == Menu.SHOP_MENU)
+                shopView.run(command);
+            else if (currentMenu == Menu.PROFILE_MENU)
+                profileView.run(command);
+            else if (currentMenu == Menu.SCOREBOARD_MENU)
+                scoreboardView.run(command);
+            else if (currentMenu == Menu.DECK_MENU)
+                deckView.run(command);
+            command = scanner.nextLine();
+
+        }
 
     }
 }

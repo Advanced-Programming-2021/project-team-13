@@ -21,4 +21,7 @@ public class ShopView {
     public void showAllCards() {
 
     }
+
+    public void run(String command) {
+    }
 }

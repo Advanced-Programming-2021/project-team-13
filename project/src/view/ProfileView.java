@@ -27,4 +27,7 @@ public class ProfileView {
     public void printSamePassword() {
 
     }
+
+    public void run(String command) {
+    }
 }

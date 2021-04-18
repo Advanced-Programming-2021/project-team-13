@@ -6,5 +6,6 @@ public enum Menu {
     MAIN_MENU,
     SCOREBOARD_MENU,
     PROFILE_MENU,
-    SHOP_MENU
+    SHOP_MENU,
+    DECK_MENU
 }

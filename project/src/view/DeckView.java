@@ -60,4 +60,7 @@ public class DeckView {
     public void printDeck(String deck) {
 
     }
+
+    public void run(String command) {
+    }
 }
