@@ -15,7 +15,7 @@ public class ViewMaster {
     private ProfileView profileView;
     private MainView mainView;
     private DeckView deckView;
-
+    //
     public static void setUser(User user) {
         ViewMaster.user = user;
     }
