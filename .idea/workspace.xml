@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5295b02a-138d-4d5b-ad02-4ddc732b9199" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML/controller.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML/uml.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UML/view.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project-team-13.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/controll/DeckController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/controll/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/controll/MainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/controll/ProfileController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/controll/ScoreboardController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/controll/ShopController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/enums/Face.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/enums/Menu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/model/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/model/Cell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/model/Deck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/model/Graveyard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/model/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/view/DeckView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/view/LoginView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/view/MainView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/view/ProfileView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/view/Regex.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/view/ScoreboardView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/view/ShopView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/src/view/ViewMaster.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1rQtp3c1rdvC9cNyLbG4oULUd13" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AP" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5295b02a-138d-4d5b-ad02-4ddc732b9199" name="Default Changelist" comment="" />
+      <created>1618920320640</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1618920320640</updated>
+      <workItem from="1618920322533" duration="713000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
