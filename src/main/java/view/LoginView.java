@@ -32,6 +32,5 @@ public class LoginView {
     }
 
     public void run(String command) {
-
     }
 }
