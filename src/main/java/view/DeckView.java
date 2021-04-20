@@ -1,4 +1,4 @@
-﻿package view;
+package view;
 
 import model.Deck;
 import controll.DeckController;

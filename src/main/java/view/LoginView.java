@@ -1,4 +1,4 @@
-﻿package view;
+package view;
 import controll.LoginController;
 public class LoginView {
     private LoginController loginController;

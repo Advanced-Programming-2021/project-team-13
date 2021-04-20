@@ -1,58 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5295b02a-138d-4d5b-ad02-4ddc732b9199" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML/controller.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML/uml.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UML/view.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project-team-13.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/project.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/controll/DeckController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/controll/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/controll/MainController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/controll/ProfileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/controll/ScoreboardController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/controll/ShopController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/enums/Face.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/enums/Menu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/model/Card.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/model/Cell.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/model/Deck.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/model/Graveyard.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/model/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/project.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/view/DeckView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/view/LoginView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/view/MainView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/view/ProfileView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/view/Regex.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/view/ScoreboardView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/view/ShopView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/src/view/ViewMaster.java" beforeDir="false" />
+    <list default="true" id="5295b02a-138d-4d5b-ad02-4ddc732b9199" name="Default Changelist" comment="to ro khoda ...">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ProfileController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Menu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/DeckView.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,6 +54,13 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="YuGiOh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -86,6 +72,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -95,8 +86,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1618920320640</updated>
-      <workItem from="1618920322533" duration="713000" />
+      <workItem from="1618920322533" duration="1331000" />
+      <workItem from="1618921685835" duration="40000" />
+      <workItem from="1618921947859" duration="785000" />
     </task>
+    <task id="LOCAL-00001" summary="to ro khoda ...">
+      <created>1618921103490</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618921103490</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,5 +113,10 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="to ro khoda ..." />
+    <option name="LAST_COMMIT_MESSAGE" value="to ro khoda ..." />
   </component>
 </project>

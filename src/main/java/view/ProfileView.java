@@ -1,4 +1,4 @@
-﻿package view;
+package view;
 import controll.ProfileController;
 
 public class ProfileView {

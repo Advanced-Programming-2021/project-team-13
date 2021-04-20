@@ -1,4 +1,4 @@
-﻿package controll;
+package controll;
 
 import model.User;
 import view.ProfileView;
