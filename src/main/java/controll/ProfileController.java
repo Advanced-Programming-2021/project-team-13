@@ -2,27 +2,46 @@ package controll;
 
 import model.User;
 import view.ProfileView;
+import view.ViewMaster;
+
+import java.util.ArrayList;
 
 public class ProfileController {
-    private User user;
-    private ProfileView profileView;
-
+    private final ProfileView profileView = new ProfileView();
 
     public void changeNickname(String nickname) {
+        if (isNewNickname(nickname)) {
+            ViewMaster.getUser().setNickname(nickname);
+            profileView.printNicknameChanged();
+        } else
+            profileView.printNicknameExists(nickname);
 
     }
-//
-//    public boolean isNewNickname(String nickname)
-//    {
-//
-//    }
+
+    public boolean isNewNickname(String nickname) {
+        ArrayList<User> users = User.getAllUsers();
+        for (User user : users)
+            if (nickname.equals(user.getNickname())) return false;
+        return true;
+    }
 
     public void changePassword(String currentPassword, String newPassword) {
-
+        if (isPasswordCorrect(currentPassword))
+            if (checkNewPassword(newPassword, currentPassword))
+                profileView.printSamePassword();
+            else {
+                ViewMaster.getUser().setPassword(newPassword);
+                profileView.printPasswordChanged();
+            }
+        else
+            profileView.printInvalidPassword();
     }
 
-//    public boolean checkNewPassword(String newPassword, String currentPassword)
-//    {
-//
-//    }
+    public boolean isPasswordCorrect(String currentPassword) {
+        return currentPassword.equals(ViewMaster.getUser().getPassword());
+    }
+
+    public boolean checkNewPassword(String newPassword, String currentPassword) {
+        return currentPassword.equals(newPassword);
+    }
 }

@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class User {
+public class User implements Comparable<User> {
     private static ArrayList<User> allUsers;
     protected String username;
     protected String nickname;
@@ -13,7 +13,6 @@ public class User {
     private int drawNum;
     private ArrayList<Card> allCards;
     private ArrayList<Deck> userDecks;
-
 
 
 //
@@ -28,21 +27,22 @@ public class User {
     public void addScore(int scoreToAdd) {
 
     }
-//
+
+    //
 //    public String getUsername() {
 //
 //    }
 //
-//    public String getNickname() {
-//
-//    }
-//
-//    public String getPassword() {
-//
-//    }
+    public String getNickname() {
+        return this.nickname;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
 
     public void setPassword(String password) {
-
+        this.password = password;
     }
 
     public void setUsername(String username) {
@@ -50,9 +50,26 @@ public class User {
     }
 
     public void setNickname(String nickname) {
+        this.nickname = nickname;
 
     }
-//
+
+    public static ArrayList<User> getAllUsers() {
+        return allUsers;
+    }
+
+    @Override
+    public int compareTo(User user) {
+        if (user.score > score) return 1;
+        if (user.score == score
+                && user.getNickname().compareTo(nickname) < 0) return 1;
+        return -1;
+    }
+
+    public int getScore() {
+        return score;
+    }
+    //
 //    public int getScore() {
 //
 //    }
@@ -81,4 +98,5 @@ public class User {
 //
 //    }
 //
+
 }
