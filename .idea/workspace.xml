@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="view master changed(print current menu+exit menu)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/LoginView.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +96,7 @@
       <workItem from="1618921685835" duration="40000" />
       <workItem from="1618921947859" duration="1094000" />
       <workItem from="1618925205852" duration="10735000" />
-      <workItem from="1618997382491" duration="2950000" />
+      <workItem from="1618997382491" duration="4109000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -137,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618998924195</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="view master changed(print current menu+exit menu)">
+      <created>1619000614426</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1619000614426</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +164,7 @@
     <MESSAGE value="Login view completed(not debugged)" />
     <MESSAGE value="Login controller completed(not debugged)" />
     <MESSAGE value="Login controller arguments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login controller arguments" />
+    <MESSAGE value="view master changed(print current menu+exit menu)" />
+    <option name="LAST_COMMIT_MESSAGE" value="view master changed(print current menu+exit menu)" />
   </component>
 </project>
