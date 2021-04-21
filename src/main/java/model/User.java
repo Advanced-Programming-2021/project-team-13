@@ -14,7 +14,7 @@ public class User implements Comparable<User> {
     private ArrayList<Card> allCards;
     private ArrayList<Deck> userDecks;
 
-    User(String username, String password, String nickname) {
+    public User(String username, String password, String nickname) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -24,6 +24,14 @@ public class User implements Comparable<User> {
     public static User getUserByUsername(String username) {
         for (User allUser : allUsers) {
             if (allUser.username.equals(username))
+                return allUser;
+        }
+        return null;
+    }
+
+    public static User getUserByNickname(String nickname) {
+        for (User allUser : allUsers) {
+            if (allUser.getNickname().equals(nickname))
                 return allUser;
         }
         return null;
@@ -88,6 +96,7 @@ public class User implements Comparable<User> {
     public int getDrawNum() {
         return drawNum;
     }
+
     public static ArrayList<User> getAllUsers() {
         return allUsers;
     }

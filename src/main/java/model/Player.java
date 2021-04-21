@@ -1,11 +1,11 @@
 package model;
 
-public class Player extends User {
+public class Player{
     private int lifeInGame;
 
-    Player(String username) {
-
-    }
+  //  Player(String username) {
+//
+  //  }
 
     public void play() {
 

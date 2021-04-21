@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Deck extends User {
+public class Deck{
     private int MIN_CARDS_IN_MAIN_DECK;
     private int MAX_CARDS_IN_MAIN_DECK;
     private String name;
@@ -14,9 +14,9 @@ public class Deck extends User {
     private boolean isActive;
     private int numberOfCards;
 
-    Deck(String name) {
-        this.name = name;
-    }
+ //  Deck(String name) {
+ //      this.name = name;
+ //  }
 
     public Deck getDeckByName(String name) {
         for (Deck allPlayersDeck : allPlayersDecks) {
