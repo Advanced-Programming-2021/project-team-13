@@ -34,7 +34,7 @@ public class LoginView {
     }
 
     public void printInvalidUsernameOrPassword() {
-        System.out.println("Username or password didn’t match!\n");
+        System.out.println("Username or password didn’t match!");
     }
 
     public void run(String command) {
