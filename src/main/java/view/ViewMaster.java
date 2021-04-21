@@ -35,7 +35,7 @@ public class ViewMaster {
     }
 
     public void printCurrentMenu() {
-
+        System.out.println(currentMenu.getMenuName());
     }
 
     public static Menu getCurrentMenu() {
@@ -47,9 +47,10 @@ public class ViewMaster {
     }
 
     public void run() {
-        String command = scanner.nextLine().trim();
+        String command;
         while (currentMenu != Menu.EXIT_MENU) {
-            if (command.equals("menu show-current"))
+            command = scanner.nextLine().trim();
+            if (command.matches(Regex.SHOW_MENU))
                 printCurrentMenu();
             if (currentMenu == Menu.LOGIN_MENU)
                 loginView.run(command);
@@ -61,8 +62,6 @@ public class ViewMaster {
                 profileView.run(command);
             else if (currentMenu == Menu.DECK_MENU)
                 deckView.run(command);
-            command = scanner.nextLine().trim();
-
         }
     }
 }

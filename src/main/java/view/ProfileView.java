@@ -42,8 +42,6 @@ public class ProfileView {
             changePassword(Regex.getInputMatcher(command, Regex.CHANGE_PASSWORD2));
         else if (command.matches(Regex.EXIT_MENU))
             ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
-        else if (command.matches(Regex.SHOW_MENU))
-            System.out.println("Profile Menu");
         else
             System.out.println("invalid command");
 
