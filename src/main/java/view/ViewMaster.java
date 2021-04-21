@@ -49,6 +49,8 @@ public class ViewMaster {
     public void run() {
         String command = scanner.nextLine().trim();
         while (currentMenu != Menu.EXIT_MENU) {
+            if (command.equals("menu show-current"))
+                printCurrentMenu();
             if (currentMenu == Menu.LOGIN_MENU)
                 loginView.run(command);
             else if (currentMenu == Menu.MAIN_MENU)
@@ -62,6 +64,5 @@ public class ViewMaster {
             command = scanner.nextLine().trim();
 
         }
-
     }
 }
