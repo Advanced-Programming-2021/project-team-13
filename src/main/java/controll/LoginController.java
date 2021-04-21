@@ -7,7 +7,7 @@ import view.Regex;
 import view.ViewMaster;
 
 public class LoginController {
-    private LoginView loginView;
+    private final LoginView loginView;
 
     public LoginController(LoginView loginView) {
         this.loginView = loginView;
@@ -41,8 +41,8 @@ public class LoginController {
                 return;
             }
             loginView.printLoginSuccessful();
+            ViewMaster.setUser(user);
             ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
-            loginView.printLoginSuccessful();
         } else loginView.printInvalidCommand();
     }
 

@@ -1,17 +1,37 @@
 package controll;
 
+import model.Card;
 import model.User;
 import view.ShopView;
+import view.ViewMaster;
+
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ShopController {
-    private User user;
-    private ShopView shopView;
+    private final ShopView shopView;
 
-    public void buyCard(String cardName) {
-
+    public ShopController(ShopView shopView) {
+        this.shopView = shopView;
     }
 
-    public void showAllCards() {
+    public void buyCard(String cardName) {
+        Card card = Card.findCardByName(cardName);
+        if (card == null) {
+            shopView.printInvalidCard();
+            return;
+        }
+        User user = ViewMaster.getUser();
+        if (user.getMoney() < card.getPrice()) shopView.printNotEnoughMoney();
+        else {
+            user.addMoney(-card.getPrice());
+            user.addCard(card);
+        }
+    }
 
+    public void sortAllCards() {
+        ArrayList<Card> allCards = Card.getAllCards();
+        allCards.sort(Comparator.comparing(Card::getCardName));
+        shopView.showAllCards(allCards);
     }
 }

@@ -5,7 +5,9 @@ import model.User;
 
 public class MainController {
     private MainView mainView;
-    private User user;
+    public MainController(MainView mainView){
+        this.mainView = mainView;
+    }
 
     public void logout() {
 
