@@ -20,7 +20,6 @@ public class ScoreboardView {
                     && users.get(i).getScore() == users.get(i + 1).getScore()) continue;
             counter++;
         }
-
     }
 
 }

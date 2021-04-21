@@ -3,22 +3,34 @@ package model;
 import java.util.ArrayList;
 
 public class User implements Comparable<User> {
-    private static ArrayList<User> allUsers;
+    private static final ArrayList<User> allUsers;
+
+    static {
+        allUsers = new ArrayList<>();
+    }
+
     protected String username;
     protected String nickname;
     private String password;
-    private long userMoney=100000;
-    private int score = 0;
-    private int winNum = 0;
-    private int loseNum = 0;
-    private int drawNum = 0;
-    private ArrayList<Card> allCards;
-    private ArrayList<Deck> userDecks;
+    private long money;
+    private int score;
+    private int winNum;
+    private int loseNum;
+    private int drawNum;
+    private final ArrayList<Card> allCards;
+    private final ArrayList<Deck> allDecks;
 
     public User(String username, String password, String nickname) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
+        this.money = 100000;
+        this.score = 0;
+        this.winNum = 0;
+        this.loseNum = 0;
+        this.drawNum = 0;
+        allCards = new ArrayList<>();
+        allDecks = new ArrayList<>();
         allUsers.add(this);
     }
 
@@ -38,8 +50,12 @@ public class User implements Comparable<User> {
         return null;
     }
 
+    public void addCard(Card card) {
+        allCards.add(card);
+    }
+
     public void addDeck(Deck deck) {
-        userDecks.add(deck);
+        allDecks.add(deck);
     }
 
     public void addScore(int scoreToAdd) {
@@ -56,6 +72,18 @@ public class User implements Comparable<User> {
 
     public void addLosts(int lostToAdd) {
         loseNum += lostToAdd;
+    }
+
+    public void addMoney(int moneyToAdd) {
+        money += moneyToAdd;
+    }
+
+    public ArrayList<Card> getAllCards() {
+        return allCards;
+    }
+
+    public long getMoney() {
+        return money;
     }
 
     public String getUsername() {
@@ -119,7 +147,7 @@ public class User implements Comparable<User> {
 //
 //    }
 //
-    public ArrayList<Deck> getUserDecks() {
-        return userDecks;
+    public ArrayList<Deck> getAllDecks() {
+        return allDecks;
     }
 }

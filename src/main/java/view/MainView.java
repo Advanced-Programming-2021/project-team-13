@@ -3,10 +3,9 @@ import controll.MainController;
 
 public class MainView {
     private MainController mainController;
-    private String command;
 
-    MainView(){
-        mainController = new MainController();
+    public MainView(){
+        mainController = new MainController(this);
     }
 
     public void run(String command) {
