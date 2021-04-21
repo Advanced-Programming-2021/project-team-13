@@ -9,12 +9,12 @@ public class ViewMaster {
     public static Scanner scanner = new Scanner(System.in);
     private static Menu currentMenu;
     private static User user;
-    private LoginView loginView;
-    private ShopView shopView;
-    private ScoreboardView scoreboardView;
-    private ProfileView profileView;
-    private MainView mainView;
-    private DeckView deckView;
+    private final LoginView loginView;
+    private final ShopView shopView;
+    private final ScoreboardView scoreboardView;
+    private final ProfileView profileView;
+    private final MainView mainView;
+    private final DeckView deckView;
 
     public ViewMaster() {
         loginView = new LoginView();
@@ -62,7 +62,6 @@ public class ViewMaster {
             else if (currentMenu == Menu.DECK_MENU)
                 deckView.run(command);
             command = scanner.nextLine().trim();
-
         }
     }
 }

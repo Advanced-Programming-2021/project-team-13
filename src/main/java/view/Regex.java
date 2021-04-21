@@ -12,6 +12,8 @@ public class Regex {
     public static final String CHANGE_PASSWORD2 = "profile change --password --new (?<newPassword>\\w+) --current (?<currentPassword>\\w+)";
     public static final String REGISTER = "user create --(\\w+) (\\w+) --(\\w+) (\\w+) --(\\w+) (\\w+)";
     public static final String LOGIN = "user login --(\\w+) (\\w+) --(\\w+) (\\w+)";
+    public static final String BUY_CARD = "buy card (?<cardName>\\w+)";
+    public static final String SHOP_SHOW_ALL = "shop show --all";
 
     public static String findUsername(String input) {
         Pattern pattern = Pattern.compile("--username (\\w+)");
