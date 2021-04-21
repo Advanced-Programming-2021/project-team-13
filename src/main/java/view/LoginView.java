@@ -1,17 +1,12 @@
 package view;
-
 import controll.LoginController;
-
-import java.util.regex.Matcher;
-
 public class LoginView {
     private LoginController loginController;
     private String command;
 
-    LoginView() {
+    LoginView(){
         loginController = new LoginController();
     }
-
     public void printUsernameExists(String username) {
 
     }
@@ -37,11 +32,5 @@ public class LoginView {
     }
 
     public void run(String command) {
-        if (command.matches(Regex.registerUser))
-            registerUser(Regex.getInputMatcher(command, Regex.registerUser));
-
-
     }
-
-
 }

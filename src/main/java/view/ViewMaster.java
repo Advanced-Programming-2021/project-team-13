@@ -7,8 +7,8 @@ import model.User;
 
 public class ViewMaster {
     public static Scanner scanner = new Scanner(System.in);
-    public static Menu currentMenu;
-    public static User user;
+    private static Menu currentMenu;
+    private static User user;
     private LoginView loginView;
     private ShopView shopView;
     private ScoreboardView scoreboardView;
@@ -16,8 +16,7 @@ public class ViewMaster {
     private MainView mainView;
     private DeckView deckView;
 
-    public ViewMaster()
-    {
+    public ViewMaster() {
         loginView = new LoginView();
         shopView = new ShopView();
         scoreboardView = new ScoreboardView();
@@ -39,10 +38,17 @@ public class ViewMaster {
 
     }
 
-    public void run(){
+    public static Menu getCurrentMenu() {
+        return currentMenu;
+    }
+
+    public static void setCurrentMenu(Menu currentMenu) {
+        ViewMaster.currentMenu = currentMenu;
+    }
+
+    public void run() {
         String command = scanner.nextLine().trim();
-        while (currentMenu != Menu.EXIT_MENU)
-        {
+        while (currentMenu != Menu.EXIT_MENU) {
             if (currentMenu == Menu.LOGIN_MENU)
                 loginView.run(command);
             else if (currentMenu == Menu.MAIN_MENU)
@@ -51,11 +57,9 @@ public class ViewMaster {
                 shopView.run(command);
             else if (currentMenu == Menu.PROFILE_MENU)
                 profileView.run(command);
-            else if (currentMenu == Menu.SCOREBOARD_MENU)
-                scoreboardView.run(command);
             else if (currentMenu == Menu.DECK_MENU)
                 deckView.run(command);
-            command = scanner.nextLine();
+            command = scanner.nextLine().trim();
 
         }
 

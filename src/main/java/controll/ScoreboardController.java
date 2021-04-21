@@ -4,13 +4,14 @@ import model.User;
 import view.ScoreboardView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class ScoreboardController {//implanting comparable
-    private User user;
-    private ScoreboardView scoreboardView;
+public class ScoreboardController {
+    private final ScoreboardView scoreboardView = new ScoreboardView();
 
-//
-//    public ArrayList<User> sortAllUsers(ArrayList<User> allUsers) {
-//
-//    }
+    public void sortAllUsers(ArrayList<User> allUsers) {
+        Collections.sort(allUsers);
+        scoreboardView.printScoreBoard(allUsers);
+    }
+
 }
