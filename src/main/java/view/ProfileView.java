@@ -6,7 +6,11 @@ import enums.Menu;
 import java.util.regex.Matcher;
 
 public class ProfileView {
-    private final ProfileController profileController = new ProfileController();
+    private final ProfileController profileController;
+
+    public ProfileView() {
+        profileController = new ProfileController(this);
+    }
 
     public void printNicknameChanged() {
         System.out.println("nickname changed successfully!");

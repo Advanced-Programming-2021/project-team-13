@@ -7,7 +7,11 @@ import view.ViewMaster;
 import java.util.ArrayList;
 
 public class ProfileController {
-    private final ProfileView profileView = new ProfileView();
+    private final ProfileView profileView;
+
+    public ProfileController(ProfileView profileView) {
+        this.profileView = profileView;
+    }
 
     public void changeNickname(String nickname) {
         if (isNewNickname(nickname)) {
