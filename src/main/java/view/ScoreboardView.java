@@ -6,7 +6,11 @@ import model.User;
 import java.util.ArrayList;
 
 public class ScoreboardView {
-    private ScoreboardController scoreboardController = new ScoreboardController();
+    private ScoreboardController scoreboardController;
+
+    public ScoreboardView() {
+        scoreboardController = new ScoreboardController(this);
+    }
 
     public void printScoreBoard(ArrayList<User> users) {
         int counter = 1;

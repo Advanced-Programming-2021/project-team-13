@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ScoreboardController {
-    private final ScoreboardView scoreboardView = new ScoreboardView();
+    private final ScoreboardView scoreboardView;
+
+    public ScoreboardController(ScoreboardView scoreboardView) {
+        this.scoreboardView = scoreboardView;
+    }
 
     public void sortAllUsers(ArrayList<User> allUsers) {
         Collections.sort(allUsers);
