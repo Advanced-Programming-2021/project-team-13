@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login view completed(not debugged)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller completed(not debugged)">
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/LoginView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +96,7 @@
       <workItem from="1618921685835" duration="40000" />
       <workItem from="1618921947859" duration="1094000" />
       <workItem from="1618925205852" duration="10735000" />
-      <workItem from="1618997382491" duration="1073000" />
+      <workItem from="1618997382491" duration="1518000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -127,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618997202610</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Login controller completed(not debugged)">
+      <created>1618998549271</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618998549271</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +148,7 @@
     <MESSAGE value="to ro khoda ..." />
     <MESSAGE value="making it runable" />
     <MESSAGE value="Login view completed(not debugged)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login view completed(not debugged)" />
+    <MESSAGE value="Login controller completed(not debugged)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login controller completed(not debugged)" />
   </component>
 </project>

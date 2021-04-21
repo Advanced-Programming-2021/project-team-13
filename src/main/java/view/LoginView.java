@@ -10,7 +10,7 @@ public class LoginView {
     private LoginController loginController;
 
     LoginView() {
-        loginController = new LoginController();
+        loginController = new LoginController(this);
     }
 
     public void printUsernameExists(String username) {

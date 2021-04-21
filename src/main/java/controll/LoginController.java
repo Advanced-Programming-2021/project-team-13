@@ -9,6 +9,10 @@ import view.ViewMaster;
 public class LoginController {
     private LoginView loginView;
 
+    public LoginController(LoginView loginView) {
+        this.loginView = loginView;
+    }
+
     public void registerUser(String command) {
         String username = Regex.findUsername(command);
         String password = Regex.findPassword(command);
