@@ -43,44 +43,10 @@ public class LoginView {
 
     public void run(String command) {
         if (command.matches(Regex.REGISTER))
-            registerUser(command);
+            loginController.registerUser(command);
         else if (command.matches(Regex.LOGIN))
-            loginUser(command);
+            loginController.loginUser(command);
         else printInvalidCommand();
     }
-
-    public void registerUser(String command) {
-        String username = Regex.findUsername(command);
-        String password = Regex.findPassword(command);
-        String nickname = Regex.findNickname(command);
-        if (username != null && password != null && nickname != null) {
-            if (User.getUserByUsername(username) != null) {
-                printUsernameExists(username);
-                return;
-            }
-            if (User.getUserByNickname(nickname) != null) {
-                printNicknameExists(nickname);
-                return;
-            }
-            User newUser = new User(username, password, nickname);
-            printLoginSuccessful();
-        } else printInvalidCommand();
-    }
-
-    public void loginUser(String command) {
-        String username = Regex.findUsername(command);
-        String password = Regex.findPassword(command);
-        if (username != null && password != null) {
-            User user = User.getUserByUsername(username);
-            if (user == null || !user.getPassword().equals(password)) {
-                printInvalidUsernameOrPassword();
-                return;
-            }
-            printLoginSuccessful();
-            ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
-            printLoginSuccessful();
-        } else printInvalidCommand();
-    }
-
 
 }

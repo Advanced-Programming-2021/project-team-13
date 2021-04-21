@@ -7,6 +7,7 @@ public class User implements Comparable<User> {
     protected String username;
     protected String nickname;
     private String password;
+    private long userMoney=100000;
     private int score = 0;
     private int winNum = 0;
     private int loseNum = 0;

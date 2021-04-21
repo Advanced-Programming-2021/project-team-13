@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="U">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login view completed(not debugged)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Deck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/LoginView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,17 +84,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -102,7 +95,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5295b02a-138d-4d5b-ad02-4ddc732b9199" name="Default Changelist" comment="" />
+      <changelist id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login view completed(not debugged)" />
       <created>1618920320640</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -111,6 +104,7 @@
       <workItem from="1618921685835" duration="40000" />
       <workItem from="1618921947859" duration="1094000" />
       <workItem from="1618925205852" duration="10735000" />
+      <workItem from="1618997382491" duration="1073000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -126,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618923009330</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Login view completed(not debugged)">
+      <created>1618997202610</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618997202610</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +148,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="to ro khoda ..." />
     <MESSAGE value="making it runable" />
-    <option name="LAST_COMMIT_MESSAGE" value="making it runable" />
+    <MESSAGE value="Login view completed(not debugged)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login view completed(not debugged)" />
   </component>
 </project>
