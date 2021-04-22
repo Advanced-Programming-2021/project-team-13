@@ -37,8 +37,14 @@ public class LoginView {
         System.out.println("Username or password didn’t match!");
     }
 
+    private void printLoginFirst() {
+        System.out.println("please login first");
+    }
+
     public void run(String command) {
-        if (command.equals("menu exit"))
+        if (command.matches(Regex.ENTER_MENU))   // needs to be tested !!!! fishy!!!!
+            printLoginFirst();
+        else if (command.equals("menu exit"))
             ViewMaster.setCurrentMenu(Menu.EXIT_MENU);
         else if (command.matches(Regex.REGISTER))
             loginController.registerUser(command);
@@ -46,5 +52,6 @@ public class LoginView {
             loginController.loginUser(command);
         else printInvalidCommand();
     }
+
 
 }

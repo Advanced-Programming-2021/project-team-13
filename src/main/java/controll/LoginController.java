@@ -27,7 +27,7 @@ public class LoginController {
                 return;
             }
             User newUser = new User(username, password, nickname);
-            loginView.printLoginSuccessful();
+            loginView.printUserCreated();
         } else loginView.printInvalidCommand();
     }
 
