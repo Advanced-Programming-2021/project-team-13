@@ -7,7 +7,8 @@ public enum Menu {
     SCOREBOARD_MENU("Scoreboard Menu"),
     PROFILE_MENU("Profile Menu"),
     SHOP_MENU("Shop Menu"),
-    DECK_MENU("Deck Menu");
+    DECK_MENU("Deck Menu"),
+    GAME_MENU("Game Menu");
 
     private final String menuName;
 

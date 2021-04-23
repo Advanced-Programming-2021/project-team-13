@@ -5,32 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/PhaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/Phase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/GameView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CSV/MonsterCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CSV/MonsterCSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CSV/SpellTrapCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CSV/SpellTrapCSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/DeckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShopView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CSV/MonsterCSV.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CSV/MonsterCSV.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CSV/SpellTrapCSV.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CSV/SpellTrapCSV.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/ShopController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/ShopController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Card.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/DeckView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/DeckView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/LoginView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ProfileView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ProfileView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ShopView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ShopView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -135,13 +116,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -233,6 +216,7 @@
     <MESSAGE value="Login view completed(not debugged)" />
     <MESSAGE value="Login controller completed(not debugged)" />
     <MESSAGE value="Login controller arguments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login controller arguments" />
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
 </project>
