@@ -3,22 +3,24 @@ package model;
 import java.util.ArrayList;
 
 public class Card {
+/*
     private static final ArrayList<Card> allCards;
     static {
         allCards = new ArrayList<>();
     }
 
+*/
     protected String cardName;
     protected int cardNumber;
     protected String cardIcon;
     protected String cardType;
     protected String cardDescription;
-    protected ArrayList<Cell> currentPosition;
+    protected Cell currentPosition;
     protected String faceDownOrUp;
-    protected ArrayList<Card> allCardsOfThisType;
+//    protected ArrayList<Card> allCardsOfThisType;
     protected int price;
 
-    public static void addNewCard(Card card){
+   /* public static void addNewCard(Card card){
         allCards.add(card);
     }
 
@@ -33,7 +35,7 @@ public class Card {
 
     public static ArrayList<Card> getAllCards() {
         return allCards;
-    }
+    }*/
 
     public String getCardName() {
         return cardName;

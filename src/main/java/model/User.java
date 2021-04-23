@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User implements Comparable<User> {
     private static final ArrayList<User> allUsers;
@@ -17,7 +18,7 @@ public class User implements Comparable<User> {
     private int winNum = 0;
     private int loseNum = 0;
     private int drawNum = 0;
-    private ArrayList<Card> allCards;
+    private HashMap<String, Integer> allCards;
     private ArrayList<Deck> allDecks;
 
     public User(String username, String password, String nickname) {
@@ -29,7 +30,7 @@ public class User implements Comparable<User> {
         this.winNum = 0;
         this.loseNum = 0;
         this.drawNum = 0;
-        allCards = new ArrayList<>();
+        allCards = new HashMap<>();
         allDecks = new ArrayList<>();
         allUsers.add(this);
     }
@@ -50,8 +51,11 @@ public class User implements Comparable<User> {
         return null;
     }
 
-    public void addCard(Card card) {
-        allCards.add(card);
+    public void addCard(String cardName) {
+        if (allCards.containsKey(cardName))
+            allCards.put(cardName, allCards.get(cardName) + 1);
+        else
+            allCards.put(cardName, 1);
     }
 
     public void addDeck(Deck deck) {
@@ -78,7 +82,7 @@ public class User implements Comparable<User> {
         money += moneyToAdd;
     }
 
-    public ArrayList<Card> getAllCards() {
+    public HashMap<String, Integer> getAllCards() {
         return allCards;
     }
 
@@ -151,5 +155,13 @@ public class User implements Comparable<User> {
 //
     public ArrayList<Deck> getAllDecks() {
         return allDecks;
+    }
+    public Deck getDeckByName(String deckName)
+    {
+        for (Deck deck : allDecks) {
+            if (deck.getName().equals(deckName))
+                return deck;
+        }
+        return null;
     }
 }
