@@ -4,46 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_12_45_AM_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_12_45_AM__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_10_PM_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_10_PM__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_19_PM_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_19_PM__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/LoginView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/LoginView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/Card.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/MainController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/MainView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ShopController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ShopView.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ViewMaster.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/CardType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/controll/ShopController$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/enums/CardType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShopView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
-    </list>
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,7 +39,7 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Application.ScoreboardController">
+  <component name="RunManager" selected="Application.MonsterCSV">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
@@ -92,6 +53,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="enums.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonsterCSV" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="CSV.MonsterCSV" />
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="CSV.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -125,19 +99,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ScoreboardView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.ScoreboardView" />
-      <module name="YuGiOh" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -153,11 +114,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ScoreboardController" />
+        <item itemvalue="Application.MonsterCSV" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.ScoreboardController" />
         <item itemvalue="Application.Menu" />
         <item itemvalue="Application.Regex" />
-        <item itemvalue="Application.ScoreboardView" />
       </list>
     </recent_temporary>
   </component>
@@ -175,6 +136,8 @@
       <workItem from="1618925205852" duration="10735000" />
       <workItem from="1618997382491" duration="2950000" />
       <workItem from="1619003778770" duration="2708000" />
+      <workItem from="1619028989150" duration="1078000" />
+      <workItem from="1619094417531" duration="2051000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>

@@ -1,5 +1,7 @@
 package controll;
 
+import CSV.MonsterCSV;
+import CSV.SpellTrapCSV;
 import model.Card;
 import model.User;
 import view.ShopView;
@@ -7,10 +9,10 @@ import view.ViewMaster;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.TreeMap;
 
 public class ShopController {
     private final ShopView shopView;
-
     public ShopController(ShopView shopView) {
         this.shopView = shopView;
     }
