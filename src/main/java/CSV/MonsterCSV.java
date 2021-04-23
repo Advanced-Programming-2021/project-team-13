@@ -6,6 +6,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
+import java.util.TreeMap;
 
 public class MonsterCSV {
     @CsvBindByName(column = "Name")
@@ -63,9 +64,8 @@ public class MonsterCSV {
         return Integer.parseInt(price);
     }
 
-    public MonsterCSV findSpellTrap(String name) throws FileNotFoundException {
-        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>
-                (new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "Monster.csv"))
+    public static MonsterCSV findMonster(String name) throws FileNotFoundException {
+        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "Monster.csv"))
                 .withType(MonsterCSV.class)
                 .build()
                 .parse();
@@ -75,4 +75,12 @@ public class MonsterCSV {
         return null;
     }
 
+    public static void getNameAndDescription(TreeMap<String, String> cards) throws FileNotFoundException {
+        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "Monster.csv"))
+                .withType(MonsterCSV.class)
+                .build()
+                .parse();
+        for (MonsterCSV monsterCSV : monsters)
+            cards.put(monsterCSV.getName(),monsterCSV.getDescription());
+    }
 }

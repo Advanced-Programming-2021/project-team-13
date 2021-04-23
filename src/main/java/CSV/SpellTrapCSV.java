@@ -6,6 +6,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
+import java.util.TreeMap;
 
 public class SpellTrapCSV {
     @CsvBindByName(column = "name")
@@ -45,7 +46,7 @@ public class SpellTrapCSV {
         return Integer.parseInt(price);
     }
 
-    public SpellTrapCSV findSpellTrap(String name) throws FileNotFoundException {
+    public static SpellTrapCSV findSpellTrap(String name) throws FileNotFoundException {
         List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "SpellTrap.csv"))
                 .withType(SpellTrapCSV.class)
                 .build()
@@ -57,4 +58,12 @@ public class SpellTrapCSV {
     }
 
 
+    public static void getNameAndDescription(TreeMap<String, String> cards) throws Exception {
+        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "SpellTrap.csv"))
+                .withType(SpellTrapCSV.class)
+                .build()
+                .parse();
+        for (SpellTrapCSV spellTrapCsv : spellsAndTraps)
+            cards.put(spellTrapCsv.getName(),spellTrapCsv.getDescription());
+    }
 }

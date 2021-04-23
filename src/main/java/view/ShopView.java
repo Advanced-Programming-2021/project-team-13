@@ -4,6 +4,7 @@ import controll.ShopController;
 import model.Card;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 
 public class ShopView {
@@ -21,9 +22,9 @@ public class ShopView {
         System.out.println("there is no card with this name");
     }
 
-    public void showAllCards(ArrayList<Card> allCards) {
-        for (Card card : allCards) {
-            System.out.println(card.getCardName() + ":" + card.getPrice());
+    public void showAllCards(TreeMap<String, String> allCards) {
+        for (String name : allCards.keySet()) {
+            System.out.println(name + ":" + allCards.get(name));
         }
     }
 
