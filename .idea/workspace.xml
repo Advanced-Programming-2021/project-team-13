@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +148,7 @@
       <workItem from="1619003778770" duration="2708000" />
       <workItem from="1619028989150" duration="1078000" />
       <workItem from="1619094417531" duration="14918000" />
-      <workItem from="1619176236088" duration="9355000" />
+      <workItem from="1619176236088" duration="10329000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
