@@ -64,7 +64,8 @@ public class MonsterCSV {
     }
 
     public MonsterCSV findSpellTrap(String name) throws FileNotFoundException {
-        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "Monster.csv"))
+        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>
+                (new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "Monster.csv"))
                 .withType(MonsterCSV.class)
                 .build()
                 .parse();
