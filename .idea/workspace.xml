@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5611faca-7bda-47ef-8315-c52f0531307f" name="Default Changelist" comment="Game view completed a little , needs more time!!">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_12_45_AM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_12_45_AM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_10_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_19_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_19_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,21 +22,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
   </component>
   <component name="ProjectId" id="1rQtp3c1rdvC9cNyLbG4oULUd13" />
   <component name="ProjectViewState">
@@ -49,13 +43,12 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last.edited.regexp" value="find --nickname asghar" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../AP" />
-    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.MonsterCSV">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
@@ -117,18 +110,18 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Regex" />
         <item itemvalue="Application.MonsterCSV" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.ScoreboardController" />
         <item itemvalue="Application.Menu" />
+        <item itemvalue="Application.Regex" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5611faca-7bda-47ef-8315-c52f0531307f" name="Default Changelist" comment="Game view completed a little , needs more time!!" />
+      <changelist id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login view completed(not debugged)" />
       <created>1618920320640</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -140,9 +133,8 @@
       <workItem from="1618997382491" duration="2950000" />
       <workItem from="1619003778770" duration="2708000" />
       <workItem from="1619028989150" duration="1078000" />
-      <workItem from="1619094417531" duration="14918000" />
-      <workItem from="1619176236088" duration="7671000" />
-      <workItem from="1619266925013" duration="1529000" />
+      <workItem from="1619094417531" duration="2051000" />
+      <workItem from="1619265976573" duration="1231000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -179,14 +171,7 @@
       <option name="project" value="LOCAL" />
       <updated>1618998924195</updated>
     </task>
-    <task id="LOCAL-00006" summary="Game view completed a little , needs more time!!">
-      <created>1619201665491</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1619201665491</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,8 +195,6 @@
     <MESSAGE value="Login view completed(not debugged)" />
     <MESSAGE value="Login controller completed(not debugged)" />
     <MESSAGE value="Login controller arguments" />
-    <MESSAGE value="a" />
-    <MESSAGE value="Game view completed a little , needs more time!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Game view completed a little , needs more time!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login controller arguments" />
   </component>
 </project>
