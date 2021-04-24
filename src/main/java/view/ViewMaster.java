@@ -58,6 +58,8 @@ public class ViewMaster {
                 loginView.run(command);
             else if (currentMenu == Menu.MAIN_MENU)
                 mainView.run(command);
+            else if (currentMenu == Menu.SCOREBOARD_MENU)
+                scoreboardView.run(command);
             else if (currentMenu == Menu.SHOP_MENU)
                 shopView.run(command);
             else if (currentMenu == Menu.GAME_MENU)

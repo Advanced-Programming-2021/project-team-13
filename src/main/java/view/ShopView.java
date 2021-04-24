@@ -1,9 +1,6 @@
 package view;
 
 import controll.ShopController;
-import model.Card;
-
-import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 

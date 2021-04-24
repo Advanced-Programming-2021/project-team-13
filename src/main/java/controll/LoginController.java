@@ -23,7 +23,7 @@ public class LoginController {
                 loginView.printNicknameExists(nickname);
                 return;
             }
-            User newUser = new User(username, password, nickname);
+            new User(username, password, nickname);
             loginView.printUserCreated();
         } else loginView.printInvalidCommand();
     }

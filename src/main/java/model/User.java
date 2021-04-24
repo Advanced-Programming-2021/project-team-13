@@ -13,11 +13,11 @@ public class User implements Comparable<User> {
     protected String username;
     protected String nickname;
     private String password;
-    private long money = 100000;
-    private int score = 0;
-    private int winNum = 0;
-    private int loseNum = 0;
-    private int drawNum = 0;
+    private long money;
+    private int score;
+    private int winNum;
+    private int loseNum;
+    private int drawNum;
     private HashMap<String, Integer> allCards;
     private ArrayList<Deck> allDecks;
 
@@ -156,8 +156,8 @@ public class User implements Comparable<User> {
     public ArrayList<Deck> getAllDecks() {
         return allDecks;
     }
-    public Deck getDeckByName(String deckName)
-    {
+
+    public Deck getDeckByName(String deckName) {
         for (Deck deck : allDecks) {
             if (deck.getName().equals(deckName))
                 return deck;

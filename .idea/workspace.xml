@@ -4,11 +4,70 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="a">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="ViewMaster debug">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/Attribute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShopView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/DeckController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ProfileController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ScoreboardController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ShopController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/CardType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/Face.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Cell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Deck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Graveyard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/DeckView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/LoginView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/MainView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ProfileView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/Regex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ScoreboardView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ShopView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ViewMaster.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project-team-13.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/project-team-13.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ProfileController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ScoreboardController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ShopController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Cell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/DeckView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/MainView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ProfileView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ScoreboardView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ShopView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
