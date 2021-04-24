@@ -42,6 +42,7 @@ public class Regex {
         return null;
     }
 
+
     public static String findNickname(String input) {
         Pattern pattern = Pattern.compile("--nickname (\\w+)");
         Matcher matcher = pattern.matcher(input);
