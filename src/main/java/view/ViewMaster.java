@@ -54,7 +54,7 @@ public class ViewMaster {
             command = scanner.nextLine().trim();
             if (command.matches(Regex.SHOW_MENU))
                 printCurrentMenu();
-            if (currentMenu == Menu.LOGIN_MENU)
+            else if (currentMenu == Menu.LOGIN_MENU)
                 loginView.run(command);
             else if (currentMenu == Menu.MAIN_MENU)
                 mainView.run(command);
@@ -66,8 +66,6 @@ public class ViewMaster {
                 profileView.run(command);
             else if (currentMenu == Menu.DECK_MENU)
                 deckView.run(command);
-            command = scanner.nextLine().trim();
-
         }
     }
 }
