@@ -1,24 +1,36 @@
 package model;
 
+import enums.CardType;
+import enums.Face;
+
 import java.util.ArrayList;
 
 public class Card {
-/*
-    private static final ArrayList<Card> allCards;
-    static {
-        allCards = new ArrayList<>();
-    }
+    /*
+        private static final ArrayList<Card> allCards;
+        static {
+            allCards = new ArrayList<>();
+        }
 
-*/
+    */
     protected String cardName;
     protected int cardNumber;
     protected String cardIcon;
-    protected String cardType;
+    protected CardType cardType;
     protected String cardDescription;
     protected Cell currentPosition;
-    protected String faceDownOrUp;
-//    protected ArrayList<Card> allCardsOfThisType;
+    protected Face face;
+    //    protected ArrayList<Card> allCardsOfThisType;
     protected int price;
+
+    public Card(String name, CardType cardType, String description, Face face, int price, int cardNum) {
+        this.cardName = name;
+        this.cardType = cardType;
+        this.cardDescription = description;
+        this.face = face;
+        this.price = price;
+        this.cardNumber = cardNum;
+    }
 
    /* public static void addNewCard(Card card){
         allCards.add(card);
@@ -53,12 +65,12 @@ public class Card {
         this.cardNumber = cardNumber;
     }
 
-    public String getCardType() {
+    public String getCardType() { ///// need the value of enum
         return cardType;
     }
 
     public void setCardType(String cardType) {
-        this.cardType = cardType;
+        this.cardType = cardType; /////////////////////needs  the value of enum
     }
 
     public String getCardDescription() {
