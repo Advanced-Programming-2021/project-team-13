@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="ViewMaster debug">
-      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Attribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CSV/MonsterCSV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CSV/SpellTrapCSV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/enums/Menu.class" beforeDir="false" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Attribute and monster type enums">
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/SpellEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/SummonType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/TrapEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/CardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/CardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/MonsterType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +108,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MonsterCSV" />
@@ -131,7 +146,8 @@
       <workItem from="1619028989150" duration="1078000" />
       <workItem from="1619094417531" duration="2051000" />
       <workItem from="1619265976573" duration="1231000" />
-      <workItem from="1619325330109" duration="570000" />
+      <workItem from="1619325330109" duration="1355000" />
+      <workItem from="1619340719040" duration="362000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -182,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619325502000</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Attribute and monster type enums">
+      <created>1619326059270</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1619326059270</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +231,7 @@
     <MESSAGE value="Login controller arguments" />
     <MESSAGE value="login view fixed,Regex not in controller anymore" />
     <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
+    <MESSAGE value="Attribute and monster type enums" />
+    <option name="LAST_COMMIT_MESSAGE" value="Attribute and monster type enums" />
   </component>
 </project>

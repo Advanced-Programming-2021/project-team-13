@@ -1,6 +1,6 @@
 package enums;
 
-public enum Attribute {
+public enum MonsterAttribute {
     DARK,
     EARTH,
     FIRE,
