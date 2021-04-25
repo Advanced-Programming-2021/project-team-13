@@ -1,4 +1,7 @@
 package enums;
 
-public class MonsterType {
+public enum MonsterType {
+    NORMAL,
+    ABILITY,
+    RITUAL;
 }
