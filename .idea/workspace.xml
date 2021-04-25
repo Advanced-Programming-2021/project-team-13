@@ -167,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618998924195</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="login view fixed,Regex not in controller anymore">
+      <created>1619282075783</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1619282075783</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +198,7 @@
     <MESSAGE value="Login view completed(not debugged)" />
     <MESSAGE value="Login controller completed(not debugged)" />
     <MESSAGE value="Login controller arguments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login controller arguments" />
+    <MESSAGE value="login view fixed,Regex not in controller anymore" />
+    <option name="LAST_COMMIT_MESSAGE" value="login view fixed,Regex not in controller anymore" />
   </component>
 </project>
