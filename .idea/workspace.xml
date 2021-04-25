@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Monster half-completed!!!!!">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Spell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Trap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Spell and Trap half completed!!!">
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Card.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,19 +101,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MonsterCSV" />
@@ -145,7 +130,7 @@
       <workItem from="1619265976573" duration="1231000" />
       <workItem from="1619325330109" duration="1355000" />
       <workItem from="1619340719040" duration="409000" />
-      <workItem from="1619359245605" duration="5051000" />
+      <workItem from="1619359245605" duration="5209000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -217,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619367693319</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Spell and Trap half completed!!!">
+      <created>1619376811321</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1619376811321</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +238,7 @@
     <MESSAGE value="Attribute and monster type enums" />
     <MESSAGE value="Card enums completed" />
     <MESSAGE value="Monster half-completed!!!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Monster half-completed!!!!!" />
+    <MESSAGE value="Spell and Trap half completed!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Spell and Trap half completed!!!" />
   </component>
 </project>

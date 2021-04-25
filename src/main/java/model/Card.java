@@ -65,11 +65,11 @@ public class Card {
         this.cardNumber = cardNumber;
     }
 
-    public String getCardType() { ///// need the value of enum
+    public CardType getCardType() { ///// need the value of enum
         return cardType;
     }
 
-    public void setCardType(String cardType) {
+    public void setCardType(CardType cardType) {
         this.cardType = cardType; /////////////////////needs  the value of enum
     }
 
@@ -97,8 +97,8 @@ public class Card {
 //
 //    }
 
-    public void setFace(String face) {
-
+    public void setFace(Face face) {
+        this.face = face;
     }
 
 //    public String getFace() {
