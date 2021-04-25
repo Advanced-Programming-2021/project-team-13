@@ -2,12 +2,12 @@ package view;
 
 import controll.LoginController;
 import enums.Menu;
-import model.User;
+
 
 
 public class LoginView {
 
-    private LoginController loginController;
+    private final LoginController loginController;
 
     LoginView() {
         loginController = new LoginController(this);
@@ -34,7 +34,7 @@ public class LoginView {
     }
 
     public void printInvalidUsernameOrPassword() {
-        System.out.println("Username or password didn’t match!");
+        System.out.println("Username or password didn't match!");
     }
 
     private void printLoginFirst() {
