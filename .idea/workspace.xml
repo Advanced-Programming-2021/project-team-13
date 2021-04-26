@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Spell and Trap half completed!!!">
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Card.java" afterDir="false" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Card set face and , get card type , set card type changed!!">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +102,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MonsterCSV" />
@@ -131,6 +143,8 @@
       <workItem from="1619325330109" duration="1355000" />
       <workItem from="1619340719040" duration="409000" />
       <workItem from="1619359245605" duration="5209000" />
+      <workItem from="1619376968389" duration="135000" />
+      <workItem from="1619401991764" duration="906000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -209,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619376811321</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Card set face and , get card type , set card type changed!!">
+      <created>1619377095469</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1619377095469</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,6 +260,7 @@
     <MESSAGE value="Card enums completed" />
     <MESSAGE value="Monster half-completed!!!!!" />
     <MESSAGE value="Spell and Trap half completed!!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Spell and Trap half completed!!!" />
+    <MESSAGE value="Card set face and , get card type , set card type changed!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Card set face and , get card type , set card type changed!!" />
   </component>
 </project>
