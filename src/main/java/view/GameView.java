@@ -4,9 +4,7 @@ import controll.PhaseController;
 import enums.Phase;
 import model.Card;
 import model.Player;
-
 import java.util.regex.Matcher;
-
 public class GameView {
     private static Phase currentPhase;
     private PhaseController phaseController;
