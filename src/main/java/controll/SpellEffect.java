@@ -10,7 +10,8 @@ public class SpellEffect {
     //!!!!!!!!!!!!!!!!! graveYard !!!!!!!!!!!!!!
 
     public void monsterReborn(Monster monster) {// revive from graveyard!!!!
-
+        if (ourPlayer.getGraveyard().getMonsterFromGraveyard(monster) != null)
+            ourPlayer.addCardInGame(monster);
     }
 
     public void terraforming(Spell spell) {// retrieve Field spell to hand from deck!!
@@ -46,7 +47,7 @@ public class SpellEffect {
     }
 
     public void spellAbsorption() {//get 500 health instantly
-
+        ourPlayer.increaseHealth(500);
     }
 
     public void messengerOfPeace(ArrayList<Monster> monstersWithAtkAbove1500) {//cant attack(needs 100 LP)
