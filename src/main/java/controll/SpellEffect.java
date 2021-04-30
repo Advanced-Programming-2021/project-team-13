@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class SpellEffect {
     private Player ourPlayer;/// suppose these are needed or maybe more!
     private Player rivalPlayer; // !!!!!!!!!!!!!!! where do we use this class and what attributes does it need???!!!!!!!!!!!!!!!
-                                //!!!!!!!!!!!!!!!!! graveYard !!!!!!!!!!!!!!
+    //!!!!!!!!!!!!!!!!! graveYard !!!!!!!!!!!!!!
 
     public void monsterReborn(Monster monster) {// revive from graveyard!!!!
 
