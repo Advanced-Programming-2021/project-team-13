@@ -19,6 +19,26 @@ public class Player {
         return playersGraveyard;
     }
 
+    public int getLifeInGame() {
+        return lifeInGame;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Player getRivalPlayer() {
+        return rivalPlayer;
+    }
+
+    public Cell[][] getBoard() {
+        return board;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
     public void increaseHealth(int amount) {
         lifeInGame += amount;
     }
