@@ -4,128 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_opencsv_opencsv_5_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20210307.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Interfaces/Effects.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controll/MonsterEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controll/PhaseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterAttribute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/Phase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/SpellEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/SummonType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/TrapEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/enums/Zone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Monster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Spell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/Trap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_opencsv_opencsv_4_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_8_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_11.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_9.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_12_45_AM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_12_45_AM__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_10_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_10_PM__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_19_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_19_PM__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/LoginView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/LoginView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/MainView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ShopController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ShopView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ViewMaster.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM__Default_Changelist_.xml" beforeDir="false" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="a">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/enums/CardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/CardType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Face.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Face.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/PhaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShopView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/DeckController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ProfileController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ScoreboardController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ShopController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/CardType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/Face.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Cell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Deck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Graveyard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/DeckView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/LoginView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/MainView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ProfileView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/Regex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ScoreboardView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ShopView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ViewMaster.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/project-team-13.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/project-team-13.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CSV/MonsterCSV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CSV/SpellTrapCSV.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/ProfileController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/ScoreboardController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/ShopController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/enums/Menu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Cell.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/DeckView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/MainView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ProfileView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ScoreboardView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ShopView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -230,13 +116,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
