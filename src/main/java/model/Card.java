@@ -3,6 +3,7 @@ package model;
 import Interfaces.Effects;
 import enums.CardType;
 import enums.Face;
+import enums.Zone;
 
 import java.util.ArrayList;
 
@@ -23,8 +24,10 @@ public class Card {
     protected Face face;
     protected Player cardOwner;
     protected Effects effects;
+    protected Zone zone;
     //    protected ArrayList<Card> allCardsOfThisType;
     protected int price;
+
 
     public Card(String name, CardType cardType, String description, Face face, int price, int cardNum) {
         this.cardName = name;
@@ -33,6 +36,7 @@ public class Card {
         this.face = face;
         this.price = price;
         this.cardNumber = cardNum;
+        this.zone = Zone.DECK_ZONE;
     }
 
    /* public static void addNewCard(Card card){
@@ -114,5 +118,24 @@ public class Card {
 
     public void addToAllCardsOfThisType(Card card) {
 
+    }
+    public Face getFace() {
+        return face;
+    }
+
+    public Player getCardOwner() {
+        return cardOwner;
+    }
+
+    public void setCardOwner(Player cardOwner) {
+        this.cardOwner = cardOwner;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
     }
 }
