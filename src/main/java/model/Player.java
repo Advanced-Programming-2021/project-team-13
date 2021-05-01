@@ -19,4 +19,7 @@ public class Player {
     public void increaseHealth(int amount) {
         lifeInGame += amount;
     }
+
+    public void addCardInGame(Card card) {
+    }
 }

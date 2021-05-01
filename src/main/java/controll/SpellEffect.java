@@ -15,34 +15,35 @@ public class SpellEffect {
     }
 
     public void terraforming(Spell spell) {// retrieve Field spell to hand from deck!!
+        if(spell.getSpellEffect()== enums.SpellEffect.FEILD)
+            ourPlayer.addCardInGame(spell);
+    }
+
+    public void potOfGreed(Spell firstSpell, Spell secondSpell) {// retrieve 2 spells from top deck///challenge:WTF is top deck????
+        ourPlayer.addCardInGame(firstSpell);
+        ourPlayer.addCardInGame(secondSpell);
+    }
+
+    public void raigeki(ArrayList<Monster> rivalsMonsters) {// destroy all rival-controlled monster///challenge:delete from board maybe??? and how does board work???
 
     }
 
-    public void potOfGreed(Spell firstSpell, Spell secondSpell) {// retrieve 2 spells from top deck
+    public void changeOfHeart(Monster rivalsMonster) {// control one of rivals monster till end of the round//challenge:do we need controlled monsters arraylist???-how to manuver in game??
+    }
+
+    public void harpie(ArrayList<Spell> rivalSpells, ArrayList<Trap> rivalTraps) {//destroy all traps and spells of rival////how THE F do I destroy sth in generall and in all cases
 
     }
 
-    public void raigeki(ArrayList<Monster> rivalsMonsters) {// destroy all rival-controlled monsters
+    public void swordsOfRevealing(ArrayList<Monster> rivalMonsters) {// 3 round(end)-all rival monsters flip to up-enemy monsters cant attack//challenge: we need access to all monsters in game(same as controlled monsters???)
 
     }
 
-    public void changeOfHeart(Monster rivalsMonster) {// control one of rivals monster till end of the round
+    public void darkHole(ArrayList<Monster> allCards) {//destroy all monsters//challenge:we need an arraylist of all monster besides the one each player has
 
     }
 
-    public void harpie(ArrayList<Spell> rivalSpells, ArrayList<Trap> rivalTraps) {//destroy all traps and spells of rival
-
-    }
-
-    public void swordsOfRevealing(ArrayList<Monster> rivalMonsters) {// 3 round(end)-all rival monsters flip to up-enemy monsters cant attack
-
-    }
-
-    public void darkHole(ArrayList<Monster> allCards) {//destroy all monsters(we need an arraylist of all monster besides the one each player has)
-
-    }
-
-    public void supplySquad(ArrayList<Monster> destroyedMonsters) {//if min of 1 of your monsters get destroyed,retrieved one card from top deck
+    public void supplySquad(ArrayList<Monster> destroyedMonsters) {//if min of 1 of your monsters get destroyed,retrieved one card from top deck//challenge:the graveyard problem!!!!!
 
     }
 
@@ -50,15 +51,15 @@ public class SpellEffect {
         ourPlayer.increaseHealth(500);
     }
 
-    public void messengerOfPeace(ArrayList<Monster> monstersWithAtkAbove1500) {//cant attack(needs 100 LP)
+    public void messengerOfPeace(ArrayList<Monster> monstersWithAtkAbove1500) {//cant attack(needs 100 LP)//challenge:the maneuver to do sth so that the enemy cant attack!!!---this is the only continues spell so we need the continues maneuver!!!
 
     }
 
-    public void twinTwisters(Card sacrifice, ArrayList<Card> boardCards) {//sacrifice one card-destroy max(2) trap or spells
+    public void twinTwisters(Card sacrifice, ArrayList<Card> boardCards) {//sacrifice one card-destroy max(2) trap or spells/challenge:the destroying maneuver
 
     }
 
-    public void mysticalTyphoon(Card spellOrTrap) {// destroy a spell or a trap
+    public void mysticalTyphoon(Card spellOrTrap) {// destroy a spell or a trap//
 
     }
 
@@ -66,7 +67,7 @@ public class SpellEffect {
 
     }
 
-    public void yami(ArrayList<Monster> allMonstersOnBoard) { // fiend/spell caster + 200 ATK/DEF - fairy - 200 ATK/DEF
+    public void yami(ArrayList<Monster> allMonstersOnBoard) { // fiend/spell caster + 200 ATK/DEF - fairy - 200 ATK/DEF//challenge: get from board or each players arraylist of cards ???
 
     }
 
@@ -82,23 +83,23 @@ public class SpellEffect {
 
     }
 
-    public void swordOfDarkDestruction() {
+    public void swordOfDarkDestruction() {//equipped fiend-spellcaster monsters +400 ATK -200 DEF// challenge : how to equip one monster(Card?) with sth ?? do we need attribute?? or method?? and how to make it work every round !!??!!
 
     }
 
-    public void blackPendant() {
+    public void blackPendant() {//equipped monsters +500 ATK
 
     }
 
-    public void unitedWeStand() {
+    public void unitedWeStand() {// equipped monsters receive 800 ATK/DEF per every controlled and faced up monster
 
     }
 
-    public void magnumShield() {
+    public void magnumShield() {//only equips warriors - on attack:+DEF(or ATK -> DEF?);;; on def:+DEF
 
     }
 
-    public void advancedArt() {
+    public void advancedArt() {//this + monsters that the sum of their levels equals ritual monster ---they go to the graveyard !!!
 
     }
 }
