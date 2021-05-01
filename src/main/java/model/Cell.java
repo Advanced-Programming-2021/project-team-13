@@ -2,8 +2,9 @@ package model;
 
 public class Cell {
     private Card card;
-    Cell(Card card){
-        this.card =card;
+
+    Cell(Card card) {
+        this.card = card;
     }
 
     public Card getCard() {

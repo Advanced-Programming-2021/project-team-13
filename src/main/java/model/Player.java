@@ -7,13 +7,15 @@ public class Player {
     private int lifeInGame;
     private User user;
     private Player rivalPlayer;
-    private Cell[][] board;
     private Card currentCard;
     private Deck deck;
+    private Board board;
     private boolean canActivateTrap = true;
-    //  Player(String username) {
-//
-    //  }
+    private boolean canAttack = true;
+
+    Player(User user) {
+        this.user = user;
+    }
 
     public void play() {
 

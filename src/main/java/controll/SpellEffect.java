@@ -24,7 +24,7 @@ public class SpellEffect {
 
     Effects monsterReborn = new Effects() {                                // problem with the arguments!!!
         @Override
-        public boolean conditionCheck(Card playingCard, Cell cell) {
+        public boolean conditionCheck(Card playingCard) {
             int check = 0;
             if (playingCard.getPlayer().getGraveyard()
                     .getCardFromGraveyard(playingCard.getCardName()) != null)
@@ -38,11 +38,6 @@ public class SpellEffect {
         @Override
         public void useAbility(Card playingCard) {
             monsterReborn((Monster) playingCard);
-        }
-
-        @Override
-        public Player getCardOwner(Card playingCard) {
-            return playingCard.getPlayer();
         }
     };
 

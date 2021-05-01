@@ -1,16 +1,16 @@
 package view;
 
-import controll.PhaseController;
+import controll.GameController;
 import enums.Phase;
 import model.Card;
 import model.Player;
 import java.util.regex.Matcher;
 public class GameView {
     private static Phase currentPhase;
-    private PhaseController phaseController;
+    private GameController phaseController;
 
     GameView() {
-        phaseController = new PhaseController(this);
+        phaseController = new GameController(this);
         currentPhase = Phase.DRAW_PHASE;
     }
 

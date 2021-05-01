@@ -4,14 +4,14 @@ import enums.Phase;
 import model.Player;
 import view.GameView;
 
-public class PhaseController {
+public class GameController {
     private GameView gameView;
     private Player p1;
     private Player p2;
     private Phase currentPhase;
     private String command;
 
-    public PhaseController(GameView gameView) {
+    public GameController(GameView gameView) {
         this.gameView = gameView;
     }
 
