@@ -1,5 +1,6 @@
 package model;
 
+import Interfaces.Effects;
 import enums.CardType;
 import enums.Face;
 
@@ -20,6 +21,8 @@ public class Card {
     protected String cardDescription;
     protected Cell currentPosition;
     protected Face face;
+    protected Player cardOwner;
+    protected Effects effects;
     //    protected ArrayList<Card> allCardsOfThisType;
     protected int price;
 
@@ -71,6 +74,10 @@ public class Card {
 
     public void setCardType(CardType cardType) {
         this.cardType = cardType; /////////////////////needs  the value of enum
+    }
+
+    public Player getPlayer() {
+        return cardOwner;
     }
 
     public String getCardDescription() {

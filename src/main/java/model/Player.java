@@ -3,7 +3,10 @@ package model;
 public class Player {
     private Graveyard playersGraveyard;
     private int lifeInGame;
-
+    private User user;
+    private Player rivalPlayer;
+    private Cell[][] board;
+    private Deck deck;
     //  Player(String username) {
 //
     //  }

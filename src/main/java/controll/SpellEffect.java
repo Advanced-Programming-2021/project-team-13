@@ -1,21 +1,43 @@
 package controll;
 
+import Interfaces.Effects;
+import enums.CardType;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SpellEffect {
     private Player ourPlayer;/// suppose these are needed or maybe more!
     private Player rivalPlayer; // !!!!!!!!!!!!!!! where do we use this class and what attributes does it need???!!!!!!!!!!!!!!!
+
     //!!!!!!!!!!!!!!!!! graveYard !!!!!!!!!!!!!!
+    public void run() {
+        HashMap<String, Effects> effects = DeckController.effects;
+        effects.put("monsterReborn", monsterReborn);
+        effects.put("")
+    }
 
     public void monsterReborn(Monster monster) {// revive from graveyard!!!!
         if (ourPlayer.getGraveyard().getMonsterFromGraveyard(monster) != null)
             ourPlayer.addCardInGame(monster);
     }
+//
+//    Effects monsterReborn = new Effects() {
+//        @Override
+//        public boolean conditionCheck(Card playingCard) {
+//            return playingCard.getCardType() == CardType.TRAP;
+//        }
+//
+//        @Override
+//        public void useAbility(Card playingCard) {
+//            if (conditionCheck(playingCard))
+//                playingCard.getPlayer();
+//        }
+//    };
 
     public void terraforming(Spell spell) {// retrieve Field spell to hand from deck!!
-        if(spell.getSpellEffect()== enums.SpellEffect.FEILD)
+        if (spell.getSpellEffect() == enums.SpellEffect.FEILD)
             ourPlayer.addCardInGame(spell);
     }
 
@@ -28,10 +50,10 @@ public class SpellEffect {
 
     }
 
-    public void changeOfHeart(Monster rivalsMonster) {// control one of rivals monster till end of the round//challenge:do we need controlled monsters arraylist???-how to manuver in game??
+    public void changeOfHeart(Monster rivalsMonster) {// control one of rivals monster till end of the round//challenge:do we need controlled monsters arraylist???-how to maneuver in game??
     }
 
-    public void harpie(ArrayList<Spell> rivalSpells, ArrayList<Trap> rivalTraps) {//destroy all traps and spells of rival////how THE F do I destroy sth in generall and in all cases
+    public void harpie(ArrayList<Spell> rivalSpells, ArrayList<Trap> rivalTraps) {//destroy all traps and spells of rival////how THE F do I destroy sth in general and in all cases
 
     }
 
@@ -102,4 +124,6 @@ public class SpellEffect {
     public void advancedArt() {//this + monsters that the sum of their levels equals ritual monster ---they go to the graveyard !!!
 
     }
+
+
 }

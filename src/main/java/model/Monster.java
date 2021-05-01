@@ -1,5 +1,6 @@
 package model;
 
+import Interfaces.Effects;
 import enums.*;
 
 public class Monster extends Card {
@@ -9,6 +10,7 @@ public class Monster extends Card {
     private int attackNum;
     private int defenseNum;
     private int level;
+    private Effects effects;
 
     Monster(String name, CardType cardType, Face face, int price, int cardNum, String description,
             MonsterType monsterType, SummonType summonType, MonsterAttribute monsterAttribute,
