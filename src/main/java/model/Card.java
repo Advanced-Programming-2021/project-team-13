@@ -1,24 +1,43 @@
 package model;
 
+import Interfaces.Effects;
+import enums.CardType;
+import enums.Face;
+import enums.Zone;
+
 import java.util.ArrayList;
 
 public class Card {
-/*
-    private static final ArrayList<Card> allCards;
-    static {
-        allCards = new ArrayList<>();
-    }
+    /*
+        private static final ArrayList<Card> allCards;
+        static {
+            allCards = new ArrayList<>();
+        }
 
-*/
+    */
     protected String cardName;
     protected int cardNumber;
     protected String cardIcon;
-    protected String cardType;
+    protected CardType cardType;
     protected String cardDescription;
     protected Cell currentPosition;
-    protected String faceDownOrUp;
-//    protected ArrayList<Card> allCardsOfThisType;
+    protected Face face;
+    protected Player cardOwner;
+    protected Effects effects;
+    protected Zone zone;
+    //    protected ArrayList<Card> allCardsOfThisType;
     protected int price;
+
+
+    public Card(String name, CardType cardType, String description, Face face, int price, int cardNum) {
+        this.cardName = name;
+        this.cardType = cardType;
+        this.cardDescription = description;
+        this.face = face;
+        this.price = price;
+        this.cardNumber = cardNum;
+        this.zone = Zone.DECK_ZONE;
+    }
 
    /* public static void addNewCard(Card card){
         allCards.add(card);
@@ -53,12 +72,16 @@ public class Card {
         this.cardNumber = cardNumber;
     }
 
-    public String getCardType() {
+    public CardType getCardType() { ///// need the value of enum
         return cardType;
     }
 
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setCardType(CardType cardType) {
+        this.cardType = cardType; /////////////////////needs  the value of enum
+    }
+
+    public Player getPlayer() {
+        return cardOwner;
     }
 
     public String getCardDescription() {
@@ -85,8 +108,8 @@ public class Card {
 //
 //    }
 
-    public void setFace(String face) {
-
+    public void setFace(Face face) {
+        this.face = face;
     }
 
 //    public String getFace() {
@@ -95,5 +118,24 @@ public class Card {
 
     public void addToAllCardsOfThisType(Card card) {
 
+    }
+    public Face getFace() {
+        return face;
+    }
+
+    public Player getCardOwner() {
+        return cardOwner;
+    }
+
+    public void setCardOwner(Player cardOwner) {
+        this.cardOwner = cardOwner;
+    }
+
+    public Zone getZone() {
+        return zone;
+    }
+
+    public void setZone(Zone zone) {
+        this.zone = zone;
     }
 }

@@ -21,6 +21,8 @@ public class Regex {
     public static final String REMOVE_CARD_FROM_DECK = "^deck rm-card (--\\w+ \\w+) (--\\w+ \\w+)( --side)?$";
     public static final String SHOW_DECKS = "^deck show --all$";
     public static final String DECK_SHOW_CARDS = "^deck show --cards$";
+    public static final String ATTACK = "attack ([1-5])";
+    public static final String SET_POSITION = "set -- position (attack|defense)"; // fishy !!!!!!!!!!!!!!
 
     public static String findUsername(String input) {
         Pattern pattern = Pattern.compile("--username (\\w+)");
@@ -39,6 +41,7 @@ public class Regex {
         }
         return null;
     }
+
 
     public static String findNickname(String input) {
         Pattern pattern = Pattern.compile("--nickname (\\w+)");

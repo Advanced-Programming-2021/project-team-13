@@ -2,12 +2,12 @@ package view;
 
 import controll.LoginController;
 import enums.Menu;
-import model.User;
+
 
 
 public class LoginView {
 
-    private LoginController loginController;
+    private final LoginController loginController;
 
     LoginView() {
         loginController = new LoginController(this);
@@ -34,7 +34,7 @@ public class LoginView {
     }
 
     public void printInvalidUsernameOrPassword() {
-        System.out.println("Username or password didn’t match!");
+        System.out.println("Username or password didn't match!");
     }
 
     private void printLoginFirst() {
@@ -47,10 +47,23 @@ public class LoginView {
         else if (command.equals("menu exit"))
             ViewMaster.setCurrentMenu(Menu.EXIT_MENU);
         else if (command.matches(Regex.REGISTER))
-            loginController.registerUser(command);
+            register(command);
         else if (command.matches(Regex.LOGIN))
-            loginController.loginUser(command);
+            login(command);
         else printInvalidCommand();
+    }
+
+    private void register(String command) {
+        String username = Regex.findUsername(command);
+        String password = Regex.findPassword(command);
+        String nickname = Regex.findNickname(command);
+        loginController.registerUser(username, password, nickname);
+    }
+
+    private void login(String command) {
+        String username = Regex.findUsername(command);
+        String password = Regex.findPassword(command);
+        loginController.loginUser(username, password);
     }
 
 

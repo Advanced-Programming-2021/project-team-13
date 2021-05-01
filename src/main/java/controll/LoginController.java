@@ -13,10 +13,7 @@ public class LoginController {
         this.loginView = loginView;
     }
 
-    public void registerUser(String command) {
-        String username = Regex.findUsername(command);
-        String password = Regex.findPassword(command);
-        String nickname = Regex.findNickname(command);
+    public void registerUser(String username, String password, String nickname) {
         if (username != null && password != null && nickname != null) {
             if (User.getUserByUsername(username) != null) {
                 loginView.printUsernameExists(username);
@@ -26,14 +23,12 @@ public class LoginController {
                 loginView.printNicknameExists(nickname);
                 return;
             }
-            User newUser = new User(username, password, nickname);
+            new User(username, password, nickname);
             loginView.printUserCreated();
         } else loginView.printInvalidCommand();
     }
 
-    public void loginUser(String command) {
-        String username = Regex.findUsername(command);
-        String password = Regex.findPassword(command);
+    public void loginUser(String username, String password) {
         if (username != null && password != null) {
             User user = User.getUserByUsername(username);
             if (user == null || !user.getPassword().equals(password)) {

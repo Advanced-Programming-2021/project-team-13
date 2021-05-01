@@ -2,8 +2,11 @@ package controll;
 
 import CSV.MonsterCSV;
 import CSV.SpellTrapCSV;
+import Interfaces.Effects;
 import model.Card;
 import model.Deck;
+import model.Monster;
+import model.Spell;
 import view.DeckView;
 import view.ViewMaster;
 
@@ -14,6 +17,8 @@ public class DeckController {
     private DeckView deckView;
     private MonsterCSV monsterCSV = new MonsterCSV();
     private SpellTrapCSV spellTrapCSV = new SpellTrapCSV();
+    private SpellEffect spellEffect = new SpellEffect();
+    public static HashMap<String , Effects> effects = new HashMap<>();
 
     public DeckController(DeckView deckView) {
         this.deckView = deckView;
@@ -75,6 +80,10 @@ public class DeckController {
             deckView.printCardDoesntExist(cardName);
     }
 
+    private void addToHashMap(String name){
+
+    }
+
     private Card findCard(String cardName) {
         MonsterCSV monster;
         SpellTrapCSV spellOrTrap;
@@ -83,7 +92,7 @@ public class DeckController {
             spellOrTrap = spellTrapCSV.findSpellTrap(cardName);
         } catch (FileNotFoundException e) {
         }
-        if (monster == null) ;
+//        if (monster == null) return new Monster(,effects.get(cardName));
         else
 
     }

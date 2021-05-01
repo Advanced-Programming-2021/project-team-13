@@ -15,6 +15,7 @@ public class ViewMaster {
     private final ProfileView profileView;
     private final MainView mainView;
     private final DeckView deckView;
+    private final GameView gameView;
 
     public ViewMaster() {
         loginView = new LoginView();
@@ -23,6 +24,7 @@ public class ViewMaster {
         profileView = new ProfileView();
         mainView = new MainView();
         deckView = new DeckView();
+        gameView = new GameView();
         currentMenu = Menu.LOGIN_MENU;
     }
 
@@ -52,18 +54,20 @@ public class ViewMaster {
             command = scanner.nextLine().trim();
             if (command.matches(Regex.SHOW_MENU))
                 printCurrentMenu();
-            if (currentMenu == Menu.LOGIN_MENU)
+            else if (currentMenu == Menu.LOGIN_MENU)
                 loginView.run(command);
             else if (currentMenu == Menu.MAIN_MENU)
                 mainView.run(command);
+            else if (currentMenu == Menu.SCOREBOARD_MENU)
+                scoreboardView.run(command);
             else if (currentMenu == Menu.SHOP_MENU)
                 shopView.run(command);
+            else if (currentMenu == Menu.GAME_MENU)
+                gameView.run(command);
             else if (currentMenu == Menu.PROFILE_MENU)
                 profileView.run(command);
             else if (currentMenu == Menu.DECK_MENU)
                 deckView.run(command);
-            command = scanner.nextLine().trim();
-
         }
     }
 }
