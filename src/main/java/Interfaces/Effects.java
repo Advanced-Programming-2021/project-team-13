@@ -1,15 +1,10 @@
 package Interfaces;
 
 import model.Card;
-import model.Cell;
 import model.Player;
 
 public interface Effects {
-    boolean conditionCheck(Card playingCard, Cell cell);
-
+    boolean conditionCheck(Card playingCard);
     void useAbility(Card playingCard);
-
-    default Player getCardOwner(Card playingCard) {
-        return playingCard.getPlayer();
-    }
+    void destroyedEffect(Card playingCard);
 }

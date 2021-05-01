@@ -4,12 +4,128 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="mindfuck of all">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_opencsv_opencsv_5_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20210307.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Interfaces/Effects.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/MonsterEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/PhaseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterAttribute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/Phase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/SpellEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/SummonType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/TrapEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/enums/Zone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Monster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Spell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/Trap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_opencsv_opencsv_4_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_8_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_11.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_12_45_AM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_12_45_AM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_10_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_10_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_19_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_19_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/LoginView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_37_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/LoginView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_2_53_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/MainView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ShopController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ShopView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/ViewMaster.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_21_2021_5_21_PM__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/Effects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Interfaces/Effects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/CardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/CardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Face.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Face.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ShopView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/DeckController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ProfileController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ScoreboardController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/controll/ShopController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/CardType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/Face.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/enums/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Cell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Deck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Graveyard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/DeckView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/LoginView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/MainView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ProfileView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/Regex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ScoreboardView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ShopView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/out/production/project-team-13/view/ViewMaster.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/project-team-13.iml" beforeDir="false" afterPath="$PROJECT_DIR$/src/project-team-13.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CSV/MonsterCSV.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CSV/SpellTrapCSV.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ProfileController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ScoreboardController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ShopController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Cell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/DeckView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/MainView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ProfileView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ScoreboardView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ShopView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +135,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
-        <option value="Interface" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -49,12 +164,13 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last.edited.regexp" value="find --nickname asghar" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../AP" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RunManager" selected="Application.MonsterCSV">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
@@ -114,13 +230,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MonsterCSV" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Regex" />
+        <item itemvalue="Application.MonsterCSV" />
         <item itemvalue="Application.ScoreboardController" />
         <item itemvalue="Application.Menu" />
-        <item itemvalue="Application.Regex" />
       </list>
     </recent_temporary>
   </component>
@@ -139,21 +266,8 @@
       <workItem from="1618997382491" duration="2950000" />
       <workItem from="1619003778770" duration="2708000" />
       <workItem from="1619028989150" duration="1078000" />
-      <workItem from="1619094417531" duration="2051000" />
-      <workItem from="1619265976573" duration="1231000" />
-      <workItem from="1619325330109" duration="1355000" />
-      <workItem from="1619340719040" duration="409000" />
-      <workItem from="1619359245605" duration="5209000" />
-      <workItem from="1619376968389" duration="135000" />
-      <workItem from="1619401991764" duration="1065000" />
-      <workItem from="1619492088206" duration="1986000" />
-      <workItem from="1619519139754" duration="617000" />
-      <workItem from="1619708731196" duration="1781000" />
-      <workItem from="1619746422465" duration="1320000" />
-      <workItem from="1619764652200" duration="4000" />
-      <workItem from="1619833017616" duration="2505000" />
-      <workItem from="1619861580738" duration="7174000" />
-      <workItem from="1619872698656" duration="5629000" />
+      <workItem from="1619094417531" duration="14918000" />
+      <workItem from="1619176236088" duration="10329000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -190,105 +304,7 @@
       <option name="project" value="LOCAL" />
       <updated>1618998924195</updated>
     </task>
-    <task id="LOCAL-00006" summary="login view fixed,Regex not in controller anymore">
-      <created>1619282075783</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1619282075783</updated>
-    </task>
-    <task id="LOCAL-00007" summary="a">
-      <created>1619325502000</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1619325502000</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Attribute and monster type enums">
-      <created>1619326059270</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1619326059270</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Card enums completed">
-      <created>1619341099086</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1619341099086</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Monster half-completed!!!!!">
-      <created>1619367693319</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1619367693319</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Spell and Trap half completed!!!">
-      <created>1619376811321</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1619376811321</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Card set face and , get card type , set card type changed!!">
-      <created>1619377095469</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1619377095469</updated>
-    </task>
-    <task id="LOCAL-00013" summary="spell effect created , needs completion">
-      <created>1619402947987</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1619402947987</updated>
-    </task>
-    <task id="LOCAL-00014" summary="spells got a bit more complete , still needs time though">
-      <created>1619494064018</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1619494064019</updated>
-    </task>
-    <task id="LOCAL-00015" summary="added Json">
-      <created>1619519598639</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1619519598639</updated>
-    </task>
-    <task id="LOCAL-00016" summary="a">
-      <created>1619746447249</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1619746447249</updated>
-    </task>
-    <task id="LOCAL-00017" summary="coded a bit , seems Graveyard and Player need to be completed before hand and the case with deck,board,etc. still remains open">
-      <created>1619747587686</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1619747587686</updated>
-    </task>
-    <task id="LOCAL-00018" summary="some comments and codes to find the challenges of this code ,, still need time">
-      <created>1619834910770</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1619834910770</updated>
-    </task>
-    <task id="LOCAL-00019" summary="mindfuck of all">
-      <created>1619868368362</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1619868368362</updated>
-    </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,19 +328,6 @@
     <MESSAGE value="Login view completed(not debugged)" />
     <MESSAGE value="Login controller completed(not debugged)" />
     <MESSAGE value="Login controller arguments" />
-    <MESSAGE value="login view fixed,Regex not in controller anymore" />
-    <MESSAGE value="Attribute and monster type enums" />
-    <MESSAGE value="Card enums completed" />
-    <MESSAGE value="Monster half-completed!!!!!" />
-    <MESSAGE value="Spell and Trap half completed!!!" />
-    <MESSAGE value="Card set face and , get card type , set card type changed!!" />
-    <MESSAGE value="spell effect created , needs completion" />
-    <MESSAGE value="spells got a bit more complete , still needs time though" />
-    <MESSAGE value="added Json" />
-    <MESSAGE value="a" />
-    <MESSAGE value="coded a bit , seems Graveyard and Player need to be completed before hand and the case with deck,board,etc. still remains open" />
-    <MESSAGE value="some comments and codes to find the challenges of this code ,, still need time" />
-    <MESSAGE value="mindfuck of all" />
-    <option name="LAST_COMMIT_MESSAGE" value="mindfuck of all" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login controller arguments" />
   </component>
 </project>

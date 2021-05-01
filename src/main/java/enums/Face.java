@@ -2,5 +2,6 @@ package enums;
 
 public enum Face {
     UP,
-    DOWN
+    DOWN,
+    Summoning
 }
