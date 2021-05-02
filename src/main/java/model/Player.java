@@ -14,6 +14,17 @@ public class Player {
     private boolean canAttack = true;
     private Card selectedCard = null;
     private ArrayList<Card> selectedCardsForTribute = new ArrayList<>();
+    private ArrayList<Card> cardsInHand = new ArrayList<>();
+
+    public Card getChangeOfHeart() {
+        return changeOfHeart;
+    }
+
+    public void setChangeOfHeart(Card changeOfHeart) {
+        this.changeOfHeart = changeOfHeart;
+    }
+
+    private Card changeOfHeart;
 
     Player(User user) {
         this.user = user;
@@ -25,6 +36,14 @@ public class Player {
 
     public Graveyard getGraveyard() {
         return playersGraveyard;
+    }
+
+    public void addCardToHand(Card card) {
+        cardsInHand.add(card);
+    }
+
+    public ArrayList<Card> getCardFromHand() {
+        return cardsInHand;
     }
 
     public int getLifeInGame() {
@@ -89,7 +108,7 @@ public class Player {
         this.selectedCard = selectedCard;
     }
 
-    public ArrayList<Card> getSelectedCardsForTribute() {
+    public ArrayList<Card> getSelectedCards() {
         return selectedCardsForTribute;
     }
 

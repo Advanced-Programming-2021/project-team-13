@@ -133,7 +133,7 @@ public class MonsterEffect {
         @Override
         public void useAbility(Card playingCard) {
             Monster gateGuardian = (Monster) playingCard;
-            for (Card card : gateGuardian.getPlayer().getSelectedCardsForTribute()) {
+            for (Card card : gateGuardian.getPlayer().getSelectedCards()) {
                 gateGuardian
                         .getPlayer()
                         .getGraveyard()

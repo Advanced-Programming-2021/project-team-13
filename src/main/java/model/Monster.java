@@ -111,6 +111,22 @@ public class Monster extends Card {
         return nameInGame;
     }
 
+    public void increaseAttackPoint(int amount) {
+        attackPointInGame += amount;
+    }
+
+    public void decreaseAttackPoint(int amount) {
+        attackPointInGame += amount;
+    }
+
+    public void increaseDefensePoint(int amount) {
+        attackPointInGame += amount;
+    }
+
+    public void decreaseDefensePoint(int amount) {
+        attackPointInGame += amount;
+    }
+
     public void setNameInGame(String nameInGame) {
         this.nameInGame = nameInGame;
     }

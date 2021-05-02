@@ -11,9 +11,9 @@ public class Graveyard {
     }
 
     public Card getCardFromGraveyard(String name) {
-        for (Card allCard : allCards) {
-            if (allCard.cardName.equals(name))
-                return allCard;
+        for (Card card : allCards) {
+            if (card.cardName.equals(name))
+                return card;
         }
         return null;
     }

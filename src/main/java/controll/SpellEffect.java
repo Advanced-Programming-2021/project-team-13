@@ -1,6 +1,8 @@
 package controll;
+/////////////////////////////////////all codes in here are prototypes so dont bother if its shity , long, or empty
 
 import Interfaces.Effects;
+import enums.Face;
 import model.*;
 
 import java.util.ArrayList;
@@ -17,14 +19,11 @@ public class SpellEffect {
         effects.put("")
     }
 
-    public void monsterReborn(Monster monster) {// revive from graveyard!!!!
-        if (ourPlayer.getGraveyard().getMonsterFromGraveyard(monster) != null)
-            ourPlayer.addCardInGame(monster);
-    }
-
     Effects monsterReborn = new Effects() {                                // problem with the arguments!!!
         @Override
         public boolean conditionCheck(Card playingCard) {
+            if (playingCard.getFace() == Face.DOWN)
+                return false;
             int check = 0;
             if (playingCard.getPlayer().getGraveyard()
                     .getCardFromGraveyard(playingCard.getCardName()) != null)
@@ -37,39 +36,63 @@ public class SpellEffect {
 
         @Override
         public void useAbility(Card playingCard) {
-            monsterReborn((Monster) playingCard);
+            Card cardInGraveyard = playingCard.getPlayer().getGraveyard().getCardFromGraveyard
+                    (playingCard.getPlayer().getSelectedCard().getCardName());
+            playingCard.getPlayer().addCardInGame(cardInGraveyard);
+        }
+
+        @Override
+        public void destroyedEffect(Card playingCard) {
+
+        }
+
+        @Override
+        public boolean destroyedConditionChecker(Card playingCard) {
+            return false;
         }
     };
 
-    public void terraforming(Spell spell) {// retrieve Field spell to hand from deck!!
-        if (spell.getSpellEffect() == enums.SpellEffect.FEILD)
-            ourPlayer.addCardInGame(spell);
-    }
+//    public void terraforming(Spell spell) {// retrieve Field spell to hand from deck!!
+//        if (spell.getSpellEffect() == enums.SpellEffect.FEILD)
+//            ourPlayer.addCardInGame(spell);
+//    }
 
-    Effects terraforming = new Effects() {   /////////////////////////////////////////////this shit is unbearable - cant handle arguments
+    Effects terraforming = new Effects() {
         @Override
         public boolean conditionCheck(Card playingCard) {
-            Spell spell = (Spell) playingCard;
+            if (playingCard.getFace() == Face.DOWN)
+                return false;
+            if (playingCard.getPlayer().getDeck().getAllCardsInMainDeck().
+                    getCardFromMainDeck(playingCard.getPlayer().getSelectedCard()) == null)
+                if (playingCard.getPlayer().getDeck().getAllCardsInMainDeck().
+                        getCardFromSideDeck(playingCard.getPlayer().getSelectedCard()) == null)
+                    return false;
+            Spell spell = (Spell) playingCard.getPlayer().getSelectedCard();
             return spell.getSpellEffect() == enums.SpellEffect.FEILD;
         }
 
         @Override
         public void useAbility(Card playingCard) {
-            if (conditionCheck(playingCard))
+            if (!conditionCheck(playingCard))
+                return;
+            playingCard.getPlayer().addCardToHand(playingCard.getPlayer().getSelectedCard());
+        }
+
+        @Override
+        public void destroyedEffect(Card playingCard) {
 
         }
 
         @Override
-        public Player getCardOwner(Card playingCard) {
-            return playingCard.getPlayer();
+        public boolean destroyedConditionChecker(Card playingCard) {
+            return false;
         }
+    };
 
-    }
-
-    public void potOfGreed(Spell firstSpell, Spell secondSpell) {// retrieve 2 spells from top deck///challenge:WTF is top deck????
-        ourPlayer.addCardInGame(firstSpell);
-        ourPlayer.addCardInGame(secondSpell);
-    }
+//    public void potOfGreed(Spell firstSpell, Spell secondSpell) {// retrieve 2 Cards from top of the deck
+//        ourPlayer.addCardInGame(firstSpell);
+//        ourPlayer.addCardInGame(secondSpell);
+//    }
 
     Effects potOfGreed = new Effects() {
         @Override
@@ -79,18 +102,82 @@ public class SpellEffect {
 
         @Override
         public void useAbility(Card playingCard) {
+            Card card1 = playingCard.getPlayer().getSelectedCards().get(0);
+            Card card2 = playingCard.getPlayer().getSelectedCards().get(1);
+            playingCard.getPlayer().addCardToHand(card1);
+            playingCard.getPlayer().addCardToHand(card2);
+        }
+
+        @Override
+        public void destroyedEffect(Card playingCard) {
 
         }
-    }
 
-    public void raigeki(ArrayList<Monster> rivalsMonsters) {// destroy all rival-controlled monster///challenge:delete from board maybe??? and how does board work???
-        for (Monster rivalsMonster : rivalsMonsters) {
-            rivalPlayer.getGraveyard().addCard(rivalsMonster);
+        @Override
+        public boolean destroyedConditionChecker(Card playingCard) {
+            return false;
         }
-        rivalsMonsters.clear();
-    }
+    };
 
-    public void changeOfHeart(Monster rivalsMonster) {// control one of rivals monster till end of the round//challenge:do we need controlled monsters arraylist???-how to maneuver in game??
+//    public void raigeki(ArrayList<Monster> rivalsMonsters) {// destroy all rival-controlled monster///challenge:delete from board maybe??? and how does board work???
+//        for (Monster rivalsMonster : rivalsMonsters) {
+//            rivalPlayer.getGraveyard().addCard(rivalsMonster);
+//        }
+//        rivalsMonsters.clear();
+//    }
+
+    Effects raigeki = new Effects() {
+        @Override
+        public boolean conditionCheck(Card playingCard) {
+            return true;
+        }
+
+        @Override
+        public void useAbility(Card playingCard) {
+            Cell[] cells = playingCard.getPlayer().getBoard().getMonster();
+            for (Cell cell : cells) {
+                playingCard.getPlayer().getRivalPlayer().
+                        getGraveyard().addCard(cell.getCard());
+                cell = null;
+            }
+        }
+
+        @Override
+        public void destroyedEffect(Card playingCard) {
+
+        }
+
+        @Override
+        public boolean destroyedConditionChecker(Card playingCard) {
+            return false;
+        }
+    };
+
+//    public void changeOfHeart(Monster rivalsMonster) {// control one of rivals monster till end of the round//challenge:do we need controlled monsters arraylist???-how to maneuver in game??
+//    }
+
+    Effects changeOfHeart = new Effects() {// changed round needed !!! + how to use ----
+        @Override
+        public boolean conditionCheck(Card playingCard) {
+            return playingCard.getPlayer().getSelectedCard() instanceof Monster;
+        }
+
+        @Override
+        public void useAbility(Card playingCard) {
+            if (!conditionCheck(playingCard))
+                return;
+            playingCard.getPlayer().setChangeOfHeart(playingCard.getPlayer().getSelectedCard());
+        }
+
+        @Override
+        public void destroyedEffect(Card playingCard) {
+
+        }
+
+        @Override
+        public boolean destroyedConditionChecker(Card playingCard) {
+            return false;
+        }
     }
 
     public void harpie(ArrayList<Spell> rivalSpells, ArrayList<Trap> rivalTraps) {//destroy all traps and spells of rival////how THE F do I destroy sth in general and in all cases
@@ -152,8 +239,8 @@ public class SpellEffect {
 
     }
 
-    public void blackPendant() {//equipped monsters +500 ATK
-
+    public void blackPendant(Monster monster) {//equipped monsters +500 ATK
+        monster.setAttackNum(500);
     }
 
     public void unitedWeStand() {// equipped monsters receive 800 ATK/DEF per every controlled and faced up monster
