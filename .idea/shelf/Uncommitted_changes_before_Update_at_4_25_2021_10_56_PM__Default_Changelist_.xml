@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_4_25_2021_10_56_PM_[Default_Changelist]" date="1619375204556" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_25_2021_10_56_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 4/25/2021 10:56 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/CSV/MonsterCSV.class" />
+    <option name="AFTER_PATH" value="target/classes/CSV/MonsterCSV.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_25_2021_10_56_PM_[Default_Changelist]/MonsterCSV.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/enums/Menu.class" />
+    <option name="AFTER_PATH" value="target/classes/enums/Menu.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_25_2021_10_56_PM_[Default_Changelist]/Menu.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/CSV/SpellTrapCSV.class" />
+    <option name="AFTER_PATH" value="target/classes/CSV/SpellTrapCSV.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_25_2021_10_56_PM_[Default_Changelist]/SpellTrapCSV.class" />
+  </binary>
+</changelist>
