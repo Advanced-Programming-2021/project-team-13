@@ -142,6 +142,7 @@ public class MonsterEffect {
         }
     };
     Effects scannerEffect = new Effects() {
+
         @Override
         public boolean conditionCheck(Card playingCard) {
             Monster scanner = (Monster) playingCard;
