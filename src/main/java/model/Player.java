@@ -12,6 +12,8 @@ public class Player {
     private Board board;
     private boolean canActivateTrap = true;
     private boolean canAttack = true;
+    private Card selectedCard = null;
+    private ArrayList<Card> selectedCardsForTribute = new ArrayList<>();
 
     Player(User user) {
         this.user = user;
@@ -37,10 +39,6 @@ public class Player {
         return rivalPlayer;
     }
 
-    public Cell[][] getBoard() {
-        return board;
-    }
-
     public Deck getDeck() {
         return deck;
     }
@@ -52,20 +50,18 @@ public class Player {
     public void addCardInGame(Card card) {
     }
 
-    public Player getRivalPlayer() {
-        return rivalPlayer;
-    }
 
     public void setRivalPlayer(Player rivalPlayer) {
         this.rivalPlayer = rivalPlayer;
     }
 
-    public Cell[][] getBoard() {
-        return board;
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 
-    public void setBoard(Cell[][] board) {
-        this.board = board;
+    public Board getBoard() {
+        return board;
     }
 
     public ArrayList<Monster> getMonsterOnBoard() {
@@ -83,5 +79,21 @@ public class Player {
 
     public void setCanActivateTrap(boolean canActivateTrap) {
         this.canActivateTrap = canActivateTrap;
+    }
+
+    public Card getSelectedCard() {
+        return selectedCard;
+    }
+
+    public void setSelectedCard(Card selectedCard) {
+        this.selectedCard = selectedCard;
+    }
+
+    public ArrayList<Card> getSelectedCardsForTribute() {
+        return selectedCardsForTribute;
+    }
+
+    public void setSelectedCardsForTribute(ArrayList<Card> selectedCardsForTribute) {
+        this.selectedCardsForTribute = selectedCardsForTribute;
     }
 }

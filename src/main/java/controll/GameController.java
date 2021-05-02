@@ -15,6 +15,9 @@ public class GameController {
         this.gameView = gameView;
     }
 
+    public GameController() {
+    }
+
     public Player getOurPlayer() {
         return p1;
     }
@@ -25,5 +28,13 @@ public class GameController {
 
     public void run(String command) {
 
+    }
+
+    public Phase getCurrentPhase() {
+        return currentPhase;
+    }
+
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
     }
 }
