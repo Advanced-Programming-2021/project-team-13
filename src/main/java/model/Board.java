@@ -46,7 +46,7 @@ public class Board {
         return spellOrTrap;
     }
 
-    public Cell[] getMonster() {
+    public Cell[] getMonsters() {
         return monster;
     }
 

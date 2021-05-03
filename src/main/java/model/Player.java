@@ -66,6 +66,10 @@ public class Player {
         lifeInGame += amount;
     }
 
+    public void decreaseHealth(int amount) {       //thers an error somewhere that I didnt put a minus , dont know where but I will find out !!!!!!!!
+        lifeInGame -= amount;
+    }
+
     public void addCardInGame(Card card) {
     }
 
@@ -83,7 +87,7 @@ public class Player {
         return board;
     }
 
-    public ArrayList<Monster> getMonsterOnBoard() {
+    public ArrayList<Monster> getMonsterOnBoard() {       //I dont think this works!!!!!
         ArrayList<Monster> monsters = new ArrayList<>();
         return monsters;
     }
@@ -114,5 +118,10 @@ public class Player {
 
     public void setSelectedCardsForTribute(ArrayList<Card> selectedCardsForTribute) {
         this.selectedCardsForTribute = selectedCardsForTribute;
+    }
+
+    public boolean willingToSacrifice() { // /////////////////////////////////////////////////needs to be completed , player needs to give health!!!!!!
+        ///prototype
+        return false; // to be completed
     }
 }

@@ -23,7 +23,7 @@ public class MonsterEffect {
             Monster monster = (Monster) playingCard;
             if (conditionCheck(playingCard)) {
                 monster.setAttackable(false);
-                for (Cell cell : monster.getPlayer().getBoard().getMonster()) {
+                for (Cell cell : monster.getPlayer().getBoard().getMonsters()) {
                     Monster friendMonster = (Monster) cell.getCard();
                     friendMonster.setAttackPointInGame(500 + friendMonster.getAttackNum());
                 }
@@ -39,7 +39,7 @@ public class MonsterEffect {
                     monster.setZone(Zone.MONSTER_ZONE);
                 else
                     monster.setZone(Zone.GRAVEYARD);
-                for (Cell cell : monster.getPlayer().getBoard().getMonster()) {
+                for (Cell cell : monster.getPlayer().getBoard().getMonsters()) {
                     Monster friendMonster = (Monster) cell.getCard();
                     friendMonster.setAttackPointInGame(-500 + friendMonster.getAttackNum());
                 }
