@@ -21,7 +21,7 @@ public class GameView {
             surrender();
         else if (command.equals("show graveyard"))
             showGraveyard();
-        if (command.equals("summon"))
+        else if (command.equals("summon"))
             summon();
         else if (command.equals("set"))
             set();
@@ -29,11 +29,11 @@ public class GameView {
             setPosition(Regex.getInputMatcher(command, Regex.SET_POSITION));
         else if (command.equals("flip-summon"))
             flipSummon();
-        if (command.matches(Regex.ATTACK))
+        else if (command.matches(Regex.ATTACK))
             attack(Regex.getInputMatcher(command, Regex.ATTACK));
         else if (command.equals("attack direct"))
             directAttack();
-        //   else if ()
+        else if ()
     }
 
     public void printPhaseName() {
