@@ -10,7 +10,9 @@ public class Graveyard {
     private ArrayList<Card> allCards;
     private Player owner;
 
-    Graveyard() {
+    public Graveyard(Player player) {
+        owner = player;
+        allCards = new ArrayList<>();
 
     }
 

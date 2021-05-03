@@ -49,4 +49,8 @@ public class DuelView {
     public void printInvalidCommand() {
         System.out.println("invalid command");
     }
+
+    public void printDoesntExistPLayer(String playerUsername) {
+        System.out.println("there is no player with this username");
+    }
 }

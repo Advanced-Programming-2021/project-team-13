@@ -107,7 +107,8 @@ public class Deck implements Comparable<Deck> {
             allCardsInSideDeck.add(card);
         else
             allCardsInMainDeck.add(card);
-        if (allCardsInMainDeck.size() >= 40)
+        if (allCardsInMainDeck.size() >= 40
+                && allCardsInMainDeck.size() <= 60)
             setValid(true);
     }
 

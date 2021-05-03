@@ -13,20 +13,46 @@ public class Player {
     private int lifeInGame;
     private User user;
     private Player rivalPlayer;
-    private Card currentCard;
+    private Card currentCard = null;
     private Deck deck;
     private Board board;
-    private boolean canActivateTrap = true;
-    private boolean canAttack = true;
     private Card selectedCard = null;
-    private ArrayList<Card> selectedCardsForTribute = new ArrayList<>();
 
-    Player(User user) {
+
+    public Player(User user, Deck deck) {
         this.user = user;
+        this.deck = deck;
+        playersGraveyard = new Graveyard(this);
+        this.board = new Board(deck, playersGraveyard);
+        this.lifeInGame = 8000;
     }
 
     public void play() {
 
+    }
+
+    public Graveyard getPlayersGraveyard() {
+        return playersGraveyard;
+    }
+
+    public void setPlayersGraveyard(Graveyard playersGraveyard) {
+        this.playersGraveyard = playersGraveyard;
+    }
+
+    public void setLifeInGame(int lifeInGame) {
+        this.lifeInGame = lifeInGame;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCurrentCard(Card currentCard) {
+        this.currentCard = currentCard;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 
     public Graveyard getGraveyard() {
@@ -60,11 +86,9 @@ public class Player {
     public void addCardInGame(Card card) {
     }
 
-
     public void setRivalPlayer(Player rivalPlayer) {
         this.rivalPlayer = rivalPlayer;
     }
-
 
     public void setBoard(Board board) {
         this.board = board;
@@ -83,14 +107,6 @@ public class Player {
         return currentCard;
     }
 
-    public boolean isCanActivateTrap() {
-        return canActivateTrap;
-    }
-
-    public void setCanActivateTrap(boolean canActivateTrap) {
-        this.canActivateTrap = canActivateTrap;
-    }
-
     public Card getSelectedCard() {
         return selectedCard;
     }
@@ -99,6 +115,17 @@ public class Player {
         this.selectedCard = selectedCard;
     }
 
+    public boolean willingToSacrifice() { // /////////////////////////////////////////////////needs to be completed , player needs to give health!!!!!!
+        ///prototype
+        return false; // to be completed
+    }
+}
+
+
+/*    private ArrayList<Card> selectedCardsForTribute = new ArrayList<>();
+    private boolean canActivateTrap = true;
+    private boolean canAttack = true;*/
+/*
     public ArrayList<Card> getSelectedCardsForTribute() {
         return selectedCardsForTribute;
     }
@@ -106,9 +133,4 @@ public class Player {
     public void setSelectedCardsForTribute(ArrayList<Card> selectedCardsForTribute) {
         this.selectedCardsForTribute = selectedCardsForTribute;
     }
-
-    public boolean willingToSacrifice() { // /////////////////////////////////////////////////needs to be completed , player needs to give health!!!!!!
-        ///prototype
-        return false; // to be completed
-    }
-}
+*/

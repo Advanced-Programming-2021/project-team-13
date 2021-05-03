@@ -132,6 +132,15 @@ public class User implements Comparable<User> {
         return drawNum;
     }
 
+    public Deck getActiveDeck()
+    {
+        for (Deck allDeck : allDecks) {
+            if (allDeck.isActive())
+                return allDeck;
+        }
+        return null;
+    }
+
     public static ArrayList<User> getAllUsers() {
         return allUsers;
     }
