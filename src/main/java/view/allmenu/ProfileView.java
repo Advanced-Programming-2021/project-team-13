@@ -1,7 +1,9 @@
-package view;
+package view.allmenu;
 
 import controll.ProfileController;
-import enums.Menu;
+import view.Menu;
+import view.Regex;
+import view.ViewMaster;
 
 import java.util.regex.Matcher;
 

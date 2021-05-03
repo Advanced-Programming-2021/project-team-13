@@ -1,6 +1,6 @@
 package bullshit.Interfaces;
 
-import model.Card;
+import model.cards.Card;
 
 public interface Effects extends Canser{
     boolean conditionCheck(Card playingCard);

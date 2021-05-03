@@ -1,9 +1,8 @@
 package controll;
 
-import enums.Menu;
-import model.User;
-import view.LoginView;
-import view.Regex;
+import view.Menu;
+import model.players.User;
+import view.allmenu.LoginView;
 import view.ViewMaster;
 
 public class LoginController {

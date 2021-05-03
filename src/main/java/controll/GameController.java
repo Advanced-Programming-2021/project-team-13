@@ -1,8 +1,8 @@
 package controll;
 
 import enums.Phase;
-import model.Player;
-import view.GameView;
+import model.players.Player;
+import view.allmenu.GameView;
 
 public class GameController {
     private GameView gameView;

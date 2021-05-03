@@ -1,9 +1,11 @@
-package view;
+package view.allmenu;
 
 import controll.GameController;
 import enums.Phase;
-import model.Card;
-import model.Player;
+import model.cards.Card;
+import model.players.Player;
+import view.Regex;
+import view.ViewMaster;
 
 import java.util.regex.Matcher;
 
@@ -11,7 +13,7 @@ public class GameView {
     private static Phase currentPhase;
     private GameController phaseController;
 
-    GameView() {
+    public GameView() {
         phaseController = new GameController(this);
         currentPhase = Phase.DRAW_PHASE;
     }

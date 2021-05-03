@@ -4,9 +4,9 @@
 //import bullshit.Interfaces.Summon;
 //import enums.Phase;
 //import enums.Zone;
-//import model.Card;
+//import model.cards.Card;
 //import model.Cell;
-//import model.Monster;
+//import model.cards.Monster;
 //import enums.Face;
 //
 //public class MonsterEffect {

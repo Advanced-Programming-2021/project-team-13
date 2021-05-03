@@ -2,9 +2,9 @@
 //
 //import bullshit.Interfaces.Effects;
 //import enums.Face;
-//import model.Card;
-//import model.Monster;
-//import model.Spell;
+//import model.cards.Card;
+//import model.cards.Monster;
+//import model.cards.Spell;
 //
 ////player.isAttacking
 //public class TrapEffect {

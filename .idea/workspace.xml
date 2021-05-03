@@ -4,17 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="81dcad64-5e8b-493f-869b-b10cb392261e" name="Default Changelist" comment="a">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="DuelView + AIPlayer + DuelController added">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/DuelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/players/AIPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/Canser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Canser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/Effects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Effects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Interfaces/Summon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Summon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Effects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Effects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Summon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Summon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/MonsterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/MonsterEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/TrapEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/TrapEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MonsterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/MonsterEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/SpellEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/TrapEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/TrapEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ShopView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,13 +48,26 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/non-effective_version" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -65,11 +102,6 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ASuS\Desktop\project-team-13\src\main\java\bullshit" />
-    </key>
-  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -79,11 +111,11 @@
       </method>
     </configuration>
     <configuration name="Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="enums.Menu" />
+      <option name="MAIN_CLASS_NAME" value="view.Menu" />
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="enums.*" />
+          <option name="PATTERN" value="view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -109,7 +141,7 @@
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.*" />
+          <option name="PATTERN" value="view.allmenu.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -218,7 +250,39 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/non-effective_version" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/non-effective_version" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -231,6 +295,7 @@
     <MESSAGE value="Login view completed(not debugged)" />
     <MESSAGE value="Login controller completed(not debugged)" />
     <MESSAGE value="Login controller arguments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login controller arguments" />
+    <MESSAGE value="DuelView + AIPlayer + DuelController added" />
+    <option name="LAST_COMMIT_MESSAGE" value="DuelView + AIPlayer + DuelController added" />
   </component>
 </project>

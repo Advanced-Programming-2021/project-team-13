@@ -1,7 +1,7 @@
 package controll;
 
-import enums.Menu;
-import view.MainView;
+import view.Menu;
+import view.allmenu.MainView;
 import view.ViewMaster;
 
 

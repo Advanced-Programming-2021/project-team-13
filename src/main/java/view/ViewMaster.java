@@ -2,8 +2,8 @@ package view;
 
 import java.util.Scanner;
 
-import enums.Menu;
-import model.User;
+import model.players.User;
+import view.allmenu.*;
 
 public class ViewMaster {
     public static Scanner scanner = new Scanner(System.in);
@@ -15,7 +15,8 @@ public class ViewMaster {
     private final ProfileView profileView;
     private final MainView mainView;
     private final DeckView deckView;
-    private final GameView gameView;
+    private final DuelView duelView;
+    private GameView gameView;
 
     public ViewMaster() {
         loginView = new LoginView();
@@ -25,6 +26,7 @@ public class ViewMaster {
         mainView = new MainView();
         deckView = new DeckView();
         gameView = new GameView();
+        duelView = new DuelView();
         currentMenu = Menu.LOGIN_MENU;
     }
 
@@ -62,12 +64,16 @@ public class ViewMaster {
                 scoreboardView.run(command);
             else if (currentMenu == Menu.SHOP_MENU)
                 shopView.run(command);
-            else if (currentMenu == Menu.GAME_MENU)
-                gameView.run(command);
             else if (currentMenu == Menu.PROFILE_MENU)
                 profileView.run(command);
             else if (currentMenu == Menu.DECK_MENU)
                 deckView.run(command);
+            else if (currentMenu == Menu.DUEL_MENU) {
+                duelView.run(command);
+                if (currentMenu == Menu.GAME_MENU)
+                    gameView = new GameView();
+            } else if (currentMenu == Menu.GAME_MENU)
+                gameView.run(command);
         }
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import model.cards.Card;
+
 public class Cell {
     private Card card;
 

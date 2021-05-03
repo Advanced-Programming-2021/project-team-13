@@ -1,5 +1,9 @@
 package model;
 
+import model.cards.Card;
+import model.cards.Monster;
+import model.players.Player;
+
 import java.util.ArrayList;
 
 public class Graveyard {
@@ -12,7 +16,7 @@ public class Graveyard {
 
     public Monster getMonsterFromGraveyard(String name) {
         for (Card card : allCards) {
-            if (card instanceof Monster && card.cardName.equals(name))
+            if (card instanceof Monster && card.getCardName().equals(name))
                 return (Monster) card;
         }
         return null;

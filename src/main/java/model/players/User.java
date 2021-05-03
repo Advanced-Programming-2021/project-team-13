@@ -1,4 +1,6 @@
-package model;
+package model.players;
+
+import model.Deck;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,9 +1,11 @@
-package model;
+package model.cards;
 
 import bullshit.Interfaces.Effects;
 import enums.CardType;
 import enums.Face;
 import enums.Zone;
+import model.Cell;
+import model.players.Player;
 
 import java.util.ArrayList;
 

@@ -3,9 +3,9 @@ package controll;
 import CSV.MonsterCSV;
 import CSV.SpellTrapCSV;
 import bullshit.Interfaces.Effects;
-import model.Card;
+import model.cards.Card;
 import model.Deck;
-import view.DeckView;
+import view.allmenu.DeckView;
 import view.ViewMaster;
 
 import java.io.FileNotFoundException;
@@ -15,7 +15,6 @@ public class DeckController {
     private DeckView deckView;
     private MonsterCSV monsterCSV = new MonsterCSV();
     private SpellTrapCSV spellTrapCSV = new SpellTrapCSV();
-    private SpellEffect spellEffect = new SpellEffect();
     public static HashMap<String , Effects> effects = new HashMap<>();
 
     public DeckController(DeckView deckView) {

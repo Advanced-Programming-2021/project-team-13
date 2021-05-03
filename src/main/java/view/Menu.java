@@ -1,4 +1,4 @@
-package enums;
+package view;
 
 public enum Menu {
     LOGIN_MENU("Login Menu"),

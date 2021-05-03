@@ -1,4 +1,4 @@
-package model;
+package model.cards;
 
 import enums.CardType;
 import enums.Face;

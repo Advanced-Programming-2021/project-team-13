@@ -23,6 +23,11 @@ public class Regex {
     public static final String DECK_SHOW_CARDS = "^deck show --cards$";
     public static final String ATTACK = "attack ([1-5])";
     public static final String SET_POSITION = "set -- position (attack|defense)"; // fishy !!!!!!!!!!!!!!
+    public static final String NEW = "--new";
+    public static final String SECOND_PLAYER = "--second-player (?<playerUsername>\\w+)";
+    public static final String ROUNDS = "--rounds (?<rounds>\\d+)";
+    public static final String AI = "--ai";
+
 
     public static String findUsername(String input) {
         Pattern pattern = Pattern.compile("--username (\\w+)");

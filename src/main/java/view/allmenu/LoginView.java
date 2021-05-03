@@ -1,15 +1,16 @@
-package view;
+package view.allmenu;
 
 import controll.LoginController;
-import enums.Menu;
-
+import view.Menu;
+import view.Regex;
+import view.ViewMaster;
 
 
 public class LoginView {
 
     private final LoginController loginController;
 
-    LoginView() {
+    public LoginView() {
         loginController = new LoginController(this);
     }
 

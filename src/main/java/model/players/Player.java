@@ -1,4 +1,10 @@
-package model;
+package model.players;
+
+import model.Board;
+import model.Deck;
+import model.Graveyard;
+import model.cards.Card;
+import model.cards.Monster;
 
 import java.util.ArrayList;
 

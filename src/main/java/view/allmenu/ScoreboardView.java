@@ -1,8 +1,10 @@
-package view;
+package view.allmenu;
 
 import controll.ScoreboardController;
-import enums.Menu;
-import model.User;
+import view.Menu;
+import model.players.User;
+import view.Regex;
+import view.ViewMaster;
 
 public class ScoreboardView {
     private final ScoreboardController scoreboardController;
