@@ -8,7 +8,9 @@ import view.ViewMaster;
 import view.allmenu.DuelView;
 
 public class DuelController {
-    DuelView duelView;
+    private final DuelView duelView;
+    private Player firstPlayer ;
+    private Player secondPlayer ;
 
     public DuelController(DuelView duelView) {
         this.duelView = duelView;
@@ -23,8 +25,9 @@ public class DuelController {
     }
 
     private void playsWithAI(User user, int rounds) {
-        Player p1 = new Player(user, user.getActiveDeck());
-        AIPlayer AI = new AIPlayer();
+        firstPlayer = new Player(user.getUsername() , user.getActiveDeck());
+        secondPlayer = new AIPlayer("AI" , );
+        //to complete
     }
 
     public void runDuelGame(int rounds, String playerUsername) {
@@ -43,9 +46,9 @@ public class DuelController {
     }
 
     private void plays(User user, User rivalUser, int rounds) {
-        Player p1 = new Player(user, user.getActiveDeck());
-        Player p2 = new Player(rivalUser, rivalUser.getActiveDeck());
-
+        firstPlayer = new Player(user.getUsername(), user.getActiveDeck());
+        secondPlayer = new Player(rivalUser.getUsername(), rivalUser.getActiveDeck());
+        //startGame
     }
 
     private boolean checkRoundNumber(int rounds) {

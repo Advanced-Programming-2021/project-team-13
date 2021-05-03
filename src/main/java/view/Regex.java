@@ -27,6 +27,15 @@ public class Regex {
     public static final String SECOND_PLAYER = "--second-player (?<playerUsername>\\w+)";
     public static final String ROUNDS = "--rounds (?<rounds>\\d+)";
     public static final String AI = "--ai";
+    public static final String OPPONENT = "--opponent";
+    public static final String MONSTER = "--monster (?<cardAddress>\\d+)";
+    public static final String SPELL = "--spell (?<cardAddress>\\d+)";
+    public static final String FIELD = "--field";
+    public static final String HAND = "--hand (?<cardAddress>\\d+)";
+    public static final String DESELECT = "select -d";
+
+
+
 
 
     public static String findUsername(String input) {

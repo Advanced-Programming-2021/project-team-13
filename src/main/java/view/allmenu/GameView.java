@@ -3,23 +3,23 @@ package view.allmenu;
 import controll.GameController;
 import enums.Phase;
 import model.cards.Card;
-import model.players.Player;
 import view.Regex;
-import view.ViewMaster;
 
 import java.util.regex.Matcher;
 
 public class GameView {
     private static Phase currentPhase;
-    private GameController phaseController;
+    private final GameController gameController;
 
     public GameView() {
-        phaseController = new GameController(this);
+        gameController = new GameController(this);
         currentPhase = Phase.DRAW_PHASE;
     }
 
     public void run(String command) {
-        if (command.equals("surrender"))
+        if (command.startsWith("select"))
+            selectOrDeselectCard(command);
+        else if (command.equals("surrender"))
             surrender();
         else if (command.equals("show graveyard"))
             showGraveyard();
@@ -35,26 +35,11 @@ public class GameView {
             attack(Regex.getInputMatcher(command, Regex.ATTACK));
         else if (command.equals("attack direct"))
             directAttack();
-        else if ()
     }
 
-    public void printPhaseName() {
-        System.out.println(currentPhase.getPhaseName()); /// needs to be completed!!!
+    private void nextPhase(){
+
     }
-
-
-    public void printAddedNewCard(Card card) {
-        System.out.println("new card added to the hand : " + card.getCardName());
-    }
-
-    public void showTurn() {
-        Player nextPlayer = phaseController.getRivalPlayer();
-        System.out.println("its " + nextPlayer + "’s turn");
-    }
-
-    // public void printErrors(){ looks fishy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //
-    // }
 
 
     private void drawPhase(String command) {
@@ -95,12 +80,84 @@ public class GameView {
     private void summon() {
     }
 
-    public String inputMonsterOrSpellName(){
-        return ViewMaster.scanner.nextLine().trim();
+    private void selectOrDeselectCard(String command){
+        if (command.matches(Regex.DESELECT))
+            deselectCard();
+        else selectCard(command);
     }
 
-    public void printIvalidCardName(){
-        //to do
+    private void deselectCard(){
+        gameController.deselectCard();
+    }
+
+    private void selectCard(String command) {
+        Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
+        Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.MONSTER);
+        Matcher spellMatcher = Regex.getInputMatcher(command, Regex.SPELL);
+        Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
+        Matcher handMatcher = Regex.getInputMatcher(command, Regex.HAND);
+        if (handMatcher.groupCount() != 1 && handMatcher.groupCount() != 0) {
+            printInvalidCommand();
+            return;
+        } else if (fieldMatcher.groupCount() != 1 && fieldMatcher.groupCount() != 0) {
+            printInvalidCommand();
+            return;
+        } else if (monsterMatcher.groupCount() != 1 && monsterMatcher.groupCount() != 0) {
+            printInvalidCommand();
+            return;
+        } else if (spellMatcher.groupCount() != 1 && spellMatcher.groupCount() != 0) {
+            printInvalidCommand();
+            return;
+        } else if (opponentMatcher.groupCount() != 1 && opponentMatcher.groupCount() != 0) {
+            printInvalidCommand();
+            return;
+        }
+        if (monsterMatcher.groupCount() == 1) {
+            int cardAddress = Integer.parseInt(monsterMatcher.group("cardAddress"));
+            if (opponentMatcher.groupCount() == 1)
+                gameController.selectOpponentMonster(cardAddress);
+            else gameController.selectPlayerMonster(cardAddress);
+        } else if (spellMatcher.groupCount() == 1) {
+            int cardAddress = Integer.parseInt(spellMatcher.group("cardAddress"));
+            if (opponentMatcher.groupCount() == 1)
+                gameController.selectOpponentSpellOrTrap(cardAddress);
+            else gameController.selectPlayerSpellOrTrap(cardAddress);
+        } else if (fieldMatcher.groupCount() == 1) {
+            if (opponentMatcher.groupCount() == 1)
+                gameController.selectOpponentFieldCard();
+            else gameController.selectPlayerFieldCard();
+        } else if (handMatcher.groupCount() == 1) {
+            int cardAddress = Integer.parseInt(handMatcher.group("cardAddress"));
+            gameController.selectPlayerHandCard(cardAddress);
+        } else printInvalidCommand();
+    }
+
+    public void printCardDeselected(){
+        System.out.println("card deselected");
+    }
+
+    public void printNoCardSelected(){
+        System.out.println("no card is selected yet");
+    }
+
+    public void printInvalidCommand() {
+        System.out.println("invalid command");
+    }
+
+    public void printCardSelected(){
+        System.out.println("card selected");
+    }
+
+    public void printNotFoundCard(){
+        System.out.println("no card found in the given position");
+    }
+
+    public void printPhaseName() {
+        System.out.println(currentPhase.getPhaseName());
+    }
+
+    public void printAddedNewCard(Card card) {
+        System.out.println("new card added to the hand : " + card.getCardName());
     }
 
 }

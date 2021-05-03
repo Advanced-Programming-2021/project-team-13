@@ -1,46 +1,54 @@
 package controll;
 
-import enums.Phase;
 import model.players.Player;
 import view.allmenu.GameView;
 
 public class GameController {
-    private GameView gameView;
-    private Player p1;
-    private Player p2;
-    private Phase currentPhase;
-    private String command;
-    private TrapEffect trapEffect;
+    private final GameView gameView;
+    private Player firstPlayer;
+    private Player secondPlayer;
+    private Player currentPlayer;
 
     public GameController(GameView gameView) {
         this.gameView = gameView;
-        this.trapEffect = new TrapEffect(this);
-    }
 
-    public GameController() {
-    }
-
-    public GameView getGameView() {
-        return gameView;
-    }
-
-    public Player getOurPlayer() {
-        return p1;
     }
 
     public Player getRivalPlayer() {
-        return p2;
+        if (currentPlayer == firstPlayer)
+            return secondPlayer;
+        return firstPlayer;
     }
 
-    public void run(String command) {
+    public void selectPlayerMonster(int cardAddress) {
 
     }
 
-    public Phase getCurrentPhase() {
-        return currentPhase;
+    public void selectPlayerSpellOrTrap(int cardAddress) {
+
     }
 
-    public void setCurrentPhase(Phase currentPhase) {
-        this.currentPhase = currentPhase;
+    public void selectOpponentMonster(int cardAddress) {
+
+    }
+
+    public void selectOpponentSpellOrTrap(int cardAddress) {
+
+    }
+
+    public void selectPlayerFieldCard() {
+
+    }
+
+    public void selectOpponentFieldCard() {
+
+    }
+
+    public void selectPlayerHandCard(int cardAddress) {
+
+    }
+
+    public void deselectCard(){
+
     }
 }

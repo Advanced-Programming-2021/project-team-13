@@ -9,22 +9,39 @@ import model.cards.Monster;
 import java.util.ArrayList;
 
 public class Player {
+    private static final ArrayList<Player> allPlayers;
+
+    static {
+        allPlayers = new ArrayList<>();
+    }
+
     private Graveyard playersGraveyard;
+    private final String username;
     private int lifeInGame;
-    private User user;
     private Player rivalPlayer;
-    private Card currentCard = null;
+    private Card currentCard;
     private Deck deck;
     private Board board;
-    private Card selectedCard = null;
+    private Card selectedCard;
 
 
-    public Player(User user, Deck deck) {
-        this.user = user;
+    public Player(String username, Deck deck) {
+        this.username = username;
         this.deck = deck;
         playersGraveyard = new Graveyard(this);
         this.board = new Board(deck, playersGraveyard);
         this.lifeInGame = 8000;
+        currentCard = null;
+        selectedCard = null;
+        allPlayers.add(this);
+    }
+
+    public Player findPlayerByName(String username){
+        for (Player player : allPlayers){
+            if (player.username.equals(username))
+                return player;
+        }
+        return null;
     }
 
     public void play() {
@@ -43,10 +60,6 @@ public class Player {
         this.lifeInGame = lifeInGame;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public void setCurrentCard(Card currentCard) {
         this.currentCard = currentCard;
     }
@@ -61,10 +74,6 @@ public class Player {
 
     public int getLifeInGame() {
         return lifeInGame;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public Player getRivalPlayer() {
