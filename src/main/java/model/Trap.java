@@ -12,4 +12,8 @@ public class Trap extends Card {
         super(name, cardType, description, face, price, cardNum);
         this.trapEffect = trapEffect;
     }
+
+    public boolean isTrapDestroyer() {///////////////////////////////////////////this needs to be completed
+        return false;
+    }
 }

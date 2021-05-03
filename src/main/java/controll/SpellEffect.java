@@ -443,12 +443,18 @@ public class SpellEffect {
     Effects ringOfDefense = new Effects() {
         @Override
         public boolean conditionCheck(Card playingCard) {
-            return false;
+            if (playingCard.getPlayer().getSelectedCard().getCardType() != CardType.TRAP)
+                return false;
+            Trap trap = (Trap) playingCard.getPlayer().getSelectedCard();
+            return trap.isTrapDestroyer();  /////////////////////////////////////////////////////this needs to be completed!!!!!!!!!!!!!!!
         }
 
         @Override
-        public void useAbility(Card playingCard) {
-
+        public void useAbility(Card playingCard) {   //////////////////////////////// the thing is that  a card needs to get out of board as a card so.......
+            if (!conditionCheck(playingCard))
+                return;
+            sendToGraveyard(playingCard.getPlayer().getSelectedCard(),
+                    playingCard.getPlayer().getRivalPlayer().getGraveyard());
         }
 
         @Override
@@ -462,9 +468,49 @@ public class SpellEffect {
         }
     };
 
-    public void yami(ArrayList<Monster> allMonstersOnBoard) { // fiend/spell caster + 200 ATK/DEF - fairy - 200 ATK/DEF//challenge: get from board or each players arraylist of cards ???
+    //    public void yami(ArrayList<Monster> allMonstersOnBoard) { // fiend/spell caster + 200 ATK/DEF - fairy - 200 ATK/DEF//challenge: get from board or each players arraylist of cards ???
+//
+//    }
+    Effects yami = new Effects() {
+        @Override
+        public boolean conditionCheck(Card playingCard) { ///////////////////////// some abilities need to check so if its destroyed , the effect is destroyed too!!
+            return true;
+        }
 
-    }
+        @Override
+        public void useAbility(Card playingCard) {
+            if (!conditionCheck(playingCard))
+                return;
+            fieldOperationYami(playingCard);
+            fieldOperationYami(playingCard);
+        }
+
+        private void fieldOperationYami(Card playingCard) {
+            Cell[] rivalMonsterCells = playingCard.getPlayer().getBoard().getMonsters();
+            for (Cell monsterCell : rivalMonsterCells) {
+                Monster monster = (Monster) monsterCell.getCard();
+                if (monster.getType().equals("fiend") || monster.getType().equals("spell caster")) {
+                    monster.increaseAttackPoint(200);
+                    monster.increaseDefensePoint(200);
+                } else if (monster.getType().equals("fairy")) {
+                    monster.decreaseAttackPoint(200);
+                    monster.decreaseDefensePoint(200);
+                }
+            }
+        }
+
+
+        @Override
+        public void destroyedEffect(Card playingCard) {
+
+        }
+
+        @Override
+        public boolean destroyedConditionChecker(Card playingCard) {
+            return false;
+        }
+    };
+
 
     public void forest(ArrayList<Monster> allMonstersOnBoard) { // Insect/beast/beast-warrior + 200 ATK/DEF
 

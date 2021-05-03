@@ -1,6 +1,5 @@
 package model;
 
-import Interfaces.Effects;
 import enums.*;
 
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ public class Monster extends Card {
     private boolean isAttackable = true;
     private boolean isActivateInThisTurn = false;
     private String nameInGame;
+    private String type;/////////////////////////////////////// this need to be set , could we make enum or will it be to much???????
 
     public int getAttackPointInGame() {
         return attackPointInGame;
@@ -169,5 +169,9 @@ public class Monster extends Card {
 
     public void setLevelInGame(int levelInGame) {
         this.levelInGame = levelInGame;
+    }
+
+    public String getType() {
+        return type;
     }
 }
