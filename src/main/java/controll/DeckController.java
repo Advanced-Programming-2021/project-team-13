@@ -2,11 +2,9 @@ package controll;
 
 import CSV.MonsterCSV;
 import CSV.SpellTrapCSV;
-import Interfaces.Effects;
+import bullshit.Interfaces.Effects;
 import model.Card;
 import model.Deck;
-import model.Monster;
-import model.Spell;
 import view.DeckView;
 import view.ViewMaster;
 

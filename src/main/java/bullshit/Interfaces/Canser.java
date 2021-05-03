@@ -1,4 +1,4 @@
-package Interfaces;
+package bullshit.Interfaces;
 
 public interface Canser {
 }

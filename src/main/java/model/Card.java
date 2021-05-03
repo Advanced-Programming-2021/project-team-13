@@ -1,6 +1,6 @@
 package model;
 
-import Interfaces.Effects;
+import bullshit.Interfaces.Effects;
 import enums.CardType;
 import enums.Face;
 import enums.Zone;

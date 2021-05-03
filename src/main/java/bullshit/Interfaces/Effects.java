@@ -1,7 +1,6 @@
-package Interfaces;
+package bullshit.Interfaces;
 
 import model.Card;
-import model.Player;
 
 public interface Effects extends Canser{
     boolean conditionCheck(Card playingCard);

@@ -4,7 +4,6 @@ import controll.GameController;
 import enums.Phase;
 import model.Card;
 import model.Player;
-import sun.applet.Main;
 
 import java.util.regex.Matcher;
 
@@ -22,18 +21,19 @@ public class GameView {
             surrender();
         else if (command.equals("show graveyard"))
             showGraveyard();
-        if (currentPhase == Phase.DRAW_PHASE)
-            drawPhase(command);
-        else if (currentPhase == Phase.STANDBY_PHASE)
-            standbyPhase(command);
-        else if (currentPhase == Phase.MAIN_PHASE_1)
-            mainPhase1(command);
-        else if (currentPhase == Phase.BATTLE_PHASE)
-            battlePhase(command);
-        else if (currentPhase == Phase.MAIN_PHASE_2)
-            mainPhase2(command);
-        else if (currentPhase == Phase.END_PHASE)
-            endPhase(command);
+        if (command.equals("summon"))
+            summon();
+        else if (command.equals("set"))
+            set();
+        else if (command.matches(Regex.SET_POSITION))
+            setPosition(Regex.getInputMatcher(command, Regex.SET_POSITION));
+        else if (command.equals("flip-summon"))
+            flipSummon();
+        if (command.matches(Regex.ATTACK))
+            attack(Regex.getInputMatcher(command, Regex.ATTACK));
+        else if (command.equals("attack direct"))
+            directAttack();
+        //   else if ()
     }
 
     public void printPhaseName() {
@@ -65,36 +65,6 @@ public class GameView {
         //if (command.equals())
     }
 
-    private void standbyPhase(String command) {
-    }
-
-    private void mainPhase1(String command) {
-        if (command.equals("summon"))
-            summon();
-        else if (command.equals("set"))
-            set();
-        else if (command.matches(Regex.SET_POSITION))
-            setPosition(Regex.getInputMatcher(command, Regex.SET_POSITION));
-        else if (command.equals("flip-summon"))
-            flipSummon();
-    }
-
-
-    private void battlePhase(String command) {
-        if (command.matches(Regex.ATTACK))
-            attack(Regex.getInputMatcher(command, Regex.ATTACK));
-        else if (command.equals("attack direct"))
-            directAttack();
-        //   else if ()
-    }
-
-    private void mainPhase2(String command) {
-    }
-
-    private void endPhase(String command) {
-
-    }
-
     private void drawCard() {
     }
 
@@ -108,6 +78,7 @@ public class GameView {
     }
 
     private void attack(Matcher inputMatcher) {
+
     }
 
     private void flipSummon() {
