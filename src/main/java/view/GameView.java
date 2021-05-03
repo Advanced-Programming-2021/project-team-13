@@ -4,7 +4,10 @@ import controll.GameController;
 import enums.Phase;
 import model.Card;
 import model.Player;
+import sun.applet.Main;
+
 import java.util.regex.Matcher;
+
 public class GameView {
     private static Phase currentPhase;
     private GameController phaseController;
@@ -13,24 +16,6 @@ public class GameView {
         phaseController = new GameController(this);
         currentPhase = Phase.DRAW_PHASE;
     }
-
-    public void printPhaseName() {
-        System.out.println(currentPhase.getPhaseName()); /// needs to be completed!!!
-    }
-
-
-    public void printAddedNewCard(Card card) {
-        System.out.println("new card added to the hand : " + card.getCardName());
-    }
-
-    public void showTurn() {
-        Player nextPlayer = phaseController.getRivalPlayer();
-        System.out.println("its " + nextPlayer + "’s turn");
-    }
-
-    // public void printErrors(){ looks fishy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //
-    // }
 
     public void run(String command) {
         if (command.equals("surrender"))
@@ -50,6 +35,24 @@ public class GameView {
         else if (currentPhase == Phase.END_PHASE)
             endPhase(command);
     }
+
+    public void printPhaseName() {
+        System.out.println(currentPhase.getPhaseName()); /// needs to be completed!!!
+    }
+
+
+    public void printAddedNewCard(Card card) {
+        System.out.println("new card added to the hand : " + card.getCardName());
+    }
+
+    public void showTurn() {
+        Player nextPlayer = phaseController.getRivalPlayer();
+        System.out.println("its " + nextPlayer + "’s turn");
+    }
+
+    // public void printErrors(){ looks fishy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //
+    // }
 
 
     private void drawPhase(String command) {
@@ -82,7 +85,7 @@ public class GameView {
             attack(Regex.getInputMatcher(command, Regex.ATTACK));
         else if (command.equals("attack direct"))
             directAttack();
-     //   else if ()
+        //   else if ()
     }
 
     private void mainPhase2(String command) {
@@ -95,7 +98,7 @@ public class GameView {
     private void drawCard() {
     }
 
-    private void showGraveyard() {
+    public void showGraveyard() {
     }
 
     private void surrender() {
@@ -117,6 +120,14 @@ public class GameView {
     }
 
     private void summon() {
+    }
+
+    public String inputMonsterOrSpellName(){
+        return ViewMaster.scanner.nextLine().trim();
+    }
+
+    public void printIvalidCardName(){
+        //to do
     }
 
 }

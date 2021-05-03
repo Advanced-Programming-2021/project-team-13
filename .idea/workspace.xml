@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Just started field spells , near the end!" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/TrapEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_29_2021_7_40_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_29_2021_7_40_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_1_2021_1_23_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_1_2021_1_23_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_1_2021_4_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_1_2021_4_10_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/GameView.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,7 +53,6 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="extract.method.default.visibility" value="private" />
     <property name="last.edited.regexp" value="find --nickname asghar" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../AP" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -137,9 +148,7 @@
       <workItem from="1619028989150" duration="1078000" />
       <workItem from="1619094417531" duration="14918000" />
       <workItem from="1619176236088" duration="10329000" />
-      <workItem from="1619967936809" duration="8630000" />
-      <workItem from="1619979340694" duration="15000" />
-      <workItem from="1620006019340" duration="7848000" />
+      <workItem from="1619967936809" duration="8361000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -176,28 +185,7 @@
       <option name="project" value="LOCAL" />
       <updated>1618998924195</updated>
     </task>
-    <task id="LOCAL-00006" summary="4 SpellEffect">
-      <created>1619979114709</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1619979114709</updated>
-    </task>
-    <task id="LOCAL-00007" summary="alot of spells completed but I sure they all have bugs">
-      <created>1620011747856</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1620011747857</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Just started field spells , near the end!">
-      <created>1620013852157</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1620013852157</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,9 +209,6 @@
     <MESSAGE value="Login view completed(not debugged)" />
     <MESSAGE value="Login controller completed(not debugged)" />
     <MESSAGE value="Login controller arguments" />
-    <MESSAGE value="4 SpellEffect" />
-    <MESSAGE value="alot of spells completed but I sure they all have bugs" />
-    <MESSAGE value="Just started field spells , near the end!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Just started field spells , near the end!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login controller arguments" />
   </component>
 </project>

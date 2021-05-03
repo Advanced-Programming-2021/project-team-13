@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Graveyard {
     private ArrayList<Card> allCards;
-    private String ownerName;
+    private Player owner;
 
     Graveyard() {
 
     }
 
-    public Card getCardFromGraveyard(String name) {
+    public Monster getMonsterFromGraveyard(String name) {
         for (Card card : allCards) {
-            if (card.cardName.equals(name))
-                return card;
+            if (card instanceof Monster && card.cardName.equals(name))
+                return (Monster) card;
         }
         return null;
     }
