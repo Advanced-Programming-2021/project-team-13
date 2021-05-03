@@ -17,7 +17,7 @@ public class DeckController {
     private DeckView deckView;
     private MonsterCSV monsterCSV = new MonsterCSV();
     private SpellTrapCSV spellTrapCSV = new SpellTrapCSV();
-    private SpellEffect spellEffect = new SpellEffect();
+    //private SpellEffect spellEffect = new SpellEffect();
     public static HashMap<String , Effects> effects = new HashMap<>();
 
     public DeckController(DeckView deckView) {
@@ -93,8 +93,9 @@ public class DeckController {
         } catch (FileNotFoundException e) {
         }
 //        if (monster == null) return new Monster(,effects.get(cardName));
-        else
-
+       /// else
+        return null;
+        ////////////////////////////////////////nnneeeeeeeeeeeeddddddddd to be complete
     }
 
     private boolean areThereThree(Deck deck, String cardName) {

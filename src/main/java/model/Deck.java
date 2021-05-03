@@ -146,5 +146,16 @@ public class Deck implements Comparable<Deck> {
         if (deck.getName().compareTo(name) < 0) return 1;
         return -1;
     }
+
+    @Override
+    protected Deck clone() {
+        Deck deck = new Deck(this.name);
+        deck.setValid(true);
+        deck.setNumberOfCards(this.numberOfCards);
+        setIsActive(true);
+        deck.setAllCardsInMainDeck(this.allCardsInMainDeck);
+        deck.setAllCardsInSideDeck(this.allCardsInSideDeck);
+        return deck;
+    }
 }
 

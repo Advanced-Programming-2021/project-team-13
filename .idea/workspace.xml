@@ -4,11 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="alot of spells completed but I sure they all have bugs">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MonsterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/MonsterEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/SpellEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/PhaseController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/Attribute.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/CardType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/CardType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/Face.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/Face.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/MonsterType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/MonsterType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Card.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Deck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/DuelView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/GameView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/GameView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/LoginView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/MainView.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/MainView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

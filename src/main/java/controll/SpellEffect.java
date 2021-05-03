@@ -285,7 +285,6 @@ public class SpellEffect {
             }
             return false;
         }
-
         @Override
         public void useAbility(Card playingCard) {
             if (!conditionCheck(playingCard))
@@ -302,7 +301,6 @@ public class SpellEffect {
         public void destroyedEffect(Card playingCard) {
 
         }
-
         @Override
         public boolean destroyedConditionChecker(Card playingCard) {
             return false;

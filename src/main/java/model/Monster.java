@@ -37,6 +37,7 @@ public class Monster extends Card {
         this.defencePointInGame = defencePointInGame;
     }
 
+
     public Monster(String name, CardType cardType, Face face, int price, int cardNum, String description,
                    MonsterType monsterType, SummonType summonType, MonsterAttribute monsterAttribute,
                    int attackNum, int defenseNum, int level) {
