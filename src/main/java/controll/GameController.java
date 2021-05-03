@@ -10,12 +10,18 @@ public class GameController {
     private Player p2;
     private Phase currentPhase;
     private String command;
+    private TrapEffect trapEffect;
 
     public GameController(GameView gameView) {
         this.gameView = gameView;
+        this.trapEffect = new TrapEffect(this);
     }
 
     public GameController() {
+    }
+
+    public GameView getGameView() {
+        return gameView;
     }
 
     public Player getOurPlayer() {

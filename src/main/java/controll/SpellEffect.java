@@ -28,17 +28,17 @@ public class SpellEffect {
                 return false;
             int check = 0;
             if (playingCard.getPlayer().getGraveyard()
-                    .getCardFromGraveyard(playingCard.getCardName()) != null)
+                    .getMonsterFromGraveyard(playingCard.getCardName()) != null)
                 check++;
             if (playingCard.getPlayer().getRivalPlayer().getGraveyard()
-                    .getCardFromGraveyard(playingCard.getCardName()) != null)
+                    .getMonsterFromGraveyard(playingCard.getCardName()) != null)
                 check++;
             return check != 0;
         }
 
         @Override
         public void useAbility(Card playingCard) {
-            Card cardInGraveyard = playingCard.getPlayer().getGraveyard().getCardFromGraveyard
+            Card cardInGraveyard = playingCard.getPlayer().getGraveyard().getMonsterFromGraveyard
                     (playingCard.getPlayer().getSelectedCard().getCardName());
             playingCard.getPlayer().addCardInGame(cardInGraveyard);
         }
