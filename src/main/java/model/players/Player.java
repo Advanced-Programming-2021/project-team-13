@@ -23,6 +23,7 @@ public class Player {
     private Deck deck;
     private Board board;
     private Card selectedCard;
+    private ArrayList<Card> cardsInHand;
 
 
     public Player(String username, Deck deck) {
@@ -33,11 +34,12 @@ public class Player {
         this.lifeInGame = 8000;
         currentCard = null;
         selectedCard = null;
+        cardsInHand = new ArrayList<>();
         allPlayers.add(this);
     }
 
     public Player findPlayerByName(String username){
-        for (Player player : allPlayers){
+        for (Player player : allPlayers) {
             if (player.username.equals(username))
                 return player;
         }
@@ -46,6 +48,14 @@ public class Player {
 
     public void play() {
 
+    }
+
+    public ArrayList<Card> getCardsInHand() {
+        return cardsInHand;
+    }
+
+    public void setCardsInHand(Card card) {
+        cardsInHand.add(card);
     }
 
     public Graveyard getPlayersGraveyard() {
@@ -94,7 +104,6 @@ public class Player {
 
     public void addCardInGame(Card card) {
     }
-
     public void setRivalPlayer(Player rivalPlayer) {
         this.rivalPlayer = rivalPlayer;
     }
