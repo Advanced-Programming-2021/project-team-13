@@ -16,17 +16,19 @@ public class Player {
     }
 
     private Graveyard playersGraveyard;
-    private final String username;
+    private final String nickname;
     private int lifeInGame;
     private Player rivalPlayer;
     private Card currentCard;
     private Deck deck;
+    User user;
     private Board board;
     private Card selectedCard;
 
 
-    public Player(String username, Deck deck) {
-        this.username = username;
+    public Player(String nickname, Deck deck, User user) {
+        this.nickname = nickname;
+        this.user = user;
         this.deck = deck;
         playersGraveyard = new Graveyard(this);
         this.board = new Board(deck, playersGraveyard);
@@ -38,7 +40,7 @@ public class Player {
 
     public Player findPlayerByName(String username){
         for (Player player : allPlayers){
-            if (player.username.equals(username))
+            if (player.nickname.equals(username))
                 return player;
         }
         return null;

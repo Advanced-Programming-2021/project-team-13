@@ -1,16 +1,17 @@
 package controll;
 
 import model.Deck;
-import model.players.AIPlayer;
 import model.players.Player;
 import model.players.User;
+import view.Menu;
 import view.ViewMaster;
 import view.allmenu.DuelView;
+import view.allmenu.GameView;
 
 public class DuelController {
     private final DuelView duelView;
-    private Player firstPlayer ;
-    private Player secondPlayer ;
+    private Player firstPlayer;
+    private Player secondPlayer;
 
     public DuelController(DuelView duelView) {
         this.duelView = duelView;
@@ -24,8 +25,9 @@ public class DuelController {
             duelView.printInvalidNumberOfRound();
     }
 
-    private void playsWithAI(User user, int rounds) { 
-        firstPlayer = new Player(user.getUsername() , user.getActiveDeck());
+    private void playsWithAI(User user, int rounds) {
+        firstPlayer = new Player(user.getNickname(), user.getActiveDeck(), user);
+        ViewMaster.setCurrentMenu(Menu.GAME_MENU);
         //secondPlayer = new AIPlayer("AI" , );
         //to complete
     }
@@ -46,8 +48,10 @@ public class DuelController {
     }
 
     private void plays(User user, User rivalUser, int rounds) {
-        firstPlayer = new Player(user.getUsername(), user.getActiveDeck());
-        secondPlayer = new Player(rivalUser.getUsername(), rivalUser.getActiveDeck());
+        firstPlayer = new Player(user.getNickname(), user.getActiveDeck(), user);
+        secondPlayer = new Player(rivalUser.getNickname(), rivalUser.getActiveDeck(), rivalUser);
+        firstPlayer.setRivalPlayer(secondPlayer);
+        secondPlayer.setRivalPlayer(firstPlayer);
         //startGame
     }
 

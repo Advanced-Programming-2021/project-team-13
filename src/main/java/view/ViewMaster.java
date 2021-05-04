@@ -25,7 +25,7 @@ public class ViewMaster {
         profileView = new ProfileView();
         mainView = new MainView();
         deckView = new DeckView();
-        gameView = new GameView();
+        //gameView = new GameView();
         duelView = new DuelView();
         currentMenu = Menu.LOGIN_MENU;
     }

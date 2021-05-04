@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Regex {
+    //// DECK REGEX NEEDS CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public static final String ENTER_MENU = "enter menu (?<menuName>\\w+)";
     public static final String EXIT_MENU = "^menu exit$";
     public static final String SHOW_MENU = "^menu show-current$";
