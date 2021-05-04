@@ -99,7 +99,7 @@ public class GameView {
         Matcher spellMatcher = Regex.getInputMatcher(command, Regex.SPELL);
         Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
         Matcher handMatcher = Regex.getInputMatcher(command, Regex.HAND);
-        if (handMatcher.groupCount() != 1 && handMatcher.groupCount() != 0) {
+        if (handMatcher.groupCount() != 1 && handMatcher.groupCount() != 0) {   // this can be shorter !!!! -- or at least we could extract the method of invalid command!
             printInvalidCommand();
             return;
         } else if (fieldMatcher.groupCount() != 1 && fieldMatcher.groupCount() != 0) {
