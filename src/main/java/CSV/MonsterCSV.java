@@ -2,6 +2,8 @@ package CSV;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvToBeanBuilder;
+import enums.MonsterAttribute;
+import enums.MonsterCardType;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -36,16 +38,36 @@ public class MonsterCSV {
         return Integer.parseInt(level);
     }
 
-    public String getAttribute() {
-        return attribute;
+    public MonsterAttribute getAttribute() {
+        switch (attribute) {
+            case "EARTH":
+                return MonsterAttribute.EARTH;
+            case "WATER":
+                return MonsterAttribute.WATER;
+            case "DARK":
+                return MonsterAttribute.DARK;
+            case "FIRE":
+                return MonsterAttribute.FIRE;
+            case "LIGHT":
+                return MonsterAttribute.LIGHT;
+            default:
+                return MonsterAttribute.WIND;
+        }
     }
 
     public String getMonsterType() {
         return monsterType;
     }
 
-    public String getCardType() {
-        return cardType;
+    public MonsterCardType getCardType() {
+        switch (cardType) {
+            case "Normal":
+                return MonsterCardType.NORMAL;
+            case "Effect":
+                return MonsterCardType.EFFECTIVE;
+            default:
+                return MonsterCardType.RITUAL;
+        }
     }
 
     public int getAttack() {
@@ -81,6 +103,6 @@ public class MonsterCSV {
                 .build()
                 .parse();
         for (MonsterCSV monsterCSV : monsters)
-            cards.put(monsterCSV.getName(),monsterCSV.getDescription());
+            cards.put(monsterCSV.getName(), monsterCSV.getDescription());
     }
 }

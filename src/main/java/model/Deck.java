@@ -110,6 +110,7 @@ public class Deck implements Comparable<Deck> {
         if (allCardsInMainDeck.size() >= 40
                 && allCardsInMainDeck.size() <= 60)
             setValid(true);
+        allCards.add(card);
     }
 
     public String getName() {
@@ -135,6 +136,7 @@ public class Deck implements Comparable<Deck> {
         else
             allCardsInMainDeck.remove(card);
         setNumberOfCards(getNumberOfCards() - 1);
+        allCards.remove(card);
     }
 
     @Override
@@ -148,6 +150,10 @@ public class Deck implements Comparable<Deck> {
     public int compareTo(Deck deck) {
         if (deck.getName().compareTo(name) < 0) return 1;
         return -1;
+    }
+
+    public void printBeforeNonMonster() {
+        System.out.println("Spell and Traps");
     }
 }
 

@@ -2,6 +2,7 @@ package CSV;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvToBeanBuilder;
+import enums.CardType;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -26,8 +27,13 @@ public class SpellTrapCSV {
         return name;
     }
 
-    public String getType() {
-        return type;
+    public CardType getType() {
+        switch (type) {
+            case "SPELL":
+                return CardType.SPELL;
+            default:
+                return CardType.TRAP;
+        }
     }
 
     public String getIcon() {
@@ -64,6 +70,6 @@ public class SpellTrapCSV {
                 .build()
                 .parse();
         for (SpellTrapCSV spellTrapCsv : spellsAndTraps)
-            cards.put(spellTrapCsv.getName(),spellTrapCsv.getDescription());
+            cards.put(spellTrapCsv.getName(), spellTrapCsv.getDescription());
     }
 }

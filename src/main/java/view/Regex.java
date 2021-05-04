@@ -20,6 +20,7 @@ public class Regex {
     public static final String ADD_CARD_TO_DECK = "^deck add-card (--\\w+ \\w+) (--\\w+ \\w+)( --side)?$";
     public static final String REMOVE_CARD_FROM_DECK = "^deck rm-card (--\\w+ \\w+) (--\\w+ \\w+)( --side)?$";
     public static final String SHOW_DECKS = "^deck show --all$";
+    public static final String SHOW_ONE_DECK = "^deck show --([^ ]+ \\w+) (--\\w+)?$";
     public static final String DECK_SHOW_CARDS = "^deck show --cards$";
     public static final String ATTACK = "attack ([1-5])";
     public static final String SET_POSITION = "set -- position (attack|defense)"; // fishy !!!!!!!!!!!!!!
@@ -79,6 +80,12 @@ public class Regex {
 
     public static String getDeckName(String command) {
         Matcher matcher = getInputMatcher(command, "--deck (\\w+)");
+        if (matcher.find())
+            return matcher.group(1);
+        else return null;
+    }
+    public static String getDeckNameForSpecificShow(String command) {
+        Matcher matcher = getInputMatcher(command, "--deck-name (\\w+)");
         if (matcher.find())
             return matcher.group(1);
         else return null;

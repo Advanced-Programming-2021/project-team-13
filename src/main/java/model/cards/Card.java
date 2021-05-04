@@ -9,35 +9,33 @@ import model.players.Player;
 
 import java.util.ArrayList;
 
-public class Card {
+public class Card implements Comparable<Card> {
     /*
         private static final ArrayList<Card> allCards;
         static {
             allCards = new ArrayList<>();
         }
-
+    protected Cell currentPosition;
+    protected Effects effects;
+    protected String cardIcon;
     */
     protected String cardName;
     protected int cardNumber;
-    protected String cardIcon;
     protected CardType cardType;
     protected String cardDescription;
-    protected Cell currentPosition;
     protected Face face;
     protected Player cardOwner;
-    protected Effects effects;
     protected Zone zone;
     //    protected ArrayList<Card> allCardsOfThisType;
     protected int price;
 
 
-    public Card(String name, CardType cardType, String description, Face face, int price, int cardNum) {
+    public Card(String name, CardType cardType, String description, Face face, int price) {
         this.cardName = name;
         this.cardType = cardType;
         this.cardDescription = description;
         this.face = face;
         this.price = price;
-        this.cardNumber = cardNum;
         this.zone = Zone.DECK_ZONE;
     }
 
@@ -121,6 +119,7 @@ public class Card {
     public void addToAllCardsOfThisType(Card card) {
 
     }
+
     public Face getFace() {
         return face;
     }
@@ -139,5 +138,11 @@ public class Card {
 
     public void setZone(Zone zone) {
         this.zone = zone;
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        if (o.getCardName().compareTo(cardName) < 0) return 1;
+        return -1;
     }
 }

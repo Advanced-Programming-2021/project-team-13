@@ -5,37 +5,35 @@ import enums.*;
 import java.util.ArrayList;
 
 public class Monster extends Card {
-    private MonsterType monsterType;
-    private MonsterType monsterTypeInGame;
+    private MonsterCardType monsterCardType;
     private SummonType summonType;
     private MonsterAttribute monsterAttribute;
-    private MonsterAttribute monsterAttributeInGame;
     private int attackNum;
     private int defenseNum;
     private int attackPointInGame;
     private int defencePointInGame;
     private int level;
-    private int levelInGame;
-    private boolean isAttackable = true;
-    private boolean isActivateInThisTurn = false;
+    private String monsterType;/////////////////////////////////////// this need to be set , could we make enum or will it be to much???????
+
+    public Monster(String name, CardType cardType, Face face, int price, String description, String monsterType,
+                   MonsterCardType monsterCardType, MonsterAttribute monsterAttribute,
+                   int attackNum, int defenseNum, int level) {
+        super(name, cardType, description, face, price);
+        setAttackNum(attackNum);
+        setDefenseNum(defenseNum);
+        setLevel(level);
+        setMonsterAttribute(monsterAttribute);
+        setMonsterCardType(monsterCardType);
+        setMonsterType(monsterType);
+    }
+    /*
+        private MonsterType monsterTypeInGame;
+        private MonsterAttribute monsterAttributeInGame;
+        private int levelInGame;
     private String nameInGame;
-    private String type;/////////////////////////////////////// this need to be set , could we make enum or will it be to much???????
+       private boolean isAttackable = true;
+    private boolean isActivateInThisTurn = false;
 
-    public int getAttackPointInGame() {
-        return attackPointInGame;
-    }
-
-    public void setAttackPointInGame(int attackPointInGame) {
-        this.attackPointInGame = attackPointInGame;
-    }
-
-    public int getDefencePointInGame() {
-        return defencePointInGame;
-    }
-
-    public void setDefencePointInGame(int defencePointInGame) {
-        this.defencePointInGame = defencePointInGame;
-    }
 
     public Monster(String name, CardType cardType, Face face, int price, int cardNum, String description,
                    MonsterType monsterType, SummonType summonType, MonsterAttribute monsterAttribute,
@@ -53,13 +51,37 @@ public class Monster extends Card {
         monsterAttributeInGame = monsterAttribute;
         monsterTypeInGame = monsterType;
         this.nameInGame = name;
+    }*/
+
+    public int getAttackPointInGame() {
+        return attackPointInGame;
     }
 
-    public MonsterType getMonsterType() {
+    public void setAttackPointInGame(int attackPointInGame) {
+        this.attackPointInGame = attackPointInGame;
+    }
+
+    public int getDefencePointInGame() {
+        return defencePointInGame;
+    }
+
+    public void setDefencePointInGame(int defencePointInGame) {
+        this.defencePointInGame = defencePointInGame;
+    }
+
+    public MonsterCardType getMonsterCardType() {
+        return monsterCardType;
+    }
+
+    public void setMonsterCardType(MonsterCardType monsterCardType) {
+        this.monsterCardType = monsterCardType;
+    }
+
+    public String getMonsterType() {
         return monsterType;
     }
 
-    public void setMonsterType(MonsterType monsterType) {
+    public void setMonsterType(String monsterType) {
         this.monsterType = monsterType;
     }
 
@@ -103,13 +125,6 @@ public class Monster extends Card {
         this.level = level;
     }
 
-    public boolean isAttackable() {
-        return isAttackable;
-    }
-
-    public String getNameInGame() {
-        return nameInGame;
-    }
 
     public void increaseAttackPoint(int amount) {
         attackPointInGame += amount;
@@ -127,51 +142,9 @@ public class Monster extends Card {
         attackPointInGame += amount;
     }
 
-    public void setNameInGame(String nameInGame) {
-        this.nameInGame = nameInGame;
-    }
-
-    public void setAttackable(boolean attackable) {
-        isAttackable = attackable;
-    }
 
     public ArrayList<Monster> getMonsterOnBoard() {
         return cardOwner.getMonsterOnBoard();
     }
 
-    public boolean isActivateInThisTurn() {
-        return isActivateInThisTurn;
-    }
-
-    public void setActivateInThisTurn(boolean activateInThisTurn) {
-        isActivateInThisTurn = activateInThisTurn;
-    }
-
-    public MonsterType getMonsterTypeInGame() {
-        return monsterTypeInGame;
-    }
-
-    public void setMonsterTypeInGame(MonsterType monsterTypeInGame) {
-        this.monsterTypeInGame = monsterTypeInGame;
-    }
-
-    public MonsterAttribute getMonsterAttributeInGame() {
-        return monsterAttributeInGame;
-    }
-
-    public void setMonsterAttributeInGame(MonsterAttribute monsterAttributeInGame) {
-        this.monsterAttributeInGame = monsterAttributeInGame;
-    }
-
-    public int getLevelInGame() {
-        return levelInGame;
-    }
-
-    public void setLevelInGame(int levelInGame) {
-        this.levelInGame = levelInGame;
-    }
-
-    public String getType() {
-        return type;
-    }
 }

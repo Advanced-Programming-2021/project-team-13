@@ -24,9 +24,9 @@ public class DuelController {
             duelView.printInvalidNumberOfRound();
     }
 
-    private void playsWithAI(User user, int rounds) {
+    private void playsWithAI(User user, int rounds) { 
         firstPlayer = new Player(user.getUsername() , user.getActiveDeck());
-        secondPlayer = new AIPlayer("AI" , );
+        //secondPlayer = new AIPlayer("AI" , );
         //to complete
     }
 

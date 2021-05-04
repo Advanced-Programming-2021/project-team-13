@@ -83,9 +83,17 @@ public class DeckView {
             removeCard(command);
         else if (command.matches(Regex.SHOW_DECKS))
             deckController.showDecks();
+        else if (command.matches(Regex.SHOW_ONE_DECK))
+            showSpecificDeck(command);
         else if (command.matches(Regex.DECK_SHOW_CARDS))
             deckController.showCards();
 
+    }
+
+    private void showSpecificDeck(String command) {
+        String deckName = Regex.getDeckNameForSpecificShow(command);
+        boolean isSide = command.contains("--side");
+        deckController.showSpecificDeck(deckName, isSide);
     }
 
     private void removeCard(String command) {
@@ -160,5 +168,15 @@ public class DeckView {
 
     public void printCard(String cardName, String description) {
         System.out.println(cardName + ":" + description);
+    }
+
+    public void printMonster(String cardName, String cardDescription) {
+        System.out.println(cardName + ": " + cardDescription);
+    }
+
+    public void printBeforeMonster(String deckName, boolean isSide) {
+        System.out.println("Deck: " + deckName);
+        System.out.println(isSide ? "Side" : "Main" + "deck:");
+        System.out.println("Monsters:");
     }
 }

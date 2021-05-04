@@ -3,8 +3,14 @@ package controll;
 import CSV.MonsterCSV;
 import CSV.SpellTrapCSV;
 import bullshit.Interfaces.Effects;
+import enums.CardType;
+import enums.Face;
 import model.cards.Card;
 import model.Deck;
+import model.cards.Monster;
+import model.cards.Spell;
+import model.cards.Trap;
+import model.players.User;
 import view.allmenu.DeckView;
 import view.ViewMaster;
 
@@ -15,7 +21,7 @@ public class DeckController {
     private DeckView deckView;
     private MonsterCSV monsterCSV = new MonsterCSV();
     private SpellTrapCSV spellTrapCSV = new SpellTrapCSV();
-    public static HashMap<String , Effects> effects = new HashMap<>();
+    public static HashMap<String, Effects> effects = new HashMap<>();
 
     public DeckController(DeckView deckView) {
         this.deckView = deckView;
@@ -77,20 +83,30 @@ public class DeckController {
             deckView.printCardDoesntExist(cardName);
     }
 
-    private void addToHashMap(String name){
+   /* private void addToHashMap(String name) {
 
-    }
+    }*/
 
-    private Card findCard(String cardName) {
-        MonsterCSV monster;
-        SpellTrapCSV spellOrTrap;
+
+    /////// Constructors need changes for effective version !!!!!!!!!!!!!!!!!!!!!!!!!!
+    private Card findCard(String cardName) { ////// Spell,Trap,Monster Constructor Work Just For noEffect BRANCH
+        MonsterCSV monster = null;
+        SpellTrapCSV spellOrTrap = null;
         try {
             monster = monsterCSV.findMonster(cardName);
             spellOrTrap = spellTrapCSV.findSpellTrap(cardName);
         } catch (FileNotFoundException e) {
         }
-//        if (monster == null) return new Monster(,effects.get(cardName));
-        else
+        if (monster != null)
+            return new Monster(monster.getName(), CardType.MONSTER, Face.DOWN, monster.getPrice(), monster.getDescription()
+                    , monster.getMonsterType(), monster.getCardType(), monster.getAttribute()
+                    , monster.getAttack(), monster.getDefence(), monster.getLevel());
+        else {
+            if (spellOrTrap.getType() == CardType.SPELL)
+                return new Spell(spellOrTrap.getName(), CardType.SPELL, spellTrapCSV.getDescription(), Face.DOWN, spellOrTrap.getPrice());
+            else
+                return new Trap(spellOrTrap.getName(), CardType.TRAP, spellTrapCSV.getDescription(), Face.DOWN, spellOrTrap.getPrice());
+        }
 
     }
 
@@ -165,12 +181,34 @@ public class DeckController {
                 spellTrapCSV = SpellTrapCSV.findSpellTrap(cardName);
             } catch (FileNotFoundException e) {
             }
-            if (monsterCSV == null)
-                deckView.printCard(cardName, spellTrapCSV.getDescription());
-            else
-                deckView.printCard(cardName, monsterCSV.getDescription());
+            for (int i = 0; i < userCards.get(cardName); i++) {
+                if (monsterCSV == null)
+                    deckView.printCard(cardName, spellTrapCSV.getDescription());
+                else
+                    deckView.printCard(cardName, monsterCSV.getDescription());
+            }
             monsterCSV = null;
             spellTrapCSV = null;
+        }
+    }
+
+    public void showSpecificDeck(String deckName, boolean isSide) {
+        if (deckName == null)
+            deckView.printInvalidCommand();
+        Deck deck = ViewMaster.getUser().getDeckByName(deckName);
+        if (deck == null)
+            deckView.printDeckDoesntExists(deckName);
+        ArrayList<Card> cards = deck.getAllCards();
+        Collections.sort(cards);
+        deckView.printBeforeMonster(deckName, isSide);
+        for (Card card : cards) {
+            if (card instanceof Monster)
+                deckView.printMonster(card.getCardName(), card.getCardDescription());
+        }
+        deck.printBeforeNonMonster();
+        for (Card card : cards) {
+            if (!(card instanceof Monster))
+                deckView.printMonster(card.getCardName(), card.getCardDescription());
         }
     }
 }
