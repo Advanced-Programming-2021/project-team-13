@@ -1,6 +1,9 @@
 package controll;
 
-import enums.*;
+import enums.AttackOrDefense;
+import enums.Face;
+import enums.Phase;
+import enums.Zone;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
@@ -16,6 +19,7 @@ public class GameController {
 
     public GameController(GameView gameView) {
         this.gameView = gameView;
+        currentPlayer = gameView.getCurrentPlayer();
 
     }
 
@@ -393,5 +397,9 @@ public class GameController {
             } else
                 gameView.printCantChangePosition();
         }
+    }
+
+    public void checkEnded() {
+
     }
 }

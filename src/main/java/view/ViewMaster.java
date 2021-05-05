@@ -1,10 +1,9 @@
 package view;
 
-import java.util.Scanner;
-
 import model.players.User;
 import view.allmenu.*;
-import view.allmenu.DuelView;
+
+import java.util.Scanner;
 
 public class ViewMaster {
     public static Scanner scanner = new Scanner(System.in);
@@ -71,10 +70,9 @@ public class ViewMaster {
                 deckView.run(command);
             else if (currentMenu == Menu.DUEL_MENU) {
                 duelView.run(command);
-                if (currentMenu == Menu.GAME_MENU)
-                    gameView = new GameView();
             } else if (currentMenu == Menu.GAME_MENU)
-                gameView.run(command);
+                duelView.getDuelController()
+                        .getGameView().run(command);
         }
     }
 }

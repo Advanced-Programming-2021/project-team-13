@@ -6,6 +6,8 @@ import view.Regex;
 import java.util.regex.Matcher;
 
 public class DuelView {
+
+
     private final DuelController duelController;
 
     public DuelView() {
@@ -48,6 +50,10 @@ public class DuelView {
 
     public void printInvalidCommand() {
         System.out.println("invalid command");
+    }
+
+    public DuelController getDuelController() {
+        return duelController;
     }
 
     public void printDoesntExistPLayer(String playerUsername) {

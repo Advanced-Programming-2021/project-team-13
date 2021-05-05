@@ -3,12 +3,10 @@ package view.allmenu;
 import controll.GameController;
 import enums.Phase;
 import model.cards.Card;
-import model.cards.Monster;
 import model.players.Player;
 import view.Regex;
 import view.ViewMaster;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -17,10 +15,15 @@ public class GameView {
     private Player firstPlayer;
     private Player secondPlayer;
     private Player currentPlayer;
+    private int round;
 
-    public GameView() {
-        gameController = new GameController(this);
+    public GameView(Player firstPlayer, Player secondPlayer, int rounds) {
         currentPhase = Phase.DRAW_PHASE;
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
+        this.currentPlayer = firstPlayer;
+        this.round = rounds;
+        gameController = new GameController(this);
     }
 
     public void run(String command) {
@@ -44,6 +47,7 @@ public class GameView {
             attack(Regex.getInputMatcher(command, Regex.ATTACK));
         else if (command.equals("attack direct"))
             directAttack();
+        gameController.checkEnded();
     }
 
     private void changeSet(Matcher inputMatcher) {
@@ -75,6 +79,10 @@ public class GameView {
 
     private void surrender() {
     }
+
+//    public void changeTurn() {
+//
+//    }
 
     private void directAttack() {
         gameController.directAttack();
@@ -316,5 +324,9 @@ public class GameView {
 
     public void printCantFlipSummon() {
         System.out.println("you can’t flip summon this card");
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 }

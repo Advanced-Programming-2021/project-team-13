@@ -13,6 +13,9 @@ public class DuelController {
     private Player firstPlayer;
     private Player secondPlayer;
 
+
+    private GameView gameView;
+
     public DuelController(DuelView duelView) {
         this.duelView = duelView;
     }
@@ -52,6 +55,7 @@ public class DuelController {
         secondPlayer = new Player(rivalUser.getNickname(), rivalUser.getActiveDeck(), rivalUser);
         firstPlayer.setRivalPlayer(secondPlayer);
         secondPlayer.setRivalPlayer(firstPlayer);
+        gameView = new GameView(firstPlayer, secondPlayer, rounds);
         //startGame
     }
 
@@ -78,6 +82,14 @@ public class DuelController {
             duelView.printNoActiveDeck(rivalUser.getUsername());
         return ((user.getActiveDeck() != null)
                 && rivalUser.getActiveDeck() != null);
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
     }
 
 }

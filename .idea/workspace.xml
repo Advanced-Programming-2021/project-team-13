@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="game controller selects (without checking regex) + &#10;game controller + game view attack(60 percent completed)&#10;need a method for checking if card has attacked in the same round or not">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="a">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DuelController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Zone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,17 +136,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
