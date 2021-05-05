@@ -62,16 +62,20 @@ public class GameView {
     }
 
     private void directAttack() {
+
     }
 
     private void attack(Matcher inputMatcher) {
-
+        if (inputMatcher.find()) {
+            int monsterNumber = Integer.parseInt(inputMatcher.group(1));
+            gameController.attack(monsterNumber);
+        }
     }
 
     private void flipSummon() {
     }
 
-    private void setPosition(Matcher inputMatcher) {
+    private void setPosition(Matcher inputMatcher) {   // y the fuck are these private!@#!@?
     }
 
     private void set() {
@@ -132,11 +136,15 @@ public class GameView {
         } else printInvalidCommand();
     }
 
-    public void printCardDeselected(){
+    public static Phase getCurrentPhase() {
+        return currentPhase;
+    }
+
+    public void printCardDeselected() {
         System.out.println("card deselected");
     }
 
-    public void printNoCardSelected(){
+    public void printNoCardSelected() {
         System.out.println("no card is selected yet");
     }
 
@@ -160,4 +168,23 @@ public class GameView {
         System.out.println("new card added to the hand : " + card.getCardName());
     }
 
+    public void printInvalidSelection() {
+        System.out.println("invalid selection");
+    }
+
+    public void printCantAttack() {
+        System.out.println("you can’t attack with this card");
+    }
+
+    public void printWrongPhase() {
+        System.out.println("you can’t do this action in this phase");
+    }
+
+    public void printAlreadyAttacked() {
+        System.out.println("this card already attacked");
+    }
+
+    public void printNoCardToAttack() {
+        System.out.println("there is no card to attack here");
+    }
 }

@@ -8,6 +8,7 @@ public class Monster extends Card {
     private MonsterCardType monsterCardType;
     private SummonType summonType;
     private MonsterAttribute monsterAttribute;
+    private AttackOrDefense attackOrDefense;    /// this was needed very much!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private int attackNum;
     private int defenseNum;
     private int attackPointInGame;
@@ -83,6 +84,14 @@ public class Monster extends Card {
 
     public void setMonsterType(String monsterType) {
         this.monsterType = monsterType;
+    }
+
+    public AttackOrDefense getAttackOrDefense() {
+        return attackOrDefense;
+    }
+
+    public void setAttackOrDefense(AttackOrDefense attackOrDefense) {
+        this.attackOrDefense = attackOrDefense;
     }
 
     public SummonType getSummonType() {

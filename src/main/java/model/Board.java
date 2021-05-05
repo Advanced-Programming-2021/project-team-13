@@ -81,4 +81,11 @@ public class Board {
         return null;
     }
 
+    public boolean isMonsterOnBoard(Card selectedCard) {
+        for (int i = 0; i < 6; i++) {
+            if (monster[i].getCard() == selectedCard)     // We can do this because of pointer!!!!
+                return true;
+        }
+        return false;
+    }
 }
