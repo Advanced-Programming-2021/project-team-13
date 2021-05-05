@@ -3,9 +3,12 @@ package view.allmenu;
 import controll.GameController;
 import enums.Phase;
 import model.cards.Card;
+import model.cards.Monster;
 import model.players.Player;
 import view.Regex;
+import view.ViewMaster;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -14,6 +17,7 @@ public class GameView {
     private Player firstPlayer;
     private Player secondPlayer;
     private Player currentPlayer;
+
     public GameView() {
         gameController = new GameController(this);
         currentPhase = Phase.DRAW_PHASE;
@@ -27,7 +31,7 @@ public class GameView {
         else if (command.equals("show graveyard"))
             showGraveyard();
         else if (command.equals("summon"))
-            summon();
+            gameController.summon();
         else if (command.equals("set"))
             set();
         else if (command.matches(Regex.SET_POSITION))
@@ -40,7 +44,7 @@ public class GameView {
             directAttack();
     }
 
-    private void nextPhase(){
+    private void nextPhase() {
 
     }
 
@@ -65,16 +69,20 @@ public class GameView {
     }
 
     private void directAttack() {
+        gameController.directAttack();
     }
 
     private void attack(Matcher inputMatcher) {
-
+        if (inputMatcher.find()) {
+            int monsterNumber = Integer.parseInt(inputMatcher.group(1));
+            gameController.attack(monsterNumber);
+        }
     }
 
     private void flipSummon() {
     }
 
-    private void setPosition(Matcher inputMatcher) {
+    private void setPosition(Matcher inputMatcher) {   // y the fuck are these private!@#!@?
     }
 
     private void set() {
@@ -83,17 +91,17 @@ public class GameView {
     private void summon() {
     }
 
-    private void selectOrDeselectCard(String command){
+    private void selectOrDeselectCard(String command) {
         if (command.matches(Regex.DESELECT))
             deselectCard();
         else selectCard(command);
     }
 
-    private void deselectCard(){
+    private void deselectCard() {
         gameController.deselectCard();
     }
 
-    private void selectCard(String command) {
+    public void selectCard(String command) {
         Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
         Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.MONSTER);
         Matcher spellMatcher = Regex.getInputMatcher(command, Regex.SPELL);
@@ -135,11 +143,15 @@ public class GameView {
         } else printInvalidCommand();
     }
 
-    public void printCardDeselected(){
+    public static Phase getCurrentPhase() {
+        return currentPhase;
+    }
+
+    public void printCardDeselected() {
         System.out.println("card deselected");
     }
 
-    public void printNoCardSelected(){
+    public void printNoCardSelected() {
         System.out.println("no card is selected yet");
     }
 
@@ -147,11 +159,11 @@ public class GameView {
         System.out.println("invalid command");
     }
 
-    public void printCardSelected(){
+    public void printCardSelected() {
         System.out.println("card selected");
     }
 
-    public void printNotFoundCard(){
+    public void printNotFoundCard() {
         System.out.println("no card found in the given position");
     }
 
@@ -163,4 +175,116 @@ public class GameView {
         System.out.println("new card added to the hand : " + card.getCardName());
     }
 
+    public void printInvalidSelection() {
+        System.out.println("invalid selection");
+    }
+
+    public void printCantAttack() {
+        System.out.println("you can’t attack with this card");
+    }
+
+    public void printWrongPhase() {
+        System.out.println("you can’t do this action in this phase");
+    }
+
+    public void printAlreadyAttacked() {
+        System.out.println("this card already attacked");
+    }
+
+    public void printNoCardToAttack() {
+        System.out.println("there is no card to attack here");
+    }
+
+    public void printOpponentMonsterDestroyed(int attackDifference) {
+        System.out.println("your opponent’s monster is destroyed " +
+                "and your opponent receives " + attackDifference + " battle damage");
+    }
+
+    public void printBothMonstersDestroyed() {
+        System.out.println("both you and your opponent monster cards" +
+                " are destroyed and no one receives damage");
+    }
+
+    public void printYourCardIsDestroyed(int attackDifference) {
+        System.out.println("Your monster card is destroyed " +
+                "and you received " + attackDifference + " battle damage");
+    }
+
+    public void printNoCardDestroyed() {
+        System.out.println("no card is destroyed");
+    }
+
+    public void printDefensePositionDestroyed() {
+        System.out.println("the defense position monster is destroyed");
+    }
+
+    public void printNoCardDestroyedYouReceivedDamage(int attackDifference) {
+        System.out.println("no card is destroyed and you" +
+                " received " + attackDifference + " battle damage");
+    }
+
+    public void printDefensePositionDestroyedHidden(String rivalMonsterName) {
+        printOpponentCardsName(rivalMonsterName);
+        printDefensePositionDestroyed();
+    }
+
+    public void printNoCardDestroyedHidden(String rivalMonsterName) {
+        printOpponentCardsName(rivalMonsterName);
+        printNoCardDestroyed();
+    }
+
+    public void printNoCardDestroyedYouReceivedDamageHidden(int attackDifference, String rivalMonsterName) {
+        printOpponentCardsName(rivalMonsterName);
+        printNoCardDestroyedYouReceivedDamage(attackDifference);
+    }
+
+    private void printOpponentCardsName(String name) {
+        System.out.println("opponent’s monster card was " + name);
+    }
+
+    public void printYourOpponentReceivesDamage(int attackNum) {
+        System.out.println("your opponent receives " + attackNum + " battle damage");
+    }
+
+    public void printCantSummon() {
+        System.out.println("you can’t summon this card");
+    }
+
+    public static void setCurrentPhase(Phase currentPhase) {
+        GameView.currentPhase = currentPhase;
+    }
+
+    public void printNotInMainPhase() {
+        System.out.println("action not allowed in this phase");
+    }
+
+    public void printMonsterZoneFull() {
+        System.out.println("monster card zone is full");
+    }
+
+    public void printAlreadySetOrSummon() {
+        System.out.println("you already summoned/set on this turn");
+    }
+
+
+    public void printSummonSuccessfully() {
+
+    }
+
+    public void printNoMonsterOnThisAddress() {
+        System.out.println("there no monsters one this address");
+    }
+
+    public void printThereArentEnoughMonsterForTribute() {
+        System.out.println("there are not enough cards for tribute");
+    }
+
+    public void printNoMonsterInOneOfThisAddress() {
+        System.out.println("there no monsters on one of this addresses");
+    }
+
+    public void getTribute() {
+        int number = ViewMaster.scanner.nextInt();
+        run("select --monster " + number);
+    }
 }

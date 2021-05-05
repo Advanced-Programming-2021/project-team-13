@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import model.players.User;
 import view.allmenu.*;
+import view.allmenu.DuelView;
 
 public class ViewMaster {
     public static Scanner scanner = new Scanner(System.in);

@@ -28,12 +28,10 @@ public class SpellTrapCSV {
     }
 
     public CardType getType() {
-        switch (type) {
-            case "SPELL":
-                return CardType.SPELL;
-            default:
-                return CardType.TRAP;
+        if ("SPELL".equals(type)) {
+            return CardType.SPELL;
         }
+        return CardType.TRAP;
     }
 
     public String getIcon() {

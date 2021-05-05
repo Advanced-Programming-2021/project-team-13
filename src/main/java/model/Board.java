@@ -1,6 +1,8 @@
 package model;
 
 import model.cards.Card;
+import model.cards.Monster;
+import model.cards.Spell;
 
 public class Board {
 
@@ -81,4 +83,42 @@ public class Board {
         return null;
     }
 
+    public boolean isMonsterOnBoard(Card selectedCard) {
+        for (int i = 0; i < 6; i++) {
+            if (monster[i].getCard() == selectedCard)     // We can do this because of pointer!!!!
+                return true;
+        }
+        return false;
+    }
+
+    public void removeMonsterFromBoard(Monster monster) {  // could we remove(this is monster and original has card)
+        for (int i = 0; i < 5; i++) {
+            if (this.monster[i].getCard() == monster)// is this ok???????????????????//
+                this.monster[i] = null;
+        }
+    }
+
+    public void removeSpellOrTrapFromBoard(Spell spell) {
+        for (int i = 0; i < 4; i++) {
+            if (spellOrTrap[i].getCard() == spell)
+                spellOrTrap[i] = null;
+        }
+    }
+
+    public boolean isThereEmptyPlaceMonsterZone() {
+        for (Cell cell : monster) {
+            if (cell == null)
+                return true;
+        }
+        return false;
+    }
+
+    public int getNumberOfMonsterInBoard() {
+        int counter = 0;
+        for (Cell cell : monster) {
+            if (cell == null)
+                counter++;
+        }
+        return counter;
+    }
 }

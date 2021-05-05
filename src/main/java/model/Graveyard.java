@@ -25,6 +25,22 @@ public class Graveyard {
     }
 
     public void addCard(Card card) {
+        if (card instanceof Monster) {
+            for (Cell monster : owner.getBoard().getMonsters()) {
+                if (monster.getCard() == card) {
+                    monster.setCard(null);
+                    break;
+                }
+            }
+        } else if (card == owner.getBoard().getFieldSpell().getCard())
+            owner.getBoard().getFieldSpell().setCard(null);
+        else
+            for (Cell cell : owner.getBoard().getSpellOrTrap()) {
+                if (cell.getCard() == card) {
+                    cell.setCard(null);
+                    break;
+                }
+            }
         allCards.add(card);
     }
 

@@ -93,15 +93,16 @@ public class DeckController {
         MonsterCSV monster = null;
         SpellTrapCSV spellOrTrap = null;
         try {
-            monster = monsterCSV.findMonster(cardName);
-            spellOrTrap = spellTrapCSV.findSpellTrap(cardName);
-        } catch (FileNotFoundException e) {
+            monster = MonsterCSV.findMonster(cardName);
+            spellOrTrap = SpellTrapCSV.findSpellTrap(cardName);
+        } catch (FileNotFoundException ignored) {
         }
         if (monster != null)
             return new Monster(monster.getName(), CardType.MONSTER, Face.DOWN, monster.getPrice(), monster.getDescription()
                     , monster.getMonsterType(), monster.getCardType(), monster.getAttribute()
                     , monster.getAttack(), monster.getDefence(), monster.getLevel());
         else {
+            assert spellOrTrap != null;
             if (spellOrTrap.getType() == CardType.SPELL)
                 return new Spell(spellOrTrap.getName(), CardType.SPELL, spellTrapCSV.getDescription(), Face.DOWN, spellOrTrap.getPrice());
             else

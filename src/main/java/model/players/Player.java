@@ -25,6 +25,7 @@ public class Player {
     private Board board;
     private Card selectedCard;
     private ArrayList<Card> cardsInHand;
+    private boolean isSetOrSummonInThisTurn = false;
 
 
     public Player(String nickname, Deck deck, User user) {
@@ -34,12 +35,13 @@ public class Player {
         playersGraveyard = new Graveyard(this);
         this.board = new Board(deck, playersGraveyard);
         this.lifeInGame = 8000;
-        currentCard = null;
+//        currentCard = null;
         selectedCard = null;
         cardsInHand = new ArrayList<>();
         allPlayers.add(this);
     }
 
+/*
     public Player findPlayerByName(String username){
 <<<<<<< HEAD
         for (Player player : allPlayers){
@@ -52,9 +54,18 @@ public class Player {
         }
         return null;
     }
+*/
 
     public void play() {
 
+    }
+
+    public boolean isSetOrSummonInThisTurn() {
+        return isSetOrSummonInThisTurn;
+    }
+
+    public void setSetOrSummonInThisTurn(boolean setOrSummonInThisTurn) {
+        isSetOrSummonInThisTurn = setOrSummonInThisTurn;
     }
 
     public ArrayList<Card> getCardsInHand() {
@@ -77,9 +88,9 @@ public class Player {
         this.lifeInGame = lifeInGame;
     }
 
-    public void setCurrentCard(Card currentCard) {
-        this.currentCard = currentCard;
-    }
+//    public void setCurrentCard(Card currentCard) {
+//        this.currentCard = currentCard;
+//    }
 
     public void setDeck(Deck deck) {
         this.deck = deck;
@@ -128,9 +139,9 @@ public class Player {
         return monsters;
     }
 
-    public Card getCurrentCard() {
-        return currentCard;
-    }
+//    public Card getCurrentCard() {
+//        return currentCard;
+//    }
 
     public Card getSelectedCard() {
         return selectedCard;
