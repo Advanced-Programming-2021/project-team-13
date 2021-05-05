@@ -1,9 +1,6 @@
 package controll;
 
-import enums.AttackOrDefense;
-import enums.Face;
-import enums.MonsterCardType;
-import enums.Phase;
+import enums.*;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
@@ -211,7 +208,7 @@ public class GameController {
             gameView.printCantAttack();
             return false;
         }
-        if (GameView.getCurrentPhase() != Phase.BATTLE_PHASE) {
+        if (gameView.getCurrentPhase() != Phase.BATTLE_PHASE) {
             gameView.printWrongPhase();
             return false;
         }
@@ -244,8 +241,8 @@ public class GameController {
             if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
                     && currentPlayer.getSelectedCard() instanceof Monster
                     && !((Monster) currentPlayer.getSelectedCard()).getMonsterType().equalsIgnoreCase("ritual")) {
-                if (GameView.getCurrentPhase() != Phase.MAIN_PHASE_1
-                        && GameView.getCurrentPhase() != Phase.MAIN_PHASE_2)
+                if (gameView.getCurrentPhase() != Phase.MAIN_PHASE_1
+                        && gameView.getCurrentPhase() != Phase.MAIN_PHASE_2)
                     gameView.printNotInMainPhase();
                 else {
                     if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
@@ -270,11 +267,14 @@ public class GameController {
         } else
             getTribute(numberOfTribute);
         monster.setSetInThisTurn(true);
+        monster.setZone(Zone.MONSTER_ZONE);
+        monster.setFace(Face.UP);
+        monster.setAttackOrDefense(AttackOrDefense.ATTACK);
         currentPlayer.setSetOrSummonInThisTurn(true);
         currentPlayer.setSelectedCard(null);
     }
 
-    private void getTribute(int numberOfTribute) { /// need send tribute to graveyard.
+    private void getTribute(int numberOfTribute) {
         ArrayList<Monster> tributeMonster = new ArrayList<>();
         int numberOfMonsterInOurBoard = currentPlayer.getBoard().getNumberOfMonsterInBoard();
         if (numberOfMonsterInOurBoard < numberOfTribute)
@@ -305,4 +305,71 @@ public class GameController {
         }
     }
 
+    public void set() {
+        if (currentPlayer.getSelectedCard() == null)
+            gameView.printNoCardSelected();
+        else {
+            if (currentPlayer.getSelectedCard().getZone() == Zone.IN_HAND) {
+                if (currentPlayer.getSelectedCard() instanceof Monster)
+                    setMonster((Monster) currentPlayer.getSelectedCard());
+                else
+                    setSpellAndTrap();
+            } else
+                gameView.printCantSet();
+        }
+    }
+
+    private void setSpellAndTrap() {
+    }
+
+    private void setMonster(Monster selectedCard) {
+        if (gameView.getCurrentPhase() == Phase.MAIN_PHASE_1 || gameView.getCurrentPhase() == Phase.MAIN_PHASE_2) {
+            if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
+                if (currentPlayer.isSetOrSummonInThisTurn())
+                    gameView.printAlreadySetOrSummon();
+                else {
+                    selectedCard.setZone(Zone.MONSTER_ZONE);
+                    selectedCard.setFace(Face.DOWN);
+                    selectedCard.setAttackOrDefense(AttackOrDefense.DEFENSE);
+                    currentPlayer.setSetOrSummonInThisTurn(true);
+                    currentPlayer.setSelectedCard(null);
+                    gameView.printSetSuccessfully();
+                }
+            } else
+                gameView.printMonsterZoneFull();
+        } else
+            gameView.printNotInMainPhase();
+    }
+
+    public void changeSet(String position) {
+        if (currentPlayer.getSelectedCard() == null)
+            gameView.printNoCardSelected();
+        else {
+            if (currentPlayer.getSelectedCard() instanceof Monster) {
+                if (gameView.getCurrentPhase() == Phase.MAIN_PHASE_1 || gameView.getCurrentPhase() == Phase.MAIN_PHASE_2) {
+                    Monster monster = (Monster) currentPlayer.getSelectedCard();
+                    if (monster.getFace() == Face.UP && monster.getAttackOrDefense() == AttackOrDefense.ATTACK
+                            && position.equals("attack"))
+                        gameView.printAlreadyInWantedPosition();
+                    else if ((monster.getFace() == Face.UP && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE
+                            && position.equals("defense")))
+                        gameView.printAlreadyInWantedPosition();
+                    else {
+                        if (monster.getHaveChangePositionInThisTurn())
+                            gameView.printAlreadyChangePositionInThisTurn();
+                        else {
+                            monster.setHaveChangePositionInThisTurn(true);
+                            if (position.equals("attack")) monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+                            else monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
+                            gameView.printChangeSetSuccessfully();
+                            currentPlayer.setSelectedCard(null);
+                        }
+                    }
+
+                } else
+                    gameView.printNotInMainPhase();
+            } else
+                gameView.printCantChangePosition();
+        }
+    }
 }

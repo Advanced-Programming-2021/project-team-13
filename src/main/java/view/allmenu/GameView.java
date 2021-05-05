@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
-    private static Phase currentPhase;
+    private Phase currentPhase;
     private final GameController gameController;
     private Player firstPlayer;
     private Player secondPlayer;
@@ -33,7 +33,9 @@ public class GameView {
         else if (command.equals("summon"))
             gameController.summon();
         else if (command.equals("set"))
-            set();
+            gameController.set();
+        else if (command.matches(Regex.CHANGE_SET))
+            changeSet(Regex.getInputMatcher(command, Regex.CHANGE_SET));
         else if (command.matches(Regex.SET_POSITION))
             setPosition(Regex.getInputMatcher(command, Regex.SET_POSITION));
         else if (command.equals("flip-summon"))
@@ -42,6 +44,12 @@ public class GameView {
             attack(Regex.getInputMatcher(command, Regex.ATTACK));
         else if (command.equals("attack direct"))
             directAttack();
+    }
+
+    private void changeSet(Matcher inputMatcher) {
+        inputMatcher.find();
+        String position = inputMatcher.group("position");
+        gameController.changeSet(position);
     }
 
     private void nextPhase() {
@@ -83,12 +91,6 @@ public class GameView {
     }
 
     private void setPosition(Matcher inputMatcher) {   // y the fuck are these private!@#!@?
-    }
-
-    private void set() {
-    }
-
-    private void summon() {
     }
 
     private void selectOrDeselectCard(String command) {
@@ -143,7 +145,7 @@ public class GameView {
         } else printInvalidCommand();
     }
 
-    public static Phase getCurrentPhase() {
+    public Phase getCurrentPhase() {
         return currentPhase;
     }
 
@@ -250,8 +252,8 @@ public class GameView {
         System.out.println("you can’t summon this card");
     }
 
-    public static void setCurrentPhase(Phase currentPhase) {
-        GameView.currentPhase = currentPhase;
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
     }
 
     public void printNotInMainPhase() {
@@ -286,5 +288,29 @@ public class GameView {
     public void getTribute() {
         int number = ViewMaster.scanner.nextInt();
         run("select --monster " + number);
+    }
+
+    public void printCantSet() {
+        System.out.println("you can’t set this card");
+    }
+
+    public void printSetSuccessfully() {
+        System.out.println("set successfully");
+    }
+
+    public void printCantChangePosition() {
+        System.out.println("you can’t change this card position");
+    }
+
+    public void printAlreadyInWantedPosition() {
+        System.out.println("this card is already in the wanted position");
+    }
+
+    public void printAlreadyChangePositionInThisTurn() {
+        System.out.println("you already changed this card position in this turn");
+    }
+
+    public void printChangeSetSuccessfully() {
+        System.out.println("doesHaveChangePositionInThisTurn");
     }
 }

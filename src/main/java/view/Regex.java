@@ -35,6 +35,7 @@ public class Regex {
     public static final String FIELD = "--field";
     public static final String HAND = "--hand (?<cardAddress>\\d+)";
     public static final String DESELECT = "select -d";
+    public static final String CHANGE_SET = "set --position (?<position>attack|defense)";
 
 
 

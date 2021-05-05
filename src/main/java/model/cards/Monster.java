@@ -16,6 +16,7 @@ public class Monster extends Card {
     private int level;
     private String monsterType;/////////////////////////////////////// this need to be set , could we make enum or will it be to much???????
     private boolean isSetInThisTurn = false;
+    private boolean HaveChangedPositionInThisTurn = false;
 
     public Monster(String name, CardType cardType, Face face, int price, String description, String monsterType,
                    MonsterCardType monsterCardType, MonsterAttribute monsterAttribute,
@@ -55,6 +56,14 @@ public class Monster extends Card {
         monsterTypeInGame = monsterType;
         this.nameInGame = name;
     }*/
+
+    public boolean getHaveChangePositionInThisTurn() {
+        return HaveChangedPositionInThisTurn;
+    }
+
+    public void setHaveChangePositionInThisTurn(boolean doesHaveChangePositionInThisTurn) {
+        this.HaveChangedPositionInThisTurn = doesHaveChangePositionInThisTurn;
+    }
 
     public boolean isSetInThisTurn() {
         return isSetInThisTurn;
@@ -180,5 +189,6 @@ public class Monster extends Card {
                 return 2;
         }
     }
+    
 }
 
