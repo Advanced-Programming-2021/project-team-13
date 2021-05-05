@@ -70,7 +70,7 @@ public class DeckView {
 
     }
 
-    public void run(String command) {
+    public void run(String command) {  //// DECK REGEX NEED CHANGE
         if (command.matches(Regex.CREATE_DECK))
             createDeck(Regex.getInputMatcher(command, Regex.CREATE_DECK));
         else if (command.matches(Regex.DELETE_DECK))

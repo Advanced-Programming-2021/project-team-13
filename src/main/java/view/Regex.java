@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Regex {
+    //// DECK REGEX NEEDS CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     public static final String ENTER_MENU = "enter menu (?<menuName>\\w+)";
     public static final String EXIT_MENU = "^menu exit$";
     public static final String SHOW_MENU = "^menu show-current$";
@@ -34,6 +35,7 @@ public class Regex {
     public static final String FIELD = "--field";
     public static final String HAND = "--hand (?<cardAddress>\\d+)";
     public static final String DESELECT = "select -d";
+    public static final String CHANGE_SET = "set --position (?<position>attack|defense)";
 
 
 

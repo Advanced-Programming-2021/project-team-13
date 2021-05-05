@@ -3,13 +3,20 @@ package view.allmenu;
 import controll.GameController;
 import enums.Phase;
 import model.cards.Card;
+import model.cards.Monster;
+import model.players.Player;
 import view.Regex;
+import view.ViewMaster;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
-    private static Phase currentPhase;
+    private Phase currentPhase;
     private final GameController gameController;
+    private Player firstPlayer;
+    private Player secondPlayer;
+    private Player currentPlayer;
 
     public GameView() {
         gameController = new GameController(this);
@@ -24,20 +31,28 @@ public class GameView {
         else if (command.equals("show graveyard"))
             showGraveyard();
         else if (command.equals("summon"))
-            summon();
+            gameController.summon();
         else if (command.equals("set"))
-            set();
+            gameController.set();
+        else if (command.matches(Regex.CHANGE_SET))
+            changeSet(Regex.getInputMatcher(command, Regex.CHANGE_SET));
         else if (command.matches(Regex.SET_POSITION))
             setPosition(Regex.getInputMatcher(command, Regex.SET_POSITION));
         else if (command.equals("flip-summon"))
-            flipSummon();
+            gameController.flipSummon();
         else if (command.matches(Regex.ATTACK))
             attack(Regex.getInputMatcher(command, Regex.ATTACK));
         else if (command.equals("attack direct"))
             directAttack();
     }
 
-    private void nextPhase(){
+    private void changeSet(Matcher inputMatcher) {
+        inputMatcher.find();
+        String position = inputMatcher.group("position");
+        gameController.changeSet(position);
+    }
+
+    private void nextPhase() {
 
     }
 
@@ -78,23 +93,17 @@ public class GameView {
     private void setPosition(Matcher inputMatcher) {   // y the fuck are these private!@#!@?
     }
 
-    private void set() {
-    }
-
-    private void summon() {
-    }
-
-    private void selectOrDeselectCard(String command){
+    private void selectOrDeselectCard(String command) {
         if (command.matches(Regex.DESELECT))
             deselectCard();
         else selectCard(command);
     }
 
-    private void deselectCard(){
+    private void deselectCard() {
         gameController.deselectCard();
     }
 
-    private void selectCard(String command) {
+    public void selectCard(String command) {
         Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
         Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.MONSTER);
         Matcher spellMatcher = Regex.getInputMatcher(command, Regex.SPELL);
@@ -136,7 +145,7 @@ public class GameView {
         } else printInvalidCommand();
     }
 
-    public static Phase getCurrentPhase() {
+    public Phase getCurrentPhase() {
         return currentPhase;
     }
 
@@ -152,11 +161,11 @@ public class GameView {
         System.out.println("invalid command");
     }
 
-    public void printCardSelected(){
+    public void printCardSelected() {
         System.out.println("card selected");
     }
 
-    public void printNotFoundCard(){
+    public void printNotFoundCard() {
         System.out.println("no card found in the given position");
     }
 
@@ -237,5 +246,75 @@ public class GameView {
 
     public void printYourOpponentReceivesDamage(int attackNum) {
         System.out.println("your opponent receives " + attackNum + " battle damage");
+    }
+
+    public void printCantSummon() {
+        System.out.println("you can’t summon this card");
+    }
+
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
+    }
+
+    public void printNotInMainPhase() {
+        System.out.println("action not allowed in this phase");
+    }
+
+    public void printMonsterZoneFull() {
+        System.out.println("monster card zone is full");
+    }
+
+    public void printAlreadySetOrSummon() {
+        System.out.println("you already summoned/set on this turn");
+    }
+
+
+    public void printSummonSuccessfully() {
+
+    }
+
+    public void printNoMonsterOnThisAddress() {
+        System.out.println("there no monsters one this address");
+    }
+
+    public void printThereArentEnoughMonsterForTribute() {
+        System.out.println("there are not enough cards for tribute");
+    }
+
+    public void printNoMonsterInOneOfThisAddress() {
+        System.out.println("there no monsters on one of this addresses");
+    }
+
+    public void getTribute() {
+        int number = ViewMaster.scanner.nextInt();
+        run("select --monster " + number);
+    }
+
+    public void printCantSet() {
+        System.out.println("you can’t set this card");
+    }
+
+    public void printSetSuccessfully() {
+        System.out.println("set successfully");
+    }
+
+    public void printCantChangePosition() {
+        System.out.println("you can’t change this card position");
+    }
+
+    public void printAlreadyInWantedPosition() {
+        System.out.println("this card is already in the wanted position");
+    }
+
+    public void printAlreadyChangePositionInThisTurn() {
+        System.out.println("you already changed this card position in this turn");
+    }
+
+    public void printChangeSetSuccessfully() {
+        System.out.println("doesHaveChangePositionInThisTurn");
+    }
+
+    public void printCantFlipSummon() {
+        System.out.println("you can’t flip summon this card");
     }
 }

@@ -16,18 +16,21 @@ public class Player {
     }
 
     private Graveyard playersGraveyard;
-    private final String username;
+    private final String nickname;
     private int lifeInGame;
     private Player rivalPlayer;
     private Card currentCard;
     private Deck deck;
+    User user;
     private Board board;
     private Card selectedCard;
     private ArrayList<Card> cardsInHand;
+    private boolean isSetOrSummonInThisTurn = false;
 
 
-    public Player(String username, Deck deck) {
-        this.username = username;
+    public Player(String nickname, Deck deck, User user) {
+        this.nickname = nickname;
+        this.user = user;
         this.deck = deck;
         playersGraveyard = new Graveyard(this);
         this.board = new Board(deck, playersGraveyard);
@@ -38,16 +41,31 @@ public class Player {
         allPlayers.add(this);
     }
 
+/*
     public Player findPlayerByName(String username){
+<<<<<<< HEAD
+        for (Player player : allPlayers){
+            if (player.nickname.equals(username))
+=======
         for (Player player : allPlayers) {
             if (player.username.equals(username))
+>>>>>>> fb940392008a94353a4aa071577d54a4515b589f
                 return player;
         }
         return null;
     }
+*/
 
     public void play() {
 
+    }
+
+    public boolean isSetOrSummonInThisTurn() {
+        return isSetOrSummonInThisTurn;
+    }
+
+    public void setSetOrSummonInThisTurn(boolean setOrSummonInThisTurn) {
+        isSetOrSummonInThisTurn = setOrSummonInThisTurn;
     }
 
     public ArrayList<Card> getCardsInHand() {

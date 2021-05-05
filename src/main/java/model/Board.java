@@ -104,4 +104,21 @@ public class Board {
                 spellOrTrap[i] = null;
         }
     }
+
+    public boolean isThereEmptyPlaceMonsterZone() {
+        for (Cell cell : monster) {
+            if (cell == null)
+                return true;
+        }
+        return false;
+    }
+
+    public int getNumberOfMonsterInBoard() {
+        int counter = 0;
+        for (Cell cell : monster) {
+            if (cell == null)
+                counter++;
+        }
+        return counter;
+    }
 }

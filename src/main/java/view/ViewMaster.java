@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import model.players.User;
 import view.allmenu.*;
+import view.allmenu.DuelView;
 
 public class ViewMaster {
     public static Scanner scanner = new Scanner(System.in);
@@ -25,7 +26,7 @@ public class ViewMaster {
         profileView = new ProfileView();
         mainView = new MainView();
         deckView = new DeckView();
-        gameView = new GameView();
+        //gameView = new GameView();
         duelView = new DuelView();
         currentMenu = Menu.LOGIN_MENU;
     }

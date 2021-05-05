@@ -1,5 +1,6 @@
 package model;
 
+import enums.Zone;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
@@ -25,6 +26,23 @@ public class Graveyard {
     }
 
     public void addCard(Card card) {
+        card.setZone(Zone.GRAVEYARD);
+        if (card instanceof Monster) {
+            for (Cell monster : owner.getBoard().getMonsters()) {
+                if (monster.getCard() == card) {
+                    monster.setCard(null);
+                    break;
+                }
+            }
+        } else if (card == owner.getBoard().getFieldSpell().getCard())
+            owner.getBoard().getFieldSpell().setCard(null);
+        else
+            for (Cell cell : owner.getBoard().getSpellOrTrap()) {
+                if (cell.getCard() == card) {
+                    cell.setCard(null);
+                    break;
+                }
+            }
         allCards.add(card);
     }
 
