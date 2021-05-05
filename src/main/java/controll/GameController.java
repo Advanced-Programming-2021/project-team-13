@@ -1,6 +1,7 @@
 package controll;
 
 import enums.AttackOrDefense;
+import enums.Face;
 import enums.Phase;
 import model.cards.Card;
 import model.cards.Monster;
@@ -89,21 +90,67 @@ public class GameController {
     }
 
     public void attack(int monsterNumber) {
-        if (checkAttack(monsterNumber)) {
+        if (checkAttack() && checkRivalMonster(monsterNumber)) {
             Monster rivalMonster = (Monster) currentPlayer.getRivalPlayer()
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
+            String rivalMonsterName = rivalMonster.getCardName();
             if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
                 int attackDifference =
                         Math.abs(rivalMonster.getAttackNum() - ourMonster.getAttackNum());
                 if (ourMonster.getAttackNum() < rivalMonster.getAttackNum()) {
                     currentPlayer.getRivalPlayer().decreaseHealth(attackDifference);
                     currentPlayer.getRivalPlayer().getGraveyard().addCard(rivalMonster);
-
+                    currentPlayer.getRivalPlayer().getBoard().removeMonsterFromBoard(rivalMonster);
+                    gameView.printOpponentMonsterDestroyed(attackDifference);
+                } else if (ourMonster.getAttackNum() == rivalMonster.getAttackNum()) {
+                    currentPlayer.getBoard().removeMonsterFromBoard(ourMonster);
+                    currentPlayer.getRivalPlayer().getBoard().removeMonsterFromBoard(rivalMonster);
+                    currentPlayer.getGraveyard().addCard(ourMonster);
+                    currentPlayer.getRivalPlayer().getGraveyard().addCard(rivalMonster);
+                    gameView.printBothMonstersDestroyed();
+                } else {
+                    currentPlayer.getBoard().removeMonsterFromBoard(ourMonster);
+                    currentPlayer.decreaseHealth(attackDifference);
+                    currentPlayer.getGraveyard().addCard(ourMonster);
+                    gameView.printYourCardIsDestroyed(attackDifference);
                 }
             } else {
+                int attackDifference =
+                        Math.abs(rivalMonster.getDefenseNum() - ourMonster.getAttackNum());
+                if (ourMonster.getAttackNum() > rivalMonster.getDefenseNum()) {
+                    currentPlayer.getRivalPlayer().getGraveyard().addCard(rivalMonster);
+                    currentPlayer.getBoard().removeMonsterFromBoard(rivalMonster);
+                    if (rivalMonster.getFace() == Face.UP)
+                        gameView.printDefensePositionDestroyed();
+                    else {
+                        gameView.printDefensePositionDestroyedHidden(rivalMonsterName);  // if card was hidden theres another thing to show
+                    }
+                } else if (ourMonster.getAttackNum() == rivalMonster.getDefenseNum()) {
+                    if (rivalMonster.getFace() == Face.UP)
+                        gameView.printNoCardDestroyed();
+                    else {                                                          // does card turn after being attacked????????????
+                        gameView.printNoCardDestroyedHidden(rivalMonsterName);
+                    }
+                } else {
+                    currentPlayer.decreaseHealth(attackDifference);
+                    if (rivalMonster.getFace() == Face.UP)
+                        gameView.printNoCardDestroyedYouReceivedDamage(attackDifference);
+                    else {
+                        gameView.printNoCardDestroyedYouReceivedDamageHidden(attackDifference, rivalMonsterName);
 
+                    }
+                }
             }
+            rivalMonster.setFace(Face.UP);
+        }
+    }
+
+    public void directAttack() {  // somehow same as attack only diff is rival card number!!!
+        if (checkAttack()) {
+            Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
+            currentPlayer.getRivalPlayer().decreaseHealth(ourMonster.getAttackNum());
+            gameView.printYourOpponentReceivesDamage(ourMonster.getAttackNum());
         }
     }
 
@@ -152,7 +199,7 @@ public class GameController {
     }
 
 
-    private boolean checkAttack(int rivalMonsterNum) {
+    private boolean checkAttack() {
         if (currentPlayer.getSelectedCard() == null) {
             gameView.printNoCardSelected();
             return false;
@@ -169,6 +216,11 @@ public class GameController {
             gameView.printAlreadyAttacked();
             return false;
         }
+
+        return true;
+    }
+
+    private boolean checkRivalMonster(int rivalMonsterNum) {
         if (currentPlayer.getRivalPlayer().getBoard()
                 .getMonsterByAddress(rivalMonsterNum) == null) {
             gameView.printNoCardToAttack();
@@ -177,7 +229,9 @@ public class GameController {
         return true;
     }
 
-    private boolean hasCardAttacked(Card selectedCard) {  ////// this need to be completed , maybe a boolean???
+    private boolean hasCardAttacked(Card selectedCard) {  ////// this need to be completed , maybe a boolean???////////////////////////////////////////////////////////////
         return true;
     }
+
+
 }

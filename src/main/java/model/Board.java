@@ -1,6 +1,8 @@
 package model;
 
 import model.cards.Card;
+import model.cards.Monster;
+import model.cards.Spell;
 
 public class Board {
 
@@ -87,5 +89,19 @@ public class Board {
                 return true;
         }
         return false;
+    }
+
+    public void removeMonsterFromBoard(Monster monster) {  // could we remove(this is monster and original has card)
+        for (int i = 0; i < 5; i++) {
+            if (this.monster[i].getCard() == monster)// is this ok???????????????????//
+                this.monster[i] = null;
+        }
+    }
+
+    public void removeSpellOrTrapFromBoard(Spell spell) {
+        for (int i = 0; i < 4; i++) {
+            if (spellOrTrap[i].getCard() == spell)
+                spellOrTrap[i] = null;
+        }
     }
 }

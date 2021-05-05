@@ -62,7 +62,7 @@ public class GameView {
     }
 
     private void directAttack() {
-
+        gameController.directAttack();
     }
 
     private void attack(Matcher inputMatcher) {
@@ -186,5 +186,56 @@ public class GameView {
 
     public void printNoCardToAttack() {
         System.out.println("there is no card to attack here");
+    }
+
+    public void printOpponentMonsterDestroyed(int attackDifference) {
+        System.out.println("your opponent’s monster is destroyed " +
+                "and your opponent receives " + attackDifference + " battle damage");
+    }
+
+    public void printBothMonstersDestroyed() {
+        System.out.println("both you and your opponent monster cards" +
+                " are destroyed and no one receives damage");
+    }
+
+    public void printYourCardIsDestroyed(int attackDifference) {
+        System.out.println("Your monster card is destroyed " +
+                "and you received " + attackDifference + " battle damage");
+    }
+
+    public void printNoCardDestroyed() {
+        System.out.println("no card is destroyed");
+    }
+
+    public void printDefensePositionDestroyed() {
+        System.out.println("the defense position monster is destroyed");
+    }
+
+    public void printNoCardDestroyedYouReceivedDamage(int attackDifference) {
+        System.out.println("no card is destroyed and you" +
+                " received " + attackDifference + " battle damage");
+    }
+
+    public void printDefensePositionDestroyedHidden(String rivalMonsterName) {
+        printOpponentCardsName(rivalMonsterName);
+        printDefensePositionDestroyed();
+    }
+
+    public void printNoCardDestroyedHidden(String rivalMonsterName) {
+        printOpponentCardsName(rivalMonsterName);
+        printNoCardDestroyed();
+    }
+
+    public void printNoCardDestroyedYouReceivedDamageHidden(int attackDifference, String rivalMonsterName) {
+        printOpponentCardsName(rivalMonsterName);
+        printNoCardDestroyedYouReceivedDamage(attackDifference);
+    }
+
+    private void printOpponentCardsName(String name) {
+        System.out.println("opponent’s monster card was " + name);
+    }
+
+    public void printYourOpponentReceivesDamage(int attackNum) {
+        System.out.println("your opponent receives " + attackNum + " battle damage");
     }
 }
