@@ -39,7 +39,7 @@ public class GameView {
         else if (command.matches(Regex.SET_POSITION))
             setPosition(Regex.getInputMatcher(command, Regex.SET_POSITION));
         else if (command.equals("flip-summon"))
-            flipSummon();
+            gameController.flipSummon();
         else if (command.matches(Regex.ATTACK))
             attack(Regex.getInputMatcher(command, Regex.ATTACK));
         else if (command.equals("attack direct"))
@@ -312,5 +312,9 @@ public class GameView {
 
     public void printChangeSetSuccessfully() {
         System.out.println("doesHaveChangePositionInThisTurn");
+    }
+
+    public void printCantFlipSummon() {
+        System.out.println("you can’t flip summon this card");
     }
 }

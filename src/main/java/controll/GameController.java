@@ -372,4 +372,26 @@ public class GameController {
                 gameView.printCantChangePosition();
         }
     }
+
+    public void flipSummon() {
+        if (currentPlayer.getSelectedCard() == null)
+            gameView.printNoCardSelected();
+        else {
+            if (currentPlayer.getSelectedCard().getZone() == Zone.MONSTER_ZONE) {
+                if (gameView.getCurrentPhase() == Phase.MAIN_PHASE_1 || gameView.getCurrentPhase() == Phase.MAIN_PHASE_2) {
+                    Monster monster = (Monster) currentPlayer.getSelectedCard();
+                    if (monster.isSetInThisTurn() ||
+                            !(monster.getFace() == Face.DOWN && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE))
+                        gameView.printCantFlipSummon();
+                    else {
+                        currentPlayer.setSelectedCard(null);
+                        monster.setFace(Face.UP);
+                        monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+                    }
+                } else
+                    gameView.printNotInMainPhase();
+            } else
+                gameView.printCantChangePosition();
+        }
+    }
 }

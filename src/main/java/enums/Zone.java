@@ -5,6 +5,6 @@ public enum Zone {
     SPELL_TRAP_ZONE,
     IN_HAND,
     GRAVEYARD,
-    BETWEEN_GRAVEYARD_AND_FIELD,
+    FIELD,
     DECK_ZONE,
 }
