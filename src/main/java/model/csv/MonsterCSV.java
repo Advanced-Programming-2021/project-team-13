@@ -1,4 +1,4 @@
-package CSV;
+package model.csv;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -87,7 +87,7 @@ public class MonsterCSV {
     }
 
     public static MonsterCSV findMonster(String name) throws FileNotFoundException {
-        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "Monster.csv"))
+        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model.CSV\\" + "Monster.csv"))
                 .withType(MonsterCSV.class)
                 .build()
                 .parse();
@@ -98,7 +98,7 @@ public class MonsterCSV {
     }
 
     public static void getNameAndDescription(TreeMap<String, String> cards) throws FileNotFoundException {
-        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\CSV\\" + "Monster.csv"))
+        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model.CSV\\" + "Monster.csv"))
                 .withType(MonsterCSV.class)
                 .build()
                 .parse();

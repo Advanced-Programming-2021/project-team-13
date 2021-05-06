@@ -10,20 +10,10 @@ import view.ViewMaster;
 import java.util.regex.Matcher;
 
 public class GameView {
-    private Phase currentPhase;
     private final GameController gameController;
-    private Player firstPlayer;
-    private Player secondPlayer;
-    private Player currentPlayer;
-    private int round;
 
-    public GameView(Player firstPlayer, Player secondPlayer, int rounds) {
-        currentPhase = Phase.DRAW_PHASE;
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
-        this.currentPlayer = firstPlayer;
-        this.round = rounds;
-        gameController = new GameController(this);
+    public GameView(Player firstPlayer, Player secondPlayer, Player currentPlayer , int rounds) {
+        gameController = new GameController(this,firstPlayer,secondPlayer,currentPlayer,rounds);
     }
 
     public void run(String command) {
@@ -153,10 +143,6 @@ public class GameView {
         } else printInvalidCommand();
     }
 
-    public Phase getCurrentPhase() {
-        return currentPhase;
-    }
-
     public void printCardDeselected() {
         System.out.println("card deselected");
     }
@@ -175,10 +161,6 @@ public class GameView {
 
     public void printNotFoundCard() {
         System.out.println("no card found in the given position");
-    }
-
-    public void printPhaseName() {
-        System.out.println(currentPhase.getPhaseName());
     }
 
     public void printAddedNewCard(Card card) {
@@ -260,10 +242,6 @@ public class GameView {
         System.out.println("you can’t summon this card");
     }
 
-    public void setCurrentPhase(Phase currentPhase) {
-        this.currentPhase = currentPhase;
-    }
-
     public void printNotInMainPhase() {
         System.out.println("action not allowed in this phase");
     }
@@ -275,7 +253,6 @@ public class GameView {
     public void printAlreadySetOrSummon() {
         System.out.println("you already summoned/set on this turn");
     }
-
 
     public void printSummonSuccessfully() {
 
@@ -326,7 +303,4 @@ public class GameView {
         System.out.println("you can’t flip summon this card");
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
 }

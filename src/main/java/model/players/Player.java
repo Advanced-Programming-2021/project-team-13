@@ -9,52 +9,26 @@ import model.cards.Monster;
 import java.util.ArrayList;
 
 public class Player {
-    private static final ArrayList<Player> allPlayers;
 
-    static {
-        allPlayers = new ArrayList<>();
-    }
-
-    private Graveyard playersGraveyard;
-    private final String nickname;
-    private int lifeInGame;
-    private Player rivalPlayer;
-    private Card currentCard;
+    private final User user;
     private Deck deck;
-    User user;
+    private int lifePoint;
     private Board board;
+    private int rounds;
     private Card selectedCard;
-    private ArrayList<Card> cardsInHand;
+    private final ArrayList<Card> cardsInHand;
     private boolean isSetOrSummonInThisTurn = false;
 
 
-    public Player(String nickname, Deck deck, User user) {
-        this.nickname = nickname;
+    public Player(User user , int rounds) {
         this.user = user;
-        this.deck = deck;
-        playersGraveyard = new Graveyard(this);
-        this.board = new Board(deck, playersGraveyard);
-        this.lifeInGame = 8000;
-//        currentCard = null;
-        selectedCard = null;
+        this.deck = user.getActiveDeck();
+        this.lifePoint = 8000;
+        this.board = new Board(deck,new Graveyard(this));
+        this.rounds = rounds;
         cardsInHand = new ArrayList<>();
-        allPlayers.add(this);
     }
 
-/*
-    public Player findPlayerByName(String username){
-<<<<<<< HEAD
-        for (Player player : allPlayers){
-            if (player.nickname.equals(username))
-=======
-        for (Player player : allPlayers) {
-            if (player.username.equals(username))
->>>>>>> fb940392008a94353a4aa071577d54a4515b589f
-                return player;
-        }
-        return null;
-    }
-*/
 
     public void play() {
 
@@ -72,20 +46,8 @@ public class Player {
         return cardsInHand;
     }
 
-    public void setCardsInHand(Card card) {
-        cardsInHand.add(card);
-    }
-
-    public Graveyard getPlayersGraveyard() {
-        return playersGraveyard;
-    }
-
-    public void setPlayersGraveyard(Graveyard playersGraveyard) {
-        this.playersGraveyard = playersGraveyard;
-    }
-
-    public void setLifeInGame(int lifeInGame) {
-        this.lifeInGame = lifeInGame;
+    public void setLifePoint(int lifePoint) {
+        this.lifePoint = lifePoint;
     }
 
 //    public void setCurrentCard(Card currentCard) {
@@ -96,16 +58,8 @@ public class Player {
         this.deck = deck;
     }
 
-    public Graveyard getGraveyard() {
-        return playersGraveyard;
-    }
-
-    public int getLifeInGame() {
-        return lifeInGame;
-    }
-
-    public Player getRivalPlayer() {
-        return rivalPlayer;
+    public int getLifePoint() {
+        return lifePoint;
     }
 
     public Deck getDeck() {
@@ -113,17 +67,14 @@ public class Player {
     }
 
     public void increaseHealth(int amount) {
-        lifeInGame += amount;
+        lifePoint += amount;
     }
 
     public void decreaseHealth(int amount) {       //thers an error somewhere that I didnt put a minus , dont know where but I will find out !!!!!!!!
-        lifeInGame -= amount;
+        lifePoint -= amount;
     }
 
     public void addCardInGame(Card card) {
-    }
-    public void setRivalPlayer(Player rivalPlayer) {
-        this.rivalPlayer = rivalPlayer;
     }
 
     public void setBoard(Board board) {

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class ViewMaster {
     public static Scanner scanner = new Scanner(System.in);
+    private static ViewMaster viewMaster ;
     private static Menu currentMenu;
     private static User user;
     private final LoginView loginView;
@@ -18,14 +19,13 @@ public class ViewMaster {
     private final DuelView duelView;
     private GameView gameView;
 
-    public ViewMaster() {
+    private ViewMaster() {
         loginView = new LoginView();
         shopView = new ShopView();
         scoreboardView = new ScoreboardView();
         profileView = new ProfileView();
         mainView = new MainView();
         deckView = new DeckView();
-        //gameView = new GameView();
         duelView = new DuelView();
         currentMenu = Menu.LOGIN_MENU;
     }
@@ -38,16 +38,26 @@ public class ViewMaster {
         return user;
     }
 
-    public void printCurrentMenu() {
-        System.out.println(currentMenu.getMenuName());
-    }
-
     public static Menu getCurrentMenu() {
         return currentMenu;
     }
 
     public static void setCurrentMenu(Menu currentMenu) {
         ViewMaster.currentMenu = currentMenu;
+    }
+
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public static ViewMaster getViewMaster() {
+        if (viewMaster == null)
+            viewMaster = new ViewMaster();
+        return viewMaster;
     }
 
     public void run() {
@@ -68,11 +78,16 @@ public class ViewMaster {
                 profileView.run(command);
             else if (currentMenu == Menu.DECK_MENU)
                 deckView.run(command);
-            else if (currentMenu == Menu.DUEL_MENU) {
+            else if (currentMenu == Menu.DUEL_MENU)
                 duelView.run(command);
-            } else if (currentMenu == Menu.GAME_MENU)
-                duelView.getDuelController()
-                        .getGameView().run(command);
+            else if (currentMenu == Menu.GAME_MENU)
+                gameView.run(command);
+
         }
     }
+
+    public void printCurrentMenu() {
+        System.out.println(currentMenu.getMenuName());
+    }
+
 }

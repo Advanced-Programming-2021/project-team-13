@@ -1,7 +1,7 @@
 package controll;
 
-import CSV.MonsterCSV;
-import CSV.SpellTrapCSV;
+import model.csv.MonsterCSV;
+import model.csv.SpellTrapCSV;
 import bullshit.Interfaces.Effects;
 import enums.CardType;
 import enums.Face;
@@ -10,7 +10,6 @@ import model.Deck;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
-import model.players.User;
 import view.allmenu.DeckView;
 import view.ViewMaster;
 

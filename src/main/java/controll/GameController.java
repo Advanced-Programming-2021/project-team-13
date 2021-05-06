@@ -13,14 +13,19 @@ import java.util.ArrayList;
 
 public class GameController {
     private final GameView gameView;
-    private Player currentPlayer;       // we only need current player since opponent has its rival
-//    private Player secondPlayer;
+    private final Player firstPlayer;
+    private final Player secondPlayer;
+    private final int startingRounds;
+    private Phase currentPhase;
+    private Player currentPlayer;
 
-
-    public GameController(GameView gameView) {
+    public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player currentPlayer , int rounds) {
         this.gameView = gameView;
-        currentPlayer = gameView.getCurrentPlayer();
-
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
+        this.currentPlayer = currentPlayer;
+        this.startingRounds = rounds;
+        currentPhase = Phase.DRAW_PHASE;
     }
 
 //    public Player getRivalPlayer() {
