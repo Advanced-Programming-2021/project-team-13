@@ -18,6 +18,7 @@ public class ViewMaster {
     private final DeckView deckView;
     private final DuelView duelView;
     private GameView gameView;
+    private ShowGraveyardMenu showGraveyardMenu;
 
     private ViewMaster() {
         loginView = new LoginView();
@@ -54,6 +55,10 @@ public class ViewMaster {
         return gameView;
     }
 
+    public void setShowGraveyardMenu(ShowGraveyardMenu showGraveyardMenu) {
+        this.showGraveyardMenu = showGraveyardMenu;
+    }
+
     public static ViewMaster getViewMaster() {
         if (viewMaster == null)
             viewMaster = new ViewMaster();
@@ -82,7 +87,8 @@ public class ViewMaster {
                 duelView.run(command);
             else if (currentMenu == Menu.GAME_MENU)
                 gameView.run(command);
-
+            else if (currentMenu == Menu.SHOW_GRAVEYARD)
+                showGraveyardMenu.run(command);
         }
     }
 

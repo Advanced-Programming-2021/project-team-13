@@ -4,29 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="game controller selects (without checking regex) + &#10;game controller + game view attack(60 percent completed)&#10;need a method for checking if card has attacked in the same round or not">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_29_2021_7_40_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_29_2021_7_40_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_1_2021_1_23_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_1_2021_1_23_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_1_2021_4_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_1_2021_4_10_PM__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="ViewMaster is singleton , gameView and gameController not completed yet">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/ShowGraveyardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ShowGraveyardMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CSV/Monster.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/Monster.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CSV/MonsterCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/MonsterCSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CSV/SpellTrap.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/SpellTrap.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CSV/SpellTrapCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/SpellTrapCSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DuelController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/Phase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/Phase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/PhaseController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ShopController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/ShopController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/enums/Attribute.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/DuelView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +36,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -130,15 +129,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -205,6 +202,7 @@
       <workItem from="1620150125607" duration="617000" />
       <workItem from="1620180485882" duration="7100000" />
       <workItem from="1620189491517" duration="3006000" />
+      <workItem from="1620298676234" duration="28135000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -255,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620187634315</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ViewMaster is singleton , gameView and gameController not completed yet">
+      <created>1620259496168</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1620259496168</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +319,7 @@
     <MESSAGE value="DuelView + AIPlayer + DuelController added" />
     <MESSAGE value="some of game controller completed" />
     <MESSAGE value="game controller selects (without checking regex) + &#10;game controller + game view attack(60 percent completed)&#10;need a method for checking if card has attacked in the same round or not" />
-    <option name="LAST_COMMIT_MESSAGE" value="game controller selects (without checking regex) + &#10;game controller + game view attack(60 percent completed)&#10;need a method for checking if card has attacked in the same round or not" />
+    <MESSAGE value="ViewMaster is singleton , gameView and gameController not completed yet" />
+    <option name="LAST_COMMIT_MESSAGE" value="ViewMaster is singleton , gameView and gameController not completed yet" />
   </component>
 </project>

@@ -10,6 +10,7 @@ public enum Menu {
     DECK_MENU("Deck Menu"),
     GAME_MENU("Game Menu"),
     DUEL_MENU("Duel Menu"),
+    SHOW_GRAVEYARD("show graveyard"),
     IMPORT_EXPORT_MENU("Import/Export Menu");
 
     private final String menuName;
@@ -19,6 +20,8 @@ public enum Menu {
     }
 
     public String getMenuName() {
+        if (this == SHOW_GRAVEYARD)
+            return GAME_MENU.menuName;
         return menuName;
     }
 }

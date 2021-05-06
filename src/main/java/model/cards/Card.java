@@ -145,4 +145,9 @@ public class Card implements Comparable<Card> {
         if (o.getCardName().compareTo(cardName) < 0) return 1;
         return -1;
     }
+
+    @Override
+    public String toString() {
+        return this.cardName + " : " + this.cardDescription;
+    }
 }

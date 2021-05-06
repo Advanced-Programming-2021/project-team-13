@@ -24,19 +24,25 @@ public class Regex {
     public static final String SHOW_ONE_DECK = "^deck show --([^ ]+ \\w+) (--\\w+)?$";
     public static final String DECK_SHOW_CARDS = "^deck show --cards$";
     public static final String ATTACK = "attack ([1-5])";
-    public static final String SET_POSITION = "set -- position (attack|defense)"; // fishy !!!!!!!!!!!!!!
     public static final String DUEL = "^duel [^ ]+ [^ ]+ [^ ]+ [^ ]+ [^ ]+$";
     public static final String NEW = "--new";
     public static final String SECOND_PLAYER = "--second-player (?<playerUsername>\\w+)";
     public static final String ROUNDS = "--rounds (?<rounds>\\d+)";
     public static final String AI = "--ai";
     public static final String OPPONENT = "--opponent";
-    public static final String MONSTER = "--monster (?<cardAddress>\\d+)";
-    public static final String SPELL = "--spell (?<cardAddress>\\d+)";
+    public static final String OPPONENT_WITH_FIELD = "--opponent (?<cardAddress>\\d+)";
+    public static final String PLAYER_MONSTER = "--monster (?<cardAddress>\\d+)";
+    public static final String PLAYER_SPELL = "--spell (?<cardAddress>\\d+)";
+    public static final String PLAYER_HAND = "--hand (?<cardAddress>\\d+)";
     public static final String FIELD = "--field";
-    public static final String HAND = "--hand (?<cardAddress>\\d+)";
+    public static final String OPPONENT_MONSTER = "--monster";
+    public static final String OPPONENT_SPELL = "--spell";
     public static final String DESELECT = "select -d";
     public static final String CHANGE_SET = "set --position (?<position>attack|defense)";
+    public static final String FIELD_SELECT = "^select [^ ]+$";
+    public static final String PLAYER_SELECT = "^select [^ ]+ [^ ]+$";
+    public static final String OPPONENT_SELECT = "^select [^ ]+ [^ ]+ [^ ]+$";
+
 
 
 

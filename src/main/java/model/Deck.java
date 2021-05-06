@@ -3,6 +3,7 @@ package model;
 import model.cards.Card;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck implements Comparable<Deck> {
     private final static int MIN_CARDS_IN_MAIN_DECK = 40;
@@ -139,6 +140,10 @@ public class Deck implements Comparable<Deck> {
         allCards.remove(card);
     }
 
+    public void shuffleMainDeck(){
+        Collections.shuffle(allCardsInMainDeck);
+    }
+
     @Override
     public String toString() {
         return name + ": main deck " + allCardsInMainDeck.size() +
@@ -154,6 +159,19 @@ public class Deck implements Comparable<Deck> {
 
     public void printBeforeNonMonster() {
         System.out.println("Spell and Traps");
+    }
+
+    @Override
+    public Deck clone() throws CloneNotSupportedException {
+        Deck clone = (Deck) super.clone();
+        clone.name = this.name;
+        clone.allCards = new ArrayList<>();
+        clone.allCardsInMainDeck = new ArrayList<>();
+        clone.allCardsInSideDeck = new ArrayList<>();
+        clone.allCards = this.allCards;
+        clone.allCardsInMainDeck = this.allCardsInMainDeck;
+        clone.allCardsInSideDeck = this.allCardsInSideDeck;
+        return clone;
     }
 }
 

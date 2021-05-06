@@ -23,7 +23,7 @@ public class DuelController {
     }
 
     private void playsWithAI(User user, int rounds) {
-        Player firstPlayer = new Player(user , rounds);
+        Player firstPlayer = new Player(user);
         ViewMaster.setCurrentMenu(Menu.GAME_MENU);
         //secondPlayer = new AIPlayer("AI" , );
         //to complete
@@ -42,12 +42,13 @@ public class DuelController {
     }
 
     private void startDuel(User user, User rivalUser, int rounds) {
-        Player firstPlayer = new Player(user , rounds);
-        Player secondPlayer = new Player(rivalUser , rounds);
+        Player firstPlayer = new Player(user);
+        Player secondPlayer = new Player(rivalUser);
         if (findUserToStart(user , rivalUser) == user)
             ViewMaster.getViewMaster().setGameView(new GameView(firstPlayer,secondPlayer,firstPlayer,rounds));
         else
             ViewMaster.getViewMaster().setGameView(new GameView(firstPlayer,secondPlayer,secondPlayer,rounds));
+        ViewMaster.setCurrentMenu(Menu.GAME_MENU);
     }
 
     private User findUserToStart(User user , User rivalUser){

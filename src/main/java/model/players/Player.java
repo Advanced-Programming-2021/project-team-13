@@ -11,21 +11,23 @@ import java.util.ArrayList;
 public class Player {
 
     private final User user;
-    private Deck deck;
     private int lifePoint;
+    private final int wonRounds;
     private Board board;
-    private int rounds;
     private Card selectedCard;
-    private final ArrayList<Card> cardsInHand;
+    private ArrayList<Card> cardsInHand;
     private boolean isSetOrSummonInThisTurn = false;
 
 
-    public Player(User user , int rounds) {
+    public Player(User user) {
+        this.wonRounds = 0;
         this.user = user;
-        this.deck = user.getActiveDeck();
         this.lifePoint = 8000;
-        this.board = new Board(deck,new Graveyard(this));
-        this.rounds = rounds;
+        try {
+            this.board = new Board(user.getActiveDeck().clone(), new Graveyard(this));
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         cardsInHand = new ArrayList<>();
     }
 
@@ -54,16 +56,8 @@ public class Player {
 //        this.currentCard = currentCard;
 //    }
 
-    public void setDeck(Deck deck) {
-        this.deck = deck;
-    }
-
     public int getLifePoint() {
         return lifePoint;
-    }
-
-    public Deck getDeck() {
-        return deck;
     }
 
     public void increaseHealth(int amount) {
@@ -77,12 +71,22 @@ public class Player {
     public void addCardInGame(Card card) {
     }
 
+    public void addCardToHand() {
+        Card card = this.getBoard().getDeck().getAllCardsInMainDeck().get(0);
+        this.getBoard().getDeck().removeCard(card ,false);
+        this.cardsInHand.add(card);
+    }
+
     public void setBoard(Board board) {
         this.board = board;
     }
 
     public Board getBoard() {
         return board;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public ArrayList<Monster> getMonsterOnBoard() {       //I dont think this works!!!!!
