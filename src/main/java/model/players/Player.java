@@ -64,7 +64,7 @@ public class Player {
         return isSetOrSummonInThisTurn;
     }
 
-    public void setSetOrSummonInThisTurn(boolean setOrSummonInThisTurn) {
+    public void setSetOrNormalSummonInThisTurn(boolean setOrSummonInThisTurn) {
         isSetOrSummonInThisTurn = setOrSummonInThisTurn;
     }
 

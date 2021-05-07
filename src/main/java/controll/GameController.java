@@ -4,6 +4,7 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.Phase;
 import enums.Zone;
+import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
@@ -99,6 +100,7 @@ public class GameController {
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
             String rivalMonsterName = rivalMonster.getCardName();
+            ourMonster.setAttackedInThisTurn(true);
             if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
                 int attackDifference =
                         Math.abs(rivalMonster.getAttackNum() - ourMonster.getAttackNum());
@@ -234,7 +236,8 @@ public class GameController {
     }
 
     private boolean hasCardAttacked(Card selectedCard) {  ////// this need to be completed , maybe a boolean???////////////////////////////////////////////////////////////
-        return true;
+        Monster monster = (Monster) selectedCard;
+        return monster.isAttackedInThisTurn();
     }
 
 
@@ -259,54 +262,66 @@ public class GameController {
                 }
             } else
                 gameView.printCantSummon();
-
         }
+    }
+
+    private void commandKnightSummon(Monster monster) {
+        monster.setAttackable(false);   // we should use this in attack function!!!!
+        ArrayList<Monster> monsters = new ArrayList<>();
+        for (Cell cell : currentPlayer.getBoard().getMonsters()) {
+            Monster friendMonster = (Monster) cell.getCard();
+            friendMonster.setAttackPointInGame(friendMonster.getAttackPointInGame() + 400); //we should decrease this in Attack function After Death.
+            monsters.add(friendMonster);
+        }
+        monster.setMonsters(monsters);
     }
 
     private void summonAndSpecifyTribute() {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
-        int numberOfTribute = monster.howManyTributeNeed();
-        if (numberOfTribute == 0) {
-            gameView.printSummonSuccessfully();
-        } else
-            getTribute(numberOfTribute);
+        if (currentPlayer.getSelectedCard().getCardName().equalsIgnoreCase("Command knight"))
+            commandKnightSummon(monster);
+        else {
+            int numberOfTribute = monster.howManyTributeNeed();
+            if (numberOfTribute != 0) {
+                int numberOfMonsterInOurBoard = currentPlayer.getBoard().getNumberOfMonsterInBoard();
+                if (numberOfMonsterInOurBoard < numberOfTribute) {
+                    currentPlayer.setSelectedCard(null);
+                    gameView.printThereArentEnoughMonsterForTribute();
+                    return;
+                }
+                if (getTribute(numberOfTribute))
+                    return;
+            }
+        }
+        gameView.printSummonSuccessfully();
         monster.setSetInThisTurn(true);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setFace(Face.UP);
         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-        currentPlayer.setSetOrSummonInThisTurn(true);
+        currentPlayer.setSetOrNormalSummonInThisTurn(true);
         currentPlayer.setSelectedCard(null);
     }
 
-    private void getTribute(int numberOfTribute) {
+    private boolean getTribute(int numberOfTribute) {
         ArrayList<Monster> tributeMonster = new ArrayList<>();
-        int numberOfMonsterInOurBoard = currentPlayer.getBoard().getNumberOfMonsterInBoard();
-        if (numberOfMonsterInOurBoard < numberOfTribute)
-            gameView.printThereArentEnoughMonsterForTribute();
-        else {
-            for (int i = 0; i < numberOfTribute; i++) {
-                gameView.getTribute();
-                if (currentPlayer.getSelectedCard() instanceof Monster)
-                    tributeMonster.add((Monster) currentPlayer.getSelectedCard());
-                if (i == numberOfTribute - 1) {
-                    if (numberOfTribute == 1 && tributeMonster.size() == 0) {
-                        i--;
-                        gameView.printNoMonsterOnThisAddress();
-                    }
-                    if (numberOfTribute == 2 && tributeMonster.size() < 2) {
-                        gameView.printNoMonsterInOneOfThisAddress();
-                        if (tributeMonster.size() == 1)
-                            i--;
-                        else
-                            i -= 2;
-                    }
-                }
-            }
-            for (Monster monster : tributeMonster) {
-                currentPlayer.getGraveyard().addCard(monster);
-            }
-            gameView.printSummonSuccessfully();
+        for (int i = 0; i < numberOfTribute; i++) {
+            gameView.getTribute();
+            Monster monster = (Monster) currentPlayer.getSelectedCard();
+            if (currentPlayer.getSelectedCard() instanceof Monster
+                    && !tributeMonster.contains(monster))
+                tributeMonster.add(monster);
         }
+        if (tributeMonster.size() < numberOfTribute) {
+            if (numberOfTribute == 1)
+                gameView.printNoMonsterOnThisAddress();
+            else
+                gameView.printNoMonsterInOneOfThisAddress();
+            return true;
+        }
+        for (Monster monster : tributeMonster) {
+            currentPlayer.getGraveyard().addCard(monster);
+        }
+        return false;
     }
 
     public void set() {
@@ -335,7 +350,7 @@ public class GameController {
                     selectedCard.setZone(Zone.MONSTER_ZONE);
                     selectedCard.setFace(Face.DOWN);
                     selectedCard.setAttackOrDefense(AttackOrDefense.DEFENSE);
-                    currentPlayer.setSetOrSummonInThisTurn(true);
+                    currentPlayer.setSetOrNormalSummonInThisTurn(true);
                     currentPlayer.setSelectedCard(null);
                     gameView.printSetSuccessfully();
                 }
@@ -389,14 +404,27 @@ public class GameController {
                         gameView.printCantFlipSummon();
                     else {
                         currentPlayer.setSelectedCard(null);
+                        if (monster.getCardName().equalsIgnoreCase("command knight"))
+                            commandKnightSummon(monster);
+                        else if (monster.getCardName().equalsIgnoreCase("man-eater bug"))
+                            manEaterBugFlipSummon();
                         monster.setFace(Face.UP);
                         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+                        gameView.printFlipSummonSuccessfully();
                     }
                 } else
                     gameView.printNotInMainPhase();
             } else
                 gameView.printCantChangePosition();
         }
+    }
+
+    private void manEaterBugFlipSummon() {
+        while (currentPlayer.getSelectedCard() == null) {
+            gameView.getOpponentMonsterForKill();
+        }
+        Monster opponentMonster = (Monster) currentPlayer.getSelectedCard();
+        currentPlayer.getRivalPlayer().getGraveyard().addCard(opponentMonster);
     }
 
     public void checkEnded() {

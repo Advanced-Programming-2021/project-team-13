@@ -1,6 +1,7 @@
 package model.cards;
 
 import enums.*;
+import monster.effect.*;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,9 @@ public class Monster extends Card {
     private String monsterType;/////////////////////////////////////// this need to be set , could we make enum or will it be to much???????
     private boolean isSetInThisTurn = false;
     private boolean HaveChangedPositionInThisTurn = false;
+    private boolean isAttackedInThisTurn = false;
+    private boolean attackable = true;
+    private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
 
     public Monster(String name, CardType cardType, Face face, int price, String description, String monsterType,
                    MonsterCardType monsterCardType, MonsterAttribute monsterAttribute,
@@ -28,15 +32,17 @@ public class Monster extends Card {
         setMonsterAttribute(monsterAttribute);
         setMonsterCardType(monsterCardType);
         setMonsterType(monsterType);
+        setAttackPointInGame(attackNum);
+        setDefencePointInGame(defenseNum);
     }
 
     /*
         private MonsterType monsterTypeInGame;
         private MonsterAttribute monsterAttributeInGame;
         private int levelInGame;
-    private String nameInGame;
+       private String nameInGame;
        private boolean isAttackable = true;
-    private boolean isActivateInThisTurn = false;
+       private boolean isActivateInThisTurn = false;
 
 
     public Monster(String name, CardType cardType, Face face, int price, int cardNum, String description,
@@ -57,12 +63,36 @@ public class Monster extends Card {
         this.nameInGame = name;
     }*/
 
+    public ArrayList<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public void setMonsters(ArrayList<Monster> monsters) {
+        this.monsters = monsters;
+    }
+
+    public boolean isAttackable() {
+        return attackable;
+    }
+
+    public void setAttackable(boolean attackable) {
+        this.attackable = attackable;
+    }
+
     public boolean getHaveChangePositionInThisTurn() {
         return HaveChangedPositionInThisTurn;
     }
 
     public void setHaveChangePositionInThisTurn(boolean doesHaveChangePositionInThisTurn) {
         this.HaveChangedPositionInThisTurn = doesHaveChangePositionInThisTurn;
+    }
+
+    public boolean isAttackedInThisTurn() {
+        return isAttackedInThisTurn;
+    }
+
+    public void setAttackedInThisTurn(boolean attackedInThisTurn) {
+        isAttackedInThisTurn = attackedInThisTurn;
     }
 
     public boolean isSetInThisTurn() {
@@ -189,6 +219,6 @@ public class Monster extends Card {
                 return 2;
         }
     }
-    
+
 }
 

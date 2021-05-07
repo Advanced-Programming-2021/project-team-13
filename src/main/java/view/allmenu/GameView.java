@@ -329,4 +329,13 @@ public class GameView {
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
+
+    public void printFlipSummonSuccessfully() {
+        System.out.println("flip summoned successfully");
+    }
+
+    public void getOpponentMonsterForKill() {
+        int number = ViewMaster.scanner.nextInt();
+        run("select --monster --opponent " + number);
+    }
 }
