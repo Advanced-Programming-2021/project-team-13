@@ -1,13 +1,13 @@
 package view.allmenu;
 
 import controll.DuelController;
+import model.players.User;
 import view.Regex;
+import view.ViewMaster;
 
 import java.util.regex.Matcher;
 
 public class DuelView {
-
-
     private final DuelController duelController;
 
     public DuelView() {
@@ -15,19 +15,18 @@ public class DuelView {
     }
 
     public void run(String command) {
-        if (command.startsWith("duel")) {
+        if (command.matches(Regex.DUEL)) {
             Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
             Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
             Matcher aiMatcher = Regex.getInputMatcher(command, Regex.AI);
             Matcher duelerMatcher = Regex.getInputMatcher(command, Regex.SECOND_PLAYER);
-            if (aiMatcher.groupCount() == 1 && newMatcher.groupCount() == 1 && roundMatcher.groupCount() == 1) {
+            if (newMatcher.find(0) && roundMatcher.find(0) && aiMatcher.find(0)) {
                 int rounds = Integer.parseInt(roundMatcher.group("rounds"));
                 duelController.runAIGame(rounds);
-            }
-            else if (duelerMatcher.groupCount() == 1 && newMatcher.groupCount() == 1 && roundMatcher.groupCount() == 1){
+            } else if (newMatcher.find(0) && roundMatcher.find(0) && duelerMatcher.find(0)) {
                 int rounds = Integer.parseInt(roundMatcher.group("rounds"));
                 String playerUsername = duelerMatcher.group("playerUsername");
-                duelController.runDuelGame(rounds , playerUsername);
+                duelController.validateDuelGame(rounds, playerUsername);
             } else printInvalidCommand();
         } else printInvalidCommand();
     }
@@ -56,7 +55,31 @@ public class DuelView {
         return duelController;
     }
 
-    public void printDoesntExistPLayer(String playerUsername) {
-        System.out.println("there is no player with this username");
+    public int inputStonePaperScissor(User user) {
+        System.out.println("hey " + user.getNickname() +" !\nplease choose one to start Game: stone , paper , scissor");
+        int numberToReturn;
+        do {
+            String input = ViewMaster.scanner.nextLine().trim().toLowerCase();
+            switch (input) {
+                case "paper":
+                    numberToReturn = 1;
+                    break;
+                case "stone":
+                    numberToReturn = 2;
+                    break;
+                case "scissor":
+                    numberToReturn = 3;
+                    break;
+                default:
+                    numberToReturn = 4;
+                    System.out.println("please enter correct name again");
+            }
+        } while (numberToReturn == 4);
+        return numberToReturn;
     }
+
+    public void printEqual(){
+        System.out.println("Equal!\ntry again!");
+    }
+
 }

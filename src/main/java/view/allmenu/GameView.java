@@ -1,80 +1,61 @@
 package view.allmenu;
 
 import controll.GameController;
+import enums.AttackOrDefense;
+import enums.Face;
 import enums.Phase;
 import model.cards.Card;
+import model.cards.Monster;
 import model.players.Player;
+import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
 import java.util.regex.Matcher;
 
 public class GameView {
-    private Phase currentPhase;
     private final GameController gameController;
-    private Player firstPlayer;
-    private Player secondPlayer;
-    private Player currentPlayer;
-    private int round;
 
-    public GameView(Player firstPlayer, Player secondPlayer, int rounds) {
-        currentPhase = Phase.DRAW_PHASE;
-        this.firstPlayer = firstPlayer;
-        this.secondPlayer = secondPlayer;
-        this.currentPlayer = firstPlayer;
-        this.round = rounds;
-        gameController = new GameController(this);
+    public GameView(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
+        gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
     }
 
     public void run(String command) {
-        if (command.startsWith("select"))
-            selectOrDeselectCard(command);
-        else if (command.equals("surrender"))
-            surrender();
-        else if (command.equals("show graveyard"))
-            showGraveyard();
+        if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
+            selectCard(command);
+        else if (command.matches(Regex.DESELECT))
+            gameController.deselectCard();
+        else if (command.equals("next phase"))
+            gameController.nextPhase();
         else if (command.equals("summon"))
             gameController.summon();
         else if (command.equals("set"))
             gameController.set();
         else if (command.matches(Regex.CHANGE_SET))
             changeSet(Regex.getInputMatcher(command, Regex.CHANGE_SET));
-        else if (command.matches(Regex.SET_POSITION))
-            setPosition(Regex.getInputMatcher(command, Regex.SET_POSITION));
         else if (command.equals("flip-summon"))
             gameController.flipSummon();
         else if (command.matches(Regex.ATTACK))
             attack(Regex.getInputMatcher(command, Regex.ATTACK));
         else if (command.equals("attack direct"))
             directAttack();
-        gameController.checkEnded();
+        else if (command.equals("show graveyard"))
+            showGraveyard(command);
+        else if (command.equals("card show --selected"))
+            gameController.showSelectedCard();
+    }
+
+    private void showGraveyard(String command) {
+        ShowGraveyardMenu showGraveyardMenu = new ShowGraveyardMenu(gameController.getCurrentPlayer());
+        ViewMaster.getViewMaster().setShowGraveyardMenu(showGraveyardMenu);
+        ViewMaster.setCurrentMenu(Menu.SHOW_GRAVEYARD);
+        showGraveyardMenu.run(command);
     }
 
     private void changeSet(Matcher inputMatcher) {
         inputMatcher.find();
         String position = inputMatcher.group("position");
         gameController.changeSet(position);
-    }
-
-    private void nextPhase() {
-
-    }
-
-
-    private void drawPhase(String command) {
-        drawCard();
-        findOtherCommand(command);
-
-    }
-
-    private void findOtherCommand(String command) {
-        //if (command.equals())
-    }
-
-    private void drawCard() {
-    }
-
-    public void showGraveyard() {
     }
 
     private void surrender() {
@@ -98,63 +79,116 @@ public class GameView {
     private void flipSummon() {
     }
 
-    private void setPosition(Matcher inputMatcher) {   // y the fuck are these private!@#!@?
+    public void printMap() {
+        Player currentPlayer = gameController.getCurrentPlayer();
+        Player rivalPlayer = gameController.getRivalPlayer();
+        StringBuilder map = new StringBuilder();
+        addRivalMap(rivalPlayer, map);
+        addPlayerMap(currentPlayer, map);
+        System.out.println(map.toString());
     }
 
-    private void selectOrDeselectCard(String command) {
-        if (command.matches(Regex.DESELECT))
-            deselectCard();
-        else selectCard(command);
+    private void addPlayerMap(Player currentPlayer, StringBuilder map) {
+        map.append("\n--------------------------\n");
+        if (currentPlayer.getBoard().getFieldSpell() == null)
+            map.append("E" + "\t\t\t\t\t\t").append(currentPlayer.getBoard().getGraveyard().getAllCards().size()).append("\n");
+        else
+            map.append("O" + "\t\t\t\t\t\t").append(currentPlayer.getBoard().getGraveyard().getAllCards().size()).append("\n");
+        for (int i = 0; i < 5; i++) {
+            addMonsterToMap(currentPlayer, map, i);
+        }
+        map.append("\n");
+        for (int i = 0; i < 5; i++) {
+            addSpellToMap(currentPlayer, map, i);
+        }
+        map.append("\n");
+        map.append("\t\t\t\t\t\t").append(currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size()).append("\n");
+        for (int i = 0; i < currentPlayer.getCardsInHand().size(); i++) {
+            map.append("\tC");
+        }
+        map.append(currentPlayer.getUser().getNickname()).append(":").append(currentPlayer.getLifePoint());
     }
 
-    private void deselectCard() {
-        gameController.deselectCard();
+    private void addRivalMap(Player rivalPlayer, StringBuilder map) {
+        map.append(rivalPlayer.getUser().getNickname()).append(":").append(rivalPlayer.getLifePoint()).append("\n");
+        for (int i = 0; i < rivalPlayer.getCardsInHand().size(); i++) {
+            map.append("\tC");
+        }
+        map.append(rivalPlayer.getBoard().getDeck().getAllCardsInMainDeck().size()).append("\n");
+        for (int i = 4; i >= 0; i--) {
+            addSpellToMap(rivalPlayer, map, i);
+        }
+        map.append("\n");
+        for (int i = 4; i >= 0; i--) {
+            addMonsterToMap(rivalPlayer, map, i);
+        }
+        map.append("\n");
+        map.append(rivalPlayer.getBoard().getGraveyard().getAllCards().size()).append("\t\t\t\t\t\t");
+        if (rivalPlayer.getBoard().getFieldSpell() == null) map.append("E\n");
+        else map.append("O\n");
+    }
+
+    private void addMonsterToMap(Player player, StringBuilder map, int i) {
+        map.append("\t");
+        Monster monster = (Monster) player.getBoard().getMonsters()[i].getCard();
+        if (monster == null)
+            map.append("E");
+        else if (monster.getAttackOrDefense() == AttackOrDefense.ATTACK)
+            map.append("OO");
+        else if (monster.getAttackOrDefense() == AttackOrDefense.DEFENSE) {
+            if (monster.getFace() == Face.UP)
+                map.append("DO");
+            else
+                map.append("DH");
+        }
+    }
+
+    private void addSpellToMap(Player player, StringBuilder map, int i) {
+        map.append("\t");
+        if (player.getBoard().getSpellOrTrap()[i].getCard() == null)
+            map.append("E");
+        else if (player.getBoard().getSpellOrTrap()[i].getCard().getFace() == Face.UP)
+            map.append("O");
+        else if (player.getBoard().getSpellOrTrap()[i].getCard().getFace() == Face.DOWN)
+            map.append("H");
     }
 
     public void selectCard(String command) {
+        Matcher opponentWithFieldMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_WITH_FIELD);
         Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
-        Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.MONSTER);
-        Matcher spellMatcher = Regex.getInputMatcher(command, Regex.SPELL);
-        Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
-        Matcher handMatcher = Regex.getInputMatcher(command, Regex.HAND);
-        if (handMatcher.groupCount() != 1 && handMatcher.groupCount() != 0) {   // this can be shorter !!!! -- or at least we could extract the method of invalid command!
-            printInvalidCommand();
-            return;
-        } else if (fieldMatcher.groupCount() != 1 && fieldMatcher.groupCount() != 0) {
-            printInvalidCommand();
-            return;
-        } else if (monsterMatcher.groupCount() != 1 && monsterMatcher.groupCount() != 0) {
-            printInvalidCommand();
-            return;
-        } else if (spellMatcher.groupCount() != 1 && spellMatcher.groupCount() != 0) {
-            printInvalidCommand();
-            return;
-        } else if (opponentMatcher.groupCount() != 1 && opponentMatcher.groupCount() != 0) {
-            printInvalidCommand();
-            return;
-        }
-        if (monsterMatcher.groupCount() == 1) {
-            int cardAddress = Integer.parseInt(monsterMatcher.group("cardAddress"));
-            if (opponentMatcher.groupCount() == 1)
+        if (opponentMatcher.find() || opponentWithFieldMatcher.find()) {
+            Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_MONSTER);
+            Matcher spellMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_SPELL);
+            Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
+            if (monsterMatcher.find()) {
+                int cardAddress = Integer.parseInt(monsterMatcher.group("cardAddress"));
                 gameController.selectOpponentMonster(cardAddress);
-            else gameController.selectPlayerMonster(cardAddress);
-        } else if (spellMatcher.groupCount() == 1) {
-            int cardAddress = Integer.parseInt(spellMatcher.group("cardAddress"));
-            if (opponentMatcher.groupCount() == 1)
+            } else if (spellMatcher.find()) {
+                int cardAddress = Integer.parseInt(spellMatcher.group("cardAddress"));
                 gameController.selectOpponentSpellOrTrap(cardAddress);
-            else gameController.selectPlayerSpellOrTrap(cardAddress);
-        } else if (fieldMatcher.groupCount() == 1) {
-            if (opponentMatcher.groupCount() == 1)
+            } else if (fieldMatcher.find()) {
                 gameController.selectOpponentFieldCard();
-            else gameController.selectPlayerFieldCard();
-        } else if (handMatcher.groupCount() == 1) {
-            int cardAddress = Integer.parseInt(handMatcher.group("cardAddress"));
-            gameController.selectPlayerHandCard(cardAddress);
-        } else printInvalidCommand();
-    }
-
-    public Phase getCurrentPhase() {
-        return currentPhase;
+            } else printInvalidCommand();
+        } else {
+            Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.PLAYER_MONSTER);
+            Matcher spellMatcher = Regex.getInputMatcher(command, Regex.PLAYER_SPELL);
+            Matcher handMatcher = Regex.getInputMatcher(command, Regex.PLAYER_HAND);
+            Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
+            if (monsterMatcher.find()) {
+                int cardAddress = Integer.parseInt(monsterMatcher.group("cardAddress"));
+                gameController.selectPlayerMonster(cardAddress);
+            } else if (spellMatcher.find()) {
+                int cardAddress = Integer.parseInt(spellMatcher.group("cardAddress"));
+                gameController.selectPlayerSpellOrTrap(cardAddress);
+            } else if (handMatcher.find()) {
+                int cardAddress = Integer.parseInt(handMatcher.group("cardAddress"));
+                gameController.selectPlayerHandCard(cardAddress);
+            } else if (fieldMatcher.find()) {
+                if (command.matches(Regex.FIELD_SELECT))
+                    gameController.selectPlayerFieldCard();
+                else printInvalidCommand();
+            } else printInvalidCommand();
+        }
     }
 
     public void printCardDeselected() {
@@ -175,10 +209,6 @@ public class GameView {
 
     public void printNotFoundCard() {
         System.out.println("no card found in the given position");
-    }
-
-    public void printPhaseName() {
-        System.out.println(currentPhase.getPhaseName());
     }
 
     public void printAddedNewCard(Card card) {
@@ -260,10 +290,6 @@ public class GameView {
         System.out.println("you can’t summon this card");
     }
 
-    public void setCurrentPhase(Phase currentPhase) {
-        this.currentPhase = currentPhase;
-    }
-
     public void printNotInMainPhase() {
         System.out.println("action not allowed in this phase");
     }
@@ -275,7 +301,6 @@ public class GameView {
     public void printAlreadySetOrSummon() {
         System.out.println("you already summoned/set on this turn");
     }
-
 
     public void printSummonSuccessfully() {
 
@@ -326,9 +351,22 @@ public class GameView {
         System.out.println("you can’t flip summon this card");
     }
 
-    public Player getCurrentPlayer() {
-        return currentPlayer;
+    public void printCurrentPhase() {
+        System.out.println(gameController.getCurrentPhase().getPhaseName());
     }
+
+    public void printWhoseTurn() {
+        System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+    }
+
+    public void showCard(Card card) {
+        System.out.println(card.toString());
+    }
+
+    public void printCardInvisible() {
+        System.out.println("card is not visible");
+    }
+
 
     public void printFlipSummonSuccessfully() {
         System.out.println("flip summoned successfully");
@@ -338,4 +376,5 @@ public class GameView {
         int number = ViewMaster.scanner.nextInt();
         run("select --monster --opponent " + number);
     }
+
 }

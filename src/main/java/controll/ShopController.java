@@ -1,7 +1,7 @@
 package controll;
 
-import CSV.MonsterCSV;
-import CSV.SpellTrapCSV;
+import model.csv.MonsterCSV;
+import model.csv.SpellTrapCSV;
 import model.players.User;
 import view.allmenu.ShopView;
 import view.ViewMaster;

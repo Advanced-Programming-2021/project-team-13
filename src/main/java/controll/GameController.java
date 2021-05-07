@@ -13,15 +13,30 @@ import view.allmenu.GameView;
 import java.util.ArrayList;
 
 public class GameController {
+    private static int playedRounds = 0;
     private final GameView gameView;
-    private Player currentPlayer;       // we only need current player since opponent has its rival
-//    private Player secondPlayer;
+    private final Player firstPlayer;
+    private final Player secondPlayer;
+    private Player currentPlayer;
+    private Phase currentPhase;
+    private final int startingRounds;
+    private int turnsPlayed;
 
 
-    public GameController(GameView gameView) {
+    public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player currentPlayer, int startingRounds) {
         this.gameView = gameView;
-        currentPlayer = gameView.getCurrentPlayer();
-
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
+        this.currentPlayer = currentPlayer;
+        firstPlayer.getBoard().getDeck().shuffleMainDeck();
+        secondPlayer.getBoard().getDeck().shuffleMainDeck();
+        for (int i = 0; i < 6; i++) {
+            firstPlayer.addCardToHand();
+            secondPlayer.addCardToHand();
+        }
+        this.startingRounds = startingRounds;
+        turnsPlayed = 0;
+        currentPhase = Phase.DRAW_PHASE;
     }
 
 //    public Player getRivalPlayer() {
@@ -45,18 +60,18 @@ public class GameController {
     }
 
     public void selectOpponentMonster(int cardAddress) {
-        if (monsterSelectionCheck(cardAddress, currentPlayer.getRivalPlayer())) {
+        if (monsterSelectionCheck(cardAddress, getRivalPlayer())) {
             currentPlayer.setSelectedCard
-                    (currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(cardAddress));
+                    (getRivalPlayer().getBoard().getMonsterByAddress(cardAddress));
             gameView.printCardSelected();
         }
     }
 
 
     public void selectOpponentSpellOrTrap(int cardAddress) {
-        if (spellSelectionCheck(cardAddress, currentPlayer.getRivalPlayer())) {
+        if (spellSelectionCheck(cardAddress, getRivalPlayer())) {
             currentPlayer.setSelectedCard
-                    (currentPlayer.getRivalPlayer().getBoard().getSpellOrTrapByAddress(cardAddress));
+                    (getRivalPlayer().getBoard().getSpellOrTrapByAddress(cardAddress));
             gameView.printCardSelected();
         }
     }
@@ -70,9 +85,9 @@ public class GameController {
     }
 
     public void selectOpponentFieldCard() {
-        if (fieldSpellCheck(currentPlayer.getRivalPlayer())) {
+        if (fieldSpellCheck(getRivalPlayer())) {
             currentPlayer.setSelectedCard
-                    (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard());
+                    (getRivalPlayer().getBoard().getFieldSpell().getCard());
             gameView.printCardSelected();
         }
     }
@@ -96,7 +111,7 @@ public class GameController {
 
     public void attack(int monsterNumber) {
         if (checkAttack() && checkRivalMonster(monsterNumber)) {
-            Monster rivalMonster = (Monster) currentPlayer.getRivalPlayer()
+            Monster rivalMonster = (Monster) getRivalPlayer()
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
             String rivalMonsterName = rivalMonster.getCardName();
@@ -105,27 +120,27 @@ public class GameController {
                 int attackDifference =
                         Math.abs(rivalMonster.getAttackNum() - ourMonster.getAttackNum());
                 if (ourMonster.getAttackNum() < rivalMonster.getAttackNum()) {
-                    currentPlayer.getRivalPlayer().decreaseHealth(attackDifference);
-                    currentPlayer.getRivalPlayer().getGraveyard().addCard(rivalMonster);
-                    currentPlayer.getRivalPlayer().getBoard().removeMonsterFromBoard(rivalMonster);
+                    getRivalPlayer().decreaseHealth(attackDifference);
+                    getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
+                    getRivalPlayer().getBoard().removeMonsterFromBoard(rivalMonster);
                     gameView.printOpponentMonsterDestroyed(attackDifference);
                 } else if (ourMonster.getAttackNum() == rivalMonster.getAttackNum()) {
                     currentPlayer.getBoard().removeMonsterFromBoard(ourMonster);
-                    currentPlayer.getRivalPlayer().getBoard().removeMonsterFromBoard(rivalMonster);
-                    currentPlayer.getGraveyard().addCard(ourMonster);
-                    currentPlayer.getRivalPlayer().getGraveyard().addCard(rivalMonster);
+                    getRivalPlayer().getBoard().removeMonsterFromBoard(rivalMonster);
+                    currentPlayer.getBoard().getGraveyard().addCard(ourMonster);
+                    getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
                     gameView.printBothMonstersDestroyed();
                 } else {
                     currentPlayer.getBoard().removeMonsterFromBoard(ourMonster);
                     currentPlayer.decreaseHealth(attackDifference);
-                    currentPlayer.getGraveyard().addCard(ourMonster);
+                    currentPlayer.getBoard().getGraveyard().addCard(ourMonster);
                     gameView.printYourCardIsDestroyed(attackDifference);
                 }
             } else {
                 int attackDifference =
                         Math.abs(rivalMonster.getDefenseNum() - ourMonster.getAttackNum());
                 if (ourMonster.getAttackNum() > rivalMonster.getDefenseNum()) {
-                    currentPlayer.getRivalPlayer().getGraveyard().addCard(rivalMonster);
+                    getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
                     currentPlayer.getBoard().removeMonsterFromBoard(rivalMonster);
                     if (rivalMonster.getFace() == Face.UP)
                         gameView.printDefensePositionDestroyed();
@@ -155,7 +170,7 @@ public class GameController {
     public void directAttack() {  // somehow same as attack only diff is rival card number!!!
         if (checkAttack()) {
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
-            currentPlayer.getRivalPlayer().decreaseHealth(ourMonster.getAttackNum());
+            getRivalPlayer().decreaseHealth(ourMonster.getAttackNum());
             gameView.printYourOpponentReceivesDamage(ourMonster.getAttackNum());
         }
     }
@@ -214,7 +229,7 @@ public class GameController {
             gameView.printCantAttack();
             return false;
         }
-        if (gameView.getCurrentPhase() != Phase.BATTLE_PHASE) {
+        if (currentPhase != Phase.BATTLE_PHASE) {
             gameView.printWrongPhase();
             return false;
         }
@@ -227,7 +242,7 @@ public class GameController {
     }
 
     private boolean checkRivalMonster(int rivalMonsterNum) {
-        if (currentPlayer.getRivalPlayer().getBoard()
+        if (getRivalPlayer().getBoard()
                 .getMonsterByAddress(rivalMonsterNum) == null) {
             gameView.printNoCardToAttack();
             return false;
@@ -240,6 +255,42 @@ public class GameController {
         return monster.isAttackedInThisTurn();
     }
 
+    public void nextPhase() {
+        if (currentPhase == Phase.END_PHASE) {
+            currentPhase = Phase.DRAW_PHASE;
+            gameView.printCurrentPhase();
+            turnsPlayed++;
+            if (turnsPlayed == 0 || turnsPlayed == 1) {
+                if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0)
+                    currentPlayer.addCardToHand();
+                else {
+
+                }
+            }
+        } else if (currentPhase == Phase.DRAW_PHASE) {
+            currentPhase = Phase.STANDBY_PHASE;
+            gameView.printCurrentPhase();
+            //do some Effects!!!
+
+        } else if (currentPhase == Phase.STANDBY_PHASE) {
+            currentPhase = Phase.MAIN_PHASE_1;
+            gameView.printCurrentPhase();
+            gameView.printMap();//to complete
+        } else if (currentPhase == Phase.MAIN_PHASE_1) {
+            currentPhase = Phase.BATTLE_PHASE;
+            gameView.printCurrentPhase();//to complete
+        } else if (currentPhase == Phase.BATTLE_PHASE) {
+            currentPhase = Phase.MAIN_PHASE_2;
+            gameView.printCurrentPhase();
+            //to comp
+        } else {
+            currentPhase = Phase.END_PHASE;
+            currentPlayer.setSetOrSummonInThisTurn(false);
+            changeCurrentPlayer();
+            gameView.printCurrentPhase();
+            gameView.printWhoseTurn();
+        }
+    }
 
     public void summon() { //need some change, SOME EFFECTIVE MONSTER CAN NOT NORMAL SUMMON!
         if (currentPlayer.getSelectedCard() == null)
@@ -248,8 +299,7 @@ public class GameController {
             if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
                     && currentPlayer.getSelectedCard() instanceof Monster
                     && !((Monster) currentPlayer.getSelectedCard()).getMonsterType().equalsIgnoreCase("ritual")) {
-                if (gameView.getCurrentPhase() != Phase.MAIN_PHASE_1
-                        && gameView.getCurrentPhase() != Phase.MAIN_PHASE_2)
+                if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
                     gameView.printNotInMainPhase();
                 else {
                     if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
@@ -257,13 +307,12 @@ public class GameController {
                             gameView.printAlreadySetOrSummon();
                         else
                             summonAndSpecifyTribute();
-                    } else
-                        gameView.printMonsterZoneFull();
+                    } else gameView.printMonsterZoneFull();
                 }
-            } else
-                gameView.printCantSummon();
+            } else gameView.printCantSummon();
         }
     }
+
 
     private void commandKnightSummon(Monster monster) {
         monster.setAttackable(false);   // we should use this in attack function!!!!
@@ -298,7 +347,7 @@ public class GameController {
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setFace(Face.UP);
         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-        currentPlayer.setSetOrNormalSummonInThisTurn(true);
+        currentPlayer.setSetOrSummonInThisTurn(true);
         currentPlayer.setSelectedCard(null);
     }
 
@@ -319,7 +368,7 @@ public class GameController {
             return true;
         }
         for (Monster monster : tributeMonster) {
-            currentPlayer.getGraveyard().addCard(monster);
+            currentPlayer.getBoard().getGraveyard().addCard(monster);
         }
         return false;
     }
@@ -342,7 +391,7 @@ public class GameController {
     }
 
     private void setMonster(Monster selectedCard) {
-        if (gameView.getCurrentPhase() == Phase.MAIN_PHASE_1 || gameView.getCurrentPhase() == Phase.MAIN_PHASE_2) {
+        if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
             if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
                 if (currentPlayer.isSetOrSummonInThisTurn())
                     gameView.printAlreadySetOrSummon();
@@ -350,7 +399,7 @@ public class GameController {
                     selectedCard.setZone(Zone.MONSTER_ZONE);
                     selectedCard.setFace(Face.DOWN);
                     selectedCard.setAttackOrDefense(AttackOrDefense.DEFENSE);
-                    currentPlayer.setSetOrNormalSummonInThisTurn(true);
+                    currentPlayer.setSetOrSummonInThisTurn(true);
                     currentPlayer.setSelectedCard(null);
                     gameView.printSetSuccessfully();
                 }
@@ -365,7 +414,7 @@ public class GameController {
             gameView.printNoCardSelected();
         else {
             if (currentPlayer.getSelectedCard() instanceof Monster) {
-                if (gameView.getCurrentPhase() == Phase.MAIN_PHASE_1 || gameView.getCurrentPhase() == Phase.MAIN_PHASE_2) {
+                if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
                     Monster monster = (Monster) currentPlayer.getSelectedCard();
                     if (monster.getFace() == Face.UP && monster.getAttackOrDefense() == AttackOrDefense.ATTACK
                             && position.equals("attack"))
@@ -397,20 +446,15 @@ public class GameController {
             gameView.printNoCardSelected();
         else {
             if (currentPlayer.getSelectedCard().getZone() == Zone.MONSTER_ZONE) {
-                if (gameView.getCurrentPhase() == Phase.MAIN_PHASE_1 || gameView.getCurrentPhase() == Phase.MAIN_PHASE_2) {
+                if (getCurrentPhase() == Phase.MAIN_PHASE_1 || getCurrentPhase() == Phase.MAIN_PHASE_2) {
                     Monster monster = (Monster) currentPlayer.getSelectedCard();
                     if (monster.isSetInThisTurn() ||
                             !(monster.getFace() == Face.DOWN && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE))
                         gameView.printCantFlipSummon();
                     else {
                         currentPlayer.setSelectedCard(null);
-                        if (monster.getCardName().equalsIgnoreCase("command knight"))
-                            commandKnightSummon(monster);
-                        else if (monster.getCardName().equalsIgnoreCase("man-eater bug"))
-                            manEaterBugFlipSummon();
                         monster.setFace(Face.UP);
                         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-                        gameView.printFlipSummonSuccessfully();
                     }
                 } else
                     gameView.printNotInMainPhase();
@@ -419,15 +463,68 @@ public class GameController {
         }
     }
 
+    public void showSelectedCard() {
+        if (currentPlayer.getSelectedCard() == null)
+            gameView.printNoCardSelected();
+        else {
+            Card card = currentPlayer.getSelectedCard();
+            if (card.getPlayer() == getRivalPlayer() && card.getFace() == Face.DOWN)
+                gameView.printCardInvisible();
+            else gameView.showCard(card);
+        }
+    }
+
+
+    public void changeCurrentPlayer() {
+        if (currentPlayer == firstPlayer)
+            currentPlayer = secondPlayer;
+        else
+            currentPlayer = firstPlayer;
+    }
+
+    public Player getCurrentPlayer() {
+        if (currentPlayer == firstPlayer)
+            return firstPlayer;
+        return secondPlayer;
+    }
+
+    public Player getRivalPlayer() {
+        if (currentPlayer == firstPlayer)
+            return secondPlayer;
+        return firstPlayer;
+    }
+
     private void manEaterBugFlipSummon() {
         while (currentPlayer.getSelectedCard() == null) {
             gameView.getOpponentMonsterForKill();
         }
         Monster opponentMonster = (Monster) currentPlayer.getSelectedCard();
-        currentPlayer.getRivalPlayer().getGraveyard().addCard(opponentMonster);
+        getRivalPlayer().getBoard().getGraveyard().addCard(opponentMonster);
     }
 
-    public void checkEnded() {
 
+    public Phase getCurrentPhase() {
+        return currentPhase;
+    }
+
+    public void findWinner() {
+        if (checkEnded() != 4) {
+            // to complete
+        }
+    }
+
+    private int checkEnded() {
+        if (currentPlayer.getLifePoint() == 0 && getRivalPlayer().getLifePoint() == 0)
+            return 3;//draw
+        else if (currentPlayer.getLifePoint() != 0)
+            return 2;//rival won
+        else if (getRivalPlayer().getLifePoint() != 0)
+            return 1;//currentPlayer has won
+        else {
+            if (currentPhase == Phase.DRAW_PHASE && currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() == 0)
+                return 2;
+            else
+                return 4;//no winner
+        }
     }
 }
