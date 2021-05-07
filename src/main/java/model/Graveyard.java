@@ -1,5 +1,6 @@
 package model;
 
+import controll.GameController;
 import enums.Zone;
 import model.cards.Card;
 import model.cards.Monster;
@@ -26,6 +27,10 @@ public class Graveyard {
     }
 
     public void addCard(Card card) {
+        if (GameController.checkForDeathAction(card))
+            return;
+        if (allCards.contains(card))
+            return;
         card.setZone(Zone.GRAVEYARD);
         if (card instanceof Monster) {
             for (Cell monster : owner.getBoard().getMonsters()) {

@@ -39,6 +39,7 @@ public class GameController {
         currentPhase = Phase.DRAW_PHASE;
     }
 
+
 //    public Player getRivalPlayer() {
 //        if (currentPlayer == firstPlayer)
 //            return secondPlayer;
@@ -114,6 +115,8 @@ public class GameController {
             Monster rivalMonster = (Monster) getRivalPlayer()
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
+            if (isSpecialAttack(ourMonster, rivalMonster))
+                return;
             String rivalMonsterName = rivalMonster.getCardName();
             ourMonster.setAttackedInThisTurn(true);
             if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
@@ -122,16 +125,12 @@ public class GameController {
                 if (ourMonster.getAttackNum() < rivalMonster.getAttackNum()) {
                     getRivalPlayer().decreaseHealth(attackDifference);
                     getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
-                    getRivalPlayer().getBoard().removeMonsterFromBoard(rivalMonster);
                     gameView.printOpponentMonsterDestroyed(attackDifference);
                 } else if (ourMonster.getAttackNum() == rivalMonster.getAttackNum()) {
-                    currentPlayer.getBoard().removeMonsterFromBoard(ourMonster);
-                    getRivalPlayer().getBoard().removeMonsterFromBoard(rivalMonster);
                     currentPlayer.getBoard().getGraveyard().addCard(ourMonster);
                     getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
                     gameView.printBothMonstersDestroyed();
                 } else {
-                    currentPlayer.getBoard().removeMonsterFromBoard(ourMonster);
                     currentPlayer.decreaseHealth(attackDifference);
                     currentPlayer.getBoard().getGraveyard().addCard(ourMonster);
                     gameView.printYourCardIsDestroyed(attackDifference);
@@ -141,7 +140,6 @@ public class GameController {
                         Math.abs(rivalMonster.getDefenseNum() - ourMonster.getAttackNum());
                 if (ourMonster.getAttackNum() > rivalMonster.getDefenseNum()) {
                     getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
-                    currentPlayer.getBoard().removeMonsterFromBoard(rivalMonster);
                     if (rivalMonster.getFace() == Face.UP)
                         gameView.printDefensePositionDestroyed();
                     else {
@@ -159,11 +157,49 @@ public class GameController {
                         gameView.printNoCardDestroyedYouReceivedDamage(attackDifference);
                     else {
                         gameView.printNoCardDestroyedYouReceivedDamageHidden(attackDifference, rivalMonsterName);
-
                     }
                 }
             }
             rivalMonster.setFace(Face.UP);
+        }
+    }
+
+    private boolean isSpecialAttack(Monster ourMonster, Monster rivalMonster) {
+        if (rivalMonster.getCardName().equals("Marshmallon")) {
+            marshmallon(ourMonster, rivalMonster);
+            return true;
+        } else if (true) {
+
+        }
+        return false;
+    }
+
+    private void marshmallon(Monster ourMonster, Monster rivalMonster) {
+        if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
+            int attackDiff = ourMonster.getAttackNum() - rivalMonster.getAttackNum();
+            if (attackDiff > 0) {
+                rivalMonster.getCardOwner().decreaseHealth(attackDiff);
+            } else if (attackDiff == 0) {
+                rivalMonster.getCardOwner().getBoard().getGraveyard().addCard(rivalMonster);
+            } else {
+                ourMonster.getCardOwner().decreaseHealth(-attackDiff);
+            }
+        } else {
+            int attackDiff = ourMonster.getAttackNum() - rivalMonster.getDefenseNum();
+            if (attackDiff > 0) {
+                if (rivalMonster.getFace() == Face.DOWN)
+                    gameView.printOpponentCardsName("Marshmallon");
+            } else if (attackDiff == 0) {
+                if (rivalMonster.getFace() == Face.DOWN)
+                    gameView.printOpponentCardsName("Marshmallon");
+
+            } else {
+                if (rivalMonster.getFace() == Face.DOWN)
+                    gameView.printOpponentCardsName("Marshmallon");
+                ourMonster.getCardOwner().decreaseHealth(-attackDiff);
+            }
+            rivalMonster.setFace(Face.UP);
+            ourMonster.getCardOwner().decreaseHealth(1000);
         }
     }
 
@@ -255,7 +291,7 @@ public class GameController {
         return monster.isAttackedInThisTurn();
     }
 
-    public void nextPhase() {
+    public void nextPhase() {//          وقتی میبینی این هنوز کامل نشده!!! :D
         if (currentPhase == Phase.END_PHASE) {
             currentPhase = Phase.DRAW_PHASE;
             gameView.printCurrentPhase();
@@ -527,4 +563,35 @@ public class GameController {
                 return 4;//no winner
         }
     }
+
+
+    public static boolean checkForDeathAction(Card card) {
+        Monster monster = (Monster) card;
+        if (card.getCardName().equals("Yomi Ship"))
+            yomiShip(monster);
+        else if (card.getCardName().equals("Texchanger"))
+            texchanger(monster);
+        else if (card.getCardName().equals("Exploder Dragon"))
+            exploderDragon(monster);
+        return false;
+    }
+
+
+    public static void yomiShip(Monster monster) {
+        monster
+                .getAttacker()
+                .getCardOwner()
+                .getBoard()
+                .getGraveyard()
+                .addCard
+                        (monster.getAttacker());
+    }
+
+    private static void exploderDragon(Monster monster) {
+    }
+
+    private static void texchanger(Monster monster) {
+    }
+
+
 }

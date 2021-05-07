@@ -1,11 +1,11 @@
 package model.cards;
 
 import enums.*;
-import monster.effect.*;
 
 import java.util.ArrayList;
 
 public class Monster extends Card {
+    public Monster attacker;
     private MonsterCardType monsterCardType;
     private SummonType summonType;
     private MonsterAttribute monsterAttribute;
@@ -181,6 +181,14 @@ public class Monster extends Card {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void setAttacker(Monster monster) {
+        attacker = monster;
+    }
+
+    public Monster getAttacker() {
+        return attacker;
     }
 
 

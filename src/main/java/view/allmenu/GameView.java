@@ -278,7 +278,7 @@ public class GameView {
         printNoCardDestroyedYouReceivedDamage(attackDifference);
     }
 
-    private void printOpponentCardsName(String name) {
+    public void printOpponentCardsName(String name) {
         System.out.println("opponent’s monster card was " + name);
     }
 
