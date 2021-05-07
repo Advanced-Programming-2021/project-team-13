@@ -168,13 +168,19 @@ public class GameController {
         if (rivalMonster.getCardName().equals("Marshmallon")) {
             marshmallon(ourMonster, rivalMonster);
             return true;
-        } else if (true) {
-
+        } else if (rivalMonster.getCardName().equals("Texchanger")) {
+            if (!rivalMonster.isAttackedInThisTurn())
+                return false;
+            texchanger(rivalMonster);
         }
         return false;
     }
 
-    private void marshmallon(Monster ourMonster, Monster rivalMonster) {
+    private void texchanger(Monster rivalMonster) {
+        rivalMonster.
+    }
+
+    private void marshmallon(Monster ourMonster, Monster rivalMonster) {/// does it get attack prints? we'll never know!!
         if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
             int attackDiff = ourMonster.getAttackNum() - rivalMonster.getAttackNum();
             if (attackDiff > 0) {
@@ -569,8 +575,6 @@ public class GameController {
         Monster monster = (Monster) card;
         if (card.getCardName().equals("Yomi Ship"))
             yomiShip(monster);
-        else if (card.getCardName().equals("Texchanger"))
-            texchanger(monster);
         else if (card.getCardName().equals("Exploder Dragon"))
             exploderDragon(monster);
         return false;
@@ -590,8 +594,6 @@ public class GameController {
     private static void exploderDragon(Monster monster) {
     }
 
-    private static void texchanger(Monster monster) {
-    }
 
 
 }
