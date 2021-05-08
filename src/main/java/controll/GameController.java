@@ -121,47 +121,46 @@ public class GameController {
             String rivalMonsterName = rivalMonster.getCardName();
             ourMonster.setAttackedInThisTurn(true);
             if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
-                int attackDifference =
-                        Math.abs(rivalMonster.getAttackNum() - ourMonster.getAttackNum());
-                if (ourMonster.getAttackNum() < rivalMonster.getAttackNum()) {
+                int attackDifference = ourMonster.getAttackPointInGame() - rivalMonster.getAttackPointInGame();
+                if (attackDifference > 0) {
                     getRivalPlayer().decreaseHealth(attackDifference);
                     getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
                     gameView.printOpponentMonsterDestroyed(attackDifference);
-                } else if (ourMonster.getAttackNum() == rivalMonster.getAttackNum()) {
+                } else if (attackDifference == 0) {
                     currentPlayer.getBoard().getGraveyard().addCard(ourMonster);
                     getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
                     gameView.printBothMonstersDestroyed();
                 } else {
-                    currentPlayer.decreaseHealth(attackDifference);
+                    currentPlayer.decreaseHealth(-attackDifference);
                     currentPlayer.getBoard().getGraveyard().addCard(ourMonster);
-                    gameView.printYourCardIsDestroyed(attackDifference);
+                    gameView.printYourCardIsDestroyed(-attackDifference);
                 }
             } else {
-                int attackDifference =
-                        Math.abs(rivalMonster.getDefenseNum() - ourMonster.getAttackNum());
-                if (ourMonster.getAttackNum() > rivalMonster.getDefenseNum()) {
+                int attackDifference = ourMonster.getAttackPointInGame() - rivalMonster.getDefencePointInGame();
+                if (attackDifference > 0) {
                     getRivalPlayer().getBoard().getGraveyard().addCard(rivalMonster);
                     if (rivalMonster.getFace() == Face.UP)
                         gameView.printDefensePositionDestroyed();
                     else {
                         gameView.printDefensePositionDestroyedHidden(rivalMonsterName);  // if card was hidden theres another thing to show
                     }
-                } else if (ourMonster.getAttackNum() == rivalMonster.getDefenseNum()) {
+                } else if (attackDifference == 0) {
                     if (rivalMonster.getFace() == Face.UP)
                         gameView.printNoCardDestroyed();
                     else {                                                          // does card turn after being attacked????????????
                         gameView.printNoCardDestroyedHidden(rivalMonsterName);
                     }
                 } else {
-                    currentPlayer.decreaseHealth(attackDifference);
+                    currentPlayer.decreaseHealth(-attackDifference);
                     if (rivalMonster.getFace() == Face.UP)
-                        gameView.printNoCardDestroyedYouReceivedDamage(attackDifference);
+                        gameView.printNoCardDestroyedYouReceivedDamage(-attackDifference);
                     else {
-                        gameView.printNoCardDestroyedYouReceivedDamageHidden(attackDifference, rivalMonsterName);
+                        gameView.printNoCardDestroyedYouReceivedDamageHidden(-attackDifference, rivalMonsterName);
                     }
                 }
+                rivalMonster.setFace(Face.UP);
             }
-            rivalMonster.setFace(Face.UP);
+
         }
     }
 
@@ -191,13 +190,13 @@ public class GameController {
             if (monsterCard.getFace() == Face.UP && !monsterCard.getCardName().equals("The Calculator")) // need this because we cant double the damage if there were 2 ///
                 ourAttackNum += monsterCard.getLevel();
         }
-        ourMonster.setAttackNum(300 * ourAttackNum);
+        ourMonster.setAttackPointInGame(300 * ourAttackNum);
     }
 
 
     private void exploderDragon(Monster ourMonster, Monster rivalMonster) {
         if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
-            int attackDiff = ourMonster.getAttackNum() - rivalMonster.getAttackNum();
+            int attackDiff = ourMonster.getAttackPointInGame() - rivalMonster.getAttackPointInGame();
             ourMonster.getCardOwner().getBoard().getGraveyard().addCard(ourMonster);
             if (attackDiff >= 0) {
                 rivalMonster.getCardOwner().getBoard().getGraveyard().addCard(rivalMonster);
@@ -209,9 +208,15 @@ public class GameController {
         } else {
             if (rivalMonster.getFace() == Face.DOWN)
                 gameView.printOpponentCardsName(rivalMonster.getCardName());
+            int attackDiff = ourMonster.getAttackPointInGame() - rivalMonster.getDefencePointInGame();
             ourMonster.getCardOwner().getBoard().getGraveyard().addCard(ourMonster);
-            rivalMonster.getCardOwner().getBoard().getGraveyard().addCard(rivalMonster);
-            gameView.printBothMonstersDestroyed();
+            if (attackDiff >= 0) {
+                rivalMonster.getCardOwner().getBoard().getGraveyard().addCard(rivalMonster);
+                gameView.printBothMonstersDestroyed();
+            } else {
+                ourMonster.getCardOwner().decreaseHealth(-attackDiff);
+                gameView.printNoCardDestroyedYouReceivedDamage(-attackDiff);
+            }
         }
         rivalMonster.setFace(Face.UP);
     }
@@ -259,16 +264,20 @@ public class GameController {
 
     private void marshmallon(Monster ourMonster, Monster rivalMonster) {/// does it get attack prints? we'll never know!!
         if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
-            int attackDiff = ourMonster.getAttackNum() - rivalMonster.getAttackNum();
+            int attackDiff = ourMonster.getAttackPointInGame() - rivalMonster.getAttackPointInGame();
             if (attackDiff > 0) {
                 rivalMonster.getCardOwner().decreaseHealth(attackDiff);
+                gameView.printNoCardDestroyedRivalReceivedDamage(attackDiff);
             } else if (attackDiff == 0) {
                 rivalMonster.getCardOwner().getBoard().getGraveyard().addCard(rivalMonster);
+                gameView.printNoCardDestroyed();
             } else {
                 ourMonster.getCardOwner().decreaseHealth(-attackDiff);
+                gameView.printYourCardIsDestroyed(-attackDiff);
             }
+            gameView.printYouReceivedDamage(1000);
         } else {
-            int attackDiff = ourMonster.getAttackNum() - rivalMonster.getDefenseNum();
+            int attackDiff = ourMonster.getAttackPointInGame() - rivalMonster.getDefencePointInGame();
             if (attackDiff > 0) {
                 if (rivalMonster.getFace() == Face.DOWN)
                     gameView.printOpponentCardsName("Marshmallon");

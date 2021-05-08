@@ -411,7 +411,16 @@ public class GameView {
         System.out.println("invalid location");
     }
 
-    public void printDoesntContainCard(String place,String monster) {
-        System.out.println(place+" doesnt contain "+monster);
+    public void printDoesntContainCard(String place, String monster) {
+        System.out.println(place + " doesnt contain " + monster);
+    }
+
+    public void printNoCardDestroyedRivalReceivedDamage(int attackDifference) {
+        System.out.println("no card is destroyed and rival" +
+                " received " + attackDifference + " battle damage");
+    }
+
+    public void printYouReceivedDamage(int amount) {
+        System.out.println("you received " + amount + " damage");
     }
 }

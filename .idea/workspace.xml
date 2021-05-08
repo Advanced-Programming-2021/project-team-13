@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="literally nothing">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="50 percent of taxchanger , calculator , exploder dragon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +187,7 @@
       <workItem from="1620298676234" duration="28135000" />
       <workItem from="1620384896704" duration="3000" />
       <workItem from="1620397682243" duration="6649000" />
-      <workItem from="1620439891874" duration="4884000" />
+      <workItem from="1620439891874" duration="6930000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -274,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620410238876</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="50 percent of taxchanger , calculator , exploder dragon">
+      <created>1620444875951</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1620444875951</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,6 +344,7 @@
     <MESSAGE value="a" />
     <MESSAGE value="fookin marshmallon" />
     <MESSAGE value="literally nothing" />
-    <option name="LAST_COMMIT_MESSAGE" value="literally nothing" />
+    <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
+    <option name="LAST_COMMIT_MESSAGE" value="50 percent of taxchanger , calculator , exploder dragon" />
   </component>
 </project>
