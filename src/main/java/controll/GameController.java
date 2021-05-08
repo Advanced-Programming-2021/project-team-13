@@ -280,8 +280,10 @@ public class GameController {
         } else {
             int attackDiff = ourMonster.getAttackPointInGame() - rivalMonster.getDefencePointInGame();
             if (attackDiff > 0) {
-                if (rivalMonster.getFace() == Face.DOWN)
+                if (rivalMonster.getFace() == Face.DOWN) {
                     gameView.printOpponentCardsName("Marshmallon");
+                    rivalMonster.getCardOwner().decreaseHealth(attackDiff);
+                }
             } else if (attackDiff == 0) {
                 if (rivalMonster.getFace() == Face.DOWN)
                     gameView.printOpponentCardsName("Marshmallon");
@@ -291,8 +293,9 @@ public class GameController {
                     gameView.printOpponentCardsName("Marshmallon");
                 ourMonster.getCardOwner().decreaseHealth(-attackDiff);
             }
+            if (rivalMonster.getFace() == Face.DOWN)
+                ourMonster.getCardOwner().decreaseHealth(1000);
             rivalMonster.setFace(Face.UP);
-            ourMonster.getCardOwner().decreaseHealth(1000);
         }
     }
 
