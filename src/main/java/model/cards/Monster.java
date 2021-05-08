@@ -20,6 +20,7 @@ public class Monster extends Card {
     private boolean HaveChangedPositionInThisTurn = false;
     private boolean isAttackedInThisTurn = false;
     private boolean attackable = true;
+    private boolean usedAbilityThisTurn = false;
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
 
     public Monster(String name, CardType cardType, Face face, int price, String description, String monsterType,
@@ -228,5 +229,12 @@ public class Monster extends Card {
         }
     }
 
+    public boolean hasUsedAbilityThisTurn() {
+        return usedAbilityThisTurn;
+    }
+
+    public void setUsedAbilityThisTurn(boolean status) {
+        usedAbilityThisTurn = status;
+    }
 }
 

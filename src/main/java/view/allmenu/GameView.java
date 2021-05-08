@@ -3,7 +3,6 @@ package view.allmenu;
 import controll.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
-import enums.Phase;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
@@ -367,6 +366,17 @@ public class GameView {
         System.out.println("card is not visible");
     }
 
+    public void printAttackDisruptedByTaxchanger() {
+        System.out.println("Attack Denied By Taxchanger");
+    }
+
+    public void printNoCyberseWithAbility() {
+        System.out.println("Cant summon Cyberse with ability");
+    }
+
+    public void printInvalidCyberseName() {
+        System.out.println("invalid Cyberse Name");
+    }
 
     public void printFlipSummonSuccessfully() {
         System.out.println("flip summoned successfully");
@@ -377,4 +387,31 @@ public class GameView {
         run("select --monster --opponent " + number);
     }
 
+    public boolean doesRivalWantCyberse() {
+        String answer = ViewMaster.scanner.nextLine();
+        if (answer.equals("Yes"))
+            return true;
+        else if (answer.equals("No"))
+            return false;
+        System.out.println("invalid answer");
+        return false;
+    }
+
+    public String getCyberse() {
+        return ViewMaster.scanner.nextLine();
+    }
+
+
+    public String getPlace() {
+        return ViewMaster.scanner.nextLine();
+    }
+
+
+    public void printInvalidLocation() {
+        System.out.println("invalid location");
+    }
+
+    public void printDoesntContainCard(String place,String monster) {
+        System.out.println(place+" doesnt contain "+monster);
+    }
 }
