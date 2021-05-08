@@ -17,7 +17,7 @@ public class Player {
     private Card selectedCard;
     private ArrayList<Card> cardsInHand;
     private boolean isSetOrSummonInThisTurn = false;
-
+    private boolean canActiveTrap = true;
 
     public Player(User user) {
         this.wonRounds = 0;
@@ -34,6 +34,14 @@ public class Player {
 
     public void play() {
 
+    }
+
+    public boolean isCanActiveTrap() {
+        return canActiveTrap;
+    }
+
+    public void setCanActiveTrap(boolean canActiveTrap) {
+        this.canActiveTrap = canActiveTrap;
     }
 
     public boolean isSetOrSummonInThisTurn() {
@@ -89,14 +97,11 @@ public class Player {
         return user;
     }
 
-    public ArrayList<Monster> getMonsterOnBoard() {       //I dont think this works!!!!!
-        ArrayList<Monster> monsters = new ArrayList<>();
-        return monsters;
-    }
-
-//    public Card getCurrentCard() {
-//        return currentCard;
+//    public ArrayList<Monster> getMonsterOnBoard() {       //I dont think this works!!!!!
+//        ArrayList<Monster> monsters = new ArrayList<>();
+//        return monsters;
 //    }
+
 
     public Card getSelectedCard() {
         return selectedCard;
@@ -112,17 +117,3 @@ public class Player {
     }
 
 }
-
-
-/*    private ArrayList<Card> selectedCardsForTribute = new ArrayList<>();
-    private boolean canActivateTrap = true;
-    private boolean canAttack = true;*/
-/*
-    public ArrayList<Card> getSelectedCardsForTribute() {
-        return selectedCardsForTribute;
-    }
-
-    public void setSelectedCardsForTribute(ArrayList<Card> selectedCardsForTribute) {
-        this.selectedCardsForTribute = selectedCardsForTribute;
-    }
-*/

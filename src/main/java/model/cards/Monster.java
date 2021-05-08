@@ -9,16 +9,17 @@ public class Monster extends Card {
     private MonsterCardType monsterCardType;
     private SummonType summonType;
     private MonsterAttribute monsterAttribute;
-    private AttackOrDefense attackOrDefense;    /// this was needed very much!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private AttackOrDefense attackOrDefense;/// this was needed very much!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private int attackNum;
     private int defenseNum;
     private int attackPointInGame;
     private int defencePointInGame;
     private int level;
-    private String monsterType;/////////////////////////////////////// this need to be set , could we make enum or will it be to much???????
+    private String monsterType;///////// this need to be set , could we make enum or will it be to much???????
     private boolean isSetInThisTurn = false;
     private boolean HaveChangedPositionInThisTurn = false;
     private boolean isAttackedInThisTurn = false;
+    private boolean isActiveAbility = false;
     private boolean attackable = true;
     private boolean usedAbilityThisTurn = false;
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
@@ -37,16 +38,15 @@ public class Monster extends Card {
         setDefencePointInGame(defenseNum);
     }
 
-    /*
+/*
         private MonsterType monsterTypeInGame;
         private MonsterAttribute monsterAttributeInGame;
         private int levelInGame;
-       private String nameInGame;
-       private boolean isAttackable = true;
-       private boolean isActivateInThisTurn = false;
+        private String nameInGame;
+        private boolean isAttackable = true;
+        private boolean isActivateInThisTurn = false;
 
-
-    public Monster(String name, CardType cardType, Face face, int price, int cardNum, String description,
+        public Monster(String name, CardType cardType, Face face, int price, int cardNum, String description,
                    MonsterType monsterType, SummonType summonType, MonsterAttribute monsterAttribute,
                    int attackNum, int defenseNum, int level) {
         super(name, cardType, description, face, price, cardNum);
@@ -62,10 +62,19 @@ public class Monster extends Card {
         monsterAttributeInGame = monsterAttribute;
         monsterTypeInGame = monsterType;
         this.nameInGame = name;
-    }*/
+}
+*/
 
     public ArrayList<Monster> getMonsters() {
         return monsters;
+    }
+
+    public boolean isActiveAbility() {
+        return isActiveAbility;
+    }
+
+    public void setActiveAbility(boolean activeAbility) {
+        isActiveAbility = activeAbility;
     }
 
     public void setMonsters(ArrayList<Monster> monsters) {
@@ -210,9 +219,9 @@ public class Monster extends Card {
     }
 
 
-    public ArrayList<Monster> getMonsterOnBoard() {
+  /*  public ArrayList<Monster> getMonsterOnBoard() {
         return cardOwner.getMonsterOnBoard();
-    }
+    }*/
 
     public int howManyTributeNeed() {
         switch (this.level) {
