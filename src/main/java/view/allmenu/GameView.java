@@ -11,6 +11,7 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -41,9 +42,12 @@ public class GameView {
             directAttack();
         else if (command.equals("show graveyard"))
             showGraveyard(command);
+        else if (command.equals("special summon"))
+            gameController.specialSummon();
         else if (command.equals("card show --selected"))
             gameController.showSelectedCard();
     }
+
 
     private void showGraveyard(String command) {
         ShowGraveyardMenu showGraveyardMenu = new ShowGraveyardMenu(gameController.getCurrentPlayer());
@@ -377,4 +381,31 @@ public class GameView {
         run("select --monster --opponent " + number);
     }
 
+    public boolean doYouWantTribute() {
+        String answer = "";
+        while (!answer.matches("^\\bNO\\b$|^\\bYES\\b$")) {
+            System.out.println("Do You Want Tribute 3 Monsters?(YES|NO)");
+            answer = ViewMaster.scanner.nextLine();
+        }
+        return answer.equals("YES");
+    }
+
+    public void printCantSpecialSummon() {
+        System.out.println("you can’t special summon this card");
+    }
+
+    public ArrayList<Monster> getTributeSpecialSummon(int numberOfTributes) {
+        ArrayList<Monster> tributes = new ArrayList<>();
+        while (tributes.size() < numberOfTributes) {
+            try {
+                int number = ViewMaster.scanner.nextInt();
+                run("select --monster " + number);
+                if (!tributes.contains(gameController.getCurrentPlayer().getSelectedCard()))
+                    tributes.add((Monster) gameController.getCurrentPlayer().getSelectedCard());
+            } catch (Exception ignore) {
+                System.out.println("you should special summon right now");
+            }
+        }
+        return tributes;
+    }
 }

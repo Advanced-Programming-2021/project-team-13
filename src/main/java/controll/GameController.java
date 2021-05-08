@@ -298,13 +298,17 @@ public class GameController {
         else {
             if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
                     && currentPlayer.getSelectedCard() instanceof Monster
-                    && !((Monster) currentPlayer.getSelectedCard()).getMonsterType().equalsIgnoreCase("ritual")) {
+                    && !((Monster) currentPlayer.getSelectedCard()).getMonsterType().equalsIgnoreCase("ritual")
+                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("gate guardian")
+                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("")) {
                 if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
                     gameView.printNotInMainPhase();
                 else {
                     if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
                         if (currentPlayer.isSetOrSummonInThisTurn())
                             gameView.printAlreadySetOrSummon();
+                        else if (currentPlayer.getSelectedCard().getCardName().equalsIgnoreCase("Beast king barbaros"))
+                            beatsKingBarbaros((Monster) currentPlayer.getSelectedCard());
                         else
                             summonAndSpecifyTribute();
                     } else gameView.printMonsterZoneFull();
@@ -314,8 +318,42 @@ public class GameController {
     }
 
 
+    public void specialSummon() {
+        if (currentPlayer.getSelectedCard() == null)
+            gameView.printNoCardSelected();
+        else {
+            if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
+                    && currentPlayer.getSelectedCard() instanceof Monster
+                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("gate guardian")
+                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("")) {
+                if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
+                    gameView.printNotInMainPhase();
+                else {
+                    if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
+                        Monster monster = (Monster) currentPlayer.getSelectedCard();
+                        if (monster.getCardName().equalsIgnoreCase("gate guardian"))
+                            gateGuardian();
+                    } else gameView.printMonsterZoneFull();
+                }
+            } else gameView.printCantSpecialSummon();
+        }
+    }
+
+    private void gateGuardian() { //to be complete
+        int numberOfMonsterInOurBoard = currentPlayer.getBoard().getNumberOfMonsterInBoard();
+        if (numberOfMonsterInOurBoard < 3) {
+            currentPlayer.setSelectedCard(null);
+            gameView.printThereArentEnoughMonsterForTribute();
+            return;
+        }
+        ArrayList<Monster> tributes = gameView.getTributeSpecialSummon(3);
+
+
+    }
+    
     private void commandKnightSummon(Monster monster) {
         monster.setAttackable(false);   // we should use this in attack function!!!!
+        monster.setActiveAbility(true);
         ArrayList<Monster> monsters = new ArrayList<>();
         for (Cell cell : currentPlayer.getBoard().getMonsters()) {
             Monster friendMonster = (Monster) cell.getCard();
@@ -327,6 +365,10 @@ public class GameController {
 
     private void summonAndSpecifyTribute() {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
+        if (monster.getCardName().equalsIgnoreCase("mirage dragon")) { // it should be TRUE in attack function when it dies;
+            getRivalPlayer().setCanActiveTrap(false);
+            monster.setActiveAbility(true);
+        }
         if (currentPlayer.getSelectedCard().getCardName().equalsIgnoreCase("Command knight"))
             commandKnightSummon(monster);
         else {
@@ -338,7 +380,7 @@ public class GameController {
                     gameView.printThereArentEnoughMonsterForTribute();
                     return;
                 }
-                if (getTribute(numberOfTribute))
+                if (!getTribute(numberOfTribute))
                     return;
             }
         }
@@ -349,6 +391,36 @@ public class GameController {
         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
         currentPlayer.setSetOrSummonInThisTurn(true);
         currentPlayer.setSelectedCard(null);
+    }
+
+    private void beatsKingBarbaros(Monster monster) {
+        if (gameView.doYouWantTribute()) {
+            currentPlayer.setSelectedCard(null);
+            if (getTribute(3)) {
+                gameView.printSummonSuccessfully();
+                monster.setSetInThisTurn(true);
+                monster.setZone(Zone.MONSTER_ZONE);
+                monster.setFace(Face.UP);
+                monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+                monster.setActiveAbility(true);
+                currentPlayer.setSetOrSummonInThisTurn(true);
+                currentPlayer.setSelectedCard(null);
+            }
+        } else {
+            monster.setAttackPointInGame(1900);
+            gameView.printSummonSuccessfully();
+            monster.setSetInThisTurn(true);
+            monster.setZone(Zone.MONSTER_ZONE);
+            monster.setActiveAbility(true);
+            monster.setFace(Face.UP);
+            monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+            currentPlayer.setSetOrSummonInThisTurn(true);
+            currentPlayer.setSelectedCard(null);
+            for (Cell cell : getRivalPlayer().getBoard().getMonsters()) {
+                getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
+                cell.setCard(null);
+            }
+        }
     }
 
     private boolean getTribute(int numberOfTribute) {
@@ -365,12 +437,12 @@ public class GameController {
                 gameView.printNoMonsterOnThisAddress();
             else
                 gameView.printNoMonsterInOneOfThisAddress();
-            return true;
+            return false;
         }
         for (Monster monster : tributeMonster) {
             currentPlayer.getBoard().getGraveyard().addCard(monster);
         }
-        return false;
+        return true;
     }
 
     public void set() {
@@ -453,14 +525,28 @@ public class GameController {
                         gameView.printCantFlipSummon();
                     else {
                         currentPlayer.setSelectedCard(null);
+                        if (monster.getCardName().equalsIgnoreCase("man eater bug"))
+                            manEaterBugFlipSummon();
+                        currentPlayer.setSelectedCard(null);
                         monster.setFace(Face.UP);
                         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+                        gameView.printFlipSummonSuccessfully();
                     }
                 } else
                     gameView.printNotInMainPhase();
             } else
                 gameView.printCantChangePosition();
         }
+    }
+
+    private void manEaterBugFlipSummon() {
+        while (currentPlayer.getSelectedCard() == null) {
+            gameView.getOpponentMonsterForKill();
+        }
+        Monster monster = (Monster) currentPlayer.getSelectedCard();
+        monster.setActiveAbility(true);
+        Monster opponentMonster = (Monster) currentPlayer.getSelectedCard();
+        getRivalPlayer().getBoard().getGraveyard().addCard(opponentMonster);
     }
 
     public void showSelectedCard() {
@@ -494,14 +580,6 @@ public class GameController {
         return firstPlayer;
     }
 
-    private void manEaterBugFlipSummon() {
-        while (currentPlayer.getSelectedCard() == null) {
-            gameView.getOpponentMonsterForKill();
-        }
-        Monster opponentMonster = (Monster) currentPlayer.getSelectedCard();
-        getRivalPlayer().getBoard().getGraveyard().addCard(opponentMonster);
-    }
-
 
     public Phase getCurrentPhase() {
         return currentPhase;
@@ -527,4 +605,5 @@ public class GameController {
                 return 4;//no winner
         }
     }
+
 }
