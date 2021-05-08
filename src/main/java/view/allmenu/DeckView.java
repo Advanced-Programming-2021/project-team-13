@@ -70,20 +70,25 @@ public class DeckView {
 
     }
 
-    public void run(String command) {  //// DECK REGEX NEED CHANGE
+    public void run(String command) {
         if (command.matches(Regex.CREATE_DECK))
             createDeck(Regex.getInputMatcher(command, Regex.CREATE_DECK));
         else if (command.matches(Regex.DELETE_DECK))
             deleteDeck(Regex.getInputMatcher(command, Regex.DELETE_DECK));
         else if (command.matches(Regex.ACTIVE_DECK))
             activeDeck(Regex.getInputMatcher(command, Regex.ACTIVE_DECK));
-        else if (command.matches(Regex.ADD_CARD_TO_DECK))
+        else if (command.matches(Regex.ADD_CARD_TO_DECK1)
+                || command.matches(Regex.ADD_CARD_TO_DECK2)
+                || command.matches(Regex.ADD_CARD_TO_DECK3))
             addCard(command);
-        else if (command.matches(Regex.REMOVE_CARD_FROM_DECK))
+        else if (command.matches(Regex.REMOVE_CARD_FROM_DECK)
+                || command.matches(Regex.REMOVE_CARD_FROM_DECK2)
+                || command.matches(Regex.REMOVE_CARD_FROM_DECK1))
             removeCard(command);
         else if (command.matches(Regex.SHOW_DECKS))
             deckController.showDecks();
-        else if (command.matches(Regex.SHOW_ONE_DECK))
+        else if (command.matches(Regex.SHOW_ONE_DECK)
+                || command.matches(Regex.SHOW_ONE_DECK2))
             showSpecificDeck(command);
         else if (command.matches(Regex.DECK_SHOW_CARDS))
             deckController.showCards();

@@ -5,6 +5,7 @@ import enums.*;
 import java.util.ArrayList;
 
 public class Monster extends Card {
+    public Monster attacker;
     private MonsterCardType monsterCardType;
     private SummonType summonType;
     private MonsterAttribute monsterAttribute;
@@ -20,6 +21,7 @@ public class Monster extends Card {
     private boolean isAttackedInThisTurn = false;
     private boolean isActiveAbility = false;
     private boolean attackable = true;
+    private boolean usedAbilityThisTurn = false;
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
 
     public Monster(String name, CardType cardType, Face face, int price, String description, String monsterType,
@@ -191,6 +193,14 @@ public class Monster extends Card {
         this.level = level;
     }
 
+    public void setAttacker(Monster monster) {
+        attacker = monster;
+    }
+
+    public Monster getAttacker() {
+        return attacker;
+    }
+
 
     public void increaseAttackPoint(int amount) {
         attackPointInGame += amount;
@@ -228,5 +238,12 @@ public class Monster extends Card {
         }
     }
 
+    public boolean hasUsedAbilityThisTurn() {
+        return usedAbilityThisTurn;
+    }
+
+    public void setUsedAbilityThisTurn(boolean status) {
+        usedAbilityThisTurn = status;
+    }
 }
 
