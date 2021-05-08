@@ -21,6 +21,11 @@ public class GameController {
     private Phase currentPhase;
     private final int startingRounds;
     private int turnsPlayed;
+    private boolean hasNormalSummonHappened;
+    private boolean hasSpecialSummonHappened;
+    private boolean hasRitualSummonHappened;
+    private boolean hasSpecialSummonMonsterHappened;
+    private boolean hasFlipSummonHappened;
 
 
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player currentPlayer, int startingRounds) {
@@ -37,14 +42,12 @@ public class GameController {
         this.startingRounds = startingRounds;
         turnsPlayed = 0;
         currentPhase = Phase.DRAW_PHASE;
+        hasNormalSummonHappened = false;
+        hasSpecialSummonHappened = false;
+        hasRitualSummonHappened = false;
+        hasSpecialSummonMonsterHappened = false;
+        hasFlipSummonHappened = false;
     }
-
-
-//    public Player getRivalPlayer() {
-//        if (currentPlayer == firstPlayer)
-//            return secondPlayer;
-//        return firstPlayer;
-//    }
 
     public void selectPlayerMonster(int cardAddress) {// no regex error!!! // are these handled or not!!??
         if (monsterSelectionCheck(cardAddress, currentPlayer)) {
@@ -416,6 +419,11 @@ public class GameController {
         } else {
             currentPhase = Phase.END_PHASE;
             currentPlayer.setSetOrSummonInThisTurn(false);
+            hasFlipSummonHappened = false;
+            hasNormalSummonHappened = false;
+            hasSpecialSummonMonsterHappened = false;
+            hasRitualSummonHappened = false;
+            hasSpecialSummonHappened = false;
             changeCurrentPlayer();
             gameView.printCurrentPhase();
             gameView.printWhoseTurn();
@@ -494,6 +502,7 @@ public class GameController {
     }
 
     private void summonAndSpecifyTribute() {
+        hasNormalSummonHappened = true;
         Monster monster = (Monster) currentPlayer.getSelectedCard();
         if (monster.getCardName().equalsIgnoreCase("mirage dragon")) { // it should be TRUE in attack function when it dies;
             getRivalPlayer().setCanActiveTrap(false);
@@ -677,6 +686,7 @@ public class GameController {
         monster.setActiveAbility(true);
         Monster opponentMonster = (Monster) currentPlayer.getSelectedCard();
         getRivalPlayer().getBoard().getGraveyard().addCard(opponentMonster);
+        hasFlipSummonHappened = true;
     }
 
     public void showSelectedCard() {
@@ -689,7 +699,6 @@ public class GameController {
             else gameView.showCard(card);
         }
     }
-
 
     public void changeCurrentPlayer() {
         if (currentPlayer == firstPlayer)
@@ -710,6 +719,25 @@ public class GameController {
         return firstPlayer;
     }
 
+    public boolean isHasFlipSummonHappened() {
+        return hasFlipSummonHappened;
+    }
+
+    public boolean isHasNormalSummonHappened() {
+        return hasNormalSummonHappened;
+    }
+
+    public boolean isHasRitualSummonHappened() {
+        return hasRitualSummonHappened;
+    }
+
+    public boolean isHasSpecialSummonHappened() {
+        return hasSpecialSummonHappened;
+    }
+
+    public boolean isHasSpecialSummonMonsterHappened() {
+        return hasSpecialSummonMonsterHappened;
+    }
 
     public Phase getCurrentPhase() {
         return currentPhase;

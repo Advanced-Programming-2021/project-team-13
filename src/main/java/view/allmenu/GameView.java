@@ -20,6 +20,10 @@ public class GameView {
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
     }
 
+    public GameController getGameController() {
+        return gameController;
+    }
+
     public void run(String command) {
         if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
             selectCard(command);
