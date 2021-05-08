@@ -56,6 +56,7 @@ public class Regex {
         }
         return null;
     }
+    
 
     public static String findPassword(String input) {
         Pattern pattern = Pattern.compile("--(password|p) (\\w+)");
