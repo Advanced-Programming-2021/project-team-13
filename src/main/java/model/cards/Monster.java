@@ -1,6 +1,7 @@
 package model.cards;
 
 import enums.*;
+import model.Cell;
 
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ public class Monster extends Card {
     public Monster attacker;
     private MonsterCardType monsterCardType;
     private SummonType summonType;
+    private Card fieldSpell;
     private MonsterAttribute monsterAttribute;
     private AttackOrDefense attackOrDefense;/// this was needed very much!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private int attackNum;
@@ -21,8 +23,25 @@ public class Monster extends Card {
     private boolean isAttackedInThisTurn = false;
     private boolean isActiveAbility = false;
     private boolean attackable = true;
+    private boolean isFieldSpellActive = false;
     private boolean usedAbilityThisTurn = false;
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
+
+    public ArrayList<Monster> getCommandKnightsActive() {
+        return commandKnightsActive;
+    }
+
+    private ArrayList<Monster> commandKnightsActive;
+
+    public void setCommandKnightsActive(Monster activeCommandKnight) {
+        if (!commandKnightsActive.contains(activeCommandKnight))
+            commandKnightsActive.add(activeCommandKnight);
+    }
+
+    public void removeFromActiveCommandKnights(Monster commandKnightToBeRemoved) {
+        commandKnightsActive.remove(commandKnightToBeRemoved);
+    }
+
 
     public Monster(String name, CardType cardType, Face face, int price, String description, String monsterType,
                    MonsterCardType monsterCardType, MonsterAttribute monsterAttribute,
@@ -36,6 +55,7 @@ public class Monster extends Card {
         setMonsterType(monsterType);
         setAttackPointInGame(attackNum);
         setDefencePointInGame(defenseNum);
+        commandKnightsActive = new ArrayList<>();
     }
 
 /*
@@ -95,6 +115,22 @@ public class Monster extends Card {
 
     public void setHaveChangePositionInThisTurn(boolean doesHaveChangePositionInThisTurn) {
         this.HaveChangedPositionInThisTurn = doesHaveChangePositionInThisTurn;
+    }
+
+    public Card getFieldSpell() {
+        return fieldSpell;
+    }
+
+    public void setFieldSpell(Card fieldSpell) {
+        this.fieldSpell = fieldSpell;
+    }
+
+    public boolean isFieldSpellActive() {
+        return isFieldSpellActive;
+    }
+
+    public void setFieldSpellActive(boolean fieldSpellActive) {
+        isFieldSpellActive = fieldSpellActive;
     }
 
     public boolean isAttackedInThisTurn() {

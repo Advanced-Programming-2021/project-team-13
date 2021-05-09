@@ -423,6 +423,10 @@ public class GameView {
         System.out.println(place + " doesnt contain " + monster);
     }
 
+    public void printCantAttackMonster() {
+        System.out.println("Cant attack this monster!");
+    }
+
     public void printNoCardDestroyedRivalReceivedDamage(int attackDifference) {
         System.out.println("no card is destroyed and rival" +
                 " received " + attackDifference + " battle damage");
@@ -431,6 +435,7 @@ public class GameView {
     public void printYouReceivedDamage(int amount) {
         System.out.println("you received " + amount + " damage");
     }
+
     public boolean doYouWantTribute() {
         String answer = "";
         while (!answer.matches("^\\bNO\\b$|^\\bYES\\b$")) {
@@ -458,4 +463,6 @@ public class GameView {
         }
         return tributes;
     }
+
+
 }
