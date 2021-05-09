@@ -13,7 +13,7 @@ import view.allmenu.GameView;
 import java.util.ArrayList;
 
 public class GameController {
-    private static int playedRounds = 0;
+    private static int playedRoundsInTotal = 0;
     private final GameView gameView;
     private final Player firstPlayer;
     private final Player secondPlayer;
@@ -39,13 +39,6 @@ public class GameController {
         currentPhase = Phase.DRAW_PHASE;
     }
 
-
-//    public Player getRivalPlayer() {
-//        if (currentPlayer == firstPlayer)
-//            return secondPlayer;
-//        return firstPlayer;
-//    }
-
     public void selectPlayerMonster(int cardAddress) {// no regex error!!! // are these handled or not!!??
         if (monsterSelectionCheck(cardAddress, currentPlayer)) {
             currentPlayer.setSelectedCard(currentPlayer.getBoard().getMonsterByAddress(cardAddress));
@@ -68,7 +61,6 @@ public class GameController {
         }
     }
 
-
     public void selectOpponentSpellOrTrap(int cardAddress) {
         if (spellSelectionCheck(cardAddress, getRivalPlayer())) {
             currentPlayer.setSelectedCard
@@ -76,7 +68,6 @@ public class GameController {
             gameView.printCardSelected();
         }
     }
-
 
     public void selectPlayerFieldCard() {
         if (fieldSpellCheck(currentPlayer)) {
@@ -99,7 +90,6 @@ public class GameController {
             gameView.printCardSelected();
         }
     }
-
 
     public void deselectCard() {
         if (currentPlayer.getSelectedCard() == null) {
@@ -263,7 +253,6 @@ public class GameController {
         fieldIncreaseDef(monster.getCardOwner(), "Fairy", -amount);
     }
 
-
     public void fieldIncreaseAtk(Player player, String monsterType, int amount) {
         for (Cell monster : player.getBoard().getMonsters()) {
             Monster boardMonster = (Monster) monster.getCard();
@@ -342,7 +331,6 @@ public class GameController {
         ourMonster.setAttackPointInGame(300 * ourAttackNum);
     }
 
-
     private void exploderDragon(Monster ourMonster, Monster rivalMonster) {
         if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
             int attackDiff = ourMonster.getAttackPointInGame() - rivalMonster.getAttackPointInGame();
@@ -398,7 +386,6 @@ public class GameController {
             gameView.printInvalidLocation();
     }
 
-
     private boolean checkCyberse(String cyberse) {
         if (cyberse.equals("Bitron"))
             return true;
@@ -446,7 +433,6 @@ public class GameController {
             rivalMonster.setFace(Face.UP);
         }
     }
-
 
     public void directAttack() {  // somehow same as attack only diff is rival card number!!!
         if (checkAttack()) {
@@ -499,7 +485,6 @@ public class GameController {
         }
         return true;
     }
-
 
     private boolean checkAttack() {
         if (currentPlayer.getSelectedCard() == null) {
@@ -597,7 +582,6 @@ public class GameController {
             } else gameView.printCantSummon();
         }
     }
-
 
     public void specialSummon() {
         if (currentPlayer.getSelectedCard() == null)
@@ -841,7 +825,6 @@ public class GameController {
         }
     }
 
-
     public void changeCurrentPlayer() {
         if (currentPlayer == firstPlayer)
             currentPlayer = secondPlayer;
@@ -860,7 +843,6 @@ public class GameController {
             return secondPlayer;
         return firstPlayer;
     }
-
 
     public Phase getCurrentPhase() {
         return currentPhase;
@@ -887,6 +869,21 @@ public class GameController {
         }
     }
 
+    public void surrender(){
+        if (currentPlayer.getLifePoint() > currentPlayer.getMaxLifePoint())
+            currentPlayer.setMaxLifePoint(currentPlayer.getMaxLifePoint());
+        if (getRivalPlayer().getLifePoint() > getRivalPlayer().getMaxLifePoint())
+            getRivalPlayer().setMaxLifePoint(getRivalPlayer().getLifePoint());
+        announceWinner(getRivalPlayer());
+    }
+
+    public void announceWinner(Player winner){
+        if (winner == null){//this is when game is ended draw
+
+        } else {
+
+        }
+    }
 
     public static boolean checkForDeathAction(Card card) {
         Monster monster = (Monster) card;
@@ -894,7 +891,6 @@ public class GameController {
             yomiShip(monster);
         return false;
     }
-
 
     public static void yomiShip(Monster monster) {
         monster
@@ -905,7 +901,5 @@ public class GameController {
                 .addCard
                         (monster.getAttacker());
     }
-
-
 
 }

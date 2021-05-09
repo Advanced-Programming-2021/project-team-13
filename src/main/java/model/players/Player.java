@@ -12,6 +12,7 @@ public class Player {
 
     private final User user;
     private int lifePoint;
+    private int maxLifePoint;
     private final int wonRounds;
     private Board board;
     private Card selectedCard;
@@ -23,6 +24,7 @@ public class Player {
         this.wonRounds = 0;
         this.user = user;
         this.lifePoint = 8000;
+        this.maxLifePoint = 0;
         try {
             this.board = new Board(user.getActiveDeck().clone(), new Graveyard(this));
         } catch (CloneNotSupportedException e) {
@@ -60,7 +62,15 @@ public class Player {
         this.lifePoint = lifePoint;
     }
 
-//    public void setCurrentCard(Card currentCard) {
+    public void setMaxLifePoint(int maxLifePoint) {
+        this.maxLifePoint = maxLifePoint;
+    }
+
+    public int getMaxLifePoint() {
+        return maxLifePoint;
+    }
+
+    //    public void setCurrentCard(Card currentCard) {
 //        this.currentCard = currentCard;
 //    }
 

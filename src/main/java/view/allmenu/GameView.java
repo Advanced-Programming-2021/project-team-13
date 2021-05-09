@@ -47,6 +47,8 @@ public class GameView {
             showGraveyard(command);
         else if (command.equals("card show --selected"))
             gameController.showSelectedCard();
+        else if (command.matches("surrender"))
+            gameController.surrender();
     }
 
 
@@ -308,7 +310,7 @@ public class GameView {
     }
 
     public void printSummonSuccessfully() {
-
+        System.out.println("summoned successfully");
     }
 
     public void printNoMonsterOnThisAddress() {
@@ -430,7 +432,7 @@ public class GameView {
         System.out.println("you received " + amount + " damage");
     }
 
-    public boolean doYouWantTributeBarBaros() {
+    public boolean doYouWantTributeBarBaros() {// :| WTF
         String answer = " ";
         System.out.println("Do You Want Tribute 3 Monsters?(YES|NO)");
         answer = ViewMaster.scanner.nextLine();
