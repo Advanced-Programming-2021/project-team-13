@@ -4,26 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="TrapEffects is adding">
-      <change afterPath="$PROJECT_DIR$/src/main/java/test/LoginTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_opencsv_opencsv_5_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20210307.xml" beforeDir="false" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="login is debuged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/enums/Phase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/Phase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/LoginAndShopTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" afterDir="false" />
     </list>
@@ -95,7 +81,7 @@
       <recent name="enums" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LoginTest.checkLoginOk">
+  <component name="RunManager" selected="JUnit.LoginAndShopTest.checkMenuEntrance">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -107,7 +93,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LoginTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginAndShopTest.checkLoginForNotCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
@@ -116,29 +102,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.LoginTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LoginTest.checkLoginForNotCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="YuGiOh" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.LoginTest" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
       <option name="METHOD_NAME" value="checkLoginForNotCreated" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LoginTest.checkLoginOk" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginAndShopTest.checkLoginOk" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
@@ -147,14 +118,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.LoginTest" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
       <option name="METHOD_NAME" value="checkLoginOk" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LoginTest.checkRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginAndShopTest.checkMenuEntrance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
@@ -163,14 +134,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.LoginTest" />
-      <option name="METHOD_NAME" value="checkRegister" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
+      <option name="METHOD_NAME" value="checkMenuEntrance" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LoginTest.checkRepeatedRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginAndShopTest.checkRepeatedRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
@@ -179,8 +150,24 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.LoginTest" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
       <option name="METHOD_NAME" value="checkRepeatedRegister" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginAndShopTest.checkShop" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
+      <option name="METHOD_NAME" value="checkShop" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -188,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LoginTest.checkLoginOk" />
-        <item itemvalue="JUnit.LoginTest.checkLoginForNotCreated" />
-        <item itemvalue="JUnit.LoginTest.checkRepeatedRegister" />
-        <item itemvalue="JUnit.LoginTest.checkRegister" />
-        <item itemvalue="JUnit.LoginTest" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkMenuEntrance" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkShop" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkLoginOk" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkLoginForNotCreated" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkRepeatedRegister" />
       </list>
     </recent_temporary>
   </component>
@@ -313,7 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620444875951</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="login is debuged">
+      <created>1620571975842</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1620571975842</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,6 +372,15 @@
     <MESSAGE value="fookin marshmallon" />
     <MESSAGE value="literally nothing" />
     <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
-    <option name="LAST_COMMIT_MESSAGE" value="50 percent of taxchanger , calculator , exploder dragon" />
+    <MESSAGE value="login is debuged" />
+    <option name="LAST_COMMIT_MESSAGE" value="login is debuged" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="ViewMaster." language="JAVA" custom="view.ViewMaster" />
+        <watch expression="ViewMaster.getCurrentMenu()" language="JAVA" custom="view.ViewMaster" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
