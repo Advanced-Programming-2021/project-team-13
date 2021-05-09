@@ -5,6 +5,8 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.util.regex.Matcher;
+
 
 public class LoginView {
 
@@ -12,6 +14,39 @@ public class LoginView {
 
     public LoginView() {
         loginController = new LoginController(this);
+    }
+
+    public void run(String command) {
+        if (command.matches(Regex.ENTER_MENU))   // needs to be tested !!!! fishy!!!!
+            loginFirst(command);
+        else if (command.equals("menu exit"))
+            ViewMaster.setCurrentMenu(Menu.EXIT_MENU);
+        else if (command.matches(Regex.REGISTER))
+            register(command);
+        else if (command.matches(Regex.LOGIN))
+            login(command);
+        else printInvalidCommand();
+    }
+
+    private void loginFirst(String command){
+        Matcher matcher = Regex.getInputMatcher(command , Regex.ENTER_MENU);
+        if (matcher.find()) {
+            String menuName = matcher.group("menuName");
+            loginController.loginFirst(menuName);
+        }
+    }
+
+    private void register(String command) {
+        String username = Regex.findUsername(command);
+        String password = Regex.findPassword(command);
+        String nickname = Regex.findNickname(command);
+        loginController.registerUser(username, password, nickname);
+    }
+
+    private void login(String command) {
+        String username = Regex.findUsername(command);
+        String password = Regex.findPassword(command);
+        loginController.loginUser(username, password);
     }
 
     public void printUsernameExists(String username) {
@@ -35,37 +70,10 @@ public class LoginView {
     }
 
     public void printInvalidUsernameOrPassword() {
-        System.out.println("Username or password didn't match!");
+        System.out.println("Username and password didn’t match!");
     }
 
-    private void printLoginFirst() {
+    public void printLoginFirst() {
         System.out.println("please login first");
     }
-
-    public void run(String command) {
-        if (command.matches(Regex.ENTER_MENU))   // needs to be tested !!!! fishy!!!!
-            printLoginFirst();
-        else if (command.equals("menu exit"))
-            ViewMaster.setCurrentMenu(Menu.EXIT_MENU);
-        else if (command.matches(Regex.REGISTER))
-            register(command);
-        else if (command.matches(Regex.LOGIN))
-            login(command);
-        else printInvalidCommand();
-    }
-
-    private void register(String command) {
-        String username = Regex.findUsername(command);
-        String password = Regex.findPassword(command);
-        String nickname = Regex.findNickname(command);
-        loginController.registerUser(username, password, nickname);
-    }
-
-    private void login(String command) {
-        String username = Regex.findUsername(command);
-        String password = Regex.findPassword(command);
-        loginController.loginUser(username, password);
-    }
-
-
 }

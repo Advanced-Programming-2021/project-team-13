@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Regex {
-    public static final String ENTER_MENU = "enter menu (?<menuName>\\w+)";
+    public static final String ENTER_MENU = "^menu enter (?<menuName>\\w+)$";
     public static final String EXIT_MENU = "^menu exit$";
     public static final String SHOW_MENU = "^menu show-current$";
     public static final String CHANGE_NICKNAME = "^profile change --nickname (?<nickname>[\\w\\-]+)$";
@@ -56,7 +56,7 @@ public class Regex {
         }
         return null;
     }
-    
+
 
     public static String findPassword(String input) {
         Pattern pattern = Pattern.compile("--(password|p) (\\w+)");

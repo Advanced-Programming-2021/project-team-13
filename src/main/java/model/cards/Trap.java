@@ -2,10 +2,8 @@ package model.cards;
 
 import enums.CardType;
 import enums.Face;
-import enums.TrapEffect;
 
 public class Trap extends Card {
-//    private TrapEffect trapEffect;
 
     public Trap(String name, CardType cardType, String description, Face face,
                 int price) {

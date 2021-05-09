@@ -8,7 +8,7 @@ public class Board {
 
 
     private Cell[] spellOrTrap;
-    private Cell[] monster;
+    private Cell[] monsterCells;
     private Cell fieldSpell;
     private Deck deck;
     private Graveyard graveyard;
@@ -18,10 +18,10 @@ public class Board {
         this.deck = deck;
         this.graveyard = graveyard;
         spellOrTrap = new Cell[5];
-        monster = new Cell[5];
+        monsterCells = new Cell[5];
         for (int i = 0; i < 5; i++) {
             spellOrTrap[i] = new Cell(null);
-            monster[i] = new Cell(null);
+            monsterCells[i] = new Cell(null);
         }
         fieldSpell = new Cell(null);
     }
@@ -31,7 +31,7 @@ public class Board {
     }
 
     public void setMonster(Cell[] monster) {
-        this.monster = monster;
+        this.monsterCells = monster;
     }
 
     public void setFieldSpell(Cell fieldSpell) {
@@ -51,7 +51,7 @@ public class Board {
     }
 
     public Cell[] getMonsters() {
-        return monster;
+        return monsterCells;
     }
 
     public Cell getFieldSpell() {
@@ -67,7 +67,7 @@ public class Board {
     }
 
     public Card getMonsterByAddress(int cardAddress) {     // get The monster card ,, the numbers in array is based on DOC
-        return getCard(cardAddress, monster);
+        return getCard(cardAddress, monsterCells);
     }
 
     public Card getSpellOrTrapByAddress(int cardAddress) {     // not the sure on the array nums!!!!!
@@ -85,7 +85,7 @@ public class Board {
 
     public boolean isMonsterOnBoard(Card selectedCard) {
         for (int i = 0; i < 6; i++) {
-            if (monster[i].getCard() == selectedCard)     // We can do this because of pointer!!!!
+            if (monsterCells[i].getCard() == selectedCard)     // We can do this because of pointer!!!!
                 return true;
         }
         return false;
@@ -93,8 +93,8 @@ public class Board {
 
     public void removeMonsterFromBoard(Monster monster) {  // could we remove(this is monster and original has card)
         for (int i = 0; i < 5; i++) {
-            if (this.monster[i].getCard() == monster)// is this ok???????????????????//
-                this.monster[i] = null;
+            if (this.monsterCells[i].getCard() == monster)// is this ok???????????????????//
+                this.monsterCells[i] = null;
         }
     }
 
@@ -106,7 +106,7 @@ public class Board {
     }
 
     public boolean isThereEmptyPlaceMonsterZone() {
-        for (Cell cell : monster) {
+        for (Cell cell : monsterCells) {
             if (cell == null)
                 return true;
         }
@@ -115,10 +115,17 @@ public class Board {
 
     public int getNumberOfMonsterInBoard() {
         int counter = 0;
-        for (Cell cell : monster) {
+        for (Cell cell : monsterCells) {
             if (cell == null)
                 counter++;
         }
         return counter;
+    }
+
+    public void putMonsterInBoard(Monster monster) {
+        for (Cell monsterCell : monsterCells) {
+            if (monsterCell.getCard() == null)
+                monsterCell.setCard(monster);
+        }
     }
 }
