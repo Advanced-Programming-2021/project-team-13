@@ -38,33 +38,6 @@ public class Monster extends Card {
         setDefencePointInGame(defenseNum);
     }
 
-/*
-        private MonsterType monsterTypeInGame;
-        private MonsterAttribute monsterAttributeInGame;
-        private int levelInGame;
-        private String nameInGame;
-        private boolean isAttackable = true;
-        private boolean isActivateInThisTurn = false;
-
-        public Monster(String name, CardType cardType, Face face, int price, int cardNum, String description,
-                   MonsterType monsterType, SummonType summonType, MonsterAttribute monsterAttribute,
-                   int attackNum, int defenseNum, int level) {
-        super(name, cardType, description, face, price, cardNum);
-        this.monsterAttribute = monsterAttribute;
-        this.monsterType = monsterType;
-        this.summonType = summonType;
-        this.attackNum = attackNum;
-        this.attackPointInGame = attackNum;
-        this.defencePointInGame = defenseNum;
-        this.defenseNum = defenseNum;
-        this.level = level;
-        levelInGame = level;
-        monsterAttributeInGame = monsterAttribute;
-        monsterTypeInGame = monsterType;
-        this.nameInGame = name;
-}
-*/
-
     public ArrayList<Monster> getMonsters() {
         return monsters;
     }
@@ -244,6 +217,13 @@ public class Monster extends Card {
 
     public void setUsedAbilityThisTurn(boolean status) {
         usedAbilityThisTurn = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + cardName + "\nLevel: " + level
+                + "\nType: " + monsterType + "\nATK: " + attackNum
+                + "\nDEF: " + defenseNum + "Description: " + cardDescription;
     }
 }
 
