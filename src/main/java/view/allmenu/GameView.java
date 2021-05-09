@@ -32,7 +32,7 @@ public class GameView {
         else if (command.equals("next phase"))
             gameController.nextPhase();
         else if (command.equals("summon"))
-            gameController.summon();
+            gameController.checksBeforeSummon();
         else if (command.equals("set"))
             gameController.set();
         else if (command.matches(Regex.CHANGE_SET))
@@ -45,8 +45,6 @@ public class GameView {
             directAttack();
         else if (command.equals("show graveyard"))
             showGraveyard(command);
-        else if (command.equals("special summon"))
-            gameController.specialSummon();
         else if (command.equals("card show --selected"))
             gameController.showSelectedCard();
     }
@@ -390,10 +388,6 @@ public class GameView {
         System.out.println("flip summoned successfully");
     }
 
-    public void getOpponentMonsterForKill() {
-        int number = ViewMaster.scanner.nextInt();
-        run("select --monster --opponent " + number);
-    }
 
     public boolean doesRivalWantCyberse() {
         String answer = ViewMaster.scanner.nextLine();
@@ -436,33 +430,83 @@ public class GameView {
         System.out.println("you received " + amount + " damage");
     }
 
-    public boolean doYouWantTribute() {
-        String answer = "";
-        while (!answer.matches("^\\bNO\\b$|^\\bYES\\b$")) {
-            System.out.println("Do You Want Tribute 3 Monsters?(YES|NO)");
+    public boolean doYouWantTributeBarBaros() {
+        String answer = " ";
+        System.out.println("Do You Want Tribute 3 Monsters?(YES|NO)");
+        answer = ViewMaster.scanner.nextLine();
+        while (!answer.equalsIgnoreCase("yes") && !answer.equalsIgnoreCase("no")) {
+            System.out.println("please enter (YES|NO) : ");
             answer = ViewMaster.scanner.nextLine();
         }
-        return answer.equals("YES");
+        return answer.equalsIgnoreCase("YES");
     }
 
-    public void printCantSpecialSummon() {
-        System.out.println("you can’t special summon this card");
-    }
 
-    public ArrayList<Monster> getTributeSpecialSummon(int numberOfTributes) {
-        ArrayList<Monster> tributes = new ArrayList<>();
-        while (tributes.size() < numberOfTributes) {
-            try {
-                int number = ViewMaster.scanner.nextInt();
-                run("select --monster " + number);
-                if (!tributes.contains(gameController.getCurrentPlayer().getSelectedCard()))
-                    tributes.add((Monster) gameController.getCurrentPlayer().getSelectedCard());
-            } catch (Exception ignore) {
-                System.out.println("you should special summon right now");
+    public Monster askDoYouWantKillOneOfRivalMonster() {
+        System.out.println("Do You Want Kill Rival Monster?(YES|NO)");
+        String answer = ViewMaster.scanner.nextLine();
+        if (answer.equalsIgnoreCase("yes")) {
+            System.out.println("Enter Monster Number: ");
+            String number = " ";
+            while (!number.equalsIgnoreCase("cancel")) {
+                number = ViewMaster.scanner.nextLine();
+                if (number.matches("^\\d+$")) {
+                    int num = Integer.parseInt(number);
+                    if (num > 0 && num < 6) {
+                        if (gameController.getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
+                            return (Monster) gameController.getRivalPlayer().getBoard().getMonsterByAddress(num);
+                        else
+                            System.out.println("There is no monster in this address");
+                    } else
+                        System.out.println("Enter Valid Number");
+                } else
+                    System.out.println("Enter Monster Number, if you want cancel this Enter \"Cancel\"");
             }
         }
-        return tributes;
+        return null;
     }
 
+    public void getTributeForBarbaros() {
+        System.out.println("Enter Monster Numbers In One Line");
+        while (true) {
+            System.out.println("Enter Monster Numbers");
+            String numbers = ViewMaster.scanner.nextLine();
+            Matcher matcher = Regex.getInputMatcher(numbers, "(\\d)\\S+(\\d)\\S+(\\d)");
+            if (matcher.find()) {
+                int m1 = Integer.parseInt(matcher.group(1));
+                int m2 = Integer.parseInt(matcher.group(2));
+                int m3 = Integer.parseInt(matcher.group(3));
+                if (gameController.checkBarbarosInput(m1, m2, m3))
+                    return;
+                else
+                    System.out.println("There Is No Monster In One Of This Address");
+            } else System.out.println("Enter Valid Number");
+        }
+    }
 
+    public void askWantSummonedAnotherMonsterTerratiger() {
+        System.out.println("Do You Want Summoned Monster With level less then 5?(YES|NO)");
+        String answer = " ";
+        while (!answer.equalsIgnoreCase("yes") && !answer.equalsIgnoreCase("no")) {
+            answer = ViewMaster.scanner.nextLine();
+            if (answer.equalsIgnoreCase("no"))
+                return;
+            else if (answer.equalsIgnoreCase("yes")) {
+                System.out.println("Enter Monster Number");
+                while (true) {
+                    String number = ViewMaster.scanner.nextLine();
+                    if (number.matches("\\d")) {
+                        if (gameController.summonCardWithTerratiger(Integer.parseInt(number)))
+                            return;
+                        else
+                            System.out.println("You Can't Summon This Card, If You Want Cancel Enter \"Cancel\"");
+                    } else if (number.equalsIgnoreCase("cancel")) return;
+                    else
+                        System.out.println("Enter Valid Number, If You Want Cancel Enter \"Cancel\"");
+                }
+            } else
+                System.out.println("Enter YES or NO");
+        }
+
+    }
 }
