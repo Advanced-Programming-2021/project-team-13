@@ -1,7 +1,6 @@
 package model.cards;
 
 import enums.*;
-import model.Cell;
 
 import java.util.ArrayList;
 
@@ -26,12 +25,8 @@ public class Monster extends Card {
     private boolean isFieldSpellActive = false;
     private boolean usedAbilityThisTurn = false;
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
-
-    public ArrayList<Monster> getCommandKnightsActive() {
-        return commandKnightsActive;
-    }
-
     private ArrayList<Monster> commandKnightsActive;
+
 
     public void setCommandKnightsActive(Monster activeCommandKnight) {
         if (!commandKnightsActive.contains(activeCommandKnight))
@@ -103,6 +98,10 @@ public class Monster extends Card {
 
     public boolean isAttackable() {
         return attackable;
+    }
+
+    public ArrayList<Monster> getCommandKnightsActive() {
+        return commandKnightsActive;
     }
 
     public void setAttackable(boolean attackable) {
