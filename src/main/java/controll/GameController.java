@@ -112,8 +112,13 @@ public class GameController {
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
             rivalMonster.setAttacker(ourMonster);
+            activateSpecial(ourMonster, rivalMonster);
             if (isSpecialAttack(ourMonster, rivalMonster))
                 return;
+            if (!rivalMonster.isAttackable()) {
+                gameView.printCantAttackMonster();
+                return;
+            }
             String rivalMonsterName = rivalMonster.getCardName();
             ourMonster.setAttackedInThisTurn(true);
             if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
@@ -159,6 +164,149 @@ public class GameController {
             }
 
         }
+    }
+
+    private void activateSpecial(Monster ourMonster, Monster rivalMonster) {
+        commandKnight(ourMonster, rivalMonster);
+        fieldSpell(ourMonster, rivalMonster);
+    }
+
+    private void fieldSpell(Monster ourMonster, Monster rivalMonster) {////// problems: all monsters on board!!!! --- Can be shorter?maybe !!!
+        yami(ourMonster);
+        yami(rivalMonster);
+        forest(ourMonster);
+        forest(rivalMonster);
+        closedForest(ourMonster);
+        closedForest(ourMonster);
+        UMIIRUKA(ourMonster);
+        UMIIRUKA(rivalMonster);
+    }
+
+    private void UMIIRUKA(Monster monster) {
+        if (monster.getFieldSpell().getCardName().equals("UMIIRUKA")) {
+            UMIIRUKAIncrease(monster, -500, 400);
+            monster.setFieldSpell(null);
+        }
+        if (!monster.getCardOwner().getBoard().getFieldSpell()
+                .getCard().getCardName().equals("UMIIRUKA"))
+            return;
+        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
+        UMIIRUKAIncrease(monster, 500, -400);
+    }
+
+    private void UMIIRUKAIncrease(Monster monster, int atkAmount, int defAmount) {
+        fieldIncreaseAtk(monster.getCardOwner(), "Aqua", atkAmount);
+        fieldIncreaseDef(monster.getCardOwner(), "Aqua", defAmount);
+    }
+
+    private void closedForest(Monster monster) {
+        if (monster.getFieldSpell().getCardName().equals("Closed Forest")) {
+            closedForestIncrease(monster,
+                    monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
+            monster.setFieldSpell(null);
+        }
+        if (!monster.getCardOwner().getBoard().getFieldSpell()
+                .getCard().getCardName().equals("Closed Forest"))
+            return;
+        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
+        closedForestIncrease(monster,
+                monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
+    }
+
+    private void closedForestIncrease(Monster monster, int amount) {
+        fieldIncreaseAtk(monster.getCardOwner(), "Beast-Type", amount);
+    }
+
+    private void forest(Monster monster) {
+        if (monster.getFieldSpell().getCardName().equals("Forest")) {
+            forestIncrease(monster, -200);
+            monster.setFieldSpell(null);
+        }
+        if (!monster.getCardOwner().getBoard().getFieldSpell()
+                .getCard().getCardName().equals("Forest"))
+            return;
+        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
+        forestIncrease(monster, 200);
+    }
+
+    private void forestIncrease(Monster monster, int amount) {
+        fieldIncreaseAtk(monster.getCardOwner(), "Insect", amount);
+        fieldIncreaseAtk(monster.getCardOwner(), "Beast", amount);
+        fieldIncreaseAtk(monster.getCardOwner(), "Beast-Warrior", amount);
+        fieldIncreaseDef(monster.getCardOwner(), "Insect", amount);
+        fieldIncreaseDef(monster.getCardOwner(), "Beast", amount);
+        fieldIncreaseDef(monster.getCardOwner(), "Beast-Warrior", amount);
+    }
+
+    private void yami(Monster monster) {
+        if (monster.getFieldSpell().getCardName().equals("Yami")) {
+            yamiIncrease(monster, -200);
+            monster.setFieldSpell(null);
+        }
+        if (!monster.getCardOwner().getBoard().getFieldSpell()
+                .getCard().getCardName().equals("Yami"))
+            return;
+        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
+        yamiIncrease(monster, 200);
+    }
+
+    private void yamiIncrease(Monster monster, int amount) {
+        fieldIncreaseAtk(monster.getCardOwner(), "Fiend", amount);
+        fieldIncreaseAtk(monster.getCardOwner(), "Spellcaster", amount);
+        fieldIncreaseAtk(monster.getCardOwner(), "Fairy", -amount);
+        fieldIncreaseDef(monster.getCardOwner(), "Fiend", amount);
+        fieldIncreaseDef(monster.getCardOwner(), "Spellcaster", amount);
+        fieldIncreaseDef(monster.getCardOwner(), "Fairy", -amount);
+    }
+
+
+    public void fieldIncreaseAtk(Player player, String monsterType, int amount) {
+        for (Cell monster : player.getBoard().getMonsters()) {
+            Monster boardMonster = (Monster) monster.getCard();
+            if (boardMonster.getMonsterType().equals(monsterType))
+                boardMonster.increaseAttackPoint(amount);
+        }
+    }
+
+    public void fieldIncreaseDef(Player player, String monsterType, int amount) {
+        for (Cell monster : player.getBoard().getMonsters()) {
+            Monster boardMonster = (Monster) monster.getCard();
+            if (boardMonster.getMonsterType().equals(monsterType))
+                boardMonster.increaseDefensePoint(amount);
+        }
+    }
+
+    private void commandKnight(Monster ourMonster, Monster rivalMonster) {
+        checkCommandKnight(ourMonster);
+        checkCommandKnight(rivalMonster);
+        boolean attackable = true;
+        for (Cell monster : rivalMonster.getCardOwner().getBoard().getMonsters()) {
+            if (!monster.getCard().getCardName().equals("Command knight")) {
+                attackable = false;
+                break;
+            }
+        }
+        if (attackable) return;
+        for (Cell monster : rivalMonster.getCardOwner().getBoard().getMonsters()) {
+            if (monster.getCard().getCardName().equals("Command knight")) {
+                Monster commandKnight = (Monster) monster.getCard();
+                if (commandKnight.getFace() == Face.UP)
+                    commandKnight.setAttackable(false);
+            }
+        }
+
+    }
+
+    private void checkCommandKnight(Monster activationMonster) {
+        activationMonster.decreaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
+        activationMonster.getCommandKnightsActive().clear();
+        for (Cell monster : activationMonster.getCardOwner().getBoard().getMonsters()) {
+            if (monster.getCard().getCardName().equals("Command knight") &&
+                    monster.getCard().getFace() == Face.UP && monster.getCard() != activationMonster) {
+                activationMonster.setCommandKnightsActive((Monster) monster.getCard());
+            }
+        }
+        activationMonster.increaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
     }
 
     private boolean isSpecialAttack(Monster ourMonster, Monster rivalMonster) {
@@ -276,8 +424,10 @@ public class GameController {
         } else {
             int attackDiff = ourMonster.getAttackPointInGame() - rivalMonster.getDefencePointInGame();
             if (attackDiff > 0) {
-                if (rivalMonster.getFace() == Face.DOWN)
+                if (rivalMonster.getFace() == Face.DOWN) {
                     gameView.printOpponentCardsName("Marshmallon");
+                    rivalMonster.getCardOwner().decreaseHealth(attackDiff);
+                }
             } else if (attackDiff == 0) {
                 if (rivalMonster.getFace() == Face.DOWN)
                     gameView.printOpponentCardsName("Marshmallon");
@@ -287,8 +437,9 @@ public class GameController {
                     gameView.printOpponentCardsName("Marshmallon");
                 ourMonster.getCardOwner().decreaseHealth(-attackDiff);
             }
+            if (rivalMonster.getFace() == Face.DOWN)
+                ourMonster.getCardOwner().decreaseHealth(1000);
             rivalMonster.setFace(Face.UP);
-            ourMonster.getCardOwner().decreaseHealth(1000);
         }
     }
 
