@@ -177,6 +177,7 @@ public class GameController {
         SwordOfDesRid();
         BlackPendantRid();
         UnitedRid();
+        magnumShieldRid();
     }
 
 
