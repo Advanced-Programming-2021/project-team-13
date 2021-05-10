@@ -13,7 +13,7 @@ public class Player {
     private final User user;
     private int lifePoint;
     private int maxLifePoint;
-    private final int wonRounds;
+    private int wonRounds;
     private Board board;
     private Card selectedCard;
     private ArrayList<Card> cardsInHand;
@@ -34,8 +34,15 @@ public class Player {
     }
 
 
-    public void play() {
-
+    public Player renewPlayer() {
+        try {
+            this.board = new Board(this.user.getActiveDeck().clone(), new Graveyard(this));
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        this.cardsInHand = new ArrayList<>();
+        this.lifePoint = 8000;
+        return this;
     }
 
     public boolean isCanActiveTrap() {
@@ -68,6 +75,14 @@ public class Player {
 
     public int getMaxLifePoint() {
         return maxLifePoint;
+    }
+
+    public void setWonRounds(int wonRounds) {
+        this.wonRounds = wonRounds;
+    }
+
+    public int getWonRounds() {
+        return wonRounds;
     }
 
     //    public void setCurrentCard(Card currentCard) {

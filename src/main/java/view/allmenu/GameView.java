@@ -10,7 +10,6 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -360,6 +359,14 @@ public class GameView {
 
     public void printCurrentPhase() {
         System.out.println(gameController.getCurrentPhase().getPhaseName());
+    }
+
+    public void printUserWonWholeGame(String username , int winnerWonRounds , int loserWonRounds){
+        System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
+    }
+
+    public void printUserWonSingleGame(String username , int winnerWonRounds , int loserWonRounds){
+        System.out.println(username + " won the game and the score is:" + winnerWonRounds + "-" + loserWonRounds);
     }
 
     public void printWhoseTurn() {

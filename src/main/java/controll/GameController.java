@@ -9,15 +9,18 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.players.Player;
+import model.players.User;
+import view.Menu;
+import view.ViewMaster;
 import view.allmenu.GameView;
 
 import java.util.ArrayList;
 
 public class GameController {
-    private static int playedRoundsInTotal = 0;
     private final GameView gameView;
     private final Player firstPlayer;
     private final Player secondPlayer;
+    private final Player startingPlayer;
     private Player currentPlayer;
     private Phase currentPhase;
     private final int startingRounds;
@@ -26,11 +29,12 @@ public class GameController {
     private int unitedCalcRival;
 
 
-    public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player currentPlayer, int startingRounds) {
+    public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
         this.gameView = gameView;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
-        this.currentPlayer = currentPlayer;
+        this.startingPlayer = startingPlayer;
+        this.currentPlayer = startingPlayer;
         firstPlayer.getBoard().getDeck().shuffleMainDeck();
         secondPlayer.getBoard().getDeck().shuffleMainDeck();
         for (int i = 0; i < 6; i++) {
@@ -40,6 +44,44 @@ public class GameController {
         this.startingRounds = startingRounds;
         turnsPlayed = 0;
         currentPhase = Phase.DRAW_PHASE;
+    }
+
+    public Player getCurrentPlayer() {
+        if (currentPlayer == firstPlayer)
+            return firstPlayer;
+        return secondPlayer;
+    }
+    public Player getRivalPlayer() {
+        if (currentPlayer == firstPlayer)
+            return secondPlayer;
+        return firstPlayer;
+    }
+
+    public Player getStartingPlayer() {
+        return startingPlayer;
+    }
+
+    public Player getFirstPlayer() {
+        return firstPlayer;
+    }
+
+    public Player getSecondPlayer() {
+        return secondPlayer;
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public int getStartingRounds() {
+        return startingRounds;
+    }
+
+    public void changeCurrentPlayer() {
+        if (currentPlayer == firstPlayer)
+            currentPlayer = secondPlayer;
+        else
+            currentPlayer = firstPlayer;
     }
 
     public void selectPlayerMonster(int cardAddress) {// no regex error!!! // are these handled or not!!??
@@ -101,6 +143,60 @@ public class GameController {
         }
         currentPlayer.setSelectedCard(null);
         gameView.printCardDeselected();
+    }
+
+    public void showSelectedCard() {
+        if (currentPlayer.getSelectedCard() == null)
+            gameView.printNoCardSelected();
+        else {
+            Card card = currentPlayer.getSelectedCard();
+            if (card.getPlayer() == getRivalPlayer() && card.getFace() == Face.DOWN)
+                gameView.printCardInvisible();
+            else gameView.showCard(card);
+        }
+    }
+
+
+
+    public void findWinner() {
+        if (checkEnded() != 4) {
+            GameWinMenu gameWinMenu = new GameWinMenu(this);
+            if (checkEnded() == 3){
+                gameWinMenu.announceWinner(null);
+            } else if (checkEnded() == 2){
+                gameWinMenu.announceWinner(getRivalPlayer());
+            } else {
+                gameWinMenu.announceWinner(currentPlayer);
+            }
+        }
+    }
+
+    private int checkEnded() {
+        if (currentPlayer.getLifePoint() == 0 && getRivalPlayer().getLifePoint() == 0)
+            return 3;//draw
+        else if (currentPlayer.getLifePoint() != 0)
+            return 2;//rival won
+        else if (getRivalPlayer().getLifePoint() != 0)
+            return 1;//currentPlayer has won
+        else {
+            if (currentPhase == Phase.DRAW_PHASE && currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() == 0)
+                return 2;//rival won
+            else
+                return 4;//no winner
+        }
+    }
+
+    public void surrender(){
+        if (startingRounds == 1)
+            getRivalPlayer().setWonRounds(1);
+        else
+            getRivalPlayer().setWonRounds(2);
+        if (currentPlayer.getLifePoint() > currentPlayer.getMaxLifePoint())
+            currentPlayer.setMaxLifePoint(currentPlayer.getMaxLifePoint());
+        if (getRivalPlayer().getLifePoint() > getRivalPlayer().getMaxLifePoint())
+            getRivalPlayer().setMaxLifePoint(getRivalPlayer().getLifePoint());
+        GameWinMenu gameWinMenu = new GameWinMenu(this);
+        gameWinMenu.announceWinner(getRivalPlayer());
     }
 
     public void attack(int monsterNumber) {
@@ -935,75 +1031,8 @@ public class GameController {
         getRivalPlayer().getBoard().getGraveyard().addCard(opponentMonster);
     }
 
-    public void showSelectedCard() {
-        if (currentPlayer.getSelectedCard() == null)
-            gameView.printNoCardSelected();
-        else {
-            Card card = currentPlayer.getSelectedCard();
-            if (card.getPlayer() == getRivalPlayer() && card.getFace() == Face.DOWN)
-                gameView.printCardInvisible();
-            else gameView.showCard(card);
-        }
-    }
-
-    public void changeCurrentPlayer() {
-        if (currentPlayer == firstPlayer)
-            currentPlayer = secondPlayer;
-        else
-            currentPlayer = firstPlayer;
-    }
-
-    public Player getCurrentPlayer() {
-        if (currentPlayer == firstPlayer)
-            return firstPlayer;
-        return secondPlayer;
-    }
-
-    public Player getRivalPlayer() {
-        if (currentPlayer == firstPlayer)
-            return secondPlayer;
-        return firstPlayer;
-    }
-
     public Phase getCurrentPhase() {
         return currentPhase;
-    }
-
-    public void findWinner() {
-        if (checkEnded() != 4) {
-            // to complete
-        }
-    }
-
-    private int checkEnded() {
-        if (currentPlayer.getLifePoint() == 0 && getRivalPlayer().getLifePoint() == 0)
-            return 3;//draw
-        else if (currentPlayer.getLifePoint() != 0)
-            return 2;//rival won
-        else if (getRivalPlayer().getLifePoint() != 0)
-            return 1;//currentPlayer has won
-        else {
-            if (currentPhase == Phase.DRAW_PHASE && currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() == 0)
-                return 2;
-            else
-                return 4;//no winner
-        }
-    }
-
-    public void surrender(){
-        if (currentPlayer.getLifePoint() > currentPlayer.getMaxLifePoint())
-            currentPlayer.setMaxLifePoint(currentPlayer.getMaxLifePoint());
-        if (getRivalPlayer().getLifePoint() > getRivalPlayer().getMaxLifePoint())
-            getRivalPlayer().setMaxLifePoint(getRivalPlayer().getLifePoint());
-        announceWinner(getRivalPlayer());
-    }
-
-    public void announceWinner(Player winner){
-        if (winner == null){//this is when game is ended draw
-
-        } else {
-
-        }
     }
 
     public static boolean checkForDeathAction(Card card) {
