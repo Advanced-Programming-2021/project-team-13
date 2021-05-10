@@ -26,6 +26,7 @@ public class Monster extends Card {
     private boolean usedAbilityThisTurn = false;
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
     private ArrayList<Monster> commandKnightsActive;
+    private ArrayList<Card> equipSpellSword;
 
 
     public void setCommandKnightsActive(Monster activeCommandKnight) {
@@ -51,6 +52,7 @@ public class Monster extends Card {
         setAttackPointInGame(attackNum);
         setDefencePointInGame(defenseNum);
         commandKnightsActive = new ArrayList<>();
+        equipSpellSword = new ArrayList<>();
     }
 
     public ArrayList<Monster> getMonsters() {
@@ -91,6 +93,15 @@ public class Monster extends Card {
 
     public Card getFieldSpell() {
         return fieldSpell;
+    }
+
+    public ArrayList<Card> getEquipedSpellsSword() {
+        return equipSpellSword;
+    }
+
+    public void addToEquipSpellSword(Card equipSpell) {
+        if (!this.equipSpellSword.contains(equipSpell))
+            this.equipSpellSword.add(equipSpell);
     }
 
     public void setFieldSpell(Card fieldSpell) {
