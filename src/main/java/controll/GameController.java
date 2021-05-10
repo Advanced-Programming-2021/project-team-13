@@ -7,6 +7,7 @@ import enums.Zone;
 import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
+import model.cards.Spell;
 import model.players.Player;
 import view.allmenu.GameView;
 
@@ -21,6 +22,8 @@ public class GameController {
     private Phase currentPhase;
     private final int startingRounds;
     private int turnsPlayed;
+    private int unitedCalcCurrent;
+    private int unitedCalcRival;
 
 
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player currentPlayer, int startingRounds) {
@@ -156,14 +159,132 @@ public class GameController {
                 }
                 rivalMonster.setFace(Face.UP);
             }
-
+            equipSpellRid();
         }
     }
+
+    private void equipSpellRid() {
+        SwordOfDesRid();
+        BlackPendantRid();
+        UnitedRid();
+        magnumShieldRid();
+    }
+
 
     private void activateSpecial(Monster ourMonster, Monster rivalMonster) {
         commandKnight(ourMonster, rivalMonster);
         fieldSpell(ourMonster, rivalMonster);
+        equipSpell();
     }
+
+    private void equipSpell() {
+        SwordOfDes();
+        BlackPendant();
+        United();
+        MagnumShield();
+    }
+
+    private void MagnumShield() {
+        increaseAndDecrease(currentPlayer, "Magnum Shield", 1, 1);
+        increaseAndDecrease(getRivalPlayer(), "Magnum Shield", 1, 1);
+    }
+
+    private void United() {///////////////////////////////////////fishyyyyyyyyyyyyyyy///////////////////////
+        unitedCalcCurrent = unitedCalculate(currentPlayer);
+        unitedCalcRival = unitedCalculate(getRivalPlayer());
+        increaseAndDecrease(currentPlayer, "United We Stand", unitedCalcCurrent, unitedCalcCurrent);
+        increaseAndDecrease(getRivalPlayer(), "United We Stand", unitedCalcRival, unitedCalcRival);
+    }
+
+
+    private void BlackPendant() {
+        increaseAndDecrease(currentPlayer, "Black Pendant", 500, 0);
+        increaseAndDecrease(getRivalPlayer(), "Black Pendant", 500, 0);
+    }
+
+    private void SwordOfDes() {
+        increaseAndDecrease(currentPlayer, "Sword of Dark Destruction", 400, -200);
+        increaseAndDecrease(getRivalPlayer(), "Sword of Dark Destruction", 400, -200);
+    }
+
+    private void increaseAndDecrease(Player player, String spellName, int atkAmount, int defAmount) {
+        for (Cell cell : player.getBoard().getSpellOrTrap()) {
+            if (cell.getCard().getCardName().equals(spellName)) {
+                Spell spell = (Spell) cell.getCard();
+                if (spellName.equals("Sword of Dark Destruction")) {
+                    if (spell.getEquippedMonster().getMonsterType().equals("Fiend") ||
+                            spell.getEquippedMonster().getMonsterType().equals("Spellcaster")) {
+                        spell.getEquippedMonster().increaseAttackPoint(atkAmount);
+                        spell.getEquippedMonster().increaseAttackPoint(defAmount);
+                    }
+                } else if (spellName.equals("Magnum Shield")) {
+                    if (spell.getEquippedMonster().getMonsterType().equals("Warrior")) {
+                        if (spell.getEquippedMonster().getAttackOrDefense() == AttackOrDefense.ATTACK) {
+                            spell.getEquippedMonster().increaseDefensePoint
+                                    (spell.getEquippedMonster().getDefencePointInGame() * atkAmount);
+                        } else {
+                            spell.getEquippedMonster().increaseDefensePoint
+                                    (spell.getEquippedMonster().getAttackPointInGame() * defAmount);
+                        }
+                    }
+                } else {
+                    spell.getEquippedMonster().increaseAttackPoint(atkAmount);
+                    spell.getEquippedMonster().increaseAttackPoint(defAmount);
+                }
+            }
+        }
+    }
+
+    private int unitedCalculate(Player player) {
+        int counter = 0;
+        for (Cell monster : player.getBoard().getMonsters()) {
+            if (monster.getCard().getFace() == Face.UP)
+                counter++;
+        }
+        return counter * 800;
+    }
+
+    private void SwordOfDesRid() {
+        increaseAndDecrease(currentPlayer, "Sword of Dark Destruction", -400, 200);
+        increaseAndDecrease(getRivalPlayer(), "Sword of Dark Destruction", -400, 200);
+    }
+
+    private void BlackPendantRid() {
+        increaseAndDecrease(currentPlayer, "Black Pendant", -500, 0);
+        increaseAndDecrease(getRivalPlayer(), "Black Pendant", -500, 0);
+    }
+
+    private void UnitedRid() {///////////////////////////////////////fishyyyyyyyyyyyyyyy///////////////////////
+        increaseAndDecrease(currentPlayer, "United We Stand", -unitedCalcCurrent, -unitedCalcCurrent);
+        increaseAndDecrease(getRivalPlayer(), "United We Stand", -unitedCalcRival, -unitedCalcRival);
+    }
+
+    private void magnumShieldRid() {
+        increaseAndDecrease(currentPlayer, "Magnum Shield", -1, -1);
+        increaseAndDecrease(getRivalPlayer(), "Magnum Shield", -1, -1);
+    }
+//
+//    private boolean findEquippedSpell(String spell, Monster monster) {
+//        for (Card equippedSpell : monster.getEquipedSpellsSword()) {
+//            if (equippedSpell.getCardName().equals(spell))
+//                return true;
+//        }
+//        return false;
+//    }
+
+//    private boolean boardHasSpell(String spellName, Monster ourMonster, Monster rivalMonster) {
+//        for (Cell cell : ourMonster.getCardOwner().getBoard().getSpellOrTrap()) {
+//            if (cell.getCard().getCardName().equals(spellName) &&
+//                    ourMonster.getEquipedSpellsSword().contains(cell.getCard()))
+//                return true;
+//        }
+//        for (Cell cell : rivalMonster.getCardOwner().getBoard().getSpellOrTrap()) {
+//            if (cell.getCard().getCardName().equals(spellName) &&
+//                    ourMonster.getEquipedSpellsSword().contains(cell.getCard()))
+//                return true;
+//        }
+//        return false;
+//    }
 
     private void fieldSpell(Monster ourMonster, Monster rivalMonster) {////// problems: all monsters on board!!!! --- Can be shorter?maybe !!!
         yami(ourMonster);
