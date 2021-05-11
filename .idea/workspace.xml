@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="fixed marshmallon">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="login is debuged">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controll/GameWinMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,84 +72,102 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="enums" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.testDuelView.testRun">
-    <configuration name="CardType" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="enums.CardType" />
-      <module name="YuGiOh" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="enums.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="YuGiOh" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Regex" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.Regex" />
-      <module name="YuGiOh" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.allmenu.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.LoginAndShopTest.checkMenuEntrance">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="testDuelView" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginAndShopTest.checkLoginForNotCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.allmenu.*" />
+          <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="view.allmenu" />
-      <option name="MAIN_CLASS_NAME" value="view.allmenu.testDuelView" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
+      <option name="METHOD_NAME" value="checkLoginForNotCreated" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="testDuelView.testRun" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LoginAndShopTest.checkLoginOk" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.allmenu.*" />
+          <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="view.allmenu" />
-      <option name="MAIN_CLASS_NAME" value="view.allmenu.testDuelView" />
-      <option name="METHOD_NAME" value="testRun" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
+      <option name="METHOD_NAME" value="checkLoginOk" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginAndShopTest.checkMenuEntrance" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
+      <option name="METHOD_NAME" value="checkMenuEntrance" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginAndShopTest.checkRepeatedRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
+      <option name="METHOD_NAME" value="checkRepeatedRegister" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginAndShopTest.checkShop" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.LoginAndShopTest" />
+      <option name="METHOD_NAME" value="checkShop" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -156,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.testDuelView.testRun" />
-        <item itemvalue="JUnit.testDuelView" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.CardType" />
-        <item itemvalue="Application.Regex" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkMenuEntrance" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkShop" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkLoginOk" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkLoginForNotCreated" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkRepeatedRegister" />
       </list>
     </recent_temporary>
   </component>
@@ -188,9 +207,8 @@
       <workItem from="1620298676234" duration="28135000" />
       <workItem from="1620384896704" duration="3000" />
       <workItem from="1620397682243" duration="6649000" />
-      <workItem from="1620439891874" duration="7011000" />
-      <workItem from="1620496294332" duration="2238000" />
-      <workItem from="1620534724327" duration="11426000" />
+      <workItem from="1620439891874" duration="6930000" />
+      <workItem from="1620621789862" duration="5708000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -283,28 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620444875951</updated>
     </task>
-    <task id="LOCAL-00014" summary="some changes , marshmallon needs hell of a change">
-      <created>1620446902681</created>
+    <task id="LOCAL-00014" summary="login is debuged">
+      <created>1620571975842</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1620446902681</updated>
+      <updated>1620571975842</updated>
     </task>
-    <task id="LOCAL-00015" summary="d fuk?">
-      <created>1620496312505</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1620496312505</updated>
-    </task>
-    <task id="LOCAL-00016" summary="fixed marshmallon">
-      <created>1620498352435</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1620498352435</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,9 +373,15 @@
     <MESSAGE value="fookin marshmallon" />
     <MESSAGE value="literally nothing" />
     <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
-    <MESSAGE value="some changes , marshmallon needs hell of a change" />
-    <MESSAGE value="d fuk?" />
-    <MESSAGE value="fixed marshmallon" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed marshmallon" />
+    <MESSAGE value="login is debuged" />
+    <option name="LAST_COMMIT_MESSAGE" value="login is debuged" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="ViewMaster." language="JAVA" custom="view.ViewMaster" />
+        <watch expression="ViewMaster.getCurrentMenu()" language="JAVA" custom="view.ViewMaster" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

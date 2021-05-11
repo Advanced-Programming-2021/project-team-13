@@ -6,6 +6,7 @@ import enums.SpellEffect;
 
 public class Spell extends Card {
     //private final SpellEffect spellEffect;  // beware that its final!!!!!!
+    private Monster equippedMonster;
     String type;
 
     public Spell(String name, CardType cardType, String description, Face face, int price, String type) {
@@ -19,6 +20,14 @@ public class Spell extends Card {
                 + "\nType: " + type + "Description: " + cardDescription;
     }
 
+    public Monster getEquippedMonster() {
+        return equippedMonster;
+    }
+
+    public void setEquippedMonster(Monster equippedMonster) {
+        this.equippedMonster = equippedMonster;
+    }
+/*
     /*
     public Spell(String name, CardType cardType, SpellEffect spellEffect,
           String description, Face face, int price, int cardNum) {

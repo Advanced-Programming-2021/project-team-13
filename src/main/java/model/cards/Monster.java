@@ -1,7 +1,6 @@
 package model.cards;
 
 import enums.*;
-import model.Cell;
 
 import java.util.ArrayList;
 
@@ -26,12 +25,9 @@ public class Monster extends Card {
     private boolean isFieldSpellActive = false;
     private boolean usedAbilityThisTurn = false;
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
-
-    public ArrayList<Monster> getCommandKnightsActive() {
-        return commandKnightsActive;
-    }
-
     private ArrayList<Monster> commandKnightsActive;
+    private ArrayList<Card> equipSpellSword;
+
 
     public void setCommandKnightsActive(Monster activeCommandKnight) {
         if (!commandKnightsActive.contains(activeCommandKnight))
@@ -56,6 +52,7 @@ public class Monster extends Card {
         setAttackPointInGame(attackNum);
         setDefencePointInGame(defenseNum);
         commandKnightsActive = new ArrayList<>();
+        equipSpellSword = new ArrayList<>();
     }
 
     public ArrayList<Monster> getMonsters() {
@@ -78,6 +75,10 @@ public class Monster extends Card {
         return attackable;
     }
 
+    public ArrayList<Monster> getCommandKnightsActive() {
+        return commandKnightsActive;
+    }
+
     public void setAttackable(boolean attackable) {
         this.attackable = attackable;
     }
@@ -92,6 +93,15 @@ public class Monster extends Card {
 
     public Card getFieldSpell() {
         return fieldSpell;
+    }
+
+    public ArrayList<Card> getEquipedSpellsSword() {
+        return equipSpellSword;
+    }
+
+    public void addToEquipSpellSword(Card equipSpell) {
+        if (!this.equipSpellSword.contains(equipSpell))
+            this.equipSpellSword.add(equipSpell);
     }
 
     public void setFieldSpell(Card fieldSpell) {

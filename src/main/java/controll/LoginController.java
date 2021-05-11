@@ -40,11 +40,25 @@ public class LoginController {
         } else loginView.printInvalidCommand();
     }
 
-//    public User newValidUsername(String username) {
-//
-//    }
-//
-//    public boolean checkUserPassword(User user, String password) {
-//
-//    }
+    public void loginFirst(String menuName){
+        if (menuName.equalsIgnoreCase("Login")){
+            loginView.printLoginFirst();
+        } else if (menuName.equalsIgnoreCase("Main")){
+            loginView.printLoginFirst();
+        } else if (menuName.equalsIgnoreCase("Deck")){
+            loginView.printLoginFirst();
+        } else if (menuName.equalsIgnoreCase("Shop")){
+            loginView.printLoginFirst();
+        } else if (menuName.equalsIgnoreCase("Duel")){
+            loginView.printLoginFirst();
+        } else if (menuName.equalsIgnoreCase("Scoreboard")){
+            loginView.printLoginFirst();
+        } else if (menuName.equalsIgnoreCase("Profile")){
+            loginView.printLoginFirst();
+        } else if (menuName.equalsIgnoreCase("Import/Export")){
+            loginView.printLoginFirst();
+        } else {
+            loginView.printInvalidCommand();
+        }
+    }
 }

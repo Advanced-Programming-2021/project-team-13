@@ -22,10 +22,4 @@ public class Trap extends Card {
     public boolean isTrapDestroyer() {///////////////////////////////////////////this needs to be completed
         return false;
     }*/
-
-    @Override
-    public String toString() {
-        return "Name: " + cardName + "Trap"
-                + "\nType: " + type + "Description: " + cardDescription;
-    }
 }
