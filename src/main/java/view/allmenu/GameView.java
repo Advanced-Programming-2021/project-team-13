@@ -10,7 +10,6 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -47,6 +46,8 @@ public class GameView {
             showGraveyard(command);
         else if (command.equals("card show --selected"))
             gameController.showSelectedCard();
+        else if (command.matches("surrender"))
+            gameController.surrender();
     }
 
 
@@ -308,7 +309,7 @@ public class GameView {
     }
 
     public void printSummonSuccessfully() {
-
+        System.out.println("summoned successfully");
     }
 
     public void printNoMonsterOnThisAddress() {
@@ -358,6 +359,14 @@ public class GameView {
 
     public void printCurrentPhase() {
         System.out.println(gameController.getCurrentPhase().getPhaseName());
+    }
+
+    public void printUserWonWholeGame(String username , int winnerWonRounds , int loserWonRounds){
+        System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
+    }
+
+    public void printUserWonSingleGame(String username , int winnerWonRounds , int loserWonRounds){
+        System.out.println(username + " won the game and the score is:" + winnerWonRounds + "-" + loserWonRounds);
     }
 
     public void printWhoseTurn() {
@@ -430,7 +439,7 @@ public class GameView {
         System.out.println("you received " + amount + " damage");
     }
 
-    public boolean doYouWantTributeBarBaros() {
+    public boolean doYouWantTributeBarBaros() {// :| WTF
         String answer = " ";
         System.out.println("Do You Want Tribute 3 Monsters?(YES|NO)");
         answer = ViewMaster.scanner.nextLine();
