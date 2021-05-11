@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="login is debuged">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controll/GameWinMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,19 +79,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.LoginAndShopTest.checkMenuEntrance">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LoginAndShopTest.checkLoginForNotCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">

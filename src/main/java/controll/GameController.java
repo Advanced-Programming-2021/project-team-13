@@ -1,17 +1,11 @@
 package controll;
 
-import enums.AttackOrDefense;
-import enums.Face;
-import enums.Phase;
-import enums.Zone;
+import enums.*;
 import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.players.Player;
-import model.players.User;
-import view.Menu;
-import view.ViewMaster;
 import view.allmenu.GameView;
 
 import java.util.ArrayList;
@@ -28,7 +22,7 @@ public class GameController {
     private int unitedCalcCurrent;
     private int unitedCalcRival;
 
-
+    ///////////////////////////////////////////////////we need activation of spells and traps to work;;;;;;DAMN!//////////////////////////++messenger++some field spells++
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
         this.gameView = gameView;
         this.firstPlayer = firstPlayer;
@@ -205,7 +199,7 @@ public class GameController {
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
             rivalMonster.setAttacker(ourMonster);
-            activateSpecial(ourMonster, rivalMonster);
+            activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
             if (isSpecialAttack(ourMonster, rivalMonster))
                 return;
             if (!rivalMonster.isAttackable()) {
@@ -259,6 +253,38 @@ public class GameController {
         }
     }
 
+    public void activeEffect() {
+        if (currentPlayer.getSelectedCard() == null) {
+            gameView.printNoCardSelected();
+            return;
+        }
+        if (!(currentPlayer.getSelectedCard() instanceof Spell)) {
+            gameView.printActiveOnlyForSpells();
+            return;
+        }
+        if ((currentPhase != Phase.MAIN_PHASE_1) || (currentPhase != Phase.MAIN_PHASE_2)) { // wtf is this things problem?????????!
+            gameView.printCantActiveThisTurn();
+            return;
+        }
+        Spell spell = (Spell) currentPlayer.getSelectedCard();
+        if (spellActive(spell)) {//////////////////fishy///////////////////////////
+            gameView.printAlreadyActivated();
+            return;
+        }
+        if (spell.getSpellEffect() != SpellEffect.FEILD) {
+            
+        } else {
+
+        }
+    }
+
+    private boolean spellActive(Spell spell) {
+        for (Cell cell : currentPlayer.getBoard().getSpellOrTrap()) {
+            if (cell.getCard() == spell) return true;
+        }
+        return false;
+    }
+
     private void equipSpellRid() {
         SwordOfDesRid();
         BlackPendantRid();
@@ -272,6 +298,7 @@ public class GameController {
         fieldSpell(ourMonster, rivalMonster);
         equipSpell();
     }
+
 
     private void equipSpell() {
         SwordOfDes();
@@ -359,28 +386,6 @@ public class GameController {
         increaseAndDecrease(currentPlayer, "Magnum Shield", -1, -1);
         increaseAndDecrease(getRivalPlayer(), "Magnum Shield", -1, -1);
     }
-//
-//    private boolean findEquippedSpell(String spell, Monster monster) {
-//        for (Card equippedSpell : monster.getEquipedSpellsSword()) {
-//            if (equippedSpell.getCardName().equals(spell))
-//                return true;
-//        }
-//        return false;
-//    }
-
-//    private boolean boardHasSpell(String spellName, Monster ourMonster, Monster rivalMonster) {
-//        for (Cell cell : ourMonster.getCardOwner().getBoard().getSpellOrTrap()) {
-//            if (cell.getCard().getCardName().equals(spellName) &&
-//                    ourMonster.getEquipedSpellsSword().contains(cell.getCard()))
-//                return true;
-//        }
-//        for (Cell cell : rivalMonster.getCardOwner().getBoard().getSpellOrTrap()) {
-//            if (cell.getCard().getCardName().equals(spellName) &&
-//                    ourMonster.getEquipedSpellsSword().contains(cell.getCard()))
-//                return true;
-//        }
-//        return false;
-//    }
 
     private void fieldSpell(Monster ourMonster, Monster rivalMonster) {////// problems: all monsters on board!!!! --- Can be shorter?maybe !!!
         yami(ourMonster);
@@ -520,7 +525,10 @@ public class GameController {
     }
 
     private boolean isSpecialAttack(Monster ourMonster, Monster rivalMonster) {
-        if (rivalMonster.getCardName().equals("Marshmallon")) {
+        if (MessengerOfPeace(ourMonster)) {
+            gameView.printCantAttackBecauseOfMessenger();
+            return true;
+        } else if (rivalMonster.getCardName().equals("Marshmallon")) {
             marshmallon(ourMonster, rivalMonster);
             return true;
         } else if (rivalMonster.getCardName().equals("Texchanger")) {
@@ -531,9 +539,25 @@ public class GameController {
         } else if (rivalMonster.getCardName().equals("Exploder Dragon")) {
             exploderDragon(ourMonster, rivalMonster);
             return true;
-        } else if (ourMonster.getCardName().equals("The Calculator")) {
+        } else if (ourMonster.getCardName().equals("The Calculator")) {/// think we need to make it first(it can be denied by messenger)
             theCalculator(ourMonster); // we just need some calculations !!!!!!! thats all
             return false;
+        }
+        return false;
+    }
+
+    private boolean MessengerOfPeace(Monster attacker) {////////////////////////where to activate??????/////////////////
+        if (!checkForActive(currentPlayer, "Messenger of peace")
+                && !checkForActive(getRivalPlayer(), "Messenger of peace"))
+            return false;
+        return attacker.getAttackPointInGame() >= 1500;
+    }
+
+    private boolean checkForActive(Player player, String spellName) {
+        for (Cell cell : player.getBoard().getSpellOrTrap()) {
+            Spell spell = (Spell) cell.getCard();
+            if (spell.getCardName().equals(spellName) && spell.isActive())
+                return true;
         }
         return false;
     }
@@ -847,7 +871,7 @@ public class GameController {
 
     private void summonAndSpecifyTribute() {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
-        if (monster.getCardName().equalsIgnoreCase("mirage dragon")) { // it should be TRUE in attack function when it dies;
+        if (monster.getCardName().equalsIgnoreCase("mirage dragon")) { // it should be TRUE in attack function when it dies;///hooman: name is right???!?!(upperCase first word!)
             getRivalPlayer().setCanActiveTrap(false);
             monster.setActiveAbility(true);
         }

@@ -48,6 +48,8 @@ public class GameView {
             gameController.showSelectedCard();
         else if (command.matches("surrender"))
             gameController.surrender();
+        else if (command.equals("active effect"))
+            gameController.activeEffect();
     }
 
 
@@ -389,6 +391,10 @@ public class GameView {
         System.out.println("Cant summon Cyberse with ability");
     }
 
+    public void printCantAttackBecauseOfMessenger() {
+        System.out.println("Cant attack : Messenger of peace active");
+    }
+
     public void printInvalidCyberseName() {
         System.out.println("invalid Cyberse Name");
     }
@@ -517,5 +523,17 @@ public class GameView {
                 System.out.println("Enter YES or NO");
         }
 
+    }
+
+    public void printActiveOnlyForSpells() {
+        System.out.println("activate effect is only for spell cards.");
+    }
+
+    public void printCantActiveThisTurn() {
+        System.out.println("you can’t activate an effect on this turn");
+    }
+
+    public void printAlreadyActivated() {
+        System.out.println("you have already activated this card");
     }
 }
