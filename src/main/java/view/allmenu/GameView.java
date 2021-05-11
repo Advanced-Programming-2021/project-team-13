@@ -437,7 +437,6 @@ public class GameView {
         return answer.equalsIgnoreCase("YES");
     }
 
-
     public Monster askDoYouWantKillOneOfRivalMonster() {
         System.out.println("Do You Want Kill Rival Monster?(YES|NO)");
         String answer = ViewMaster.scanner.nextLine();

@@ -87,18 +87,18 @@ public class MonsterCSV {
     }
 
     public static MonsterCSV findMonster(String name) throws FileNotFoundException {
-        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model.CSV\\" + "Monster.csv"))
+        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\csv\\" + "Monster.csv"))
                 .withType(MonsterCSV.class)
                 .build()
                 .parse();
         for (MonsterCSV monsterCSV : monsters)
-            if (name.equals(monsterCSV.getName()))
+            if (name.equalsIgnoreCase(monsterCSV.getName()))
                 return monsterCSV;
         return null;
     }
 
     public static void getNameAndDescription(TreeMap<String, String> cards) throws FileNotFoundException {
-        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model.CSV\\" + "Monster.csv"))
+        List<MonsterCSV> monsters = new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\csv\\" + "Monster.csv"))
                 .withType(MonsterCSV.class)
                 .build()
                 .parse();

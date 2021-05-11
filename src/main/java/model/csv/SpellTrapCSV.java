@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.TreeMap;
 
 public class SpellTrapCSV {
-    @CsvBindByName(column = "name")
+    @CsvBindByName(column = "Name")
     private String name;
-    @CsvBindByName(column = "type")
+    @CsvBindByName(column = "Type")
     private String type;
     @CsvBindByName(column = "Icon (Property)")
     private String icon;
     @CsvBindByName(column = "Description")
     private String description;
-    @CsvBindByName(column = "status")
+    @CsvBindByName(column = "Status")
     private String status;
-    @CsvBindByName(column = "price")
+    @CsvBindByName(column = "Price")
     private String price;
 
     public String getName() {
@@ -28,7 +28,8 @@ public class SpellTrapCSV {
     }
 
     public CardType getType() {
-        if ("SPELL".equals(type)) {
+        String s = "SPELL";
+        if (s.equalsIgnoreCase(type)) {
             return CardType.SPELL;
         }
         return CardType.TRAP;
@@ -51,19 +52,19 @@ public class SpellTrapCSV {
     }
 
     public static SpellTrapCSV findSpellTrap(String name) throws FileNotFoundException {
-        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model.CSV\\" + "SpellTrap.csv"))
+        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
                 .withType(SpellTrapCSV.class)
                 .build()
                 .parse();
         for (SpellTrapCSV spellTrapCsv : spellsAndTraps)
-            if (name.equals(spellTrapCsv.getName()))
+            if (name.equalsIgnoreCase(spellTrapCsv.getName()))
                 return spellTrapCsv;
         return null;
     }
 
 
     public static void getNameAndDescription(TreeMap<String, String> cards) throws Exception {
-        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model.CSV\\" + "SpellTrap.csv"))
+        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
                 .withType(SpellTrapCSV.class)
                 .build()
                 .parse();

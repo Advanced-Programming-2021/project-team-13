@@ -1,8 +1,10 @@
 package controll;
 
+import enums.CardType;
 import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import model.players.User;
+import org.json.JSONPropertyIgnore;
 import view.allmenu.ShopView;
 import view.ViewMaster;
 
@@ -11,10 +13,18 @@ import java.util.TreeMap;
 
 public class ShopController {
     private final ShopView shopView;
-    private TreeMap<String, String> cards = null;
+    private TreeMap<String, String> cards = new TreeMap<>();
 
     public ShopController(ShopView shopView) {
         this.shopView = shopView;
+        try {
+            MonsterCSV.getNameAndDescription(cards);
+        } catch (FileNotFoundException ignored) {
+        }
+        try {
+            SpellTrapCSV.getNameAndDescription(cards);
+        } catch (Exception ignored) {
+        }
     }
 
     public void buyCard(String cardName) {
@@ -43,20 +53,35 @@ public class ShopController {
         }
     }
 
-    public void sortAllCards() {
-        if (cards == null) {
-            cards = new TreeMap<>();
-            try {
-                MonsterCSV.getNameAndDescription(cards);
 
-            } catch (FileNotFoundException e) {
-            }
-            try {
-                SpellTrapCSV.getNameAndDescription(cards);
-            } catch (Exception e) {
-            }
-        }
+    public void sortAllCards() {
         shopView.showAllCards(cards);
     }
+
+    public void showCard(String cardName) {
+        MonsterCSV monsterCSV = null;
+        try {
+            monsterCSV = MonsterCSV.findMonster(cardName);
+        } catch (Exception ignore) {
+        }
+        if (monsterCSV == null) {
+            SpellTrapCSV spellTrapCSV = null;
+            try {
+                spellTrapCSV = SpellTrapCSV.findSpellTrap(cardName);
+            } catch (Exception ignore) {
+            }
+            if (spellTrapCSV == null)
+                shopView.printInvalidCard();
+            else
+                shopView.printSpellAndTrap(spellTrapCSV.getIcon(), spellTrapCSV.getDescription(), spellTrapCSV.getName(),
+                        spellTrapCSV.getType() == CardType.SPELL ? "Spell" : "Trap");
+
+        } else
+            shopView.printMonsterCard(monsterCSV.getAttack(), monsterCSV.getDefence(), monsterCSV.getLevel(), monsterCSV.getName()
+                    , monsterCSV.getDescription(), monsterCSV.getMonsterType());
+
+    }
+
+
 }
 
