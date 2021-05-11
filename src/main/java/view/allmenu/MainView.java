@@ -11,20 +11,6 @@ public class MainView {
         mainController = new MainController(this);
     }
 
-    public void run(String command) {
-        if (command.startsWith("menu enter")) {
-           menuEnter(command);
-        } else if (command.matches(Regex.EXIT_MENU) || command.matches("user logout"))
-            mainController.logout();
-        else printInvalidCommand();
-    }
-
-    private void menuEnter(String command){
-        Matcher menu = Regex.getInputMatcher(command , Regex.ENTER_MENU);
-        if (menu.find())
-            mainController.enterMenu(menu.group("menuName"));
-    }
-
     public void printMenuNavigationImpossible(){
         System.out.println("menu navigation is not possible");
     }
@@ -33,7 +19,12 @@ public class MainView {
         System.out.println("invalid command");
     }
 
-    public MainController getMainController() {
-        return mainController;
+    public void run(String command) {
+        if (command.startsWith("menu enter")) {
+            Matcher menu = Regex.getInputMatcher(command , Regex.ENTER_MENU);
+            mainController.enterMenu(menu.group("menuName"));
+        } else if (command.matches(Regex.EXIT_MENU) || command.matches("user logout"))
+            mainController.logout();
+        else printInvalidCommand();
     }
 }

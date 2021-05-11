@@ -29,8 +29,6 @@ public class ScoreboardView {
             scoreboardController.sortAllUsers(User.getAllUsers());
         else if (command.matches(Regex.EXIT_MENU))
             ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
-        else if (command.startsWith("menu enter"))
-            printMenuNavigationImpossible();
         else printInvalidCommand();
     }
 }

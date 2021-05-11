@@ -121,11 +121,11 @@ public class Deck implements Comparable<Deck> {
     public Card getCardByName(String cardName, boolean isSide) {
         if (isSide) {
             for (Card card : getAllCardsInSideDeck())
-                if (card.getCardName().equals(cardName))
+                if (card.getCardName().equalsIgnoreCase(cardName))
                     return card;
         } else
-            for (Card card : getAllCardsInSideDeck()) {
-                if (card.getCardName().equals(cardName))
+            for (Card card : getAllCardsInMainDeck()) {
+                if (card.getCardName().equalsIgnoreCase(cardName))
                     return card;
             }
         return null;
@@ -137,10 +137,12 @@ public class Deck implements Comparable<Deck> {
         else
             allCardsInMainDeck.remove(card);
         setNumberOfCards(getNumberOfCards() - 1);
+        if (allCardsInMainDeck.size() < 40)
+            setValid(false);
         allCards.remove(card);
     }
 
-    public void shuffleMainDeck(){
+    public void shuffleMainDeck() {
         Collections.shuffle(allCardsInMainDeck);
     }
 
@@ -155,10 +157,6 @@ public class Deck implements Comparable<Deck> {
     public int compareTo(Deck deck) {
         if (deck.getName().compareTo(name) < 0) return 1;
         return -1;
-    }
-
-    public void printBeforeNonMonster() {
-        System.out.println("Spell and Traps");
     }
 
     @Override

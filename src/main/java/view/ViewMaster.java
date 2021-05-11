@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ViewMaster {
     public static Scanner scanner = new Scanner(System.in);
-    private static ViewMaster viewMaster ;
+    private static ViewMaster viewMaster;
     private static Menu currentMenu;
     private static User user;
     private final LoginView loginView;
@@ -71,6 +71,8 @@ public class ViewMaster {
             command = scanner.nextLine().trim();
             if (command.matches(Regex.SHOW_MENU))
                 printCurrentMenu();
+            else if (command.matches(Regex.ENTER_MENU) && currentMenu != Menu.MAIN_MENU)
+                System.out.println("menu navigation is not possible");
             else if (currentMenu == Menu.LOGIN_MENU)
                 loginView.run(command);
             else if (currentMenu == Menu.MAIN_MENU)

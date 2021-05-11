@@ -593,9 +593,9 @@ public class GameController {
             }
             gameView.printDoesntContainCard("Graveyard", rivalMonster.getCardName());
         } else if (fromWhere.equals("Hand")) {
-            if () {
+/*            if () {
 
-            }
+            }*/
             gameView.printDoesntContainCard("Hand", rivalMonster.getCardName());
         } else if (fromWhere.equals("Deck")) {
             gameView.printDoesntContainCard("Deck", rivalMonster.getCardName());

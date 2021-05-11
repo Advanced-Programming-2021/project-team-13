@@ -132,8 +132,7 @@ public class User implements Comparable<User> {
         return drawNum;
     }
 
-    public Deck getActiveDeck()
-    {
+    public Deck getActiveDeck() {
         for (Deck allDeck : allDecks) {
             if (allDeck.isActive())
                 return allDeck;
@@ -156,7 +155,7 @@ public class User implements Comparable<User> {
 
     @Override
     public String toString() {
-        return "- " + nickname + ": " + score;
+        return "- " + this.nickname + ": " + this.score;
     }
 
     //
