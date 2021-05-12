@@ -1,10 +1,12 @@
 package model.cards;
 
+import bullshit.TrapAction;
 import enums.CardType;
 import enums.Face;
 
 public class Trap extends Card {
-    //    private TrapEffect trapEffect;
+    private TrapAction trapAction;
+    private boolean usedAbility;
     String type;
     boolean isSetINThisTurn = false;
 
@@ -12,6 +14,7 @@ public class Trap extends Card {
                 int price, String type) {
         super(name, cardType, description, face, price);
         this.type = type;
+        this.
     }
 
     public String getType() {
