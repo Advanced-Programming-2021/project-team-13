@@ -8,10 +8,33 @@ public class Spell extends Card {
     //private final SpellEffect spellEffect;  // beware that its final!!!!!!
     private boolean isActive = false;
     private Monster equippedMonster;
-    private SpellEffect spellEffect; ////// wtf  ,,, these were supposed to be created in deck
+
 
     public Spell(String name, CardType cardType, String description, Face face, int price) {
         super(name, cardType, description, face, price);
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean isSetINThisTurn() {
+        return isSetINThisTurn;
+    }
+
+    public void setSetINThisTurn(boolean setINThisTurn) {
+        isSetINThisTurn = setINThisTurn;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + cardName + "Spell"
+                + "\nType: " + type + "Description: " + cardDescription;
     }
 
     public Monster getEquippedMonster() {

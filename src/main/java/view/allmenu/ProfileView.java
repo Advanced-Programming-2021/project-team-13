@@ -60,4 +60,5 @@ public class ProfileView {
         inputMatcher.find();
         profileController.changeNickname(inputMatcher.group("nickname"));
     }
+
 }

@@ -2,7 +2,9 @@ package view.allmenu;
 
 import model.Deck;
 import controll.DeckController;
+import view.Menu;
 import view.Regex;
+import view.ViewMaster;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -62,7 +64,8 @@ public class DeckView {
         System.out.println(activeDeck);
         System.out.println("Other decks:");
         for (Deck deck : decks) {
-            System.out.println(deck);
+            if (deck != activeDeck)
+                System.out.println(deck);
         }
     }
 
@@ -92,6 +95,10 @@ public class DeckView {
             showSpecificDeck(command);
         else if (command.matches(Regex.DECK_SHOW_CARDS))
             deckController.showCards();
+        else if (command.matches(Regex.EXIT_MENU))
+            ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
+        else
+            System.out.println("invalid command");
 
     }
 
@@ -162,6 +169,10 @@ public class DeckView {
         for (Deck deck : decks) {
             System.out.println(deck);
         }
+    }
+
+    public void printBeforeNonMonster() {
+        System.out.println("Spell and Traps:");
     }
 
     public void printDeckListOnlyHaveActiveDeck(Deck activeDeck) {

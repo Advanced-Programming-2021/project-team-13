@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="active spell in game view">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="GameController finish and renew game is completed (except deck view during change game)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +35,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="noEffectBranch" />
+        <entry key="$PROJECT_DIR$" value="fix" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -158,11 +156,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.LoginAndShopTest.checkMenuEntrance" />
         <item itemvalue="JUnit.LoginAndShopTest.checkShop" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkRepeatedRegister" />
+        <item itemvalue="JUnit.LoginAndShopTest.checkMenuEntrance" />
         <item itemvalue="JUnit.LoginAndShopTest.checkLoginOk" />
         <item itemvalue="JUnit.LoginAndShopTest.checkLoginForNotCreated" />
-        <item itemvalue="JUnit.LoginAndShopTest.checkRepeatedRegister" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +190,6 @@
       <workItem from="1620397682243" duration="6649000" />
       <workItem from="1620439891874" duration="6930000" />
       <workItem from="1620621789862" duration="5708000" />
-      <workItem from="1620785684513" duration="666000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -292,12 +289,12 @@
       <option name="project" value="LOCAL" />
       <updated>1620571975842</updated>
     </task>
-    <task id="LOCAL-00015" summary="active spell in game view">
-      <created>1620739697558</created>
+    <task id="LOCAL-00015" summary="GameController finish and renew game is completed (except deck view during change game)">
+      <created>1620649004879</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1620739697558</updated>
+      <updated>1620649004880</updated>
     </task>
     <option name="localTasksCounter" value="16" />
     <servers />
@@ -365,8 +362,8 @@
     <MESSAGE value="literally nothing" />
     <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
     <MESSAGE value="login is debuged" />
-    <MESSAGE value="active spell in game view" />
-    <option name="LAST_COMMIT_MESSAGE" value="active spell in game view" />
+    <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
+    <option name="LAST_COMMIT_MESSAGE" value="GameController finish and renew game is completed (except deck view during change game)" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

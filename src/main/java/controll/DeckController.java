@@ -63,7 +63,7 @@ public class DeckController {
             return;
         }
         if (doesHaveCard(cardName)) {
-            Deck deck = ViewMaster.getUser().getDeckByName(deckName);
+            Deck deck = ViewMaster.getUser().getDeckByName(deckName.trim());
             if (deck == null)
                 deckView.printCardDoesntExist(deckName);
             else {
@@ -92,8 +92,11 @@ public class DeckController {
         MonsterCSV monster = null;
         SpellTrapCSV spellOrTrap = null;
         try {
-            monster = MonsterCSV.findMonster(cardName);
-            spellOrTrap = SpellTrapCSV.findSpellTrap(cardName);
+            monster = MonsterCSV.findMonster(cardName.trim());
+        } catch (FileNotFoundException ignored) {
+        }
+        try {
+            spellOrTrap = SpellTrapCSV.findSpellTrap(cardName.trim());
         } catch (FileNotFoundException ignored) {
         }
         if (monster != null)
@@ -101,11 +104,10 @@ public class DeckController {
                     , monster.getMonsterType(), monster.getCardType(), monster.getAttribute()
                     , monster.getAttack(), monster.getDefence(), monster.getLevel());
         else {
-            assert spellOrTrap != null;
-            if (spellOrTrap.getType() == CardType.SPELL)
-                return new Spell(spellOrTrap.getName(), CardType.SPELL, spellTrapCSV.getDescription(), Face.DOWN, spellOrTrap.getPrice());
+            if (Objects.requireNonNull(spellOrTrap).getType() == CardType.SPELL)
+                return new Spell(spellOrTrap.getName(), CardType.SPELL, spellOrTrap.getDescription(), Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
             else
-                return new Trap(spellOrTrap.getName(), CardType.TRAP, spellTrapCSV.getDescription(), Face.DOWN, spellOrTrap.getPrice());
+                return new Trap(spellOrTrap.getName(), CardType.TRAP, spellOrTrap.getDescription(), Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
         }
 
     }
@@ -113,10 +115,10 @@ public class DeckController {
     private boolean areThereThree(Deck deck, String cardName) {
         int counter = 0;
         for (Card card : deck.getAllCardsInMainDeck())
-            if (card.getCardName().equals(cardName))
+            if (card.getCardName().equalsIgnoreCase(cardName))
                 counter++;
         for (Card card : deck.getAllCardsInSideDeck())
-            if (card.getCardName().equals(cardName))
+            if (card.getCardName().equalsIgnoreCase(cardName))
                 counter++;
         return (counter == 3);
     }
@@ -129,7 +131,11 @@ public class DeckController {
     }
 
     private boolean doesHaveCard(String cardName) {
-        return ViewMaster.getUser().getAllCards().containsKey(cardName);
+        for (String card : ViewMaster.getUser().getAllCards().keySet()) {
+            if (card.equalsIgnoreCase(cardName))
+                return true;
+        }
+        return false;
     }
 
     public void removeCard(String cardName, String deckName, boolean isSide) {
@@ -193,22 +199,31 @@ public class DeckController {
     }
 
     public void showSpecificDeck(String deckName, boolean isSide) {
-        if (deckName == null)
+        if (deckName == null) {
             deckView.printInvalidCommand();
+            return;
+        }
         Deck deck = ViewMaster.getUser().getDeckByName(deckName);
-        if (deck == null)
+        if (deck == null) {
             deckView.printDeckDoesntExists(deckName);
-        ArrayList<Card> cards = deck.getAllCards();
+            return;
+        }
+        ArrayList<Card> cards;
+        if (isSide)
+            cards = deck.getAllCardsInSideDeck();
+        else
+            cards = deck.getAllCardsInMainDeck();
         Collections.sort(cards);
         deckView.printBeforeMonster(deckName, isSide);
         for (Card card : cards) {
             if (card instanceof Monster)
                 deckView.printMonster(card.getCardName(), card.getCardDescription());
         }
-        deck.printBeforeNonMonster();
+        deckView.printBeforeNonMonster();
         for (Card card : cards) {
             if (!(card instanceof Monster))
                 deckView.printMonster(card.getCardName(), card.getCardDescription());
+
         }
     }
 }

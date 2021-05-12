@@ -3,6 +3,7 @@ package model;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
+import model.cards.Trap;
 
 public class Board {
 
@@ -126,6 +127,43 @@ public class Board {
         for (Cell monsterCell : monsterCells) {
             if (monsterCell.getCard() == null)
                 monsterCell.setCard(monster);
+        }
+    }
+
+
+    public int getNumberOFSpellAndTrapInBoard() {
+        int counter = 0;
+        for (Cell cell : spellOrTrap) {
+            if (cell.getCard() != null)
+                counter++;
+        }
+        return counter;
+    }
+
+    public void putSpellAndTrapInBoard(Card selectedCard) {
+        if (selectedCard instanceof Trap)
+            putTrap((Trap) selectedCard);
+        else
+            putSpell((Spell) selectedCard);
+
+    }
+
+    private void putSpell(Spell selectedCard) {
+        for (Cell cell : spellOrTrap) {
+            if (cell.getCard() == null) {
+                cell.setCard(selectedCard);
+                return;
+            }
+
+        }
+    }
+
+    private void putTrap(Trap selectedCard) {
+        for (Cell cell : spellOrTrap) {
+            if (cell.getCard() == null) {
+                cell.setCard(selectedCard);
+                return;
+            }
         }
     }
 }

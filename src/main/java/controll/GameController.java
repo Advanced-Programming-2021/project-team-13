@@ -45,6 +45,7 @@ public class GameController {
             return firstPlayer;
         return secondPlayer;
     }
+
     public Player getRivalPlayer() {
         if (currentPlayer == firstPlayer)
             return secondPlayer;
@@ -151,13 +152,12 @@ public class GameController {
     }
 
 
-
     public void findWinner() {
         if (checkEnded() != 4) {
             GameWinMenu gameWinMenu = new GameWinMenu(this);
-            if (checkEnded() == 3){
+            if (checkEnded() == 3) {
                 gameWinMenu.announceWinner(null);
-            } else if (checkEnded() == 2){
+            } else if (checkEnded() == 2) {
                 gameWinMenu.announceWinner(getRivalPlayer());
             } else {
                 gameWinMenu.announceWinner(currentPlayer);
@@ -180,7 +180,7 @@ public class GameController {
         }
     }
 
-    public void surrender(){
+    public void surrender() {
         if (startingRounds == 1)
             getRivalPlayer().setWonRounds(1);
         else
@@ -617,9 +617,9 @@ public class GameController {
             }
             gameView.printDoesntContainCard("Graveyard", rivalMonster.getCardName());
         } else if (fromWhere.equals("Hand")) {
-            if () {
+/*            if () {
 
-            }
+            }*/
             gameView.printDoesntContainCard("Hand", rivalMonster.getCardName());
         } else if (fromWhere.equals("Deck")) {
             gameView.printDoesntContainCard("Deck", rivalMonster.getCardName());
@@ -799,14 +799,13 @@ public class GameController {
         }
     }
 
-    public void summon() { //need some change, SOME EFFECTIVE MONSTER CAN NOT NORMAL SUMMON!
+    public void checksBeforeSummon() { //need some change, SOME EFFECTIVE MONSTER CAN NOT NORMAL SUMMON!
         if (currentPlayer.getSelectedCard() == null)
             gameView.printNoCardSelected();
         else {
             if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
                     && currentPlayer.getSelectedCard() instanceof Monster
-                    && !((Monster) currentPlayer.getSelectedCard()).getMonsterType().equalsIgnoreCase("ritual")
-                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("gate guardian")
+                    && ((Monster) currentPlayer.getSelectedCard()).getMonsterCardType() != MonsterCardType.RITUAL
                     && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("")) {
                 if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
                     gameView.printNotInMainPhase();
@@ -816,6 +815,8 @@ public class GameController {
                             gameView.printAlreadySetOrSummon();
                         else if (currentPlayer.getSelectedCard().getCardName().equalsIgnoreCase("Beast king barbaros"))
                             beatsKingBarbaros((Monster) currentPlayer.getSelectedCard());
+                        else if (currentPlayer.getSelectedCard().getCardName().equalsIgnoreCase("Terratiger, the Empowered Warrior"))
+                            terratiger((Monster) currentPlayer.getSelectedCard());
                         else
                             summonAndSpecifyTribute();
                     } else gameView.printMonsterZoneFull();
@@ -824,49 +825,32 @@ public class GameController {
         }
     }
 
-    public void specialSummon() {
-        if (currentPlayer.getSelectedCard() == null)
-            gameView.printNoCardSelected();
-        else {
-            if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
-                    && currentPlayer.getSelectedCard() instanceof Monster
-                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("gate guardian")
-                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("")) {
-                if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
-                    gameView.printNotInMainPhase();
-                else {
-                    if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
-                        Monster monster = (Monster) currentPlayer.getSelectedCard();
-                        if (monster.getCardName().equalsIgnoreCase("gate guardian"))
-                            gateGuardian();
-                    } else gameView.printMonsterZoneFull();
-                }
-            } else gameView.printCantSpecialSummon();
-        }
+    public void normalSummon(Monster monster) {
+        gameView.printSummonSuccessfully();
+        monster.setSetInThisTurn(true);
+        monster.setZone(Zone.MONSTER_ZONE);
+        monster.setFace(Face.UP);
+        monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+        currentPlayer.setSetOrSummonInThisTurn(true);
+        currentPlayer.setSelectedCard(null);
+        currentPlayer.getBoard().putMonsterInBoard(monster);
     }
 
-    private void gateGuardian() { //to be complete
-        int numberOfMonsterInOurBoard = currentPlayer.getBoard().getNumberOfMonsterInBoard();
-        if (numberOfMonsterInOurBoard < 3) {
-            currentPlayer.setSelectedCard(null);
-            gameView.printThereArentEnoughMonsterForTribute();
-            return;
-        }
-        ArrayList<Monster> tributes = gameView.getTributeSpecialSummon(3);
+    private void terratiger(Monster terratiger) {
+        boolean isExist = false;
+        if (getCurrentPlayer().getBoard().getNumberOfMonsterInBoard() <= 3)
+            for (Card card : currentPlayer.getCardsInHand()) {
+                if (card instanceof Monster)
+                    if (((Monster) card).getLevel() <= 4) {
+                        isExist = true;
+                        break;
+                    }
+            }
+        if (isExist)
+            gameView.askWantSummonedAnotherMonsterTerratiger();
+        terratiger.setActiveAbility(true);
+        normalSummon(terratiger);
 
-
-    }
-
-    private void commandKnightSummon(Monster monster) {
-        monster.setAttackable(false);   // we should use this in attack function!!!!
-        monster.setActiveAbility(true);
-        ArrayList<Monster> monsters = new ArrayList<>();
-        for (Cell cell : currentPlayer.getBoard().getMonsters()) {
-            Monster friendMonster = (Monster) cell.getCard();
-            friendMonster.setAttackPointInGame(friendMonster.getAttackPointInGame() + 400); //we should decrease this in Attack function After Death.
-            monsters.add(friendMonster);
-        }
-        monster.setMonsters(monsters);
     }
 
     private void summonAndSpecifyTribute() {
@@ -875,58 +859,48 @@ public class GameController {
             getRivalPlayer().setCanActiveTrap(false);
             monster.setActiveAbility(true);
         }
-        if (currentPlayer.getSelectedCard().getCardName().equalsIgnoreCase("Command knight"))
-            commandKnightSummon(monster);
-        else {
-            int numberOfTribute = monster.howManyTributeNeed();
-            if (numberOfTribute != 0) {
-                int numberOfMonsterInOurBoard = currentPlayer.getBoard().getNumberOfMonsterInBoard();
-                if (numberOfMonsterInOurBoard < numberOfTribute) {
-                    currentPlayer.setSelectedCard(null);
-                    gameView.printThereArentEnoughMonsterForTribute();
-                    return;
-                }
-                if (!getTribute(numberOfTribute))
-                    return;
+        int numberOfTribute = monster.howManyTributeNeed();
+        if (numberOfTribute != 0) {
+            int numberOfMonsterInOurBoard = currentPlayer.getBoard().getNumberOfMonsterInBoard();
+            if (numberOfMonsterInOurBoard < numberOfTribute) {
+                currentPlayer.setSelectedCard(null);
+                gameView.printThereArentEnoughMonsterForTribute();
+                return;
             }
+            if (!getTribute(numberOfTribute))
+                return;
         }
-        gameView.printSummonSuccessfully();
-        monster.setSetInThisTurn(true);
-        monster.setZone(Zone.MONSTER_ZONE);
-        monster.setFace(Face.UP);
-        monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-        currentPlayer.setSetOrSummonInThisTurn(true);
-        currentPlayer.setSelectedCard(null);
+        normalSummon(monster);
     }
 
     private void beatsKingBarbaros(Monster monster) {
-        if (gameView.doYouWantTribute()) {
-            currentPlayer.setSelectedCard(null);
-            if (getTribute(3)) {
-                gameView.printSummonSuccessfully();
-                monster.setSetInThisTurn(true);
-                monster.setZone(Zone.MONSTER_ZONE);
-                monster.setFace(Face.UP);
-                monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-                monster.setActiveAbility(true);
-                currentPlayer.setSetOrSummonInThisTurn(true);
-                currentPlayer.setSelectedCard(null);
-            }
-        } else {
-            monster.setAttackPointInGame(1900);
-            gameView.printSummonSuccessfully();
-            monster.setSetInThisTurn(true);
-            monster.setZone(Zone.MONSTER_ZONE);
-            monster.setActiveAbility(true);
-            monster.setFace(Face.UP);
-            monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-            currentPlayer.setSetOrSummonInThisTurn(true);
-            currentPlayer.setSelectedCard(null);
-            for (Cell cell : getRivalPlayer().getBoard().getMonsters()) {
-                getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
-                cell.setCard(null);
+        if (currentPlayer.getBoard().getNumberOfMonsterInBoard() >= 3) {
+            if (gameView.doYouWantTributeBarBaros()) {
+                gameView.getTributeForBarbaros();
+            } else {
+                monster.setAttackPointInGame(1900);
+                for (Cell cell : getRivalPlayer().getBoard().getMonsters()) {
+                    getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
+                    cell.setCard(null);
+                }
             }
         }
+        monster.setActiveAbility(true);
+        normalSummon(monster);
+    }
+
+    public boolean checkBarbarosInput(int monsterNumber1, int monsterNumber2, int monsterNumber3) {
+        if (monsterNumber1 <= 0 || monsterNumber1 >= 6
+                || monsterNumber2 <= 0 || monsterNumber2 >= 6
+                || monsterNumber3 <= 0 || monsterNumber3 >= 6) return false;
+        Monster monster1 = (Monster) currentPlayer.getBoard().getMonsterByAddress(monsterNumber1);
+        Monster monster2 = (Monster) currentPlayer.getBoard().getMonsterByAddress(monsterNumber2);
+        Monster monster3 = (Monster) currentPlayer.getBoard().getMonsterByAddress(monsterNumber3);
+        if (monster1 == null || monster2 == null || monster3 == null) return false;
+        currentPlayer.getBoard().getGraveyard().addCard(monster1);
+        currentPlayer.getBoard().getGraveyard().addCard(monster2);
+        currentPlayer.getBoard().getGraveyard().addCard(monster3);
+        return true;
     }
 
     private boolean getTribute(int numberOfTribute) {
@@ -966,6 +940,21 @@ public class GameController {
     }
 
     private void setSpellAndTrap() {
+        if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
+            if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
+                currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
+                Card card = currentPlayer.getSelectedCard();
+                card.setZone(Zone.SPELL_TRAP_ZONE);
+                card.setFace(Face.DOWN);
+                if (currentPlayer.getSelectedCard() instanceof Spell)
+                    ((Spell) currentPlayer.getSelectedCard()).setSetINThisTurn(true);
+                currentPlayer.setSelectedCard(null);
+                currentPlayer.setSetOrSummonInThisTurn(true);
+                gameView.printSetSuccessfully();
+            } else
+                gameView.printSpellZoneIsFull();
+        } else
+            gameView.printNotInMainPhase();
     }
 
     private void setMonster(Monster selectedCard) {
@@ -980,6 +969,7 @@ public class GameController {
                     currentPlayer.setSetOrSummonInThisTurn(true);
                     currentPlayer.setSelectedCard(null);
                     gameView.printSetSuccessfully();
+                    currentPlayer.getBoard().putMonsterInBoard(selectedCard);
                 }
             } else
                 gameView.printMonsterZoneFull();
@@ -1030,8 +1020,8 @@ public class GameController {
                             !(monster.getFace() == Face.DOWN && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE))
                         gameView.printCantFlipSummon();
                     else {
-                        currentPlayer.setSelectedCard(null);
-                        if (monster.getCardName().equalsIgnoreCase("man eater bug"))
+                        if (monster.getCardName().equalsIgnoreCase("man eater bug")
+                                || monster.getCardName().equalsIgnoreCase("gate guardian"))
                             manEaterBugFlipSummon();
                         currentPlayer.setSelectedCard(null);
                         monster.setFace(Face.UP);
@@ -1046,13 +1036,29 @@ public class GameController {
     }
 
     private void manEaterBugFlipSummon() {
-        while (currentPlayer.getSelectedCard() == null) {
-            gameView.getOpponentMonsterForKill();
+        if (getRivalPlayer().getBoard().getNumberOfMonsterInBoard() > 0) {
+            Monster monster = gameView.askDoYouWantKillOneOfRivalMonster();
+            if (monster != null) {
+                monster.setActiveAbility(true);
+                getRivalPlayer().getBoard().getGraveyard().addCard(monster);
+            }
         }
-        Monster monster = (Monster) currentPlayer.getSelectedCard();
-        monster.setActiveAbility(true);
-        Monster opponentMonster = (Monster) currentPlayer.getSelectedCard();
-        getRivalPlayer().getBoard().getGraveyard().addCard(opponentMonster);
+    }
+
+    public boolean summonCardWithTerratiger(int monsterNumber) {
+        if (monsterNumber <= 0 || monsterNumber > 5) return false;
+        if (currentPlayer.getCardsInHand().get(monsterNumber - 1) instanceof Monster) {
+            Monster monster = (Monster) currentPlayer.getCardsInHand().get(monsterNumber - 1);
+            if (monster.getLevel() > 4)
+                return false;
+            gameView.printSummonSuccessfully();
+            monster.setSetInThisTurn(true);
+            monster.setZone(Zone.MONSTER_ZONE);
+            monster.setFace(Face.UP);
+            monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
+            currentPlayer.getBoard().putMonsterInBoard(monster);
+            return true;
+        } else return false;
     }
 
     public Phase getCurrentPhase() {

@@ -13,7 +13,7 @@ public class ShowGraveyardController {
         this.currentPlayer = currentPlayer;
     }
 
-    public void showGraveyard() {
+    public void     showGraveyard() {
         if (currentPlayer.getBoard().getGraveyard().getAllCards().size() == 0) {
             showGraveyardMenu.printGraveyardEmpty();
             return;
