@@ -6,9 +6,6 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.players.Player;
-import model.players.User;
-import view.Menu;
-import view.ViewMaster;
 import view.allmenu.GameView;
 
 import java.util.ArrayList;
@@ -913,6 +910,16 @@ public class GameController {
     }
 
     private void setSpellAndTrap() {
+        if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
+            if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
+                currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
+                Card card = currentPlayer.getSelectedCard();
+                card.setZone(Zone.SPELL_TRAP_ZONE);
+                card.setFace(Face.DOWN);
+            } else
+                gameView.printSpellZoneIsFull();
+        } else
+            gameView.printNotInMainPhase();
     }
 
     private void setMonster(Monster selectedCard) {

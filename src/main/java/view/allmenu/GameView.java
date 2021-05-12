@@ -82,9 +82,6 @@ public class GameView {
         }
     }
 
-    private void flipSummon() {
-    }
-
     public void printMap() {
         Player currentPlayer = gameController.getCurrentPlayer();
         Player rivalPlayer = gameController.getRivalPlayer();
@@ -361,11 +358,11 @@ public class GameView {
         System.out.println(gameController.getCurrentPhase().getPhaseName());
     }
 
-    public void printUserWonWholeGame(String username , int winnerWonRounds , int loserWonRounds){
+    public void printUserWonWholeGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
     }
 
-    public void printUserWonSingleGame(String username , int winnerWonRounds , int loserWonRounds){
+    public void printUserWonSingleGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the game and the score is:" + winnerWonRounds + "-" + loserWonRounds);
     }
 
@@ -516,5 +513,9 @@ public class GameView {
                 System.out.println("Enter YES or NO");
         }
 
+    }
+
+    public void printSpellZoneIsFull() {
+        System.out.println("spell card zone is full");
     }
 }
