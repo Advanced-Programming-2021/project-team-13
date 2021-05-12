@@ -916,6 +916,11 @@ public class GameController {
                 Card card = currentPlayer.getSelectedCard();
                 card.setZone(Zone.SPELL_TRAP_ZONE);
                 card.setFace(Face.DOWN);
+                if (currentPlayer.getSelectedCard() instanceof Spell)
+                    ((Spell) currentPlayer.getSelectedCard()).setSetINThisTurn(true);
+                currentPlayer.setSelectedCard(null);
+                currentPlayer.setSetOrSummonInThisTurn(true);
+                gameView.printSetSuccessfully();
             } else
                 gameView.printSpellZoneIsFull();
         } else
