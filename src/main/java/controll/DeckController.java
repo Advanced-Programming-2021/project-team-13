@@ -1,17 +1,17 @@
 package controll;
 
-import model.csv.MonsterCSV;
-import model.csv.SpellTrapCSV;
 import bullshit.Interfaces.Effects;
 import enums.CardType;
 import enums.Face;
-import model.cards.Card;
 import model.Deck;
+import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
-import view.allmenu.DeckView;
+import model.csv.MonsterCSV;
+import model.csv.SpellTrapCSV;
 import view.ViewMaster;
+import view.allmenu.DeckView;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -100,14 +100,17 @@ public class DeckController {
         } catch (FileNotFoundException ignored) {
         }
         if (monster != null)
-            return new Monster(monster.getName(), CardType.MONSTER, Face.DOWN, monster.getPrice(), monster.getDescription()
+            return new Monster(monster.getName(), CardType.MONSTER, Face.DOWN,
+                    monster.getPrice(), monster.getDescription()
                     , monster.getMonsterType(), monster.getCardType(), monster.getAttribute()
                     , monster.getAttack(), monster.getDefence(), monster.getLevel());
         else {
             if (Objects.requireNonNull(spellOrTrap).getType() == CardType.SPELL)
-                return new Spell(spellOrTrap.getName(), CardType.SPELL, spellOrTrap.getDescription(), Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
+                return new Spell(spellOrTrap.getName(), CardType.SPELL, spellOrTrap.getDescription(),
+                        Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
             else
-                return new Trap(spellOrTrap.getName(), CardType.TRAP, spellOrTrap.getDescription(), Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
+                return new Trap(spellOrTrap.getName(), CardType.TRAP, spellOrTrap.getDescription(),
+                        Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
         }
 
     }

@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="GameController finish and renew game is completed (except deck view during change game)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_29_2021_7_40_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/Effect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/TrapCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/TrapCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/TrapEffect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +39,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="fix" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -84,17 +78,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.LoginAndShopTest.checkMenuEntrance">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LoginAndShopTest.checkLoginForNotCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
