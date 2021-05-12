@@ -21,7 +21,10 @@ public class GameController {
     private int turnsPlayed;
     private int unitedCalcCurrent;
     private int unitedCalcRival;
+    private boolean isSummonInThisTurn = false;
+    private Card summonedCard;
     private int turn = 0;
+
     ///////////////////////////////////////////////////we need activation of spells and traps to work;;;;;;DAMN!//////////////////////////++messenger++some field spells++
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
         this.gameView = gameView;
@@ -50,6 +53,22 @@ public class GameController {
         if (currentPlayer == firstPlayer)
             return secondPlayer;
         return firstPlayer;
+    }
+
+    public void setSummonInThisTurn(boolean summonInThisTurn) {
+        isSummonInThisTurn = summonInThisTurn;
+    }
+
+    public boolean isSummonInThisTurn() {
+        return isSummonInThisTurn;
+    }
+
+    public void setSummonedCard(Card summonedCard) {
+        this.summonedCard = summonedCard;
+    }
+
+    public Card getSummonedCard() {
+        return summonedCard;
     }
 
     public Player getStartingPlayer() {
@@ -272,7 +291,6 @@ public class GameController {
             return;
         }
         if (!spell.getSpellEffect().equalsIgnoreCase("Field")) {
-
         } else {
             if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() == 5) {
                 gameView.printSpellZoneIsFull();
@@ -809,6 +827,8 @@ public class GameController {
         } else {
             currentPhase = Phase.END_PHASE;
             currentPlayer.setSetOrSummonInThisTurn(false);
+            setSummonInThisTurn(false);
+            setSummonedCard(null);
             changeCurrentPlayer();
             turn++;
             gameView.printCurrentPhase();
@@ -849,6 +869,8 @@ public class GameController {
         monster.setFace(Face.UP);
         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
         currentPlayer.setSetOrSummonInThisTurn(true);
+        setSummonInThisTurn(true);
+        setSummonedCard(monster);
         currentPlayer.setSelectedCard(null);
         currentPlayer.getBoard().putMonsterInBoard(monster);
     }

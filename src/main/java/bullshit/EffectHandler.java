@@ -4,8 +4,10 @@ import controll.GameController;
 import enums.Phase;
 import enums.SummonType;
 import enums.Zone;
+import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
+import model.cards.Spell;
 import model.cards.Trap;
 import model.players.Player;
 import view.ViewMaster;
@@ -26,16 +28,15 @@ public abstract class EffectHandler {
     public abstract boolean canActivate();
 }
 
-class IsPlayerAttacking extends EffectHandler {
+class IsRivalPlayerAttacking extends EffectHandler {
 
-    public IsPlayerAttacking(Card card) {
+    public IsRivalPlayerAttacking(Card card) {
         super(card);
     }
 
     @Override
     public boolean canActivate() {
-        Player currentPlayer = gameController.getCurrentPlayer();
-        if (card.getCardOwner() == currentPlayer && gameController.getCurrentPhase() == Phase.BATTLE_PHASE) {
+        if (gameController.getRivalPlayer()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -44,14 +45,14 @@ class IsPlayerAttacking extends EffectHandler {
     }
 }
 
-class HasAnySummonHappendThisTurn extends EffectHandler {
-    public HasAnySummonHappendThisTurn(Card card) {
+class HasAnySummonHappenedThisTurn extends EffectHandler {
+    public HasAnySummonHappenedThisTurn(Card card) {
         super(card);
     }
 
     @Override
     public boolean canActivate() {
-        if (gameController.getRivalPlayer().isSummonInThisTurn() || gameController.getCurrentPlayer().isSummonInThisTurn()) {
+        if (gameController.isSummonInThisTurn()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -155,7 +156,31 @@ class PlayerCanActivateTrap extends EffectHandler {
 
     @Override
     public boolean canActivate() {
-        if (card.getPlayer().isCanActiveTrap() && !((Trap) card).isEffectUsed()) {
+        if (card.getPlayer().isCanActiveTrap() && !((Trap) card).isEffectUsed() && !((Trap) card).isSetINThisTurn()) {
+            if (nextHandler != null) return nextHandler.canActivate();
+            else return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+class IsPlayerMonsterZoneHasEmptyPlace extends EffectHandler {
+
+    public IsPlayerMonsterZoneHasEmptyPlace(Card card) {
+        super(card);
+    }
+
+    @Override
+    public boolean canActivate() {
+        boolean emptyCell = false;
+        for (Cell cell : card.getPlayer().getBoard().getMonsters()) {
+            if (cell.getCard() == null) {
+                emptyCell = true;
+                break;
+            }
+        }
+        if (emptyCell) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -181,15 +206,15 @@ class IsCardInGraveyard extends EffectHandler {
     }
 }
 
-class IsEffectedCardInGraveyard extends EffectHandler{
+class IsEffectedCardInGraveyard extends EffectHandler {
 
-    public IsEffectedCardInGraveyard(Card card){
+    public IsEffectedCardInGraveyard(Card card) {
         super(card);
     }
 
     @Override
     public boolean canActivate() {
-        if (((Trap)card).getEffectedCard().getZone() == Zone.GRAVEYARD){
+        if (((Trap) card).getEffectedCard().getZone() == Zone.GRAVEYARD) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -198,4 +223,35 @@ class IsEffectedCardInGraveyard extends EffectHandler{
     }
 }
 
+class IsAnySpellActive extends EffectHandler {
 
+    public IsAnySpellActive(Card card) {
+        super(card);
+    }
+
+    @Override
+    public boolean canActivate() {
+        boolean anySpellActive = false;
+        for (Cell cell : card.getPlayer().getBoard().getSpellOrTrap()) {
+            if (cell.getCard() instanceof Spell && !cell.getCard().isActivated()) {
+                anySpellActive = true;
+                break;
+            }
+        }
+        if (!anySpellActive)
+        for (Cell cell : gameController.getRivalPlayer().getBoard().getSpellOrTrap()) {
+            if (cell.getCard() instanceof Spell && !cell.getCard().isActivated()) {
+                anySpellActive = true;
+                break;
+            }
+        }
+        if (anySpellActive) {
+            if (nextHandler != null) return nextHandler.canActivate();
+            else return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+class

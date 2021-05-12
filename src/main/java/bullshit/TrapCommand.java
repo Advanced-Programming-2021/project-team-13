@@ -2,7 +2,9 @@ package bullshit;
 
 import controll.GameController;
 import enums.AttackOrDefense;
+import enums.Zone;
 import model.Cell;
+import model.Graveyard;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Trap;
@@ -29,9 +31,9 @@ public abstract class TrapCommand {
 
 }
 
-class BringMonsterBackFromGraveYard extends TrapCommand{
+class BringMonsterBackFromGraveYardToBoard extends TrapCommand {
 
-    public BringMonsterBackFromGraveYard(Card card){
+    public BringMonsterBackFromGraveYardToBoard(Card card) {
         super(card);
     }
 
@@ -39,6 +41,7 @@ class BringMonsterBackFromGraveYard extends TrapCommand{
     public void execute() {
         gameController.selectMonsterFromGraveyard();
         Monster monster = (Monster) gameController.getCurrentPlayer().getSelectedCard();
+        monster.setZone(Zone.MONSTER_ZONE);
         monster.setAttackedInThisTurn(false);
         monster.setAttackable(true);
         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
@@ -51,9 +54,9 @@ class BringMonsterBackFromGraveYard extends TrapCommand{
     }
 }
 
-class SetEffectedMonster extends TrapCommand{
+class SetEffectedMonster extends TrapCommand {
 
-    public SetEffectedMonster(Card card){
+    public SetEffectedMonster(Card card) {
         super(card);
     }
 
@@ -64,3 +67,31 @@ class SetEffectedMonster extends TrapCommand{
         gameController.getCurrentPlayer().setSelectedCard(null);
     }
 }
+
+class SendMonsterToGraveyard extends TrapCommand {
+
+    public SendMonsterToGraveyard(Card card) {
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        Graveyard graveyard = trap.getPlayer().getBoard().getGraveyard();
+        graveyard.addCard(trap.getEffectedCard());
+    }
+}
+
+class SendCardToGraveyard extends TrapCommand {
+
+    public SendCardToGraveyard(Card card) {
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        Graveyard graveyard = trap.getPlayer().getBoard().getGraveyard();
+        graveyard.addCard(trap);
+    }
+}
+
+class

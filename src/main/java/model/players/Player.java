@@ -19,6 +19,7 @@ public class Player {
     private ArrayList<Card> cardsInHand;
     private boolean isSetOrSummonInThisTurn = false;
     private boolean canActiveTrap = true;
+    private boolean isAttacking;
 
     public Player(User user) {
         this.wonRounds = 0;
@@ -42,7 +43,16 @@ public class Player {
         }
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
+        this.isAttacking = false;
         return this;
+    }
+
+    public void setAttacking(boolean attacking) {
+        isAttacking = attacking;
+    }
+
+    public boolean isAttacking() {
+        return isAttacking;
     }
 
     public boolean isCanActiveTrap() {

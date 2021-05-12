@@ -55,10 +55,10 @@ public class GameView {
 
 
     private void showGraveyard(String command) {
-        ShowGraveyardMenu showGraveyardMenu = new ShowGraveyardMenu(gameController.getCurrentPlayer());
-        ViewMaster.getViewMaster().setShowGraveyardMenu(showGraveyardMenu);
+        ShowGraveyardView showGraveyardView = new ShowGraveyardView(gameController.getCurrentPlayer());
+        ViewMaster.getViewMaster().setShowGraveyardMenu(showGraveyardView);
         ViewMaster.setCurrentMenu(Menu.SHOW_GRAVEYARD);
-        showGraveyardMenu.run(command);
+        showGraveyardView.run(command);
     }
 
     private void changeSet(Matcher inputMatcher) {

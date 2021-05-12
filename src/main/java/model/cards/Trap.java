@@ -6,7 +6,8 @@ import enums.Face;
 
 public class Trap extends Card {
     private TrapAction trapAction;
-    private boolean usedAbility;
+    private boolean isEffectUsed;
+    private Card EffectedCard;
     String type;
     boolean isSetINThisTurn = false;
 
@@ -14,7 +15,7 @@ public class Trap extends Card {
                 int price, String type) {
         super(name, cardType, description, face, price);
         this.type = type;
-        this.
+        this.isEffectUsed = false;
     }
 
     public String getType() {
@@ -31,6 +32,30 @@ public class Trap extends Card {
 
     public void setSetINThisTurn(boolean setINThisTurn) {
         isSetINThisTurn = setINThisTurn;
+    }
+
+    public Card getEffectedCard() {
+        return EffectedCard;
+    }
+
+    public TrapAction getTrapAction() {
+        return trapAction;
+    }
+
+    public void setEffectedCard(Card effectedCard) {
+        EffectedCard = effectedCard;
+    }
+
+    public void setTrapAction(TrapAction trapAction) {
+        this.trapAction = trapAction;
+    }
+
+    public void setEffectUsed(boolean effectUsed) {
+        isEffectUsed = effectUsed;
+    }
+
+    public boolean isEffectUsed() {
+        return isEffectUsed;
     }
 
     @Override
