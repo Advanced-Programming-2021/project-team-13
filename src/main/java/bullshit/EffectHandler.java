@@ -156,7 +156,7 @@ class PlayerCanActivateTrap extends EffectHandler {
 
     @Override
     public boolean canActivate() {
-        if (card.getPlayer().isCanActiveTrap() && !((Trap) card).isEffectUsed() && !((Trap) card).isSetINThisTurn()) {
+        if (card.getPlayer().isCanActiveTrap() && !card.isActivated() && !((Trap) card).isSetINThisTurn()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -253,5 +253,3 @@ class IsAnySpellActive extends EffectHandler {
         }
     }
 }
-
-class

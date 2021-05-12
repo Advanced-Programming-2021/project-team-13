@@ -6,7 +6,9 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.players.Player;
+import view.ViewMaster;
 import view.allmenu.GameView;
+import view.allmenu.ShowGraveyardView;
 
 import java.util.ArrayList;
 
@@ -1121,8 +1123,15 @@ public class GameController {
                         (monster.getAttacker());
     }
 
-    public void selectMonsterFronGraveyard(){
-
+    public void selectMonsterFromGraveyard(){
+        ShowGraveyardView showGraveyardView = new ShowGraveyardView(currentPlayer);
+        showGraveyardView.run("show graveyard");
+        int monsterNum;
+        do {
+            showGraveyardView.printSelectCard();
+            monsterNum = ViewMaster.scanner.nextInt();
+        } while (monsterNum > showGraveyardView.getShowGraveyardController().showGraveyard());
+        showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum);
     }
 
 }

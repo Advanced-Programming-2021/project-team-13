@@ -45,12 +45,7 @@ class BringMonsterBackFromGraveYardToBoard extends TrapCommand {
         monster.setAttackedInThisTurn(false);
         monster.setAttackable(true);
         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-        for (Cell cell : gameController.getCurrentPlayer().getBoard().getMonsters()) {
-            if (cell.getCard() == null) {
-                cell.setCard(monster);
-                break;
-            }
-        }
+        monster.getCardOwner().getBoard().putMonsterInBoard(monster);
     }
 }
 

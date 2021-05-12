@@ -77,7 +77,7 @@ class CallOfTheHaunted extends TrapAction {
     @Override
     public void run() {
         if (startActionCheck.canActivate()) {
-            trap.setEffectUsed(true);
+            trap.setActivated(true);
             for (TrapCommand trapCommand : trapCommands)
                 trapCommand.execute();
         } else if (endActionCheck1.canActivate() || endActionCheck2.canActivate()) {
@@ -109,4 +109,12 @@ class MagicJammer extends TrapAction {
     }
 }
 
-class
+class TimeSeal extends TrapAction {
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+
+    }
+}

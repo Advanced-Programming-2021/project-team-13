@@ -34,6 +34,7 @@ public class ShowGraveyardController {
                 number--;
                 if (number == 0) {
                     currentPlayer.setSelectedCard(card);
+                    break;
                 }
             }
         }

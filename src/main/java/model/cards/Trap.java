@@ -50,14 +50,6 @@ public class Trap extends Card {
         this.trapAction = trapAction;
     }
 
-    public void setEffectUsed(boolean effectUsed) {
-        isEffectUsed = effectUsed;
-    }
-
-    public boolean isEffectUsed() {
-        return isEffectUsed;
-    }
-
     @Override
     public String toString() {
         return "Name: " + cardName + "Trap"

@@ -20,6 +20,7 @@ public class Player {
     private boolean isSetOrSummonInThisTurn = false;
     private boolean canActiveTrap = true;
     private boolean isAttacking;
+    private boolean canDrawCard;
 
     public Player(User user) {
         this.wonRounds = 0;
@@ -32,6 +33,7 @@ public class Player {
             e.printStackTrace();
         }
         cardsInHand = new ArrayList<>();
+        canDrawCard = true;
     }
 
 
@@ -49,6 +51,14 @@ public class Player {
 
     public void setAttacking(boolean attacking) {
         isAttacking = attacking;
+    }
+
+    public void setCanDrawCard(boolean canDrawCard) {
+        this.canDrawCard = canDrawCard;
+    }
+
+    public boolean getCanDrawCard() {
+        return canDrawCard;
     }
 
     public boolean isAttacking() {
@@ -116,7 +126,7 @@ public class Player {
 
     public void addCardToHand() {
         Card card = this.getBoard().getDeck().getAllCardsInMainDeck().get(0);
-        this.getBoard().getDeck().removeCard(card ,false);
+        this.getBoard().getDeck().removeCard(card, false);
         this.cardsInHand.add(card);
     }
 
