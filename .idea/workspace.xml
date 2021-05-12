@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="login is debuged">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="active spell in game view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,6 +192,7 @@
       <workItem from="1620397682243" duration="6649000" />
       <workItem from="1620439891874" duration="6930000" />
       <workItem from="1620621789862" duration="5708000" />
+      <workItem from="1620785684513" duration="666000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -294,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620571975842</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="active spell in game view">
+      <created>1620739697558</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1620739697558</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,7 +365,8 @@
     <MESSAGE value="literally nothing" />
     <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
     <MESSAGE value="login is debuged" />
-    <option name="LAST_COMMIT_MESSAGE" value="login is debuged" />
+    <MESSAGE value="active spell in game view" />
+    <option name="LAST_COMMIT_MESSAGE" value="active spell in game view" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
