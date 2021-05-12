@@ -8,9 +8,11 @@ public class Spell extends Card {
     //private final SpellEffect spellEffect;  // beware that its final!!!!!!
     private boolean isActive = false;
     private Monster equippedMonster;
+    private String type;
+    private boolean isSetINThisTurn = false;
+    private SpellEffect spellEffect;
 
-
-    public Spell(String name, CardType cardType, String description, Face face, int price) {
+    public Spell(String name, CardType cardType, String description, Face face, int price, String type) {
         super(name, cardType, description, face, price);
         this.type = type;
     }

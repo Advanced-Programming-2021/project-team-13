@@ -536,4 +536,8 @@ public class GameView {
     public void printAlreadyActivated() {
         System.out.println("you have already activated this card");
     }
+
+    public void printSpellZoneIsFull() {
+        System.out.println("spell zone is full");
+    }
 }
