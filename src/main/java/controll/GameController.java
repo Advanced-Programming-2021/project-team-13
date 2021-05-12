@@ -1,9 +1,6 @@
 package controll;
 
-import enums.AttackOrDefense;
-import enums.Face;
-import enums.Phase;
-import enums.Zone;
+import enums.*;
 import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
