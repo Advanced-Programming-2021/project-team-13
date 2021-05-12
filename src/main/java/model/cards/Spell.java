@@ -2,15 +2,12 @@ package model.cards;
 
 import enums.CardType;
 import enums.Face;
-import enums.SpellEffect;
 
 public class Spell extends Card {
     //private final SpellEffect spellEffect;  // beware that its final!!!!!!
-    private boolean isActive = false;
     private Monster equippedMonster;
     private String type;
     private boolean isSetINThisTurn = false;
-    private SpellEffect spellEffect;
 
     public Spell(String name, CardType cardType, String description, Face face, int price, String type) {
         super(name, cardType, description, face, price);
@@ -43,25 +40,18 @@ public class Spell extends Card {
         return equippedMonster;
     }
 
-    public SpellEffect getSpellEffect() {
-        return spellEffect;
+    public String getSpellEffect() {
+        return type;
     }
 
-    public void setSpellEffect(SpellEffect spellEffect) {
-        this.spellEffect = spellEffect;
+    public void setSpellEffect(String type) {
+        this.type = type;
     }
 
     public void setEquippedMonster(Monster equippedMonster) {
         this.equippedMonster = equippedMonster;
     }
 
-    public void setActive(boolean status) {
-        isActive = status;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
 /*
     public Spell(String name, CardType cardType, SpellEffect spellEffect,
           String description, Face face, int price, int cardNum) {

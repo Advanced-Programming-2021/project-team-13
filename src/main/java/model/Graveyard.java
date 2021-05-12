@@ -32,6 +32,7 @@ public class Graveyard {
         if (allCards.contains(card))
             return;
         card.setZone(Zone.GRAVEYARD);
+//        card.setActivated(false);
         if (card instanceof Monster) {
             for (Cell monster : owner.getBoard().getMonsters()) {
                 if (monster.getCard() == card) {
