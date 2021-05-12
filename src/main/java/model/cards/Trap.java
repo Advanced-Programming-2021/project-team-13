@@ -2,7 +2,6 @@ package model.cards;
 
 import enums.CardType;
 import enums.Face;
-import enums.TrapEffect;
 
 public class Trap extends Card {
     //    private TrapEffect trapEffect;
@@ -13,12 +12,6 @@ public class Trap extends Card {
         super(name, cardType, description, face, price);
         this.type = type;
     }
-
-    @Override
-    public String toString() {
-        return "Name: " + cardName + "Trap"
-                + "\nType: " + type + "Description: " + cardDescription;
-    }
  /*   Trap(String name, CardType cardType, String description, Face face,
          int price, int cardNum, TrapEffect trapEffect) {
         super(name, cardType, description, face, price, cardNum);
@@ -28,4 +21,10 @@ public class Trap extends Card {
     public boolean isTrapDestroyer() {///////////////////////////////////////////this needs to be completed
         return false;
     }*/
+
+    @Override
+    public String toString() {
+        return "Name: " + cardName + "Trap"
+                + "\nType: " + type + "Description: " + cardDescription;
+    }
 }
