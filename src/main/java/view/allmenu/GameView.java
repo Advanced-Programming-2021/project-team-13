@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 
 public class GameView {
     private final GameController gameController;
+    private int roundCheck = 0;
 
     public GameView(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
@@ -539,5 +540,9 @@ public class GameView {
 
     public void printSpellZoneIsFull() {
         System.out.println("spell zone is full");
+    }
+
+    public void printPrepsNotDone() {
+        System.out.println("preparations of this spell are not done yet");
     }
 }

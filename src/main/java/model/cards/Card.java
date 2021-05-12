@@ -1,6 +1,5 @@
 package model.cards;
 
-import bullshit.Interfaces.Effects;
 import enums.CardType;
 import enums.Face;
 import enums.Zone;
@@ -28,6 +27,7 @@ public class Card implements Comparable<Card> {
     protected Zone zone;
     //    protected ArrayList<Card> allCardsOfThisType;
     protected int price;
+    protected boolean activated = false;
 
 
     public Card(String name, CardType cardType, String description, Face face, int price) {
@@ -118,6 +118,14 @@ public class Card implements Comparable<Card> {
 
     public void addToAllCardsOfThisType(Card card) {
 
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public Face getFace() {
