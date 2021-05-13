@@ -21,6 +21,7 @@ public class GameController {
     private int turnsPlayed;
     private int unitedCalcCurrent;
     private int unitedCalcRival;
+    private int turn = 0;
 
     ///////////////////////////////////////////////////we need activation of spells and traps to work;;;;;;DAMN!//////////////////////////++messenger++some field spells++
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
@@ -262,7 +263,7 @@ public class GameController {
             gameView.printActiveOnlyForSpells();
             return;
         }
-        if ((currentPhase != Phase.MAIN_PHASE_1) || (currentPhase != Phase.MAIN_PHASE_2)) { // wtf is this things problem?????????!
+        if ((currentPhase != Phase.MAIN_PHASE_1) && (currentPhase != Phase.MAIN_PHASE_2)) { // wtf is this things problem?????????!
             gameView.printCantActiveThisTurn();
             return;
         }
@@ -271,18 +272,35 @@ public class GameController {
             gameView.printAlreadyActivated();
             return;
         }
-        if (spell.getSpellEffect() != SpellEffect.FEILD) {
+        if (!spell.getSpellEffect().equalsIgnoreCase("Field")) {
+
 
         } else {
-
+            if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() == 5) {
+                gameView.printSpellZoneIsFull();
+                return;
+            }
+            if (!checkPreparation(currentPlayer.getSelectedCard())) {
+                gameView.printPrepsNotDone();
+                return;
+            }
+            findEffect(currentPlayer.getSelectedCard());
+            sendCardT
         }
     }
 
+    private boolean checkPreparation(Card card) {
+        if (card.getCardName().equalsIgnoreCase("Twin Twisters"))
+            return twinTwistersCheck();
+        else if (card.getCardName().equalsIgnoreCase("Messenger of peace"))
+            return checkMessenger();
+        else if (card.getCardName().equalsIgnoreCase("Supply Squad"))
+            return supplySquad();
+        return true;
+    }
+
     private boolean spellActive(Spell spell) {
-        for (Cell cell : currentPlayer.getBoard().getSpellOrTrap()) {
-            if (cell.getCard() == spell) return true;
-        }
-        return false;
+        return spell.isActivated();
     }
 
     private void equipSpellRid() {
@@ -525,7 +543,7 @@ public class GameController {
     }
 
     private boolean isSpecialAttack(Monster ourMonster, Monster rivalMonster) {
-        if (MessengerOfPeace(ourMonster)) {
+        if (messengerOfPeace(ourMonster)) {
             gameView.printCantAttackBecauseOfMessenger();
             return true;
         } else if (rivalMonster.getCardName().equals("Marshmallon")) {
@@ -546,7 +564,7 @@ public class GameController {
         return false;
     }
 
-    private boolean MessengerOfPeace(Monster attacker) {////////////////////////where to activate??????/////////////////
+    private boolean messengerOfPeace(Monster attacker) {////////////////////////where to activate??????/////////////////
         if (!checkForActive(currentPlayer, "Messenger of peace")
                 && !checkForActive(getRivalPlayer(), "Messenger of peace"))
             return false;
@@ -556,7 +574,7 @@ public class GameController {
     private boolean checkForActive(Player player, String spellName) {
         for (Cell cell : player.getBoard().getSpellOrTrap()) {
             Spell spell = (Spell) cell.getCard();
-            if (spell.getCardName().equals(spellName) && spell.isActive())
+            if (spell.getCardName().equals(spellName) && spell.isActivated())
                 return true;
         }
         return false;
@@ -794,6 +812,7 @@ public class GameController {
             currentPhase = Phase.END_PHASE;
             currentPlayer.setSetOrSummonInThisTurn(false);
             changeCurrentPlayer();
+            turn++;
             gameView.printCurrentPhase();
             gameView.printWhoseTurn();
         }

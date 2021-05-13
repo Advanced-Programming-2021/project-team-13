@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 
 public class GameView {
     private final GameController gameController;
+    private int roundCheck = 0;
 
     public GameView(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
@@ -365,11 +366,11 @@ public class GameView {
         System.out.println(gameController.getCurrentPhase().getPhaseName());
     }
 
-    public void printUserWonWholeGame(String username, int winnerWonRounds, int loserWonRounds) {
+    public void printUserWonWholeGame(String username , int winnerWonRounds , int loserWonRounds){
         System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
     }
 
-    public void printUserWonSingleGame(String username, int winnerWonRounds, int loserWonRounds) {
+    public void printUserWonSingleGame(String username , int winnerWonRounds , int loserWonRounds){
         System.out.println(username + " won the game and the score is:" + winnerWonRounds + "-" + loserWonRounds);
     }
 
@@ -541,6 +542,10 @@ public class GameView {
 
     public void printSpellZoneIsFull() {
         System.out.println("spell zone is full");
+    }
+
+    public void printPrepsNotDone() {
+        System.out.println("preparations of this spell are not done yet");
     }
 
     public void printCantSpecialSummon() {
