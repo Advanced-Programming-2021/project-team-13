@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class User implements Comparable<User> {
-    private static final ArrayList<User> allUsers;
+    private static ArrayList<User> allUsers;
 
     static {
         allUsers = new ArrayList<>();
@@ -142,6 +142,10 @@ public class User implements Comparable<User> {
 
     public static ArrayList<User> getAllUsers() {
         return allUsers;
+    }
+
+    public static void setAllUsers(ArrayList<User> users) {
+        allUsers = users;
     }
 
     @Override

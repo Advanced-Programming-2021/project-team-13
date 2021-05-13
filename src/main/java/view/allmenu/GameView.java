@@ -51,6 +51,8 @@ public class GameView {
             gameController.surrender();
         else if (command.equals("active effect"))
             gameController.activeEffect();
+        else if (command.equals("special summon"))
+            gameController.checksBeforeSpecialSummon(false);
     }
 
 
@@ -364,11 +366,11 @@ public class GameView {
         System.out.println(gameController.getCurrentPhase().getPhaseName());
     }
 
-    public void printUserWonWholeGame(String username , int winnerWonRounds , int loserWonRounds){
+    public void printUserWonWholeGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
     }
 
-    public void printUserWonSingleGame(String username , int winnerWonRounds , int loserWonRounds){
+    public void printUserWonSingleGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the game and the score is:" + winnerWonRounds + "-" + loserWonRounds);
     }
 
@@ -496,7 +498,7 @@ public class GameView {
                     return;
                 else
                     System.out.println("There Is No Monster In One Of This Address");
-            } else System.out.println("Enter Valid Number");
+            } else System.out.println("Enter Valid Format");
         }
     }
 
@@ -544,5 +546,38 @@ public class GameView {
 
     public void printPrepsNotDone() {
         System.out.println("preparations of this spell are not done yet");
+    }
+
+    public void printCantSpecialSummon() {
+        System.out.println("there is no way you could special summon a monster");
+    }
+
+    public void getTributeTheTricky() {
+        while (true) {
+            System.out.println("Enter Monster Number: ");
+            String number = ViewMaster.scanner.nextLine();
+            if (number.matches("^\\d$")) {
+                if (gameController.checkTheTrickyInput(Integer.parseInt(number)))
+                    return;
+                else
+                    System.out.println("you should special summon right now");
+            } else
+                System.out.println("you should special summon right now");
+        }
+    }
+
+    public String getPositionForSpecialSummon() {
+        while (true) {
+            System.out.println("Attack Or Defence ?");
+            String position = ViewMaster.scanner.nextLine();
+            if (position.equalsIgnoreCase("attack")) return "attack";
+            else if (position.equalsIgnoreCase("defence")) return "defence";
+            else
+                System.out.println("you should special summon right now");
+        }
+    }
+
+    public void cantRitualSummon() {
+        System.out.println("there is no way you could ritual summon a monster");
     }
 }
