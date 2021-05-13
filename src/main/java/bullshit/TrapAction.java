@@ -37,7 +37,7 @@ public abstract class TrapAction implements Effect {
     }
 }
 
-class CallOfTheHaunted extends TrapAction {
+class  CallOfTheHaunted extends TrapAction {
 
     private EffectHandler endActionCheck1;
     private EffectHandler endActionCheck2;
@@ -117,7 +117,7 @@ class TimeSeal extends TrapAction {
         this.trap = (Trap) card;
         EffectHandler effectHandler = new PlayerCanActivateTrap(card);
         setStartActionCheck(effectHandler);
-        TrapCommand trapCommand = new SetPlayerCannotDrawCard(card);
+        TrapCommand trapCommand = new SetRivalPlayerCannotDrawCardNextTurn(card);
         TrapCommand trapCommand1 = new SendCardToGraveyard(card);
         trapCommands = new ArrayList<>();
         trapCommands.add(trapCommand);

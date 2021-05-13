@@ -88,14 +88,15 @@ class SendCardToGraveyard extends TrapCommand {
     }
 }
 
-class SetPlayerCannotDrawCard extends TrapCommand{
+class SetRivalPlayerCannotDrawCardNextTurn extends TrapCommand{
 
-    public SetPlayerCannotDrawCard(Card card){
+    public SetRivalPlayerCannotDrawCardNextTurn(Card card){
         super(card);
     }
 
     @Override
     public void execute() {
-        gameController.getRivalPlayer().setCanDrawCard(false);
+        int currentTurn = gameController.getTurnsPlayed();
+        gameController.addNotToDrawCardTurn(currentTurn + 1);
     }
 }

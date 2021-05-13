@@ -17,13 +17,13 @@ public class GameController {
     private final Player firstPlayer;
     private final Player secondPlayer;
     private final Player startingPlayer;
+    private final ArrayList<Integer> notToDrawCardTurns;
     private Player currentPlayer;
     private Phase currentPhase;
     private final int startingRounds;
     private int turnsPlayed;
     private int unitedCalcCurrent;
     private int unitedCalcRival;
-    private int turn = 0;
 
     ///////////////////////////////////////////////////we need activation of spells and traps to work;;;;;;DAMN!//////////////////////////++messenger++some field spells++
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
@@ -41,6 +41,15 @@ public class GameController {
         this.startingRounds = startingRounds;
         turnsPlayed = 0;
         currentPhase = Phase.DRAW_PHASE;
+        notToDrawCardTurns = new ArrayList<>();
+    }
+
+    public void addNotToDrawCardTurn(int turn){
+        notToDrawCardTurns.add(turn);
+    }
+
+    public ArrayList<Integer> getNotToDrawCardTurns() {
+        return notToDrawCardTurns;
     }
 
     public Player getCurrentPlayer() {
@@ -73,6 +82,10 @@ public class GameController {
 
     public int getStartingRounds() {
         return startingRounds;
+    }
+
+    public int getTurnsPlayed() {
+        return turnsPlayed;
     }
 
     public void changeCurrentPlayer() {
@@ -148,7 +161,7 @@ public class GameController {
             gameView.printNoCardSelected();
         else {
             Card card = currentPlayer.getSelectedCard();
-            if (card.getPlayer() == getRivalPlayer() && card.getFace() == Face.DOWN)
+            if (card.getCardOwner() == getRivalPlayer() && card.getFace() == Face.DOWN)
                 gameView.printCardInvisible();
             else gameView.showCard(card);
         }
@@ -791,11 +804,13 @@ public class GameController {
             currentPhase = Phase.DRAW_PHASE;
             gameView.printCurrentPhase();
             turnsPlayed++;
-            if (turnsPlayed == 0 || turnsPlayed == 1) {
-                if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0)
-                    currentPlayer.addCardToHand();
-                else {
-
+            if (turnsPlayed != 0 && turnsPlayed != 1) {
+                if (!notToDrawCardTurns.contains(turnsPlayed)) {
+                    if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0)
+                        currentPlayer.addCardToHand();
+                    else {
+                        new GameWinMenu(this).announceWinner(getRivalPlayer());
+                    }
                 }
             }
         } else if (currentPhase == Phase.DRAW_PHASE) {
@@ -818,7 +833,6 @@ public class GameController {
             currentPhase = Phase.END_PHASE;
             currentPlayer.setSetOrSummonInThisTurn(false);
             changeCurrentPlayer();
-            turn++;
             gameView.printCurrentPhase();
             gameView.printWhoseTurn();
         }
