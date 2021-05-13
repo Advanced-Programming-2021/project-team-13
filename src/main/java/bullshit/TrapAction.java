@@ -25,6 +25,7 @@ public abstract class TrapAction implements Effect {
     private static void setAllTrapEffects() {
         allTrapEffects = new HashMap<>();//complete this!!
         allTrapEffects.put("Call of The Haunted", new CallOfTheHaunted());
+        allTrapEffects.put("Time Seal" , new TimeSeal());
     }
 
     public void setTrapCommands(ArrayList<TrapCommand> trapCommands) {
@@ -69,7 +70,7 @@ class CallOfTheHaunted extends TrapAction {
         setTrapCommands(trapCommands);
         endCommands = new ArrayList<>();
         TrapCommand trapCommand2 = new SendCardToGraveyard(card);
-        TrapCommand trapCommand3 = new SendMonsterToGraveyard(card);
+        TrapCommand trapCommand3 = new SendEffectedMonsterToGraveyard(card);
         endCommands.add(trapCommand3);
         endCommands.add(trapCommand2);
     }
@@ -115,6 +116,19 @@ class TimeSeal extends TrapAction {
     public void setCard(Card card) {
         this.trap = (Trap) card;
         EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        setStartActionCheck(effectHandler);
+        TrapCommand trapCommand = new SetPlayerCannotDrawCard(card);
+        TrapCommand trapCommand1 = new SendCardToGraveyard(card);
+        trapCommands = new ArrayList<>();
+        trapCommands.add(trapCommand);
+        trapCommands.add(trapCommand1);
+    }
 
+    @Override
+    public void run() {
+        if (startActionCheck.canActivate()){
+            for (TrapCommand trapCommand : trapCommands)
+                trapCommand.execute();
+        }
     }
 }

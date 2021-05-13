@@ -156,7 +156,7 @@ class PlayerCanActivateTrap extends EffectHandler {
 
     @Override
     public boolean canActivate() {
-        if (card.getPlayer().isCanActiveTrap() && !card.isActivated() && !((Trap) card).isSetINThisTurn()) {
+        if (card.getCardOwner().isCanActiveTrap() && !card.isActivated() && !((Trap) card).isSetINThisTurn()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -174,7 +174,7 @@ class IsPlayerMonsterZoneHasEmptyPlace extends EffectHandler {
     @Override
     public boolean canActivate() {
         boolean emptyCell = false;
-        for (Cell cell : card.getPlayer().getBoard().getMonsters()) {
+        for (Cell cell : card.getCardOwner().getBoard().getMonsters()) {
             if (cell.getCard() == null) {
                 emptyCell = true;
                 break;
@@ -232,7 +232,7 @@ class IsAnySpellActive extends EffectHandler {
     @Override
     public boolean canActivate() {
         boolean anySpellActive = false;
-        for (Cell cell : card.getPlayer().getBoard().getSpellOrTrap()) {
+        for (Cell cell : card.getCardOwner().getBoard().getSpellOrTrap()) {
             if (cell.getCard() instanceof Spell && !cell.getCard().isActivated()) {
                 anySpellActive = true;
                 break;

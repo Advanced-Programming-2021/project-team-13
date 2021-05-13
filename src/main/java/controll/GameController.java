@@ -166,7 +166,7 @@ public class GameController {
             gameView.printNoCardSelected();
         else {
             Card card = currentPlayer.getSelectedCard();
-            if (card.getPlayer() == getRivalPlayer() && card.getFace() == Face.DOWN)
+            if (card.getCardOwner() == getRivalPlayer() && card.getFace() == Face.DOWN)
                 gameView.printCardInvisible();
             else gameView.showCard(card);
         }
@@ -804,10 +804,13 @@ public class GameController {
             gameView.printCurrentPhase();
             turnsPlayed++;
             if (turnsPlayed == 0 || turnsPlayed == 1) {
-                if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0)
-                    currentPlayer.addCardToHand();
-                else {
-
+                if (currentPlayer.getCanDrawCard()) {
+                    if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0)
+                        currentPlayer.addCardToHand();
+                    else {
+                        GameWinMenu gameWinMenu = new GameWinMenu(this);
+                        gameWinMenu.announceWinner(getRivalPlayer());
+                    }
                 }
             }
         } else if (currentPhase == Phase.DRAW_PHASE) {

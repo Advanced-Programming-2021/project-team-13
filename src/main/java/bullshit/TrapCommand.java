@@ -3,7 +3,6 @@ package bullshit;
 import controll.GameController;
 import enums.AttackOrDefense;
 import enums.Zone;
-import model.Cell;
 import model.Graveyard;
 import model.cards.Card;
 import model.cards.Monster;
@@ -63,15 +62,15 @@ class SetEffectedMonster extends TrapCommand {
     }
 }
 
-class SendMonsterToGraveyard extends TrapCommand {
+class SendEffectedMonsterToGraveyard extends TrapCommand {
 
-    public SendMonsterToGraveyard(Card card) {
+    public SendEffectedMonsterToGraveyard(Card card) {
         super(card);
     }
 
     @Override
     public void execute() {
-        Graveyard graveyard = trap.getPlayer().getBoard().getGraveyard();
+        Graveyard graveyard = trap.getCardOwner().getBoard().getGraveyard();
         graveyard.addCard(trap.getEffectedCard());
     }
 }
@@ -84,9 +83,19 @@ class SendCardToGraveyard extends TrapCommand {
 
     @Override
     public void execute() {
-        Graveyard graveyard = trap.getPlayer().getBoard().getGraveyard();
+        Graveyard graveyard = trap.getCardOwner().getBoard().getGraveyard();
         graveyard.addCard(trap);
     }
 }
 
-class
+class SetPlayerCannotDrawCard extends TrapCommand{
+
+    public SetPlayerCannotDrawCard(Card card){
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        gameController.getRivalPlayer().setCanDrawCard(false);
+    }
+}
