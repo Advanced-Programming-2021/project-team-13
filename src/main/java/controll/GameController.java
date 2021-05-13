@@ -272,7 +272,7 @@ public class GameController {
             return;
         }
         if (spell.getSpellEffect() != SpellEffect.FEILD) {
-            
+
         } else {
 
         }
@@ -616,24 +616,24 @@ public class GameController {
                     rivalMonster.getCardOwner();
             }
             gameView.printDoesntContainCard("Graveyard", rivalMonster.getCardName());
-        } else if (fromWhere.equals("Hand")) {
+        } else if (fromWhere.equalsIgnoreCase("Hand")) {
 /*            if () {
 
             }*/
             gameView.printDoesntContainCard("Hand", rivalMonster.getCardName());
-        } else if (fromWhere.equals("Deck")) {
+        } else if (fromWhere.equalsIgnoreCase("Deck")) {
             gameView.printDoesntContainCard("Deck", rivalMonster.getCardName());
         } else
             gameView.printInvalidLocation();
     }
 
     private boolean checkCyberse(String cyberse) {
-        if (cyberse.equals("Bitron"))
+        if (cyberse.equalsIgnoreCase("Bitron"))
             return true;
-        else if (cyberse.equals("Texchanger")) {
+        else if (cyberse.equalsIgnoreCase("Texchanger")) {
             gameView.printNoCyberseWithAbility();
             return false;
-        } else if (cyberse.equals("Leotron"))
+        } else if (cyberse.equalsIgnoreCase("Leotron"))
             return true;
         gameView.printInvalidCyberseName();
         return false;
@@ -806,7 +806,7 @@ public class GameController {
             if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
                     && currentPlayer.getSelectedCard() instanceof Monster
                     && ((Monster) currentPlayer.getSelectedCard()).getMonsterCardType() != MonsterCardType.RITUAL
-                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("")) {
+                    && !(currentPlayer.getSelectedCard()).getCardName().equalsIgnoreCase("the tricky")) {
                 if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
                     gameView.printNotInMainPhase();
                 else {
@@ -1082,4 +1082,41 @@ public class GameController {
                         (monster.getAttacker());
     }
 
+    public void checksBeforeSpecialSummon(boolean isItHappenBecauseOfCardEffect) {
+        if (isItHappenBecauseOfCardEffect || currentPlayer.getSelectedCard().getCardName().equalsIgnoreCase("the tricky")) {
+            Monster monster = (Monster) currentPlayer.getSelectedCard();
+            if (monster.getCardName().equalsIgnoreCase("the tricky")) {
+                if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone())
+                    gameView.getTributeTheTricky();
+                else {
+                    gameView.printCantSpecialSummon();
+                    return;
+                }
+                specialSummon();
+            }
+        } else
+            gameView.printCantSpecialSummon();
+    }
+
+    private void specialSummon() {
+        Monster monster = (Monster) currentPlayer.getSelectedCard();
+        String position = gameView.getPositionForSpecialSummon();
+        if (position.equalsIgnoreCase("attack"))
+            monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+        else
+            monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
+        monster.setSetInThisTurn(true);
+        monster.setZone(Zone.MONSTER_ZONE);
+        monster.setFace(Face.UP);
+        currentPlayer.setSelectedCard(null);
+        currentPlayer.getBoard().putMonsterInBoard(monster);
+    }
+
+    public boolean checkTheTrickyInput(int monsterNumber) {
+        if (monsterNumber <= 0 || monsterNumber > 5) return false;
+        Monster monster = (Monster) currentPlayer.getBoard().getMonsterByAddress(monsterNumber);
+        if (monster == null) return false;
+        currentPlayer.getBoard().getGraveyard().addCard(monster);
+        return true;
+    }
 }
