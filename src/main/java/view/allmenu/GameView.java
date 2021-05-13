@@ -366,11 +366,11 @@ public class GameView {
         System.out.println(gameController.getCurrentPhase().getPhaseName());
     }
 
-    public void printUserWonWholeGame(String username , int winnerWonRounds , int loserWonRounds){
+    public void printUserWonWholeGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
     }
 
-    public void printUserWonSingleGame(String username , int winnerWonRounds , int loserWonRounds){
+    public void printUserWonSingleGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the game and the score is:" + winnerWonRounds + "-" + loserWonRounds);
     }
 
@@ -575,5 +575,9 @@ public class GameView {
             else
                 System.out.println("you should special summon right now");
         }
+    }
+
+    public void cantRitualSummon() {
+        System.out.println("there is no way you could ritual summon a monster");
     }
 }

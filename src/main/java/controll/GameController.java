@@ -268,11 +268,14 @@ public class GameController {
             return;
         }
         Spell spell = (Spell) currentPlayer.getSelectedCard();
+
         if (spellActive(spell)) {//////////////////fishy///////////////////////////
             gameView.printAlreadyActivated();
             return;
         }
-        if (!spell.getSpellEffect().equalsIgnoreCase("Field")) {
+        if (spell.getCardName().equalsIgnoreCase("Advance ritual art"))
+            checkRitualSummon(spell);
+        else if (!spell.getSpellEffect().equalsIgnoreCase("Field")) {
 
 
         } else {
@@ -289,13 +292,14 @@ public class GameController {
         }
     }
 
+
     private boolean checkPreparation(Card card) {
-        if (card.getCardName().equalsIgnoreCase("Twin Twisters"))
+/*        if (card.getCardName().equalsIgnoreCase("Twin Twisters"))
             return twinTwistersCheck();
         else if (card.getCardName().equalsIgnoreCase("Messenger of peace"))
             return checkMessenger();
         else if (card.getCardName().equalsIgnoreCase("Supply Squad"))
-            return supplySquad();
+            return supplySquad();*/
         return true;
     }
 
@@ -1086,7 +1090,7 @@ public class GameController {
 
     public static boolean checkForDeathAction(Card card) {
         Monster monster = (Monster) card;
-        if (card.getCardName().equals("Yomi Ship"))
+        if (card.getCardName().equalsIgnoreCase("Yomi Ship"))
             yomiShip(monster);
         return false;
     }
@@ -1115,6 +1119,20 @@ public class GameController {
             }
         } else
             gameView.printCantSpecialSummon();
+    }
+
+    private void checkRitualSummon(Spell spell) {
+        boolean isThereRitualMonster = false;
+        for (Card card : currentPlayer.getCardsInHand()) {
+            if (card instanceof Monster)
+                if (((Monster) card).getMonsterCardType() == MonsterCardType.RITUAL) {
+                    isThereRitualMonster = true;
+                    break;
+                }
+        }
+        if (isThereRitualMonster) {
+        } else
+            gameView.cantRitualSummon();
     }
 
     private void specialSummon() {
