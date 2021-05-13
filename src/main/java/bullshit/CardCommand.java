@@ -3,13 +3,16 @@ package bullshit;
 import controll.GameController;
 import enums.AttackOrDefense;
 import enums.Zone;
+import model.Cell;
 import model.Graveyard;
 import model.cards.Card;
 import model.cards.Monster;
+import model.cards.Spell;
 import model.cards.Trap;
 import view.ViewMaster;
 
-public abstract class TrapCommand {
+
+public abstract class CardCommand {
     protected static GameController gameController;
 
     static {
@@ -18,7 +21,7 @@ public abstract class TrapCommand {
 
     protected Trap trap;
 
-    public TrapCommand(Card card) {
+    public CardCommand(Card card) {
         this.trap = (Trap) card;
     }
 
@@ -30,7 +33,7 @@ public abstract class TrapCommand {
 
 }
 
-class BringMonsterBackFromGraveYardToBoard extends TrapCommand {
+class BringMonsterBackFromGraveYardToBoard extends CardCommand {
 
     public BringMonsterBackFromGraveYardToBoard(Card card) {
         super(card);
@@ -48,7 +51,7 @@ class BringMonsterBackFromGraveYardToBoard extends TrapCommand {
     }
 }
 
-class SetEffectedMonster extends TrapCommand {
+class SetEffectedMonster extends CardCommand {
 
     public SetEffectedMonster(Card card) {
         super(card);
@@ -62,9 +65,9 @@ class SetEffectedMonster extends TrapCommand {
     }
 }
 
-class SendEffectedMonsterToGraveyard extends TrapCommand {
+class SendEffectedCardToGraveyard extends CardCommand {
 
-    public SendEffectedMonsterToGraveyard(Card card) {
+    public SendEffectedCardToGraveyard(Card card) {
         super(card);
     }
 
@@ -75,7 +78,7 @@ class SendEffectedMonsterToGraveyard extends TrapCommand {
     }
 }
 
-class SendCardToGraveyard extends TrapCommand {
+class SendCardToGraveyard extends CardCommand {
 
     public SendCardToGraveyard(Card card) {
         super(card);
@@ -88,9 +91,9 @@ class SendCardToGraveyard extends TrapCommand {
     }
 }
 
-class SetRivalPlayerCannotDrawCardNextTurn extends TrapCommand{
+class SetRivalPlayerCannotDrawCardNextTurn extends CardCommand {
 
-    public SetRivalPlayerCannotDrawCardNextTurn(Card card){
+    public SetRivalPlayerCannotDrawCardNextTurn(Card card) {
         super(card);
     }
 
@@ -98,5 +101,33 @@ class SetRivalPlayerCannotDrawCardNextTurn extends TrapCommand{
     public void execute() {
         int currentTurn = gameController.getTurnsPlayed();
         gameController.addNotToDrawCardTurn(currentTurn + 1);
+    }
+}
+
+class FindActiveSpell extends CardCommand {
+
+    public FindActiveSpell(Card card) {
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        Spell effectedCard = null;
+        for (Cell cell : trap.getCardOwner().getBoard().getSpellOrTrap()) {
+            if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
+                effectedCard = (Spell) cell.getCard();
+                break;
+            }
+        }
+        if (effectedCard == null) {
+            for (Cell cell : gameController.getRivalPlayer().getBoard().getSpellOrTrap()) {
+                if (trap != cell.getCard())
+                    if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
+                        effectedCard = (Spell) cell.getCard();
+                        break;
+                    }
+            }
+        }
+        trap.setEffectedCard(effectedCard);
     }
 }

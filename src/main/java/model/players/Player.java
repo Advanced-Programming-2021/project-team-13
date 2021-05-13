@@ -1,10 +1,8 @@
 package model.players;
 
 import model.Board;
-import model.Deck;
 import model.Graveyard;
 import model.cards.Card;
-import model.cards.Monster;
 
 import java.util.ArrayList;
 
@@ -35,7 +33,7 @@ public class Player {
     }
 
 
-    public Player renewPlayer() {
+    public void renewPlayer() {
         try {
             this.board = new Board(this.user.getActiveDeck().clone(), new Graveyard(this));
         } catch (CloneNotSupportedException e) {
@@ -44,7 +42,6 @@ public class Player {
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
-        return this;
     }
 
     public void setAttacking(boolean attacking) {

@@ -232,17 +232,20 @@ class IsAnySpellActive extends EffectHandler {
     @Override
     public boolean canActivate() {
         boolean anySpellActive = false;
-        for (Cell cell : card.getCardOwner().getBoard().getSpellOrTrap()) {
-            if (cell.getCard() instanceof Spell && !cell.getCard().isActivated()) {
+        for (Cell cell : gameController.getRivalPlayer().getBoard().getSpellOrTrap()) {
+            if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
                 anySpellActive = true;
                 break;
             }
         }
-        if (!anySpellActive)
-        for (Cell cell : gameController.getRivalPlayer().getBoard().getSpellOrTrap()) {
-            if (cell.getCard() instanceof Spell && !cell.getCard().isActivated()) {
-                anySpellActive = true;
-                break;
+        if (!anySpellActive) {
+            for (Cell cell : card.getCardOwner().getBoard().getSpellOrTrap()) {
+                if (cell.getCard() != card) {
+                    if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
+                        anySpellActive = true;
+                        break;
+                    }
+                }
             }
         }
         if (anySpellActive) {
