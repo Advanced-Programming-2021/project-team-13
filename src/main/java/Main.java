@@ -7,6 +7,4 @@ public class Main {
         new UserJson().loadDataBase();
         ViewMaster.getViewMaster().run();
     }
-
-    public int hi = 0;
 }
