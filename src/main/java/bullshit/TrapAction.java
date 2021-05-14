@@ -140,4 +140,4 @@ class TimeSeal extends TrapAction {
     }
 }
 
-class
+/*class*/

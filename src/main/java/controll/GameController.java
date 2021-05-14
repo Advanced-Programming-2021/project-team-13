@@ -327,31 +327,31 @@ public class GameController {
 
     private void findEffect(Spell spell) { ////////these are not complete but hell of a ride !!!
         String effectName = spell.getCardName();
-        if (effectName.equals("Monster Reborn"))
+        if (effectName.equalsIgnoreCase("Monster Reborn"))
             monsterReborn();
-        else if (effectName.equals("Terraforming"))
+        else if (effectName.equalsIgnoreCase("Terraforming"))
             terraforming();
-        else if (effectName.equals("Pot of Greed"))
+        else if (effectName.equalsIgnoreCase("Pot of Greed"))
             potOfGreed();
-        else if (effectName.equals("Raigeki"))
+        else if (effectName.equalsIgnoreCase("Raigeki"))
             raigeki();
-        else if (effectName.equals("Change of Heart"))
+        else if (effectName.equalsIgnoreCase("Change of Heart"))
             changeOfHeart();
-        else if (effectName.equals("Harpie’s Feather Duster"))
+        else if (effectName.equalsIgnoreCase("Harpie’s Feather Duster"))
             harpie();
-        else if (effectName.equals("Swords of Revealing Light"))
+        else if (effectName.equalsIgnoreCase("Swords of Revealing Light"))
             swordsOfRevealingLight();
-        else if (effectName.equals("Dark Hole"))
+        else if (effectName.equalsIgnoreCase("Dark Hole"))
             darkHole();
-        else if (effectName.equals("Supply Squad"))
+        else if (effectName.equalsIgnoreCase("Supply Squad"))
             supplySquad();
-        else if (effectName.equals("Spell Absorption"))
+        else if (effectName.equalsIgnoreCase("Spell Absorption"))
             spellAbsorption();
-        else if (effectName.equals("Messenger of peace"))
+        else if (effectName.equalsIgnoreCase("Messenger of peace"))
             activeMessenger(spell);
-        else if (effectName.equals("Twin Twisters"))
+        else if (effectName.equalsIgnoreCase("Twin Twisters"))
             trinTwisters();
-        else if (effectName.equals("Mystical space typhoon"))
+        else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
             mysticalTyphoon();
     }
 
