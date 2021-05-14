@@ -35,8 +35,8 @@ public class Board {
         this.monsterCells = monster;
     }
 
-    public void setFieldSpell(Cell fieldSpell) {
-        this.fieldSpell = fieldSpell;
+    public void setFieldSpell(Card fieldSpell) {
+        this.fieldSpell.setCard(fieldSpell);
     }
 
     public void setDeck(Deck deck) {
