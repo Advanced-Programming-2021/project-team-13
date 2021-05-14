@@ -417,7 +417,7 @@ public class GameView {
         return false;
     }
 
-    public String getCyberse() {
+    public String getAnswer() {
         return ViewMaster.scanner.nextLine();
     }
 
@@ -579,5 +579,25 @@ public class GameView {
 
     public void cantRitualSummon() {
         System.out.println("there is no way you could ritual summon a monster");
+    }
+
+    public void printSpellActivated() {
+        System.out.println("spell activated");
+    }
+
+    public void printSelectSpellOrTrap() {
+        System.out.println("select a spell or trap(1-5) :");
+    }
+
+    public int getNum() {
+        return ViewMaster.scanner.nextInt();
+    }
+
+    public void printSelectMonsterFromBoard() {
+        System.out.println("select a monster(1-5) from board(our board-rival board)");
+    }
+
+    public void printSelectMonsterFromGraveyard() {
+        System.out.println("select a monster(1-5) from Graveyard(our graveyard-rival graveyard");
     }
 }

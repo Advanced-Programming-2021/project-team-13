@@ -288,11 +288,13 @@ public class GameController {
             gameView.printAlreadyActivated();
             return;
         }
-        if (spell.getCardName().equalsIgnoreCase("Advance ritual art"))
+        if (spell.getCardName().equalsIgnoreCase("Advanced ritual art"))
             checkRitualSummon(spell);
         else if (!spell.getSpellEffect().equalsIgnoreCase("Field")) {
-
-
+            currentPlayer.getBoard().getGraveyard().addCard(currentPlayer.getBoard().getFieldSpell().getCard());
+            currentPlayer.getBoard().setFieldSpell(spell);
+            spell.setActivated(true);
+            gameView.printSpellActivated();
         } else {
             if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() == 5) {
                 gameView.printSpellZoneIsFull();
@@ -302,9 +304,109 @@ public class GameController {
                 gameView.printPrepsNotDone();
                 return;
             }
-            findEffect(currentPlayer.getSelectedCard());
-            sendCardT
+            currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
+            gameView.printSpellActivated();
+            if (spell.getType().equals("Equip")) {
+                gameView.printSelectMonsterFromBoard();
+                int num = gameView.getNum();
+                String board = gameView.getAnswer();
+                if (board.equalsIgnoreCase("our board"))
+                    spell.setEquippedMonster
+                            ((Monster) currentPlayer.getBoard().getMonsterByAddress(num));
+                else if (board.equalsIgnoreCase("rival board"))
+                    spell.setEquippedMonster((Monster) getRivalPlayer().getBoard().getMonsterByAddress(num));
+                spell.setActivated(true);
+            } else {
+                findEffect(spell);
+                spell.setActivated(true);
+                if (spell.getType().equals("Normal") || spell.getType().equals("Quick-play"))
+                    currentPlayer.getBoard().getGraveyard().addCard(spell);
+            }
         }
+    }
+
+    private void findEffect(Spell spell) { ////////these are not complete but hell of a ride !!!
+        String effectName = spell.getCardName();
+        if (effectName.equals("Monster Reborn"))
+            monsterReborn();
+        else if (effectName.equals("Terraforming"))
+            terraforming();
+        else if (effectName.equals("Pot of Greed"))
+            potOfGreed();
+        else if (effectName.equals("Raigeki"))
+            raigeki();
+        else if (effectName.equals("Change of Heart"))
+            changeOfHeart();
+        else if (effectName.equals("Harpie’s Feather Duster"))
+            harpie();
+        else if (effectName.equals("Swords of Revealing Light"))
+            swordsOfRevealingLight();
+        else if (effectName.equals("Dark Hole"))
+            darkHole();
+        else if (effectName.equals("Supply Squad"))
+            supplySquad();
+        else if (effectName.equals("Spell Absorption"))
+            spellAbsorption();
+        else if (effectName.equals("Messenger of peace"))
+            activeMessenger(spell);
+        else if (effectName.equals("Twin Twisters"))
+            trinTwisters();
+        else if (effectName.equals("Mystical space typhoon"))
+            mysticalTyphoon();
+    }
+
+
+    private void mysticalTyphoon() {//////// just for other player??????? can we destroy our own spell??
+        gameView.printSelectSpellOrTrap();
+        getRivalPlayer().getBoard().getGraveyard()
+                .addCard(getRivalPlayer().getBoard()
+                        .getSpellOrTrapByAddress(gameView.getNum()));
+    }
+
+    private void activeMessenger(Spell spell) {
+        spell.setActivated(true);
+    }
+
+    private void spellAbsorption() {
+
+    }
+
+    private void darkHole() {
+        for (Cell monster : currentPlayer.getBoard().getMonsters()) {
+            currentPlayer.getBoard().getGraveyard().addCard(monster.getCard());
+        }
+        for (Cell monster : getRivalPlayer().getBoard().getMonsters()) {
+            getRivalPlayer().getBoard().getGraveyard().addCard(monster.getCard());
+        }
+    }
+
+    private void harpie() {
+        for (Cell cell : getRivalPlayer().getBoard().getSpellOrTrap()) {
+            getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
+        }
+        getRivalPlayer().getBoard().getGraveyard()
+                .addCard(getRivalPlayer().getBoard().getFieldSpell().getCard());
+    }
+
+    private void changeOfHeart() {
+//        gameView.printSelectRivalMonster();
+//        Monster rivalMonster = getRivalPlayer().getBoard().getMonsterByAddress(gameView.getNum());
+//        currentPlayer.getExtraCards.add(rivalMonster);
+
+    }
+
+    private void raigeki() {
+        for (Cell monster : getRivalPlayer().getBoard().getMonsters()) {
+            getRivalPlayer().getBoard().getGraveyard().addCard(monster.getCard());
+        }
+    }
+
+    private void monsterReborn() {
+//        gameView.printSelectMonsterFromGraveyard();
+//        int num = gameView.getNum();
+//        String graveyard = gameView.getAnswer();
+//        if(graveyard.equalsIgnoreCase("our graveyard"))
+//
     }
 
 
@@ -643,7 +745,7 @@ public class GameController {
         gameView.printAttackDisruptedByTaxchanger();
         if (!gameView.doesRivalWantCyberse())
             return;
-        String cyberse = gameView.getCyberse();
+        String cyberse = gameView.getAnswer();
         if (!checkCyberse(cyberse))
             return;
         String fromWhere = gameView.getPlace();
