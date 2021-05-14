@@ -355,6 +355,10 @@ public class GameController {
             mysticalTyphoon();
     }
 
+    private void trinTwisters() {
+
+    }
+
 
     private void mysticalTyphoon() {//////// just for other player??????? can we destroy our own spell??
         gameView.printSelectSpellOrTrap();
