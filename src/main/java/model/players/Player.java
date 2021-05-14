@@ -1,10 +1,8 @@
 package model.players;
 
 import model.Board;
-import model.Deck;
 import model.Graveyard;
 import model.cards.Card;
-import model.cards.Monster;
 
 import java.util.ArrayList;
 
@@ -19,6 +17,7 @@ public class Player {
     private ArrayList<Card> cardsInHand;
     private boolean isSetOrSummonInThisTurn = false;
     private boolean canActiveTrap = true;
+    private boolean isAttacking;
 
     public Player(User user) {
         this.wonRounds = 0;
@@ -34,7 +33,7 @@ public class Player {
     }
 
 
-    public Player renewPlayer() {
+    public void renewPlayer() {
         try {
             this.board = new Board(this.user.getActiveDeck().clone(), new Graveyard(this));
         } catch (CloneNotSupportedException e) {
@@ -42,7 +41,15 @@ public class Player {
         }
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
-        return this;
+        this.isAttacking = false;
+    }
+
+    public void setAttacking(boolean attacking) {
+        isAttacking = attacking;
+    }
+
+    public boolean isAttacking() {
+        return isAttacking;
     }
 
     public boolean isCanActiveTrap() {
@@ -106,7 +113,7 @@ public class Player {
 
     public void addCardToHand() {
         Card card = this.getBoard().getDeck().getAllCardsInMainDeck().get(0);
-        this.getBoard().getDeck().removeCard(card ,false);
+        this.getBoard().getDeck().removeCard(card, false);
         this.cardsInHand.add(card);
     }
 

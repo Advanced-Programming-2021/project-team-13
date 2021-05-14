@@ -1,6 +1,7 @@
 package controll;
 
 import bullshit.Interfaces.Effects;
+import controll.json.UserJson;
 import enums.CardType;
 import enums.Face;
 import model.Deck;

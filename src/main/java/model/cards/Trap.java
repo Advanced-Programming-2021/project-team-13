@@ -1,10 +1,12 @@
 package model.cards;
 
+import bullshit.TrapAction;
 import enums.CardType;
 import enums.Face;
 
 public class Trap extends Card {
-    //    private TrapEffect trapEffect;
+    private TrapAction trapAction;
+    private Card EffectedCard;
     String type;
     boolean isSetINThisTurn = false;
 
@@ -28,6 +30,22 @@ public class Trap extends Card {
 
     public void setSetINThisTurn(boolean setINThisTurn) {
         isSetINThisTurn = setINThisTurn;
+    }
+
+    public Card getEffectedCard() {
+        return EffectedCard;
+    }
+
+    public TrapAction getTrapAction() {
+        return trapAction;
+    }
+
+    public void setEffectedCard(Card effectedCard) {
+        EffectedCard = effectedCard;
+    }
+
+    public void setTrapAction(TrapAction trapAction) {
+        this.trapAction = trapAction;
     }
 
     @Override

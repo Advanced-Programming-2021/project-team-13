@@ -6,11 +6,15 @@ import model.players.Player;
 import view.Menu;
 import view.ViewMaster;
 
-public class ShowGraveyardMenu {
+public class ShowGraveyardView {
     private final ShowGraveyardController showGraveyardController;
 
-    public ShowGraveyardMenu(Player currentPlayer) {
+    public ShowGraveyardView(Player currentPlayer) {
         showGraveyardController = new ShowGraveyardController(this, currentPlayer);
+    }
+
+    public ShowGraveyardController getShowGraveyardController() {
+        return showGraveyardController;
     }
 
     public void run(String command) {
@@ -31,5 +35,9 @@ public class ShowGraveyardMenu {
 
     public void printCard(Card card, int number) {
         System.out.println(number + ". " + card.toString());
+    }
+
+    public void printSelectCard(){
+        System.out.print("Please select the number of the card you want to return: ");
     }
 }

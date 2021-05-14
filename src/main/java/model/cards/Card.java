@@ -80,10 +80,6 @@ public class Card implements Comparable<Card> {
         this.cardType = cardType; /////////////////////needs  the value of enum
     }
 
-    public Player getPlayer() {
-        return cardOwner;
-    }
-
     public String getCardDescription() {
         return cardDescription;
     }

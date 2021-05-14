@@ -15,7 +15,6 @@ public class Graveyard {
     public Graveyard(Player player) {
         owner = player;
         allCards = new ArrayList<>();
-
     }
 
     public Monster getMonsterFromGraveyard(String name) {
