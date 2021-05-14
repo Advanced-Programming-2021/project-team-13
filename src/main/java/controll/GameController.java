@@ -287,6 +287,32 @@ public class GameController {
         }
     }
 
+    private void findEffect(Card selectedCard) {
+        String cardName = selectedCard.getCardName();
+        if (cardName.equals("Yomi"))
+            Yomi(selectedCard);
+        if (cardName.equalsIgnoreCase("Dark sword"))
+            darkSword(selectedCard);
+        .
+        .
+    }
+
+    private void Yomi(Card selectedCard) {
+        if (!checkConditionYomi())
+            return;
+    }
+
+    private void chain(Player starter, Player other) {
+        ArrayList<Card> chainCards = new ArrayList<>();
+        while (checkConditionChain(starter)) {
+            chainCards.add(gameView.getChainCard());
+            changeCurrentPlayer();
+        }
+        for (Card chainCard : chainCards) {
+            findEffect(chainCard);
+        }
+    }
+
     private boolean checkPreparation(Card card) {
         if (card.getCardName().equalsIgnoreCase("Twin Twisters"))
             return twinTwistersCheck();

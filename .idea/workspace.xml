@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="nothing" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="nothing">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,19 +77,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.LoginAndShopTest.checkMenuEntrance">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="LoginAndShopTest.checkLoginForNotCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
@@ -203,6 +193,8 @@
       <workItem from="1620397682243" duration="6649000" />
       <workItem from="1620439891874" duration="6930000" />
       <workItem from="1620621789862" duration="5708000" />
+      <workItem from="1620844594922" duration="1999000" />
+      <workItem from="1620889490854" duration="1249000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -323,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620833385258</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="nothing">
+      <created>1620844635686</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1620844635686</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
