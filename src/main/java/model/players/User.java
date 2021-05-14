@@ -60,6 +60,10 @@ public class User implements Comparable<User> {
             allCards.put(cardName, 1);
     }
 
+    public void setMoney(long money) {
+        this.money = money;
+    }
+
     public void addDeck(Deck deck) {
         allDecks.add(deck);
     }
