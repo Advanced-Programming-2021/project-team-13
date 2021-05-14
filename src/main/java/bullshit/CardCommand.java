@@ -131,3 +131,23 @@ class FindActiveSpell extends CardCommand {
         trap.setEffectedCard(effectedCard);
     }
 }
+
+class ChooseCardFromHandToSacrifice extends CardCommand{
+
+    public ChooseCardFromHandToSacrifice(Card card){
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        int number;
+        do {
+            System.out.print("please enter a correct number to choose from your hand : ");
+            number = ViewMaster.scanner.nextInt();
+        } while (number > gameController.getCurrentPlayer().getCardsInHand().size() || number <= 0);
+        gameController.selectPlayerHandCard(number);
+        Card card = gameController.getCurrentPlayer().getSelectedCard();
+        gameController.getCurrentPlayer().getBoard().getGraveyard().addCard(card);
+        gameController.getCurrentPlayer().setSelectedCard(null);
+    }
+}

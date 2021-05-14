@@ -98,13 +98,15 @@ class MagicJammer extends TrapAction {
         EffectHandler effectHandler1 = new PlayerCanActivateTrap(card);
         effectHandler1.setNextHandler(effectHandler);
         setStartActionCheck(effectHandler1);
-        CardCommand cardCommand = new FindActiveSpell(card);
-        CardCommand cardCommand1 = new SendCardToGraveyard(card);
-        CardCommand cardCommand2 = new SendEffectedCardToGraveyard(card);
+        CardCommand cardCommand = new ChooseCardFromHandToSacrifice(card);
+        CardCommand cardCommand1 = new FindActiveSpell(card);
+        CardCommand cardCommand2 = new SendCardToGraveyard(card);
+        CardCommand cardCommand3 = new SendEffectedCardToGraveyard(card);
         cardCommands = new ArrayList<>();
         cardCommands.add(cardCommand);
         cardCommands.add(cardCommand1);
         cardCommands.add(cardCommand2);
+        cardCommands.add(cardCommand3);
     }
 
     @Override
@@ -139,5 +141,3 @@ class TimeSeal extends TrapAction {
         }
     }
 }
-
-class
