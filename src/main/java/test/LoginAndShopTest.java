@@ -1,9 +1,8 @@
+/*
 package test;
 
 import controll.LoginController;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
 import view.Menu;
 import view.ViewMaster;
 import view.allmenu.LoginView;
@@ -40,3 +39,4 @@ public class LoginAndShopTest {
 
     }
 }
+*/
