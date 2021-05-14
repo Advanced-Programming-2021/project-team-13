@@ -30,6 +30,9 @@ public class Graveyard {
             return;
         if (allCards.contains(card))
             return;
+        if (card.getZone() == Zone.IN_HAND){
+            card.getCardOwner().getCardsInHand().remove(card);
+        }
         card.setZone(Zone.GRAVEYARD);
 //        card.setActivated(false);
         if (card instanceof Monster) {

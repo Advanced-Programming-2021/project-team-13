@@ -8,8 +8,8 @@ public class Regex {
     public static final String EXIT_MENU = "^menu exit$";
     public static final String SHOW_MENU = "^menu show-current$";
     public static final String CHANGE_NICKNAME = "^profile change --nickname (?<nickname>[\\w\\-]+)$";
-    public static final String CHANGE_PASSWORD1 = "^profile change --password --current (?<currentPassword>\\w+) --new (?<newPassword>\\w+)$";
-    public static final String CHANGE_PASSWORD2 = "^profile change --password --new (?<newPassword>\\w+) --current (?<currentPassword>\\w+)$";
+    public static final String CHANGE_PASSWORD1 = "^profile change --(password|p) --(current|c) (?<currentPassword>\\w+) --(new|n) (?<newPassword>\\w+)$";
+    public static final String CHANGE_PASSWORD2 = "^profile change --(password|p) --(new|n) (?<newPassword>\\w+) --(current|c) (?<currentPassword>\\w+)$";
     public static final String REGISTER = "^user create --(\\w+) (\\w+) --(\\w+) (\\w+) --(\\w+) (\\w+)$";
     public static final String LOGIN = "^user login --(\\w+) (\\w+) --(\\w+) (\\w+)$";
     public static final String BUY_CARD = "^shop buy (?<cardName>.+)$";
@@ -82,7 +82,7 @@ public class Regex {
     }
 
     public static String getCardName(String command) {
-        Matcher matcher = getInputMatcher(command, "--card (\\w+[ ]?\\w*)");
+        Matcher matcher = getInputMatcher(command, "--card (\\w+[ ]?\\w*[ ]?\\w*[ ]?\\w*)");
         if (matcher.find())
             return matcher.group(1);
         else return null;
