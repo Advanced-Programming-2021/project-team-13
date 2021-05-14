@@ -205,8 +205,7 @@ public class GameController {
             currentPlayer.setMaxLifePoint(currentPlayer.getMaxLifePoint());
         if (getRivalPlayer().getLifePoint() > getRivalPlayer().getMaxLifePoint())
             getRivalPlayer().setMaxLifePoint(getRivalPlayer().getLifePoint());
-        GameWinMenu gameWinMenu = new GameWinMenu(this);
-        gameWinMenu.announceWinner(getRivalPlayer());
+        new GameWinMenu(this).announceWinner(getRivalPlayer());
     }
 
     public void attack(int monsterNumber) {

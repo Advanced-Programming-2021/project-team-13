@@ -11,6 +11,8 @@ import model.cards.Spell;
 import model.cards.Trap;
 import view.ViewMaster;
 
+import java.util.ArrayList;
+
 
 public abstract class CardCommand {
     protected static GameController gameController;
@@ -149,5 +151,41 @@ class ChooseCardFromHandToSacrifice extends CardCommand{
         Card card = gameController.getCurrentPlayer().getSelectedCard();
         gameController.getCurrentPlayer().getBoard().getGraveyard().addCard(card);
         gameController.getCurrentPlayer().setSelectedCard(null);
+    }
+}
+
+class AnnounceCardNameToRemove extends CardCommand{
+
+    public AnnounceCardNameToRemove(Card card){
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        System.out.print("please enter a card name to remove from rival hand : ");
+        String cardName = ViewMaster.scanner.nextLine().trim();
+        boolean containsCard = false;
+        for (Card card : gameController.getRivalPlayer().getCardsInHand()) {
+            if (card.getCardName().equalsIgnoreCase(cardName)){
+                containsCard = true;
+                break;
+            }
+        }
+        if (containsCard){
+            ArrayList<Card> newRivalHand = new ArrayList<>();
+            for (Card card: gameController.getRivalPlayer().getCardsInHand()) {
+                if (!card.getCardName().equalsIgnoreCase(cardName)) newRivalHand.add(card);
+                else gameController.getRivalPlayer().getBoard().getGraveyard().addCard(card);
+            }
+            gameController.getRivalPlayer().setCardsInHand(newRivalHand);
+            ArrayList<Card> newRivalDeck = new ArrayList<>();
+            for (Card card: gameController.getRivalPlayer().getBoard().getDeck().getAllCardsInMainDeck()) {
+                if (!card.getCardName().equalsIgnoreCase(cardName)) newRivalDeck.add(card);
+                else gameController.getRivalPlayer().getBoard().getGraveyard().addCard(card);
+            }
+            gameController.getRivalPlayer().getBoard().getDeck().setAllCardsInMainDeck(newRivalDeck);
+        } else {
+            new ChooseCardFromHandToSacrifice(trap).execute();
+        }
     }
 }

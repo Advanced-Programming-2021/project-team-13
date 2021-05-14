@@ -25,8 +25,9 @@ public abstract class TrapAction implements Effect {
     private static void setAllTrapEffects() {
         allTrapEffects = new HashMap<>();//complete this!!
         allTrapEffects.put("Call of The Haunted", new CallOfTheHaunted());
-        allTrapEffects.put("Time Seal" , new TimeSeal());
-        allTrapEffects.put("Magic Jammer" , new MagicJammer());
+        allTrapEffects.put("Time Seal", new TimeSeal());
+        allTrapEffects.put("Magic Jammer", new MagicJammer());
+        allTrapEffects.put("Mind Crush" , new MindCrush());
     }
 
     public void setTrapCommands(ArrayList<CardCommand> cardCommands) {
@@ -38,7 +39,7 @@ public abstract class TrapAction implements Effect {
     }
 }
 
-class  CallOfTheHaunted extends TrapAction {
+class CallOfTheHaunted extends TrapAction {
 
     private EffectHandler endActionCheck1;
     private EffectHandler endActionCheck2;
@@ -111,7 +112,7 @@ class MagicJammer extends TrapAction {
 
     @Override
     public void run() {
-        if (startActionCheck.canActivate()){
+        if (startActionCheck.canActivate()) {
             for (CardCommand cardCommand : cardCommands) {
                 cardCommand.execute();
             }
@@ -135,7 +136,28 @@ class TimeSeal extends TrapAction {
 
     @Override
     public void run() {
-        if (startActionCheck.canActivate()){
+        if (startActionCheck.canActivate()) {
+            for (CardCommand cardCommand : cardCommands)
+                cardCommand.execute();
+        }
+    }
+}
+
+class MindCrush extends TrapAction {
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        setStartActionCheck(effectHandler);
+        CardCommand cardCommand = new AnnounceCardNameToRemove(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+    }
+
+    @Override
+    public void run() {
+        if (startActionCheck.canActivate()) {
             for (CardCommand cardCommand : cardCommands)
                 cardCommand.execute();
         }

@@ -32,6 +32,9 @@ public class Player {
         cardsInHand = new ArrayList<>();
     }
 
+    public void setCardsInHand(ArrayList<Card> cardsInHand) {
+        this.cardsInHand = cardsInHand;
+    }
 
     public void renewPlayer() {
         try {
