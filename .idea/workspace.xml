@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="a">
+      <change afterPath="$PROJECT_DIR$/src/main/java/test/GameTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/SpellEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +80,18 @@
       <recent name="enums" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.LoginMenuTest">
+  <component name="RunManager" selected="JUnit.ProfileMenuTest">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LoginMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="YuGiOh" />
       <extension name="coverage">
@@ -90,6 +102,36 @@
       </extension>
       <option name="PACKAGE_NAME" value="test" />
       <option name="MAIN_CLASS_NAME" value="test.LoginMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProfileMenuTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.ProfileMenuTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScoreboardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.ScoreboardTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -126,52 +168,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShopMenuTest.testInvalidBuy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="YuGiOh" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.ShopMenuTest" />
-      <option name="METHOD_NAME" value="testInvalidBuy" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ShopMenuTest.testShowAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="YuGiOh" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.ShopMenuTest" />
-      <option name="METHOD_NAME" value="testShowAll" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProfileMenuTest" />
         <item itemvalue="JUnit.LoginMenuTest" />
+        <item itemvalue="JUnit.ScoreboardTest" />
         <item itemvalue="JUnit.ShopMenuTest" />
         <item itemvalue="JUnit.ShopMenuTest.testBuySomeCard" />
-        <item itemvalue="JUnit.ShopMenuTest.testShowAll" />
-        <item itemvalue="JUnit.ShopMenuTest.testInvalidBuy" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login view completed(not debugged)" />
+      <changelist id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="a" />
       <created>1618920320640</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -194,6 +204,7 @@
       <workItem from="1620397682243" duration="6649000" />
       <workItem from="1620439891874" duration="6930000" />
       <workItem from="1620621789862" duration="5708000" />
+      <workItem from="1621058246942" duration="4392000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -307,7 +318,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620813161790</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="a">
+      <created>1621058266087</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1621058266087</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,14 +386,14 @@
     <MESSAGE value="game controller selects (without checking regex) + &#10;game controller + game view attack(60 percent completed)&#10;need a method for checking if card has attacked in the same round or not" />
     <MESSAGE value="ViewMaster is singleton , gameView and gameController not completed yet" />
     <MESSAGE value="ش" />
-    <MESSAGE value="a" />
     <MESSAGE value="fookin marshmallon" />
     <MESSAGE value="literally nothing" />
     <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
     <MESSAGE value="login is debuged" />
     <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

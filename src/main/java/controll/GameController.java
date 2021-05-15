@@ -264,6 +264,7 @@ public class GameController {
                 }
                 rivalMonster.setFace(Face.UP);
             }
+            gameView.printMap();
             equipSpellRid();
         }
     }
@@ -318,6 +319,7 @@ public class GameController {
             } else {
                 findEffect(spell);
                 spell.setActivated(true);
+                gameView.printMap();
                 if (spell.getType().equals("Normal") || spell.getType().equals("Quick-play"))
                     currentPlayer.getBoard().getGraveyard().addCard(spell);
             }
@@ -405,11 +407,12 @@ public class GameController {
     }
 
     private void monsterReborn() {
-//        gameView.printSelectMonsterFromGraveyard();
-//        int num = gameView.getNum();
+//        gameView.selectGraveyard();
 //        String graveyard = gameView.getAnswer();
-//        if(graveyard.equalsIgnoreCase("our graveyard"))
+//        if(graveyard.equalsIgnoreCase("our graveyard")){
 //
+//        }
+
     }
 
 
@@ -669,9 +672,11 @@ public class GameController {
     private boolean isSpecialAttack(Monster ourMonster, Monster rivalMonster) {
         if (messengerOfPeace(ourMonster)) {
             gameView.printCantAttackBecauseOfMessenger();
+            gameView.printMap();
             return true;
         } else if (rivalMonster.getCardName().equals("Marshmallon")) {
             marshmallon(ourMonster, rivalMonster);
+            gameView.printMap();
             return true;
         } else if (rivalMonster.getCardName().equals("Texchanger")) {
             if (!rivalMonster.isAttackedInThisTurn())
@@ -680,9 +685,11 @@ public class GameController {
             return true;
         } else if (rivalMonster.getCardName().equals("Exploder Dragon")) {
             exploderDragon(ourMonster, rivalMonster);
+            gameView.printMap();
             return true;
         } else if (ourMonster.getCardName().equals("The Calculator")) {/// think we need to make it first(it can be denied by messenger)
             theCalculator(ourMonster); // we just need some calculations !!!!!!! thats all
+            gameView.printMap();
             return false;
         }
         return false;
@@ -822,6 +829,7 @@ public class GameController {
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
             getRivalPlayer().decreaseHealth(ourMonster.getAttackNum());
             gameView.printYourOpponentReceivesDamage(ourMonster.getAttackNum());
+            gameView.printMap();
         }
     }
 
@@ -978,6 +986,7 @@ public class GameController {
         currentPlayer.setSetOrSummonInThisTurn(true);
         currentPlayer.setSelectedCard(null);
         currentPlayer.getBoard().putMonsterInBoard(monster);
+        gameView.printMap();
     }
 
     private void terratiger(Monster terratiger) {
@@ -1012,6 +1021,7 @@ public class GameController {
                 return;
             }
             if (!getTribute(numberOfTribute))
+                gameView.printMap();
                 return;
         }
         normalSummon(monster);
@@ -1095,6 +1105,7 @@ public class GameController {
                 currentPlayer.setSelectedCard(null);
                 currentPlayer.setSetOrSummonInThisTurn(true);
                 gameView.printSetSuccessfully();
+                gameView.printMap();
             } else
                 gameView.printSpellZoneIsFull();
         } else
@@ -1113,6 +1124,7 @@ public class GameController {
                     currentPlayer.setSetOrSummonInThisTurn(true);
                     currentPlayer.setSelectedCard(null);
                     gameView.printSetSuccessfully();
+                    gameView.printMap();
                     currentPlayer.getBoard().putMonsterInBoard(selectedCard);
                 }
             } else
@@ -1143,6 +1155,7 @@ public class GameController {
                             else monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
                             gameView.printChangeSetSuccessfully();
                             currentPlayer.setSelectedCard(null);
+                            gameView.printMap();
                         }
                     }
 
@@ -1171,6 +1184,7 @@ public class GameController {
                         monster.setFace(Face.UP);
                         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
                         gameView.printFlipSummonSuccessfully();
+                        gameView.printMap();
                     }
                 } else
                     gameView.printNotInMainPhase();
@@ -1185,6 +1199,7 @@ public class GameController {
             if (monster != null) {
                 monster.setActiveAbility(true);
                 getRivalPlayer().getBoard().getGraveyard().addCard(monster);
+                gameView.printMap();
             }
         }
     }
@@ -1201,6 +1216,7 @@ public class GameController {
             monster.setFace(Face.UP);
             monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
             currentPlayer.getBoard().putMonsterInBoard(monster);
+            gameView.printMap();
             return true;
         } else return false;
     }

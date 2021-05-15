@@ -10,6 +10,7 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -597,7 +598,8 @@ public class GameView {
         System.out.println("select a monster(1-5) from board(our board-rival board)");
     }
 
-    public void printSelectMonsterFromGraveyard() {
-        System.out.println("select a monster(1-5) from Graveyard(our graveyard-rival graveyard");
+    public void selectGraveyard() {
+        System.out.println("select a Graveyard(our graveyard-rival graveyard");
     }
+
 }
