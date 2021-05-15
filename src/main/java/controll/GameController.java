@@ -330,10 +330,10 @@ public class GameController {
         String effectName = spell.getCardName();
         if (effectName.equalsIgnoreCase("Monster Reborn"))
             monsterReborn();
-//        else if (effectName.equalsIgnoreCase("Terraforming"))
-//            terraforming();
-//        else if (effectName.equalsIgnoreCase("Pot of Greed"))
-//            potOfGreed();
+        else if (effectName.equalsIgnoreCase("Terraforming"))
+            terraforming();
+        else if (effectName.equalsIgnoreCase("Pot of Greed"))
+            potOfGreed();
         else if (effectName.equalsIgnoreCase("Raigeki"))
             raigeki();
         else if (effectName.equalsIgnoreCase("Change of Heart"))
@@ -346,18 +346,44 @@ public class GameController {
             darkHole();
 //        else if (effectName.equalsIgnoreCase("Supply Squad"))
 //            supplySquad();
+//        else if(effectName.equalsIgnoreCase("Ring of Defense"))
+//            ringOfDefense();
         else if (effectName.equalsIgnoreCase("Spell Absorption"))
             spellAbsorption();
         else if (effectName.equalsIgnoreCase("Messenger of peace"))
             activeMessenger(spell);
         else if (effectName.equalsIgnoreCase("Twin Twisters"))
-            trinTwisters();
+            twinTwisters();
         else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
             mysticalTyphoon();
     }
 
-    private void trinTwisters() {
+    private void potOfGreed() {/////fishyyyyyyy////////
+        currentPlayer.addCardToHand();
+        currentPlayer.addCardToHand();
+    }
 
+    private void terraforming() {//////////needs completion!!!
+        showDeckInGame(currentPlayer); //// this needs completion!
+        gameView.printSelectNum();
+        currentPlayer.addCardToHand();
+    }
+
+    private void showDeckInGame(Player currentPlayer) {
+
+    }
+
+    private void twinTwisters() {//////not complete !!!!!#crap!!
+        showCardsInHand();
+        gameView.printSelectNum();
+        currentPlayer.getBoard().getGraveyard()
+                .addCard(currentPlayer.getCardsInHand().get(gameView.getNum()));
+    }
+
+    private void showCardsInHand() {
+        for (int i = 0; i < currentPlayer.getCardsInHand().size(); i++) {
+            gameView.printCardInHand(currentPlayer.getCardsInHand().get(i),i);
+        }
     }
 
 
@@ -406,7 +432,7 @@ public class GameController {
         }
     }
 
-    private void monsterReborn() {
+    private void monsterReborn() { //چقد توابعش سمیه!!!
         gameView.selectGraveyard();
         Player graveyardOwner = null;
         String graveyardName = gameView.getAnswer();
@@ -421,6 +447,10 @@ public class GameController {
         }
         ShowGraveyardView graveyard = new ShowGraveyardView(graveyardOwner);
         graveyard.getShowGraveyardController().showGraveyard();
+        gameView.printSelectNum();
+        graveyard.getShowGraveyardController().selectCardFromGraveyard(gameView.getNum());
+        specialSummon();
+
     }
 
 
@@ -1292,6 +1322,7 @@ public class GameController {
         monster.setFace(Face.UP);
         currentPlayer.setSelectedCard(null);
         currentPlayer.getBoard().putMonsterInBoard(monster);
+        gameView.printMap();
     }
 
     public boolean checkTheTrickyInput(int monsterNumber) {

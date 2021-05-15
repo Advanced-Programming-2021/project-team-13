@@ -602,4 +602,15 @@ public class GameView {
         System.out.println("select a Graveyard(our graveyard-rival graveyard");
     }
 
+    public void printSelectNum() {
+        System.out.println("select a number");
+    }
+
+    public void printselectCardFromHand(int size) {
+        System.out.println("select a card from hand("+size+") to send to graveyard");
+    }
+
+    public void printCardInHand(Card card, int i) {
+        System.out.println(card.getCardName()+" : "+i);
+    }
 }
