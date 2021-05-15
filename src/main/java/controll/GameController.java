@@ -328,22 +328,22 @@ public class GameController {
         String effectName = spell.getCardName();
         if (effectName.equalsIgnoreCase("Monster Reborn"))
             monsterReborn();
-        else if (effectName.equalsIgnoreCase("Terraforming"))
-            terraforming();
-        else if (effectName.equalsIgnoreCase("Pot of Greed"))
-            potOfGreed();
+//        else if (effectName.equalsIgnoreCase("Terraforming"))
+//            terraforming();
+//        else if (effectName.equalsIgnoreCase("Pot of Greed"))
+//            potOfGreed();
         else if (effectName.equalsIgnoreCase("Raigeki"))
             raigeki();
         else if (effectName.equalsIgnoreCase("Change of Heart"))
             changeOfHeart();
         else if (effectName.equalsIgnoreCase("Harpie’s Feather Duster"))
             harpie();
-        else if (effectName.equalsIgnoreCase("Swords of Revealing Light"))
-            swordsOfRevealingLight();
+//        else if (effectName.equalsIgnoreCase("Swords of Revealing Light"))
+//            swordsOfRevealingLight();
         else if (effectName.equalsIgnoreCase("Dark Hole"))
             darkHole();
-        else if (effectName.equalsIgnoreCase("Supply Squad"))
-            supplySquad();
+//        else if (effectName.equalsIgnoreCase("Supply Squad"))
+//            supplySquad();
         else if (effectName.equalsIgnoreCase("Spell Absorption"))
             spellAbsorption();
         else if (effectName.equalsIgnoreCase("Messenger of peace"))

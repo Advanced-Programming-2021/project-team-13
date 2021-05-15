@@ -34,32 +34,32 @@ class IsRivalPlayerAttacking extends EffectHandler {
         super(card);
     }
 
-    @Override
-    public boolean canActivate() {
-        if (gameController.getRivalPlayer()) {
-            if (nextHandler != null) return nextHandler.canActivate();
-            else return true;
-        } else {
-            return false;
-        }
-    }
-}
+//
+//    public boolean canActivate() {
+//        if (gameController.getRivalPlayer()) {
+//            if (nextHandler != null) return nextHandler.canActivate();
+//            else return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//}
 
 class HasAnySummonHappenedThisTurn extends EffectHandler {
     public HasAnySummonHappenedThisTurn(Card card) {
         super(card);
     }
 
-    @Override
-    public boolean canActivate() {
-        if (gameController.isSummonInThisTurn()) {
-            if (nextHandler != null) return nextHandler.canActivate();
-            else return true;
-        } else {
-            return false;
-        }
-    }
-}
+//    @Override
+//    public boolean canActivate() {
+//        if (gameController.isSummonInThisTurn()) {
+//            if (nextHandler != null) return nextHandler.canActivate();
+//            else return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//}
 
 class HasNormalSummonHappened extends EffectHandler {//check game setters
 
