@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="a">
-      <change afterPath="$PROJECT_DIR$/src/main/java/test/GameTest.java" afterDir="false" />
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="new test menu + print map infront of all successfuls">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/SpellEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
@@ -204,7 +201,7 @@
       <workItem from="1620397682243" duration="6649000" />
       <workItem from="1620439891874" duration="6930000" />
       <workItem from="1620621789862" duration="5708000" />
-      <workItem from="1621058246942" duration="4392000" />
+      <workItem from="1621058246942" duration="5420000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -325,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621058266087</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="new test menu + print map infront of all successfuls">
+      <created>1621062834879</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1621062834879</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -393,7 +397,8 @@
     <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
     <MESSAGE value="fix" />
     <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
+    <MESSAGE value="new test menu + print map infront of all successfuls" />
+    <option name="LAST_COMMIT_MESSAGE" value="new test menu + print map infront of all successfuls" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

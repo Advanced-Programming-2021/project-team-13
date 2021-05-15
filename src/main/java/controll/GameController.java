@@ -407,12 +407,20 @@ public class GameController {
     }
 
     private void monsterReborn() {
-//        gameView.selectGraveyard();
-//        String graveyard = gameView.getAnswer();
-//        if(graveyard.equalsIgnoreCase("our graveyard")){
-//
-//        }
-
+        gameView.selectGraveyard();
+        Player graveyardOwner = null;
+        String graveyardName = gameView.getAnswer();
+        if (graveyardName.equalsIgnoreCase("our graveyard")) {
+            graveyardOwner = currentPlayer;
+        } else if (graveyardName.equalsIgnoreCase("rival graveyard")) {
+            graveyardOwner = getRivalPlayer();
+        }
+        if (graveyardOwner == null) {
+            System.out.println("wrong graveyard name");
+            return;
+        }
+        ShowGraveyardView graveyard = new ShowGraveyardView(graveyardOwner);
+        graveyard.getShowGraveyardController().showGraveyard();
     }
 
 

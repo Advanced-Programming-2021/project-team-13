@@ -57,7 +57,7 @@ public class GameView {
     }
 
 
-    private void showGraveyard(String command) {
+    public void showGraveyard(String command) {
         ShowGraveyardView showGraveyardView = new ShowGraveyardView(gameController.getCurrentPlayer());
         ViewMaster.getViewMaster().setShowGraveyardMenu(showGraveyardView);
         ViewMaster.setCurrentMenu(Menu.SHOW_GRAVEYARD);
