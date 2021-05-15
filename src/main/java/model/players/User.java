@@ -27,7 +27,7 @@ public class User implements Comparable<User> {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.money = 100000;
+        this.money = 10000000;
         this.score = 0;
         this.winNum = 0;
         this.loseNum = 0;
@@ -54,6 +54,7 @@ public class User implements Comparable<User> {
     }
 
     public void addCard(String cardName) {
+        cardName = cardName.replace("_","-");
         if (allCards.containsKey(cardName))
             allCards.put(cardName, allCards.get(cardName) + 1);
         else

@@ -1,11 +1,12 @@
 package view.allmenu;
 
 import controll.GameController;
-import enums.AttackOrDefense;
-import enums.Face;
+import enums.*;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
+import org.junit.Assert;
+import org.junit.Test;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
@@ -331,6 +332,7 @@ public class GameView {
     }
 
     public void getTribute() {
+        System.out.println("enter tribute number: ");
         int number = ViewMaster.scanner.nextInt();
         run("select --monster " + number);
     }
@@ -356,7 +358,7 @@ public class GameView {
     }
 
     public void printChangeSetSuccessfully() {
-        System.out.println("doesHaveChangePositionInThisTurn");
+        System.out.println("monster card position changed successfully");
     }
 
     public void printCantFlipSummon() {
@@ -607,10 +609,10 @@ public class GameView {
     }
 
     public void printselectCardFromHand(int size) {
-        System.out.println("select a card from hand("+size+") to send to graveyard");
+        System.out.println("select a card from hand(" + size + ") to send to graveyard");
     }
 
     public void printCardInHand(Card card, int i) {
-        System.out.println(card.getCardName()+" : "+i);
+        System.out.println(card.getCardName() + " : " + i);
     }
 }

@@ -101,12 +101,12 @@ public class DeckController {
         } catch (FileNotFoundException ignored) {
         }
         if (monster != null)
-            return new Monster(monster.getName(), CardType.MONSTER, Face.DOWN,
+            return new Monster(monster.getName().replace("_", "-"), CardType.MONSTER, Face.DOWN,
                     monster.getPrice(), monster.getDescription()
                     , monster.getMonsterType(), monster.getCardType(), monster.getAttribute()
                     , monster.getAttack(), monster.getDefence(), monster.getLevel());
         else {
-            if (Objects.requireNonNull(spellOrTrap).getType() == CardType.SPELL)
+            if (spellOrTrap.getType() == CardType.SPELL)
                 return new Spell(spellOrTrap.getName(), CardType.SPELL, spellOrTrap.getDescription(),
                         Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
             else
@@ -136,7 +136,7 @@ public class DeckController {
 
     private boolean doesHaveCard(String cardName) {
         for (String card : ViewMaster.getUser().getAllCards().keySet()) {
-            if (card.equalsIgnoreCase(cardName))
+            if (card.equalsIgnoreCase(cardName.replace("_","-")))
                 return true;
         }
         return false;

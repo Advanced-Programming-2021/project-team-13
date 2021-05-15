@@ -44,7 +44,7 @@ public class GameController {
         notToDrawCardTurns = new ArrayList<>();
     }
 
-    public void addNotToDrawCardTurn(int turn){
+    public void addNotToDrawCardTurn(int turn) {
         notToDrawCardTurns.add(turn);
     }
 
@@ -382,7 +382,7 @@ public class GameController {
 
     private void showCardsInHand() {
         for (int i = 0; i < currentPlayer.getCardsInHand().size(); i++) {
-            gameView.printCardInHand(currentPlayer.getCardsInHand().get(i),i);
+            gameView.printCardInHand(currentPlayer.getCardsInHand().get(i), i);
         }
     }
 
@@ -1017,6 +1017,7 @@ public class GameController {
 
     public void normalSummon(Monster monster) {
         gameView.printSummonSuccessfully();
+        currentPlayer.getCardsInHand().remove(monster);
         monster.setSetInThisTurn(true);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setFace(Face.UP);
@@ -1060,7 +1061,7 @@ public class GameController {
             }
             if (!getTribute(numberOfTribute))
                 gameView.printMap();
-                return;
+            return;
         }
         normalSummon(monster);
     }
@@ -1140,6 +1141,7 @@ public class GameController {
                 card.setFace(Face.DOWN);
                 if (currentPlayer.getSelectedCard() instanceof Spell)
                     ((Spell) currentPlayer.getSelectedCard()).setSetINThisTurn(true);
+                currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
                 currentPlayer.setSelectedCard(null);
                 currentPlayer.setSetOrSummonInThisTurn(true);
                 gameView.printSetSuccessfully();
@@ -1163,6 +1165,7 @@ public class GameController {
                     currentPlayer.setSelectedCard(null);
                     gameView.printSetSuccessfully();
                     gameView.printMap();
+                    currentPlayer.getCardsInHand().remove(selectedCard);
                     currentPlayer.getBoard().putMonsterInBoard(selectedCard);
                 }
             } else
@@ -1219,6 +1222,7 @@ public class GameController {
                                 || monster.getCardName().equalsIgnoreCase("gate guardian"))
                             manEaterBugFlipSummon();
                         currentPlayer.setSelectedCard(null);
+                        currentPlayer.getCardsInHand().remove(monster);
                         monster.setFace(Face.UP);
                         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
                         gameView.printFlipSummonSuccessfully();
@@ -1250,6 +1254,7 @@ public class GameController {
                 return false;
             gameView.printSummonSuccessfully();
             monster.setSetInThisTurn(true);
+            currentPlayer.getCardsInHand().remove(monster);
             monster.setZone(Zone.MONSTER_ZONE);
             monster.setFace(Face.UP);
             monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
@@ -1340,7 +1345,7 @@ public class GameController {
         do {
             showGraveyardView.printSelectCard();
             monsterNum = ViewMaster.scanner.nextInt();
-        } while(monsterNum > showGraveyardView.getShowGraveyardController().showGraveyard());
+        } while (monsterNum > showGraveyardView.getShowGraveyardController().showGraveyard());
         showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum);
     }
 }
