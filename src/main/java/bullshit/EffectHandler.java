@@ -1,6 +1,7 @@
 package bullshit;
 
 import controll.GameController;
+import enums.Phase;
 import enums.SummonType;
 import enums.Zone;
 import model.Cell;
@@ -8,6 +9,7 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.players.Player;
 import view.ViewMaster;
 
 public abstract class EffectHandler {
@@ -25,6 +27,39 @@ public abstract class EffectHandler {
 
     public abstract boolean canActivate();
 }
+//
+//class IsRivalPlayerAttacking extends EffectHandler {
+//
+//    public IsRivalPlayerAttacking(Card card) {
+//        super(card);
+//    }
+//
+//    @Override
+//    public boolean canActivate() {
+//        if (gameController) {
+//            if (nextHandler != null) return nextHandler.canActivate();
+//            else return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//}
+//
+//class HasAnySummonHappenedThisTurn extends EffectHandler {
+//    public HasAnySummonHappenedThisTurn(Card card) {
+//        super(card);
+//    }
+//
+//    @Override
+//    public boolean canActivate() {
+//        if (gameController.isSummonInThisTurn()) {
+//            if (nextHandler != null) return nextHandler.canActivate();
+//            else return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//}
 
 //class IsRivalPlayerAttacking extends EffectHandler {
 //
@@ -254,4 +289,3 @@ class IsAnySpellActive extends EffectHandler {
         }
     }
 }
-//}

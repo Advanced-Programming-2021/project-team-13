@@ -55,6 +55,7 @@ public class GameView {
             gameController.activeEffect();
         else if (command.equals("special summon"))
             gameController.checksBeforeSpecialSummon(false);
+        else System.out.println("invalid command");
     }
 
 
@@ -117,7 +118,7 @@ public class GameView {
         map.append("\n");
         map.append("\t\t\t\t\t\t").append(currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size()).append("\n");
         for (int i = 0; i < currentPlayer.getCardsInHand().size(); i++) {
-            map.append("\tC");
+            map.append("C\t");
         }
         map.append(currentPlayer.getUser().getNickname()).append(":").append(currentPlayer.getLifePoint());
     }
