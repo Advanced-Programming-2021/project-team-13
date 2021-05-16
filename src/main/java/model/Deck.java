@@ -159,16 +159,15 @@ public class Deck implements Comparable<Deck> {
         return -1;
     }
 
-    @Override
-    public Deck clone() throws CloneNotSupportedException {
-        Deck clone = (Deck) super.clone();
+    public Deck clone(){
+        Deck clone = new Deck (this.name);
         clone.name = this.name;
         clone.allCards = new ArrayList<>();
         clone.allCardsInMainDeck = new ArrayList<>();
         clone.allCardsInSideDeck = new ArrayList<>();
-        clone.allCards = this.allCards;
-        clone.allCardsInMainDeck = this.allCardsInMainDeck;
-        clone.allCardsInSideDeck = this.allCardsInSideDeck;
+        clone.allCards = (ArrayList<Card>) this.allCards.clone();
+        clone.allCardsInMainDeck = (ArrayList<Card>) this.allCardsInMainDeck.clone();
+        clone.allCardsInSideDeck = (ArrayList<Card>) this.allCardsInSideDeck.clone();
         return clone;
     }
 }

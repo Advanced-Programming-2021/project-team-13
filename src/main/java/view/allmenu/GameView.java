@@ -6,10 +6,13 @@ import enums.Face;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
+import org.junit.Assert;
+import org.junit.Test;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -57,7 +60,7 @@ public class GameView {
             printCurrentPhase();
         else if (command.equals("map"))
             printMap();
-        else System.out.println("invalid command!");
+        else System.out.println("invalid command");
     }
 
 
@@ -120,7 +123,7 @@ public class GameView {
         map.append("\n");
         map.append("\t\t\t\t\t\t").append(currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size()).append("\n");
         for (int i = 0; i < currentPlayer.getCardsInHand().size(); i++) {
-            map.append("\tC");
+            map.append("C\t");
         }
         map.append("\n");
         map.append(currentPlayer.getUser().getNickname()).append(":").append(currentPlayer.getLifePoint());
