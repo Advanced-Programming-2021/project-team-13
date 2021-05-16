@@ -11,6 +11,7 @@ import view.allmenu.GameView;
 import view.allmenu.ShowGraveyardView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GameController {
     private final GameView gameView;
@@ -34,6 +35,12 @@ public class GameController {
         this.currentPlayer = startingPlayer;
         firstPlayer.getBoard().getDeck().shuffleMainDeck();
         secondPlayer.getBoard().getDeck().shuffleMainDeck();
+        for (Card allCard : firstPlayer.getBoard().getDeck().getAllCards()) {
+            allCard.setCardOwner(firstPlayer);
+        }
+        for (Card allCard : secondPlayer.getBoard().getDeck().getAllCards()) {
+            allCard.setCardOwner(secondPlayer);
+        }
         for (int i = 0; i < 6; i++) {
             firstPlayer.addCardToHand();
             secondPlayer.addCardToHand();
@@ -214,13 +221,13 @@ public class GameController {
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
             rivalMonster.setAttacker(ourMonster);
-            activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
-            if (isSpecialAttack(ourMonster, rivalMonster))
-                return;
-            if (!rivalMonster.isAttackable()) {
-                gameView.printCantAttackMonster();
-                return;
-            }
+//            activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
+//            if (isSpecialAttack(ourMonster, rivalMonster))
+//                return;
+//            if (!rivalMonster.isAttackable()) {
+//                gameView.printCantAttackMonster();
+//                return;
+//            }
             String rivalMonsterName = rivalMonster.getCardName();
             ourMonster.setAttackedInThisTurn(true);
             if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
@@ -265,7 +272,7 @@ public class GameController {
                 rivalMonster.setFace(Face.UP);
             }
             gameView.printMap();
-            equipSpellRid();
+//            equipSpellRid();
         }
     }
 
@@ -675,8 +682,8 @@ public class GameController {
     }
 
     private void commandKnight(Monster ourMonster, Monster rivalMonster) {
-        checkCommandKnight(ourMonster);
-        checkCommandKnight(rivalMonster);
+        checkCommandKnight(ourMonster,currentPlayer);
+        checkCommandKnight(rivalMonster,getRivalPlayer());
         boolean attackable = true;
         for (Cell monster : rivalMonster.getCardOwner().getBoard().getMonsters()) {
             if (!monster.getCard().getCardName().equals("Command knight")) {
@@ -695,10 +702,13 @@ public class GameController {
 
     }
 
-    private void checkCommandKnight(Monster activationMonster) {
+    private void checkCommandKnight(Monster activationMonster,Player player) {
         activationMonster.decreaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
         activationMonster.getCommandKnightsActive().clear();
-        for (Cell monster : activationMonster.getCardOwner().getBoard().getMonsters()) {
+        System.out.println(activationMonster.getCardOwner());
+        System.out.println(activationMonster.getCardOwner().getBoard());
+        System.out.println(Arrays.toString(activationMonster.getCardOwner().getBoard().getMonsters()));
+        for (Cell monster : player.getBoard().getMonsters()) {
             if (monster.getCard().getCardName().equals("Command knight") &&
                     monster.getCard().getFace() == Face.UP && monster.getCard() != activationMonster) {
                 activationMonster.setCommandKnightsActive((Monster) monster.getCard());

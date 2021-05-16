@@ -6,13 +6,10 @@ import enums.Face;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -30,8 +27,6 @@ public class GameView {
     public void run(String command) {
         if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
             selectCard(command);
-        else if (command.matches(Regex.DESELECT))
-            gameController.deselectCard();
         else if (command.equals("next phase"))
             gameController.nextPhase();
         else if (command.equals("summon"))
@@ -175,6 +170,10 @@ public class GameView {
     }
 
     public void selectCard(String command) {
+        if (command.matches(Regex.DESELECT)) {
+            gameController.deselectCard();
+            return;
+        }
         Matcher opponentWithFieldMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_WITH_FIELD);
         Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
         if (opponentMatcher.find() || opponentWithFieldMatcher.find()) {

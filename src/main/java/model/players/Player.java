@@ -1,5 +1,6 @@
 package model.players;
 
+import enums.Zone;
 import model.Board;
 import model.Graveyard;
 import model.cards.Card;
@@ -108,6 +109,7 @@ public class Player {
     public void addCardToHand() {
         Card card = this.getBoard().getDeck().getAllCardsInMainDeck().get(0);
         this.getBoard().getDeck().removeCard(card, false);
+        card.setZone(Zone.IN_HAND);
         this.cardsInHand.add(card);
     }
 
