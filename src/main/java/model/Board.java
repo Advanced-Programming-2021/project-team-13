@@ -85,7 +85,9 @@ public class Board {
     }
 
     public boolean isMonsterOnBoard(Card selectedCard) {
-        for (int i = 0; i < 6; i++) {
+        if (selectedCard == null)
+            return false;
+        for (int i = 0; i < 5; i++) {
             if (monsterCells[i].getCard() == selectedCard)     // We can do this because of pointer!!!!
                 return true;
         }
@@ -100,7 +102,7 @@ public class Board {
     }
 
     public void removeSpellOrTrapFromBoard(Spell spell) {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             if (spellOrTrap[i].getCard() == spell)
                 spellOrTrap[i] = null;
         }

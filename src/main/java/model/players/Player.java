@@ -33,11 +33,6 @@ public class Player {
     }
 
     public void renewPlayer() {
-        try {
-            this.board = new Board(this.user.getActiveDeck().clone(), new Graveyard(this));
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
