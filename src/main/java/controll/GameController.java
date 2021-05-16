@@ -955,13 +955,11 @@ public class GameController {
             currentPhase = Phase.DRAW_PHASE;
             gameView.printCurrentPhase();
             turnsPlayed++;
-            if (turnsPlayed != 0 && turnsPlayed != 1) {
-                if (!notToDrawCardTurns.contains(turnsPlayed)) {
-                    if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0)
-                        currentPlayer.addCardToHand();
-                    else {
-                        new GameWinMenu(this).announceWinner(getRivalPlayer());
-                    }
+            if (!notToDrawCardTurns.contains(turnsPlayed)) {
+                if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0)
+                    currentPlayer.addCardToHand();
+                else {
+                    new GameWinMenu(this).announceWinner(getRivalPlayer());
                 }
             }
         } else if (currentPhase == Phase.DRAW_PHASE) {
@@ -975,6 +973,14 @@ public class GameController {
             gameView.printMap();//to complete
         } else if (currentPhase == Phase.MAIN_PHASE_1) {
             currentPhase = Phase.BATTLE_PHASE;
+            if (turnsPlayed == 0) {
+                currentPhase = Phase.DRAW_PHASE;
+                currentPlayer.setSetOrSummonInThisTurn(false);
+                changeCurrentPlayer();
+                gameView.printCurrentPhase();
+                gameView.printWhoseTurn();
+                turnsPlayed++;
+            }
             gameView.printCurrentPhase();//to complete
         } else if (currentPhase == Phase.BATTLE_PHASE) {
             currentPhase = Phase.MAIN_PHASE_2;
