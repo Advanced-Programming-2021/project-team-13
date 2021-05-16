@@ -24,11 +24,7 @@ public class Player {
         this.user = user;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
-        try {
-            this.board = new Board(user.getActiveDeck().clone(), new Graveyard(this));
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        this.board = new Board(user.getActiveDeck(), new Graveyard(this));
         cardsInHand = new ArrayList<>();
     }
 

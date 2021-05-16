@@ -108,7 +108,7 @@ public class Board {
 
     public boolean isThereEmptyPlaceMonsterZone() {
         for (Cell cell : monsterCells) {
-            if (cell == null)
+            if (cell.getCard() == null)
                 return true;
         }
         return false;
@@ -125,8 +125,10 @@ public class Board {
 
     public void putMonsterInBoard(Monster monster) {
         for (Cell monsterCell : monsterCells) {
-            if (monsterCell.getCard() == null)
+            if (monsterCell.getCard() == null) {
                 monsterCell.setCard(monster);
+                return;
+            }
         }
     }
 

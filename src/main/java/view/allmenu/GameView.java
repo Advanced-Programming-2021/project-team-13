@@ -1,17 +1,15 @@
 package view.allmenu;
 
 import controll.GameController;
-import enums.*;
+import enums.AttackOrDefense;
+import enums.Face;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
-import org.junit.Assert;
-import org.junit.Test;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -55,6 +53,11 @@ public class GameView {
             gameController.activeEffect();
         else if (command.equals("special summon"))
             gameController.checksBeforeSpecialSummon(false);
+        else if (command.equals("phase"))
+            printCurrentPhase();
+        else if (command.equals("map"))
+            printMap();
+        else System.out.println("invalid command!");
     }
 
 
@@ -119,6 +122,7 @@ public class GameView {
         for (int i = 0; i < currentPlayer.getCardsInHand().size(); i++) {
             map.append("\tC");
         }
+        map.append("\n");
         map.append(currentPlayer.getUser().getNickname()).append(":").append(currentPlayer.getLifePoint());
     }
 
@@ -127,6 +131,7 @@ public class GameView {
         for (int i = 0; i < rivalPlayer.getCardsInHand().size(); i++) {
             map.append("\tC");
         }
+        map.append("\n");
         map.append(rivalPlayer.getBoard().getDeck().getAllCardsInMainDeck().size()).append("\n");
         for (int i = 4; i >= 0; i--) {
             addSpellToMap(rivalPlayer, map, i);

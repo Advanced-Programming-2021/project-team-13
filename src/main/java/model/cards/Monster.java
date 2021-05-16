@@ -269,7 +269,7 @@ public class Monster extends Card {
     public String toString() {
         return "Name: " + cardName + "\nLevel: " + level
                 + "\nType: " + monsterType + "\nATK: " + attackNum
-                + "\nDEF: " + defenseNum + "Description: " + cardDescription;
+                + "\nDEF: " + defenseNum + "\nDescription: " + cardDescription;
     }
 }
 
