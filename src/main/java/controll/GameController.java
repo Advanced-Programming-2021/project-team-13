@@ -11,7 +11,6 @@ import view.allmenu.GameView;
 import view.allmenu.ShowGraveyardView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GameController {
     private final GameView gameView;
@@ -106,6 +105,7 @@ public class GameController {
         if (monsterSelectionCheck(cardAddress, currentPlayer)) {
             currentPlayer.setSelectedCard(currentPlayer.getBoard().getMonsterByAddress(cardAddress));
             gameView.printCardSelected();
+            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
         }
     }
 
@@ -113,6 +113,7 @@ public class GameController {
         if (spellSelectionCheck(cardAddress, currentPlayer)) {
             currentPlayer.setSelectedCard(currentPlayer.getBoard().getSpellOrTrapByAddress(cardAddress));
             gameView.printCardSelected();
+            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
         }
     }
 
@@ -121,6 +122,7 @@ public class GameController {
             currentPlayer.setSelectedCard
                     (getRivalPlayer().getBoard().getMonsterByAddress(cardAddress));
             gameView.printCardSelected();
+            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
         }
     }
 
@@ -129,6 +131,7 @@ public class GameController {
             currentPlayer.setSelectedCard
                     (getRivalPlayer().getBoard().getSpellOrTrapByAddress(cardAddress));
             gameView.printCardSelected();
+            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
         }
     }
 
@@ -151,6 +154,7 @@ public class GameController {
         if (handCardCheck(cardAddress)) {
             currentPlayer.setSelectedCard(currentPlayer.getCardsInHand().get(cardAddress - 1));
             gameView.printCardSelected();
+            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
         }
     }
 
@@ -522,7 +526,7 @@ public class GameController {
 
     private void increaseAndDecrease(Player player, String spellName, int atkAmount, int defAmount) {
         for (Cell cell : player.getBoard().getSpellOrTrap()) {
-            if (cell.getCard().getCardName().equals(spellName)) {
+            if (cell.getCard() != null && cell.getCard().getCardName().equals(spellName)) {
                 Spell spell = (Spell) cell.getCard();
                 if (spellName.equals("Sword of Dark Destruction")) {
                     if (spell.getEquippedMonster().getMonsterType().equals("Fiend") ||
@@ -551,7 +555,7 @@ public class GameController {
     private int unitedCalculate(Player player) {
         int counter = 0;
         for (Cell monster : player.getBoard().getMonsters()) {
-            if (monster.getCard().getFace() == Face.UP)
+            if (monster.getCard() != null && monster.getCard().getFace() == Face.UP)
                 counter++;
         }
         return counter * 800;
@@ -578,14 +582,17 @@ public class GameController {
     }
 
     private void fieldSpell(Monster ourMonster, Monster rivalMonster) {////// problems: all monsters on board!!!! --- Can be shorter?maybe !!!
-        yami(ourMonster);
-        yami(rivalMonster);
-        forest(ourMonster);
-        forest(rivalMonster);
-        closedForest(ourMonster);
-        closedForest(ourMonster);
-        UMIIRUKA(ourMonster);
-        UMIIRUKA(rivalMonster);
+        checkField(ourMonster);
+        checkField(rivalMonster);
+    }
+
+    private void checkField(Monster monster) {
+        if (monster.getCardOwner().getBoard().getFieldSpell().getCard() == null)
+            return;
+        yami(monster);
+        forest(monster);
+        closedForest(monster);
+        UMIIRUKA(monster);
     }
 
     private void UMIIRUKA(Monster monster) {
@@ -686,14 +693,14 @@ public class GameController {
         checkCommandKnight(rivalMonster,getRivalPlayer());
         boolean attackable = true;
         for (Cell monster : rivalMonster.getCardOwner().getBoard().getMonsters()) {
-            if (!monster.getCard().getCardName().equals("Command knight")) {
+            if (monster.getCard() != null && !monster.getCard().getCardName().equals("Command knight")) {
                 attackable = false;
                 break;
             }
         }
         if (attackable) return;
         for (Cell monster : rivalMonster.getCardOwner().getBoard().getMonsters()) {
-            if (monster.getCard().getCardName().equals("Command knight")) {
+            if (monster.getCard() != null && monster.getCard().getCardName().equals("Command knight")) {
                 Monster commandKnight = (Monster) monster.getCard();
                 if (commandKnight.getFace() == Face.UP)
                     commandKnight.setAttackable(false);
@@ -705,14 +712,12 @@ public class GameController {
     private void checkCommandKnight(Monster activationMonster,Player player) {
         activationMonster.decreaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
         activationMonster.getCommandKnightsActive().clear();
-        System.out.println(activationMonster.getCardOwner());
-        System.out.println(activationMonster.getCardOwner().getBoard());
-        System.out.println(Arrays.toString(activationMonster.getCardOwner().getBoard().getMonsters()));
-        for (Cell monster : player.getBoard().getMonsters()) {
-            if (monster.getCard().getCardName().equals("Command knight") &&
-                    monster.getCard().getFace() == Face.UP && monster.getCard() != activationMonster) {
-                activationMonster.setCommandKnightsActive((Monster) monster.getCard());
-            }
+        for (Cell monster : player.getBoard().getMonsters()) { // fookin cell has a problem nigga!!
+            if (monster.getCard() != null)
+                if (monster.getCard().getCardName().equals("Command knight") &&
+                        monster.getCard().getFace() == Face.UP && monster.getCard() != activationMonster) {
+                    activationMonster.setCommandKnightsActive((Monster) monster.getCard());
+                }
         }
         activationMonster.increaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
     }
@@ -753,7 +758,7 @@ public class GameController {
     private boolean checkForActive(Player player, String spellName) {
         for (Cell cell : player.getBoard().getSpellOrTrap()) {
             Spell spell = (Spell) cell.getCard();
-            if (spell.getCardName().equals(spellName) && spell.isActivated())
+            if (spell != null && spell.getCardName().equals(spellName) && spell.isActivated())
                 return true;
         }
         return false;
@@ -1082,7 +1087,7 @@ public class GameController {
         normalSummon(monster);
     }
 
-    private void beatsKingBarbaros(Monster monster) {
+    private void beatsKingBarbaros(Monster monster) {//// hooman:cell is broken- 1400/2/27\\10:33
         if (currentPlayer.getBoard().getNumberOfMonsterInBoard() >= 3) {
             if (gameView.doYouWantTributeBarBaros()) {
                 gameView.getTributeForBarbaros();

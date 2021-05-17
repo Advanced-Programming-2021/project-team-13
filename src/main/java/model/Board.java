@@ -51,7 +51,13 @@ public class Board {
         return spellOrTrap;
     }
 
-    public Cell[] getMonsters() {
+    public Cell[] getMonsters() { // y cant I do this ???
+//        ArrayList<Cell> cells = new ArrayList<>();
+//        for (Cell monsterCell : monsterCells) {
+//            if (monsterCell.getCard() != null)
+//                cells.add(monsterCell);
+//        }
+//        return (Cell[]) cells.toArray();
         return monsterCells;
     }
 
