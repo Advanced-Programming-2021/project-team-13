@@ -125,7 +125,7 @@ public class Board {
     public int getNumberOfMonsterInBoard() {
         int counter = 0;
         for (Cell cell : monsterCells) {
-            if (cell == null)
+            if (cell.getCard() != null)
                 counter++;
         }
         return counter;

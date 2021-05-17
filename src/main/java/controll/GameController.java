@@ -1199,9 +1199,9 @@ public class GameController {
                     currentPlayer.setSetOrSummonInThisTurn(true);
                     currentPlayer.setSelectedCard(null);
                     gameView.printSetSuccessfully();
-                    gameView.printMap();
                     currentPlayer.getCardsInHand().remove(selectedCard);
                     currentPlayer.getBoard().putMonsterInBoard(selectedCard);
+                    gameView.printMap();
                 }
             } else
                 gameView.printMonsterZoneFull();
@@ -1253,7 +1253,7 @@ public class GameController {
                             !(monster.getFace() == Face.DOWN && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE))
                         gameView.printCantFlipSummon();
                     else {
-                        if (monster.getCardName().equalsIgnoreCase("man eater bug")
+                        if (monster.getCardName().equalsIgnoreCase("man-eater bug")
                                 || monster.getCardName().equalsIgnoreCase("gate guardian"))
                             manEaterBugFlipSummon();
                         currentPlayer.setSelectedCard(null);
