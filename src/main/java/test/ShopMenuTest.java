@@ -32,6 +32,7 @@ public class ShopMenuTest {
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
+        User.getAllUsers().clear();
     }
 
     @org.junit.Test

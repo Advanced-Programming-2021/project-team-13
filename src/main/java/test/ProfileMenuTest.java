@@ -2,6 +2,8 @@ package test;
 
 import model.players.User;
 import org.junit.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import view.Menu;
 import view.ViewMaster;
 import view.allmenu.ProfileView;
@@ -29,6 +31,11 @@ public class ProfileMenuTest {
         System.setOut(originalOut);
     }
 
+    @AfterAll
+    public void reset() {
+        User.getAllUsers().clear();
+    }
+
     @Test
     public void profileMenuTest1() {
         profileView.run("profile change --nickname Nima");
@@ -43,8 +50,8 @@ public class ProfileMenuTest {
 
     @Test
     public void profileMenuTest3() {
-        profileView.run("profile change --nickname NiMa");
-        Assert.assertEquals(user.getNickname(), "NiMa");
+        profileView.run("profile change --nickname NIMa");
+        Assert.assertEquals(user.getNickname(), "NIMa");
     }
 
     @Test

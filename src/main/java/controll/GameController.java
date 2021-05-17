@@ -1001,7 +1001,7 @@ public class GameController {
             currentPhase = Phase.MAIN_PHASE_2;
             gameView.printCurrentPhase();
             //to comp
-        } else if (currentPhase == Phase.MAIN_PHASE_2){
+        } else if (currentPhase == Phase.MAIN_PHASE_2) {
             reset();
             currentPhase = Phase.END_PHASE;
             currentPlayer.setSetOrSummonInThisTurn(false);
@@ -1094,8 +1094,10 @@ public class GameController {
                 gameView.printThereArentEnoughMonsterForTribute();
                 return;
             }
-            if (!getTribute(numberOfTribute))
+            if (!getTribute(numberOfTribute)) {
                 gameView.printMap();
+                return;
+            }
         }
         normalSummon(monster);
     }
