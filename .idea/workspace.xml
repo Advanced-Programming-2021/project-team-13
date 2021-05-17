@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="debug - 9">
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="debug - 6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameWinMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameWinMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,6 +88,19 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -297,14 +317,7 @@
       <option name="project" value="LOCAL" />
       <updated>1620813161790</updated>
     </task>
-    <task id="LOCAL-00017" summary="debug - 9">
-      <created>1621258421701</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1621258421701</updated>
-    </task>
-    <option name="localTasksCounter" value="18" />
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +334,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/non-effective_version" />
+                        <option value="origin/noEffectBranch" />
                       </list>
                     </value>
                   </entry>
@@ -372,8 +385,7 @@
     <MESSAGE value="login is debuged" />
     <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
     <MESSAGE value="fix" />
-    <MESSAGE value="debug - 9" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug - 9" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -388,8 +400,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controll/GameController.java</url>
-          <line>1322</line>
-          <option name="timeStamp" value="6" />
+          <line>710</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

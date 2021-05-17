@@ -985,7 +985,7 @@ public class GameController {
             currentPhase = Phase.DRAW_PHASE;
             gameView.printCurrentPhase();
             turnsPlayed++;
-            if (!notToDrawCardTurns.contains(turnsPlayed)) {
+            if (!notToDrawCardTurns.contains(turnsPlayed) && currentPlayer.getCardsInHand().size() < 6) {
                 if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0)
                     currentPlayer.addCardToHand();
                 else {
@@ -1402,4 +1402,12 @@ public class GameController {
         } while (monsterNum > showGraveyardView.getShowGraveyardController().showGraveyard());
         showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum);
     }
+
+    public void moneyCheat(int amount){
+        currentPlayer.getUser().addMoney(amount);
+    }
+
+//    public void addCardToHandCheat(String cardName){
+//        Card card = currentPlayer.
+//    }
 }
