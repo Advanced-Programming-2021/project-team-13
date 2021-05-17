@@ -57,7 +57,6 @@ public class Regex {
         return null;
     }
 
-
     public static String findPassword(String input) {
         Pattern pattern = Pattern.compile("--(password|p) (\\w+)");
         Matcher matcher = pattern.matcher(input);
@@ -66,7 +65,6 @@ public class Regex {
         }
         return null;
     }
-
 
     public static String findNickname(String input) {
         Pattern pattern = Pattern.compile("--(nickname|n) (\\w+)");

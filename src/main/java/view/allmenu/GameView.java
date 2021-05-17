@@ -45,8 +45,10 @@ public class GameView {
             showGraveyard(command);
         else if (command.equals("card show --selected"))
             gameController.showSelectedCard();
-        else if (command.matches("surrender"))
+        else if (command.matches("surrender")) {
             gameController.surrender();
+            return;
+        }
         else if (command.equals("active effect"))
             gameController.activeEffect();
         else if (command.equals("special summon"))
@@ -56,6 +58,7 @@ public class GameView {
         else if (command.equals("map"))
             printMap();
         else System.out.println("invalid command");
+        gameController.findWinner();
     }
 
 
@@ -72,13 +75,6 @@ public class GameView {
         gameController.changeSet(position);
     }
 
-    private void surrender() {
-    }
-
-//    public void changeTurn() {
-//
-//    }
-
     private void directAttack() {
         gameController.directAttack();
     }
@@ -88,9 +84,6 @@ public class GameView {
             int monsterNumber = Integer.parseInt(inputMatcher.group(1));
             gameController.attack(monsterNumber);
         }
-    }
-
-    private void flipSummon() {
     }
 
     public void printMap() {

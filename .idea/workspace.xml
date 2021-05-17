@@ -9,6 +9,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/test/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/Regex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Regex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,19 +84,6 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,7 +164,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="dubug - 4" />
+      <changelist id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login view completed(not debugged)" />
       <created>1618920320640</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -198,7 +187,6 @@
       <workItem from="1620397682243" duration="6649000" />
       <workItem from="1620439891874" duration="6930000" />
       <workItem from="1620621789862" duration="5708000" />
-      <workItem from="1621227261416" duration="7147000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -312,28 +300,7 @@
       <option name="project" value="LOCAL" />
       <updated>1620813161790</updated>
     </task>
-    <task id="LOCAL-00017" summary="dubug - 4">
-      <created>1621193419917</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1621193419917</updated>
-    </task>
-    <task id="LOCAL-00018" summary="a">
-      <created>1621227353946</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1621227353946</updated>
-    </task>
-    <task id="LOCAL-00019" summary="debug - 6">
-      <created>1621231634856</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1621231634856</updated>
-    </task>
-    <option name="localTasksCounter" value="20" />
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,16 +361,14 @@
     <MESSAGE value="game controller selects (without checking regex) + &#10;game controller + game view attack(60 percent completed)&#10;need a method for checking if card has attacked in the same round or not" />
     <MESSAGE value="ViewMaster is singleton , gameView and gameController not completed yet" />
     <MESSAGE value="ش" />
+    <MESSAGE value="a" />
     <MESSAGE value="fookin marshmallon" />
     <MESSAGE value="literally nothing" />
     <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
     <MESSAGE value="login is debuged" />
     <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
     <MESSAGE value="fix" />
-    <MESSAGE value="dubug - 4" />
-    <MESSAGE value="a" />
-    <MESSAGE value="debug - 6" />
-    <option name="LAST_COMMIT_MESSAGE" value="debug - 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -418,18 +383,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controll/GameController.java</url>
-          <line>1323</line>
+          <line>1304</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controll/GameController.java</url>
-          <line>714</line>
+          <line>710</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/model/Board.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />

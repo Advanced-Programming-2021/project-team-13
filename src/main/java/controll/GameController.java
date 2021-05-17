@@ -193,11 +193,11 @@ public class GameController {
     }
 
     private int checkEnded() {
-        if (currentPlayer.getLifePoint() == 0 && getRivalPlayer().getLifePoint() == 0)
+        if (currentPlayer.getLifePoint() <= 0 && getRivalPlayer().getLifePoint() <= 0)
             return 3;//draw
-        else if (currentPlayer.getLifePoint() != 0)
+        else if (currentPlayer.getLifePoint() <= 0)
             return 2;//rival won
-        else if (getRivalPlayer().getLifePoint() != 0)
+        else if (getRivalPlayer().getLifePoint() <= 0)
             return 1;//currentPlayer has won
         else {
             if (currentPhase == Phase.DRAW_PHASE && currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() == 0)
@@ -689,8 +689,8 @@ public class GameController {
     }
 
     private void commandKnight(Monster ourMonster, Monster rivalMonster) {
-        checkCommandKnight(ourMonster,currentPlayer);
-        checkCommandKnight(rivalMonster,getRivalPlayer());
+        checkCommandKnight(ourMonster, currentPlayer);
+        checkCommandKnight(rivalMonster, getRivalPlayer());
         boolean attackable = true;
         for (Cell monster : rivalMonster.getCardOwner().getBoard().getMonsters()) {
             if (monster.getCard() != null && !monster.getCard().getCardName().equals("Command knight")) {
@@ -709,7 +709,7 @@ public class GameController {
 
     }
 
-    private void checkCommandKnight(Monster activationMonster,Player player) {
+    private void checkCommandKnight(Monster activationMonster, Player player) {
         activationMonster.decreaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
         activationMonster.getCommandKnightsActive().clear();
         for (Cell monster : player.getBoard().getMonsters()) { // fookin cell has a problem nigga!!
@@ -1001,9 +1001,9 @@ public class GameController {
             currentPhase = Phase.MAIN_PHASE_2;
             gameView.printCurrentPhase();
             //to comp
-        } else {
+        } else if (currentPhase == Phase.MAIN_PHASE_2){
             reset();
-            currentPhase = Phase.DRAW_PHASE;
+            currentPhase = Phase.END_PHASE;
             currentPlayer.setSetOrSummonInThisTurn(false);
             changeCurrentPlayer();
             gameView.printCurrentPhase();
