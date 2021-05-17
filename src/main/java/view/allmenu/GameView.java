@@ -565,7 +565,7 @@ public class GameView {
     public void getTributeTheTricky() {
         while (true) {
             System.out.println("Enter Monster Number: ");
-            String number = ViewMaster.scanner.nextLine();
+            String number = ViewMaster.scanner.nextLine().trim();
             if (number.matches("^\\d$")) {
                 if (gameController.checkTheTrickyInput(Integer.parseInt(number)))
                     return;

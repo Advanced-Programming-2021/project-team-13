@@ -689,8 +689,8 @@ public class GameController {
     }
 
     private void commandKnight(Monster ourMonster, Monster rivalMonster) {
-        checkCommandKnight(ourMonster,currentPlayer);
-        checkCommandKnight(rivalMonster,getRivalPlayer());
+        checkCommandKnight(ourMonster, currentPlayer);
+        checkCommandKnight(rivalMonster, getRivalPlayer());
         boolean attackable = true;
         for (Cell monster : rivalMonster.getCardOwner().getBoard().getMonsters()) {
             if (monster.getCard() != null && !monster.getCard().getCardName().equals("Command knight")) {
@@ -709,7 +709,7 @@ public class GameController {
 
     }
 
-    private void checkCommandKnight(Monster activationMonster,Player player) {
+    private void checkCommandKnight(Monster activationMonster, Player player) {
         activationMonster.decreaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
         activationMonster.getCommandKnightsActive().clear();
         for (Cell monster : player.getBoard().getMonsters()) { // fookin cell has a problem nigga!!
@@ -1096,7 +1096,6 @@ public class GameController {
             }
             if (!getTribute(numberOfTribute))
                 gameView.printMap();
-            return;
         }
         normalSummon(monster);
     }
@@ -1370,6 +1369,7 @@ public class GameController {
         Monster monster = (Monster) currentPlayer.getBoard().getMonsterByAddress(monsterNumber);
         if (monster == null) return false;
         currentPlayer.getBoard().getGraveyard().addCard(monster);
+        currentPlayer.getCardsInHand().remove(monster);
         return true;
     }
 
