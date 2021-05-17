@@ -615,4 +615,8 @@ public class GameView {
     public void printCardInHand(Card card, int i) {
         System.out.println(card.getCardName() + " : " + i);
     }
+
+    public void printCantAttackDirectly() {
+        System.out.println("you can’t attack the opponent directly");
+    }
 }

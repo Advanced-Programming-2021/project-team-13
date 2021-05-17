@@ -224,14 +224,15 @@ public class GameController {
             Monster rivalMonster = (Monster) getRivalPlayer()
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
-            rivalMonster.setAttacker(ourMonster);
-            activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
-            if (isSpecialAttack(ourMonster, rivalMonster))
-                return;
             if (!rivalMonster.isAttackable()) {
                 gameView.printCantAttackMonster();
                 return;
             }
+            rivalMonster.setAttacker(ourMonster);
+            rivalMonster.setHasBeenAttacked(true);//// lioghhhhhhhhhhhhhhhhhhh
+            activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
+            if (isSpecialAttack(ourMonster, rivalMonster))
+                return;
             String rivalMonsterName = rivalMonster.getCardName();
             ourMonster.setAttackedInThisTurn(true);
             if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
@@ -276,8 +277,11 @@ public class GameController {
                 rivalMonster.setFace(Face.UP);
             }
             gameView.printMap();
+            if (ourMonster.getAttacker().getCardName().equals("Suijin"))/////////////////////// fishyyyyyyyyyyyyy
+                ourMonster.setAttackPointInGame(rivalMonster.getAttackNum());
             equipSpellRid();
         }
+        deselectCard();
     }
 
     public void activeEffect() {
@@ -744,6 +748,12 @@ public class GameController {
             theCalculator(ourMonster); // we just need some calculations !!!!!!! thats all
             gameView.printMap();
             return false;
+        } else if (rivalMonster.getCardName().equals("Suijin")) {
+            if (!rivalMonster.isActiveAbility()) {
+                rivalMonster.setActiveAbility(true);
+                ourMonster.setAttackPointInGame(0);
+            }
+            return false;
         }
         return false;
     }
@@ -811,7 +821,7 @@ public class GameController {
         String cyberse = gameView.getAnswer();
         if (!checkCyberse(cyberse))
             return;
-        String fromWhere = gameView.getPlace();
+        String fromWhere = gameView.getAnswer();
         if (fromWhere.equals("Graveyard")) {
             for (Card allCard : rivalMonster.getCardOwner().getBoard().getGraveyard().getAllCards()) {
                 if (allCard.getCardName().equals(cyberse))
@@ -883,7 +893,9 @@ public class GameController {
             getRivalPlayer().decreaseHealth(ourMonster.getAttackNum());
             gameView.printYourOpponentReceivesDamage(ourMonster.getAttackNum());
             gameView.printMap();
+            ourMonster.setAttackedInThisTurn(true);
         }
+        deselectCard();
     }
 
     private boolean monsterSelectionCheck(int cardAddress, Player player) {
@@ -947,7 +959,10 @@ public class GameController {
             gameView.printAlreadyAttacked();
             return false;
         }
-
+        if (getRivalPlayer().getBoard().getNumberOfMonsterInBoard() != 0) {
+            gameView.printCantAttackDirectly();
+            return false;
+        }
         return true;
     }
 
@@ -1017,6 +1032,8 @@ public class GameController {
                 if (!monster.getCard().getCardName().equalsIgnoreCase("Suijin"))
                     ((Monster) (monster.getCard())).setActiveAbility(false);
                 ((Monster) (monster.getCard())).setAttackable(true);
+                ((Monster) (monster.getCard())).setAttacker(null);
+                ((Monster) (monster.getCard())).setHasBeenAttacked(false);
                 ((Monster) (monster.getCard())).setSetInThisTurn(false);
                 ((Monster) (monster.getCard())).setAttackedInThisTurn(false);
                 ((Monster) (monster.getCard())).setHaveChangePositionInThisTurn(false);
