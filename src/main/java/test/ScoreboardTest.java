@@ -3,6 +3,7 @@ package test;
 import model.players.User;
 import org.junit.*;
 import org.junit.Assert.*;
+import org.junit.jupiter.api.AfterAll;
 import view.Menu;
 import view.ViewMaster;
 import view.allmenu.ScoreboardView;
@@ -47,6 +48,11 @@ public class ScoreboardTest {
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
+    }
+
+    @AfterAll
+    public void reset() {
+        User.getAllUsers().clear();
     }
 
     @Test

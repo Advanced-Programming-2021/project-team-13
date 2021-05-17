@@ -38,6 +38,7 @@ public class GameTest {
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
+        User.getAllUsers().clear();
     }
 
     @Test

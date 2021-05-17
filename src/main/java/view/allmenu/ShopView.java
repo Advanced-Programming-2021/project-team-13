@@ -47,7 +47,6 @@ public class ShopView {
         matcher.find();
         String cardName = matcher.group(1);
         shopController.showCard(cardName);
-
     }
 
     private void buyCard(Matcher inputMatcher) {
@@ -59,11 +58,11 @@ public class ShopView {
     public void printMonsterCard(int attackNum, int defenseNum, int level, String cardName, String cardDescription, String monsterType) {
         System.out.println("Name: " + cardName + "\nLevel: " + level
                 + "\nType: " + monsterType + "\nATK: " + attackNum
-                + "\nDEF: " + defenseNum + "Description: " + cardDescription);
+                + "\nDEF: " + defenseNum + "\nDescription: " + cardDescription);
     }
 
     public void printSpellAndTrap(String icon, String cardDescription, String cardName, String type) {
         System.out.println("Name: " + cardName + "Spell"
-                + "\nType: " + type + "Description: " + cardDescription);
+                + "\nType: " + type + "\nDescription: " + cardDescription);
     }
 }

@@ -4,6 +4,7 @@ package test;
 import model.players.User;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
 import view.Menu;
 import view.ViewMaster;
 import view.allmenu.LoginView;
@@ -27,6 +28,12 @@ public class LoginMenuTest {
     @After
     public void restoreStreams() {
         System.setOut(originalOut);
+
+    }
+
+    @AfterAll
+    public void reset() {
+        User.getAllUsers().clear();
     }
 
     @org.junit.Test
