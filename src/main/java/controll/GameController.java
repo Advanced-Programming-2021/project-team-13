@@ -802,9 +802,9 @@ public class GameController {
     }
 
     private void texchanger(Monster rivalMonster) {///// needs summon nigga !!!
-        if (!rivalMonster.isAttackedInThisTurn() || !rivalMonster.hasUsedAbilityThisTurn())
+        if (!rivalMonster.isAttackedInThisTurn() || !rivalMonster.isActiveAbility())
             return;
-        rivalMonster.setUsedAbilityThisTurn(true);
+        rivalMonster.setActiveAbility(true);
         gameView.printAttackDisruptedByTaxchanger();
         if (!gameView.doesRivalWantCyberse())
             return;
@@ -1002,11 +1002,25 @@ public class GameController {
             gameView.printCurrentPhase();
             //to comp
         } else {
-            currentPhase = Phase.END_PHASE;
+            reset();
+            currentPhase = Phase.DRAW_PHASE;
             currentPlayer.setSetOrSummonInThisTurn(false);
             changeCurrentPlayer();
             gameView.printCurrentPhase();
             gameView.printWhoseTurn();
+        }
+    }
+
+    private void reset() {
+        for (Cell monster : currentPlayer.getBoard().getMonsters()) {
+            if (monster.getCard() != null) {
+                if (!monster.getCard().getCardName().equalsIgnoreCase("Suijin"))
+                    ((Monster) (monster.getCard())).setActiveAbility(false);
+                ((Monster) (monster.getCard())).setAttackable(true);
+                ((Monster) (monster.getCard())).setSetInThisTurn(false);
+                ((Monster) (monster.getCard())).setAttackedInThisTurn(false);
+                ((Monster) (monster.getCard())).setHaveChangePositionInThisTurn(false);
+            }
         }
     }
 

@@ -1,5 +1,7 @@
 package test;
 
+import model.cards.Monster;
+import model.csv.MonsterCSV;
 import model.players.Player;
 import model.players.User;
 import org.junit.After;
@@ -10,6 +12,7 @@ import view.ViewMaster;
 import view.allmenu.GameView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 public class GameTest {
@@ -20,7 +23,9 @@ public class GameTest {
     GameView gameView;
 
     @Before
-    public void setUpStreams() {
+    public void setUpStreams() throws FileNotFoundException {
+        MonsterCSV monsterCSV = MonsterCSV.findMonster("Command Knight");
+        ///////////////////
         System.setOut(new PrintStream(outContent));
         ViewMaster.setCurrentMenu(Menu.GAME_MENU);
         user = new User("Nima", "1234", "NIMA");

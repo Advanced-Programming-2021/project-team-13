@@ -23,7 +23,6 @@ public class Monster extends Card {
     private boolean isActiveAbility = false;
     private boolean attackable = true;
     private boolean isFieldSpellActive = false;
-    private boolean usedAbilityThisTurn = false;
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
     private ArrayList<Monster> commandKnightsActive;
     private ArrayList<Card> equipSpellSword;
@@ -255,14 +254,6 @@ public class Monster extends Card {
             default:
                 return 2;
         }
-    }
-
-    public boolean hasUsedAbilityThisTurn() {
-        return usedAbilityThisTurn;
-    }
-
-    public void setUsedAbilityThisTurn(boolean status) {
-        usedAbilityThisTurn = status;
     }
 
     @Override
