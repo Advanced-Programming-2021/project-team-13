@@ -2,6 +2,7 @@ package model.players;
 
 import enums.Zone;
 import model.Board;
+import model.Deck;
 import model.Graveyard;
 import model.cards.Card;
 
@@ -25,7 +26,7 @@ public class Player {
         this.user = user;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
-        this.board = new Board(user.getActiveDeck(), new Graveyard(this));
+        this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
         cardsInHand = new ArrayList<>();
     }
 
@@ -37,6 +38,11 @@ public class Player {
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
+        this.board = new Board(new Deck(user.getActiveDeck()) , new Graveyard(this));
+        this.selectedCard = null;
+        this.cardsInHand = new ArrayList<>();
+        this.isAttacking = false;
+        this.isSetOrSummonInThisTurn = false;
     }
 
     public void setAttacking(boolean attacking) {
@@ -103,12 +109,10 @@ public class Player {
         lifePoint -= amount;
     }
 
-    public void addCardInGame(Card card) {
-    }
-
     public void addCardToHand() {
         Card card = this.getBoard().getDeck().getAllCardsInMainDeck().get(0);
-        this.getBoard().getDeck().removeCard(card, false);
+        this.getBoard().getDeck().getAllCardsInMainDeck().remove(0);
+        this.getBoard().getDeck().getAllCards().remove(card);
         card.setZone(Zone.IN_HAND);
         this.cardsInHand.add(card);
     }
@@ -125,12 +129,6 @@ public class Player {
         return user;
     }
 
-//    public ArrayList<Monster> getMonsterOnBoard() {       //I dont think this works!!!!!
-//        ArrayList<Monster> monsters = new ArrayList<>();
-//        return monsters;
-//    }
-
-
     public Card getSelectedCard() {
         return selectedCard;
     }
@@ -139,9 +137,8 @@ public class Player {
         this.selectedCard = selectedCard;
     }
 
-    public boolean willingToSacrifice() { // /////////////////////////////////////////////////needs to be completed , player needs to give health!!!!!!
-        ///prototype
-        return false; // to be completed
+    public void addWonRounds(int number){
+        this.wonRounds += number;
     }
 
 }

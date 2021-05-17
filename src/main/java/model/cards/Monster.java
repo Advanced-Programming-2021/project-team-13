@@ -57,6 +57,14 @@ public class Monster extends Card {
         equipSpellSword = new ArrayList<>();
     }
 
+    public void setCommandKnightsActive(ArrayList<Monster> commandKnightsActive) {
+        this.commandKnightsActive = commandKnightsActive;
+    }
+
+    public void setEquipSpellSword(ArrayList<Card> equipSpellSword) {
+        this.equipSpellSword = equipSpellSword;
+    }
+
     public ArrayList<Monster> getMonsters() {
         return monsters;
     }
