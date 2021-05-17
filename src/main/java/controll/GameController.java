@@ -221,13 +221,13 @@ public class GameController {
                     .getBoard().getMonsterByAddress(monsterNumber);
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
             rivalMonster.setAttacker(ourMonster);
-//            activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
-//            if (isSpecialAttack(ourMonster, rivalMonster))
-//                return;
-//            if (!rivalMonster.isAttackable()) {
-//                gameView.printCantAttackMonster();
-//                return;
-//            }
+            activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
+            if (isSpecialAttack(ourMonster, rivalMonster))
+                return;
+            if (!rivalMonster.isAttackable()) {
+                gameView.printCantAttackMonster();
+                return;
+            }
             String rivalMonsterName = rivalMonster.getCardName();
             ourMonster.setAttackedInThisTurn(true);
             if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
@@ -272,7 +272,7 @@ public class GameController {
                 rivalMonster.setFace(Face.UP);
             }
             gameView.printMap();
-//            equipSpellRid();
+            equipSpellRid();
         }
     }
 
