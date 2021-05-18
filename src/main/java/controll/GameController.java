@@ -99,6 +99,7 @@ public class GameController {
             currentPlayer = secondPlayer;
         else
             currentPlayer = firstPlayer;
+        gameView.playerChanged(currentPlayer);
     }
 
     public void selectPlayerMonster(int cardAddress) {// no regex error!!! // are these handled or not!!??
@@ -368,7 +369,7 @@ public class GameController {
         else if (effectName.equalsIgnoreCase("Messenger of peace"))
             activeMessenger(spell);
         else if (effectName.equalsIgnoreCase("Twin Twisters"))
-            twinTwisters();
+            twinTwisters(spell);
         else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
             mysticalTyphoon();
     }
@@ -388,16 +389,16 @@ public class GameController {
 
     }
 
-    private void twinTwisters() {//////not complete !!!!!#crap!!
-        showCardsInHand();
+    private void twinTwisters(Spell spell) {//////not complete !!!!!#crap!!
+        showCardsInHand(spell.getCardOwner());
         gameView.printSelectNum();
         currentPlayer.getBoard().getGraveyard()
                 .addCard(currentPlayer.getCardsInHand().get(gameView.getNum()));
     }
 
-    private void showCardsInHand() {
-        for (int i = 0; i < currentPlayer.getCardsInHand().size(); i++) {
-            gameView.printCardInHand(currentPlayer.getCardsInHand().get(i), i);
+    private void showCardsInHand(Player player) {
+        for (int i = 0; i < player.getCardsInHand().size(); i++) {
+            gameView.printCardInHand(player.getCardsInHand().get(i), i);
         }
     }
 
@@ -463,7 +464,7 @@ public class GameController {
         ShowGraveyardView graveyard = new ShowGraveyardView(graveyardOwner);
         graveyard.getShowGraveyardController().showGraveyard();
         gameView.printSelectNum();
-        graveyard.getShowGraveyardController().selectCardFromGraveyard(gameView.getNum());
+        graveyard.getShowGraveyardController().selectCardFromGraveyard(gameView.getNum(), graveyardOwner);
         specialSummon();
 
     }
@@ -811,32 +812,30 @@ public class GameController {
         rivalMonster.setFace(Face.UP);
     }
 
-    private void texchanger(Monster rivalMonster) {///// needs summon nigga !!!
-        if (!rivalMonster.isAttackedInThisTurn() || !rivalMonster.isActiveAbility())
+    private void texchanger(Monster rivalMonster) {///// lets see....
+        if (rivalMonster.isActiveAbility())
             return;
         rivalMonster.setActiveAbility(true);
         gameView.printAttackDisruptedByTaxchanger();
+        changeCurrentPlayer();
         if (!gameView.doesRivalWantCyberse())
             return;
-        String cyberse = gameView.getAnswer();
-        if (!checkCyberse(cyberse))
-            return;
+        gameView.printSelectGraveyardHandOrDeck();
         String fromWhere = gameView.getAnswer();
-        if (fromWhere.equals("Graveyard")) {
-            for (Card allCard : rivalMonster.getCardOwner().getBoard().getGraveyard().getAllCards()) {
-                if (allCard.getCardName().equals(cyberse))
-                    rivalMonster.getCardOwner();
-            }
-            gameView.printDoesntContainCard("Graveyard", rivalMonster.getCardName());
+        if (fromWhere.equalsIgnoreCase("Graveyard")) {
+            ShowGraveyardView graveyard = new ShowGraveyardView(currentPlayer);
+            graveyard.getShowGraveyardController().showGraveyard();
+            graveyard.getShowGraveyardController().selectCardFromGraveyard(gameView.getNum(), currentPlayer);
+            specialSummon();
         } else if (fromWhere.equalsIgnoreCase("Hand")) {
-/*            if () {
-
-            }*/
-            gameView.printDoesntContainCard("Hand", rivalMonster.getCardName());
+            showCardsInHand(currentPlayer);
+            selectPlayerHandCard(gameView.getNum());
+            specialSummon();
         } else if (fromWhere.equalsIgnoreCase("Deck")) {
-            gameView.printDoesntContainCard("Deck", rivalMonster.getCardName());
+            showDeckInGame(currentPlayer);
         } else
             gameView.printInvalidLocation();
+        changeCurrentPlayer();
     }
 
     private boolean checkCyberse(String cyberse) {
@@ -1400,7 +1399,7 @@ public class GameController {
             showGraveyardView.printSelectCard();
             monsterNum = ViewMaster.scanner.nextInt();
         } while (monsterNum > showGraveyardView.getShowGraveyardController().showGraveyard());
-        showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum);
+        showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum, currentPlayer);
     }
 
     public void moneyCheat(int amount){
