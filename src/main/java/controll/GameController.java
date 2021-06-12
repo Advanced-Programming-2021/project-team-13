@@ -50,6 +50,10 @@ public class GameController {
         notToDrawCardTurns = new ArrayList<>();
     }
 
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
+    }
+
     public void addNotToDrawCardTurn(int turn) {
         notToDrawCardTurns.add(turn);
     }
@@ -877,8 +881,9 @@ public class GameController {
         }
     }
 
-    public void directAttack() {  // somehow same as attack only diff is rival card number!!!
-        if (checkAttack()) {
+    public void directAttack(boolean isAI) {  // somehow same as attack only diff is rival card number!!!
+        if (checkAttack()
+                || isAI) {
             Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
             getRivalPlayer().decreaseHealth(ourMonster.getAttackNum());
             gameView.printYourOpponentReceivesDamage(ourMonster.getAttackNum());
@@ -1077,7 +1082,6 @@ public class GameController {
             gameView.askWantSummonedAnotherMonsterTerratiger();
         terratiger.setActiveAbility(true);
         normalSummon(terratiger);
-
     }
 
     private void summonAndSpecifyTribute() {
