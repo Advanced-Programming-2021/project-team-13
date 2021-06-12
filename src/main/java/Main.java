@@ -1,5 +1,8 @@
 
 import controll.json.UserJson;
+import enums.CardType;
+import enums.Face;
+import model.cards.Card;
 import view.ViewMaster;
 
 public class Main {

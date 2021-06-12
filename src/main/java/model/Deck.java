@@ -1,6 +1,10 @@
 package model;
 
+import enums.Zone;
 import model.cards.Card;
+import model.cards.Monster;
+import model.cards.Spell;
+import model.cards.Trap;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +26,52 @@ public class Deck implements Comparable<Deck> {
         setValid(false);
         setNumberOfCards(0);
         setIsActive(false);
+    }
+
+    public Deck(Deck that) {
+        this.setNumberOfCards(that.numberOfCards);
+        this.setName(that.name);
+        this.isActive = true;
+        this.isValid = true;
+        this.allCards = new ArrayList<>();
+        this.allCardsInMainDeck = new ArrayList<>();
+        this.allCardsInSideDeck = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            ArrayList<ArrayList<Card>> allArraysToCopy = new ArrayList<>();
+            ArrayList<ArrayList<Card>> allArrays = new ArrayList<>();
+            allArraysToCopy.add(that.allCardsInSideDeck);
+            allArraysToCopy.add(that.allCardsInMainDeck);
+            allArraysToCopy.add(that.allCards);
+            allArrays.add(allCardsInSideDeck);
+            allArrays.add(allCardsInMainDeck);
+            allArrays.add(allCards);
+            for (Card card : allArraysToCopy.get(i)) {
+                card.setZone(Zone.DECK_ZONE);
+                if (card instanceof Monster){
+                    ((Monster) card).setAttackNum(((Monster) card).getAttackNum());
+                    ((Monster) card).setAttackedInThisTurn(false);
+                    ((Monster) card).setSetInThisTurn(false);
+                    ((Monster) card).setActiveAbility(false);
+                    ((Monster) card).setAttackable(false);
+                    ((Monster) card).setDefenseNum(((Monster) card).getDefenseNum());
+                    ((Monster) card).setLevel(((Monster) card).getLevel());
+                    ((Monster) card).setMonsterAttribute(((Monster) card).getMonsterAttribute());
+                    ((Monster) card).setMonsterCardType(((Monster) card).getMonsterCardType());
+                    ((Monster) card).setMonsterType(((Monster) card).getMonsterType());
+                    ((Monster) card).setAttackPointInGame(((Monster) card).getAttackNum());
+                    ((Monster) card).setDefencePointInGame(((Monster) card).getDefenseNum());
+                    ((Monster) card).setCommandKnightsActive(new ArrayList<>());
+                    ((Monster) card).setEquipSpellSword(new ArrayList<>());
+                } else if (card instanceof Spell){
+                    ((Spell) card).setEquippedMonster(null);
+                } else if (card instanceof Trap){
+                    ((Trap) card).setEffectedCard(null);
+                    ((Trap) card).setTrapAction(null);
+                    ((Trap) card).setSetINThisTurn(false);
+                }
+                allArrays.get(i).add(card);
+            }
+        }
     }
 
 
@@ -159,16 +209,5 @@ public class Deck implements Comparable<Deck> {
         return -1;
     }
 
-    public Deck clone(){
-        Deck clone = new Deck (this.name);
-        clone.name = this.name;
-        clone.allCards = new ArrayList<>();
-        clone.allCardsInMainDeck = new ArrayList<>();
-        clone.allCardsInSideDeck = new ArrayList<>();
-        clone.allCards = (ArrayList<Card>) this.allCards.clone();
-        clone.allCardsInMainDeck = (ArrayList<Card>) this.allCardsInMainDeck.clone();
-        clone.allCardsInSideDeck = (ArrayList<Card>) this.allCardsInSideDeck.clone();
-        return clone;
-    }
 }
 

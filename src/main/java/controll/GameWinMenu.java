@@ -42,6 +42,7 @@ public class GameWinMenu {
         Player loser ;
         if (winner == firstPlayer) loser = secondPlayer;
         else loser = firstPlayer;
+        winner.addWonRounds(1);
         User winnerUser = winner.getUser();
         User loserUser = loser.getUser();
         gameView.printUserWonSingleGame(winnerUser.getUsername() , winner.getWonRounds() , loser.getWonRounds());

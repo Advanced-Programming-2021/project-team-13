@@ -28,8 +28,8 @@ public class ShowGraveyardController {
         return counter;
     }
 
-    public void selectCardFromGraveyard(int number) {
-        for (Card card : currentPlayer.getBoard().getGraveyard().getAllCards()) {
+    public void selectCardFromGraveyard(int number,Player player) {
+        for (Card card : player.getBoard().getGraveyard().getAllCards()) {
             if (card instanceof Monster) {
                 number--;
                 if (number == 0) {

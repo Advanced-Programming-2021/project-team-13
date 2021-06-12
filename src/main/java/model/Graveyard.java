@@ -34,7 +34,7 @@ public class Graveyard {
             card.getCardOwner().getCardsInHand().remove(card);
         }
         card.setZone(Zone.GRAVEYARD);
-//        card.setActivated(false);
+        card.setActivated(false);
         if (card instanceof Monster) {
             for (Cell monster : owner.getBoard().getMonsters()) {
                 if (monster.getCard() == card) {

@@ -23,6 +23,9 @@ public class Monster extends Card {
     private boolean isActiveAbility = false;
     private boolean attackable = true;
     private boolean isFieldSpellActive = false;
+    private boolean hasBeenAttacked;
+
+
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
     private ArrayList<Monster> commandKnightsActive;
     private ArrayList<Card> equipSpellSword;
@@ -52,6 +55,14 @@ public class Monster extends Card {
         setDefencePointInGame(defenseNum);
         commandKnightsActive = new ArrayList<>();
         equipSpellSword = new ArrayList<>();
+    }
+
+    public void setCommandKnightsActive(ArrayList<Monster> commandKnightsActive) {
+        this.commandKnightsActive = commandKnightsActive;
+    }
+
+    public void setEquipSpellSword(ArrayList<Card> equipSpellSword) {
+        this.equipSpellSword = equipSpellSword;
     }
 
     public ArrayList<Monster> getMonsters() {
@@ -261,6 +272,13 @@ public class Monster extends Card {
         return "Name: " + cardName + "\nLevel: " + level
                 + "\nType: " + monsterType + "\nATK: " + attackNum
                 + "\nDEF: " + defenseNum + "\nDescription: " + cardDescription;
+    }
+
+    public void setHasBeenAttacked(boolean status) {
+        this.hasBeenAttacked = status;
+    }
+    public boolean hasBeenAttacked() {
+        return hasBeenAttacked;
     }
 }
 

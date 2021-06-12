@@ -614,4 +614,16 @@ public class GameView {
     public void printCardInHand(Card card, int i) {
         System.out.println(card.getCardName() + " : " + i);
     }
+
+    public void printCantAttackDirectly() {
+        System.out.println("you can’t attack the opponent directly");
+    }
+
+    public void printSelectGraveyardHandOrDeck() {
+        System.out.println("select (Graveyard-Hand-Deck)");
+    }
+
+    public void playerChanged(Player currentPlayer) {
+        System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());//// added this to show changed turn
+    }
 }
