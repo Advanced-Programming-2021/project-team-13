@@ -48,8 +48,7 @@ public class GameView {
         else if (command.matches("surrender")) {
             gameController.surrender();
             return;
-        }
-        else if (command.equals("active effect"))
+        } else if (command.equals("active effect"))
             gameController.activeEffect();
         else if (command.equals("special summon"))
             gameController.checksBeforeSpecialSummon(false);
@@ -76,7 +75,7 @@ public class GameView {
     }
 
     private void directAttack() {
-        gameController.directAttack();
+        gameController.directAttack(false);
     }
 
     private void attack(Matcher inputMatcher) {

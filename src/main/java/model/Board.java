@@ -176,4 +176,12 @@ public class Board {
             }
         }
     }
+
+    public int getMonsterCellNumber(Monster monster) {
+        for (int i = 0; i < monsterCells.length; i++) {
+            if (monster == monsterCells[i].getCard())
+                return i;
+        }
+        return -1;
+    }
 }

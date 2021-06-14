@@ -5,6 +5,7 @@ import model.Board;
 import model.Deck;
 import model.Graveyard;
 import model.cards.Card;
+import model.cards.Monster;
 
 import java.util.ArrayList;
 
@@ -20,13 +21,26 @@ public class Player {
     private boolean isSetOrSummonInThisTurn = false;
     private boolean canActiveTrap = true;
     private boolean isAttacking;
+    private boolean isAI;
 
     public Player(User user) {
         this.wonRounds = 0;
         this.user = user;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
-        this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
+        isAI = false;
+        this.board = new Board(user.getActiveDeck(), new Graveyard(this));
+        // this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
+        cardsInHand = new ArrayList<>();
+    }
+
+    public Player(Deck deck) {
+        this.wonRounds = 0;
+        this.lifePoint = 8000;
+        this.maxLifePoint = 0;
+        isAI = true;
+        user = null;
+        this.board = new Board(deck, new Graveyard(this));
         cardsInHand = new ArrayList<>();
     }
 
@@ -38,7 +52,7 @@ public class Player {
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
-        this.board = new Board(new Deck(user.getActiveDeck()) , new Graveyard(this));
+        this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
         this.selectedCard = null;
         this.cardsInHand = new ArrayList<>();
         this.isAttacking = false;
@@ -137,7 +151,7 @@ public class Player {
         this.selectedCard = selectedCard;
     }
 
-    public void addWonRounds(int number){
+    public void addWonRounds(int number) {
         this.wonRounds += number;
     }
 
