@@ -5,6 +5,7 @@ import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
+import model.players.AIPlayer;
 import model.players.Player;
 import view.ViewMaster;
 import view.allmenu.GameView;
@@ -24,6 +25,8 @@ public class GameController {
     private int turnsPlayed;
     private int unitedCalcCurrent;
     private int unitedCalcRival;
+    private boolean canContinueAttack;
+    private boolean isInAttack;
 
     ///////////////////////////////////////////////////we need activation of spells and traps to work;;;;;;DAMN!//////////////////////////++messenger++some field spells++
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
@@ -48,6 +51,8 @@ public class GameController {
         turnsPlayed = 0;
         currentPhase = Phase.DRAW_PHASE;
         notToDrawCardTurns = new ArrayList<>();
+        canContinueAttack = true;
+        isInAttack = false;
     }
 
     public void setCurrentPhase(Phase currentPhase) {
@@ -72,6 +77,14 @@ public class GameController {
         if (currentPlayer == firstPlayer)
             return secondPlayer;
         return firstPlayer;
+    }
+
+    public void setCanContinueAttack(boolean canContinueAttack){
+        this.canContinueAttack = canContinueAttack;
+    }
+
+    public boolean getCanContinueAttack(){
+        return canContinueAttack;
     }
 
     public Player getStartingPlayer() {
@@ -198,13 +211,17 @@ public class GameController {
     }
 
     private int checkEnded() {
-        if (currentPlayer.getLifePoint() <= 0 && getRivalPlayer().getLifePoint() <= 0)
+        if (currentPlayer.getLifePoint() <= 0 && getRivalPlayer().getLifePoint() <= 0) {
+            currentPlayer.setLifePoint(0);
+            getRivalPlayer().setLifePoint(0);
             return 3;//draw
-        else if (currentPlayer.getLifePoint() <= 0)
+        } else if (currentPlayer.getLifePoint() <= 0){
+            currentPlayer.setLifePoint(0);
             return 2;//rival won
-        else if (getRivalPlayer().getLifePoint() <= 0)
+        } else if (getRivalPlayer().getLifePoint() <= 0) {
+            getRivalPlayer().setLifePoint(0);
             return 1;//currentPlayer has won
-        else {
+        } else {
             if (currentPhase == Phase.DRAW_PHASE && currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() == 0)
                 return 2;//rival won
             else
@@ -233,6 +250,7 @@ public class GameController {
                 gameView.printCantAttackMonster();
                 return;
             }
+            isInAttack = true;
             rivalMonster.setAttacker(ourMonster);
             rivalMonster.setHasBeenAttacked(true);//// lioghhhhhhhhhhhhhhhhhhh
             activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
@@ -286,6 +304,7 @@ public class GameController {
                 ourMonster.setAttackPointInGame(rivalMonster.getAttackNum());
             equipSpellRid();
         }
+        isInAttack = false;
         deselectCard();
     }
 
@@ -1406,8 +1425,12 @@ public class GameController {
         showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum, currentPlayer);
     }
 
-    public void moneyCheat(int amount){
+    public void moneyCheat(int amount) {
         currentPlayer.getUser().addMoney(amount);
+    }
+
+    public void playAI() {
+        ((AIPlayer) currentPlayer).play(currentPhase, this);
     }
 
 //    public void addCardToHandCheat(String cardName){

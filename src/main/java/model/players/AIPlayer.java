@@ -25,23 +25,19 @@ public class AIPlayer extends Player {
     public void play(Phase phase, GameController GC) {
         switch (phase) {
             case DRAW_PHASE:
+                //GC
             case STANDBY_PHASE:
-                GC.setCurrentPhase(Phase.STANDBY_PHASE);
+            case END_PHASE:
+                GC.nextPhase();
                 break;
             case MAIN_PHASE_1:
+            case MAIN_PHASE_2:
                 mainPhaseMove(GC);
-                GC.setCurrentPhase(Phase.BATTLE_PHASE);
+                GC.nextPhase();
                 break;
             case BATTLE_PHASE:
                 battlePhaseMove(GC);
-                GC.setCurrentPhase(Phase.MAIN_PHASE_2);
-                break;
-            case MAIN_PHASE_2:
-                mainPhaseMove(GC);
-                GC.setCurrentPhase(Phase.END_PHASE);
-                break;
-            case END_PHASE:
-                GC.setCurrentPhase(Phase.DRAW_PHASE);
+                GC.nextPhase();
                 break;
         }
 

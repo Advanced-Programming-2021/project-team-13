@@ -1,5 +1,6 @@
 package view;
 
+import model.players.AIPlayer;
 import model.players.User;
 import view.allmenu.*;
 
@@ -68,6 +69,11 @@ public class ViewMaster {
     public void run() {
         String command;
         while (currentMenu != Menu.EXIT_MENU) {
+            if (currentMenu == Menu.GAME_MENU &&
+                    gameView.getGameController().getCurrentPlayer() instanceof AIPlayer) {
+                gameView.getGameController().playAI();
+                continue;
+            }
             command = scanner.nextLine().trim();
             if (command.matches(Regex.SHOW_MENU))
                 printCurrentMenu();
