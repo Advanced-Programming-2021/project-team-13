@@ -1,9 +1,9 @@
 package view;
 
-import model.players.AIPlayer;
 import model.players.User;
-import view.allmenu.*;
+import view.allMenu.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ViewMaster {
@@ -66,42 +66,8 @@ public class ViewMaster {
         return viewMaster;
     }
 
-    public void run() {
-        String command;
-        while (currentMenu != Menu.EXIT_MENU) {
-            if (currentMenu == Menu.GAME_MENU &&
-                    gameView.getGameController().getCurrentPlayer() instanceof AIPlayer) {
-                gameView.getGameController().playAI();
-                continue;
-            }
-            command = scanner.nextLine().trim();
-            if (command.matches(Regex.SHOW_MENU))
-                printCurrentMenu();
-            else if (command.matches(Regex.ENTER_MENU) && currentMenu != Menu.MAIN_MENU)
-                System.out.println("menu navigation is not possible");
-            else if (currentMenu == Menu.LOGIN_MENU)
-                loginView.run(command);
-            else if (currentMenu == Menu.MAIN_MENU)
-                mainView.run(command);
-            else if (currentMenu == Menu.SCOREBOARD_MENU)
-                scoreboardView.run(command);
-            else if (currentMenu == Menu.SHOP_MENU)
-                shopView.run(command);
-            else if (currentMenu == Menu.PROFILE_MENU)
-                profileView.run(command);
-            else if (currentMenu == Menu.DECK_MENU)
-                deckView.run(command);
-            else if (currentMenu == Menu.DUEL_MENU)
-                duelView.run(command);
-            else if (currentMenu == Menu.GAME_MENU)
-                gameView.run(command);
-            else if (currentMenu == Menu.SHOW_GRAVEYARD)
-                showGraveyardView.run(command);
-        }
-    }
-
-    public void printCurrentMenu() {
-        System.out.println(currentMenu.getMenuName());
+    public void run() throws IOException {
+        loginView.setLogin();
     }
 
 }

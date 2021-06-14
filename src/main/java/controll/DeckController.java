@@ -1,7 +1,5 @@
 package controll;
 
-import bullshit.Interfaces.Effects;
-import controll.json.UserJson;
 import enums.CardType;
 import enums.Face;
 import model.Deck;
@@ -12,16 +10,17 @@ import model.cards.Trap;
 import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import view.ViewMaster;
-import view.allmenu.DeckView;
+import view.allMenu.DeckView;
 
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.TreeMap;
 
 public class DeckController {
     private DeckView deckView;
     private MonsterCSV monsterCSV = new MonsterCSV();
     private SpellTrapCSV spellTrapCSV = new SpellTrapCSV();
-    public static HashMap<String, Effects> effects = new HashMap<>();
 
     public DeckController(DeckView deckView) {
         this.deckView = deckView;

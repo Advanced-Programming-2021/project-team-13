@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import view.Menu;
 import view.ViewMaster;
-import view.allmenu.MainView;
+import view.allMenu.MainView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

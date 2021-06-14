@@ -1,4 +1,4 @@
-package view.allmenu;
+package view.allMenu;
 
 import controll.ShopController;
 import view.Menu;

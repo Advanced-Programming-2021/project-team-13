@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import view.Menu;
 import view.ViewMaster;
-import view.allmenu.ProfileView;
+import view.allMenu.ProfileView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

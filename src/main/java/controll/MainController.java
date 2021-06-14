@@ -1,7 +1,7 @@
 package controll;
 
 import view.Menu;
-import view.allmenu.MainView;
+import view.allMenu.MainView;
 import view.ViewMaster;
 
 

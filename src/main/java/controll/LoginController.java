@@ -2,7 +2,7 @@ package controll;
 
 import view.Menu;
 import model.players.User;
-import view.allmenu.LoginView;
+import view.allMenu.LoginView;
 import view.ViewMaster;
 
 public class LoginController {

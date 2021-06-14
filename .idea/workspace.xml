@@ -4,7 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="a" />
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="a">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/loginMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/registerMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DuelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameWinMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameWinMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShowGraveyardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ShowGraveyardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/DeckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/DuelView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/ProfileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/ScoreboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/ShopView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ShowGraveyardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/ShowGraveyardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/LoginMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/LoginMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MainMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MainMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ScoreboardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ScoreboardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ShopMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ShopMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Deck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +51,7 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -63,7 +99,7 @@
     <property name="last.edited.regexp" value="find --nickname asghar" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../AP" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -321,7 +357,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621267037166</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="a">
+      <created>1623672959379</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1623672959379</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,14 +425,14 @@
     <MESSAGE value="game controller selects (without checking regex) + &#10;game controller + game view attack(60 percent completed)&#10;need a method for checking if card has attacked in the same round or not" />
     <MESSAGE value="ViewMaster is singleton , gameView and gameController not completed yet" />
     <MESSAGE value="ش" />
-    <MESSAGE value="a" />
     <MESSAGE value="fookin marshmallon" />
     <MESSAGE value="literally nothing" />
     <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
     <MESSAGE value="login is debuged" />
     <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

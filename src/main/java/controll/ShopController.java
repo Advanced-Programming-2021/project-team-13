@@ -4,8 +4,7 @@ import enums.CardType;
 import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import model.players.User;
-import org.json.JSONPropertyIgnore;
-import view.allmenu.ShopView;
+import view.allMenu.ShopView;
 import view.ViewMaster;
 
 import java.io.FileNotFoundException;

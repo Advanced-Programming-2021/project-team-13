@@ -3,7 +3,7 @@ import org.junit.After;
 import org.junit.Before;
 import view.Menu;
 import view.ViewMaster;
-import view.allmenu.ShopView;
+import view.allMenu.ShopView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

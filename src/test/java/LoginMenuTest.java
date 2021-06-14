@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.jupiter.api.AfterAll;
 import view.Menu;
 import view.ViewMaster;
-import view.allmenu.LoginView;
+import view.allMenu.LoginView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
