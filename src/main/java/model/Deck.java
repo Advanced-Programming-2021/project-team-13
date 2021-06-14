@@ -67,7 +67,7 @@ public class Deck implements Comparable<Deck> {
                 } else if (card instanceof Trap){
                     ((Trap) card).setEffectedCard(null);
                     ((Trap) card).setTrapAction(null);
-                    ((Trap) card).setSetINThisTurn(false);
+                    ((Trap) card).setSetInThisTurn(false);
                 }
                 allArrays.get(i).add(card);
             }

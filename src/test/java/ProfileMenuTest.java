@@ -1,9 +1,9 @@
-package test;
-
 import model.players.User;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import view.Menu;
 import view.ViewMaster;
 import view.allmenu.ProfileView;

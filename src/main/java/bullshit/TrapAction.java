@@ -3,7 +3,6 @@ package bullshit;
 import controll.GameController;
 import model.cards.Card;
 import model.cards.Trap;
-import view.ViewMaster;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +12,11 @@ public abstract class TrapAction implements Effect {
     protected static HashMap<String, TrapAction> allTrapEffects;
 
     static {
-        gameController = ViewMaster.getViewMaster().getGameView().getGameController();
         setAllTrapEffects();
+    }
+
+    public static void setGameController(GameController gameController) {
+        TrapAction.gameController = gameController;
     }
 
     protected Trap trap;
@@ -27,7 +29,7 @@ public abstract class TrapAction implements Effect {
         allTrapEffects.put("Call of The Haunted", new CallOfTheHaunted());
         allTrapEffects.put("Time Seal", new TimeSeal());
         allTrapEffects.put("Magic Jammer", new MagicJammer());
-        allTrapEffects.put("Mind Crush" , new MindCrush());
+        allTrapEffects.put("Mind Crush", new MindCrush());
     }
 
     public void setTrapCommands(ArrayList<CardCommand> cardCommands) {
