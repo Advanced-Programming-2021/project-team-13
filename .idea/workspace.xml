@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="debug - 6">
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="a little texchanger change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShowGraveyardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ShowGraveyardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,17 +79,6 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,7 +182,12 @@
       <workItem from="1620397682243" duration="6649000" />
       <workItem from="1620439891874" duration="6930000" />
       <workItem from="1620621789862" duration="5708000" />
-      <workItem from="1621322365038" duration="2126000" />
+      <workItem from="1621322365038" duration="2163000" />
+      <workItem from="1621336308393" duration="11000" />
+      <workItem from="1621336682499" duration="1538000" />
+      <workItem from="1621339605196" duration="5343000" />
+      <workItem from="1621401696976" duration="2169000" />
+      <workItem from="1623253035707" duration="1217000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -310,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620813161790</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="a little texchanger change">
+      <created>1621324513092</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1621324513092</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,7 +376,8 @@
     <MESSAGE value="login is debuged" />
     <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="a little texchanger change" />
+    <option name="LAST_COMMIT_MESSAGE" value="a little texchanger change" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
