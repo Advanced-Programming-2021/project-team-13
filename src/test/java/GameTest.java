@@ -1,6 +1,4 @@
-package test;
 
-import model.cards.Monster;
 import model.csv.MonsterCSV;
 import model.players.Player;
 import model.players.User;

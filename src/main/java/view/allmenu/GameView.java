@@ -15,7 +15,6 @@ import java.util.regex.Matcher;
 
 public class GameView {
     private final GameController gameController;
-    private int roundCheck = 0;
 
     public GameView(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);

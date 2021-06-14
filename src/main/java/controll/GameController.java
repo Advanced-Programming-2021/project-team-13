@@ -27,6 +27,10 @@ public class GameController {
     private int unitedCalcRival;
     private boolean canContinueAttack;
     private boolean isInAttack;
+    private boolean normalSummonHappened;
+    private boolean specialSummonHappened;
+    private boolean ritualSummonHappened;
+    private boolean anySummonHappened;
 
     ///////////////////////////////////////////////////we need activation of spells and traps to work;;;;;;DAMN!//////////////////////////++messenger++some field spells++
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {

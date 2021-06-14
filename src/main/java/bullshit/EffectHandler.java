@@ -1,7 +1,6 @@
 package bullshit;
 
 import controll.GameController;
-import enums.Phase;
 import enums.SummonType;
 import enums.Zone;
 import model.Cell;
@@ -9,7 +8,6 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
-import model.players.Player;
 import view.ViewMaster;
 
 public abstract class EffectHandler {
@@ -189,7 +187,7 @@ class PlayerCanActivateTrap extends EffectHandler {
 
     @Override
     public boolean canActivate() {
-        if (card.getCardOwner().isCanActiveTrap() && !card.isActivated() && !((Trap) card).isSetINThisTurn()) {
+        if (card.getCardOwner().isCanActiveTrap() && !card.isActivated() && !((Trap) card).isSetInThisTurn()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {

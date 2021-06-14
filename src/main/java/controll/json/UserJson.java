@@ -17,7 +17,7 @@ public class UserJson {
         FileWriter jsonFile;
         try {
             String json = mapper.toJson(User.getAllUsers(), User.class);
-            jsonFile = new FileWriter("UserJson.txt");
+            jsonFile = new FileWriter("UserJson.json");
             jsonFile.write(json);
             jsonFile.close();
         } catch (Exception ignored) {
@@ -28,7 +28,7 @@ public class UserJson {
         String json = "";
         try {
             YaGson mapper = new YaGson();
-            json = new String(Files.readAllBytes(Paths.get("UserJson.txt")));
+            json = new String(Files.readAllBytes(Paths.get("UserJson.json")));
             Type type = new TypeToken<ArrayList<User>>() {
             }.getType();
             User.setAllUsers(mapper.fromJson(json, type));
