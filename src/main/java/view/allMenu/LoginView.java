@@ -40,12 +40,14 @@ public class LoginView {
         primaryStage.show();
     }
 
-    public void goToMainMenu(ActionEvent event) {
-
+    public void goToMainMenu(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainMenu.fxml"));
+        ((Stage)registerButton.getScene().getWindow()).setScene(new Scene(root));
     }
 
-    public void goToRegisterMenu(ActionEvent event) {
-
+    public void goToRegisterMenu(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/registerMenu.fxml"));
+        ((Stage)registerButton.getScene().getWindow()).setScene(new Scene(root));
     }
 
     public void exit(ActionEvent event) {
