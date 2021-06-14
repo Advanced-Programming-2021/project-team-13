@@ -5,6 +5,7 @@ import enums.AttackOrDefense;
 import enums.Face;
 import model.cards.Card;
 import model.cards.Monster;
+import model.players.AIPlayer;
 import model.players.Player;
 import view.Menu;
 import view.Regex;

@@ -5,6 +5,7 @@ import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
+import model.players.AIPlayer;
 import model.players.Player;
 import view.ViewMaster;
 import view.allmenu.GameView;
@@ -1406,8 +1407,12 @@ public class GameController {
         showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum, currentPlayer);
     }
 
-    public void moneyCheat(int amount){
+    public void moneyCheat(int amount) {
         currentPlayer.getUser().addMoney(amount);
+    }
+
+    public void playAI() {
+        ((AIPlayer) currentPlayer).play(currentPhase, this);
     }
 
 //    public void addCardToHandCheat(String cardName){

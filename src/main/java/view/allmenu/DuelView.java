@@ -56,7 +56,7 @@ public class DuelView {
     }
 
     public int inputStonePaperScissor(User user) {
-        System.out.println("hey " + user.getNickname() +" !\nplease choose one to start Game: stone , paper , scissor");
+        System.out.println("hey " + user.getNickname() + " !\nplease choose one to start Game: stone , paper , scissor");
         int numberToReturn;
         do {
             String input = ViewMaster.scanner.nextLine().trim().toLowerCase();
@@ -78,7 +78,7 @@ public class DuelView {
         return numberToReturn;
     }
 
-    public void printEqual(){
+    public void printEqual() {
         System.out.println("Equal!\ntry again!");
     }
 
