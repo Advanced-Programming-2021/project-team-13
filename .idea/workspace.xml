@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="first graphic">
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="nothing much">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/ScoreboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/ScoreboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/ShopController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/ShopController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/loginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/loginMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,6 +209,8 @@
       <workItem from="1621322365038" duration="2126000" />
       <workItem from="1621452167149" duration="586000" />
       <workItem from="1623656328675" duration="877000" />
+      <workItem from="1623722598762" duration="4049000" />
+      <workItem from="1623741391530" duration="2091000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -342,7 +345,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623677255461</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="nothing much">
+      <created>1623677875275</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1623677875275</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,7 +421,8 @@
     <MESSAGE value="fix" />
     <MESSAGE value="a" />
     <MESSAGE value="first graphic" />
-    <option name="LAST_COMMIT_MESSAGE" value="first graphic" />
+    <MESSAGE value="nothing much" />
+    <option name="LAST_COMMIT_MESSAGE" value="nothing much" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
