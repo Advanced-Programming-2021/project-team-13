@@ -2,6 +2,7 @@ package view.allMenu;
 
 import controll.LoginController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,6 +28,12 @@ public class LoginView {
     public Button registerButton;
     public Button exitButton;
     public Label notifLabel;
+    public Button regButton;
+    public TextField regUsernameField;
+    public PasswordField regPasswordField;
+    public TextField regNicknameField;
+    public Button backButton;
+    public Label regNotifLabel;
 
     public LoginView() {
         loginController = new LoginController(this);
@@ -58,11 +65,17 @@ public class LoginView {
         ((Stage)exitButton.getScene().getWindow()).close();
     }
 
-    private boolean register() {
-        String username = "";
-        String password = "";
-        String nickname = "";
+    @FXML
+    private boolean register(ActionEvent event) {
+        String username = regUsernameField.getText();
+        String password = regPasswordField.getText();
+        String nickname = regNicknameField.getText();
         return loginController.registerUser(username, password, nickname);
+    }
+
+    public void goBack(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginMenu.fxml"));
+        ((Stage)backButton.getScene().getWindow()).setScene(new Scene(root));
     }
 
     private boolean login() {
@@ -72,15 +85,15 @@ public class LoginView {
     }
 
     public void printUsernameExists(String username) {
-        notifLabel.setText("user with username " + username + " already exists");
+        regNotifLabel.setText("user with username " + username + " already exists");
     }
 
     public void printNicknameExists(String nickname) {
-        notifLabel.setText("user with nickname " + nickname + " already exists");
+        regNotifLabel.setText("user with nickname " + nickname + " already exists");
     }
 
     public void printUserCreated() {
-        notifLabel.setText("user created successfully!");
+        regNotifLabel.setText("user created successfully!");
     }
 
     public void printLoginSuccessful() {
@@ -90,6 +103,7 @@ public class LoginView {
     public void printInvalidUsernameOrPassword() {
         notifLabel.setText("Username and password didn’t match!");
     }
+
 
 
 }
