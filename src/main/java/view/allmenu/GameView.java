@@ -87,7 +87,7 @@ public class GameView {
 
     public void printMap() {
         Player currentPlayer = gameController.getCurrentPlayer();
-        Player rivalPlayer = gameController.getRivalPlayer();
+        Player rivalPlayer = gameController.getCurrentPlayer().getRivalPlayer();
         StringBuilder map = new StringBuilder();
         addRivalMap(rivalPlayer, map);
         addPlayerMap(currentPlayer, map);
@@ -482,8 +482,8 @@ public class GameView {
                 if (number.matches("^\\d+$")) {
                     int num = Integer.parseInt(number);
                     if (num > 0 && num < 6) {
-                        if (gameController.getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
-                            return (Monster) gameController.getRivalPlayer().getBoard().getMonsterByAddress(num);
+                        if (gameController.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
+                            return (Monster) gameController.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num);
                         else
                             System.out.println("There is no monster in this address");
                     } else

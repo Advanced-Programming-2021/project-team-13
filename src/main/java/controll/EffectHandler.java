@@ -1,6 +1,5 @@
-package bullshit;
+package controll;
 
-import controll.GameController;
 import enums.SummonType;
 import enums.Zone;
 import model.Cell;
@@ -100,7 +99,7 @@ class HasNormalSummonHappened extends EffectHandler {//check game setters
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.NORMAL) {
+        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.NORMAL) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -117,7 +116,7 @@ class HasFlipSummonHappened extends EffectHandler {//check game setters
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.FLIP) {
+        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.FLIP) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -152,7 +151,7 @@ class HasSpecialSummonHappened extends EffectHandler {//check game setters
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.SPECIAL) {
+        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.SPECIAL) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -178,6 +177,24 @@ class HasSpecialSummonHappened extends EffectHandler {//check game setters
 //        }
 //    }
 //}
+
+class IsInAttack extends EffectHandler {
+
+    public IsInAttack(Card card){
+        super(card);
+    }
+
+    @Override
+    public boolean canActivate() {
+        if (gameController.isInAttack()){
+            if (nextHandler != null)
+                return nextHandler.canActivate();
+            else return true;
+        } else {
+            return false;
+        }
+    }
+}
 
 class PlayerCanActivateTrap extends EffectHandler {
 
@@ -263,7 +280,7 @@ class IsAnySpellActive extends EffectHandler {
     @Override
     public boolean canActivate() {
         boolean anySpellActive = false;
-        for (Cell cell : gameController.getRivalPlayer().getBoard().getSpellOrTrap()) {
+        for (Cell cell : gameController.getCurrentPlayer().getRivalPlayer().getBoard().getSpellOrTrap()) {
             if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
                 anySpellActive = true;
                 break;

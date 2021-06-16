@@ -1,6 +1,6 @@
 package model.cards;
 
-import bullshit.TrapAction;
+import controll.TrapAction;
 import enums.CardType;
 import enums.Face;
 

@@ -1,6 +1,5 @@
-package bullshit;
+package controll;
 
-import controll.GameController;
 import model.cards.Card;
 import model.cards.Trap;
 
@@ -38,6 +37,24 @@ public abstract class TrapAction implements Effect {
 
     public void setStartActionCheck(EffectHandler startActionCheck) {
         this.startActionCheck = startActionCheck;
+    }
+}
+
+class MagicCylinder extends TrapAction {
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new IsInAttack(card);
+        EffectHandler effectHandler1 = new PlayerCanActivateTrap(card);
+        effectHandler1.setNextHandler(effectHandler);
+        setStartActionCheck(effectHandler1);
+//        CardCommand cardCommand = new
+    }
+
+    @Override
+    public void run() {
+
     }
 }
 
@@ -93,6 +110,10 @@ class CallOfTheHaunted extends TrapAction {
 }
 
 class MagicJammer extends TrapAction {
+
+    public MagicJammer(){
+
+    }
 
     @Override
     public void setCard(Card card) {

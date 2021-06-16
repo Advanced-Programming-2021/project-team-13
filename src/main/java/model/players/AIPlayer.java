@@ -88,7 +88,7 @@ public class AIPlayer extends Player {
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 2));
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 3));
             gc.normalSummon(monster);
-            for (Cell cell : gc.getRivalPlayer().getBoard().getMonsters())
+            for (Cell cell : gc.getCurrentPlayer().getRivalPlayer().getBoard().getMonsters())
                 cell.setCard(null);
             return true;
         }
@@ -143,7 +143,7 @@ public class AIPlayer extends Player {
         if (monsters.size() != 0)
             for (Monster monster : monsters) {
                 if (!monster.isAttackedInThisTurn()) {
-                    if (GC.getRivalPlayer().getBoard().getNumberOfMonsterInBoard() == 0) {
+                    if (GC.getCurrentPlayer().getRivalPlayer().getBoard().getNumberOfMonsterInBoard() == 0) {
                         this.setSelectedCard(monster);
                         GC.directAttack(true);
                         this.setSelectedCard(null);
@@ -155,7 +155,7 @@ public class AIPlayer extends Player {
                         if (rivalMonster != null) {
                             setSelectedCard(monster);
                             attackInThisTurn = true;
-                            int number = GC.getRivalPlayer().getBoard().getMonsterCellNumber(rivalMonster);
+                            int number = GC.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterCellNumber(rivalMonster);
                             if (number == 1)
                                 GC.attack(3);
                             else if (number == 2)
