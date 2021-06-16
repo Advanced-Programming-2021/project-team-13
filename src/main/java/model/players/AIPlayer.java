@@ -15,11 +15,20 @@ import java.util.stream.Collectors;
 public class AIPlayer extends Player {
     private final Comparator<Monster> comparator;
     private int roundsNumberThatDoNotAttack = 0;
+    private String nickname;
 
     public AIPlayer(Deck deck) {
         super(deck);
         comparator = Comparator.comparing(Monster::getAttackPointInGame, Comparator.reverseOrder())
                 .thenComparing(Monster::getDefencePointInGame, Comparator.reverseOrder());
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 
     public void play(Phase phase, GameController GC) {
@@ -121,10 +130,12 @@ public class AIPlayer extends Player {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         List<Monster> faceUpMonsters = Arrays.stream(getBoard().getMonsters()).map(e -> (Monster) e.getCard())
+                .filter(Objects::nonNull)
                 .filter(e -> e.getFace() == Face.UP)
                 .sorted(comparator.reversed())
                 .collect(Collectors.toList());
         List<Monster> faceDownMonster = Arrays.stream(getBoard().getMonsters()).map(e -> (Monster) e.getCard())
+                .filter(Objects::nonNull)
                 .filter(e -> e.getFace() == Face.DOWN)
                 .sorted(comparator.reversed())
                 .collect(Collectors.toList());

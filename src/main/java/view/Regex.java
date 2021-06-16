@@ -28,7 +28,7 @@ public class Regex {
     public static final String SHOW_ONE_DECK2 = "^deck show( --side)? --([^ ]+ \\w+)$";
     public static final String DECK_SHOW_CARDS = "^deck show --cards$";
     public static final String ATTACK = "attack ([1-5])";
-    public static final String DUEL = "^duel [^ ]+ [^ ]+ [^ ]+ [^ ]+ [^ ]+$";
+    public static final String DUEL = "^duel [^ ]+ [^ ]+ [^ ]+ [^ ]+$";
     public static final String NEW = "--new";
     public static final String SECOND_PLAYER = "--second-player (?<playerUsername>\\w+)";
     public static final String ROUNDS = "--rounds (?<rounds>\\d+)";

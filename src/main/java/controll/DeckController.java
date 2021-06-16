@@ -1,7 +1,6 @@
 package controll;
 
-import bullshit.Interfaces.Effects;
-import controll.json.UserJson;
+
 import enums.CardType;
 import enums.Face;
 import model.Deck;
@@ -15,13 +14,16 @@ import view.ViewMaster;
 import view.allmenu.DeckView;
 
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 public class DeckController {
     private DeckView deckView;
     private MonsterCSV monsterCSV = new MonsterCSV();
     private SpellTrapCSV spellTrapCSV = new SpellTrapCSV();
-    public static HashMap<String, Effects> effects = new HashMap<>();
+//    public static HashMap<String, Effects> effects = new HashMap<>();
 
     public DeckController(DeckView deckView) {
         this.deckView = deckView;
@@ -136,7 +138,7 @@ public class DeckController {
 
     private boolean doesHaveCard(String cardName) {
         for (String card : ViewMaster.getUser().getAllCards().keySet()) {
-            if (card.equalsIgnoreCase(cardName.replace("_","-")))
+            if (card.equalsIgnoreCase(cardName.replace("_", "-")))
                 return true;
         }
         return false;

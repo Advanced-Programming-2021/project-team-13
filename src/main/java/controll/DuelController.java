@@ -1,5 +1,13 @@
 package controll;
 
+import enums.CardType;
+import enums.Face;
+import enums.MonsterAttribute;
+import enums.MonsterCardType;
+import model.Deck;
+import model.cards.Card;
+import model.cards.Monster;
+import model.players.AIPlayer;
 import model.players.Player;
 import model.players.User;
 import view.Menu;
@@ -25,6 +33,28 @@ public class DuelController {
     private void playsWithAI(User user, int rounds) {
         Player firstPlayer = new Player(user);
         ViewMaster.setCurrentMenu(Menu.GAME_MENU);
+        Deck aIDeck = new Deck("AIDeck");
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        aIDeck.addNewCard(new Monster("ali" , CardType.MONSTER , Face.UP , 85000 , "Alieeeee!" ,
+                "ali" , MonsterCardType.RITUAL , MonsterAttribute.DARK , 8500 , 8500 , 1) , false);
+        AIPlayer aiPlayer = new AIPlayer(aIDeck);
+
+        ViewMaster.getViewMaster().setGameView(new GameView(firstPlayer , aiPlayer , firstPlayer , rounds));
         //secondPlayer = new AIPlayer("AI" , );
         //to complete
     }
