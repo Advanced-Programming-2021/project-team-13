@@ -60,7 +60,7 @@ public class AIPlayer extends Player {
                 }
                 if (numberOfTribute <= getBoard().getNumberOfMonsterInBoard()) {
                     List<Monster> tributeList = Arrays.stream(getBoard().getMonsters()).map(e -> (Monster) e.getCard())
-                            .sorted(comparator).collect(Collectors.toList());
+                            .filter(Objects::nonNull).sorted(comparator).collect(Collectors.toList());
                     getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 1));
                     getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 2));
                     GC.normalSummon(monster);
