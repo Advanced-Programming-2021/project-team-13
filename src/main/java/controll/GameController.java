@@ -81,11 +81,11 @@ public class GameController {
         return secondPlayer;
     }
 
-    public void setCanContinueAttack(boolean canContinueAttack){
+    public void setCanContinueAttack(boolean canContinueAttack) {
         this.canContinueAttack = canContinueAttack;
     }
 
-    public boolean getCanContinueAttack(){
+    public boolean getCanContinueAttack() {
         return canContinueAttack;
     }
 
@@ -217,7 +217,7 @@ public class GameController {
             currentPlayer.setLifePoint(0);
             currentPlayer.getRivalPlayer().setLifePoint(0);
             return 3;//draw
-        } else if (currentPlayer.getLifePoint() <= 0){
+        } else if (currentPlayer.getLifePoint() <= 0) {
             currentPlayer.setLifePoint(0);
             return 2;//rival won
         } else if (currentPlayer.getRivalPlayer().getLifePoint() <= 0) {
@@ -268,7 +268,7 @@ public class GameController {
         rivalMonster.setHasBeenAttacked(true);//// lioghhhhhhhhhhhhhhhhhhh
         activateSpecial(ourMonster, rivalMonster);//////////////////////sorting of which comes first is a problem we have to check!
         if (isSpecialAttack(ourMonster, rivalMonster))
-            return ;
+            return;
         String rivalMonsterName = rivalMonster.getCardName();
         ourMonster.setAttackedInThisTurn(true);
         if (rivalMonster.getAttackOrDefense() == AttackOrDefense.ATTACK) {
@@ -1101,6 +1101,10 @@ public class GameController {
     }
 
     public void normalSummon(Monster monster) {
+        if (monster.getCardName().equalsIgnoreCase("Mirage Dragon")) {
+            getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
+            monster.setActiveAbility(true);
+        }
         gameView.printSummonSuccessfully();
         currentPlayer.getCardsInHand().remove(monster);
         monster.setSetInThisTurn(true);
@@ -1131,10 +1135,6 @@ public class GameController {
 
     private void summonAndSpecifyTribute() {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
-        if (monster.getCardName().equalsIgnoreCase("mirage dragon")) { // it should be TRUE in attack function when it dies;///hooman: name is right???!?!(upperCase first word!)
-            currentPlayer.getRivalPlayer().setCanActiveTrap(false);
-            monster.setActiveAbility(true);
-        }
         int numberOfTribute = monster.howManyTributeNeed();
         if (numberOfTribute != 0) {
             int numberOfMonsterInOurBoard = currentPlayer.getBoard().getNumberOfMonsterInBoard();
@@ -1344,6 +1344,10 @@ public class GameController {
             monster.setFace(Face.UP);
             monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
             currentPlayer.getBoard().putMonsterInBoard(monster);
+            if (monster.getCardName().equalsIgnoreCase("Mirage Dragon")) {
+                getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
+                monster.setActiveAbility(true);
+            }
             gameView.printMap();
             return true;
         } else return false;

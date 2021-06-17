@@ -83,7 +83,7 @@ public class AIPlayer extends Player {
     private boolean summonBarbaros(Monster monster, GameController gc) {
         if (getBoard().getNumberOfMonsterInBoard() >= 3) {
             List<Monster> tributeList = Arrays.stream(getBoard().getMonsters()).map(e -> (Monster) e.getCard())
-                    .sorted(comparator).collect(Collectors.toList());
+                    .filter(Objects::nonNull).sorted(comparator).collect(Collectors.toList());
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 1));
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 2));
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 3));
@@ -102,6 +102,10 @@ public class AIPlayer extends Player {
             for (Monster monster1 : monsters) {
                 if (monster1.getLevel() <= 4) {
                     getBoard().putMonsterInBoard(monster1);
+                    if (monster1.getCardName().equalsIgnoreCase("Mirage Dragon")) {
+                        gc.getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
+                        monster1.setActiveAbility(true);
+                    }
                     monster.setZone(Zone.MONSTER_ZONE);
                     monster.setFace(Face.UP);
                     monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
