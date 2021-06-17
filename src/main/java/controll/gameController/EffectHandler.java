@@ -1,5 +1,6 @@
-package controll;
+package controll.gameController;
 
+import enums.Phase;
 import enums.SummonType;
 import enums.Zone;
 import model.Cell;
@@ -10,8 +11,13 @@ import model.cards.Trap;
 import view.ViewMaster;
 
 public abstract class EffectHandler {
+    protected static GameController gameController;
+
+    public static void setGameController(GameController gameController) {
+        EffectHandler.gameController = gameController;
+    }
+
     protected Card card;
-    protected static GameController gameController = ViewMaster.getViewMaster().getGameView().getGameController();
     protected EffectHandler nextHandler;
 
     public EffectHandler(Card card) {
@@ -24,56 +30,22 @@ public abstract class EffectHandler {
 
     public abstract boolean canActivate();
 }
-//
-//class IsRivalPlayerAttacking extends EffectHandler {
-//
-//    public IsRivalPlayerAttacking(Card card) {
-//        super(card);
-//    }
-//
-//    @Override
-//    public boolean canActivate() {
-//        if (gameController) {
-//            if (nextHandler != null) return nextHandler.canActivate();
-//            else return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//}
-//
-//class HasAnySummonHappenedThisTurn extends EffectHandler {
-//    public HasAnySummonHappenedThisTurn(Card card) {
-//        super(card);
-//    }
-//
-//    @Override
-//    public boolean canActivate() {
-//        if (gameController.isSummonInThisTurn()) {
-//            if (nextHandler != null) return nextHandler.canActivate();
-//            else return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//}
 
-//class IsRivalPlayerAttacking extends EffectHandler {
-//
-//    public IsRivalPlayerAttacking(Card card) {
-//        super(card);
-//    }
+class HasAnySummonHappenedThisTurn extends EffectHandler {
+    public HasAnySummonHappenedThisTurn(Card card) {
+        super(card);
+    }
 
-//
-//    public boolean canActivate() {
-//        if (gameController.getRivalPlayer()) {
-//            if (nextHandler != null) return nextHandler.canActivate();
-//            else return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//}
+    @Override
+    public boolean canActivate() {
+        if (gameController.isAnySummonHappened()) {
+            if (nextHandler != null) return nextHandler.canActivate();
+            else return true;
+        } else {
+            return false;
+        }
+    }
+}
 
 //class HasAnySummonHappenedThisTurn extends EffectHandler {
 //    public HasAnySummonHappenedThisTurn(Card card) {
@@ -180,13 +152,13 @@ class HasSpecialSummonHappened extends EffectHandler {//check game setters
 
 class IsInAttack extends EffectHandler {
 
-    public IsInAttack(Card card){
+    public IsInAttack(Card card) {
         super(card);
     }
 
     @Override
     public boolean canActivate() {
-        if (gameController.isInAttack()){
+        if (gameController.isInAttack() && gameController.getCurrentPhase() == Phase.BATTLE_PHASE) {
             if (nextHandler != null)
                 return nextHandler.canActivate();
             else return true;

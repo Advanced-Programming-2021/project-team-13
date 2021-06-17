@@ -1,6 +1,6 @@
 package model.players;
 
-import controll.GameController;
+import controll.gameController.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
 import enums.Phase;

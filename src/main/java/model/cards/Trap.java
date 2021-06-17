@@ -1,6 +1,6 @@
 package model.cards;
 
-import controll.TrapAction;
+import controll.gameController.TrapAction;
 import enums.CardType;
 import enums.Face;
 

@@ -1,6 +1,6 @@
 package view.allmenu;
 
-import controll.DuelController;
+import controll.gameController.DuelController;
 import model.players.User;
 import view.Regex;
 import view.ViewMaster;

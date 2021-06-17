@@ -1,4 +1,4 @@
-package controll;
+package controll.gameController;
 
 import model.cards.Card;
 import model.cards.Trap;
@@ -22,13 +22,15 @@ public abstract class TrapAction implements Effect {
     protected EffectHandler startActionCheck;
     protected ArrayList<CardCommand> cardCommands;
 
-
     private static void setAllTrapEffects() {
         allTrapEffects = new HashMap<>();
         allTrapEffects.put("Call of The Haunted", new CallOfTheHaunted());
         allTrapEffects.put("Time Seal", new TimeSeal());
         allTrapEffects.put("Magic Jammer", new MagicJammer());
         allTrapEffects.put("Mind Crush", new MindCrush());
+        allTrapEffects.put("Magic Cylinder" , new MagicCylinder());
+        allTrapEffects.put("Negate Attack" , new NegateAttack());
+        allTrapEffects.put("Torrential Tribute" , new TorrentialTribute());
     }
 
     public void setTrapCommands(ArrayList<CardCommand> cardCommands) {
@@ -49,12 +51,21 @@ class MagicCylinder extends TrapAction {
         EffectHandler effectHandler1 = new PlayerCanActivateTrap(card);
         effectHandler1.setNextHandler(effectHandler);
         setStartActionCheck(effectHandler1);
-//        CardCommand cardCommand = new
+        CardCommand cardCommand = new SetCannotContinueAttack(card);
+        CardCommand cardCommand1 = new ReverseAttack(card);
+        CardCommand cardCommand2 = new SendCardToGraveyard(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
+        cardCommands.add(cardCommand2);
     }
 
     @Override
     public void run() {
-
+        if (startActionCheck.canActivate()) {
+            for (CardCommand cardCommand : cardCommands)
+                cardCommand.execute();
+        }
     }
 }
 
@@ -110,10 +121,6 @@ class CallOfTheHaunted extends TrapAction {
 }
 
 class MagicJammer extends TrapAction {
-
-    public MagicJammer(){
-
-    }
 
     @Override
     public void setCard(Card card) {
@@ -174,8 +181,10 @@ class MindCrush extends TrapAction {
         EffectHandler effectHandler = new PlayerCanActivateTrap(card);
         setStartActionCheck(effectHandler);
         CardCommand cardCommand = new AnnounceCardNameToRemove(card);
+        CardCommand cardCommand1 = new SendCardToGraveyard(card);
         cardCommands = new ArrayList<>();
         cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
     }
 
     @Override
@@ -183,6 +192,59 @@ class MindCrush extends TrapAction {
         if (startActionCheck.canActivate()) {
             for (CardCommand cardCommand : cardCommands)
                 cardCommand.execute();
+        }
+    }
+}
+
+class NegateAttack extends TrapAction {
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        EffectHandler effectHandler1 = new IsInAttack(card);
+        effectHandler.setNextHandler(effectHandler1);
+        setStartActionCheck(effectHandler);
+        CardCommand cardCommand = new SetCannotContinueAttack(card);
+        CardCommand cardCommand1 = new SendCardToGraveyard(card);
+        CardCommand cardCommand2 =  new GoNextPhase(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
+        cardCommands.add(cardCommand2);
+    }
+
+    @Override
+    public void run() {
+        if (startActionCheck.canActivate()) {
+            for (CardCommand cardCommand : cardCommands)
+                cardCommand.execute();
+        }
+    }
+}
+
+class TorrentialTribute extends TrapAction {
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        EffectHandler effectHandler1 = new HasAnySummonHappenedThisTurn(card);
+        effectHandler.setNextHandler(effectHandler1);
+        setStartActionCheck(effectHandler);
+        CardCommand cardCommand = new DestroyAllMonsters(card);
+        CardCommand cardCommand1 = new SendCardToGraveyard(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
+    }
+
+    @Override
+    public void run() {
+        if (startActionCheck.canActivate()) {
+            for (CardCommand cardCommand : cardCommands) {
+                cardCommand.execute();
+            }
         }
     }
 }

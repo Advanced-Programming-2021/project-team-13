@@ -1,6 +1,6 @@
 package view.allmenu;
 
-import controll.GameController;
+import controll.gameController.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
 import model.cards.Card;
@@ -637,5 +637,9 @@ public class GameView {
             System.out.println("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname());//// added this to show changed turn
         else
             System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());
+    }
+
+    public void printCardAddedToHand(Card card) {
+        System.out.println("new card added to hand : " + card.getCardName());
     }
 }
