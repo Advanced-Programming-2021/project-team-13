@@ -1,6 +1,3 @@
-
-package test;
-
 import model.players.User;
 import org.junit.After;
 import org.junit.Before;

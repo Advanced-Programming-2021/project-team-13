@@ -1,14 +1,14 @@
 package model.cards;
 
-import bullshit.TrapAction;
+import controll.TrapAction;
 import enums.CardType;
 import enums.Face;
 
 public class Trap extends Card {
     private TrapAction trapAction;
     private Card EffectedCard;
-    String type;
-    boolean isSetINThisTurn = false;
+    private String type;
+    private boolean isSetInThisTurn = false;
 
     public Trap(String name, CardType cardType, String description, Face face,
                 int price, String type) {
@@ -24,12 +24,12 @@ public class Trap extends Card {
         this.type = type;
     }
 
-    public boolean isSetINThisTurn() {
-        return isSetINThisTurn;
+    public boolean isSetInThisTurn() {
+        return isSetInThisTurn;
     }
 
-    public void setSetINThisTurn(boolean setINThisTurn) {
-        isSetINThisTurn = setINThisTurn;
+    public void setSetInThisTurn(boolean setInThisTurn) {
+        isSetInThisTurn = setInThisTurn;
     }
 
     public Card getEffectedCard() {

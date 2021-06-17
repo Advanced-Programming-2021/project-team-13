@@ -1,7 +1,5 @@
-package bullshit;
+package controll;
 
-import controll.GameController;
-import enums.Phase;
 import enums.SummonType;
 import enums.Zone;
 import model.Cell;
@@ -9,7 +7,6 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
-import model.players.Player;
 import view.ViewMaster;
 
 public abstract class EffectHandler {
@@ -102,7 +99,7 @@ class HasNormalSummonHappened extends EffectHandler {//check game setters
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.NORMAL) {
+        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.NORMAL) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -119,7 +116,7 @@ class HasFlipSummonHappened extends EffectHandler {//check game setters
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.FLIP) {
+        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.FLIP) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -154,7 +151,7 @@ class HasSpecialSummonHappened extends EffectHandler {//check game setters
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.SPECIAL) {
+        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.SPECIAL) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -181,6 +178,24 @@ class HasSpecialSummonHappened extends EffectHandler {//check game setters
 //    }
 //}
 
+class IsInAttack extends EffectHandler {
+
+    public IsInAttack(Card card){
+        super(card);
+    }
+
+    @Override
+    public boolean canActivate() {
+        if (gameController.isInAttack()){
+            if (nextHandler != null)
+                return nextHandler.canActivate();
+            else return true;
+        } else {
+            return false;
+        }
+    }
+}
+
 class PlayerCanActivateTrap extends EffectHandler {
 
     public PlayerCanActivateTrap(Card card) {
@@ -189,7 +204,7 @@ class PlayerCanActivateTrap extends EffectHandler {
 
     @Override
     public boolean canActivate() {
-        if (card.getCardOwner().isCanActiveTrap() && !card.isActivated() && !((Trap) card).isSetINThisTurn()) {
+        if (card.getCardOwner().isCanActiveTrap() && !card.isActivated() && !((Trap) card).isSetInThisTurn()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -265,7 +280,7 @@ class IsAnySpellActive extends EffectHandler {
     @Override
     public boolean canActivate() {
         boolean anySpellActive = false;
-        for (Cell cell : gameController.getRivalPlayer().getBoard().getSpellOrTrap()) {
+        for (Cell cell : gameController.getCurrentPlayer().getRivalPlayer().getBoard().getSpellOrTrap()) {
             if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
                 anySpellActive = true;
                 break;

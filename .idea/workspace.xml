@@ -4,13 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="debug - 9">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="change java version and some changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserJson.txt" beforeDir="false" afterPath="$PROJECT_DIR$/UserJson.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Canser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Effects.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Summon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Deck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/LoginMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/LoginMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/MainMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MainMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfileMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ScoreboardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ScoreboardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/ShopMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ShopMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/hello" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +98,9 @@
       <recent name="E:\project-team-13\src\test" />
       <recent name="E:\project-team-13\src\main" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -108,12 +125,12 @@
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.ShopMenuTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ShopMenuTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -123,12 +140,12 @@
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.ShopMenuTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ShopMenuTest" />
       <option name="METHOD_NAME" value="testBuySomeCard" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -139,12 +156,12 @@
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.ShopMenuTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ShopMenuTest" />
       <option name="METHOD_NAME" value="testInvalidBuy" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -155,12 +172,12 @@
       <module name="YuGiOh" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="test" />
-      <option name="MAIN_CLASS_NAME" value="test.ShopMenuTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="ShopMenuTest" />
       <option name="METHOD_NAME" value="testShowAll" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -326,7 +343,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621267037166</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="change java version and some changes">
+      <created>1623658478908</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1623658478908</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,22 +418,15 @@
     <MESSAGE value="login is debuged" />
     <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="change java version and some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="change java version and some changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/test/ShopMenuTest.java</url>
-          <line>26</line>
-          <properties class="test.ShopMenuTest">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controll/GameController.java</url>
-          <line>728</line>
+          <line>733</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">

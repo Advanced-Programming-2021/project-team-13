@@ -15,7 +15,6 @@ import java.util.regex.Matcher;
 
 public class GameView {
     private final GameController gameController;
-    private int roundCheck = 0;
 
     public GameView(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
@@ -88,7 +87,7 @@ public class GameView {
 
     public void printMap() {
         Player currentPlayer = gameController.getCurrentPlayer();
-        Player rivalPlayer = gameController.getRivalPlayer();
+        Player rivalPlayer = gameController.getCurrentPlayer().getRivalPlayer();
         StringBuilder map = new StringBuilder();
         addRivalMap(rivalPlayer, map);
         addPlayerMap(currentPlayer, map);
@@ -114,11 +113,17 @@ public class GameView {
             map.append("C\t");
         }
         map.append("\n");
-        map.append(currentPlayer.getUser().getNickname()).append(":").append(currentPlayer.getLifePoint());
+        if (currentPlayer instanceof AIPlayer)
+            map.append(((AIPlayer) currentPlayer).getNickname()).append(":").append(currentPlayer.getLifePoint());
+        else
+            map.append(currentPlayer.getUser().getNickname()).append(":").append(currentPlayer.getLifePoint());
     }
 
     private void addRivalMap(Player rivalPlayer, StringBuilder map) {
-        map.append(rivalPlayer.getUser().getNickname()).append(":").append(rivalPlayer.getLifePoint()).append("\n");
+        if (rivalPlayer instanceof AIPlayer)
+            map.append(((AIPlayer) rivalPlayer).getNickname()).append(":").append(rivalPlayer.getLifePoint()).append("\n");
+        else
+            map.append(rivalPlayer.getUser().getNickname()).append(":").append(rivalPlayer.getLifePoint()).append("\n");
         for (int i = 0; i < rivalPlayer.getCardsInHand().size(); i++) {
             map.append("\tC");
         }
@@ -378,7 +383,10 @@ public class GameView {
     }
 
     public void printWhoseTurn() {
-        System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+        if (gameController.getCurrentPlayer() instanceof AIPlayer)
+            System.out.println("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
+        else
+            System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
     }
 
     public void showCard(Card card) {
@@ -474,8 +482,8 @@ public class GameView {
                 if (number.matches("^\\d+$")) {
                     int num = Integer.parseInt(number);
                     if (num > 0 && num < 6) {
-                        if (gameController.getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
-                            return (Monster) gameController.getRivalPlayer().getBoard().getMonsterByAddress(num);
+                        if (gameController.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
+                            return (Monster) gameController.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num);
                         else
                             System.out.println("There is no monster in this address");
                     } else
@@ -625,6 +633,9 @@ public class GameView {
     }
 
     public void playerChanged(Player currentPlayer) {
-        System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());//// added this to show changed turn
+        if (currentPlayer instanceof AIPlayer)
+            System.out.println("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname());//// added this to show changed turn
+        else
+            System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());
     }
 }
