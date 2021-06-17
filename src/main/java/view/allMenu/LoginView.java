@@ -11,12 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import view.Menu;
-import view.Regex;
-import view.ViewMaster;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
 
 
 public class LoginView {
@@ -41,7 +37,7 @@ public class LoginView {
 
     public void setLogin() throws IOException {
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("/fxml/loginMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("/fxml/LoginMenu.fxml"));
         Parent root = loader.load();
         primaryStage.setResizable(false);
         primaryStage.setTitle("you-gey-oh?:D");
@@ -52,12 +48,12 @@ public class LoginView {
     public void goToMainMenu(ActionEvent event) throws IOException {
         if(!login())
             return;
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
         ((Stage)loginButton.getScene().getWindow()).setScene(new Scene(root));
     }
 
     public void goToRegisterMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/registerMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/RegisterMenu.fxml"));
         ((Stage)registerButton.getScene().getWindow()).setScene(new Scene(root));
     }
 
@@ -74,7 +70,7 @@ public class LoginView {
     }
 
     public void goBack(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginMenu.fxml"));
         ((Stage)backButton.getScene().getWindow()).setScene(new Scene(root));
     }
 
