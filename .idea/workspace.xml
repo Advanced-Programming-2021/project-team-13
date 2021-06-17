@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="deleted tests (because of graphics)">
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="register completed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/registerMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/registerMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/LoginController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,19 +85,6 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -209,7 +192,7 @@
       <workItem from="1621452167149" duration="586000" />
       <workItem from="1623656328675" duration="877000" />
       <workItem from="1623722598762" duration="4049000" />
-      <workItem from="1623741391530" duration="4318000" />
+      <workItem from="1623741391530" duration="4899000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -365,7 +348,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623746599886</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="register completed">
+      <created>1623749812462</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1623749812462</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,7 +427,8 @@
     <MESSAGE value="nothing much" />
     <MESSAGE value="most of login done ( not pretty!!)" />
     <MESSAGE value="deleted tests (because of graphics)" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted tests (because of graphics)" />
+    <MESSAGE value="register completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="register completed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
