@@ -1141,6 +1141,7 @@ public class GameController {
     }
 
     public void normalSummon(Monster monster, AttackOrDefense position) {
+        anySummonHappened = true;
         if (monster.getCardName().equalsIgnoreCase("Mirage Dragon")) {
             getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
             monster.setActiveAbility(true);
@@ -1190,6 +1191,7 @@ public class GameController {
                 return;
             }
         }
+        normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
     }
 
@@ -1206,6 +1208,7 @@ public class GameController {
             }
         }
         monster.setActiveAbility(true);
+        normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
     }
 
@@ -1381,6 +1384,7 @@ public class GameController {
             Monster monster = (Monster) currentPlayer.getCardsInHand().get(monsterNumber - 1);
             if (monster.getLevel() > 4)
                 return false;
+            normalSummonHappened = true;
             normalSummon(monster, AttackOrDefense.DEFENSE);
             return true;
         } else return false;
@@ -1460,16 +1464,8 @@ public class GameController {
     private void specialSummon() {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
         String position = gameView.getPositionForSpecialSummon();
-        if (position.equalsIgnoreCase("attack"))
-            monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-        else
-            monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
-        monster.setSetInThisTurn(true);
-        monster.setZone(Zone.MONSTER_ZONE);
-        monster.setFace(Face.UP);
-        currentPlayer.setSelectedCard(null);
-        currentPlayer.getBoard().putMonsterInBoard(monster);
-        gameView.printMap();
+        specialSummonHappened = true;
+        normalSummon(monster, position.equalsIgnoreCase("attack") ? AttackOrDefense.ATTACK : AttackOrDefense.DEFENSE);
     }
 
     public boolean checkTheTrickyInput(int monsterNumber) {
@@ -1511,6 +1507,7 @@ public class GameController {
     public void ritualSummon(Monster ritualMonster, ArrayList<Monster> tributes, AttackOrDefense position) {
         for (Monster tribute : tributes)
             getCurrentPlayer().getBoard().getGraveyard().addCard(tribute);
+        ritualSummonHappened = true;
         normalSummon(ritualMonster, position);
     }
 
