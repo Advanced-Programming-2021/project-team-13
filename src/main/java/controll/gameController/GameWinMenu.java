@@ -66,6 +66,8 @@ public class GameWinMenu {
             } else {
                 firstPlayer.renewPlayer();
                 secondPlayer.renewPlayer();
+                firstPlayer.setRivalPlayer(secondPlayer);
+                secondPlayer.setRivalPlayer(firstPlayer);
                 //go to deck to change!!!!!!!!!!
                 if (startingPlayer == firstPlayer) {
                     ViewMaster.getViewMaster().setGameView(new GameView(firstPlayer, secondPlayer, secondPlayer, startingRounds));

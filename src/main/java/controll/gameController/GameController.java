@@ -24,6 +24,7 @@ public class GameController {
     private final Player secondPlayer;
     private final Player startingPlayer;
     private final ArrayList<Integer> notToDrawCardTurns;
+    private final ArrayList<Trap> chain;
     private Card attackingCard;
     private Card summonedCard;
     private Player currentPlayer;
@@ -46,6 +47,7 @@ public class GameController {
         this.secondPlayer = secondPlayer;
         this.startingPlayer = startingPlayer;
         this.currentPlayer = startingPlayer;
+        this.chain = new ArrayList<>();
         firstPlayer.getBoard().getDeck().shuffleMainDeck();
         secondPlayer.getBoard().getDeck().shuffleMainDeck();
         for (Card allCard : firstPlayer.getBoard().getDeck().getAllCards()) {
@@ -358,10 +360,35 @@ public class GameController {
             gameView.printNoCardSelected();
             return;
         }
-        if (!(currentPlayer.getSelectedCard() instanceof Spell)) {
-            gameView.printActiveOnlyForSpells();
+        if (!(currentPlayer.getSelectedCard() instanceof Spell) && !(currentPlayer.getSelectedCard() instanceof Trap)) {
+            gameView.printActiveOnlyForSpellsAndTrap();
+        } else if (currentPlayer.getSelectedCard() instanceof Spell) {
+            activateSpell();
+        } else {
+            activateTrap();
+        }
+    }
+
+    private void activateTrap() {
+        Trap trap = (Trap) currentPlayer.getSelectedCard();
+        if (trap.isActivated()) {
+            gameView.printAlreadyActivated();
             return;
         }
+        if (trap.getCardOwner() != currentPlayer && trap.getZone() == Zone.SPELL_TRAP_ZONE) {
+            return;
+        }
+        if (!trap.getTrapAction().startActionCheck.canActivate()) {
+            gameView.printPrepsNotDone();
+            return;
+        }
+        trap.setActivated(true);
+        trap.setFace(Face.UP);
+        chain.add(trap);
+        checkTrapActivation();
+    }
+
+    private void activateSpell() {
         if ((currentPhase != Phase.MAIN_PHASE_1) && (currentPhase != Phase.MAIN_PHASE_2)) { // wtf is this things problem?????????!
             gameView.printCantActiveThisTurn();
             return;
@@ -1154,7 +1181,6 @@ public class GameController {
             if (checkScannerEffect(monster, true)) return;
         summonedCard = monster;
         gameView.printSummonSuccessfully();
-        anySummonHappened = true;
         currentPlayer.getCardsInHand().remove(monster);
         monster.setSetInThisTurn(true);
         monster.setZone(Zone.MONSTER_ZONE);
@@ -1225,6 +1251,7 @@ public class GameController {
             gameView.askWantSummonedAnotherMonsterTerratiger();
         terratiger.setActiveAbility(true);
         normalSummon(terratiger, AttackOrDefense.ATTACK);
+        checkTrapActivation();
     }
 
     private void summonAndSpecifyTribute() {
@@ -1244,6 +1271,7 @@ public class GameController {
         }
         normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
+        checkTrapActivation();
     }
 
     private void beatsKingBarbaros(Monster monster) {//// hooman:cell is broken- 1400/2/27\\10:33
@@ -1261,6 +1289,7 @@ public class GameController {
         monster.setActiveAbility(true);
         normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
+        checkTrapActivation();
     }
 
     public boolean checkBarbarosInput(int monsterNumber1, int monsterNumber2, int monsterNumber3) {
@@ -1323,7 +1352,7 @@ public class GameController {
                 if (currentPlayer.getSelectedCard() instanceof Spell)
                     ((Spell) currentPlayer.getSelectedCard()).setSetINThisTurn(true);
                 else
-                    ((Trap) currentPlayer.getSelectedCard()).setSetInThisTurn(true);
+                    ((Trap) currentPlayer.getSelectedCard()).setSetTurn(turnsPlayed);
                 currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
                 currentPlayer.setSelectedCard(null);
                 currentPlayer.setSetOrSummonInThisTurn(true);
@@ -1437,6 +1466,7 @@ public class GameController {
                 return false;
             normalSummonHappened = true;
             normalSummon(monster, AttackOrDefense.DEFENSE);
+            checkTrapActivation();
             return true;
         } else return false;
     }
@@ -1517,6 +1547,7 @@ public class GameController {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
         String position = gameView.getPositionForSpecialSummon();
         specialSummonHappened = true;
+        checkTrapActivation();
         normalSummon(monster, position.equalsIgnoreCase("attack") ? AttackOrDefense.ATTACK : AttackOrDefense.DEFENSE);
     }
 
@@ -1561,10 +1592,97 @@ public class GameController {
             getCurrentPlayer().getBoard().getGraveyard().addCard(tribute);
         ritualSummonHappened = true;
         ritualMonster.setActiveAbility(true);
+        checkTrapActivation();
         normalSummon(ritualMonster, position);
     }
 
-//    public void addCardToHandCheat(String cardName){
+    //    public void addCardToHandCheat(String cardName){
 //        Card card = currentPlayer.
 //    }
+
+    public ArrayList<Trap> currentPlayerCanActivateTrap() {
+        ArrayList<Trap> trapArrayList = new ArrayList<>();
+        for (Cell cell : currentPlayer.getBoard().getSpellOrTrap()) {
+            addTrap(trapArrayList, cell);
+        }
+        return trapArrayList;
+    }
+
+    public ArrayList<Trap> rivalPlayerCanActivateTrap() {
+        ArrayList<Trap> trapArrayList = new ArrayList<>();
+        for (Cell cell : currentPlayer.getRivalPlayer().getBoard().getSpellOrTrap()) {
+            addTrap(trapArrayList, cell);
+        }
+        return trapArrayList;
+    }
+
+    private void addTrap(ArrayList<Trap> trapArrayList, Cell cell) {
+        if (cell.getCard() != null && cell.getCard() instanceof Trap) {
+            TrapAction trapAction = ((Trap) cell.getCard()).getTrapAction();
+            if (trapAction.startActionCheck.canActivate()) {
+                trapArrayList.add((Trap) cell.getCard());
+            } else if (trapAction instanceof CallOfTheHaunted){
+                trapArrayList.add((Trap) cell.getCard());
+            }
+        }
+    }
+
+    public void activateRivalPlayerTrap() {
+        ArrayList<Trap> trapArrayList = rivalPlayerCanActivateTrap();
+        boolean activatedTrap = false;
+        if (trapArrayList.size() != 0) {
+            changeCurrentPlayer();
+            gameView.printChangeTurn();
+            activatedTrap = addTrapToChain(trapArrayList);
+            changeCurrentPlayer();
+            gameView.printChangeTurn();
+        }
+        if (activatedTrap)
+            activateCurrentPlayerTrap();
+    }
+
+    public void activateCurrentPlayerTrap() {
+        ArrayList<Trap> trapArrayList = currentPlayerCanActivateTrap();
+        boolean activatedTrap = false;
+        if (trapArrayList.size() != 0) {
+            activatedTrap = addTrapToChain(trapArrayList);
+        }
+        if (activatedTrap)
+            activateRivalPlayerTrap();
+    }
+
+    private boolean addTrapToChain(ArrayList<Trap> trapArrayList) {
+        boolean activatedTrap = false;
+        for (Trap trap : trapArrayList) {
+            if (gameView.wantToActivateTrap(trap)) {
+                trap.setActivated(true);
+                trap.setFace(Face.UP);
+                chain.add(trap);
+                gameView.printMap();
+                activatedTrap = true;
+            } else if (trap.getTrapAction() instanceof CallOfTheHaunted && trap.isActivated()) {
+                chain.add(trap);
+            }
+        }
+        return activatedTrap;
+    }
+
+    private void runChain() {
+        for (int i = chain.size() - 1; i >= 0; i--) {
+            if (chain.get(i).getTrapAction() instanceof CallOfTheHaunted && chain.get(i).isActivated()){
+                CallOfTheHaunted callOfTheHaunted = (CallOfTheHaunted) chain.get(i).getTrapAction();
+                if (callOfTheHaunted.getEndActionCheck2().canActivate() || callOfTheHaunted.getEndActionCheck1().canActivate()){
+                    callOfTheHaunted.runEnd();
+                    continue;
+                }
+            }
+            chain.get(i).getTrapAction().run();
+            chain.remove(i);
+        }
+    }
+
+    private void checkTrapActivation(){
+        activateRivalPlayerTrap();
+        runChain();
+    }
 }

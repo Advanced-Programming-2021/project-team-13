@@ -176,7 +176,7 @@ class PlayerCanActivateTrap extends EffectHandler {
 
     @Override
     public boolean canActivate() {
-        if (card.getCardOwner().isCanActiveTrap() && !card.isActivated() && !((Trap) card).isSetInThisTurn()) {
+        if (card.getCardOwner().isCanActiveTrap() && !card.isActivated() && ((Trap) card).getSetTurn() != gameController.getTurnsPlayed()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
