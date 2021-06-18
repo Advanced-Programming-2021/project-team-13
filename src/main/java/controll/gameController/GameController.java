@@ -1113,9 +1113,12 @@ public class GameController {
                 monsterInCell.setHaveChangePositionInThisTurn(false);
                 if (monsterInCell.isScanner())
                     checkScannerEffect(monsterInCell, false);
+                if (monsterInCell.getCardName().equalsIgnoreCase("Herald Of Creation"))
+                    heraldOfCreationEffect(monsterInCell);
             }
         }
     }
+
 
     public void checksBeforeSummon() { //need some change, SOME EFFECTIVE MONSTER CAN NOT NORMAL SUMMON!
         if (currentPlayer.getSelectedCard() == null)
@@ -1187,8 +1190,21 @@ public class GameController {
         scanner.setLevel(monster.getLevel());
         scanner.setCardName(monster.getCardName());
         scanner.setScanner(true);
+        scanner.setActiveAbility(true);
     }
 
+    private void heraldOfCreationEffect(Monster monsterInCell) {
+        List<Monster> rivalGraveYardMonster = getCurrentPlayer().getRivalPlayer().getBoard().getGraveyard().getAllCards()
+                .stream().filter(e -> e instanceof Monster).map(e -> (Monster) e).filter(e -> e.getLevel() >= 7)
+                .collect(Collectors.toList());
+        if (rivalGraveYardMonster.size() > 0)
+            if (gameView.wantToUseHeraldAbility()) {
+                Monster monster;
+                int number = gameView.chooseMonsterForHeraldOfCreation(rivalGraveYardMonster);
+                monster = rivalGraveYardMonster.get(number);
+                getCurrentPlayer().getCardsInHand().add(monster);
+            }
+    }
 
     private void mirageDragonEffect(Monster monster) {
         getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);

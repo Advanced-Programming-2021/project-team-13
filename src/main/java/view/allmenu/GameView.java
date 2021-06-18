@@ -713,7 +713,41 @@ public class GameView {
             String command = ViewMaster.scanner.nextLine();
             try {
                 int number = Integer.parseInt(command);
-                if (number > rivalGraveYardMonsters.size())
+                if (number > rivalGraveYardMonsters.size()
+                        || number <= 0)
+                    System.out.println("Wrong Number");
+                else
+                    return number - 1;
+            } catch (Exception e) {
+                System.out.println("Invalid Input");
+            }
+        }
+    }
+
+    public boolean wantToUseHeraldAbility() {
+        while (true) {
+            System.out.println("Do You Want To Use <Herald Of Creation> Ability? (YES|NO)");
+            String command = ViewMaster.scanner.nextLine();
+            if (command.equalsIgnoreCase("YES"))
+                return true;
+            else if (command.equalsIgnoreCase("NO"))
+                return false;
+            else
+                System.out.println("Invalid Input");
+        }
+    }
+
+    public int chooseMonsterForHeraldOfCreation(List<Monster> rivalGraveYardMonster) {
+        while (true) {
+            AtomicInteger i = new AtomicInteger();
+            System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
+            rivalGraveYardMonster.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardName() + " : "
+                    + e.getCardDescription()));
+            String command = ViewMaster.scanner.nextLine();
+            try {
+                int number = Integer.parseInt(command);
+                if (number > rivalGraveYardMonster.size()
+                        || number <= 0)
                     System.out.println("Wrong Number");
                 else
                     return number - 1;
