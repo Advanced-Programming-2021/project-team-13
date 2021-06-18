@@ -12,6 +12,10 @@ import view.allmenu.GameView;
 import view.allmenu.ShowGraveyardView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class GameController {
     private final GameView gameView;
@@ -1100,7 +1104,7 @@ public class GameController {
         }
     }
 
-    public void normalSummon(Monster monster) {
+    public void normalSummon(Monster monster, AttackOrDefense position) {
         if (monster.getCardName().equalsIgnoreCase("Mirage Dragon")) {
             getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
             monster.setActiveAbility(true);
@@ -1110,7 +1114,7 @@ public class GameController {
         monster.setSetInThisTurn(true);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setFace(Face.UP);
-        monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+        monster.setAttackOrDefense(position);
         currentPlayer.setSetOrSummonInThisTurn(true);
         currentPlayer.setSelectedCard(null);
         currentPlayer.getBoard().putMonsterInBoard(monster);
@@ -1130,7 +1134,7 @@ public class GameController {
         if (isExist)
             gameView.askWantSummonedAnotherMonsterTerratiger();
         terratiger.setActiveAbility(true);
-        normalSummon(terratiger);
+        normalSummon(terratiger, AttackOrDefense.ATTACK);
     }
 
     private void summonAndSpecifyTribute() {
@@ -1148,7 +1152,7 @@ public class GameController {
                 return;
             }
         }
-        normalSummon(monster);
+        normalSummon(monster, AttackOrDefense.ATTACK);
     }
 
     private void beatsKingBarbaros(Monster monster) {//// hooman:cell is broken- 1400/2/27\\10:33
@@ -1164,7 +1168,7 @@ public class GameController {
             }
         }
         monster.setActiveAbility(true);
-        normalSummon(monster);
+        normalSummon(monster, AttackOrDefense.ATTACKd);
     }
 
     public boolean checkBarbarosInput(int monsterNumber1, int monsterNumber2, int monsterNumber3) {
@@ -1337,18 +1341,7 @@ public class GameController {
             Monster monster = (Monster) currentPlayer.getCardsInHand().get(monsterNumber - 1);
             if (monster.getLevel() > 4)
                 return false;
-            gameView.printSummonSuccessfully();
-            monster.setSetInThisTurn(true);
-            currentPlayer.getCardsInHand().remove(monster);
-            monster.setZone(Zone.MONSTER_ZONE);
-            monster.setFace(Face.UP);
-            monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
-            currentPlayer.getBoard().putMonsterInBoard(monster);
-            if (monster.getCardName().equalsIgnoreCase("Mirage Dragon")) {
-                getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
-                monster.setActiveAbility(true);
-            }
-            gameView.printMap();
+            normalSummon(monster, AttackOrDefense.DEFENSE);
             return true;
         } else return false;
     }
@@ -1391,18 +1384,41 @@ public class GameController {
     }
 
     private void checkRitualSummon(Spell spell) {
-        boolean isThereRitualMonster = false;
-        for (Card card : currentPlayer.getCardsInHand()) {
-            if (card instanceof Monster)
-                if (((Monster) card).getMonsterCardType() == MonsterCardType.RITUAL) {
-                    isThereRitualMonster = true;
-                    break;
-                }
-        }
-        if (isThereRitualMonster) {
-        } else
+        List<Monster> ritualMonster = getCurrentPlayer().getCardsInHand().stream().filter(e -> e instanceof Monster)
+                .map(e -> (Monster) e)
+                .filter(e -> e.getMonsterCardType() == MonsterCardType.RITUAL).collect(Collectors.toList());
+        if (ritualMonster.size() == 0)
             gameView.cantRitualSummon();
+        else {
+            if (checkLevelForRitualSummon(ritualMonster)) {
+                getCurrentPlayer().getBoard().getGraveyard().addCard(spell);
+                gameView.getRitualSummonInput();
+            } else
+                gameView.cantRitualSummon();
+        }
     }
+
+    private boolean checkLevelForRitualSummon(List<Monster> ritualMonster) {
+        List<Integer> boardMonsterLevel = Arrays.stream(getCurrentPlayer().getBoard().getMonsters()).map(e -> (Monster) e.getCard())
+                .filter(Objects::nonNull)
+                .map(Monster::getLevel)
+                .collect(Collectors.toList());
+        return sumOfSubsets(ritualMonster, boardMonsterLevel, 0, boardMonsterLevel.size() - 1, 0);
+    }
+
+    private boolean sumOfSubsets(List<Monster> ritualMonster, List<Integer> boardMonsterLevel, int l, int length, int sum) {
+        if (l > length) {
+            for (Monster monster : ritualMonster) {
+                if (monster.getLevel() == sum)
+                    return true;
+            }
+            return false;
+        }
+        sumOfSubsets(ritualMonster, boardMonsterLevel, l + 1, length, sum + boardMonsterLevel.get(l));
+        sumOfSubsets(ritualMonster, boardMonsterLevel, l + 1, length, sum);
+        return false;
+    }
+
 
     private void specialSummon() {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
@@ -1445,6 +1461,20 @@ public class GameController {
 
     public void playAI() {
         ((AIPlayer) currentPlayer).play(currentPhase, this);
+    }
+
+    public boolean checkTributeLevelForRitualSummon(ArrayList<Monster> tributes, Monster ritualMonster) {
+        int sum = 0;
+        for (Monster tribute : tributes) {
+            sum += tribute.getLevel();
+        }
+        return sum == ritualMonster.getLevel();
+    }
+
+    public void ritualSummon(Monster ritualMonster, ArrayList<Monster> tributes, AttackOrDefense position) {
+        for (Monster tribute : tributes)
+            getCurrentPlayer().getBoard().getGraveyard().addCard(tribute);
+        normalSummon(ritualMonster, position);
     }
 
 //    public void addCardToHandCheat(String cardName){

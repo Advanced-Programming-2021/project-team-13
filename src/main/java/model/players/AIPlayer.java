@@ -72,7 +72,7 @@ public class AIPlayer extends Player {
                             .filter(Objects::nonNull).sorted(comparator).collect(Collectors.toList());
                     getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 1));
                     getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 2));
-                    GC.normalSummon(monster);
+                    GC.normalSummon(monster, AttackOrDefense.ATTACK);
                     return;
                 }
 
@@ -87,12 +87,12 @@ public class AIPlayer extends Player {
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 1));
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 2));
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 3));
-            gc.normalSummon(monster);
+            gc.normalSummon(monster, AttackOrDefense.ATTACK);
             for (Cell cell : gc.getCurrentPlayer().getRivalPlayer().getBoard().getMonsters())
                 cell.setCard(null);
             return true;
         }
-        gc.normalSummon(monster);
+        gc.normalSummon(monster, AttackOrDefense.ATTACK);
         monster.setAttackPointInGame(1900);
         return true;
     }
@@ -110,7 +110,7 @@ public class AIPlayer extends Player {
                     monster.setFace(Face.UP);
                     monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
                     getCardsInHand().remove(monster1);
-                    gc.normalSummon(monster);
+                    gc.normalSummon(monster, AttackOrDefense.ATTACK);
                     monster.setActiveAbility(true);
                     return true;
                 }
@@ -121,7 +121,7 @@ public class AIPlayer extends Player {
     private void summonTricky(Monster monster, List<Monster> monsters, GameController GC) {
         if (monsters.size() > 1) {
             getBoard().getGraveyard().addCard(monsters.get(monsters.size() - 1));
-            GC.normalSummon(monster);
+            GC.normalSummon(monster, AttackOrDefense.ATTACK);
             if (new Random().nextInt() % 2 == 0)
                 monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
             this.setSetOrSummonInThisTurn(false);

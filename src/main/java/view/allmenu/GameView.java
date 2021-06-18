@@ -3,6 +3,7 @@ package view.allmenu;
 import controll.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
+import enums.MonsterCardType;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.AIPlayer;
@@ -11,6 +12,7 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -637,5 +639,62 @@ public class GameView {
             System.out.println("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname());//// added this to show changed turn
         else
             System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());
+    }
+
+    public void printRitualSummonError() {
+        System.out.println("there is no way you could ritual summon a monster");
+    }
+
+    public void getRitualSummonInput() {
+        String command = "";
+        while (true) {
+            System.out.println("Enter Ritual Monster Number: ");
+            command = ViewMaster.scanner.nextLine();
+            try {
+                int number = Integer.parseInt(command);
+                run("select --hand " + number);
+                Monster ritualMonster = (Monster) gameController.getCurrentPlayer().getSelectedCard();
+                if (ritualMonster.getMonsterCardType() == MonsterCardType.RITUAL)
+                    while (true) {
+                        System.out.println("Enter Ritual Monster Tributes Number: \n" +
+                                "For Example: 1 2 3 \n" +
+                                "For Change Selected Card Enter <Back>");
+                        command = ViewMaster.scanner.nextLine();
+                        if (command.equalsIgnoreCase("back")) break;
+                        ArrayList<Monster> tributes = new ArrayList<>();
+                        String[] numbers = command.split("\\s+");
+                        if (checkIsInputNumber(numbers)) {
+                            for (String num : numbers) {
+                                run("select --monster " + num);
+                                tributes.add((Monster) gameController.getCurrentPlayer().getSelectedCard());
+                            }
+                            if (gameController.checkTributeLevelForRitualSummon(tributes, ritualMonster)) {
+                                while (!command.equalsIgnoreCase("attack") &&
+                                        !command.equalsIgnoreCase("Defence")) {
+                                    System.out.println("Defence OR Attack?");
+                                    command = ViewMaster.scanner.nextLine();
+                                }
+                                gameController.ritualSummon(ritualMonster, tributes,
+                                        command.equalsIgnoreCase("attack") ? AttackOrDefense.ATTACK : AttackOrDefense.DEFENSE);
+                                return;
+                            } else
+                                System.out.println("selected monsters levels don’t match with ritual monster\n");
+                        } else
+                            System.out.println("you should ritual summon right now");
+                    }
+                else
+                    System.out.println("you should ritual summon right now");
+            } catch (Exception e) {
+                System.out.println("you should ritual summon right now");
+            }
+        }
+    }
+
+    private boolean checkIsInputNumber(String[] numbers) {
+        for (String number : numbers) {
+            if (!number.matches("^\\d+$"))
+                return false;
+        }
+        return true;
     }
 }
