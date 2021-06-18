@@ -1480,6 +1480,7 @@ public class GameController {
     private boolean checkLevelForRitualSummon(List<Monster> ritualMonster) {
         List<Integer> boardMonsterLevel = Arrays.stream(getCurrentPlayer().getBoard().getMonsters()).map(e -> (Monster) e.getCard())
                 .filter(Objects::nonNull)
+                .filter(e -> e.getMonsterCardType() == MonsterCardType.NORMAL)
                 .map(Monster::getLevel)
                 .collect(Collectors.toList());
         int total = 1 << boardMonsterLevel.size();
