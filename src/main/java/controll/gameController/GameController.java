@@ -1443,22 +1443,19 @@ public class GameController {
                 .filter(Objects::nonNull)
                 .map(Monster::getLevel)
                 .collect(Collectors.toList());
-        return sumOfSubsets(ritualMonster, boardMonsterLevel, 0, boardMonsterLevel.size() - 1, 0);
-    }
-
-    private boolean sumOfSubsets(List<Monster> ritualMonster, List<Integer> boardMonsterLevel, int l, int length, int sum) {
-        if (l > length) {
+        int total = 1 << boardMonsterLevel.size();
+        for (int i = 0; i < total; i++) {
+            int sum = 0;
+            for (int j = 0; j < boardMonsterLevel.size(); j++)
+                if ((i & (1 << j)) != 0)
+                    sum += boardMonsterLevel.get(j);
             for (Monster monster : ritualMonster) {
                 if (monster.getLevel() == sum)
                     return true;
             }
-            return false;
         }
-        sumOfSubsets(ritualMonster, boardMonsterLevel, l + 1, length, sum + boardMonsterLevel.get(l));
-        sumOfSubsets(ritualMonster, boardMonsterLevel, l + 1, length, sum);
         return false;
     }
-
 
     private void specialSummon() {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
