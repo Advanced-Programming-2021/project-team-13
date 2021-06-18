@@ -13,6 +13,8 @@ import view.Regex;
 import view.ViewMaster;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -700,5 +702,24 @@ public class GameView {
 
     public void printCardAddedToHand(Card card) {
         System.out.println("new card added to hand : " + card.getCardName());
+    }
+
+    public int chooseMonsterForSummonScanner(List<Monster> rivalGraveYardMonsters) {
+        while (true) {
+            AtomicInteger i = new AtomicInteger();
+            System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
+            rivalGraveYardMonsters.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardName() + " : "
+                    + e.getCardDescription()));
+            String command = ViewMaster.scanner.nextLine();
+            try {
+                int number = Integer.parseInt(command);
+                if (number > rivalGraveYardMonsters.size())
+                    System.out.println("Wrong Number");
+                else
+                    return number - 1;
+            } catch (Exception e) {
+                System.out.println("Invalid Input");
+            }
+        }
     }
 }

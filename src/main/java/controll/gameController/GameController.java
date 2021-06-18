@@ -1102,14 +1102,17 @@ public class GameController {
         specialSummonHappened = false;
         for (Cell monster : currentPlayer.getBoard().getMonsters()) {
             if (monster.getCard() != null) {
+                Monster monsterInCell = ((Monster) (monster.getCard()));
                 if (!monster.getCard().getCardName().equalsIgnoreCase("Suijin"))
-                    ((Monster) (monster.getCard())).setActiveAbility(false);
-                ((Monster) (monster.getCard())).setAttackable(true);
-                ((Monster) (monster.getCard())).setAttacker(null);
-                ((Monster) (monster.getCard())).setHasBeenAttacked(false);
-                ((Monster) (monster.getCard())).setSetInThisTurn(false);
-                ((Monster) (monster.getCard())).setAttackedInThisTurn(false);
-                ((Monster) (monster.getCard())).setHaveChangePositionInThisTurn(false);
+                    monsterInCell.setActiveAbility(false);
+                monsterInCell.setAttackable(true);
+                monsterInCell.setAttacker(null);
+                monsterInCell.setHasBeenAttacked(false);
+                monsterInCell.setSetInThisTurn(false);
+                monsterInCell.setAttackedInThisTurn(false);
+                monsterInCell.setHaveChangePositionInThisTurn(false);
+                if (monsterInCell.isScanner())
+                    checkScannerEffect(monsterInCell, false);
             }
         }
     }
@@ -1142,10 +1145,10 @@ public class GameController {
 
     public void normalSummon(Monster monster, AttackOrDefense position) {
         anySummonHappened = true;
-        if (monster.getCardName().equalsIgnoreCase("Mirage Dragon")) {
-            getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
-            monster.setActiveAbility(true);
-        }
+        if (monster.getCardName().equalsIgnoreCase("Mirage Dragon"))
+            mirageDragonEffect(monster);
+        if (monster.getCardName().equalsIgnoreCase("scanner"))
+            if (checkScannerEffect(monster, true)) return;
         summonedCard = monster;
         gameView.printSummonSuccessfully();
         anySummonHappened = true;
@@ -1158,6 +1161,38 @@ public class GameController {
         currentPlayer.setSelectedCard(null);
         currentPlayer.getBoard().putMonsterInBoard(monster);
         gameView.printMap();
+    }
+
+    private boolean checkScannerEffect(Monster monster, boolean summoning) {
+        List<Monster> rivalGraveYardMonsters = getCurrentPlayer().getRivalPlayer().getBoard().getGraveyard()
+                .getAllCards().stream().filter(e -> e instanceof Monster).map(e -> (Monster) e).collect(Collectors.toList());
+        if (rivalGraveYardMonsters.size() == 0) {
+            if (summoning) gameView.printCantSummon();
+            return true;
+        }
+        scannerEffect(monster, rivalGraveYardMonsters);
+        return false;
+    }
+
+    private void scannerEffect(Monster scanner, List<Monster> rivalGraveYardMonsters) {
+        Monster monster;
+        do {
+            int number = gameView.chooseMonsterForSummonScanner(rivalGraveYardMonsters);
+            monster = rivalGraveYardMonsters.get(number);
+        } while (monster.getCardName().equalsIgnoreCase("scanner"));
+        scanner.setAttackPointInGame(monster.getAttackNum());
+        scanner.setDefencePointInGame(monster.getDefenseNum());
+        scanner.setMonsterAttribute(monster.getMonsterAttribute());
+        scanner.setMonsterType(monster.getMonsterType());
+        scanner.setLevel(monster.getLevel());
+        scanner.setCardName(monster.getCardName());
+        scanner.setScanner(true);
+    }
+
+
+    private void mirageDragonEffect(Monster monster) {
+        getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
+        monster.setActiveAbility(true);
     }
 
     private void terratiger(Monster terratiger) {
@@ -1508,6 +1543,7 @@ public class GameController {
         for (Monster tribute : tributes)
             getCurrentPlayer().getBoard().getGraveyard().addCard(tribute);
         ritualSummonHappened = true;
+        ritualMonster.setActiveAbility(true);
         normalSummon(ritualMonster, position);
     }
 

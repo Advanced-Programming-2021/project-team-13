@@ -25,6 +25,7 @@ public class Monster extends Card {
     private boolean attackable = true;
     private boolean isFieldSpellActive = false;
     private boolean hasBeenAttacked;
+    private boolean isScanner = false;
 
 
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
@@ -100,6 +101,14 @@ public class Monster extends Card {
 
     public void setHaveChangePositionInThisTurn(boolean doesHaveChangePositionInThisTurn) {
         this.HaveChangedPositionInThisTurn = doesHaveChangePositionInThisTurn;
+    }
+
+    public boolean isScanner() {
+        return isScanner;
+    }
+
+    public void setScanner(boolean scanner) {
+        isScanner = scanner;
     }
 
     public Card getFieldSpell() {
@@ -285,6 +294,7 @@ public class Monster extends Card {
     public void setHasBeenAttacked(boolean status) {
         this.hasBeenAttacked = status;
     }
+
     public boolean hasBeenAttacked() {
         return hasBeenAttacked;
     }
