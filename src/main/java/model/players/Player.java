@@ -5,7 +5,6 @@ import model.Board;
 import model.Deck;
 import model.Graveyard;
 import model.cards.Card;
-import model.cards.Monster;
 
 import java.util.ArrayList;
 
@@ -132,12 +131,13 @@ public class Player {
         lifePoint -= amount;
     }
 
-    public void addCardToHand() {
+    public Card addCardToHand() {
         Card card = this.getBoard().getDeck().getAllCardsInMainDeck().get(0);
         this.getBoard().getDeck().getAllCardsInMainDeck().remove(0);
         this.getBoard().getDeck().getAllCards().remove(card);
         card.setZone(Zone.IN_HAND);
         this.cardsInHand.add(card);
+        return card;
     }
 
     public void setBoard(Board board) {

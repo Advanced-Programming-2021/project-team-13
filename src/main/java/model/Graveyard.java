@@ -1,6 +1,6 @@
 package model;
 
-import controll.GameController;
+import controll.gameController.GameController;
 import enums.Zone;
 import model.cards.Card;
 import model.cards.Monster;

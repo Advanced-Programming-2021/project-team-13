@@ -5,7 +5,8 @@ import enums.*;
 import java.util.ArrayList;
 
 public class Monster extends Card {
-    public Monster attacker;
+    private Monster attacker;
+    private Monster attackedMonster;
     private MonsterCardType monsterCardType;
     private SummonType summonType;
     private Card fieldSpell;
@@ -230,6 +231,13 @@ public class Monster extends Card {
         return attacker;
     }
 
+    public Monster getAttackedMonster() {
+        return attackedMonster;
+    }
+
+    public void setAttackedMonster(Monster attackedMonster) {
+        this.attackedMonster = attackedMonster;
+    }
 
     public void increaseAttackPoint(int amount) {
         attackPointInGame += amount;

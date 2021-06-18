@@ -1,6 +1,6 @@
 package view.allmenu;
 
-import controll.GameController;
+import controll.gameController.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
@@ -696,5 +696,9 @@ public class GameView {
                 return false;
         }
         return true;
+    }
+
+    public void printCardAddedToHand(Card card) {
+        System.out.println("new card added to hand : " + card.getCardName());
     }
 }

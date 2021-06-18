@@ -1,4 +1,4 @@
-package controll;
+package controll.gameController;
 
 import model.cards.Card;
 
