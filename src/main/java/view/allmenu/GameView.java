@@ -183,17 +183,19 @@ public class GameView {
         }
         Matcher opponentWithFieldMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_WITH_FIELD);
         Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
-        if (opponentMatcher.find() || opponentWithFieldMatcher.find()) {
+        if (opponentWithFieldMatcher.find(0)) {
             Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_MONSTER);
             Matcher spellMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_SPELL);
-            Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
             if (monsterMatcher.find()) {
                 int cardAddress = Integer.parseInt(opponentWithFieldMatcher.group("cardAddress"));
                 gameController.selectOpponentMonster(cardAddress);
             } else if (spellMatcher.find()) {
                 int cardAddress = Integer.parseInt(opponentWithFieldMatcher.group("cardAddress"));
                 gameController.selectOpponentSpellOrTrap(cardAddress);
-            } else if (fieldMatcher.find()) {
+            } else printInvalidCommand();
+        } else if (opponentMatcher.find(0)) {
+            Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
+            if (fieldMatcher.find()) {
                 gameController.selectOpponentFieldCard();
             } else printInvalidCommand();
         } else {
@@ -767,7 +769,7 @@ public class GameView {
         printMap();
     }
 
-    public boolean wantToActivateTrap(Trap trap){
+    public boolean wantToActivateTrap(Trap trap) {
         System.out.println("do you want to activate your " + trap.getCardName() + " and spell?(YES/NO)");
         while (true) {
             String yesOrNo = ViewMaster.scanner.nextLine().trim();
