@@ -782,4 +782,12 @@ public class GameView {
             }
         }
     }
+
+    public void printCantAttackFacedDown() {
+        System.out.println("cant attack because card is faced down");
+    }
+
+    public void printCantAttackItsOnDefense() {
+        System.out.println("cant attack because card is on defense");
+    }
 }

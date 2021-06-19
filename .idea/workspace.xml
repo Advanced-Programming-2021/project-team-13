@@ -6,25 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="change java version and some changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserJson.txt" beforeDir="false" afterPath="$PROJECT_DIR$/UserJson.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Canser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Effects.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Summon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/LoginMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/LoginMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/MainMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MainMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfileMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ScoreboardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ScoreboardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ShopMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ShopMenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/hello" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -413,11 +396,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/GameController.java</url>
-          <line>733</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="8" />
