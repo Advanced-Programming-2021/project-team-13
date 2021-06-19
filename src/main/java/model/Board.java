@@ -8,9 +8,9 @@ import model.cards.Trap;
 public class Board {
 
 
-    private Cell[] spellOrTrap;
-    private Cell[] monsterCells;
-    private Cell fieldSpell;
+    private final Cell[] spellOrTrap;
+    private final Cell[] monsterCells;
+    private final Cell fieldSpell;
     private Deck deck;
     private Graveyard graveyard;
 
@@ -25,14 +25,6 @@ public class Board {
             monsterCells[i] = new Cell(null);
         }
         fieldSpell = new Cell(null);
-    }
-
-    public void setSpellOrTrap(Cell[] spellOrTrap) {
-        this.spellOrTrap = spellOrTrap;
-    }
-
-    public void setMonster(Cell[] monster) {
-        this.monsterCells = monster;
     }
 
     public void setFieldSpell(Card fieldSpell) {

@@ -1,6 +1,6 @@
 package view.allmenu;
 
-import controll.ShowGraveyardController;
+import controll.gameController.ShowGraveyardController;
 import model.cards.Card;
 import model.players.Player;
 import view.Menu;

@@ -5,13 +5,13 @@ import model.Board;
 import model.Deck;
 import model.Graveyard;
 import model.cards.Card;
-import model.cards.Monster;
 
 import java.util.ArrayList;
 
 public class Player {
 
     private final User user;
+    private Player rivalPlayer;
     private int lifePoint;
     private int maxLifePoint;
     private int wonRounds;
@@ -42,6 +42,14 @@ public class Player {
         user = null;
         this.board = new Board(deck, new Graveyard(this));
         cardsInHand = new ArrayList<>();
+    }
+
+    public void setRivalPlayer(Player rivalPlayer) {
+        this.rivalPlayer = rivalPlayer;
+    }
+
+    public Player getRivalPlayer() {
+        return rivalPlayer;
     }
 
     public void setCardsInHand(ArrayList<Card> cardsInHand) {
@@ -123,12 +131,13 @@ public class Player {
         lifePoint -= amount;
     }
 
-    public void addCardToHand() {
+    public Card addCardToHand() {
         Card card = this.getBoard().getDeck().getAllCardsInMainDeck().get(0);
         this.getBoard().getDeck().getAllCardsInMainDeck().remove(0);
         this.getBoard().getDeck().getAllCards().remove(card);
         card.setZone(Zone.IN_HAND);
         this.cardsInHand.add(card);
+        return card;
     }
 
     public void setBoard(Board board) {

@@ -1,4 +1,4 @@
-package controll;
+package controll.gameController;
 
 import model.players.Player;
 import model.players.User;
@@ -12,7 +12,8 @@ public class GameWinMenu {
     private final Player firstPlayer;
     private final Player secondPlayer;
     private final Player startingPlayer;
-    public GameWinMenu(GameController gameController){
+
+    public GameWinMenu(GameController gameController) {
         this.gameView = gameController.getGameView();
         this.startingRounds = gameController.getStartingRounds();
         this.firstPlayer = gameController.getFirstPlayer();
@@ -21,9 +22,8 @@ public class GameWinMenu {
     }
 
 
-
-    public void announceWinner(Player winner){
-        if (winner == null){//this is when game is ended draw
+    public void announceWinner(Player winner) {
+        if (winner == null) {//this is when game is ended draw
             drawState();
         } else {
             winOrLoseState(winner);
@@ -31,7 +31,7 @@ public class GameWinMenu {
     }
 
     private void drawState() {
-        if (startingRounds == 1){
+        if (startingRounds == 1) {
 
         } else {
 
@@ -39,20 +39,20 @@ public class GameWinMenu {
     }
 
     private void winOrLoseState(Player winner) {
-        Player loser ;
+        Player loser;
         if (winner == firstPlayer) loser = secondPlayer;
         else loser = firstPlayer;
         winner.addWonRounds(1);
         User winnerUser = winner.getUser();
         User loserUser = loser.getUser();
-        gameView.printUserWonSingleGame(winnerUser.getUsername() , winner.getWonRounds() , loser.getWonRounds());
-        if (startingRounds == 1){
+        gameView.printUserWonSingleGame(winnerUser.getUsername(), winner.getWonRounds(), loser.getWonRounds());
+        if (startingRounds == 1) {
             winnerUser.addWins(1);
             loserUser.addLosts(1);
             winnerUser.addScore(1000);
             winnerUser.addMoney(1000 + winner.getMaxLifePoint());
             loserUser.addMoney(100);
-            gameView.printUserWonWholeGame(winnerUser.getUsername() , winner.getWonRounds() , loser.getWonRounds());
+            gameView.printUserWonWholeGame(winnerUser.getUsername(), winner.getWonRounds(), loser.getWonRounds());
             ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
         } else {
             if (winner.getWonRounds() == 2) {
@@ -66,11 +66,13 @@ public class GameWinMenu {
             } else {
                 firstPlayer.renewPlayer();
                 secondPlayer.renewPlayer();
+                firstPlayer.setRivalPlayer(secondPlayer);
+                secondPlayer.setRivalPlayer(firstPlayer);
                 //go to deck to change!!!!!!!!!!
                 if (startingPlayer == firstPlayer) {
-                    ViewMaster.getViewMaster().setGameView(new GameView(firstPlayer, secondPlayer,secondPlayer , startingRounds));
+                    ViewMaster.getViewMaster().setGameView(new GameView(firstPlayer, secondPlayer, secondPlayer, startingRounds));
                 } else {
-                    ViewMaster.getViewMaster().setGameView(new GameView(firstPlayer , secondPlayer , firstPlayer , startingRounds));
+                    ViewMaster.getViewMaster().setGameView(new GameView(firstPlayer, secondPlayer, firstPlayer, startingRounds));
                 }
             }
         }

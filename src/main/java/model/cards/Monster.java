@@ -5,7 +5,8 @@ import enums.*;
 import java.util.ArrayList;
 
 public class Monster extends Card {
-    public Monster attacker;
+    private Monster attacker;
+    private Monster attackedMonster;
     private MonsterCardType monsterCardType;
     private SummonType summonType;
     private Card fieldSpell;
@@ -24,6 +25,7 @@ public class Monster extends Card {
     private boolean attackable = true;
     private boolean isFieldSpellActive = false;
     private boolean hasBeenAttacked;
+    private boolean isScanner = false;
 
 
     private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
@@ -45,6 +47,7 @@ public class Monster extends Card {
                    MonsterCardType monsterCardType, MonsterAttribute monsterAttribute,
                    int attackNum, int defenseNum, int level) {
         super(name, cardType, description, face, price);
+        if (name.equalsIgnoreCase("scanner")) isScanner = true;
         setAttackNum(attackNum);
         setDefenseNum(defenseNum);
         setLevel(level);
@@ -99,6 +102,14 @@ public class Monster extends Card {
 
     public void setHaveChangePositionInThisTurn(boolean doesHaveChangePositionInThisTurn) {
         this.HaveChangedPositionInThisTurn = doesHaveChangePositionInThisTurn;
+    }
+
+    public boolean isScanner() {
+        return isScanner;
+    }
+
+    public void setScanner(boolean scanner) {
+        isScanner = scanner;
     }
 
     public Card getFieldSpell() {
@@ -230,6 +241,13 @@ public class Monster extends Card {
         return attacker;
     }
 
+    public Monster getAttackedMonster() {
+        return attackedMonster;
+    }
+
+    public void setAttackedMonster(Monster attackedMonster) {
+        this.attackedMonster = attackedMonster;
+    }
 
     public void increaseAttackPoint(int amount) {
         attackPointInGame += amount;
@@ -277,6 +295,7 @@ public class Monster extends Card {
     public void setHasBeenAttacked(boolean status) {
         this.hasBeenAttacked = status;
     }
+
     public boolean hasBeenAttacked() {
         return hasBeenAttacked;
     }

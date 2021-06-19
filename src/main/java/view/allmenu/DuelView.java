@@ -1,6 +1,6 @@
 package view.allmenu;
 
-import controll.DuelController;
+import controll.gameController.DuelController;
 import model.players.User;
 import view.Regex;
 import view.ViewMaster;
@@ -15,18 +15,22 @@ public class DuelView {
     }
 
     public void run(String command) {
-        if (command.matches(Regex.DUEL)) {
+        if (command.matches(Regex.TWO_PLAYER_DUEL)) {
+            Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
+            Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
+            Matcher duelerMatcher = Regex.getInputMatcher(command, Regex.SECOND_PLAYER);
+            if (newMatcher.find(0) && roundMatcher.find(0) && duelerMatcher.find(0)) {
+                int rounds = Integer.parseInt(roundMatcher.group("rounds"));
+                String playerUsername = duelerMatcher.group("playerUsername");
+                duelController.validateTwoPlayerDuelGame(rounds, playerUsername);
+            } else printInvalidCommand();
+        } else if (command.matches(Regex.AI_DUEL)) {
             Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
             Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
             Matcher aiMatcher = Regex.getInputMatcher(command, Regex.AI);
-            Matcher duelerMatcher = Regex.getInputMatcher(command, Regex.SECOND_PLAYER);
             if (newMatcher.find(0) && roundMatcher.find(0) && aiMatcher.find(0)) {
                 int rounds = Integer.parseInt(roundMatcher.group("rounds"));
-                duelController.runAIGame(rounds);
-            } else if (newMatcher.find(0) && roundMatcher.find(0) && duelerMatcher.find(0)) {
-                int rounds = Integer.parseInt(roundMatcher.group("rounds"));
-                String playerUsername = duelerMatcher.group("playerUsername");
-                duelController.validateDuelGame(rounds, playerUsername);
+                duelController.validateAIDuelGame(rounds);
             } else printInvalidCommand();
         } else printInvalidCommand();
     }

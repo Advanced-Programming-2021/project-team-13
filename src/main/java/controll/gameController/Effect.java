@@ -1,4 +1,4 @@
-package bullshit;
+package controll.gameController;
 
 import model.cards.Card;
 

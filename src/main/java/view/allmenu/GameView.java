@@ -1,16 +1,21 @@
 package view.allmenu;
 
-import controll.GameController;
+import controll.gameController.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
+import enums.MonsterCardType;
 import model.cards.Card;
 import model.cards.Monster;
+import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -85,9 +90,13 @@ public class GameView {
         }
     }
 
+    private void printNotThoseMoves() {
+        System.out.println("it’s not your turn to play this kind of moves");
+    }
+
     public void printMap() {
         Player currentPlayer = gameController.getCurrentPlayer();
-        Player rivalPlayer = gameController.getRivalPlayer();
+        Player rivalPlayer = gameController.getCurrentPlayer().getRivalPlayer();
         StringBuilder map = new StringBuilder();
         addRivalMap(rivalPlayer, map);
         addPlayerMap(currentPlayer, map);
@@ -113,11 +122,17 @@ public class GameView {
             map.append("C\t");
         }
         map.append("\n");
-        map.append(currentPlayer.getUser().getNickname()).append(":").append(currentPlayer.getLifePoint());
+        if (currentPlayer instanceof AIPlayer)
+            map.append(((AIPlayer) currentPlayer).getNickname()).append(":").append(currentPlayer.getLifePoint());
+        else
+            map.append(currentPlayer.getUser().getNickname()).append(":").append(currentPlayer.getLifePoint());
     }
 
     private void addRivalMap(Player rivalPlayer, StringBuilder map) {
-        map.append(rivalPlayer.getUser().getNickname()).append(":").append(rivalPlayer.getLifePoint()).append("\n");
+        if (rivalPlayer instanceof AIPlayer)
+            map.append(((AIPlayer) rivalPlayer).getNickname()).append(":").append(rivalPlayer.getLifePoint()).append("\n");
+        else
+            map.append(rivalPlayer.getUser().getNickname()).append(":").append(rivalPlayer.getLifePoint()).append("\n");
         for (int i = 0; i < rivalPlayer.getCardsInHand().size(); i++) {
             map.append("\tC");
         }
@@ -168,17 +183,19 @@ public class GameView {
         }
         Matcher opponentWithFieldMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_WITH_FIELD);
         Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
-        if (opponentMatcher.find() || opponentWithFieldMatcher.find()) {
+        if (opponentWithFieldMatcher.find(0)) {
             Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_MONSTER);
             Matcher spellMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_SPELL);
-            Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
             if (monsterMatcher.find()) {
-                int cardAddress = Integer.parseInt(monsterMatcher.group("cardAddress"));
+                int cardAddress = Integer.parseInt(opponentWithFieldMatcher.group("cardAddress"));
                 gameController.selectOpponentMonster(cardAddress);
             } else if (spellMatcher.find()) {
-                int cardAddress = Integer.parseInt(spellMatcher.group("cardAddress"));
+                int cardAddress = Integer.parseInt(opponentWithFieldMatcher.group("cardAddress"));
                 gameController.selectOpponentSpellOrTrap(cardAddress);
-            } else if (fieldMatcher.find()) {
+            } else printInvalidCommand();
+        } else if (opponentMatcher.find(0)) {
+            Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
+            if (fieldMatcher.find()) {
                 gameController.selectOpponentFieldCard();
             } else printInvalidCommand();
         } else {
@@ -377,7 +394,10 @@ public class GameView {
     }
 
     public void printWhoseTurn() {
-        System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+        if (gameController.getCurrentPlayer() instanceof AIPlayer)
+            System.out.println("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
+        else
+            System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
     }
 
     public void showCard(Card card) {
@@ -473,8 +493,8 @@ public class GameView {
                 if (number.matches("^\\d+$")) {
                     int num = Integer.parseInt(number);
                     if (num > 0 && num < 6) {
-                        if (gameController.getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
-                            return (Monster) gameController.getRivalPlayer().getBoard().getMonsterByAddress(num);
+                        if (gameController.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
+                            return (Monster) gameController.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num);
                         else
                             System.out.println("There is no monster in this address");
                     } else
@@ -530,7 +550,7 @@ public class GameView {
 
     }
 
-    public void printActiveOnlyForSpells() {
+    public void printActiveOnlyForSpellsAndTrap() {
         System.out.println("activate effect is only for spell cards.");
     }
 
@@ -624,6 +644,142 @@ public class GameView {
     }
 
     public void playerChanged(Player currentPlayer) {
-        System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());//// added this to show changed turn
+        if (currentPlayer instanceof AIPlayer)
+            System.out.println("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname());//// added this to show changed turn
+        else
+            System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());
+    }
+
+    public void printRitualSummonError() {
+        System.out.println("there is no way you could ritual summon a monster");
+    }
+
+    public void getRitualSummonInput() {
+        String command = "";
+        while (true) {
+            System.out.println("Enter Ritual Monster Number: ");
+            command = ViewMaster.scanner.nextLine();
+            try {
+                int number = Integer.parseInt(command);
+                run("select --hand " + number);
+                Monster ritualMonster = (Monster) gameController.getCurrentPlayer().getSelectedCard();
+                if (ritualMonster.getMonsterCardType() == MonsterCardType.RITUAL)
+                    while (true) {
+                        System.out.println("Enter Ritual Monster Tributes Number: \n" +
+                                "For Example: 1 2 3 \n" +
+                                "For Change Selected Card Enter <Back>");
+                        command = ViewMaster.scanner.nextLine();
+                        if (command.equalsIgnoreCase("back")) break;
+                        ArrayList<Monster> tributes = new ArrayList<>();
+                        String[] numbers = command.split("\\s+");
+                        if (checkIsInputNumber(numbers)) {
+                            for (String num : numbers) {
+                                run("select --monster " + num);
+                                tributes.add((Monster) gameController.getCurrentPlayer().getSelectedCard());
+                            }
+                            if (gameController.checkTributeLevelForRitualSummon(tributes, ritualMonster)) {
+                                while (!command.equalsIgnoreCase("attack") &&
+                                        !command.equalsIgnoreCase("Defence")) {
+                                    System.out.println("Defence OR Attack?");
+                                    command = ViewMaster.scanner.nextLine();
+                                }
+                                gameController.ritualSummon(ritualMonster, tributes,
+                                        command.equalsIgnoreCase("attack") ? AttackOrDefense.ATTACK : AttackOrDefense.DEFENSE);
+                                return;
+                            } else
+                                System.out.println("selected monsters levels don’t match with ritual monster\n");
+                        } else
+                            System.out.println("you should ritual summon right now");
+                    }
+                else
+                    System.out.println("you should ritual summon right now");
+            } catch (Exception e) {
+                System.out.println("you should ritual summon right now");
+            }
+        }
+    }
+
+    private boolean checkIsInputNumber(String[] numbers) {
+        for (String number : numbers) {
+            if (!number.matches("^\\d+$"))
+                return false;
+        }
+        return true;
+    }
+
+    public void printCardAddedToHand(Card card) {
+        System.out.println("new card added to hand : " + card.getCardName());
+    }
+
+    public int chooseMonsterForSummonScanner(List<Monster> rivalGraveYardMonsters) {
+        while (true) {
+            AtomicInteger i = new AtomicInteger();
+            System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
+            rivalGraveYardMonsters.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardName() + " : "
+                    + e.getCardDescription()));
+            String command = ViewMaster.scanner.nextLine();
+            try {
+                int number = Integer.parseInt(command);
+                if (number > rivalGraveYardMonsters.size()
+                        || number <= 0)
+                    System.out.println("Wrong Number");
+                else
+                    return number - 1;
+            } catch (Exception e) {
+                System.out.println("Invalid Input");
+            }
+        }
+    }
+
+    public boolean wantToUseHeraldAbility() {
+        while (true) {
+            System.out.println("Do You Want To Use <Herald Of Creation> Ability? (YES|NO)");
+            String command = ViewMaster.scanner.nextLine();
+            if (command.equalsIgnoreCase("YES"))
+                return true;
+            else if (command.equalsIgnoreCase("NO"))
+                return false;
+            else
+                System.out.println("Invalid Input");
+        }
+    }
+
+    public int chooseMonsterForHeraldOfCreation(List<Monster> rivalGraveYardMonster) {
+        while (true) {
+            AtomicInteger i = new AtomicInteger();
+            System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
+            rivalGraveYardMonster.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardName() + " : "
+                    + e.getCardDescription()));
+            String command = ViewMaster.scanner.nextLine();
+            try {
+                int number = Integer.parseInt(command);
+                if (number > rivalGraveYardMonster.size()
+                        || number <= 0)
+                    System.out.println("Wrong Number");
+                else
+                    return number - 1;
+            } catch (Exception e) {
+                System.out.println("Invalid Input");
+            }
+        }
+    }
+
+    public void printChangeTurn() {
+        System.out.println("now it will be " + gameController.getCurrentPlayer() + "’s turn");
+        printMap();
+    }
+
+    public boolean wantToActivateTrap(Trap trap) {
+        System.out.println("do you want to activate your " + trap.getCardName() + " and spell?(YES/NO)");
+        while (true) {
+            String yesOrNo = ViewMaster.scanner.nextLine().trim();
+            if (yesOrNo.equalsIgnoreCase("yes")) {
+                return true;
+            } else if (yesOrNo.equalsIgnoreCase("no")) {
+                return false;
+            } else {
+                printInvalidCommand();
+            }
+        }
     }
 }

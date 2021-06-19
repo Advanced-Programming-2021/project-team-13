@@ -1,6 +1,5 @@
-package bullshit;
+package controll.gameController;
 
-import controll.GameController;
 import enums.AttackOrDefense;
 import enums.Zone;
 import model.Cell;
@@ -9,6 +8,7 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.players.Player;
 import view.ViewMaster;
 
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public abstract class CardCommand {
     protected static GameController gameController;
 
-    static {
-        gameController = ViewMaster.getViewMaster().getGameView().getGameController();
+    public static void setGameController(GameController gameController) {
+        CardCommand.gameController = gameController;
     }
 
     protected Trap trap;
@@ -37,33 +37,23 @@ public abstract class CardCommand {
 
 class BringMonsterBackFromGraveYardToBoard extends CardCommand {
 
-    public BringMonsterBackFromGraveYardToBoard(Card card) {
+    TrapAction trapAction;
+
+    public BringMonsterBackFromGraveYardToBoard(Card card , TrapAction trapAction) {
         super(card);
+        this.trapAction = trapAction;
     }
 
     @Override
     public void execute() {
         gameController.selectMonsterFromGraveyard();
         Monster monster = (Monster) gameController.getCurrentPlayer().getSelectedCard();
+        trapAction.getTrap().setEffectedCard(monster);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setAttackedInThisTurn(false);
         monster.setAttackable(true);
         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
         monster.getCardOwner().getBoard().putMonsterInBoard(monster);
-    }
-}
-
-class SetEffectedMonster extends CardCommand {
-
-    public SetEffectedMonster(Card card) {
-        super(card);
-    }
-
-    @Override
-    public void execute() {
-        Card effectedCard = gameController.getCurrentPlayer().getSelectedCard();
-        trap.setEffectedCard(effectedCard);
-        gameController.getCurrentPlayer().setSelectedCard(null);
     }
 }
 
@@ -122,7 +112,7 @@ class FindActiveSpell extends CardCommand {
             }
         }
         if (effectedCard == null) {
-            for (Cell cell : gameController.getRivalPlayer().getBoard().getSpellOrTrap()) {
+            for (Cell cell : gameController.getCurrentPlayer().getRivalPlayer().getBoard().getSpellOrTrap()) {
                 if (trap != cell.getCard())
                     if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
                         effectedCard = (Spell) cell.getCard();
@@ -134,9 +124,9 @@ class FindActiveSpell extends CardCommand {
     }
 }
 
-class ChooseCardFromHandToSacrifice extends CardCommand{
+class ChooseCardFromHandToSacrifice extends CardCommand {
 
-    public ChooseCardFromHandToSacrifice(Card card){
+    public ChooseCardFromHandToSacrifice(Card card) {
         super(card);
     }
 
@@ -154,9 +144,9 @@ class ChooseCardFromHandToSacrifice extends CardCommand{
     }
 }
 
-class AnnounceCardNameToRemove extends CardCommand{
+class AnnounceCardNameToRemove extends CardCommand {
 
-    public AnnounceCardNameToRemove(Card card){
+    public AnnounceCardNameToRemove(Card card) {
         super(card);
     }
 
@@ -165,27 +155,88 @@ class AnnounceCardNameToRemove extends CardCommand{
         System.out.print("please enter a card name to remove from rival hand : ");
         String cardName = ViewMaster.scanner.nextLine().trim();
         boolean containsCard = false;
-        for (Card card : gameController.getRivalPlayer().getCardsInHand()) {
-            if (card.getCardName().equalsIgnoreCase(cardName)){
+        for (Card card : gameController.getCurrentPlayer().getRivalPlayer().getCardsInHand()) {
+            if (card.getCardName().equalsIgnoreCase(cardName)) {
                 containsCard = true;
                 break;
             }
         }
-        if (containsCard){
+        if (containsCard) {
             ArrayList<Card> newRivalHand = new ArrayList<>();
-            for (Card card: gameController.getRivalPlayer().getCardsInHand()) {
+            for (Card card : gameController.getCurrentPlayer().getRivalPlayer().getCardsInHand()) {
                 if (!card.getCardName().equalsIgnoreCase(cardName)) newRivalHand.add(card);
-                else gameController.getRivalPlayer().getBoard().getGraveyard().addCard(card);
+                else gameController.getCurrentPlayer().getRivalPlayer().getBoard().getGraveyard().addCard(card);
             }
-            gameController.getRivalPlayer().setCardsInHand(newRivalHand);
+            gameController.getCurrentPlayer().getRivalPlayer().setCardsInHand(newRivalHand);
             ArrayList<Card> newRivalDeck = new ArrayList<>();
-            for (Card card: gameController.getRivalPlayer().getBoard().getDeck().getAllCardsInMainDeck()) {
+            for (Card card : gameController.getCurrentPlayer().getRivalPlayer().getBoard().getDeck().getAllCardsInMainDeck()) {
                 if (!card.getCardName().equalsIgnoreCase(cardName)) newRivalDeck.add(card);
-                else gameController.getRivalPlayer().getBoard().getGraveyard().addCard(card);
+                else gameController.getCurrentPlayer().getRivalPlayer().getBoard().getGraveyard().addCard(card);
             }
-            gameController.getRivalPlayer().getBoard().getDeck().setAllCardsInMainDeck(newRivalDeck);
+            gameController.getCurrentPlayer().getRivalPlayer().getBoard().getDeck().setAllCardsInMainDeck(newRivalDeck);
         } else {
             new ChooseCardFromHandToSacrifice(trap).execute();
+        }
+    }
+}
+
+class SetCannotContinueAttack extends CardCommand {
+
+    public SetCannotContinueAttack(Card card) {
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        gameController.setCanContinueAttack(false);
+    }
+}
+
+class ReverseAttack extends CardCommand {
+
+    public ReverseAttack(Card card) {
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        Monster attackingMonster = (Monster) gameController.getAttackingCard();
+        Player player = attackingMonster.getCardOwner();
+        player.decreaseHealth(attackingMonster.getAttackNum());
+    }
+}
+
+class GoNextPhase extends CardCommand {
+
+    public GoNextPhase(Card card) {
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        gameController.nextPhase();
+    }
+}
+
+class DestroyAllMonsters extends CardCommand {
+
+    public DestroyAllMonsters(Card card) {
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        Graveyard firstPlayerGraveyard = gameController.getFirstPlayer().getBoard().getGraveyard();
+        Graveyard secondPlayerGraveyard = gameController.getSecondPlayer().getBoard().getGraveyard();
+        for (Cell cell : gameController.getFirstPlayer().getBoard().getMonsters()){
+            if (cell.getCard() != null){
+                firstPlayerGraveyard.addCard(cell.getCard());
+            }
+        }
+        for (Cell cell : gameController.getSecondPlayer().getBoard().getMonsters()){
+            if (cell.getCard() != null){
+                secondPlayerGraveyard.addCard(cell.getCard());
+            }
         }
     }
 }

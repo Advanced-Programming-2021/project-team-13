@@ -1,6 +1,5 @@
-package bullshit;
+package controll.gameController;
 
-import controll.GameController;
 import model.cards.Card;
 import model.cards.Trap;
 
@@ -23,13 +22,19 @@ public abstract class TrapAction implements Effect {
     protected EffectHandler startActionCheck;
     protected ArrayList<CardCommand> cardCommands;
 
-
     private static void setAllTrapEffects() {
         allTrapEffects = new HashMap<>();
         allTrapEffects.put("Call of The Haunted", new CallOfTheHaunted());
         allTrapEffects.put("Time Seal", new TimeSeal());
         allTrapEffects.put("Magic Jammer", new MagicJammer());
         allTrapEffects.put("Mind Crush", new MindCrush());
+        allTrapEffects.put("Magic Cylinder", new MagicCylinder());
+        allTrapEffects.put("Negate Attack", new NegateAttack());
+        allTrapEffects.put("Torrential Tribute", new TorrentialTribute());
+    }
+
+    public Trap getTrap() {
+        return trap;
     }
 
     public void setTrapCommands(ArrayList<CardCommand> cardCommands) {
@@ -38,6 +43,30 @@ public abstract class TrapAction implements Effect {
 
     public void setStartActionCheck(EffectHandler startActionCheck) {
         this.startActionCheck = startActionCheck;
+    }
+
+    public void run() {
+        for (CardCommand cardCommand : cardCommands)
+            cardCommand.execute();
+    }
+}
+
+class MagicCylinder extends TrapAction {
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new IsInAttack(card);
+        EffectHandler effectHandler1 = new PlayerCanActivateTrap(card);
+        effectHandler1.setNextHandler(effectHandler);
+        setStartActionCheck(effectHandler1);
+        CardCommand cardCommand = new SetCannotContinueAttack(card);
+        CardCommand cardCommand1 = new ReverseAttack(card);
+        CardCommand cardCommand2 = new SendCardToGraveyard(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
+        cardCommands.add(cardCommand2);
     }
 }
 
@@ -55,6 +84,14 @@ class CallOfTheHaunted extends TrapAction {
         this.endActionCheck2 = endActionCheck2;
     }
 
+    public EffectHandler getEndActionCheck1() {
+        return endActionCheck1;
+    }
+
+    public EffectHandler getEndActionCheck2() {
+        return endActionCheck2;
+    }
+
     @Override
     public void setCard(Card card) {
         this.trap = (Trap) card;
@@ -67,10 +104,8 @@ class CallOfTheHaunted extends TrapAction {
         setEndActionCheck1(effectHandler1);
         setEndActionCheck2(effectHandler2);
         cardCommands = new ArrayList<>();
-        CardCommand cardCommand = new BringMonsterBackFromGraveYardToBoard(card);
-        CardCommand cardCommand1 = new SetEffectedMonster(card);
+        CardCommand cardCommand = new BringMonsterBackFromGraveYardToBoard(card , this);
         cardCommands.add(cardCommand);
-        cardCommands.add(cardCommand1);
         setTrapCommands(cardCommands);
         endCommands = new ArrayList<>();
         CardCommand cardCommand2 = new SendCardToGraveyard(card);
@@ -79,16 +114,9 @@ class CallOfTheHaunted extends TrapAction {
         endCommands.add(cardCommand2);
     }
 
-    @Override
-    public void run() {
-        if (startActionCheck.canActivate()) {
-            trap.setActivated(true);
-            for (CardCommand cardCommand : cardCommands)
-                cardCommand.execute();
-        } else if (endActionCheck1.canActivate() || endActionCheck2.canActivate()) {
-            for (CardCommand cardCommand : endCommands)
-                cardCommand.execute();
-        }
+    public void runEnd() {
+        for (CardCommand cardCommand : endCommands)
+            cardCommand.execute();
     }
 }
 
@@ -111,15 +139,6 @@ class MagicJammer extends TrapAction {
         cardCommands.add(cardCommand2);
         cardCommands.add(cardCommand3);
     }
-
-    @Override
-    public void run() {
-        if (startActionCheck.canActivate()) {
-            for (CardCommand cardCommand : cardCommands) {
-                cardCommand.execute();
-            }
-        }
-    }
 }
 
 class TimeSeal extends TrapAction {
@@ -136,13 +155,6 @@ class TimeSeal extends TrapAction {
         cardCommands.add(cardCommand1);
     }
 
-    @Override
-    public void run() {
-        if (startActionCheck.canActivate()) {
-            for (CardCommand cardCommand : cardCommands)
-                cardCommand.execute();
-        }
-    }
 }
 
 class MindCrush extends TrapAction {
@@ -153,15 +165,45 @@ class MindCrush extends TrapAction {
         EffectHandler effectHandler = new PlayerCanActivateTrap(card);
         setStartActionCheck(effectHandler);
         CardCommand cardCommand = new AnnounceCardNameToRemove(card);
+        CardCommand cardCommand1 = new SendCardToGraveyard(card);
         cardCommands = new ArrayList<>();
         cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
     }
+}
+
+class NegateAttack extends TrapAction {
 
     @Override
-    public void run() {
-        if (startActionCheck.canActivate()) {
-            for (CardCommand cardCommand : cardCommands)
-                cardCommand.execute();
-        }
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        EffectHandler effectHandler1 = new IsInAttack(card);
+        effectHandler.setNextHandler(effectHandler1);
+        setStartActionCheck(effectHandler);
+        CardCommand cardCommand = new SetCannotContinueAttack(card);
+        CardCommand cardCommand1 = new SendCardToGraveyard(card);
+        CardCommand cardCommand2 = new GoNextPhase(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
+        cardCommands.add(cardCommand2);
+    }
+}
+
+class TorrentialTribute extends TrapAction {
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        EffectHandler effectHandler1 = new HasAnySummonHappenedThisTurn(card);
+        effectHandler.setNextHandler(effectHandler1);
+        setStartActionCheck(effectHandler);
+        CardCommand cardCommand = new DestroyAllMonsters(card);
+        CardCommand cardCommand1 = new SendCardToGraveyard(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
     }
 }
