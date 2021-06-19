@@ -37,33 +37,23 @@ public abstract class CardCommand {
 
 class BringMonsterBackFromGraveYardToBoard extends CardCommand {
 
-    public BringMonsterBackFromGraveYardToBoard(Card card) {
+    TrapAction trapAction;
+
+    public BringMonsterBackFromGraveYardToBoard(Card card , TrapAction trapAction) {
         super(card);
+        this.trapAction = trapAction;
     }
 
     @Override
     public void execute() {
         gameController.selectMonsterFromGraveyard();
         Monster monster = (Monster) gameController.getCurrentPlayer().getSelectedCard();
+        trapAction.getTrap().setEffectedCard(monster);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setAttackedInThisTurn(false);
         monster.setAttackable(true);
         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
         monster.getCardOwner().getBoard().putMonsterInBoard(monster);
-    }
-}
-
-class SetEffectedMonster extends CardCommand {
-
-    public SetEffectedMonster(Card card) {
-        super(card);
-    }
-
-    @Override
-    public void execute() {
-        Card effectedCard = gameController.getCurrentPlayer().getSelectedCard();
-        trap.setEffectedCard(effectedCard);
-        gameController.getCurrentPlayer().setSelectedCard(null);
     }
 }
 

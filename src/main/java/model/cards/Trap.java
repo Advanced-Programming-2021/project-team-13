@@ -8,12 +8,13 @@ public class Trap extends Card {
     private TrapAction trapAction;
     private Card EffectedCard;
     private String type;
-    private boolean isSetInThisTurn = false;
+    private int setTurn;
 
     public Trap(String name, CardType cardType, String description, Face face,
                 int price, String type) {
         super(name, cardType, description, face, price);
         this.type = type;
+        setTurn = -1;
     }
 
     public String getType() {
@@ -22,14 +23,6 @@ public class Trap extends Card {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public boolean isSetInThisTurn() {
-        return isSetInThisTurn;
-    }
-
-    public void setSetInThisTurn(boolean setInThisTurn) {
-        isSetInThisTurn = setInThisTurn;
     }
 
     public Card getEffectedCard() {
@@ -48,20 +41,18 @@ public class Trap extends Card {
         this.trapAction = trapAction;
     }
 
+    public void setSetTurn(int setTurn) {
+        this.setTurn = setTurn;
+    }
+
+    public int getSetTurn() {
+        return setTurn;
+    }
+
     @Override
     public String toString() {
         return "Name: " + cardName + "Trap"
                 + "\nType: " + type + "Description: " + cardDescription;
     }
-
-     /*   Trap(String name, CardType cardType, String description, Face face,
-         int price, int cardNum, TrapEffect trapEffect) {
-        super(name, cardType, description, face, price, cardNum);
-        this.trapEffect = trapEffect;
-    }*/
-/*
-    public boolean isTrapDestroyer() {///////////////////////////////////////////this needs to be completed
-        return false;
-    }*/
 
 }

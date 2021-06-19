@@ -6,6 +6,7 @@ import enums.Face;
 import enums.MonsterCardType;
 import model.cards.Card;
 import model.cards.Monster;
+import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
 import view.Menu;
@@ -87,6 +88,10 @@ public class GameView {
             int monsterNumber = Integer.parseInt(inputMatcher.group(1));
             gameController.attack(monsterNumber);
         }
+    }
+
+    private void printNotThoseMoves() {
+        System.out.println("it’s not your turn to play this kind of moves");
     }
 
     public void printMap() {
@@ -178,17 +183,19 @@ public class GameView {
         }
         Matcher opponentWithFieldMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_WITH_FIELD);
         Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
-        if (opponentMatcher.find() || opponentWithFieldMatcher.find()) {
+        if (opponentWithFieldMatcher.find(0)) {
             Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_MONSTER);
             Matcher spellMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_SPELL);
-            Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
             if (monsterMatcher.find()) {
-                int cardAddress = Integer.parseInt(monsterMatcher.group("cardAddress"));
+                int cardAddress = Integer.parseInt(opponentWithFieldMatcher.group("cardAddress"));
                 gameController.selectOpponentMonster(cardAddress);
             } else if (spellMatcher.find()) {
-                int cardAddress = Integer.parseInt(spellMatcher.group("cardAddress"));
+                int cardAddress = Integer.parseInt(opponentWithFieldMatcher.group("cardAddress"));
                 gameController.selectOpponentSpellOrTrap(cardAddress);
-            } else if (fieldMatcher.find()) {
+            } else printInvalidCommand();
+        } else if (opponentMatcher.find(0)) {
+            Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
+            if (fieldMatcher.find()) {
                 gameController.selectOpponentFieldCard();
             } else printInvalidCommand();
         } else {
@@ -543,7 +550,7 @@ public class GameView {
 
     }
 
-    public void printActiveOnlyForSpells() {
+    public void printActiveOnlyForSpellsAndTrap() {
         System.out.println("activate effect is only for spell cards.");
     }
 
@@ -753,6 +760,25 @@ public class GameView {
                     return number - 1;
             } catch (Exception e) {
                 System.out.println("Invalid Input");
+            }
+        }
+    }
+
+    public void printChangeTurn() {
+        System.out.println("now it will be " + gameController.getCurrentPlayer() + "’s turn");
+        printMap();
+    }
+
+    public boolean wantToActivateTrap(Trap trap) {
+        System.out.println("do you want to activate your " + trap.getCardName() + " and spell?(YES/NO)");
+        while (true) {
+            String yesOrNo = ViewMaster.scanner.nextLine().trim();
+            if (yesOrNo.equalsIgnoreCase("yes")) {
+                return true;
+            } else if (yesOrNo.equalsIgnoreCase("no")) {
+                return false;
+            } else {
+                printInvalidCommand();
             }
         }
     }
