@@ -47,6 +47,7 @@ public class Monster extends Card {
                    MonsterCardType monsterCardType, MonsterAttribute monsterAttribute,
                    int attackNum, int defenseNum, int level) {
         super(name, cardType, description, face, price);
+        if (name.equalsIgnoreCase("scanner")) isScanner = true;
         setAttackNum(attackNum);
         setDefenseNum(defenseNum);
         setLevel(level);

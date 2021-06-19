@@ -1173,6 +1173,16 @@ public class GameController {
             if (summoning) gameView.printCantSummon();
             return true;
         }
+        boolean isThereMonsterExceptScanner = false;
+        for (Monster m : rivalGraveYardMonsters)
+            if (!m.isScanner()) {
+                isThereMonsterExceptScanner = true;
+                break;
+            }
+        if (!isThereMonsterExceptScanner) {
+            if (summoning) gameView.printCantSummon();
+            return true;
+        }
         scannerEffect(monster, rivalGraveYardMonsters);
         return false;
     }
