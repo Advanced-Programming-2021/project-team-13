@@ -286,6 +286,8 @@ public class GameController {
         isInAttack = true;
         ourMonster.setAttackedMonster(rivalMonster);
         rivalMonster.setAttacker(ourMonster);
+        ourMonster.setAttackedInThisTurn(true);
+        rivalMonster.setHasBeenAttacked(true);//// lioghhhhhhhhhhhhhhhhhhh
         attackingCard = ourMonster;
         checkTrapActivation(); //check for trap activation
         if (canContinueAttack) {
@@ -299,12 +301,10 @@ public class GameController {
     }
 
     private void monsterByMonsterAttack(Monster beenAttackedMonster, Monster attackingMonster) {
-        beenAttackedMonster.setHasBeenAttacked(true);//// lioghhhhhhhhhhhhhhhhhhh
         activateSpecial(attackingMonster, beenAttackedMonster);//////////////////////sorting of which comes first is a problem we have to check!
         if (isSpecialAttack(attackingMonster, beenAttackedMonster))
             return;
         String rivalMonsterName = beenAttackedMonster.getCardName();
-        attackingMonster.setAttackedInThisTurn(true);
         if (beenAttackedMonster.getAttackOrDefense() == AttackOrDefense.ATTACK)
             rivalsOnAttack(beenAttackedMonster, attackingMonster);
         else rivalsOnDefense(beenAttackedMonster, attackingMonster, rivalMonsterName);
@@ -1079,7 +1079,7 @@ public class GameController {
     }
 
     private boolean spellSelectionCheck(int cardAddress, Player player) {
-        if (cardAddress <= 0 || cardAddress > 4) {
+        if (cardAddress <= 0 || cardAddress > 5) {
             gameView.printInvalidSelection();
             return false;
         }
@@ -1607,15 +1607,15 @@ public class GameController {
         return true;
     }
 
-    public void selectMonsterFromGraveyard() {
-        ShowGraveyardView showGraveyardView = new ShowGraveyardView(currentPlayer);
+    public void selectMonsterFromPlayerGraveyard(Player player) {
+        ShowGraveyardView showGraveyardView = new ShowGraveyardView(player);
         showGraveyardView.run("show graveyard");
         int monsterNum;
         do {
             showGraveyardView.printSelectCard();
             monsterNum = ViewMaster.scanner.nextInt();
-        } while (monsterNum > showGraveyardView.getShowGraveyardController().showGraveyard());
-        showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum, currentPlayer);
+        } while (monsterNum > showGraveyardView.getShowGraveyardController().getMonsterCounter());
+        showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum, player);
     }
 
     public void moneyCheat(int amount) {

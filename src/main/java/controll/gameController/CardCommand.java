@@ -46,8 +46,8 @@ class BringMonsterBackFromGraveYardToBoard extends CardCommand {
 
     @Override
     public void execute() {
-        gameController.selectMonsterFromGraveyard();
-        Monster monster = (Monster) gameController.getCurrentPlayer().getSelectedCard();
+        gameController.selectMonsterFromPlayerGraveyard(trap.getCardOwner());
+        Monster monster = (Monster) trap.getCardOwner().getSelectedCard();
         trapAction.getTrap().setEffectedCard(monster);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setAttackedInThisTurn(false);

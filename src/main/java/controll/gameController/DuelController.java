@@ -104,7 +104,6 @@ public class DuelController {
                 }
                 trap.setTrapAction(trapAction);
                 trapAction.setCard(trap);
-                System.out.println(trapAction.toString() + " " + player);
             }
         }
     }

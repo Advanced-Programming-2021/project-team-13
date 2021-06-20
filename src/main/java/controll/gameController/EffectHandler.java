@@ -4,6 +4,7 @@ import enums.Phase;
 import enums.SummonType;
 import enums.Zone;
 import model.Cell;
+import model.Graveyard;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
@@ -270,6 +271,25 @@ class IsAnySpellActive extends EffectHandler {
         }
         if (anySpellActive) {
             if (nextHandler != null) return nextHandler.canActivate();
+            else return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+class GraveYardHasMonsterIn extends EffectHandler {
+
+    public GraveYardHasMonsterIn(Card card){
+        super(card);
+    }
+
+    @Override
+    public boolean canActivate() {
+        Graveyard graveyard = card.getCardOwner().getBoard().getGraveyard();
+        if (graveyard.hasMonster()){
+            if (nextHandler != null)
+                return nextHandler.canActivate();
             else return true;
         } else {
             return false;

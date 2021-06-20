@@ -99,6 +99,8 @@ class CallOfTheHaunted extends TrapAction {
         EffectHandler effectHandler1 = new IsCardInGraveyard(card);
         EffectHandler effectHandler2 = new IsEffectedCardInGraveyard(card);
         EffectHandler effectHandler3 = new IsPlayerMonsterZoneHasEmptyPlace(card);
+        EffectHandler effectHandler4 = new GraveYardHasMonsterIn(card);
+        effectHandler3.setNextHandler(effectHandler4);
         effectHandler.setNextHandler(effectHandler3);
         setStartActionCheck(effectHandler);
         setEndActionCheck1(effectHandler1);

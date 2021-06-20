@@ -62,6 +62,15 @@ public class Graveyard {
         allCards.remove(card);
     }
 
+    public boolean hasMonster(){
+        for (Card card : allCards){
+            if (card instanceof Monster){
+                return true;
+            }
+        }
+        return false;
+    }
+
 //    public Monster getMonsterFromGraveyard(Monster monster) {
 //        for (int i = 0; i < allCards.size(); i++) {
 //            if (allCards.get(i) instanceof Monster) {
