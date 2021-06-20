@@ -13,6 +13,7 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -575,6 +576,12 @@ public class GameView {
     }
 
     public void getTributeTheTricky() {
+        int counter = 0;
+        for (int i = 0; i < gameController.getCurrentPlayer().getCardsInHand().size(); i++) {
+            Card card = gameController.getCurrentPlayer().getCardsInHand().get(i);
+            if (!card.getCardName().equalsIgnoreCase("the tricky"))
+            System.out.println(++counter + ". " + card.getCardName());
+        }
         while (true) {
             System.out.println("Enter Monster Number: ");
             String number = ViewMaster.scanner.nextLine().trim();
@@ -582,7 +589,9 @@ public class GameView {
                 if (gameController.checkTheTrickyInput(Integer.parseInt(number)))
                     return;
                 else
-                    System.out.println("you should special summon right now");
+                    System.out.println("invalid selection , try again!");
+            } else if (number.equalsIgnoreCase("cancel")){
+                return;
             } else
                 System.out.println("you should special summon right now");
         }
@@ -765,12 +774,15 @@ public class GameView {
     }
 
     public void printChangeTurn() {
-        System.out.println("now it will be " + gameController.getCurrentPlayer() + "’s turn");
+        if (gameController.getCurrentPlayer() instanceof AIPlayer)
+            System.out.println("now it will be " + ((AIPlayer)gameController.getCurrentPlayer()).getNickname() + "’s turn");
+        else
+            System.out.println("now it will be " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
         printMap();
     }
 
     public boolean wantToActivateTrap(Trap trap) {
-        System.out.println("do you want to activate your " + trap.getCardName() + " and spell?(YES/NO)");
+        System.out.println("do you want to activate your trap " + trap.getCardName() + " ?(YES/NO)");
         while (true) {
             String yesOrNo = ViewMaster.scanner.nextLine().trim();
             if (yesOrNo.equalsIgnoreCase("yes")) {
