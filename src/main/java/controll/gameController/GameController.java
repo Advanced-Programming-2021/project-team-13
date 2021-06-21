@@ -33,10 +33,11 @@ public class GameController {
     private int turnsPlayed;
     private int unitedCalcCurrent;
     private int unitedCalcRival;
-    private boolean canContinueAttack;
+    private boolean canContinue;
     private boolean isInAttack;
     private boolean normalSummonHappened;
     private boolean specialSummonHappened;
+    private boolean flipSummonHappened;
     private boolean ritualSummonHappened;
     private boolean anySummonHappened;
 
@@ -48,8 +49,8 @@ public class GameController {
         this.startingPlayer = startingPlayer;
         this.currentPlayer = startingPlayer;
         this.chain = new ArrayList<>();
-        firstPlayer.getBoard().getDeck().shuffleMainDeck();
-        secondPlayer.getBoard().getDeck().shuffleMainDeck();
+//        firstPlayer.getBoard().getDeck().shuffleMainDeck();
+//        secondPlayer.getBoard().getDeck().shuffleMainDeck();
         for (Card allCard : firstPlayer.getBoard().getDeck().getAllCards()) {
             allCard.setCardOwner(firstPlayer);
         }
@@ -64,7 +65,7 @@ public class GameController {
         turnsPlayed = 0;
         currentPhase = Phase.DRAW_PHASE;
         notToDrawCardTurns = new ArrayList<>();
-        canContinueAttack = true;
+        canContinue = true;
         isInAttack = false;
         normalSummonHappened = false;
         specialSummonHappened = false;
@@ -86,6 +87,10 @@ public class GameController {
 
     public boolean isSpecialSummonHappened() {
         return specialSummonHappened;
+    }
+
+    public boolean isFlipSummonHappened() {
+        return flipSummonHappened;
     }
 
     public boolean isInAttack() {
@@ -110,16 +115,20 @@ public class GameController {
         return secondPlayer;
     }
 
+    public Card getSummonedCard() {
+        return summonedCard;
+    }
+
     public Card getAttackingCard() {
         return attackingCard;
     }
 
-    public void setCanContinueAttack(boolean canContinueAttack) {
-        this.canContinueAttack = canContinueAttack;
+    public void setCanContinue(boolean canContinue) {
+        this.canContinue = canContinue;
     }
 
-    public boolean getCanContinueAttack() {
-        return canContinueAttack;
+    public boolean getCanContinue() {
+        return canContinue;
     }
 
     public Player getStartingPlayer() {
@@ -290,12 +299,12 @@ public class GameController {
         rivalMonster.setHasBeenAttacked(true);//// lioghhhhhhhhhhhhhhhhhhh
         attackingCard = ourMonster;
         checkTrapActivation(); //check for trap activation
-        if (canContinueAttack) {
+        if (canContinue) {
             monsterByMonsterAttack(rivalMonster, ourMonster);
         }
         attackingCard = null;
         ourMonster.setAttackedMonster(null);
-        canContinueAttack = true;
+        canContinue = true;
         isInAttack = false;
         currentPlayer.setSelectedCard(null);
     }
@@ -506,7 +515,7 @@ public class GameController {
         if (checkDirectAttack()
                 || isAI) {
             checkTrapActivation();
-            if (canContinueAttack) {
+            if (canContinue) {
                 Monster ourMonster = (Monster) currentPlayer.getSelectedCard();
                 currentPlayer.getRivalPlayer().decreaseHealth(ourMonster.getAttackNum());
                 gameView.printYourOpponentReceivesDamage(ourMonster.getAttackNum());
@@ -1478,16 +1487,24 @@ public class GameController {
                             !(monster.getFace() == Face.DOWN && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE))
                         gameView.printCantFlipSummon();
                     else {
-                        if (monster.getCardName().equalsIgnoreCase("man-eater bug")
-                                || monster.getCardName().equalsIgnoreCase("gate guardian"))
-                            manEaterBugFlipSummon();
                         currentPlayer.setSelectedCard(null);
                         currentPlayer.getCardsInHand().remove(monster);
                         monster.setFace(Face.UP);
                         monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-                        gameView.printFlipSummonSuccessfully();
                         gameView.printMap();
+                        summonedCard = monster;
+                        flipSummonHappened = true;
+                        anySummonHappened  = true;
                         checkTrapActivation();
+                        if (canContinue) {
+                            if (monster.getCardName().equalsIgnoreCase("man-eater bug")
+                                    || monster.getCardName().equalsIgnoreCase("gate guardian"))
+                                manEaterBugFlipSummon(monster);
+                            gameView.printFlipSummonSuccessfully();
+                        }
+                        flipSummonHappened = false;
+                        canContinue = true;
+                        summonedCard = null;
                     }
                 } else
                     gameView.printNotInMainPhase();
@@ -1496,13 +1513,15 @@ public class GameController {
         }
     }
 
-    private void manEaterBugFlipSummon() {
-        if (currentPlayer.getRivalPlayer().getBoard().getNumberOfMonsterInBoard() > 0) {
-            Monster monster = gameView.askDoYouWantKillOneOfRivalMonster();
-            if (monster != null) {
-                monster.setActiveAbility(true);
-                currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(monster);
-                gameView.printMap();
+    private void manEaterBugFlipSummon(Monster manEaterBug) {
+        if (manEaterBug.getZone() != Zone.GRAVEYARD) {
+            if (currentPlayer.getRivalPlayer().getBoard().getNumberOfMonsterInBoard() > 0) {
+                Monster monster = gameView.askDoYouWantKillOneOfRivalMonster();
+                if (monster != null) {
+                    monster.setActiveAbility(true);
+                    monster.getCardOwner().getBoard().getGraveyard().addCard(monster);
+                    gameView.printMap();
+                }
             }
         }
     }

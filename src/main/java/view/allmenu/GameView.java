@@ -429,7 +429,6 @@ public class GameView {
         System.out.println("flip summoned successfully");
     }
 
-
     public boolean doesRivalWantCyberse() {
         String answer = ViewMaster.scanner.nextLine();
         if (answer.equals("Yes"))
@@ -501,7 +500,7 @@ public class GameView {
                     } else
                         System.out.println("Enter Valid Number");
                 } else
-                    System.out.println("Enter Monster Number, if you want cancel this Enter \"Cancel\"");
+                    System.out.println("Enter Monster Number, if you want to cancel this Enter \"Cancel\"");
             }
         }
         return null;

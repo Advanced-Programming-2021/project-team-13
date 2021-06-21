@@ -31,6 +31,8 @@ public abstract class TrapAction implements Effect {
         allTrapEffects.put("Magic Cylinder", new MagicCylinder());
         allTrapEffects.put("Negate Attack", new NegateAttack());
         allTrapEffects.put("Torrential Tribute", new TorrentialTribute());
+        allTrapEffects.put("Mirror Force" , new MirrorForce());
+        allTrapEffects.put("Trap Hole" , new TrapHole());
     }
 
     public Trap getTrap() {
@@ -203,6 +205,42 @@ class TorrentialTribute extends TrapAction {
         effectHandler.setNextHandler(effectHandler1);
         setStartActionCheck(effectHandler);
         CardCommand cardCommand = new DestroyAllMonsters(card);
+        CardCommand cardCommand1 = new SendCardToGraveyard(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
+    }
+}
+
+class MirrorForce extends TrapAction {
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        EffectHandler effectHandler1 = new IsInAttack(card);
+        effectHandler.setNextHandler(effectHandler1);
+        setStartActionCheck(effectHandler);
+        CardCommand cardCommand = new DestroyEnemyAttackingMonsters(card);
+        CardCommand cardCommand1 = new SendCardToGraveyard(card);
+        cardCommands = new ArrayList<>();
+        cardCommands.add(cardCommand);
+        cardCommands.add(cardCommand1);
+    }
+}
+
+class TrapHole extends TrapAction{
+
+    @Override
+    public void setCard(Card card) {
+        this.trap = (Trap) card;
+        EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        EffectHandler effectHandler1 = new HasNormalOrFlipSummonHappened(card);
+        EffectHandler effectHandler2 = new HasSummonedMonsterPowerMoreThan1000(card);
+        effectHandler1.setNextHandler(effectHandler2);
+        effectHandler.setNextHandler(effectHandler1);
+        setStartActionCheck(effectHandler);
+        CardCommand cardCommand = new DestroySummonedCard(card);
         CardCommand cardCommand1 = new SendCardToGraveyard(card);
         cardCommands = new ArrayList<>();
         cardCommands.add(cardCommand);

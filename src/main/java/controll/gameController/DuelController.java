@@ -55,14 +55,6 @@ public class DuelController {
         secondPlayer.setRivalPlayer(firstPlayer);
         setPlayersTrapActions(firstPlayer);
         setPlayersTrapActions(secondPlayer);
-        Card card = firstPlayer.getBoard().getDeck().getAllCardsInMainDeck().get(0);
-        Card card1 = firstPlayer.getBoard().getDeck().getAllCardsInMainDeck().get(1);
-        Card card2 = secondPlayer.getBoard().getDeck().getAllCardsInMainDeck().get(0);
-        Card card3 = secondPlayer.getBoard().getDeck().getAllCardsInMainDeck().get(1);
-        firstPlayer.getBoard().getGraveyard().addCard(card);
-        firstPlayer.getBoard().getGraveyard().addCard(card1);
-        secondPlayer.getBoard().getGraveyard().addCard(card2);
-        secondPlayer.getBoard().getGraveyard().addCard(card3);
         GameView gameView;
         if (findPlayerToStart(user, rivalUser) == user) {
             gameView = new GameView(firstPlayer, secondPlayer, firstPlayer, rounds);
@@ -101,6 +93,10 @@ public class DuelController {
                     trapAction = new NegateAttack();
                 } else if (trapAction instanceof TorrentialTribute) {
                     trapAction = new TorrentialTribute();
+                } else if (trapAction instanceof MirrorForce){
+                    trapAction = new MirrorForce();
+                } else if (trapAction instanceof TrapHole){
+                    trapAction = new TrapHole();
                 }
                 trap.setTrapAction(trapAction);
                 trapAction.setCard(trap);
