@@ -8,13 +8,14 @@ import view.allmenu.ShowGraveyardView;
 public class ShowGraveyardController {
     private final ShowGraveyardView showGraveyardView;
     private final Player currentPlayer;
+    private int monsterCounter;
 
     public ShowGraveyardController(ShowGraveyardView showGraveyardView, Player currentPlayer) {
         this.showGraveyardView = showGraveyardView;
         this.currentPlayer = currentPlayer;
     }
 
-    public int showGraveyard() {
+    public void showGraveyard() {
         int counter = 0;
         for (int i = 0; i < currentPlayer.getBoard().getGraveyard().getAllCards().size(); i++) {
             Card card = currentPlayer.getBoard().getGraveyard().getAllCards().get(i);
@@ -25,7 +26,7 @@ public class ShowGraveyardController {
         }
         if (counter == 0)
             showGraveyardView.printGraveyardEmpty();
-        return counter;
+        monsterCounter = counter;
     }
 
     public void selectCardFromGraveyard(int number,Player player) {
@@ -38,5 +39,9 @@ public class ShowGraveyardController {
                 }
             }
         }
+    }
+
+    public int getMonsterCounter() {
+        return monsterCounter;
     }
 }

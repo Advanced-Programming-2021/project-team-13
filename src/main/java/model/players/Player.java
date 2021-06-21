@@ -29,7 +29,7 @@ public class Player {
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
         isAI = false;
-        this.board = new Board(user.getActiveDeck(), new Graveyard(this));
+        this.board = new Board(new Deck(user.getActiveDeck()) , new Graveyard(this));
         // this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
         cardsInHand = new ArrayList<>();
     }
