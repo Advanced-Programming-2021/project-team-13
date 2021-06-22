@@ -3,6 +3,7 @@ package controll.gameController;
 import model.Deck;
 import model.cards.Card;
 import model.cards.Trap;
+import model.players.AIPlayer;
 import model.players.Player;
 import model.players.User;
 import view.Menu;
@@ -44,6 +45,10 @@ public class DuelController {
         Deck aIDeck = new Deck("AIDeck");
 //        ViewMaster.getViewMaster().setGameView(new GameView(player, aiPlayer, player, rounds));
 //        ViewMaster.setCurrentMenu(Menu.GAME_MENU);
+//        firstPlayer.setRivalPlayer(secondPlayer);
+//        secondPlayer.setRivalPlayer(firstPlayer);
+//        setPlayersTrapActions(firstPlayer);
+//        setPlayersTrapActions(secondPlayer);
 //        secondPlayer = new AIPlayer("AI" , );
 //        to complete
     }
@@ -51,6 +56,7 @@ public class DuelController {
     private void startTwoPlayerDuel(User user, User rivalUser, int rounds) {
         Player firstPlayer = new Player(user);
         Player secondPlayer = new Player(rivalUser);
+//        AIPlayer secondPlayer = new AIPlayer(rivalUser.getActiveDeck());
         firstPlayer.setRivalPlayer(secondPlayer);
         secondPlayer.setRivalPlayer(firstPlayer);
         setPlayersTrapActions(firstPlayer);

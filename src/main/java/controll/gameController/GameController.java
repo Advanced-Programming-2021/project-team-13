@@ -311,6 +311,10 @@ public class GameController {
 
     private void monsterByMonsterAttack(Monster beenAttackedMonster, Monster attackingMonster) {
         activateSpecial(attackingMonster, beenAttackedMonster);//////////////////////sorting of which comes first is a problem we have to check!
+//        if ((beenAttackedMonster).isAttackable()) {
+//            gameView.printCantAttackMonster();
+//            return;
+//        }
         if (isSpecialAttack(attackingMonster, beenAttackedMonster))
             return;
         String rivalMonsterName = beenAttackedMonster.getCardName();
@@ -359,8 +363,10 @@ public class GameController {
         int ourAttackNum = 0;
         for (Cell monster : ourMonster.getCardOwner().getBoard().getMonsters()) {
             Monster monsterCard = (Monster) monster.getCard();
-            if (monsterCard.getFace() == Face.UP && !monsterCard.getCardName().equals("The Calculator")) // need this because we cant double the damage if there were 2 ///
-                ourAttackNum += monsterCard.getLevel();
+            if(monsterCard!=null) {
+                if (monsterCard.getFace() == Face.UP && !monsterCard.getCardName().equals("The Calculator")) // need this because we cant double the damage if there were 2 ///
+                    ourAttackNum += monsterCard.getLevel();
+            }
         }
         ourMonster.setAttackPointInGame(300 * ourAttackNum);
     }
@@ -540,11 +546,6 @@ public class GameController {
         if (currentPlayer.getRivalPlayer().getBoard()
                 .getMonsterByAddress(rivalMonsterNum) == null) {
             gameView.printNoCardToAttack();
-            return false;
-        }
-        if (!((Monster) currentPlayer.getRivalPlayer().getBoard()
-                .getMonsterByAddress(rivalMonsterNum)).isAttackable()) {
-            gameView.printCantAttackMonster();
             return false;
         }
         return true;
