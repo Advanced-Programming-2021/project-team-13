@@ -542,11 +542,11 @@ public class GameController {
             gameView.printNoCardToAttack();
             return false;
         }
-//        if (!((Monster) currentPlayer.getRivalPlayer().getBoard()
-//                .getMonsterByAddress(rivalMonsterNum)).isAttackable()) {
-//            gameView.printCantAttackMonster();
-//            return false;
-//        }
+        if (!((Monster) currentPlayer.getRivalPlayer().getBoard()
+                .getMonsterByAddress(rivalMonsterNum)).isAttackable()) {
+            gameView.printCantAttackMonster();
+            return false;
+        }
         return true;
     }
 
