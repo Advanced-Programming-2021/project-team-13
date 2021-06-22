@@ -61,6 +61,8 @@ class BringMonsterBackFromGraveYardToBoard extends CardCommand {
             trap.getCardOwner().setSelectedCard(monster);
         } else gameController.selectMonsterFromPlayerGraveyard(trap.getCardOwner());
         Monster monster = (Monster) trap.getCardOwner().getSelectedCard();
+        Graveyard graveyard = trap.getCardOwner().getBoard().getGraveyard();
+        graveyard.removeCard(monster);
         trapAction.getTrap().setEffectedCard(monster);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setAttackedInThisTurn(false);

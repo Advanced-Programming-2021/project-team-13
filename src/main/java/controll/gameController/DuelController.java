@@ -40,7 +40,7 @@ public class DuelController {
     }
 
     private void startAIDuel(int rounds) {
-        Player player = new Player(ViewMaster.getUser());
+        Player firstPlayer = new Player(ViewMaster.getUser());
         Deck aIDeck = new Deck("AIDeck");
 //        ViewMaster.getViewMaster().setGameView(new GameView(player, aiPlayer, player, rounds));
 //        ViewMaster.setCurrentMenu(Menu.GAME_MENU);
