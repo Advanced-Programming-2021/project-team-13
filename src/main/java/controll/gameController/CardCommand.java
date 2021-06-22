@@ -8,6 +8,7 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.players.AIPlayer;
 import model.players.Player;
 import view.ViewMaster;
 
@@ -46,8 +47,22 @@ class BringMonsterBackFromGraveYardToBoard extends CardCommand {
 
     @Override
     public void execute() {
-        gameController.selectMonsterFromPlayerGraveyard(trap.getCardOwner());
+        if (trap.getCardOwner() instanceof AIPlayer) {
+            ArrayList<Monster> monsters = new ArrayList<>();
+            for (Card card : trap.getCardOwner().getBoard().getGraveyard().getAllCards()){
+                if (card instanceof Monster)
+                    monsters.add((Monster) card);
+            }
+            Monster monster = monsters.get(0);
+            for (Monster monster1 : monsters){
+                if (monster1.getAttackNum() > monster.getAttackNum())
+                    monster = monster1;
+            }
+            trap.getCardOwner().setSelectedCard(monster);
+        } else gameController.selectMonsterFromPlayerGraveyard(trap.getCardOwner());
         Monster monster = (Monster) trap.getCardOwner().getSelectedCard();
+        Graveyard graveyard = trap.getCardOwner().getBoard().getGraveyard();
+        graveyard.removeCard(monster);
         trapAction.getTrap().setEffectedCard(monster);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setAttackedInThisTurn(false);
