@@ -1,6 +1,5 @@
 package controll.gameController;
 
-import model.Deck;
 import model.cards.Card;
 import model.cards.Trap;
 import model.players.AIPlayer;
@@ -10,6 +9,8 @@ import view.Menu;
 import view.ViewMaster;
 import view.allmenu.DuelView;
 import view.allmenu.GameView;
+
+import java.util.Random;
 
 public class DuelController {
     private final DuelView duelView;
@@ -35,52 +36,44 @@ public class DuelController {
         if (checkUserHasActiveDeck(user))
             if (checkUserValidDeckForGame(user))
                 if (checkRoundNumber(rounds))
-                    startAIDuel(rounds);
+                    startAIDuel(user, rounds);
                 else
                     duelView.printInvalidNumberOfRound();
     }
 
-    private void startAIDuel(int rounds) {
-        Player firstPlayer = new Player(ViewMaster.getUser());
-        Deck aIDeck = new Deck("AIDeck");
-//        ViewMaster.getViewMaster().setGameView(new GameView(player, aiPlayer, player, rounds));
-//        ViewMaster.setCurrentMenu(Menu.GAME_MENU);
-//        firstPlayer.setRivalPlayer(secondPlayer);
-//        secondPlayer.setRivalPlayer(firstPlayer);
-//        setPlayersTrapActions(firstPlayer);
-//        setPlayersTrapActions(secondPlayer);
-//        secondPlayer = new AIPlayer("AI" , );
-//        to complete
-    }
-
-    private void startTwoPlayerDuel(User user, User rivalUser, int rounds) {
-        Player firstPlayer = new Player(user);
-        Player secondPlayer = new Player(rivalUser);
-//        AIPlayer secondPlayer = new AIPlayer(rivalUser.getActiveDeck());
+    private void startDuel(Player firstPlayer, Player secondPlayer, int rounds) {
         firstPlayer.setRivalPlayer(secondPlayer);
         secondPlayer.setRivalPlayer(firstPlayer);
         setPlayersTrapActions(firstPlayer);
         setPlayersTrapActions(secondPlayer);
         GameView gameView;
-        if (findPlayerToStart(user, rivalUser) == user) {
+        if (findPlayerToStart(firstPlayer, firstPlayer) == firstPlayer) {
             gameView = new GameView(firstPlayer, secondPlayer, firstPlayer, rounds);
-            GameController gameController = gameView.getGameController();
-            TrapAction.setGameController(gameController);
-            CardCommand.setGameController(gameController);
-            EffectHandler.setGameController(gameController);
         } else {
             gameView = new GameView(firstPlayer, secondPlayer, secondPlayer, rounds);
-            GameController gameController = gameView.getGameController();
-            TrapAction.setGameController(gameController);
-            CardCommand.setGameController(gameController);
-            EffectHandler.setGameController(gameController);
         }
+        GameController gameController = gameView.getGameController();
+        TrapAction.setGameController(gameController);
+        CardCommand.setGameController(gameController);
+        EffectHandler.setGameController(gameController);
         ViewMaster.getViewMaster().setGameView(gameView);
         ViewMaster.setCurrentMenu(Menu.GAME_MENU);
     }
 
+    private void startAIDuel(User user, int rounds) {
+        Player firstPlayer = new Player(user);
+        AIPlayer aiPlayer = new AIPlayer(firstPlayer.getUser().getActiveDeck());
+        startDuel(firstPlayer, aiPlayer, rounds);
+    }
+
+    private void startTwoPlayerDuel(User user, User rivalUser, int rounds) {
+        Player firstPlayer = new Player(user);
+        Player secondPlayer = new Player(rivalUser);
+        startDuel(firstPlayer, secondPlayer, rounds);
+    }
+
     private void setPlayersTrapActions(Player player) {
-        for (int i = 0 ; i < player.getBoard().getDeck().getAllCards().size() ; i++) {
+        for (int i = 0; i < player.getBoard().getDeck().getAllCards().size(); i++) {
             Card card = player.getBoard().getDeck().getAllCards().get(i);
             if (card instanceof Trap) {
                 Trap trap = (Trap) card;
@@ -99,9 +92,9 @@ public class DuelController {
                     trapAction = new NegateAttack();
                 } else if (trapAction instanceof TorrentialTribute) {
                     trapAction = new TorrentialTribute();
-                } else if (trapAction instanceof MirrorForce){
+                } else if (trapAction instanceof MirrorForce) {
                     trapAction = new MirrorForce();
-                } else if (trapAction instanceof TrapHole){
+                } else if (trapAction instanceof TrapHole) {
                     trapAction = new TrapHole();
                 }
                 trap.setTrapAction(trapAction);
@@ -110,26 +103,35 @@ public class DuelController {
         }
     }
 
-    private User findPlayerToStart(User user, User rivalUser) {
-        User userToStart = null;
+    private Player findPlayerToStart(Player player, Player rivalPlayer) {
+        Player userToStart = null;
+        Random random = new Random();
         do {
-            int userNumber = duelView.inputStonePaperScissor(user);
-            int rivalNumber = duelView.inputStonePaperScissor(rivalUser);
-            if (userNumber == 3) {
+            int playerNumber;
+            int rivalNumber;
+            if (player instanceof AIPlayer) {
+                int number = random.nextInt() % 3;
+                playerNumber = number + 1;
+            } else playerNumber = duelView.inputStonePaperScissor(player.getUser());
+            if (rivalPlayer instanceof AIPlayer) {
+                int number = random.nextInt() % 3;
+                rivalNumber = number + 1;
+            } else rivalNumber = duelView.inputStonePaperScissor(rivalPlayer.getUser());
+            if (playerNumber == 3) {
                 if (rivalNumber == 2)
-                    userToStart = rivalUser;
+                    userToStart = rivalPlayer;
                 else if (rivalNumber == 1)
-                    userToStart = user;
-            } else if (userNumber == 2) {
+                    userToStart = player;
+            } else if (playerNumber == 2) {
                 if (rivalNumber == 1)
-                    userToStart = rivalUser;
+                    userToStart = rivalPlayer;
                 else if (rivalNumber == 3)
-                    userToStart = user;
-            } else if (userNumber == 1) {
+                    userToStart = player;
+            } else if (playerNumber == 1) {
                 if (rivalNumber == 2)
-                    userToStart = user;
+                    userToStart = player;
                 else if (rivalNumber == 3)
-                    userToStart = rivalUser;
+                    userToStart = rivalPlayer;
             }
             if (userToStart == null)
                 duelView.printEqual();

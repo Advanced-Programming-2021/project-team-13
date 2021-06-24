@@ -1120,7 +1120,6 @@ public class GameController {
         return true;
     }
 
-
     public void nextPhase() {
         if (currentPhase == Phase.END_PHASE) {
             currentPhase = Phase.DRAW_PHASE;
