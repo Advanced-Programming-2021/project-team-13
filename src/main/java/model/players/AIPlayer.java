@@ -34,7 +34,6 @@ public class AIPlayer extends Player {
     public void play(Phase phase, GameController GC) {
         switch (phase) {
             case DRAW_PHASE:
-                //GC
             case STANDBY_PHASE:
             case END_PHASE:
                 GC.nextPhase();

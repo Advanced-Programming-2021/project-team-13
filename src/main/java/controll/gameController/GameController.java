@@ -1155,7 +1155,7 @@ public class GameController {
     }
 
 
-    public void checksBeforeSummon() { //need some change, SOME EFFECTIVE MONSTER CAN NOT NORMAL SUMMON!
+    public void checksBeforeSummon() {
         if (currentPlayer.getSelectedCard() == null)
             gameView.printNoCardSelected();
         else {
@@ -1638,7 +1638,7 @@ public class GameController {
             TrapAction trapAction = ((Trap) cell.getCard()).getTrapAction();
             if (trapAction.startActionCheck.canActivate()) {
                 trapArrayList.add((Trap) cell.getCard());
-            } else if (trapAction instanceof CallOfTheHaunted){
+            } else if (trapAction instanceof CallOfTheHaunted) {
                 trapArrayList.add((Trap) cell.getCard());
             }
         }
@@ -1686,9 +1686,9 @@ public class GameController {
 
     private void runChain() {
         for (int i = chain.size() - 1; i >= 0; i--) {
-            if (chain.get(i).getTrapAction() instanceof CallOfTheHaunted && chain.get(i).isActivated()){
+            if (chain.get(i).getTrapAction() instanceof CallOfTheHaunted && chain.get(i).isActivated()) {
                 CallOfTheHaunted callOfTheHaunted = (CallOfTheHaunted) chain.get(i).getTrapAction();
-                if (callOfTheHaunted.getEndActionCheck2().canActivate() || callOfTheHaunted.getEndActionCheck1().canActivate()){
+                if (callOfTheHaunted.getEndActionCheck2().canActivate() || callOfTheHaunted.getEndActionCheck1().canActivate()) {
                     callOfTheHaunted.runEnd();
                     continue;
                 }
@@ -1698,7 +1698,7 @@ public class GameController {
         }
     }
 
-    private void checkTrapActivation(){
+    private void checkTrapActivation() {
         activateRivalPlayerTrap();
         runChain();
     }

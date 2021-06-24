@@ -94,11 +94,11 @@ public class LoginMenuTest {
         assertEquals("user with nickname Nima already exists\r\n", outContent.toString());
     }
 
-    @org.junit.Test
+  /*  @org.junit.Test
     public void loginMenuTest10() {
         loginView.run("user login --username nima --password 1234");
         assertEquals("user logged in successfully!\r\n", outContent.toString());
-    }
+    }*/
 
     @org.junit.Test
     public void loginMenuTest11() {
