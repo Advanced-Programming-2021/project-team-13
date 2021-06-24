@@ -4,27 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="change java version and some changes">
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="Call Of The Haunted for AI is Debugged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserJson.txt" beforeDir="false" afterPath="$PROJECT_DIR$/UserJson.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/EffectHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Canser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Effects.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/Interfaces/Summon.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bullshit/TrapAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/LoginMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/LoginMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/MainMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MainMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ProfileMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ScoreboardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ScoreboardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/test/ShopMenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ShopMenuTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/hello" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +19,8 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
+        <option value="FxmlFile" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -75,6 +60,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -106,17 +92,6 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -223,6 +198,9 @@
       <workItem from="1621322365038" duration="2126000" />
       <workItem from="1621452167149" duration="586000" />
       <workItem from="1623656328675" duration="877000" />
+      <workItem from="1624114854621" duration="35693000" />
+      <workItem from="1624350220735" duration="52000" />
+      <workItem from="1624354819866" duration="4660000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -350,7 +328,91 @@
       <option name="project" value="LOCAL" />
       <updated>1623658478908</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add resources">
+      <created>1623672117548</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1623672117548</updated>
+    </task>
+    <task id="LOCAL-00020" summary="add resources again TO RO KHODA">
+      <created>1623672520666</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1623672520666</updated>
+    </task>
+    <task id="LOCAL-00021" summary="AI changes added">
+      <created>1623838048116</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1623838048116</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Duel View Debugged + GameController had some changes">
+      <created>1623847743003</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1623847743003</updated>
+    </task>
+    <task id="LOCAL-00023" summary="adding some traps">
+      <created>1623959250755</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1623959250755</updated>
+    </task>
+    <task id="LOCAL-00024" summary="traps completed">
+      <created>1624046260011</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1624046260011</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fixed some bugs">
+      <created>1624051928171</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1624051928171</updated>
+    </task>
+    <task id="LOCAL-00026" summary="game debug 1 - May God Protect Us!">
+      <created>1624220219528</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1624220219528</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Call Of The Haunted debugged - May God Protect Us!">
+      <created>1624223609518</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1624223609518</updated>
+    </task>
+    <task id="LOCAL-00028" summary="TrapHole added + debugged">
+      <created>1624273095511</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1624273095511</updated>
+    </task>
+    <task id="LOCAL-00029" summary="MirrorForce added + debug">
+      <created>1624273196625</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1624273196625</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Call Of The Haunted for AI is Debugged">
+      <created>1624357061204</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1624357061204</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,12 +463,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="to ro khoda ..." />
-    <MESSAGE value="making it runable" />
-    <MESSAGE value="Login view completed(not debugged)" />
-    <MESSAGE value="Login controller completed(not debugged)" />
-    <MESSAGE value="Login controller arguments" />
-    <MESSAGE value="DuelView + AIPlayer + DuelController added" />
     <MESSAGE value="some of game controller completed" />
     <MESSAGE value="game controller selects (without checking regex) + &#10;game controller + game view attack(60 percent completed)&#10;need a method for checking if card has attacked in the same round or not" />
     <MESSAGE value="ViewMaster is singleton , gameView and gameController not completed yet" />
@@ -419,7 +475,20 @@
     <MESSAGE value="GameController finish and renew game is completed (except deck view during change game)" />
     <MESSAGE value="fix" />
     <MESSAGE value="change java version and some changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="change java version and some changes" />
+    <MESSAGE value="add resources" />
+    <MESSAGE value="add resources again TO RO KHODA" />
+    <MESSAGE value="AI changes added" />
+    <MESSAGE value="Duel View Debugged + GameController had some changes" />
+    <MESSAGE value="adding some traps" />
+    <MESSAGE value="adding some changes" />
+    <MESSAGE value="traps completed" />
+    <MESSAGE value="fixed some bugs" />
+    <MESSAGE value="game debug 1 - May God Protect Us!" />
+    <MESSAGE value="Call Of The Haunted debugged - May God Protect Us!" />
+    <MESSAGE value="TrapHole added + debugged" />
+    <MESSAGE value="MirrorForce added + debug" />
+    <MESSAGE value="Call Of The Haunted for AI is Debugged" />
+    <option name="LAST_COMMIT_MESSAGE" value="Call Of The Haunted for AI is Debugged" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -433,6 +502,94 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="8" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>48</line>
+          <properties class="controll.gameController.BringMonsterBackFromGraveYardToBoard" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>80</line>
+          <properties class="controll.gameController.SendEffectedCardToGraveyard" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>93</line>
+          <properties class="controll.gameController.SendCardToGraveyard" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>106</line>
+          <properties class="controll.gameController.SetRivalPlayerCannotDrawCardNextTurn" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>119</line>
+          <properties class="controll.gameController.FindActiveSpell" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>147</line>
+          <properties class="controll.gameController.ChooseCardFromHandToSacrifice" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>167</line>
+          <properties class="controll.gameController.AnnounceCardNameToRemove" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>203</line>
+          <properties class="controll.gameController.SetCannotContinueAttack" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>215</line>
+          <properties class="controll.gameController.ReverseAttack" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>229</line>
+          <properties class="controll.gameController.GoNextPhase" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>241</line>
+          <properties class="controll.gameController.DestroyAllMonsters" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>

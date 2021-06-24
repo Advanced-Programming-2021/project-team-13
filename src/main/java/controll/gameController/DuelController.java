@@ -3,6 +3,7 @@ package controll.gameController;
 import model.Deck;
 import model.cards.Card;
 import model.cards.Trap;
+import model.players.AIPlayer;
 import model.players.Player;
 import model.players.User;
 import view.Menu;
@@ -40,10 +41,14 @@ public class DuelController {
     }
 
     private void startAIDuel(int rounds) {
-        Player player = new Player(ViewMaster.getUser());
+        Player firstPlayer = new Player(ViewMaster.getUser());
         Deck aIDeck = new Deck("AIDeck");
 //        ViewMaster.getViewMaster().setGameView(new GameView(player, aiPlayer, player, rounds));
 //        ViewMaster.setCurrentMenu(Menu.GAME_MENU);
+//        firstPlayer.setRivalPlayer(secondPlayer);
+//        secondPlayer.setRivalPlayer(firstPlayer);
+//        setPlayersTrapActions(firstPlayer);
+//        setPlayersTrapActions(secondPlayer);
 //        secondPlayer = new AIPlayer("AI" , );
 //        to complete
     }
@@ -51,8 +56,11 @@ public class DuelController {
     private void startTwoPlayerDuel(User user, User rivalUser, int rounds) {
         Player firstPlayer = new Player(user);
         Player secondPlayer = new Player(rivalUser);
+//        AIPlayer secondPlayer = new AIPlayer(rivalUser.getActiveDeck());
         firstPlayer.setRivalPlayer(secondPlayer);
         secondPlayer.setRivalPlayer(firstPlayer);
+        setPlayersTrapActions(firstPlayer);
+        setPlayersTrapActions(secondPlayer);
         GameView gameView;
         if (findPlayerToStart(user, rivalUser) == user) {
             gameView = new GameView(firstPlayer, secondPlayer, firstPlayer, rounds);
@@ -67,43 +75,37 @@ public class DuelController {
             CardCommand.setGameController(gameController);
             EffectHandler.setGameController(gameController);
         }
-        setPlayersTrapActions(user, rivalUser);
         ViewMaster.getViewMaster().setGameView(gameView);
         ViewMaster.setCurrentMenu(Menu.GAME_MENU);
     }
 
-    private void setPlayersTrapActions(User user, User rivalUser) {
-        for (int i = 0; i < 2; i++) {
-            User users;
-            if (i == 0) {
-                users = user;
-            } else {
-                users = rivalUser;
-            }
-            for (Card card : users.getActiveDeck().getAllCards()) {
-                if (card instanceof Trap) {
-                    Trap trap = (Trap) card;
-                    TrapAction trapAction = TrapAction.allTrapEffects.get(trap.getCardName());
-                    if (trapAction instanceof MagicCylinder) {
-                        trapAction = new MagicCylinder();
-                    } else if (trapAction instanceof CallOfTheHaunted) {
-                        trapAction = new CallOfTheHaunted();
-                    } else if (trapAction instanceof TimeSeal) {
-                        trapAction = new TimeSeal();
-                    } else if (trapAction instanceof MagicJammer) {
-                        trapAction = new MagicJammer();
-                    } else if (trapAction instanceof MindCrush) {
-                        trapAction = new MindCrush();
-                    } else if (trapAction instanceof NegateAttack) {
-                        trapAction = new NegateAttack();
-                    } else if (trapAction instanceof TorrentialTribute) {
-                        trapAction = new TorrentialTribute();
-                    } else {
-                        System.out.println("BOOOOOOO ANNNNNNNN");
-                    }
-                    trapAction.setCard(trap);
-                    trap.setTrapAction(trapAction);
+    private void setPlayersTrapActions(Player player) {
+        for (int i = 0 ; i < player.getBoard().getDeck().getAllCards().size() ; i++) {
+            Card card = player.getBoard().getDeck().getAllCards().get(i);
+            if (card instanceof Trap) {
+                Trap trap = (Trap) card;
+                TrapAction trapAction = TrapAction.allTrapEffects.get(trap.getCardName());
+                if (trapAction instanceof MagicCylinder) {
+                    trapAction = new MagicCylinder();
+                } else if (trapAction instanceof CallOfTheHaunted) {
+                    trapAction = new CallOfTheHaunted();
+                } else if (trapAction instanceof TimeSeal) {
+                    trapAction = new TimeSeal();
+                } else if (trapAction instanceof MagicJammer) {
+                    trapAction = new MagicJammer();
+                } else if (trapAction instanceof MindCrush) {
+                    trapAction = new MindCrush();
+                } else if (trapAction instanceof NegateAttack) {
+                    trapAction = new NegateAttack();
+                } else if (trapAction instanceof TorrentialTribute) {
+                    trapAction = new TorrentialTribute();
+                } else if (trapAction instanceof MirrorForce){
+                    trapAction = new MirrorForce();
+                } else if (trapAction instanceof TrapHole){
+                    trapAction = new TrapHole();
                 }
+                trap.setTrapAction(trapAction);
+                trapAction.setCard(trap);
             }
         }
     }

@@ -1,14 +1,13 @@
 package controll.gameController;
 
 import enums.Phase;
-import enums.SummonType;
 import enums.Zone;
 import model.Cell;
+import model.Graveyard;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
-import view.ViewMaster;
 
 public abstract class EffectHandler {
     protected static GameController gameController;
@@ -47,31 +46,15 @@ class HasAnySummonHappenedThisTurn extends EffectHandler {
     }
 }
 
-//class HasAnySummonHappenedThisTurn extends EffectHandler {
-//    public HasAnySummonHappenedThisTurn(Card card) {
-//        super(card);
-//    }
+class HasNormalOrFlipSummonHappened extends EffectHandler {
 
-//    @Override
-//    public boolean canActivate() {
-//        if (gameController.isSummonInThisTurn()) {
-//            if (nextHandler != null) return nextHandler.canActivate();
-//            else return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//}
-
-class HasNormalSummonHappened extends EffectHandler {//check game setters
-
-    public HasNormalSummonHappened(Card card) {
+    public HasNormalOrFlipSummonHappened(Card card) {
         super(card);
     }
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.NORMAL) {
+        if (gameController.isNormalSummonHappened() || gameController.isFlipSummonHappened()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -80,7 +63,7 @@ class HasNormalSummonHappened extends EffectHandler {//check game setters
     }
 }
 
-class HasFlipSummonHappened extends EffectHandler {//check game setters
+class HasFlipSummonHappened extends EffectHandler {
 
     public HasFlipSummonHappened(Card card) {
         super(card);
@@ -88,7 +71,7 @@ class HasFlipSummonHappened extends EffectHandler {//check game setters
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.FLIP) {
+        if (gameController.isFlipSummonHappened()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -97,25 +80,7 @@ class HasFlipSummonHappened extends EffectHandler {//check game setters
     }
 }
 
-//
-//class HasRitualSummonHappened extends EffectHandler{//check game setters
-//
-//    public HasRitualSummonHappened(Card card){
-//        super(card);
-//    }
-//
-//    @Override
-//    boolean canActivate() {
-//        if (((Monster)gameController.getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.SPECIAL){//to check!!!!
-//            if (nextHandler != null) return nextHandler.canActivate();
-//            else return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//}
-
-class HasSpecialSummonHappened extends EffectHandler {//check game setters
+class HasSpecialSummonHappened extends EffectHandler {
 
     public HasSpecialSummonHappened(Card card) {
         super(card);
@@ -123,7 +88,7 @@ class HasSpecialSummonHappened extends EffectHandler {//check game setters
 
     @Override
     public boolean canActivate() {
-        if (((Monster) gameController.getCurrentPlayer().getRivalPlayer().getSelectedCard()).getSummonType() == SummonType.SPECIAL) {
+        if (gameController.isSpecialSummonHappened()) {
             if (nextHandler != null) return nextHandler.canActivate();
             else return true;
         } else {
@@ -131,24 +96,6 @@ class HasSpecialSummonHappened extends EffectHandler {//check game setters
         }
     }
 }
-
-//
-//class HasSpecialSummonMonsterHappened extends EffectHandler{//check game setters
-//
-//    public HasSpecialSummonMonsterHappened(Card card){
-//        super(card);
-//    }
-//
-//    @Override
-//    boolean canActivate() {
-//        if (((Monster)gameController.getRivalPla){
-//            if (nextHandler != null) return nextHandler.canActivate();
-//            else return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//}
 
 class IsInAttack extends EffectHandler {
 
@@ -270,6 +217,45 @@ class IsAnySpellActive extends EffectHandler {
         }
         if (anySpellActive) {
             if (nextHandler != null) return nextHandler.canActivate();
+            else return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+class GraveYardHasMonsterIn extends EffectHandler {
+
+    public GraveYardHasMonsterIn(Card card) {
+        super(card);
+    }
+
+    @Override
+    public boolean canActivate() {
+        Graveyard graveyard = card.getCardOwner().getBoard().getGraveyard();
+        if (graveyard.hasMonster()) {
+            if (nextHandler != null)
+                return nextHandler.canActivate();
+            else return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+class HasSummonedMonsterPowerMoreThan1000 extends EffectHandler {
+
+    public HasSummonedMonsterPowerMoreThan1000(Card card) {
+        super(card);
+    }
+
+    @Override
+    public boolean canActivate() {
+        if (gameController.getSummonedCard() != null &&
+                gameController.getSummonedCard() instanceof Monster &&
+                ((Monster) gameController.getSummonedCard()).getAttackNum() > 1000) {
+            if (nextHandler != null)
+                return nextHandler.canActivate();
             else return true;
         } else {
             return false;

@@ -8,6 +8,7 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.players.AIPlayer;
 import model.players.Player;
 import view.ViewMaster;
 
@@ -46,8 +47,22 @@ class BringMonsterBackFromGraveYardToBoard extends CardCommand {
 
     @Override
     public void execute() {
-        gameController.selectMonsterFromGraveyard();
-        Monster monster = (Monster) gameController.getCurrentPlayer().getSelectedCard();
+        if (trap.getCardOwner() instanceof AIPlayer) {
+            ArrayList<Monster> monsters = new ArrayList<>();
+            for (Card card : trap.getCardOwner().getBoard().getGraveyard().getAllCards()){
+                if (card instanceof Monster)
+                    monsters.add((Monster) card);
+            }
+            Monster monster = monsters.get(0);
+            for (Monster monster1 : monsters){
+                if (monster1.getAttackNum() > monster.getAttackNum())
+                    monster = monster1;
+            }
+            trap.getCardOwner().setSelectedCard(monster);
+        } else gameController.selectMonsterFromPlayerGraveyard(trap.getCardOwner());
+        Monster monster = (Monster) trap.getCardOwner().getSelectedCard();
+        Graveyard graveyard = trap.getCardOwner().getBoard().getGraveyard();
+        graveyard.removeCard(monster);
         trapAction.getTrap().setEffectedCard(monster);
         monster.setZone(Zone.MONSTER_ZONE);
         monster.setAttackedInThisTurn(false);
@@ -188,7 +203,7 @@ class SetCannotContinueAttack extends CardCommand {
 
     @Override
     public void execute() {
-        gameController.setCanContinueAttack(false);
+        gameController.setCanContinue(false);
     }
 }
 
@@ -202,7 +217,7 @@ class ReverseAttack extends CardCommand {
     public void execute() {
         Monster attackingMonster = (Monster) gameController.getAttackingCard();
         Player player = attackingMonster.getCardOwner();
-        player.decreaseHealth(attackingMonster.getAttackNum());
+        player.decreaseHealth(attackingMonster.getAttackPointInGame());
     }
 }
 
@@ -238,5 +253,39 @@ class DestroyAllMonsters extends CardCommand {
                 secondPlayerGraveyard.addCard(cell.getCard());
             }
         }
+    }
+}
+
+class DestroyEnemyAttackingMonsters extends CardCommand{
+
+    public DestroyEnemyAttackingMonsters(Card card){
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        Player rivalPlayer = trap.getCardOwner().getRivalPlayer();
+        Graveyard graveyard = trap.getCardOwner().getRivalPlayer().getBoard().getGraveyard();
+        for (Cell cell : rivalPlayer.getBoard().getMonsters()){
+            if (cell.getCard() != null){
+                if (((Monster)cell.getCard()).getAttackOrDefense() == AttackOrDefense.ATTACK){
+                    graveyard.addCard(cell.getCard());
+                }
+            }
+        }
+    }
+}
+
+class DestroySummonedCard extends CardCommand{
+
+    public DestroySummonedCard(Card card){
+        super(card);
+    }
+
+    @Override
+    public void execute() {
+        Card card = gameController.getSummonedCard();
+        Graveyard graveyard = card.getCardOwner().getBoard().getGraveyard();
+        graveyard.addCard(card);
     }
 }
