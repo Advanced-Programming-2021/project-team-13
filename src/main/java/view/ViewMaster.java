@@ -18,10 +18,12 @@ public class ViewMaster {
     private final MainView mainView;
     private final DeckView deckView;
     private final DuelView duelView;
+    private final ImportAndExportView importAndExportView;
     private GameView gameView;
     private ShowGraveyardView showGraveyardView;
 
     private ViewMaster() {
+        importAndExportView = new ImportAndExportView();
         loginView = new LoginView();
         shopView = new ShopView();
         scoreboardView = new ScoreboardView();
@@ -54,6 +56,10 @@ public class ViewMaster {
 
     public GameView getGameView() {
         return gameView;
+    }
+
+    public DeckView getDeckView() {
+        return deckView;
     }
 
     public void setShowGraveyardMenu(ShowGraveyardView showGraveyardView) {
@@ -97,6 +103,8 @@ public class ViewMaster {
                 gameView.run(command);
             else if (currentMenu == Menu.SHOW_GRAVEYARD)
                 showGraveyardView.run(command);
+            else if (currentMenu == Menu.IMPORT_EXPORT_MENU)
+                importAndExportView.run(command);
         }
     }
 

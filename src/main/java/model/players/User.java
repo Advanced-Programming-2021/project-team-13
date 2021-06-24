@@ -1,6 +1,7 @@
 package model.players;
 
 import model.Deck;
+import model.cards.Card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ public class User implements Comparable<User> {
     private int drawNum;
     private HashMap<String, Integer> allCards;
     private ArrayList<Deck> allDecks;
+    private ArrayList<Card> cards;
 
     public User(String username, String password, String nickname) {
         this.username = username;
@@ -53,8 +55,12 @@ public class User implements Comparable<User> {
         return null;
     }
 
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
     public void addCard(String cardName) {
-        cardName = cardName.replace("_","-");
+        cardName = cardName.replace("_", "-");
         if (allCards.containsKey(cardName))
             allCards.put(cardName, allCards.get(cardName) + 1);
         else
