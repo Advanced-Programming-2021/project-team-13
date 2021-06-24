@@ -1128,8 +1128,7 @@ public class GameController {
             turnsPlayed++;
             if (!notToDrawCardTurns.contains(turnsPlayed) && currentPlayer.getCardsInHand().size() < 6) {
                 if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0) {
-                    Card card = currentPlayer.addCardToHand();
-                    gameView.printCardAddedToHand(card);
+                    addCardToHand();
                 } else {
                     new GameWinMenu(this).announceWinner(currentPlayer.getRivalPlayer());
                 }
@@ -1659,6 +1658,11 @@ public class GameController {
             GameWinMenu gameWinMenu = new GameWinMenu(this);
             gameWinMenu.announceWinner(winner);
         }
+    }
+
+    public void addCardToHand(){
+        Card card = currentPlayer.addCardToHand();
+        gameView.printCardAddedToHand(card);
     }
 
     public void playAI() {
