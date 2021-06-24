@@ -259,7 +259,6 @@ public class GameController {
         }
     }
 
-
     public void findWinner() {
         if (checkEnded() != 4) {
             GameWinMenu gameWinMenu = new GameWinMenu(this);
@@ -331,6 +330,7 @@ public class GameController {
         canContinue = true;
         isInAttack = false;
         currentPlayer.setSelectedCard(null);
+        checkTrapActivation();
     }
 
     private void monsterByMonsterAttack(Monster beenAttackedMonster, Monster attackingMonster) {
@@ -1163,7 +1163,6 @@ public class GameController {
         return true;
     }
 
-
     public void nextPhase() {
         if (currentPhase == Phase.END_PHASE) {
             currentPhase = Phase.DRAW_PHASE;
@@ -1171,8 +1170,7 @@ public class GameController {
             turnsPlayed++;
             if (!notToDrawCardTurns.contains(turnsPlayed) && currentPlayer.getCardsInHand().size() < 6) {
                 if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0) {
-                    Card card = currentPlayer.addCardToHand();
-                    gameView.printCardAddedToHand(card);
+                    addCardToHand();
                 } else {
                     new GameWinMenu(this).announceWinner(currentPlayer.getRivalPlayer());
                 }
@@ -1671,6 +1669,30 @@ public class GameController {
         currentPlayer.getUser().addMoney(amount);
     }
 
+    public void lifePointCheat(int amount){
+        int lp = currentPlayer.getLifePoint();
+        currentPlayer.setLifePoint(lp + amount);
+    }
+
+    public void setDuelWinnerCheat(String nickName){
+        Player winner = null;
+        if (currentPlayer.getUser().getNickname().equals(nickName))
+            winner = currentPlayer;
+        else if (!(currentPlayer.getRivalPlayer() instanceof AIPlayer)){
+            if (currentPlayer.getRivalPlayer().getUser().getNickname().equals(nickName))
+                winner = currentPlayer.getRivalPlayer();
+        }
+        if (winner != null){
+            GameWinMenu gameWinMenu = new GameWinMenu(this);
+            gameWinMenu.announceWinner(winner);
+        }
+    }
+
+    public void addCardToHand(){
+        Card card = currentPlayer.addCardToHand();
+        gameView.printCardAddedToHand(card);
+    }
+
     public void playAI() {
         ((AIPlayer) currentPlayer).play(currentPhase, this);
     }
@@ -1692,10 +1714,6 @@ public class GameController {
         normalSummon(ritualMonster, position);
     }
 
-    //    public void addCardToHandCheat(String cardName){
-//        Card card = currentPlayer.
-//    }
-
     public ArrayList<Trap> currentPlayerCanActivateTrap() {
         ArrayList<Trap> trapArrayList = new ArrayList<>();
         for (Cell cell : currentPlayer.getBoard().getSpellOrTrap()) {
@@ -1715,13 +1733,7 @@ public class GameController {
     private void addTrap(ArrayList<Trap> trapArrayList, Cell cell) {
         if (cell.getCard() != null && cell.getCard() instanceof Trap) {
             TrapAction trapAction = ((Trap) cell.getCard()).getTrapAction();
-            if (trapAction == null) {
-                System.out.println("RIDIN");
-            } else if (trapAction.startActionCheck == null) {
-                System.out.println("Bazam ridin");
-            } else if (trapAction.startActionCheck.canActivate()) {
-                trapArrayList.add((Trap) cell.getCard());
-            } else if (trapAction instanceof CallOfTheHaunted) {
+            if (trapAction.startActionCheck.canActivate()) {
                 trapArrayList.add((Trap) cell.getCard());
             }
         }
@@ -1756,6 +1768,8 @@ public class GameController {
         boolean activatedTrap = false;
         for (Trap trap : trapArrayList) {
             if (gameView.wantToActivateTrap(trap)) {
+                if (!(trap.getTrapAction() instanceof CallOfTheHaunted))
+                    trap.setActivated(true);
                 trap.setFace(Face.UP);
                 chain.add(trap);
                 gameView.printMap();
@@ -1767,17 +1781,21 @@ public class GameController {
 
     private void runChain() {
         for (int i = chain.size() - 1; i >= 0; i--) {
-            if (chain.get(i).getTrapAction() instanceof CallOfTheHaunted && chain.get(i).isActivated()) {
+            if (!(chain.get(i).getTrapAction() instanceof CallOfTheHaunted)) {
+                chain.remove(i);
+                chain.get(i).getTrapAction().run();
+            } else {
+                if (!chain.get(i).isActivated()){
+                    chain.get(i).getTrapAction().run();
+                    chain.get(i).setActivated(true);
+                    continue;
+                }
                 CallOfTheHaunted callOfTheHaunted = (CallOfTheHaunted) chain.get(i).getTrapAction();
                 if (callOfTheHaunted.getEndActionCheck2().canActivate() || callOfTheHaunted.getEndActionCheck1().canActivate()) {
                     callOfTheHaunted.runEnd();
-                    continue;
+                    chain.remove(i);
                 }
             }
-            chain.get(i).setActivated(true);
-            chain.get(i).getTrapAction().run();
-            if (!(chain.get(i).getTrapAction() instanceof CallOfTheHaunted))
-                chain.remove(i);
         }
     }
 
