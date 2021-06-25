@@ -299,10 +299,6 @@ public class GameController {
         checkTrapActivation();
         if (canContinue) {
             activateSpecial(ourMonster, rivalMonster);
-//            if (!rivalMonster.isAttackable()) {
-//                gameView.printCantAttackMonster();
-//                return;
-//            }
             monsterByMonsterAttack(rivalMonster, ourMonster);
         }
         attackingCard = null;
@@ -630,11 +626,6 @@ public class GameController {
             gameView.printSpellZoneIsFull();
             return;
         }
-        if (!checkPreparation(currentPlayer.getSelectedCard())) {
-            gameView.printPrepsNotDone();
-            return;
-        }
-
         if (spell.getType().equals("Equip")) {
             int tries = -1;
             int num = 0;
@@ -824,12 +815,6 @@ public class GameController {
         }
     }
 
-    private void showCardsInHand(Player player) {
-        for (int i = 0; i < player.getCardsInHand().size(); i++) {
-            gameView.printCardInHand(player.getCardsInHand().get(i), i);
-        }
-    }
-
 
     private void mysticalTyphoon() {
         boolean check = false;
@@ -915,7 +900,7 @@ public class GameController {
         }
     }
 
-    private void monsterReborn() { //چقد توابعش سمیه!!!
+    private void monsterReborn() {
         gameView.selectGraveyard();
         Player graveyardOwner = null;
         String graveyardName = gameView.getAnswer();
@@ -934,15 +919,6 @@ public class GameController {
         graveyard.getShowGraveyardController().selectCardFromGraveyard(gameView.getNum(), graveyardOwner);
         specialSummon();
 
-    }
-
-
-    private boolean checkPreparation(Card card) {
-/*
-        else if (card.getCardName().equalsIgnoreCase("Messenger of peace"))
-            return checkMessenger();
-     */
-        return true;
     }
 
     private boolean spellActive(Spell spell) {

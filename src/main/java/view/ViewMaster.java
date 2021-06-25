@@ -1,5 +1,6 @@
 package view;
 
+import controll.json.UserJson;
 import model.players.AIPlayer;
 import model.players.User;
 import view.allmenu.*;
@@ -86,7 +87,7 @@ public class ViewMaster {
             }
             command = scanner.nextLine().trim();
             if (command.equalsIgnoreCase("ai vs ai"))
-                duelView.getDuelController().startAIDuelAI(1);
+                duelView.getDuelController().startAIDuelAI(3);
             if (command.matches(Regex.SHOW_MENU))
                 printCurrentMenu();
             else if (command.matches(Regex.ENTER_MENU) && currentMenu != Menu.MAIN_MENU)
@@ -112,6 +113,7 @@ public class ViewMaster {
             else if (currentMenu == Menu.IMPORT_EXPORT_MENU)
                 importAndExportView.run(command);
         }
+        new UserJson().update();
     }
 
     public void printCurrentMenu() {
