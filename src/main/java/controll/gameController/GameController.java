@@ -674,6 +674,7 @@ public class GameController {
         gameView.printMap();
         if (spell.isActivated())
             checkForAbsorption();
+        checkTrapActivation();
     }
 
     private void checkForAbsorption() {
@@ -731,6 +732,7 @@ public class GameController {
         spell.setActivated(true);
         gameView.printSpellActivated();
         gameView.printMap();
+        checkTrapActivation();
     }
 
     private void findEffect(Spell spell) {
@@ -747,8 +749,6 @@ public class GameController {
             harpie();
         else if (effectName.equalsIgnoreCase("Dark Hole"))
             darkHole();
-//        else if (effectName.equalsIgnoreCase("Supply Squad"))
-//            supplySquad();
         else if (effectName.equalsIgnoreCase("Messenger of peace"))
             activeMessenger(spell);
         else if (effectName.equalsIgnoreCase("Twin Twisters"))
@@ -1266,11 +1266,10 @@ public class GameController {
                 gameView.printWhoseTurn();
                 turnsPlayed++;
             }
-            gameView.printCurrentPhase();//to complete
+            gameView.printCurrentPhase();
         } else if (currentPhase == Phase.BATTLE_PHASE) {
             currentPhase = Phase.MAIN_PHASE_2;
             gameView.printCurrentPhase();
-            //to comp
         } else if (currentPhase == Phase.MAIN_PHASE_2) {
             reset();
             currentPhase = Phase.END_PHASE;
