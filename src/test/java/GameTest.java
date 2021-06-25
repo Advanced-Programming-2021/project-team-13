@@ -65,6 +65,8 @@ public class GameTest {
                 "deck create testDeck\n" +
                 "deck set-activate testDeck\n" +
                 "deck add-card --card Magic Cylinder --deck testDeck\n" +
+                "deck rm-card --card Magic Cylinder --deck testDeck\n" +
+                "deck show --all\n"+
                 "deck add-card --card Warrior Dai Grepher --deck testDeck\n" +
                 "deck add-card --card Horn IMp --deck testDeck\n" +
                 "deck add-card --card yomi ship --deck testDeck\n" +
@@ -105,6 +107,8 @@ public class GameTest {
                 "deck add-card --card bitron --deck testDeck\n" +
                 "deck add-card --card Dark Blade --deck testDeck\n" +
                 "deck add-card --card Wattaildragon --deck testDeck\n" +
+                "deck show --cards\n" +
+                "deck show --all\n"+
                 "menu exit\n" +
                 "menu exit\n" +
                 "user login --password 1234 --username homaan\n" +
