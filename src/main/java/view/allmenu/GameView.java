@@ -853,4 +853,8 @@ public class GameView {
     public void printSelectNextSpellOrAbort() {
         System.out.println("select next trap/spell or abort");
     }
+
+    public void printAllMonstersDestroyed() {
+        System.out.println("all monsters destroyed");
+    }
 }
