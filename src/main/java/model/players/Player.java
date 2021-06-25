@@ -10,18 +10,18 @@ import java.util.ArrayList;
 
 public class Player {
 
-    private final User user;
-    private Player rivalPlayer;
-    private int lifePoint;
-    private int maxLifePoint;
-    private int wonRounds;
-    private Board board;
-    private Card selectedCard;
-    private ArrayList<Card> cardsInHand;
-    private boolean isSetOrSummonInThisTurn = false;
-    private boolean canActiveTrap = true;
-    private boolean isAttacking;
-    private boolean isAI;
+    protected final User user;
+    protected Player rivalPlayer;
+    protected int lifePoint;
+    protected int maxLifePoint;
+    protected int wonRounds;
+    protected Board board;
+    protected Card selectedCard;
+    protected ArrayList<Card> cardsInHand;
+    protected boolean isSetOrSummonInThisTurn = false;
+    protected boolean canActiveTrap = true;
+    protected boolean isAttacking;
+    protected boolean isAI;
 
     public Player(User user) {
         this.wonRounds = 0;

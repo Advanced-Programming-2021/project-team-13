@@ -13,7 +13,6 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
-import javax.swing.plaf.IconUIResource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -56,6 +55,14 @@ public class GameView {
             return;
         } else if (command.equals("active effect"))
             gameController.activeEffect();
+        else if (command.matches("increase --money \\d+"))
+            increaseMoney(command);
+        else if (command.matches("increase --LP \\d+"))
+            increaseLp(command);
+        else if (command.matches("duel set-winner \\w+"))
+            setWinner(command);
+        else if (command.equals("select --hand --force"))
+            handCheat();
         else if (command.equals("special summon"))
             gameController.checksBeforeSpecialSummon(false);
         else if (command.equals("phase"))
@@ -66,6 +73,26 @@ public class GameView {
         gameController.findWinner();
     }
 
+    private void handCheat() {
+        gameController.addCardToHand();
+    }
+
+    private void setWinner(String command) {
+        String duelWinner = Regex.getInputMatcher(command, "duel set-winner (\\w+)").group(1);
+        gameController.setDuelWinnerCheat(duelWinner);
+    }
+
+    private void increaseLp(String command) {
+        String amountStr = Regex.getInputMatcher(command, "increase --LP (\\d+)").group(1);
+        int amount = Integer.parseInt(amountStr);
+        gameController.lifePointCheat(amount);
+    }
+
+    private void increaseMoney(String command) {
+        String amountString = Regex.getInputMatcher(command, "increase --money (\\d+)").group(1);
+        int amount = Integer.parseInt(amountString);
+        gameController.moneyCheat(amount);
+    }
 
     public void showGraveyard(String command) {
         ShowGraveyardView showGraveyardView = new ShowGraveyardView(gameController.getCurrentPlayer());
@@ -579,7 +606,7 @@ public class GameView {
         for (int i = 0; i < gameController.getCurrentPlayer().getCardsInHand().size(); i++) {
             Card card = gameController.getCurrentPlayer().getCardsInHand().get(i);
             if (!card.getCardName().equalsIgnoreCase("the tricky"))
-            System.out.println(++counter + ". " + card.getCardName());
+                System.out.println(++counter + ". " + card.getCardName());
         }
         while (true) {
             System.out.println("Enter Monster Number: ");
@@ -589,7 +616,7 @@ public class GameView {
                     return;
                 else
                     System.out.println("invalid selection , try again!");
-            } else if (number.equalsIgnoreCase("cancel")){
+            } else if (number.equalsIgnoreCase("cancel")) {
                 return;
             } else
                 System.out.println("you should special summon right now");
@@ -774,7 +801,7 @@ public class GameView {
 
     public void printChangeTurn() {
         if (gameController.getCurrentPlayer() instanceof AIPlayer)
-            System.out.println("now it will be " + ((AIPlayer)gameController.getCurrentPlayer()).getNickname() + "’s turn");
+            System.out.println("now it will be " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
         else
             System.out.println("now it will be " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
         printMap();

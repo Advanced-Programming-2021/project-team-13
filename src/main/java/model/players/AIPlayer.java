@@ -5,8 +5,10 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.Phase;
 import enums.Zone;
+import model.Board;
 import model.Cell;
 import model.Deck;
+import model.Graveyard;
 import model.cards.Monster;
 
 import java.util.*;
@@ -21,6 +23,17 @@ public class AIPlayer extends Player {
         super(deck);
         comparator = Comparator.comparing(Monster::getAttackPointInGame, Comparator.reverseOrder())
                 .thenComparing(Monster::getDefencePointInGame, Comparator.reverseOrder());
+    }
+
+    public void renewPlayer(Deck deck){
+        this.cardsInHand = new ArrayList<>();
+        this.lifePoint = 8000;
+        this.isAttacking = false;
+        this.board = new Board(new Deck(deck), new Graveyard(this));
+        this.selectedCard = null;
+        this.cardsInHand = new ArrayList<>();
+        this.isAttacking = false;
+        this.isSetOrSummonInThisTurn = false;
     }
 
     public void setNickname(String nickname) {
