@@ -183,11 +183,11 @@ public class GameController {
         gameView.playerChanged(currentPlayer);
     }
 
-    public void selectPlayerMonster(int cardAddress) {// no regex error!!! // are these handled or not!!??
+    public void selectPlayerMonster(int cardAddress) {
         if (monsterSelectionCheck(cardAddress, currentPlayer)) {
             currentPlayer.setSelectedCard(currentPlayer.getBoard().getMonsterByAddress(cardAddress));
             gameView.printCardSelected();
-            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
+            showSelectedCard();
         }
     }
 
@@ -195,7 +195,7 @@ public class GameController {
         if (spellSelectionCheck(cardAddress, currentPlayer)) {
             currentPlayer.setSelectedCard(currentPlayer.getBoard().getSpellOrTrapByAddress(cardAddress));
             gameView.printCardSelected();
-            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
+            showSelectedCard();
         }
     }
 
@@ -204,7 +204,7 @@ public class GameController {
             currentPlayer.setSelectedCard
                     (currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(cardAddress));
             gameView.printCardSelected();
-            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
+            showSelectedCard();
         }
     }
 
@@ -213,7 +213,7 @@ public class GameController {
             currentPlayer.setSelectedCard
                     (currentPlayer.getRivalPlayer().getBoard().getSpellOrTrapByAddress(cardAddress));
             gameView.printCardSelected();
-            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
+            showSelectedCard();
         }
     }
 
@@ -236,7 +236,7 @@ public class GameController {
         if (handCardCheck(cardAddress)) {
             currentPlayer.setSelectedCard(currentPlayer.getCardsInHand().get(cardAddress - 1));
             gameView.printCardSelected();
-            showSelectedCard();////////////////////////////////////////this needsssssssssss to be reversed !!!
+            showSelectedCard();
         }
     }
 
@@ -551,7 +551,7 @@ public class GameController {
         return false;
     }
 
-    private boolean hasCardAttacked(Card selectedCard) {  ////// this need to be completed , maybe a boolean???////////////////////////////////////////////////////////////
+    private boolean hasCardAttacked(Card selectedCard) {
         Monster monster = (Monster) selectedCard;
         return monster.isAttackedInThisTurn();
     }
@@ -768,7 +768,7 @@ public class GameController {
             mysticalTyphoon();
     }
 
-    private void potOfGreed() {/////fishyyyyyyy////////
+    private void potOfGreed() {
         currentPlayer.addCardToHand();
         currentPlayer.addCardToHand();
     }
@@ -1062,42 +1062,10 @@ public class GameController {
             rivalFieldspell=rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
         }
 
-        System.out.println("*********************************************************");
-
-
-        System.out.println("our monsters attack point before field spell : " + ourMonster.getAttackPointInGame() + "\n" +
-                "our monster defense before field spell : " + ourMonster.getDefencePointInGame());
-        System.out.println("rival monsters attack point before field spell : " + rivalMonster.getAttackPointInGame() + "\n" +
-                "rival monster defense before field spell : " + rivalMonster.getDefencePointInGame());
-
-
-        System.out.println("*********************************************************");
-
         if (ourMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)
             checkField(ourMonster, rivalMonster);
         if (rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)
             checkField(rivalMonster, ourMonster);
-
-        System.out.println("our monster : " + ourMonster.getCardName() + "\n" +
-                "type : " + ourMonster.getMonsterType() + "\n" +
-                "field spell : " + ourFieldspell + "\n" +
-                "attack point after field spell : " + ourMonster.getAttackPointInGame() + "\n" +
-                "defence after field spell : " + ourMonster.getDefencePointInGame());
-
-
-        System.out.println("*********************************************************");
-
-
-        System.out.println("rival monster : " + rivalMonster.getCardName() + "\n" +
-                "rival type : " + rivalMonster.getMonsterType() + "\n" +
-                "rival field spell : " + rivalFieldspell + "\n" +
-                "rivals attack point after field spell : " + rivalMonster.getAttackPointInGame() + "\n" +
-                "rivals defence after field spell : " + rivalMonster.getDefencePointInGame());
-
-
-        System.out.println("*********************************************************");
-
-
     }
 
     private void checkField(Monster ourMonster, Monster rivalMonster) {
