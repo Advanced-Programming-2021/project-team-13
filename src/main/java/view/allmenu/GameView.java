@@ -837,4 +837,20 @@ public class GameView {
     public void printAbortedFromEquipSpell() {
         System.out.println("aborted from placing equip spell");
     }
+
+    public void printAborted() {
+        System.out.println("aborted");
+    }
+
+    public void printDoYouWantToDestroyFieldSpell() {
+        System.out.println("do you want to destroy field spell??");
+    }
+
+    public void printSpellDestroyed() {
+        System.out.println("spell/trap is destroyed");
+    }
+
+    public void printSelectNextSpellOrAbort() {
+        System.out.println("select next trap/spell or abort");
+    }
 }
