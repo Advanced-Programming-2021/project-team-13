@@ -657,32 +657,81 @@ public class GameController {
             return;
         }
         currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
-        gameView.printSpellActivated();
         if (spell.getType().equals("Equip")) {
-            gameView.printSelectMonsterFromBoard();
-            int num = gameView.getNum();
-            String board = gameView.getAnswer();
+            int tries = -1;
+            int num = 0;
+            String board = "";
+            while (tries == -1) {
+                gameView.printSelectMonsterFromBoard();
+                String answer = gameView.getAnswer();
+                if (answer.matches("^(\\d+) ([\\w]+ [\\w]+)$")) {
+                    String[] answerSpilt = answer.split(" ");
+                    num = Integer.parseInt(answerSpilt[0]);
+                    board = answerSpilt[1] + " " + answerSpilt[2];
+                    if (board.equals("abort")) {
+                        gameView.printAbortedFromEquipSpell();
+                        return;
+                    }
+                    if (checkCorrectEquipInput(num, board, spell))
+                        tries = 0;
+                } else gameView.printInvalidCommand();
+
+            }
             if (board.equalsIgnoreCase("our board"))
                 spell.setEquippedMonster
                         ((Monster) currentPlayer.getBoard().getMonsterByAddress(num));
-            else if (board.equalsIgnoreCase("rival board"))
+            else
                 spell.setEquippedMonster((Monster) currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(num));
             spell.setActivated(true);
+            gameView.printSpellActivated();
+            gameView.printMap();
         } else {
             findEffect(spell);
             spell.setActivated(true);
+            gameView.printSpellActivated();
             gameView.printMap();
             if (spell.getType().equals("Normal") || spell.getType().equals("Quick-play"))
                 currentPlayer.getBoard().getGraveyard().addCard(spell);
         }
     }
 
+    private boolean checkCorrectEquipInput(int num, String board, Spell spell) {
+        Monster monster;
+        if (!(0 < num && num < 6) || !(board.equals("our board") || board.equals("rival board"))) {
+            gameView.printInvalidSelection();
+            return false;
+        }
+        if (board.equals("our board"))
+            monster = (Monster) currentPlayer.getBoard().getMonsterByAddress(num);
+        else monster = (Monster) currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(num);
+        if (monster == null) {
+            gameView.printNoMonsterOnThisAddress();
+            return false;
+        }
+        if (!checkCanBeEquippedByMonster(monster, spell)) {
+            gameView.printThisCardCantBeEquippedByThisType();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkCanBeEquippedByMonster(Monster monster, Spell spell) {
+        if (spell.getCardName().equalsIgnoreCase("Sword of Dark Destruction") &&
+                !(monster.getMonsterType().equalsIgnoreCase("spellcaster") ||
+                        monster.getMonsterType().equalsIgnoreCase("fiend")))
+            return false;
+        else return !spell.getCardName().equalsIgnoreCase("Magnum Shield") ||
+                monster.getMonsterType().equalsIgnoreCase("Warrior");
+    }
+
     private void activateFieldSpell(Spell spell) {
         if (currentPlayer.getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getBoard().getGraveyard().addCard(currentPlayer.getBoard().getFieldSpell().getCard());
+        currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
         currentPlayer.getBoard().setFieldSpell(spell);
         spell.setActivated(true);
         gameView.printSpellActivated();
+        gameView.printMap();
     }
 
     private void findEffect(Spell spell) { ////////these are not complete but hell of a ride !!!
@@ -846,7 +895,7 @@ public class GameController {
         increaseAndDecrease(currentPlayer.getRivalPlayer(), "Magnum Shield", 1, 1);
     }
 
-    private void United() {///////////////////////////////////////fishyyyyyyyyyyyyyyy///////////////////////
+    private void United() {
         unitedCalcCurrent = unitedCalculate(currentPlayer);
         unitedCalcRival = unitedCalculate(currentPlayer.getRivalPlayer());
         increaseAndDecrease(currentPlayer, "United We Stand", unitedCalcCurrent, unitedCalcCurrent);
@@ -866,27 +915,22 @@ public class GameController {
 
     private void increaseAndDecrease(Player player, String spellName, int atkAmount, int defAmount) {
         for (Cell cell : player.getBoard().getSpellOrTrap()) {
-            if (cell.getCard() != null && cell.getCard().getCardName().equals(spellName)) {
+            if (cell.getCard() != null && cell.getCard().getCardName().equalsIgnoreCase(spellName)) {
                 Spell spell = (Spell) cell.getCard();
                 if (spellName.equals("Sword of Dark Destruction")) {
-                    if (spell.getEquippedMonster().getMonsterType().equals("Fiend") ||
-                            spell.getEquippedMonster().getMonsterType().equals("Spellcaster")) {
-                        spell.getEquippedMonster().increaseAttackPoint(atkAmount);
-                        spell.getEquippedMonster().increaseAttackPoint(defAmount);
-                    }
-                } else if (spellName.equals("Magnum Shield")) {
-                    if (spell.getEquippedMonster().getMonsterType().equals("Warrior")) {
-                        if (spell.getEquippedMonster().getAttackOrDefense() == AttackOrDefense.ATTACK) {
-                            spell.getEquippedMonster().increaseDefensePoint
-                                    (spell.getEquippedMonster().getDefencePointInGame() * atkAmount);
-                        } else {
-                            spell.getEquippedMonster().increaseDefensePoint
-                                    (spell.getEquippedMonster().getAttackPointInGame() * defAmount);
-                        }
+                    spell.getEquippedMonster().increaseAttackPoint(atkAmount);
+                    spell.getEquippedMonster().increaseDefensePoint(defAmount);
+                } else if (spellName.equalsIgnoreCase("Magnum Shield")) {
+                    if (spell.getEquippedMonster().getAttackOrDefense() == AttackOrDefense.ATTACK) {
+                        spell.getEquippedMonster().increaseAttackPoint
+                                (spell.getEquippedMonster().getDefencePointInGame() * atkAmount);
+                    } else {
+                        spell.getEquippedMonster().increaseDefensePoint
+                                (spell.getEquippedMonster().getAttackPointInGame() * defAmount);
                     }
                 } else {
                     spell.getEquippedMonster().increaseAttackPoint(atkAmount);
-                    spell.getEquippedMonster().increaseAttackPoint(defAmount);
+                    spell.getEquippedMonster().increaseDefensePoint(defAmount);
                 }
             }
         }
