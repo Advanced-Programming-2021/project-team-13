@@ -254,15 +254,15 @@ public class Monster extends Card {
     }
 
     public void decreaseAttackPoint(int amount) {
-        attackPointInGame += amount;
+        attackPointInGame -= amount;
     }
 
     public void increaseDefensePoint(int amount) {
-        attackPointInGame += amount;
+        defencePointInGame += amount;
     }
 
     public void decreaseDefensePoint(int amount) {
-        attackPointInGame += amount;
+        defencePointInGame -= amount;
     }
 
 
