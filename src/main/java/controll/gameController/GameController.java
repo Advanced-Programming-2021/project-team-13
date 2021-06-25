@@ -1073,7 +1073,6 @@ public class GameController {
 
         System.out.println("*********************************************************");
 
-
         if (ourMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)
             checkField(ourMonster, rivalMonster);
         if (rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)
@@ -1364,7 +1363,7 @@ public class GameController {
     }
 
 
-    public void checksBeforeSummon() { //need some change, SOME EFFECTIVE MONSTER CAN NOT NORMAL SUMMON!
+    public void checksBeforeSummon() {
         if (currentPlayer.getSelectedCard() == null)
             gameView.printNoCardSelected();
         else {

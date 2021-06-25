@@ -21,6 +21,10 @@ public class DeckView {
         System.out.println("deck created successfully!");
     }
 
+    public DeckController getDeckController() {
+        return deckController;
+    }
+
     public void printDeckExists(String deckName) {
         System.out.println("deck with name " + deckName + " already exists");
 

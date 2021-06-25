@@ -90,7 +90,7 @@ public class DeckController {
 
 
     /////// Constructors need changes for effective version !!!!!!!!!!!!!!!!!!!!!!!!!!
-    private Card findCard(String cardName) { ////// Spell,Trap,Monster Constructor Work Just For noEffect BRANCH
+    public Card findCard(String cardName) { ////// Spell,Trap,Monster Constructor Work Just For noEffect BRANCH
         MonsterCSV monster = null;
         SpellTrapCSV spellOrTrap = null;
         try {
