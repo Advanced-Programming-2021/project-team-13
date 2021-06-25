@@ -18,6 +18,12 @@ public class Trap extends Card {
         setTurn = -1;
     }
 
+    public Trap(Trap that){
+        super(that);
+        this.type = that.type;
+        this.setTurn = -1;
+    }
+
     public int getActivatedTurn() {
         return activatedTurn;
     }
