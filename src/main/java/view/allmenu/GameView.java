@@ -6,7 +6,6 @@ import enums.Face;
 import enums.MonsterCardType;
 import model.cards.Card;
 import model.cards.Monster;
-import model.cards.Spell;
 import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
@@ -96,7 +95,7 @@ public class GameView {
     }
 
     public void showGraveyard(String command) {
-        ShowGraveyardView showGraveyardView = new ShowGraveyardView(gameController.getCurrentPlayer());
+        ShowGraveyardView showGraveyardView = new ShowGraveyardView(gameController.getPlayer());
         ViewMaster.getViewMaster().setShowGraveyardMenu(showGraveyardView);
         ViewMaster.setCurrentMenu(Menu.SHOW_GRAVEYARD);
         showGraveyardView.run(command);
@@ -124,8 +123,8 @@ public class GameView {
     }
 
     public void printMap() {
-        Player currentPlayer = gameController.getCurrentPlayer();
-        Player rivalPlayer = gameController.getCurrentPlayer().getRivalPlayer();
+        Player currentPlayer = gameController.getPlayer();
+        Player rivalPlayer = gameController.getPlayer().getRivalPlayer();
         StringBuilder map = new StringBuilder();
         addRivalMap(rivalPlayer, map);
         addPlayerMap(currentPlayer, map);
@@ -426,10 +425,10 @@ public class GameView {
     }
 
     public void printWhoseTurn() {
-        if (gameController.getCurrentPlayer() instanceof AIPlayer)
-            System.out.println("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
+        if (gameController.getPlayer() instanceof AIPlayer)
+            System.out.println("Its " + ((AIPlayer) gameController.getPlayer()).getNickname() + "’s turn");
         else
-            System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+            System.out.println("Its " + gameController.getPlayer().getUser().getNickname() + "’s turn");
     }
 
     public void showCard(Card card) {
@@ -524,8 +523,8 @@ public class GameView {
                 if (number.matches("^\\d+$")) {
                     int num = Integer.parseInt(number);
                     if (num > 0 && num < 6) {
-                        if (gameController.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
-                            return (Monster) gameController.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num);
+                        if (gameController.getPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num) != null)
+                            return (Monster) gameController.getPlayer().getRivalPlayer().getBoard().getMonsterByAddress(num);
                         else
                             System.out.println("There is no monster in this address");
                     } else
@@ -607,8 +606,8 @@ public class GameView {
 
     public void getTributeTheTricky() {
         int counter = 0;
-        for (int i = 0; i < gameController.getCurrentPlayer().getCardsInHand().size(); i++) {
-            Card card = gameController.getCurrentPlayer().getCardsInHand().get(i);
+        for (int i = 0; i < gameController.getPlayer().getCardsInHand().size(); i++) {
+            Card card = gameController.getPlayer().getCardsInHand().get(i);
                 System.out.println(++counter + ". " + card.getCardName());
         }
         while (true) {
@@ -700,7 +699,7 @@ public class GameView {
             try {
                 int number = Integer.parseInt(command);
                 run("select --hand " + number);
-                Monster ritualMonster = (Monster) gameController.getCurrentPlayer().getSelectedCard();
+                Monster ritualMonster = (Monster) gameController.getPlayer().getSelectedCard();
                 if (ritualMonster.getMonsterCardType() == MonsterCardType.RITUAL)
                     while (true) {
                         System.out.println("Enter Ritual Monster Tributes Number: \n" +
@@ -713,7 +712,7 @@ public class GameView {
                         if (checkIsInputNumber(numbers)) {
                             for (String num : numbers) {
                                 run("select --monster " + num);
-                                tributes.add((Monster) gameController.getCurrentPlayer().getSelectedCard());
+                                tributes.add((Monster) gameController.getPlayer().getSelectedCard());
                             }
                             if (gameController.checkTributeLevelForRitualSummon(tributes, ritualMonster)) {
                                 while (!command.equalsIgnoreCase("attack") &&
@@ -803,10 +802,10 @@ public class GameView {
     }
 
     public void printChangeTurn() {
-        if (gameController.getCurrentPlayer() instanceof AIPlayer)
-            System.out.println("now it will be " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
+        if (gameController.getPlayer() instanceof AIPlayer)
+            System.out.println("now it will be " + ((AIPlayer) gameController.getPlayer()).getNickname() + "’s turn");
         else
-            System.out.println("now it will be " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+            System.out.println("now it will be " + gameController.getPlayer().getUser().getNickname() + "’s turn");
         printMap();
     }
 

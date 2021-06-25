@@ -168,7 +168,7 @@ class IsAnySpellActive extends EffectHandler {
     @Override
     public boolean canActivate() {
         boolean anySpellActive = false;
-        for (Cell cell : gameController.getCurrentPlayer().getRivalPlayer().getBoard().getSpellOrTrap()) {
+        for (Cell cell : gameController.getPlayer().getRivalPlayer().getBoard().getSpellOrTrap()) {
             if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
                 anySpellActive = true;
                 break;
