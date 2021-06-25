@@ -198,6 +198,7 @@ public class GameTest {
                 "deck add-card --card Exploder Dragon --deck testDeck\n" +
                 "deck add-card --card The Tricky --deck testDeck\n" +
                 "deck add-card --card Spiral Serpent --deck testDeck\n" +
+                "deck show --deck-name testDeck\n" +
                 "menu exit\n" +
                 "menu enter duel\n" +
                 "duel --second-player nima --new --rounds 1\n" +
