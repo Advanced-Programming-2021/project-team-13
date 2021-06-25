@@ -6,6 +6,7 @@ import enums.Face;
 import enums.MonsterCardType;
 import model.cards.Card;
 import model.cards.Monster;
+import model.cards.Spell;
 import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
@@ -830,5 +831,13 @@ public class GameView {
 
     public void printCantAttackItsOnDefense() {
         System.out.println("cant attack because card is on defense");
+    }
+
+    public void printThisCardCantBeEquippedByThisType() {
+        System.out.println("this equip spell cant be equipped by this type of monster");
+    }
+
+    public void printAbortedFromEquipSpell() {
+        System.out.println("aborted from placing equip spell");
     }
 }
