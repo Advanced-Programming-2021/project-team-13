@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="field spells completed">
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="field spell fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/EffectHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -201,7 +205,7 @@
       <workItem from="1624114854621" duration="35693000" />
       <workItem from="1624350220735" duration="52000" />
       <workItem from="1624354819866" duration="17656000" />
-      <workItem from="1624595656976" duration="23755000" />
+      <workItem from="1624595656976" duration="13531000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -441,14 +445,7 @@
       <option name="project" value="LOCAL" />
       <updated>1624604671745</updated>
     </task>
-    <task id="LOCAL-00035" summary="field spells completed">
-      <created>1624609292862</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1624609292862</updated>
-    </task>
-    <option name="localTasksCounter" value="36" />
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,6 +496,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="ش" />
     <MESSAGE value="a" />
     <MESSAGE value="fookin marshmallon" />
     <MESSAGE value="literally nothing" />
@@ -523,8 +521,7 @@
     <MESSAGE value="Call Of The Haunted is Debugged" />
     <MESSAGE value="added cheats" />
     <MESSAGE value="field spell fix" />
-    <MESSAGE value="field spells completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="field spells completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="field spell fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -536,18 +533,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
-          <line>1017</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
-          <line>1015</line>
+          <line>965</line>
           <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
-          <line>898</line>
-          <option name="timeStamp" value="50" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
@@ -587,75 +574,75 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>120</line>
-          <properties class="controll.gameController.FindActiveSpell" method="execute">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>148</line>
-          <properties class="controll.gameController.ChooseCardFromHandToSacrifice" method="execute">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>168</line>
-          <properties class="controll.gameController.AnnounceCardNameToRemove" method="execute">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>204</line>
+          <line>214</line>
           <properties class="controll.gameController.SetCannotContinueAttack" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="27" />
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>216</line>
+          <line>226</line>
           <properties class="controll.gameController.ReverseAttack" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="28" />
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>230</line>
+          <line>240</line>
           <properties class="controll.gameController.GoNextPhase" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="30" />
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>242</line>
+          <line>252</line>
           <properties class="controll.gameController.DestroyAllMonsters" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="31" />
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>265</line>
+          <line>275</line>
           <properties class="controll.gameController.DestroyEnemyAttackingMonsters" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="32" />
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>285</line>
+          <line>295</line>
           <properties class="controll.gameController.DestroySummonedCard" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="33" />
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>167</line>
+          <properties class="controll.gameController.AnnounceCardNameToRemove" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>152</line>
+          <properties class="controll.gameController.ChooseCardFromHandToSacrifice" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
+          <line>124</line>
+          <properties class="controll.gameController.FindActiveSpell" method="execute">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
