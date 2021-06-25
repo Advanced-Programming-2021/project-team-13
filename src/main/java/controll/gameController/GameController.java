@@ -657,32 +657,80 @@ public class GameController {
             return;
         }
         currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
-        gameView.printSpellActivated();
         if (spell.getType().equals("Equip")) {
-            gameView.printSelectMonsterFromBoard();
-            int num = gameView.getNum();
-            String board = gameView.getAnswer();
+            int tries = -1;
+            int num = 0;
+            String board = "";
+            while (tries == -1) {
+                gameView.printSelectMonsterFromBoard();
+                String answer = gameView.getAnswer();
+                if (answer.matches("^(\\d+) ([\\w]+ [\\w]+)$")) {
+                    String[] answerSpilt = answer.split(" ");
+                    num = Integer.parseInt(answerSpilt[0]);
+                    board = answerSpilt[1] + " " + answerSpilt[2];
+                    if (board.equals("abort")) {
+                        gameView.printAbortedFromEquipSpell();
+                        return;
+                    }
+                    if (checkCorrectEquipInput(num, board, spell))
+                        tries = 0;
+                } else gameView.printInvalidCommand();
+
+            }
             if (board.equalsIgnoreCase("our board"))
                 spell.setEquippedMonster
                         ((Monster) currentPlayer.getBoard().getMonsterByAddress(num));
-            else if (board.equalsIgnoreCase("rival board"))
+            else
                 spell.setEquippedMonster((Monster) currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(num));
             spell.setActivated(true);
+            gameView.printSpellActivated();
         } else {
             findEffect(spell);
             spell.setActivated(true);
-            gameView.printMap();
+            gameView.printSpellActivated();
             if (spell.getType().equals("Normal") || spell.getType().equals("Quick-play"))
                 currentPlayer.getBoard().getGraveyard().addCard(spell);
         }
+        gameView.printMap();
+    }
+
+    private boolean checkCorrectEquipInput(int num, String board, Spell spell) {
+        Monster monster;
+        if (!(0 < num && num < 6) || !(board.equals("our board") || board.equals("rival board"))) {
+            gameView.printInvalidSelection();
+            return false;
+        }
+        if (board.equals("our board"))
+            monster = (Monster) currentPlayer.getBoard().getMonsterByAddress(num);
+        else monster = (Monster) currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(num);
+        if (monster == null) {
+            gameView.printNoMonsterOnThisAddress();
+            return false;
+        }
+        if (!checkCanBeEquippedByMonster(monster, spell)) {
+            gameView.printThisCardCantBeEquippedByThisType();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkCanBeEquippedByMonster(Monster monster, Spell spell) {
+        if (spell.getCardName().equalsIgnoreCase("Sword of Dark Destruction") &&
+                !(monster.getMonsterType().equalsIgnoreCase("spellcaster") ||
+                        monster.getMonsterType().equalsIgnoreCase("fiend")))
+            return false;
+        else return !spell.getCardName().equalsIgnoreCase("Magnum Shield") ||
+                monster.getMonsterType().equalsIgnoreCase("Warrior");
     }
 
     private void activateFieldSpell(Spell spell) {
         if (currentPlayer.getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getBoard().getGraveyard().addCard(currentPlayer.getBoard().getFieldSpell().getCard());
+        currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
         currentPlayer.getBoard().setFieldSpell(spell);
         spell.setActivated(true);
         gameView.printSpellActivated();
+        gameView.printMap();
     }
 
     private void findEffect(Spell spell) { ////////these are not complete but hell of a ride !!!
@@ -710,7 +758,7 @@ public class GameController {
         else if (effectName.equalsIgnoreCase("Messenger of peace"))
             activeMessenger(spell);
         else if (effectName.equalsIgnoreCase("Twin Twisters"))
-            twinTwisters(spell);
+            twinTwisters();
         else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
             mysticalTyphoon();
     }
@@ -730,11 +778,54 @@ public class GameController {
 
     }
 
-    private void twinTwisters(Spell spell) {//////not complete !!!!!#crap!!
-        showCardsInHand(spell.getCardOwner());
-        gameView.printSelectNum();
-        currentPlayer.getBoard().getGraveyard()
-                .addCard(currentPlayer.getCardsInHand().get(gameView.getNum()));
+    private void twinTwisters() {
+        while (true) {
+            gameView.printselectCardFromHand(5);
+            String answer = gameView.getAnswer();
+            if (answer.equals("abort")) {
+                gameView.printAborted();
+                return;
+            }
+            if (answer.matches("\\d+") && 0 < Integer.parseInt(answer) && Integer.parseInt(answer) <= 5) {
+                currentPlayer.getBoard().getGraveyard()
+                        .addCard(currentPlayer.getCardsInHand().get(Integer.parseInt(answer)));
+                while (true) {
+                    gameView.printSelectSpellOrTrap();
+                    String answer2 = gameView.getAnswer();
+                    if (answer2.equals("abort")) {
+                        gameView.printAborted();
+                        return;
+                    }
+                    if (answer2.matches("\\d+")) {
+                        int num1 = Integer.parseInt(answer2);
+                        if (checkForTrapOrSpell(num1)) {
+                            currentPlayer.getRivalPlayer().getBoard().getGraveyard()
+                                    .addCard(currentPlayer.getRivalPlayer().getBoard()
+                                            .getSpellOrTrapByAddress(num1));
+                            gameView.printSpellDestroyed();
+                            while (true) {
+                                gameView.printSelectNextSpellOrAbort();
+                                String answer3 = gameView.getAnswer();
+                                if (answer3.equals("abort")) {
+                                    gameView.printAborted();
+                                    return;
+                                } else if (answer3.matches("\\d+")) {
+                                    int num2 = Integer.parseInt(answer3);
+                                    if (checkForTrapOrSpell(num2)) {
+                                        currentPlayer.getRivalPlayer().getBoard().getGraveyard()
+                                                .addCard(currentPlayer.getRivalPlayer().getBoard()
+                                                        .getSpellOrTrapByAddress(num2));
+                                        gameView.printSpellDestroyed();
+                                        return;
+                                    }
+                                    gameView.printInvalidSelection();
+                                } else gameView.printInvalidCommand();
+                            }
+                        } else gameView.printInvalidSelection();
+                    } else gameView.printInvalidCommand();
+                }
+            } else gameView.printInvalidCommand();
+        }
     }
 
     private void showCardsInHand(Player player) {
@@ -744,11 +835,49 @@ public class GameController {
     }
 
 
-    private void mysticalTyphoon() {//////// just for other player??????? can we destroy our own spell??
-        gameView.printSelectSpellOrTrap();
+    private void mysticalTyphoon() {
+        boolean check = false;
+        int num = 1;
+        while (!check) {
+            if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null)
+                while (true) {
+                    gameView.printDoYouWantToDestroyFieldSpell();
+                    String yesOrNo = gameView.getAnswer();
+                    if (yesOrNo.equalsIgnoreCase("no"))
+                        break;
+                    else if (yesOrNo.equalsIgnoreCase("yes")) {
+                        currentPlayer.getRivalPlayer().getBoard().getGraveyard()
+                                .addCard(currentPlayer.getRivalPlayer().getBoard()
+                                        .getFieldSpell().getCard());
+                        gameView.printSpellDestroyed();
+                        return;
+                    } else gameView.printInvalidSelection();
+                }
+            gameView.printSelectSpellOrTrap();
+            String answer = gameView.getAnswer();
+            if (answer.equalsIgnoreCase("abort")) {
+                gameView.printAborted();
+                return;
+            }
+            if (answer.matches("\\d+")) {
+                num = Integer.parseInt(answer);
+                if (checkForTrapOrSpell(num)) {
+                    check = true;
+                } else gameView.printInvalidSelection();
+            } else gameView.printInvalidCommand();
+        }
         currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                 .addCard(currentPlayer.getRivalPlayer().getBoard()
-                        .getSpellOrTrapByAddress(gameView.getNum()));
+                        .getSpellOrTrapByAddress(num));
+        gameView.printSpellDestroyed();
+    }
+
+    private boolean checkForTrapOrSpell(int number) {
+        if (0 > number || number > 5) {
+            gameView.printInvalidSelection();
+            return false;
+        }
+        return currentPlayer.getRivalPlayer().getBoard().getSpellOrTrapByAddress(number) != null;
     }
 
     private void activeMessenger(Spell spell) {
@@ -846,7 +975,7 @@ public class GameController {
         increaseAndDecrease(currentPlayer.getRivalPlayer(), "Magnum Shield", 1, 1);
     }
 
-    private void United() {///////////////////////////////////////fishyyyyyyyyyyyyyyy///////////////////////
+    private void United() {
         unitedCalcCurrent = unitedCalculate(currentPlayer);
         unitedCalcRival = unitedCalculate(currentPlayer.getRivalPlayer());
         increaseAndDecrease(currentPlayer, "United We Stand", unitedCalcCurrent, unitedCalcCurrent);
@@ -866,27 +995,22 @@ public class GameController {
 
     private void increaseAndDecrease(Player player, String spellName, int atkAmount, int defAmount) {
         for (Cell cell : player.getBoard().getSpellOrTrap()) {
-            if (cell.getCard() != null && cell.getCard().getCardName().equals(spellName)) {
+            if (cell.getCard() != null && cell.getCard().getCardName().equalsIgnoreCase(spellName)) {
                 Spell spell = (Spell) cell.getCard();
                 if (spellName.equals("Sword of Dark Destruction")) {
-                    if (spell.getEquippedMonster().getMonsterType().equals("Fiend") ||
-                            spell.getEquippedMonster().getMonsterType().equals("Spellcaster")) {
-                        spell.getEquippedMonster().increaseAttackPoint(atkAmount);
-                        spell.getEquippedMonster().increaseAttackPoint(defAmount);
-                    }
-                } else if (spellName.equals("Magnum Shield")) {
-                    if (spell.getEquippedMonster().getMonsterType().equals("Warrior")) {
-                        if (spell.getEquippedMonster().getAttackOrDefense() == AttackOrDefense.ATTACK) {
-                            spell.getEquippedMonster().increaseDefensePoint
-                                    (spell.getEquippedMonster().getDefencePointInGame() * atkAmount);
-                        } else {
-                            spell.getEquippedMonster().increaseDefensePoint
-                                    (spell.getEquippedMonster().getAttackPointInGame() * defAmount);
-                        }
+                    spell.getEquippedMonster().increaseAttackPoint(atkAmount);
+                    spell.getEquippedMonster().increaseDefensePoint(defAmount);
+                } else if (spellName.equalsIgnoreCase("Magnum Shield")) {
+                    if (spell.getEquippedMonster().getAttackOrDefense() == AttackOrDefense.ATTACK) {
+                        spell.getEquippedMonster().increaseAttackPoint
+                                (spell.getEquippedMonster().getDefencePointInGame() * atkAmount);
+                    } else {
+                        spell.getEquippedMonster().increaseDefensePoint
+                                (spell.getEquippedMonster().getAttackPointInGame() * defAmount);
                     }
                 } else {
                     spell.getEquippedMonster().increaseAttackPoint(atkAmount);
-                    spell.getEquippedMonster().increaseAttackPoint(defAmount);
+                    spell.getEquippedMonster().increaseDefensePoint(defAmount);
                 }
             }
         }
@@ -911,7 +1035,7 @@ public class GameController {
         increaseAndDecrease(currentPlayer.getRivalPlayer(), "Black Pendant", -500, 0);
     }
 
-    private void UnitedRid() {///////////////////////////////////////fishyyyyyyyyyyyyyyy///////////////////////
+    private void UnitedRid() {
         increaseAndDecrease(currentPlayer, "United We Stand", -unitedCalcCurrent, -unitedCalcCurrent);
         increaseAndDecrease(currentPlayer.getRivalPlayer(), "United We Stand", -unitedCalcRival, -unitedCalcRival);
     }
@@ -993,17 +1117,6 @@ public class GameController {
     }
 
     private void UMIIRUKA(Monster monster, Monster rivalMonster) {
-//        if (monster.getFieldSpell().getCardName().equalsIgnoreCase("UMIIRUKA")) {
-//            UMIIRUKAIncrease(monster, -500, 400);
-//            UMIIRUKAIncrease(rivalMonster, -500, 400);
-//            monster.setFieldSpell(null);
-//        }
-//        if (!monster.getCardOwner().getBoard().getFieldSpell()
-//                .getCard().getCardName().equalsIgnoreCase("UMIIRUKA"))
-//            return;
-//        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
-//        UMIIRUKAIncrease(monster, 500, -400);
-//        UMIIRUKAIncrease(rivalMonster, 500, -400);
         if (monster.getCardOwner().getBoard().getFieldSpell().getCard()
                 .getCardName().equalsIgnoreCase("UMIIRUKA")) {
             UMIIRUKAIncrease(monster, 500, -400);

@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="Bezan Zango :)">
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="a">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -439,12 +441,12 @@
       <option name="project" value="LOCAL" />
       <updated>1624604671745</updated>
     </task>
-    <task id="LOCAL-00035" summary="Bezan Zango :)">
-      <created>1624621129303</created>
+    <task id="LOCAL-00035" summary="a">
+      <created>1624622242212</created>
       <option name="number" value="00035" />
       <option name="presentableId" value="LOCAL-00035" />
       <option name="project" value="LOCAL" />
-      <updated>1624621129303</updated>
+      <updated>1624622242212</updated>
     </task>
     <option name="localTasksCounter" value="36" />
     <servers />
@@ -497,7 +499,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="a" />
+    <MESSAGE value="ش" />
     <MESSAGE value="fookin marshmallon" />
     <MESSAGE value="literally nothing" />
     <MESSAGE value="50 percent of taxchanger , calculator , exploder dragon" />
@@ -521,8 +523,8 @@
     <MESSAGE value="Call Of The Haunted is Debugged" />
     <MESSAGE value="added cheats" />
     <MESSAGE value="field spell fix" />
-    <MESSAGE value="Bezan Zango :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bezan Zango :)" />
+    <MESSAGE value="a" />
+    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -531,11 +533,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/controll/GameController.java</url>
           <line>733</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
-          <line>965</line>
-          <option name="timeStamp" value="46" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
@@ -575,55 +572,47 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>214</line>
-          <properties class="controll.gameController.SetCannotContinueAttack" method="execute">
+          <line>224</line>
+          <properties class="controll.gameController.ReverseAttack">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>226</line>
-          <properties class="controll.gameController.ReverseAttack" method="execute">
+          <line>236</line>
+          <properties class="controll.gameController.GoNextPhase">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>240</line>
-          <properties class="controll.gameController.GoNextPhase" method="execute">
+          <line>250</line>
+          <properties class="controll.gameController.DestroyAllMonsters">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>252</line>
-          <properties class="controll.gameController.DestroyAllMonsters" method="execute">
+          <line>262</line>
+          <properties class="controll.gameController.DestroyAllMonsters">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>275</line>
-          <properties class="controll.gameController.DestroyEnemyAttackingMonsters" method="execute">
+          <line>285</line>
+          <properties class="controll.gameController.DestroyEnemyAttackingMonsters">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>295</line>
-          <properties class="controll.gameController.DestroySummonedCard" method="execute">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>167</line>
+          <line>166</line>
           <properties class="controll.gameController.AnnounceCardNameToRemove" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -631,16 +620,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>152</line>
-          <properties class="controll.gameController.ChooseCardFromHandToSacrifice" method="execute">
+          <line>156</line>
+          <properties class="controll.gameController.ChooseCardFromHandToSacrifice">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>124</line>
-          <properties class="controll.gameController.FindActiveSpell" method="execute">
+          <line>128</line>
+          <properties class="controll.gameController.FindActiveSpell">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="56" />
