@@ -632,7 +632,7 @@ public class GameController {
     }
 
     private void activateSpell() {
-        if ((currentPhase != Phase.MAIN_PHASE_1) && (currentPhase != Phase.MAIN_PHASE_2)) { // wtf is this things problem?????????!
+        if ((currentPhase != Phase.MAIN_PHASE_1) && (currentPhase != Phase.MAIN_PHASE_2)) {
             gameView.printCantActiveThisTurn();
             return;
         }
