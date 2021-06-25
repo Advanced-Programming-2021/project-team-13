@@ -887,7 +887,7 @@ public class GameController {
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
             }
         }
-        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell() != null)
+        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                     .addCard(currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard());
     }
