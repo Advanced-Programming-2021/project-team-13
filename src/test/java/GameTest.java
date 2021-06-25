@@ -13,6 +13,115 @@ import java.util.Scanner;
 public class GameTest {
 
     @Test
+    public void deckTest() {
+        User.getAllUsers().clear();
+        ViewMaster.setCurrentMenu(Menu.LOGIN_MENU);
+        ByteArrayInputStream in = new ByteArrayInputStream(("user create --u nima --nickname Nima --p 1234\n" +
+                "user create --nickname Hooman --username homaan --password 1234\n" +
+                "user login --password 1234 --username nima\n" +
+                "menu enter shop\n" +
+                "shop buy Magic Cylinder\n" +
+                "shop buy Call of The Haunted\n" +
+                "shop buy Time Seal\n" +
+                "shop buy Magic Jammer\n" +
+                "shop buy Mind Crush\n" +
+                "shop buy Negate Attack\n" +
+                "shop buy Torrential Tribute\n" +
+                "shop buy Scanner\n" +
+                "shop buy command knight\n" +
+                "shop buy Horn IMp\n" +
+                "shop buy yomi ship\n" +
+                "shop buy suijin\n" +
+                "shop buy fireyarou\n" +
+                "shop buy Curtain of the Dark Ones\n" +
+                "shop buy Feral Imp\n" +
+                "shop buy Dark Magician\n" +
+                "shop buy Wattkid\n" +
+                "shop buy Baby Dragon\n" +
+                "shop buy Hero of the East\n" +
+                "shop buy Crawling dragon\n" +
+                "shop buy Flame Manipulator\n" +
+                "shop buy Blue_Eyes White Dragon\n" +
+                "shop buy Slot Machine\n" +
+                "shop buy Haniwa\n" +
+                "shop buy Man_Eater Bug\n" +
+                "shop buy Gate Guardian\n" +
+                "shop buy bitron\n" +
+                "shop buy Marshmallon\n" +
+                "shop buy Beast King Barbaros\n" +
+                "shop buy Leotron\n" +
+                "shop buy The Calculator\n" +
+                "shop buy Alexandrite Dragon\n" +
+                "shop buy Mirage Dragon\n" +
+                "shop buy Exploder Dragon\n" +
+                "shop buy Warrior Dai Grepher\n" +
+                "shop buy Dark Blade\n" +
+                "shop buy Wattaildragon\n" +
+                "shop buy Terratiger, the Empowered Warrior\n" +
+                "shop buy The Tricky\n" +
+                "shop buy Spiral Serpent\n" +
+                "menu exit\n" +
+                "menu enter deck\n" +
+                "deck create testDeck\n" +
+                "deck delete testDeck\n" +
+                "deck create testDeck\n" +
+                "deck set-activate testDeck\n" +
+                "deck add-card --card Magic Cylinder --deck testDeck\n" +
+                "deck rm-card --card Magic Cylinder --deck testDeck\n" +
+                "deck add-card --card Magic Cylinder --deck testDeck\n" +
+                "deck add-card --card Warrior Dai Grepher --deck testDeck\n" +
+                "deck add-card --card Horn IMp --deck testDeck\n" +
+                "deck add-card --card yomi ship --deck testDeck\n" +
+                "deck add-card --card Time Seal --deck testDeck\n" +
+                "deck add-card --card Magic Jammer --deck testDeck\n" +
+                "deck add-card --card Call of The Haunted --deck testDeck\n" +
+                "deck add-card --card Slot Machine --deck testDeck\n" +
+                "deck add-card --card Haniwa --deck testDeck\n" +
+                "deck add-card --card Exploder Dragon --deck testDeck\n" +
+                "deck add-card --card Mind Crush --deck testDeck\n" +
+                "deck add-card --card Negate Attack --deck testDeck\n" +
+                "deck add-card --card Alexandrite Dragon --deck testDeck\n" +
+                "deck add-card --card Mirage Dragon --deck testDeck\n" +
+                "deck add-card --card Feral Imp --deck testDeck\n" +
+                "deck add-card --card Torrential Tribute --deck testDeck\n" +
+                "deck add-card --card command knight --deck testDeck\n" +
+                "deck add-card --card Dark Magician --deck testDeck\n" +
+                "deck add-card --card Wattkid --deck testDeck\n" +
+                "deck add-card --card Baby Dragon --deck testDeck\n" +
+                "deck add-card --card Marshmallon --deck testDeck\n" +
+                "deck add-card --card Beast King Barbaros --deck testDeck\n" +
+                "deck add-card --card Leotron --deck testDeck\n" +
+                "deck add-card --card The Calculator --deck testDeck\n" +
+                "deck add-card --card Baby Dragon --deck testDeck\n" +
+                "deck add-card --card Hero of the East --deck testDeck\n" +
+                "deck add-card --card Crawling dragon --deck testDeck\n" +
+                "deck add-card --card Flame Manipulator --deck testDeck\n" +
+                "deck add-card --card Blue_Eyes White Dragon --deck testDeck\n" +
+                "deck add-card --card Terratiger, the Empowered Warrior --deck testDeck\n" +
+                "deck add-card --card The Tricky --deck testDeck\n" +
+                "deck add-card --card Spiral Serpent --deck testDeck\n" +
+                "deck add-card --card Scanner --deck testDeck\n" +
+                "deck add-card --card suijin --deck testDeck\n" +
+                "deck add-card --card fireyarou --deck testDeck\n" +
+                "deck add-card --card Curtain of the Dark Ones --deck testDeck\n" +
+                "deck add-card --card Man_Eater Bug --deck testDeck\n" +
+                "deck add-card --card Gate Guardian --deck testDeck\n" +
+                "deck add-card --card bitron --deck testDeck\n" +
+                "deck add-card --card Dark Blade --deck testDeck\n" +
+                "deck add-card --card Wattaildragon --deck testDeck\n" +
+                "deck show --all\n" +
+                "deck show --deck-name testDeck\n" +
+                "deck show --cards\n" +
+                "menu exit\n" +
+                "menu exit\n" +
+                "menu exit\n").getBytes(StandardCharsets.UTF_8));
+        System.setIn(in);
+        ViewMaster.setScanner(new Scanner(System.in));
+        ViewMaster.getViewMaster().run();
+        Assert.assertTrue(true);
+    }
+
+    @Test
     public void battleTest() {
         InputStream sysInBackup = System.in;
         User.getAllUsers().clear();
