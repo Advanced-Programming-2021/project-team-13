@@ -34,6 +34,10 @@ public class ViewMaster {
         currentMenu = Menu.LOGIN_MENU;
     }
 
+    public static void setScanner(Scanner scanner) {
+        ViewMaster.scanner = scanner;
+    }
+
     public static void setUser(User user) {
         ViewMaster.user = user;
     }

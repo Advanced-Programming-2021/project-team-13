@@ -542,7 +542,7 @@ public class GameView {
         while (true) {
             System.out.println("Enter Monster Numbers");
             String numbers = ViewMaster.scanner.nextLine();
-            Matcher matcher = Regex.getInputMatcher(numbers, "(\\d)\\S+(\\d)\\S+(\\d)");
+            Matcher matcher = Regex.getInputMatcher(numbers, "(\\d)\\s+(\\d)\\s+(\\d)");
             if (matcher.find()) {
                 int m1 = Integer.parseInt(matcher.group(1));
                 int m2 = Integer.parseInt(matcher.group(2));
