@@ -85,6 +85,8 @@ public class ViewMaster {
                 continue;
             }
             command = scanner.nextLine().trim();
+            if (command.equalsIgnoreCase("ai vs ai"))
+                duelView.getDuelController().startAIDuelAI(1);
             if (command.matches(Regex.SHOW_MENU))
                 printCurrentMenu();
             else if (command.matches(Regex.ENTER_MENU) && currentMenu != Menu.MAIN_MENU)

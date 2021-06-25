@@ -609,8 +609,7 @@ public class GameView {
         int counter = 0;
         for (int i = 0; i < gameController.getCurrentPlayer().getCardsInHand().size(); i++) {
             Card card = gameController.getCurrentPlayer().getCardsInHand().get(i);
-            if (!card.getCardName().equalsIgnoreCase("the tricky"))
-                System.out.println(++counter + ". " + card.getCardName());
+            System.out.println(++counter + ". " + card.getCardName());
         }
         while (true) {
             System.out.println("Enter Monster Number: ");
@@ -751,6 +750,10 @@ public class GameView {
     }
 
     public int chooseMonsterForSummonScanner(List<Monster> rivalGraveYardMonsters) {
+        return chooseFromGraveyard(rivalGraveYardMonsters);
+    }
+
+    private int chooseFromGraveyard(List<Monster> rivalGraveYardMonsters) {
         while (true) {
             AtomicInteger i = new AtomicInteger();
             System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
@@ -784,23 +787,7 @@ public class GameView {
     }
 
     public int chooseMonsterForHeraldOfCreation(List<Monster> rivalGraveYardMonster) {
-        while (true) {
-            AtomicInteger i = new AtomicInteger();
-            System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
-            rivalGraveYardMonster.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardName() + " : "
-                    + e.getCardDescription()));
-            String command = ViewMaster.scanner.nextLine();
-            try {
-                int number = Integer.parseInt(command);
-                if (number > rivalGraveYardMonster.size()
-                        || number <= 0)
-                    System.out.println("Wrong Number");
-                else
-                    return number - 1;
-            } catch (Exception e) {
-                System.out.println("Invalid Input");
-            }
-        }
+        return chooseFromGraveyard(rivalGraveYardMonster);
     }
 
     public void printChangeTurn() {
@@ -859,5 +846,25 @@ public class GameView {
 
     public void printAllMonstersDestroyed() {
         System.out.println("all monsters destroyed");
+    }
+
+    public int getInputForTerraforming(List<Spell> fieldSpells) {
+        int counter = 0;
+        for (Spell fieldSpell : fieldSpells) {
+            System.out.println(++counter + "- " + fieldSpell.getCardName() + ": " + fieldSpell.getCardDescription());
+        }
+        while (true) {
+            System.out.println("Enter Spell Number");
+            String number = ViewMaster.scanner.nextLine().trim();
+            try {
+                int num = Integer.parseInt(number);
+                if (num <= fieldSpells.size())
+                    return num - 1;
+                else
+                    System.out.println("Invalid Number");
+            } catch (Exception e) {
+                System.out.println("Invalid Input");
+            }
+        }
     }
 }
