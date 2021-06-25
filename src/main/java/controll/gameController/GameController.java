@@ -925,7 +925,6 @@ public class GameController {
         System.out.println("our monsters attack point before field spell : " + ourMonster.getAttackPointInGame());
         System.out.println("rival monsters attack point before field spell : " + rivalMonster.getAttackPointInGame());
 
-
         if (ourMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)
             checkField(ourMonster, rivalMonster);
         if (rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)

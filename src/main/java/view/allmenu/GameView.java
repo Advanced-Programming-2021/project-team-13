@@ -377,8 +377,11 @@ public class GameView {
 
     public void getTribute() {
         System.out.println("enter tribute number: ");
-        int number = ViewMaster.scanner.nextInt();
-        run("select --monster " + number);
+        try {
+            int number = ViewMaster.scanner.nextInt();
+            run("select --monster " + number);
+        } catch (Exception e) {
+        }
     }
 
     public void printCantSet() {
