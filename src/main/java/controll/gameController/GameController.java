@@ -741,8 +741,8 @@ public class GameController {
         String effectName = spell.getCardName();
         if (effectName.equalsIgnoreCase("Monster Reborn"))
             monsterReborn();
-//        else if (effectName.equalsIgnoreCase("Terraforming"))
-//            terraforming();
+        else if (effectName.equalsIgnoreCase("Terraforming"))
+            terraforming();
         else if (effectName.equalsIgnoreCase("Pot of Greed"))
             potOfGreed();
         else if (effectName.equalsIgnoreCase("Raigeki"))
@@ -759,6 +759,18 @@ public class GameController {
             twinTwisters();
         else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
             mysticalTyphoon();
+    }
+
+    private void terraforming() {
+        List<Spell> fieldSpells = currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().stream()
+                .filter(e -> e instanceof Spell)
+                .map(e -> (Spell) e)
+                .filter(e -> e.getType().equalsIgnoreCase("field"))
+                .collect(Collectors.toList());
+        if (fieldSpells.size() > 0) {
+            int number = gameView.getInputForTerraforming(fieldSpells);
+            getCurrentPlayer().getCardsInHand().add(fieldSpells.get(number));
+        }
     }
 
     private void potOfGreed() {
