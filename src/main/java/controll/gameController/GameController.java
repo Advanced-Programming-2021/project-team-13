@@ -955,7 +955,7 @@ public class GameController {
         increaseAndDecrease(currentPlayer.getRivalPlayer(), "Black Pendant", -500, 0);
     }
 
-    private void UnitedRid() {///////////////////////////////////////fishyyyyyyyyyyyyyyy///////////////////////
+    private void UnitedRid() {
         increaseAndDecrease(currentPlayer, "United We Stand", -unitedCalcCurrent, -unitedCalcCurrent);
         increaseAndDecrease(currentPlayer.getRivalPlayer(), "United We Stand", -unitedCalcRival, -unitedCalcRival);
     }
