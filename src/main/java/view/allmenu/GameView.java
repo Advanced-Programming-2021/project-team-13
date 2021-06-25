@@ -750,6 +750,10 @@ public class GameView {
     }
 
     public int chooseMonsterForSummonScanner(List<Monster> rivalGraveYardMonsters) {
+        return chooseFromGraveyard(rivalGraveYardMonsters);
+    }
+
+    private int chooseFromGraveyard(List<Monster> rivalGraveYardMonsters) {
         while (true) {
             AtomicInteger i = new AtomicInteger();
             System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
@@ -783,23 +787,7 @@ public class GameView {
     }
 
     public int chooseMonsterForHeraldOfCreation(List<Monster> rivalGraveYardMonster) {
-        while (true) {
-            AtomicInteger i = new AtomicInteger();
-            System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
-            rivalGraveYardMonster.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardName() + " : "
-                    + e.getCardDescription()));
-            String command = ViewMaster.scanner.nextLine();
-            try {
-                int number = Integer.parseInt(command);
-                if (number > rivalGraveYardMonster.size()
-                        || number <= 0)
-                    System.out.println("Wrong Number");
-                else
-                    return number - 1;
-            } catch (Exception e) {
-                System.out.println("Invalid Input");
-            }
-        }
+        return chooseFromGraveyard(rivalGraveYardMonster);
     }
 
     public void printChangeTurn() {

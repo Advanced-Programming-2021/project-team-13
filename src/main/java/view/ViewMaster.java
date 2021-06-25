@@ -80,7 +80,7 @@ public class ViewMaster {
         String command;
         while (currentMenu != Menu.EXIT_MENU) {
             if (currentMenu == Menu.GAME_MENU &&
-                    gameView.getGameController().getPlayer() instanceof AIPlayer) {
+                    gameView.getGameController().getCurrentPlayer() instanceof AIPlayer) {
                 gameView.getGameController().playAI();
                 continue;
             }

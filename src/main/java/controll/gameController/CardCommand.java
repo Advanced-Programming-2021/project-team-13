@@ -131,7 +131,7 @@ class FindActiveSpell extends CardCommand {
             }
         }
         if (effectedCard == null) {
-            for (Cell cell : gameController.getPlayer().getRivalPlayer().getBoard().getSpellOrTrap()) {
+            for (Cell cell : gameController.getCurrentPlayer().getRivalPlayer().getBoard().getSpellOrTrap()) {
                 if (trap != cell.getCard())
                     if (cell.getCard() instanceof Spell && cell.getCard().isActivated()) {
                         effectedCard = (Spell) cell.getCard();

@@ -103,7 +103,7 @@ public class AIPlayer extends Player {
                 .collect(Collectors.toList());
         if (traps.size() > 0)
             if (getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
-                GC.getPlayer().setSelectedCard(traps.get(0));
+                GC.getCurrentPlayer().setSelectedCard(traps.get(0));
                 GC.set();
             }
     }
@@ -113,7 +113,7 @@ public class AIPlayer extends Player {
                 .map(e -> (Spell) e).filter(e -> e.getType().equalsIgnoreCase("field"))
                 .collect(Collectors.toList());
         if (spells.size() > 0) {
-            GC.getPlayer().setSelectedCard(spells.get(0));
+            GC.getCurrentPlayer().setSelectedCard(spells.get(0));
             GC.activeEffect();
         }
     }
@@ -126,7 +126,7 @@ public class AIPlayer extends Player {
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 2));
             getBoard().getGraveyard().addCard(tributeList.get(tributeList.size() - 3));
             gc.normalSummon(monster, AttackOrDefense.ATTACK);
-            for (Cell cell : gc.getPlayer().getRivalPlayer().getBoard().getMonsters())
+            for (Cell cell : gc.getCurrentPlayer().getRivalPlayer().getBoard().getMonsters())
                 cell.setCard(null);
             return true;
         }
@@ -141,7 +141,7 @@ public class AIPlayer extends Player {
                 if (monster1.getLevel() <= 4) {
                     getBoard().putMonsterInBoard(monster1);
                     if (monster1.getCardName().equalsIgnoreCase("Mirage Dragon")) {
-                        gc.getPlayer().getRivalPlayer().setCanActiveTrap(false);
+                        gc.getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
                         monster1.setActiveAbility(true);
                     }
                     monster.setZone(Zone.MONSTER_ZONE);
@@ -185,7 +185,7 @@ public class AIPlayer extends Player {
         if (monsters.size() != 0)
             for (Monster monster : monsters) {
                 if (!monster.isAttackedInThisTurn()) {
-                    if (GC.getPlayer().getRivalPlayer().getBoard().getNumberOfMonsterInBoard() == 0) {
+                    if (GC.getCurrentPlayer().getRivalPlayer().getBoard().getNumberOfMonsterInBoard() == 0) {
                         this.setSelectedCard(monster);
                         GC.directAttack(true);
                         this.setSelectedCard(null);
@@ -197,7 +197,7 @@ public class AIPlayer extends Player {
                         if (rivalMonster != null) {
                             setSelectedCard(monster);
                             attackInThisTurn = true;
-                            int number = GC.getPlayer().getRivalPlayer().getBoard().getMonsterCellNumber(rivalMonster);
+                            int number = GC.getCurrentPlayer().getRivalPlayer().getBoard().getMonsterCellNumber(rivalMonster);
                             if (number == 1)
                                 GC.attack(3);
                             else if (number == 2)
