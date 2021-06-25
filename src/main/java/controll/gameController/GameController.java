@@ -68,8 +68,8 @@ public class GameController {
         this.startingPlayer = startingPlayer;
         this.currentPlayer = startingPlayer;
         this.chain = new ArrayList<>();
-//        firstPlayer.getBoard().getDeck().shuffleMainDeck();
-//        secondPlayer.getBoard().getDeck().shuffleMainDeck();
+        firstPlayer.getBoard().getDeck().shuffleMainDeck();
+        secondPlayer.getBoard().getDeck().shuffleMainDeck();
         for (Card allCard : firstPlayer.getBoard().getDeck().getAllCards()) {
             allCard.setCardOwner(firstPlayer);
         }
@@ -337,11 +337,7 @@ public class GameController {
                 ourMonster.setAttackPointInGame(0);
             }
         }
-        if (messengerOfPeace(ourMonster)) {
-            gameView.printCantAttackBecauseOfMessenger();
-            gameView.printMap();
-            return true;
-        } else if (rivalMonster.getCardName().equalsIgnoreCase("Marshmallon")) {
+        else if (rivalMonster.getCardName().equalsIgnoreCase("Marshmallon")) {
             marshmallon(ourMonster, rivalMonster);
             gameView.printMap();
             return true;
@@ -561,14 +557,6 @@ public class GameController {
                 }
         }
         activationMonster.increaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
-    }
-
-
-    private boolean messengerOfPeace(Monster attacker) {
-        if (!checkForActive(currentPlayer, "Messenger of peace")
-                && !checkForActive(currentPlayer.getRivalPlayer(), "Messenger of peace"))
-            return false;
-        return attacker.getAttackPointInGame() >= 1500;
     }
 
 

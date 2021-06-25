@@ -31,7 +31,7 @@ public class AIPlayer extends Player {
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
-        this.board = new Board(new Deck(deck), new Graveyard(this));
+        this.board = new Board(new Deck(deck), new Graveyard(this), this);
         this.selectedCard = null;
         this.cardsInHand = new ArrayList<>();
         this.isAttacking = false;

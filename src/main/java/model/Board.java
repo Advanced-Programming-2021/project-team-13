@@ -5,6 +5,7 @@ import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
 import model.players.AIPlayer;
+import model.players.Player;
 
 public class Board {
 
@@ -16,17 +17,7 @@ public class Board {
     private Graveyard graveyard;
 
 
-    public Board(Deck deck, Graveyard graveyard) {
-        if(getGraveyard().getOwner() instanceof AIPlayer) {
-            deck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
-                    || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
-                    || e.getCardName().equalsIgnoreCase("Skull Guardian")
-                    || e.getCardName().equalsIgnoreCase("Crab Turtle"));
-            deck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
-                    || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
-                    || e.getCardName().equalsIgnoreCase("Skull Guardian")
-                    || e.getCardName().equalsIgnoreCase("Crab Turtle"));
-        }
+    public Board(Deck deck, Graveyard graveyard, Player player) {
         this.deck = deck;
         this.graveyard = graveyard;
         spellOrTrap = new Cell[5];

@@ -280,10 +280,6 @@ public class Monster extends Card {
     }
 
 
-  /*  public ArrayList<Monster> getMonsterOnBoard() {
-        return cardOwner.getMonsterOnBoard();
-    }*/
-
     public int howManyTributeNeed() {
         switch (this.level) {
             case 1:

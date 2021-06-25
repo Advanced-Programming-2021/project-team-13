@@ -4,10 +4,9 @@ import org.junit.Test;
 import view.Menu;
 import view.ViewMaster;
 
-import java.io.*;
-import java.net.URL;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class GameTest {
@@ -1115,13 +1114,11 @@ public class GameTest {
                 "deck add-card --card Twin Twisters --deck testDeck\n" +
                 "deck add-card --card The Tricky --deck testDeck\n" +
                 "deck add-card --card Man_Eater Bug --deck testDeck\n" +
-                "deck add-card --card Scanner --deck testDeck\n" +
                 "deck add-card --card Terratiger, the Empowered Warrior --deck testDeck\n" +
                 "deck add-card --card yomi ship --deck testDeck\n" +
                 "deck add-card --card bitron --deck testDeck\n" +
                 "deck add-card --card Harpie's Feather Duster --deck testDeck\n" +
                 "deck add-card --card Mystical space typhoon --deck testDeck\n" +
-                "deck add-card --card Scanner --deck testDeck\n" +
                 "deck add-card --card Yami --deck testDeck\n" +
                 "deck add-card --card Horn IMp --deck testDeck\n" +
                 "deck add-card --card Exploder Dragon --deck testDeck\n" +
@@ -1220,8 +1217,8 @@ public class GameTest {
                 "YES\n" +
                 "2\n" +
                 "surrender\n" +
-                "menu exit \n" +
-                "menu exit \n" +
+                "menu exit\n" +
+                "menu exit\n" +
                 "menu exit"
         ).getBytes(StandardCharsets.UTF_8));
         System.setIn(in);
@@ -1231,7 +1228,7 @@ public class GameTest {
     }
     @Test
     public void spellTest() {
-        InputStream sysInBackup = System.in; // backup System.in to restore it later
+        InputStream sysInBackup = System.in;
         User.getAllUsers().clear();
         ViewMaster.setCurrentMenu(Menu.LOGIN_MENU);
         ByteArrayInputStream in = new ByteArrayInputStream((
@@ -1595,18 +1592,12 @@ public class GameTest {
         ViewMaster.getViewMaster().run();
         Assert.assertTrue(User.getUserByUsername("nima").getWinNum() == 1);
     }
-//
-//    @Test
-//    public void test(){
-//        URL url = getClass().getResource("/")
-//        File file = new File(Paths.get());
-//        FileReader reader = new FileReader(file);
-//    }
+
 
 
     @Test
     public void AITest() {
-        InputStream sysInBackup = System.in; // backup System.in to restore it later
+        InputStream sysInBackup = System.in;
         User.getAllUsers().clear();
         ViewMaster.setCurrentMenu(Menu.LOGIN_MENU);
         ByteArrayInputStream in = new ByteArrayInputStream(("user create --u nima --nickname Nima --p 1234\n" +

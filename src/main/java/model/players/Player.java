@@ -24,23 +24,32 @@ public class Player {
     protected boolean isAI;
 
     public Player(User user) {
+
         this.wonRounds = 0;
         this.user = user;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
         isAI = false;
-        this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
+        this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this),this);
         cardsInHand = new ArrayList<>();
+
     }
 
     public Player(Deck deck) {
-
+            deck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
+                    || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
+                    || e.getCardName().equalsIgnoreCase("Skull Guardian")
+                    || e.getCardName().equalsIgnoreCase("Crab Turtle"));
+            deck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
+                    || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
+                    || e.getCardName().equalsIgnoreCase("Skull Guardian")
+                    || e.getCardName().equalsIgnoreCase("Crab Turtle"));
         this.wonRounds = 0;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
         isAI = true;
         user = null;
-        this.board = new Board(deck, new Graveyard(this));
+        this.board = new Board(deck, new Graveyard(this),this);
         cardsInHand = new ArrayList<>();
     }
 
@@ -60,7 +69,7 @@ public class Player {
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
-        this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
+        this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this),this);
         this.selectedCard = null;
         this.cardsInHand = new ArrayList<>();
         this.isAttacking = false;

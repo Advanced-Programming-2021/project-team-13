@@ -16,7 +16,6 @@ public class Deck implements Comparable<Deck> {
     private ArrayList<Card> allCards = new ArrayList<>();
     private ArrayList<Card> allCardsInMainDeck = new ArrayList<>();
     private ArrayList<Card> allCardsInSideDeck = new ArrayList<>();
-    //private ArrayList<Deck> allPlayersDecks = new ArrayList<>();
     private boolean isValid;
     private boolean isActive;
     private int numberOfCards;
@@ -58,15 +57,6 @@ public class Deck implements Comparable<Deck> {
 
     }
 
-
-    /*public Deck getDeckByName(String name) {
-        for (Deck allPlayersDeck : allPlayersDecks) {
-            if (allPlayersDeck.name.equals(name))
-                return allPlayersDeck;
-        }
-        return null;
-    }
-*/
 
     public static int getMinCardsInMainDeck() {
         return MIN_CARDS_IN_MAIN_DECK;

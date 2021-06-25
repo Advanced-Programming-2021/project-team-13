@@ -4,7 +4,6 @@ import enums.CardType;
 import enums.Face;
 
 public class Spell extends Card {
-    //private final SpellEffect spellEffect;  // beware that its final!!!!!!
     private Monster equippedMonster;
     private String type;
     private boolean isSetINThisTurn = false;
@@ -57,15 +56,4 @@ public class Spell extends Card {
         this.equippedMonster = equippedMonster;
     }
 
-/*
-    public Spell(String name, CardType cardType, SpellEffect spellEffect,
-          String description, Face face, int price, int cardNum) {
-        super(name, cardType, description, face, price, cardNum);
-        this.spellEffect = spellEffect;
-    }
-*/
-
-    /*public SpellEffect getSpellEffect() {
-        return spellEffect;
-    }*/
 }
