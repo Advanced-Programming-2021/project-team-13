@@ -4,12 +4,9 @@ import org.junit.Test;
 import view.Menu;
 import view.ViewMaster;
 
-import java.io.*;
-import java.net.URL;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class GameTest {
@@ -547,19 +544,6 @@ public class GameTest {
         Assert.assertTrue(User.getUserByUsername("nima").getWinNum() == 1);
     }
 
-    @Test
-    public void test() throws IOException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(byteArrayOutputStream));
-        URL url = getClass().getResource("/testCases/gameTest.txt");
-        File file = new File(url.getPath());
-        Scanner scanner = new Scanner(file);
-        ViewMaster.setScanner(scanner);
-        ViewMaster.getViewMaster().run();
-        String ans = new String(Files.readAllBytes(Paths.get("src/main/resources/testCases/gameTest/txt")));
-        Assert.assertEquals(ans , byteArrayOutputStream.toString());
-    }
-
 
     @Test
     public void AITest() {
@@ -592,11 +576,11 @@ public class GameTest {
                 "shop buy Crawling dragon\n" +
                 "shop buy Flame Manipulator\n" +
                 "shop buy Blue_Eyes White Dragon\n" +
-                "shop buy Curtain of the Dark Ones\n"+
-                "shop buy UMIIRUKA\n"+
-                "shop buy Yami\n"+
-                "shop buy Closed Forest\n"+
-                "shop buy Forest\n"+
+                "shop buy Curtain of the Dark Ones\n" +
+                "shop buy UMIIRUKA\n" +
+                "shop buy Yami\n" +
+                "shop buy Closed Forest\n" +
+                "shop buy Forest\n" +
                 "shop buy Slot Machine\n" +
                 "shop buy Haniwa\n" +
                 "shop buy Man_Eater Bug\n" +
@@ -637,10 +621,10 @@ public class GameTest {
                 "deck add-card --card Torrential Tribute --deck testDeck\n" +
                 "deck add-card --card command knight --deck testDeck\n" +
                 "deck add-card --card Dark Magician --deck testDeck\n" +
-                "deck add-card --card UMIIRUKA --deck testDeck\n"+
-                "deck add-card --card Closed Forest --deck testDeck\n"+
-                "deck add-card --card Yami --deck testDeck\n"+
-                "deck add-card --card Forest --deck testDeck\n"+
+                "deck add-card --card UMIIRUKA --deck testDeck\n" +
+                "deck add-card --card Closed Forest --deck testDeck\n" +
+                "deck add-card --card Yami --deck testDeck\n" +
+                "deck add-card --card Forest --deck testDeck\n" +
                 "deck add-card --card Wattkid --deck testDeck\n" +
                 "deck add-card --card Baby Dragon --deck testDeck\n" +
                 "deck add-card --card Marshmallon --deck testDeck\n" +
