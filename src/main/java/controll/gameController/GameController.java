@@ -684,15 +684,14 @@ public class GameController {
                 spell.setEquippedMonster((Monster) currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(num));
             spell.setActivated(true);
             gameView.printSpellActivated();
-            gameView.printMap();
         } else {
             findEffect(spell);
             spell.setActivated(true);
             gameView.printSpellActivated();
-            gameView.printMap();
             if (spell.getType().equals("Normal") || spell.getType().equals("Quick-play"))
                 currentPlayer.getBoard().getGraveyard().addCard(spell);
         }
+        gameView.printMap();
     }
 
     private boolean checkCorrectEquipInput(int num, String board, Spell spell) {
@@ -759,7 +758,7 @@ public class GameController {
         else if (effectName.equalsIgnoreCase("Messenger of peace"))
             activeMessenger(spell);
         else if (effectName.equalsIgnoreCase("Twin Twisters"))
-            twinTwisters(spell);
+            twinTwisters();
         else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
             mysticalTyphoon();
     }
@@ -779,11 +778,54 @@ public class GameController {
 
     }
 
-    private void twinTwisters(Spell spell) {//////not complete !!!!!#crap!!
-        showCardsInHand(spell.getCardOwner());
-        gameView.printSelectNum();
-        currentPlayer.getBoard().getGraveyard()
-                .addCard(currentPlayer.getCardsInHand().get(gameView.getNum()));
+    private void twinTwisters() {
+        while (true) {
+            gameView.printselectCardFromHand(5);
+            String answer = gameView.getAnswer();
+            if (answer.equals("abort")) {
+                gameView.printAborted();
+                return;
+            }
+            if (answer.matches("\\d+") && 0 < Integer.parseInt(answer) && Integer.parseInt(answer) <= 5) {
+                currentPlayer.getBoard().getGraveyard()
+                        .addCard(currentPlayer.getCardsInHand().get(Integer.parseInt(answer)));
+                while (true) {
+                    gameView.printSelectSpellOrTrap();
+                    String answer2 = gameView.getAnswer();
+                    if (answer2.equals("abort")) {
+                        gameView.printAborted();
+                        return;
+                    }
+                    if (answer2.matches("\\d+")) {
+                        int num1 = Integer.parseInt(answer2);
+                        if (checkForTrapOrSpell(num1)) {
+                            currentPlayer.getRivalPlayer().getBoard().getGraveyard()
+                                    .addCard(currentPlayer.getRivalPlayer().getBoard()
+                                            .getSpellOrTrapByAddress(num1));
+                            gameView.printSpellDestroyed();
+                            while (true) {
+                                gameView.printSelectNextSpellOrAbort();
+                                String answer3 = gameView.getAnswer();
+                                if (answer3.equals("abort")) {
+                                    gameView.printAborted();
+                                    return;
+                                } else if (answer3.matches("\\d+")) {
+                                    int num2 = Integer.parseInt(answer3);
+                                    if (checkForTrapOrSpell(num2)) {
+                                        currentPlayer.getRivalPlayer().getBoard().getGraveyard()
+                                                .addCard(currentPlayer.getRivalPlayer().getBoard()
+                                                        .getSpellOrTrapByAddress(num2));
+                                        gameView.printSpellDestroyed();
+                                        return;
+                                    }
+                                    gameView.printInvalidSelection();
+                                } else gameView.printInvalidCommand();
+                            }
+                        } else gameView.printInvalidSelection();
+                    } else gameView.printInvalidCommand();
+                }
+            } else gameView.printInvalidCommand();
+        }
     }
 
     private void showCardsInHand(Player player) {
@@ -793,11 +835,49 @@ public class GameController {
     }
 
 
-    private void mysticalTyphoon() {//////// just for other player??????? can we destroy our own spell??
-        gameView.printSelectSpellOrTrap();
+    private void mysticalTyphoon() {
+        boolean check = false;
+        int num = 1;
+        while (!check) {
+            if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null)
+                while (true) {
+                    gameView.printDoYouWantToDestroyFieldSpell();
+                    String yesOrNo = gameView.getAnswer();
+                    if (yesOrNo.equalsIgnoreCase("no"))
+                        break;
+                    else if (yesOrNo.equalsIgnoreCase("yes")) {
+                        currentPlayer.getRivalPlayer().getBoard().getGraveyard()
+                                .addCard(currentPlayer.getRivalPlayer().getBoard()
+                                        .getFieldSpell().getCard());
+                        gameView.printSpellDestroyed();
+                        return;
+                    } else gameView.printInvalidSelection();
+                }
+            gameView.printSelectSpellOrTrap();
+            String answer = gameView.getAnswer();
+            if (answer.equalsIgnoreCase("abort")) {
+                gameView.printAborted();
+                return;
+            }
+            if (answer.matches("\\d+")) {
+                num = Integer.parseInt(answer);
+                if (checkForTrapOrSpell(num)) {
+                    check = true;
+                } else gameView.printInvalidSelection();
+            } else gameView.printInvalidCommand();
+        }
         currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                 .addCard(currentPlayer.getRivalPlayer().getBoard()
-                        .getSpellOrTrapByAddress(gameView.getNum()));
+                        .getSpellOrTrapByAddress(num));
+        gameView.printSpellDestroyed();
+    }
+
+    private boolean checkForTrapOrSpell(int number) {
+        if (0 > number || number > 5) {
+            gameView.printInvalidSelection();
+            return false;
+        }
+        return currentPlayer.getRivalPlayer().getBoard().getSpellOrTrapByAddress(number) != null;
     }
 
     private void activeMessenger(Spell spell) {
@@ -1036,17 +1116,6 @@ public class GameController {
     }
 
     private void UMIIRUKA(Monster monster, Monster rivalMonster) {
-//        if (monster.getFieldSpell().getCardName().equalsIgnoreCase("UMIIRUKA")) {
-//            UMIIRUKAIncrease(monster, -500, 400);
-//            UMIIRUKAIncrease(rivalMonster, -500, 400);
-//            monster.setFieldSpell(null);
-//        }
-//        if (!monster.getCardOwner().getBoard().getFieldSpell()
-//                .getCard().getCardName().equalsIgnoreCase("UMIIRUKA"))
-//            return;
-//        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
-//        UMIIRUKAIncrease(monster, 500, -400);
-//        UMIIRUKAIncrease(rivalMonster, 500, -400);
         if (monster.getCardOwner().getBoard().getFieldSpell().getCard()
                 .getCardName().equalsIgnoreCase("UMIIRUKA")) {
             UMIIRUKAIncrease(monster, 500, -400);
@@ -1499,7 +1568,17 @@ public class GameController {
 
     private void setSpellAndTrap() {
         if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
-            if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
+            if (currentPlayer.getSelectedCard() instanceof Spell && ((Spell)currentPlayer.getSelectedCard()).getType().equalsIgnoreCase("field")){
+                if (currentPlayer.getBoard().getFieldSpell().getCard() != null){
+                    Spell spell = (Spell) currentPlayer.getSelectedCard();
+                    spell.setFace(Face.UP);
+                    spell.setZone(Zone.FIELD);
+                    currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
+                    currentPlayer.setSelectedCard(null);
+                    gameView.printMap();
+                    checkTrapActivation();
+                } else gameView.printSpellZoneIsFull();
+            } else if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
                 currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
                 Card card = currentPlayer.getSelectedCard();
                 card.setZone(Zone.SPELL_TRAP_ZONE);
