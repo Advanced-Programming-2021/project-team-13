@@ -1569,7 +1569,17 @@ public class GameController {
 
     private void setSpellAndTrap() {
         if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
-            if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
+            if (currentPlayer.getSelectedCard() instanceof Spell && ((Spell)currentPlayer.getSelectedCard()).getType().equalsIgnoreCase("field")){
+                if (currentPlayer.getBoard().getFieldSpell().getCard() != null){
+                    Spell spell = (Spell) currentPlayer.getSelectedCard();
+                    spell.setFace(Face.UP);
+                    spell.setZone(Zone.FIELD);
+                    currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
+                    currentPlayer.setSelectedCard(null);
+                    gameView.printMap();
+                    checkTrapActivation();
+                } else gameView.printSpellZoneIsFull();
+            } else if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
                 currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
                 Card card = currentPlayer.getSelectedCard();
                 card.setZone(Zone.SPELL_TRAP_ZONE);
