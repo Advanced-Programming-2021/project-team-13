@@ -64,39 +64,7 @@ class HasNormalOrFlipSummonHappened extends EffectHandler {
     }
 }
 
-class HasFlipSummonHappened extends EffectHandler {
 
-    public HasFlipSummonHappened(Card card) {
-        super(card);
-    }
-
-    @Override
-    public boolean canActivate() {
-        if (gameController.isFlipSummonHappened()) {
-            if (nextHandler != null) return nextHandler.canActivate();
-            else return true;
-        } else {
-            return false;
-        }
-    }
-}
-
-class HasSpecialSummonHappened extends EffectHandler {
-
-    public HasSpecialSummonHappened(Card card) {
-        super(card);
-    }
-
-    @Override
-    public boolean canActivate() {
-        if (gameController.isSpecialSummonHappened()) {
-            if (nextHandler != null) return nextHandler.canActivate();
-            else return true;
-        } else {
-            return false;
-        }
-    }
-}
 
 class IsInAttack extends EffectHandler {
 

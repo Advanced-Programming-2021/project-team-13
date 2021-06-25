@@ -61,7 +61,6 @@ public class GameController {
     }
 
 
-    ///////////////////////////////////////////////////we need activation of spells and traps to work;;;;;;DAMN!//////////////////////////++messenger++some field spells++
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
         this.gameView = gameView;
         this.firstPlayer = firstPlayer;
@@ -315,9 +314,9 @@ public class GameController {
         ourMonster.setAttackedMonster(rivalMonster);
         rivalMonster.setAttacker(ourMonster);
         ourMonster.setAttackedInThisTurn(true);
-        rivalMonster.setHasBeenAttacked(true);//// lioghhhhhhhhhhhhhhhhhhh
+        rivalMonster.setHasBeenAttacked(true);
         attackingCard = ourMonster;
-        checkTrapActivation(); //check for trap activation
+        checkTrapActivation();
         if (canContinue) {
             activateSpecial(ourMonster, rivalMonster);
 //            if (!rivalMonster.isAttackable()) {
@@ -342,7 +341,7 @@ public class GameController {
             rivalsOnAttack(beenAttackedMonster, attackingMonster);
         else rivalsOnDefense(beenAttackedMonster, attackingMonster, rivalMonsterName);
         gameView.printMap();
-        if (beenAttackedMonster.getCardName().equalsIgnoreCase("Suijin"))/////////////////////// fishyyyyyyyyyyyyy
+        if (beenAttackedMonster.getCardName().equalsIgnoreCase("Suijin"))
             attackingMonster.setAttackPointInGame(attackingMonster.getAttackNum());
         equipSpellRid();
         fieldSpellRid(attackingMonster, beenAttackedMonster);
@@ -357,7 +356,7 @@ public class GameController {
             gameView.printMap();
         }
         if (rivalMonster.getCardName().equalsIgnoreCase("Suijin")) {
-            if (!rivalMonster.isActiveAbility()) {// rival = suijin butttttttt not active ///// not activated yet
+            if (!rivalMonster.isActiveAbility()) {
                 rivalMonster.setActiveAbility(true);
                 ourMonster.setAttackPointInGame(0);
             }
@@ -578,7 +577,7 @@ public class GameController {
     private void checkCommandKnight(Monster activationMonster, Player player) {
         activationMonster.decreaseAttackPoint(activationMonster.getCommandKnightsActive().size() * 400);
         activationMonster.getCommandKnightsActive().clear();
-        for (Cell monster : player.getBoard().getMonsters()) { // fookin cell has a problem nigga!!
+        for (Cell monster : player.getBoard().getMonsters()) {
             if (monster.getCard() != null)
                 if (monster.getCard().getCardName().equalsIgnoreCase("Command knight") &&
                         monster.getCard().getFace() == Face.UP && monster.getCard() != activationMonster) {
@@ -589,7 +588,7 @@ public class GameController {
     }
 
 
-    private boolean messengerOfPeace(Monster attacker) {////////////////////////where to activate??????/////////////////
+    private boolean messengerOfPeace(Monster attacker) {
         if (!checkForActive(currentPlayer, "Messenger of peace")
                 && !checkForActive(currentPlayer.getRivalPlayer(), "Messenger of peace"))
             return false;
@@ -636,7 +635,7 @@ public class GameController {
             return;
         }
         Spell spell = (Spell) currentPlayer.getSelectedCard();
-        if (spellActive(spell)) {//////////////////fishy///////////////////////////
+        if (spellActive(spell)) {
             gameView.printAlreadyActivated();
             return;
         }
@@ -1464,7 +1463,7 @@ public class GameController {
         anySummonHappened = false;
     }
 
-    private void beatsKingBarbaros(Monster monster) {//// hooman:cell is broken- 1400/2/27\\10:33
+    private void beatsKingBarbaros(Monster monster) {
         if (currentPlayer.getBoard().getNumberOfMonsterInBoard() >= 3) {
             if (gameView.doYouWantTributeBarBaros()) {
                 gameView.getTributeForBarbaros();

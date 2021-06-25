@@ -11,13 +11,13 @@ public class Monster extends Card {
     private SummonType summonType;
     private Card fieldSpell;
     private MonsterAttribute monsterAttribute;
-    private AttackOrDefense attackOrDefense;/// this was needed very much!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private AttackOrDefense attackOrDefense;
     private int attackNum;
     private int defenseNum;
     private int attackPointInGame;
     private int defencePointInGame;
     private int level;
-    private String monsterType;///////// this need to be set , could we make enum or will it be to much???????
+    private String monsterType;
     private boolean isSetInThisTurn = false;
     private boolean HaveChangedPositionInThisTurn = false;
     private boolean isAttackedInThisTurn = false;
@@ -28,7 +28,7 @@ public class Monster extends Card {
     private boolean isScanner = false;
 
 
-    private ArrayList<Monster> monsters; //This ArrayList Contains Monsters that get attackPoint From our Monster and Gets NEW in game;
+    private ArrayList<Monster> monsters;
     private ArrayList<Monster> commandKnightsActive;
     private ArrayList<Card> equipSpellSword;
 

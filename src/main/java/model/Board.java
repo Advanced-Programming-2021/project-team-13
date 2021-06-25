@@ -94,23 +94,16 @@ public class Board {
         if (selectedCard == null)
             return false;
         for (int i = 0; i < 5; i++) {
-            if (monsterCells[i].getCard() == selectedCard)     // We can do this because of pointer!!!!
+            if (monsterCells[i].getCard() == selectedCard)
                 return true;
         }
         return false;
     }
 
-    public void removeMonsterFromBoard(Monster monster) {  // could we remove(this is monster and original has card)
+    public void removeMonsterFromBoard(Monster monster) {
         for (int i = 0; i < 5; i++) {
-            if (this.monsterCells[i].getCard() == monster)// is this ok???????????????????//
+            if (this.monsterCells[i].getCard() == monster)
                 this.monsterCells[i] = null;
-        }
-    }
-
-    public void removeSpellOrTrapFromBoard(Spell spell) {
-        for (int i = 0; i < 5; i++) {
-            if (spellOrTrap[i].getCard() == spell)
-                spellOrTrap[i] = null;
         }
     }
 
