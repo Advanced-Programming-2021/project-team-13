@@ -609,7 +609,7 @@ public class GameView {
         int counter = 0;
         for (int i = 0; i < gameController.getCurrentPlayer().getCardsInHand().size(); i++) {
             Card card = gameController.getCurrentPlayer().getCardsInHand().get(i);
-                System.out.println(++counter + ". " + card.getCardName());
+            System.out.println(++counter + ". " + card.getCardName());
         }
         while (true) {
             System.out.println("Enter Monster Number: ");
@@ -858,5 +858,25 @@ public class GameView {
 
     public void printAllMonstersDestroyed() {
         System.out.println("all monsters destroyed");
+    }
+
+    public int getInputForTerraforming(List<Spell> fieldSpells) {
+        int counter = 0;
+        for (Spell fieldSpell : fieldSpells) {
+            System.out.println(++counter + "- " + fieldSpell.getCardName() + ": " + fieldSpell.getCardDescription());
+        }
+        while (true) {
+            System.out.println("Enter Spell Number");
+            String number = ViewMaster.scanner.nextLine().trim();
+            try {
+                int num = Integer.parseInt(number);
+                if (num <= fieldSpells.size())
+                    return num - 1;
+                else
+                    System.out.println("Invalid Number");
+            } catch (Exception e) {
+                System.out.println("Invalid Input");
+            }
+        }
     }
 }
