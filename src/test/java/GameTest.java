@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class GameTest {
 
-
     @Test
     public void battleTest() {
         InputStream sysInBackup = System.in; // backup System.in to restore it later

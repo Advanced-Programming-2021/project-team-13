@@ -16,8 +16,14 @@ public class Board {
 
 
     public Board(Deck deck, Graveyard graveyard) {
-        deck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner"));
-        deck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner"));
+        deck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
+                || e.getCardName().equalsIgnoreCase("Swords of Revealing Light")
+                || e.getCardName().equalsIgnoreCase("Skull Guardian")
+                || e.getCardName().equalsIgnoreCase("Crab Turtle"));
+        deck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
+                || e.getCardName().equalsIgnoreCase("Swords of Revealing Light")
+                || e.getCardName().equalsIgnoreCase("Skull Guardian")
+                || e.getCardName().equalsIgnoreCase("Crab Turtle"));
         this.deck = deck;
         this.graveyard = graveyard;
         spellOrTrap = new Cell[5];
