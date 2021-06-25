@@ -774,11 +774,6 @@ public class GameController {
         currentPlayer.addCardToHand();
     }
 
-//    private void terraforming() {
-//        gameView.printSelectNum();
-//        currentPlayer.addCardToHand();
-//    }
-
     private void twinTwisters() {
         while (true) {
             gameView.printselectCardFromHand(5);
