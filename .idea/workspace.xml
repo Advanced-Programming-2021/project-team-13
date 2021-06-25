@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="ai duel added - should test it !!!" />
+    <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="fixed some attacking monsters">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,7 +200,8 @@
       <workItem from="1623656328675" duration="877000" />
       <workItem from="1624114854621" duration="35693000" />
       <workItem from="1624350220735" duration="52000" />
-      <workItem from="1624354819866" duration="18364000" />
+      <workItem from="1624354819866" duration="17656000" />
+      <workItem from="1624595656976" duration="8834000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -429,14 +434,7 @@
       <option name="project" value="LOCAL" />
       <updated>1624545452954</updated>
     </task>
-    <task id="LOCAL-00034" summary="ai duel added - should test it !!!">
-      <created>1624552664166</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1624552664166</updated>
-    </task>
-    <option name="localTasksCounter" value="35" />
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,6 +485,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="ViewMaster is singleton , gameView and gameController not completed yet" />
     <MESSAGE value="ش" />
     <MESSAGE value="a" />
     <MESSAGE value="fookin marshmallon" />
@@ -511,8 +510,7 @@
     <MESSAGE value="Call Of The Haunted for AI is Debugged" />
     <MESSAGE value="Call Of The Haunted is Debugged" />
     <MESSAGE value="added cheats" />
-    <MESSAGE value="ai duel added - should test it !!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="ai duel added - should test it !!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="added cheats" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -521,6 +519,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/controll/GameController.java</url>
           <line>733</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
+          <line>929</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
+          <line>931</line>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
