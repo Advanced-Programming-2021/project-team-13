@@ -12,7 +12,9 @@ import view.allmenu.GameView;
 
 import javax.swing.text.View;
 import java.io.*;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class GameTest {
@@ -550,5 +552,12 @@ public class GameTest {
         ViewMaster.getViewMaster().run();
         Assert.assertTrue(User.getUserByUsername("nima").getWinNum() == 1);
     }
+//
+//    @Test
+//    public void test(){
+//        URL url = getClass().getResource("/")
+//        File file = new File(Paths.get());
+//        FileReader reader = new FileReader(file);
+//    }
 
 }
