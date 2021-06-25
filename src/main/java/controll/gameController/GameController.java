@@ -1053,15 +1053,6 @@ public class GameController {
     }
 
     private void fieldSpell(Monster ourMonster, Monster rivalMonster) {
-        String ourFieldspell="nothing";
-        String rivalFieldspell = "nothing";
-        if(ourMonster.getCardOwner().getBoard().getFieldSpell().getCard()!=null){
-            ourFieldspell=ourMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
-        }
-        if(rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard()!=null){
-            rivalFieldspell=rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
-        }
-
         if (ourMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)
             checkField(ourMonster, rivalMonster);
         if (rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)
@@ -1078,13 +1069,11 @@ public class GameController {
     private void fieldSpellRid(Monster ourMonster, Monster rivalMonster) {
         if (ourMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null) {
             UMIIRUKARid(ourMonster, rivalMonster);
-            closedForestRid(ourMonster);
             forestRid(ourMonster, rivalMonster);
             yamiRid(ourMonster, rivalMonster);
         }
         if (rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null) {
             UMIIRUKARid(rivalMonster, ourMonster);
-            closedForestRid(rivalMonster);
             forestRid(rivalMonster, ourMonster);
             yamiRid(rivalMonster, ourMonster);
         }
@@ -1122,13 +1111,6 @@ public class GameController {
         }
     }
 
-    private void closedForestRid(Monster monster) {
-//        if (monster.getCardOwner().getBoard().getFieldSpell()
-//                .getCard().getCardName().equalsIgnoreCase("Closed Forest")) {
-//            closedForestIncrease(monster,
-//                    -monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
-//        }
-    }
 
     private void closedForestIncrease(Monster monster, int amount) {
         fieldIncreaseAtk(monster.getCardOwner(),"Beast-Warrior",amount);
