@@ -12,10 +12,6 @@ public class ScoreboardView {
         scoreboardController = new ScoreboardController(this);
     }
 
-    public void printMenuNavigationImpossible(){
-        System.out.println("menu navigation is not possible");
-    }
-
     public void printInvalidCommand(){
         System.out.println("invalid command");
     }

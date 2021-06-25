@@ -35,6 +35,7 @@ public class Player {
     }
 
     public Player(Deck deck) {
+
         this.wonRounds = 0;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;

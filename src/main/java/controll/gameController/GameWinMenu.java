@@ -44,7 +44,7 @@ public class GameWinMenu {
         if (winner == firstPlayer) loser = secondPlayer;
         else loser = firstPlayer;
         winner.addWonRounds(1);
-        if (winner instanceof AIPlayer || loser instanceof AIPlayer){
+        if (winner instanceof AIPlayer || loser instanceof AIPlayer) {
             withAiWin(winner, loser);
         } else {
             noAiWin(winner, loser);
@@ -53,17 +53,21 @@ public class GameWinMenu {
 
     private void withAiWin(Player winner, Player loser) {
         User user;
+        if (winner instanceof AIPlayer && loser instanceof AIPlayer) {
+            ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
+            return;
+        }
         if (winner instanceof AIPlayer) {
             user = loser.getUser();
-            if (startingRounds == 1){
+            if (startingRounds == 1) {
                 user.addLosts(1);
                 user.addMoney(100);
-                gameView.printUserWonSingleGame(((AIPlayer) loser).getNickname() , winner.getWonRounds() , loser.getWonRounds());
+                gameView.printUserWonSingleGame(((AIPlayer) loser).getNickname(), winner.getWonRounds(), loser.getWonRounds());
             } else {
-                if (winner.getWonRounds() == 2){
+                if (winner.getWonRounds() == 2) {
                     user.addLosts(1);
                     user.addMoney(300);
-                    gameView.printUserWonSingleGame(((AIPlayer) winner).getNickname() , winner.getWonRounds() , loser.getWonRounds());
+                    gameView.printUserWonSingleGame(((AIPlayer) winner).getNickname(), winner.getWonRounds(), loser.getWonRounds());
                     ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
                 } else {
                     loser.renewPlayer();
@@ -73,15 +77,15 @@ public class GameWinMenu {
             }
         } else {
             user = winner.getUser();
-            if (startingRounds == 1){
+            if (startingRounds == 1) {
                 user.addWins(1);
                 user.addMoney(1000 + winner.getMaxLifePoint());
-                gameView.printUserWonWholeGame(user.getUsername() , winner.getWonRounds() , loser.getWonRounds());
+                gameView.printUserWonWholeGame(user.getUsername(), winner.getWonRounds(), loser.getWonRounds());
             } else {
-                if (winner.getWonRounds() == 2){
+                if (winner.getWonRounds() == 2) {
                     user.addWins(1);
-                    user.addMoney(3000 + 3* winner.getMaxLifePoint());
-                    gameView.printUserWonWholeGame(user.getUsername(), winner.getWonRounds() , loser.getWonRounds());
+                    user.addMoney(3000 + 3 * winner.getMaxLifePoint());
+                    gameView.printUserWonWholeGame(user.getUsername(), winner.getWonRounds(), loser.getWonRounds());
                     ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
                 } else {
                     winner.renewPlayer();

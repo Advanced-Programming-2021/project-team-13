@@ -16,6 +16,8 @@ public class Board {
 
 
     public Board(Deck deck, Graveyard graveyard) {
+        deck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner"));
+        deck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner"));
         this.deck = deck;
         this.graveyard = graveyard;
         spellOrTrap = new Cell[5];
@@ -151,7 +153,7 @@ public class Board {
     }
 
     private void putSpell(Spell selectedCard) {
-        if (selectedCard.getType().equalsIgnoreCase("field")){
+        if (selectedCard.getType().equalsIgnoreCase("field")) {
             fieldSpell.setCard(selectedCard);
         } else {
             for (Cell cell : spellOrTrap) {

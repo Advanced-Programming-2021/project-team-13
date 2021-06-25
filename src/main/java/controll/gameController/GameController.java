@@ -33,7 +33,7 @@ public class GameController {
     private int turnsPlayed;
     private int unitedCalcCurrent;
     private int unitedCalcRival;
-    private int differenceInAtkPoints=0;
+    private int differenceInAtkPoints = 0;
     private boolean canContinue;
     private boolean isInAttack;
     private boolean normalSummonHappened;
@@ -383,7 +383,7 @@ public class GameController {
                     attackNumOfCalculator += monsterCard.getLevel();
             }
         }
-        ourMonster.setAttackPointInGame(300 * attackNumOfCalculator+ourMonster.getAttackPointInGame());
+        ourMonster.setAttackPointInGame(300 * attackNumOfCalculator + ourMonster.getAttackPointInGame());
     }
 
     private void marshmallon(Monster ourMonster, Monster rivalMonster) {
@@ -471,8 +471,7 @@ public class GameController {
             else {
                 gameView.printDefensePositionDestroyedHidden(rivalMonsterName);
             }
-        }
-        else if (attackDifference == 0) {
+        } else if (attackDifference == 0) {
             if (beenAttackedMonster.getFace() == Face.UP)
                 gameView.printNoCardDestroyed();
             else {
@@ -1046,13 +1045,13 @@ public class GameController {
     }
 
     private void fieldSpell(Monster ourMonster, Monster rivalMonster) {
-        String ourFieldspell="nothing";
+        String ourFieldspell = "nothing";
         String rivalFieldspell = "nothing";
-        if(ourMonster.getCardOwner().getBoard().getFieldSpell().getCard()!=null){
-            ourFieldspell=ourMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
+        if (ourMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null) {
+            ourFieldspell = ourMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
         }
-        if(rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard()!=null){
-            rivalFieldspell=rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
+        if (rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null) {
+            rivalFieldspell = rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
         }
 
         System.out.println("*********************************************************");
@@ -1143,7 +1142,7 @@ public class GameController {
                 .getCard().getCardName().equalsIgnoreCase("Closed Forest")) {
             closedForestIncrease(monster,
                     monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
-            differenceInAtkPoints= monster.getAttackPointInGame()- prevAtkPoint;
+            differenceInAtkPoints = monster.getAttackPointInGame() - prevAtkPoint;
         }
     }
 
@@ -1156,7 +1155,7 @@ public class GameController {
     }
 
     private void closedForestIncrease(Monster monster, int amount) {
-        fieldIncreaseAtk(monster.getCardOwner(),"Beast-Warrior",amount);
+        fieldIncreaseAtk(monster.getCardOwner(), "Beast-Warrior", amount);
     }
 
     private void forest(Monster monster, Monster rivalMonster) {
@@ -1428,8 +1427,8 @@ public class GameController {
             int number = gameView.chooseMonsterForSummonScanner(rivalGraveYardMonsters);
             monster = rivalGraveYardMonsters.get(number);
         } while (monster.getCardName().equalsIgnoreCase("scanner"));
-        scanner.setAttackPointInGame(monster.getAttackNum());
-        scanner.setDefencePointInGame(monster.getDefenseNum());
+        scanner.setAttackNum(monster.getAttackNum());
+        scanner.setDefenseNum(monster.getDefenseNum());
         scanner.setMonsterAttribute(monster.getMonsterAttribute());
         scanner.setMonsterType(monster.getMonsterType());
         scanner.setLevel(monster.getLevel());
@@ -1568,8 +1567,8 @@ public class GameController {
 
     private void setSpellAndTrap() {
         if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
-            if (currentPlayer.getSelectedCard() instanceof Spell && ((Spell)currentPlayer.getSelectedCard()).getType().equalsIgnoreCase("field")){
-                if (currentPlayer.getBoard().getFieldSpell().getCard() != null){
+            if (currentPlayer.getSelectedCard() instanceof Spell && ((Spell) currentPlayer.getSelectedCard()).getType().equalsIgnoreCase("field")) {
+                if (currentPlayer.getBoard().getFieldSpell().getCard() != null) {
                     Spell spell = (Spell) currentPlayer.getSelectedCard();
                     spell.setFace(Face.UP);
                     spell.setZone(Zone.FIELD);
@@ -1673,7 +1672,7 @@ public class GameController {
                         gameView.printMap();
                         summonedCard = monster;
                         flipSummonHappened = true;
-                        anySummonHappened  = true;
+                        anySummonHappened = true;
                         checkTrapActivation();
                         if (canContinue) {
                             if (monster.getCardName().equalsIgnoreCase("man-eater bug")
@@ -1790,7 +1789,8 @@ public class GameController {
     public boolean checkTheTrickyInput(int monsterNumber) {
         if (monsterNumber <= 0 || monsterNumber > currentPlayer.getCardsInHand().size()) return false;
         if (!(currentPlayer.getCardsInHand().get(monsterNumber - 1) instanceof Monster)) return false;
-        if (currentPlayer.getCardsInHand().get(monsterNumber - 1).getCardName().equalsIgnoreCase("the tricky")) return false;
+        if (currentPlayer.getCardsInHand().get(monsterNumber - 1).getCardName().equalsIgnoreCase("the tricky"))
+            return false;
         Monster monster = (Monster) currentPlayer.getCardsInHand().get(monsterNumber - 1);
         currentPlayer.getBoard().getGraveyard().addCard(monster);
         currentPlayer.getCardsInHand().remove(monster);
@@ -1812,26 +1812,26 @@ public class GameController {
         currentPlayer.getUser().addMoney(amount);
     }
 
-    public void lifePointCheat(int amount){
+    public void lifePointCheat(int amount) {
         int lp = currentPlayer.getLifePoint();
         currentPlayer.setLifePoint(lp + amount);
     }
 
-    public void setDuelWinnerCheat(String nickName){
+    public void setDuelWinnerCheat(String nickName) {
         Player winner = null;
         if (currentPlayer.getUser().getNickname().equals(nickName))
             winner = currentPlayer;
-        else if (!(currentPlayer.getRivalPlayer() instanceof AIPlayer)){
+        else if (!(currentPlayer.getRivalPlayer() instanceof AIPlayer)) {
             if (currentPlayer.getRivalPlayer().getUser().getNickname().equals(nickName))
                 winner = currentPlayer.getRivalPlayer();
         }
-        if (winner != null){
+        if (winner != null) {
             GameWinMenu gameWinMenu = new GameWinMenu(this);
             gameWinMenu.announceWinner(winner);
         }
     }
 
-    public void addCardToHand(){
+    public void addCardToHand() {
         Card card = currentPlayer.addCardToHand();
         gameView.printCardAddedToHand(card);
     }
@@ -1909,8 +1909,8 @@ public class GameController {
 
     private boolean addTrapToChain(ArrayList<Trap> trapArrayList) {
         boolean activatedTrap = false;
-        if (currentPlayer instanceof AIPlayer){
-            for (Trap trap : trapArrayList){
+        if (currentPlayer instanceof AIPlayer) {
+            for (Trap trap : trapArrayList) {
                 trap.setActivated(true);
                 trap.setFace(Face.UP);
                 chain.add(trap);
@@ -1937,7 +1937,7 @@ public class GameController {
                 chain.get(i).getTrapAction().run();
                 chain.remove(i);
             } else {
-                if (chain.get(i).isActivated() && chain.get(i).getActivatedTurn() == -1){
+                if (chain.get(i).isActivated() && chain.get(i).getActivatedTurn() == -1) {
                     chain.get(i).setActivatedTurn(turnsPlayed);
                     chain.get(i).getTrapAction().run();
                     continue;
