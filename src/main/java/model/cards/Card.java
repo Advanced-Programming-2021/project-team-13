@@ -7,6 +7,7 @@ import model.Cell;
 import model.players.Player;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Card implements Comparable<Card> {
     protected String cardName;
@@ -25,6 +26,15 @@ public class Card implements Comparable<Card> {
         this.cardDescription = description;
         this.face = face;
         this.price = price;
+        this.zone = Zone.DECK_ZONE;
+    }
+
+    public Card (Card that){
+        this.cardName = that.cardName;
+        this.cardType = that.cardType;
+        this.cardDescription = that.cardDescription;
+        this.face = that.face;
+        this.price = that.price;
         this.zone = Zone.DECK_ZONE;
     }
 

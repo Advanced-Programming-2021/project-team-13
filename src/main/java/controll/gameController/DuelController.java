@@ -50,7 +50,8 @@ public class DuelController {
         setPlayersTrapActions(firstPlayer);
         setPlayersTrapActions(secondPlayer);
         GameView gameView;
-        if (findPlayerToStart(firstPlayer, firstPlayer) == firstPlayer) {
+        Player player = findPlayerToStart(firstPlayer, secondPlayer);
+        if (player == firstPlayer) {
             gameView = new GameView(firstPlayer, secondPlayer, firstPlayer, rounds);
         } else {
             gameView = new GameView(firstPlayer, secondPlayer, secondPlayer, rounds);
@@ -65,7 +66,7 @@ public class DuelController {
 
     private void startAIDuel(User user, int rounds) {
         Player firstPlayer = new Player(user);
-        AIPlayer aiPlayer = new AIPlayer(new Deck(ViewMaster.getUser().getActiveDeck()));
+        AIPlayer aiPlayer = new AIPlayer(new Deck(user.getActiveDeck()));
         aiPlayer.setNickname("Abbas BooAzaar");
         startDuel(firstPlayer, aiPlayer, rounds);
     }
@@ -127,7 +128,7 @@ public class DuelController {
                 playerNumber = number + 1;
             } else playerNumber = duelView.inputStonePaperScissor(player.getUser());
             if (rivalPlayer instanceof AIPlayer) {
-                int number = random.nextInt() % 3;
+                int number = random.nextInt(3) % 3;
                 rivalNumber = number + 1;
             } else rivalNumber = duelView.inputStonePaperScissor(rivalPlayer.getUser());
             if (playerNumber == 3) {

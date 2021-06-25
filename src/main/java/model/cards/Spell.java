@@ -14,6 +14,11 @@ public class Spell extends Card {
         this.type = type;
     }
 
+    public Spell(Spell that){
+        super(that);
+        this.type = that.type;
+    }
+
     public String getType() {
         return type;
     }
