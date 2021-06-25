@@ -151,12 +151,15 @@ public class Board {
     }
 
     private void putSpell(Spell selectedCard) {
-        for (Cell cell : spellOrTrap) {
-            if (cell.getCard() == null) {
-                cell.setCard(selectedCard);
-                return;
+        if (selectedCard.getType().equalsIgnoreCase("field")){
+            fieldSpell.setCard(selectedCard);
+        } else {
+            for (Cell cell : spellOrTrap) {
+                if (cell.getCard() == null) {
+                    cell.setCard(selectedCard);
+                    return;
+                }
             }
-
         }
     }
 
