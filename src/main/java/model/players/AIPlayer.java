@@ -10,6 +10,8 @@ import model.Cell;
 import model.Deck;
 import model.Graveyard;
 import model.cards.Monster;
+import model.cards.Spell;
+import model.cards.Trap;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,7 +27,7 @@ public class AIPlayer extends Player {
                 .thenComparing(Monster::getDefencePointInGame, Comparator.reverseOrder());
     }
 
-    public void renewPlayer(Deck deck){
+    public void renewPlayer(Deck deck) {
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
@@ -65,6 +67,8 @@ public class AIPlayer extends Player {
     }
 
     private void mainPhaseMove(GameController GC) {
+        activeSpell(GC);
+        setTrap(GC);
         if (!isSetOrSummonInThisTurn()) {
             List<Monster> monsters = getSortedHandsMonsterBasedOnAttackAndDefence();
             if (monsters == null) return;
@@ -90,6 +94,27 @@ public class AIPlayer extends Player {
                 }
 
             }
+        }
+    }
+
+    private void setTrap(GameController GC) {
+        List<Trap> traps = getCardsInHand().stream().filter(e -> e instanceof Trap)
+                .map(e -> (Trap) e)
+                .collect(Collectors.toList());
+        if (traps.size() > 0)
+            if (getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
+                GC.getCurrentPlayer().setSelectedCard(traps.get(0));
+                GC.set();
+            }
+    }
+
+    private void activeSpell(GameController GC) {
+        List<Spell> spells = getCardsInHand().stream().filter(e -> e instanceof Spell)
+                .map(e -> (Spell) e).filter(e -> e.getType().equalsIgnoreCase("field"))
+                .collect(Collectors.toList());
+        if (spells.size() > 0) {
+            GC.getCurrentPlayer().setSelectedCard(spells.get(0));
+            GC.activeEffect();
         }
     }
 

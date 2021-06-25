@@ -27,7 +27,6 @@ public class DeckView {
 
     public void printDeckExists(String deckName) {
         System.out.println("deck with name " + deckName + " already exists");
-
     }
 
     public void deckDeleted() {
@@ -46,16 +45,8 @@ public class DeckView {
         System.out.println("card added to deck successfully");
     }
 
-    public void printInvalidCard(String cardName) {
-
-    }
-
     public void deckIsFull(String mainOrSide) {
         System.out.println(mainOrSide + " deck is full");
-    }
-
-    public void printInvalidNumberOfCards(String cardName) {
-
     }
 
     public void printCardRemoved() {
@@ -71,10 +62,6 @@ public class DeckView {
             if (deck != activeDeck)
                 System.out.println(deck);
         }
-    }
-
-    public void printDeck(String deck) {
-
     }
 
     public void run(String command) {

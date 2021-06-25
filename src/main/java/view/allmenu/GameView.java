@@ -609,7 +609,6 @@ public class GameView {
         int counter = 0;
         for (int i = 0; i < gameController.getCurrentPlayer().getCardsInHand().size(); i++) {
             Card card = gameController.getCurrentPlayer().getCardsInHand().get(i);
-            if (!card.getCardName().equalsIgnoreCase("the tricky"))
                 System.out.println(++counter + ". " + card.getCardName());
         }
         while (true) {
