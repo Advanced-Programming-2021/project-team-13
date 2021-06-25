@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6fc6edca-75e0-4d01-828a-503cf704b6da" name="Default Changelist" comment="fixed some attacking monsters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -522,12 +524,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
-          <line>929</line>
+          <line>896</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
-          <line>931</line>
+          <line>898</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
@@ -568,7 +570,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>120</line>
+          <line>124</line>
           <properties class="controll.gameController.FindActiveSpell" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -576,7 +578,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>148</line>
+          <line>152</line>
           <properties class="controll.gameController.ChooseCardFromHandToSacrifice" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -584,7 +586,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>168</line>
+          <line>172</line>
           <properties class="controll.gameController.AnnounceCardNameToRemove" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -592,7 +594,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>204</line>
+          <line>208</line>
           <properties class="controll.gameController.SetCannotContinueAttack" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -600,7 +602,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>216</line>
+          <line>220</line>
           <properties class="controll.gameController.ReverseAttack" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -608,7 +610,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>230</line>
+          <line>234</line>
           <properties class="controll.gameController.GoNextPhase" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -616,7 +618,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>242</line>
+          <line>246</line>
           <properties class="controll.gameController.DestroyAllMonsters" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -624,7 +626,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>265</line>
+          <line>269</line>
           <properties class="controll.gameController.DestroyEnemyAttackingMonsters" method="execute">
             <option name="EMULATED" value="true" />
           </properties>
@@ -632,7 +634,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java</url>
-          <line>285</line>
+          <line>289</line>
           <properties class="controll.gameController.DestroySummonedCard" method="execute">
             <option name="EMULATED" value="true" />
           </properties>

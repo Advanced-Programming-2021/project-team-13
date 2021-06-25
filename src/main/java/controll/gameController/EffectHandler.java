@@ -8,6 +8,7 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.players.Player;
 
 public abstract class EffectHandler {
     protected static GameController gameController;
@@ -260,5 +261,22 @@ class HasSummonedMonsterPowerMoreThan1000 extends EffectHandler {
         } else {
             return false;
         }
+    }
+}
+
+class EnemyHasAnyCardInHand extends EffectHandler {
+
+    public EnemyHasAnyCardInHand (Card card){
+        super(card);
+    }
+
+    @Override
+    public boolean canActivate() {
+        Player rival = card.getCardOwner().getRivalPlayer();
+        if (rival.getCardsInHand().size() != 0){
+            if (nextHandler != null)
+                return nextHandler.canActivate();
+            else return true;
+        } else return false;
     }
 }

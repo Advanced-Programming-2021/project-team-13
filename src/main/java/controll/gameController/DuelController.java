@@ -97,6 +97,7 @@ public class DuelController {
                 } else if (trapAction instanceof TrapHole) {
                     trapAction = new TrapHole();
                 }
+                trap.setActivatedTurn(-1);
                 trap.setTrapAction(trapAction);
                 trapAction.setCard(trap);
             }

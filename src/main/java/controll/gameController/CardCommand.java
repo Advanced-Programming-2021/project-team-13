@@ -107,7 +107,11 @@ class SetRivalPlayerCannotDrawCardNextTurn extends CardCommand {
     @Override
     public void execute() {
         int currentTurn = gameController.getTurnsPlayed();
-        gameController.addNotToDrawCardTurn(currentTurn + 1);
+        if (currentTurn % 2 == trap.getSetTurn() % 2){ //activated in his turn
+            gameController.addNotToDrawCardTurn(currentTurn + 1);
+        } else {
+            gameController.addNotToDrawCardTurn(currentTurn + 2);
+        }
     }
 }
 

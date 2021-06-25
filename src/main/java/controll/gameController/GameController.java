@@ -1785,8 +1785,7 @@ public class GameController {
         boolean activatedTrap = false;
         for (Trap trap : trapArrayList) {
             if (gameView.wantToActivateTrap(trap)) {
-                if (!(trap.getTrapAction() instanceof CallOfTheHaunted))
-                    trap.setActivated(true);
+                trap.setActivated(true);
                 trap.setFace(Face.UP);
                 chain.add(trap);
                 gameView.printMap();
@@ -1799,12 +1798,13 @@ public class GameController {
     private void runChain() {
         for (int i = chain.size() - 1; i >= 0; i--) {
             if (!(chain.get(i).getTrapAction() instanceof CallOfTheHaunted)) {
-                chain.remove(i);
+                chain.get(i).setActivatedTurn(turnsPlayed);
                 chain.get(i).getTrapAction().run();
+                chain.remove(i);
             } else {
-                if (!chain.get(i).isActivated()){
+                if (chain.get(i).isActivated() && chain.get(i).getActivatedTurn() == -1){
+                    chain.get(i).setActivatedTurn(turnsPlayed);
                     chain.get(i).getTrapAction().run();
-                    chain.get(i).setActivated(true);
                     continue;
                 }
                 CallOfTheHaunted callOfTheHaunted = (CallOfTheHaunted) chain.get(i).getTrapAction();
