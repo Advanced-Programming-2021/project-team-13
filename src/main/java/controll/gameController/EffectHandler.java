@@ -254,7 +254,8 @@ class HasSummonedMonsterPowerMoreThan1000 extends EffectHandler {
     public boolean canActivate() {
         if (gameController.getSummonedCard() != null &&
                 gameController.getSummonedCard() instanceof Monster &&
-                ((Monster) gameController.getSummonedCard()).getAttackNum() > 1000) {
+                ((Monster) gameController.getSummonedCard()).getAttackNum() > 1000 &&
+                gameController.getSummonedCard().getCardOwner().getRivalPlayer() == card.getCardOwner()) {
             if (nextHandler != null)
                 return nextHandler.canActivate();
             else return true;

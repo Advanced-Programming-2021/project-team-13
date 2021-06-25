@@ -13,7 +13,7 @@ import model.players.Player;
 import view.ViewMaster;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 
 public abstract class CardCommand {
     protected static GameController gameController;
@@ -151,15 +151,10 @@ class ChooseCardFromHandToSacrifice extends CardCommand {
 
     @Override
     public void execute() {
-        int number;
-        do {
-            System.out.print("please enter a correct number to choose from your hand : ");
-            number = ViewMaster.scanner.nextInt();
-        } while (number > gameController.getCurrentPlayer().getCardsInHand().size() || number <= 0);
-        gameController.selectPlayerHandCard(number);
-        Card card = gameController.getCurrentPlayer().getSelectedCard();
-        gameController.getCurrentPlayer().getBoard().getGraveyard().addCard(card);
-        gameController.getCurrentPlayer().setSelectedCard(null);
+        Random random = new Random();
+        int num = random.nextInt() % trap.getCardOwner().getCardsInHand().size();
+        Graveyard graveyard = trap.getCardOwner().getBoard().getGraveyard();
+        graveyard.addCard(trap.getCardOwner().getCardsInHand().get(num));
     }
 }
 
@@ -171,28 +166,39 @@ class AnnounceCardNameToRemove extends CardCommand {
 
     @Override
     public void execute() {
-        System.out.print("please enter a card name to remove from rival hand : ");
-        String cardName = ViewMaster.scanner.nextLine().trim();
         boolean containsCard = false;
-        for (Card card : gameController.getCurrentPlayer().getRivalPlayer().getCardsInHand()) {
-            if (card.getCardName().equalsIgnoreCase(cardName)) {
-                containsCard = true;
-                break;
+        String cardName;
+        Player rival = trap.getCardOwner().getRivalPlayer();
+        if (trap.getCardOwner() instanceof AIPlayer) {
+            cardName = rival.getCardsInHand().get(0).getCardName();
+            containsCard = true;
+        } else {
+            System.out.println("please enter a card name to remove from rival hand : ");
+            cardName = ViewMaster.scanner.nextLine().trim();
+            for (Card card : rival.getCardsInHand()) {
+                if (card.getCardName().equalsIgnoreCase(cardName)) {
+                    containsCard = true;
+                    break;
+                }
             }
         }
         if (containsCard) {
             ArrayList<Card> newRivalHand = new ArrayList<>();
-            for (Card card : gameController.getCurrentPlayer().getRivalPlayer().getCardsInHand()) {
-                if (!card.getCardName().equalsIgnoreCase(cardName)) newRivalHand.add(card);
-                else gameController.getCurrentPlayer().getRivalPlayer().getBoard().getGraveyard().addCard(card);
-            }
-            gameController.getCurrentPlayer().getRivalPlayer().setCardsInHand(newRivalHand);
             ArrayList<Card> newRivalDeck = new ArrayList<>();
-            for (Card card : gameController.getCurrentPlayer().getRivalPlayer().getBoard().getDeck().getAllCardsInMainDeck()) {
-                if (!card.getCardName().equalsIgnoreCase(cardName)) newRivalDeck.add(card);
-                else gameController.getCurrentPlayer().getRivalPlayer().getBoard().getGraveyard().addCard(card);
+            ArrayList<Card> removedCards = new ArrayList<>();
+            for (Card card : rival.getCardsInHand()) {
+                if (!card.getCardName().equalsIgnoreCase(cardName)) newRivalHand.add(card);
+                else removedCards.add(card);
             }
-            gameController.getCurrentPlayer().getRivalPlayer().getBoard().getDeck().setAllCardsInMainDeck(newRivalDeck);
+            for (Card card : rival.getBoard().getDeck().getAllCardsInMainDeck()) {
+                if (!card.getCardName().equalsIgnoreCase(cardName)) newRivalDeck.add(card);
+                else removedCards.add(card);
+            }
+            for (Card card : removedCards){
+                rival.getBoard().getGraveyard().addCard(card);
+            }
+            rival.setCardsInHand(newRivalHand);
+            rival.getBoard().getDeck().setAllCardsInMainDeck(newRivalDeck);
         } else {
             new ChooseCardFromHandToSacrifice(trap).execute();
         }

@@ -1223,6 +1223,7 @@ public class GameController {
         normalSummonHappened = false;
         ritualSummonHappened = false;
         specialSummonHappened = false;
+        flipSummonHappened = false;
         for (Cell monster : currentPlayer.getBoard().getMonsters()) {
             if (monster.getCard() != null) {
                 Monster monsterInCell = ((Monster) (monster.getCard()));
@@ -1358,6 +1359,7 @@ public class GameController {
         terratiger.setActiveAbility(true);
         normalSummon(terratiger, AttackOrDefense.ATTACK);
         checkTrapActivation();
+        anySummonHappened = false;
     }
 
     private void summonAndSpecifyTribute() {
@@ -1378,6 +1380,8 @@ public class GameController {
         normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
         checkTrapActivation();
+        normalSummonHappened = false;
+        anySummonHappened = false;
     }
 
     private void beatsKingBarbaros(Monster monster) {//// hooman:cell is broken- 1400/2/27\\10:33
@@ -1396,6 +1400,8 @@ public class GameController {
         normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
         checkTrapActivation();
+        normalSummonHappened = false;
+        anySummonHappened = false;
     }
 
     public boolean checkBarbarosInput(int monsterNumber1, int monsterNumber2, int monsterNumber3) {
@@ -1553,6 +1559,7 @@ public class GameController {
                                 manEaterBugFlipSummon(monster);
                             gameView.printFlipSummonSuccessfully();
                         }
+                        anySummonHappened = false;
                         flipSummonHappened = false;
                         canContinue = true;
                         summonedCard = null;
@@ -1586,6 +1593,8 @@ public class GameController {
             normalSummonHappened = true;
             normalSummon(monster, AttackOrDefense.DEFENSE);
             checkTrapActivation();
+            normalSummonHappened = false;
+            anySummonHappened = false;
             return true;
         } else return false;
     }
@@ -1647,10 +1656,13 @@ public class GameController {
 
     private void specialSummon() {
         specialSummonHappened = true;
-        checkTrapActivation();
         Monster monster = (Monster) currentPlayer.getSelectedCard();
+        summonedCard = monster;
         String position = gameView.getPositionForSpecialSummon();
         normalSummon(monster, position.equalsIgnoreCase("attack") ? AttackOrDefense.ATTACK : AttackOrDefense.DEFENSE);
+        checkTrapActivation();
+        anySummonHappened = false;
+        specialSummonHappened = false;
     }
 
     public boolean checkTheTrickyInput(int monsterNumber) {
@@ -1775,13 +1787,22 @@ public class GameController {
 
     private boolean addTrapToChain(ArrayList<Trap> trapArrayList) {
         boolean activatedTrap = false;
-        for (Trap trap : trapArrayList) {
-            if (gameView.wantToActivateTrap(trap)) {
+        if (currentPlayer instanceof AIPlayer){
+            for (Trap trap : trapArrayList){
                 trap.setActivated(true);
                 trap.setFace(Face.UP);
                 chain.add(trap);
-                gameView.printMap();
                 activatedTrap = true;
+            }
+        } else {
+            for (Trap trap : trapArrayList) {
+                if (gameView.wantToActivateTrap(trap)) {
+                    trap.setActivated(true);
+                    trap.setFace(Face.UP);
+                    chain.add(trap);
+                    gameView.printMap();
+                    activatedTrap = true;
+                }
             }
         }
         return activatedTrap;

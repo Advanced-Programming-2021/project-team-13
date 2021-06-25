@@ -63,6 +63,7 @@ public class DuelController {
     private void startAIDuel(User user, int rounds) {
         Player firstPlayer = new Player(user);
         AIPlayer aiPlayer = new AIPlayer(firstPlayer.getUser().getActiveDeck());
+        aiPlayer.setNickname("Abbas BooAzaar");
         startDuel(firstPlayer, aiPlayer, rounds);
     }
 
