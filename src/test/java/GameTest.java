@@ -877,6 +877,11 @@ public class GameTest {
                 "shop buy Crawling dragon\n" +
                 "shop buy Flame Manipulator\n" +
                 "shop buy Blue_Eyes White Dragon\n" +
+                "shop buy Curtain of the Dark Ones\n"+
+                "shop buy UMIIRUKA\n"+
+                "shop buy Yami\n"+
+                "shop buy Closed Forest\n"+
+                "shop buy Forest\n"+
                 "shop buy Slot Machine\n" +
                 "shop buy Haniwa\n" +
                 "shop buy Man_Eater Bug\n" +
@@ -917,6 +922,10 @@ public class GameTest {
                 "deck add-card --card Torrential Tribute --deck testDeck\n" +
                 "deck add-card --card command knight --deck testDeck\n" +
                 "deck add-card --card Dark Magician --deck testDeck\n" +
+                "deck add-card --card UMIIRUKA --deck testDeck\n"+
+                "deck add-card --card Closed Forest --deck testDeck\n"+
+                "deck add-card --card Yami --deck testDeck\n"+
+                "deck add-card --card Forest --deck testDeck\n"+
                 "deck add-card --card Wattkid --deck testDeck\n" +
                 "deck add-card --card Baby Dragon --deck testDeck\n" +
                 "deck add-card --card Marshmallon --deck testDeck\n" +
