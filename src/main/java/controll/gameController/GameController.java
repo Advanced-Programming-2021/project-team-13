@@ -33,6 +33,7 @@ public class GameController {
     private int turnsPlayed;
     private int unitedCalcCurrent;
     private int unitedCalcRival;
+    private int differenceInAtkPoints=0;
     private boolean canContinue;
     private boolean isInAttack;
     private boolean normalSummonHappened;
@@ -921,9 +922,25 @@ public class GameController {
     }
 
     private void fieldSpell(Monster ourMonster, Monster rivalMonster) {
+        String ourFieldspell="nothing";
+        String rivalFieldspell = "nothing";
+        if(ourMonster.getCardOwner().getBoard().getFieldSpell().getCard()!=null){
+            ourFieldspell=ourMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
+        }
+        if(rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard()!=null){
+            rivalFieldspell=rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName();
+        }
+
         System.out.println("*********************************************************");
-        System.out.println("our monsters attack point before field spell : " + ourMonster.getAttackPointInGame());
-        System.out.println("rival monsters attack point before field spell : " + rivalMonster.getAttackPointInGame());
+
+
+        System.out.println("our monsters attack point before field spell : " + ourMonster.getAttackPointInGame() + "\n" +
+                "our monster defense before field spell : " + ourMonster.getDefencePointInGame());
+        System.out.println("rival monsters attack point before field spell : " + rivalMonster.getAttackPointInGame() + "\n" +
+                "rival monster defense before field spell : " + rivalMonster.getDefencePointInGame());
+
+
+        System.out.println("*********************************************************");
 
 
         if (ourMonster.getCardOwner().getBoard().getFieldSpell().getCard() != null)
@@ -933,17 +950,19 @@ public class GameController {
 
         System.out.println("our monster : " + ourMonster.getCardName() + "\n" +
                 "type : " + ourMonster.getMonsterType() + "\n" +
-                "field spell : " + ourMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName() + "\n" +
-                "attack point after field spell : " + ourMonster.getAttackPointInGame());
+                "field spell : " + ourFieldspell + "\n" +
+                "attack point after field spell : " + ourMonster.getAttackPointInGame() + "\n" +
+                "defence after field spell : " + ourMonster.getDefencePointInGame());
 
 
         System.out.println("*********************************************************");
 
 
         System.out.println("rival monster : " + rivalMonster.getCardName() + "\n" +
-                "type : " + rivalMonster.getMonsterType() + "\n" +
-                "field spell : " + rivalMonster.getCardOwner().getBoard().getFieldSpell().getCard().getCardName() + "\n" +
-                "attack point after field spell : " + rivalMonster.getAttackPointInGame());
+                "rival type : " + rivalMonster.getMonsterType() + "\n" +
+                "rival field spell : " + rivalFieldspell + "\n" +
+                "rivals attack point after field spell : " + rivalMonster.getAttackPointInGame() + "\n" +
+                "rivals defence after field spell : " + rivalMonster.getDefencePointInGame());
 
 
         System.out.println("*********************************************************");
@@ -1006,47 +1025,29 @@ public class GameController {
     }
 
     private void closedForest(Monster monster) {
-//        if (monster.getFieldSpell().getCardName().equalsIgnoreCase("Closed Forest")) {
-//            closedForestIncrease(monster,
-//                    monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
-//            monster.setFieldSpell(null);
-//        }
-//        if (!monster.getCardOwner().getBoard().getFieldSpell()
-//                .getCard().getCardName().equalsIgnoreCase("Closed Forest"))
-//            return;
-//        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
-//        closedForestIncrease(monster,
-//                monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
+        monster.decreaseAttackPoint(differenceInAtkPoints);
+        int prevAtkPoint = monster.getAttackPointInGame();
         if (monster.getCardOwner().getBoard().getFieldSpell()
                 .getCard().getCardName().equalsIgnoreCase("Closed Forest")) {
             closedForestIncrease(monster,
                     monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
+            differenceInAtkPoints= monster.getAttackPointInGame()- prevAtkPoint;
         }
     }
 
     private void closedForestRid(Monster monster) {
-        if (monster.getCardOwner().getBoard().getFieldSpell()
-                .getCard().getCardName().equalsIgnoreCase("Closed Forest")) {
-            closedForestIncrease(monster,
-                    -monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
-        }
+//        if (monster.getCardOwner().getBoard().getFieldSpell()
+//                .getCard().getCardName().equalsIgnoreCase("Closed Forest")) {
+//            closedForestIncrease(monster,
+//                    -monster.getCardOwner().getBoard().getGraveyard().getAllCards().size() * 100);
+//        }
     }
 
     private void closedForestIncrease(Monster monster, int amount) {
-        fieldIncreaseAtk(monster.getCardOwner(), "Beast-Warrior", amount);
-        fieldIncreaseAtk(monster.getCardOwner(), "Beast", amount);
+        fieldIncreaseAtk(monster.getCardOwner(),"Beast-Warrior",amount);
     }
 
     private void forest(Monster monster, Monster rivalMonster) {
-//        if (monster.getFieldSpell().getCardName().equalsIgnoreCase("Forest")) {
-//            forestIncrease(monster, -200);
-//            monster.setFieldSpell(null);
-//        }
-//        if (!monster.getCardOwner().getBoard().getFieldSpell()
-//                .getCard().getCardName().equals("Forest"))
-//            return;
-//        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
-//        forestIncrease(monster, 200);
         if (monster.getCardOwner().getBoard().getFieldSpell()
                 .getCard().getCardName().equalsIgnoreCase("Forest")) {
             forestIncrease(monster, 200);
@@ -1072,15 +1073,6 @@ public class GameController {
     }
 
     private void yami(Monster monster, Monster rivalMonster) {
-//        if (monster.getFieldSpell().getCardName().equals("Yami")) {
-//            yamiIncrease(monster, -200);
-//            monster.setFieldSpell(null);
-//        }
-//        if (!monster.getCardOwner().getBoard().getFieldSpell()
-//                .getCard().getCardName().equals("Yami"))
-//            return;
-//        monster.setFieldSpell(monster.getCardOwner().getBoard().getFieldSpell().getCard());
-//        yamiIncrease(monster, 200);
         if (monster.getCardOwner().getBoard().getFieldSpell()
                 .getCard().getCardName().equalsIgnoreCase("Yami")) {
             yamiIncrease(monster, 200);
