@@ -633,14 +633,14 @@ public class GameController {
             while (tries == -1) {
                 gameView.printSelectMonsterFromBoard();
                 String answer = gameView.getAnswer();
+                if (answer.equals("abort")) {
+                    gameView.printAbortedFromEquipSpell();
+                    return;
+                }
                 if (answer.matches("^(\\d+) ([\\w]+ [\\w]+)$")) {
                     String[] answerSpilt = answer.split(" ");
                     num = Integer.parseInt(answerSpilt[0]);
                     board = answerSpilt[1] + " " + answerSpilt[2];
-                    if (board.equals("abort")) {
-                        gameView.printAbortedFromEquipSpell();
-                        return;
-                    }
                     if (checkCorrectEquipInput(num, board, spell))
                         tries = 0;
                 } else gameView.printInvalidCommand();
@@ -887,7 +887,7 @@ public class GameController {
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
             }
         }
-        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell() != null)
+        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                     .addCard(currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard());
     }
