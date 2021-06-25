@@ -30,11 +30,11 @@ public class Player {
         this.maxLifePoint = 0;
         isAI = false;
         this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
-        // this.board = new Board(new Deck(user.getActiveDeck()), new Graveyard(this));
         cardsInHand = new ArrayList<>();
     }
 
     public Player(Deck deck) {
+
         this.wonRounds = 0;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
@@ -115,9 +115,6 @@ public class Player {
         return wonRounds;
     }
 
-    //    public void setCurrentCard(Card currentCard) {
-//        this.currentCard = currentCard;
-//    }
 
     public int getLifePoint() {
         return lifePoint;

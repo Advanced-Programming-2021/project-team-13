@@ -990,6 +990,7 @@ public class GameTest {
                 "shop buy Warrior Dai Grepher\n" +
                 "shop buy raigeki\n" +
                 "shop buy Dark Blade\n" +
+                "shop buy Scanner\n" +
                 "shop buy Pot of Greed\n" +
                 "shop buy Magnum Shield\n" +
                 "shop buy Wattaildragon\n" +
@@ -1011,7 +1012,7 @@ public class GameTest {
                 "deck add-card --card bitron --deck testDeck\n" +
                 "deck add-card --card Harpie's Feather Duster --deck testDeck\n" +
                 "deck add-card --card Mystical space typhoon --deck testDeck\n" +
-                "deck add-card --card command knight --deck testDeck\n" +
+                "deck add-card --card Scanner --deck testDeck\n" +
                 "deck add-card --card Yami --deck testDeck\n" +
                 "deck add-card --card Horn IMp --deck testDeck\n" +
                 "deck add-card --card Exploder Dragon --deck testDeck\n" +
@@ -1054,8 +1055,6 @@ public class GameTest {
                 "deck add-card --card Warrior Dai Grepher --deck testDeck\n" +
                 "deck add-card --card Dark Blade --deck testDeck\n" +
                 "deck add-card --card Wattaildragon --deck testDeck\n" +
-                "deck add-card --card Terratiger, the Empowered Warrior --deck testDeck\n" +
-                "deck add-card --card Spiral Serpent --deck testDeck\n" +
                 "menu exit\n" +
                 "menu enter duel\n" +
                 "duel --second-player nima --new --rounds 1\n" +
@@ -1093,9 +1092,27 @@ public class GameTest {
                 "5\n" +
                 "select --spell 5\n" +
                 "active effect\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "select --hand 3\n" +
+                "summon\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "next phase\n" +
+                "select --hand 1\n" +
+                "summon\n" +
+                "YES\n" +
+                "2\n" +
                 "surrender\n" +
-                "menu exit\n" +
-                "menu exit\n" +
+                "menu exit \n" +
+                "menu exit \n" +
                 "menu exit"
         ).getBytes(StandardCharsets.UTF_8));
         System.setIn(in);

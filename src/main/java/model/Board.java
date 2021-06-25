@@ -4,6 +4,7 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.players.AIPlayer;
 
 public class Board {
 
@@ -16,14 +17,16 @@ public class Board {
 
 
     public Board(Deck deck, Graveyard graveyard) {
-        deck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
-                || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
-                || e.getCardName().equalsIgnoreCase("Skull Guardian")
-                || e.getCardName().equalsIgnoreCase("Crab Turtle"));
-        deck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
-                || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
-                || e.getCardName().equalsIgnoreCase("Skull Guardian")
-                || e.getCardName().equalsIgnoreCase("Crab Turtle"));
+        if(getGraveyard().getOwner() instanceof AIPlayer) {
+            deck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
+                    || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
+                    || e.getCardName().equalsIgnoreCase("Skull Guardian")
+                    || e.getCardName().equalsIgnoreCase("Crab Turtle"));
+            deck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
+                    || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
+                    || e.getCardName().equalsIgnoreCase("Skull Guardian")
+                    || e.getCardName().equalsIgnoreCase("Crab Turtle"));
+        }
         this.deck = deck;
         this.graveyard = graveyard;
         spellOrTrap = new Cell[5];
@@ -51,13 +54,7 @@ public class Board {
         return spellOrTrap;
     }
 
-    public Cell[] getMonsters() { // y cant I do this ???
-//        ArrayList<Cell> cells = new ArrayList<>();
-//        for (Cell monsterCell : monsterCells) {
-//            if (monsterCell.getCard() != null)
-//                cells.add(monsterCell);
-//        }
-//        return (Cell[]) cells.toArray();
+    public Cell[] getMonsters() {
         return monsterCells;
     }
 

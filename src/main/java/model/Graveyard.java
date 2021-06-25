@@ -25,6 +25,10 @@ public class Graveyard {
         return null;
     }
 
+    public Player getOwner() {
+        return owner;
+    }
+
     public void addCard(Card card) {
         if (GameController.checkForDeathAction(card))
             return;
