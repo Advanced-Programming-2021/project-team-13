@@ -30,7 +30,9 @@ public class GameView {
     }
 
     public void run(String command) {
-        if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
+        if (command.equals("select --hand --force"))
+            handCheat();
+        else if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
             selectCard(command);
         else if (command.equals("next phase"))
             gameController.nextPhase();
@@ -61,8 +63,6 @@ public class GameView {
             increaseLp(command);
         else if (command.matches("duel set-winner \\w+"))
             setWinner(command);
-        else if (command.equals("select --hand --force"))
-            handCheat();
         else if (command.equals("special summon"))
             gameController.checksBeforeSpecialSummon(false);
         else if (command.equals("phase"))

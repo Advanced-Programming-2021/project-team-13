@@ -63,6 +63,7 @@ public class DuelController {
     private void startAIDuel(User user, int rounds) {
         Player firstPlayer = new Player(user);
         AIPlayer aiPlayer = new AIPlayer(firstPlayer.getUser().getActiveDeck());
+        aiPlayer.setNickname("Abbas BooAzaar");
         startDuel(firstPlayer, aiPlayer, rounds);
     }
 
@@ -97,6 +98,7 @@ public class DuelController {
                 } else if (trapAction instanceof TrapHole) {
                     trapAction = new TrapHole();
                 }
+                trap.setActivatedTurn(-1);
                 trap.setTrapAction(trapAction);
                 trapAction.setCard(trap);
             }

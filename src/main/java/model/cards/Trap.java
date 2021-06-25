@@ -9,12 +9,21 @@ public class Trap extends Card {
     private Card EffectedCard;
     private String type;
     private int setTurn;
+    private int activatedTurn;
 
     public Trap(String name, CardType cardType, String description, Face face,
                 int price, String type) {
         super(name, cardType, description, face, price);
         this.type = type;
         setTurn = -1;
+    }
+
+    public int getActivatedTurn() {
+        return activatedTurn;
+    }
+
+    public void setActivatedTurn(int activatedTurn) {
+        this.activatedTurn = activatedTurn;
     }
 
     public String getType() {
@@ -51,8 +60,8 @@ public class Trap extends Card {
 
     @Override
     public String toString() {
-        return "Name: " + cardName + "Trap"
-                + "\nType: " + type + "Description: " + cardDescription;
+        return "Name: " + cardName + " Trap"
+                + "\nType: " + type + "\nDescription: " + cardDescription;
     }
 
 }

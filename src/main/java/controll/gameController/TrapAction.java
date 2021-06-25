@@ -167,6 +167,8 @@ class MindCrush extends TrapAction {
     public void setCard(Card card) {
         this.trap = (Trap) card;
         EffectHandler effectHandler = new PlayerCanActivateTrap(card);
+        EffectHandler effectHandler1 = new EnemyHasAnyCardInHand(card);
+        effectHandler.setNextHandler(effectHandler1);
         setStartActionCheck(effectHandler);
         CardCommand cardCommand = new AnnounceCardNameToRemove(card);
         CardCommand cardCommand1 = new SendCardToGraveyard(card);
