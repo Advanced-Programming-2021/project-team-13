@@ -1,8 +1,8 @@
 package controll;
 
 import view.Menu;
-import view.allmenu.MainView;
 import view.ViewMaster;
+import view.allmenu.MainView;
 
 
 public class MainController {
@@ -28,7 +28,6 @@ public class MainController {
             ViewMaster.setCurrentMenu(Menu.SHOP_MENU);
         else if (menuToEnter.equalsIgnoreCase("import/export"))
             ViewMaster.setCurrentMenu(Menu.IMPORT_EXPORT_MENU);
-        else mainView.printInvalidCommand();
     }
 
     public void logout() {

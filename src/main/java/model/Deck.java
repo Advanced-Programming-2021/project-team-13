@@ -58,6 +58,15 @@ public class Deck implements Comparable<Deck> {
     }
 
 
+    /*public Deck getDeckByName(String name) {
+        for (Deck allPlayersDeck : allPlayersDecks) {
+            if (allPlayersDeck.name.equals(name))
+                return allPlayersDeck;
+        }
+        return null;
+    }
+*/
+
     public static int getMinCardsInMainDeck() {
         return MIN_CARDS_IN_MAIN_DECK;
     }

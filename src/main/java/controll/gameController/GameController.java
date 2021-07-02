@@ -9,6 +9,7 @@ import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
 import view.ViewMaster;
+
 import view.allmenu.GameView;
 import view.allmenu.ShowGraveyardView;
 

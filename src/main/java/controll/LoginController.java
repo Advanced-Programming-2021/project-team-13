@@ -2,8 +2,8 @@ package controll;
 
 import view.Menu;
 import model.players.User;
-import view.allmenu.LoginView;
 import view.ViewMaster;
+import view.allmenu.LoginView;
 
 public class LoginController {
     private final LoginView loginView;
@@ -12,53 +12,34 @@ public class LoginController {
         this.loginView = loginView;
     }
 
-    public void registerUser(String username, String password, String nickname) {
+    public boolean registerUser(String username, String password, String nickname) {
         if (username != null && password != null && nickname != null) {
             if (User.getUserByUsername(username) != null) {
                 loginView.printUsernameExists(username);
-                return;
+                return false;
             }
             if (User.getUserByNickname(nickname) != null) {
                 loginView.printNicknameExists(nickname);
-                return;
+                return false;
             }
             new User(username, password, nickname);
             loginView.printUserCreated();
-        } else loginView.printInvalidCommand();
+            return true;
+        }return false;
     }
 
-    public void loginUser(String username, String password) {
+    public boolean loginUser(String username, String password) {
         if (username != null && password != null) {
             User user = User.getUserByUsername(username);
             if (user == null || !user.getPassword().equals(password)) {
                 loginView.printInvalidUsernameOrPassword();
-                return;
+                return false;
             }
             loginView.printLoginSuccessful();
             ViewMaster.setUser(user);
             ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
-        } else loginView.printInvalidCommand();
+            return true;
+        } return false;
     }
 
-    public void loginFirst(String menuName){
-        if (menuName.equalsIgnoreCase("Login")){
-            loginView.printLoginFirst();
-        } else if (menuName.equalsIgnoreCase("Main")){
-            loginView.printLoginFirst();
-        } else if (menuName.equalsIgnoreCase("Deck")){
-            loginView.printLoginFirst();
-        } else if (menuName.equalsIgnoreCase("Shop")){
-            loginView.printLoginFirst();
-        } else if (menuName.equalsIgnoreCase("Duel")){
-            loginView.printLoginFirst();
-        } else if (menuName.equalsIgnoreCase("Scoreboard")){
-            loginView.printLoginFirst();
-        } else if (menuName.equalsIgnoreCase("Profile")){
-            loginView.printLoginFirst();
-        } else if (menuName.equalsIgnoreCase("Import/Export")){
-            loginView.printLoginFirst();
-        } else {
-            loginView.printInvalidCommand();
-        }
-    }
 }
