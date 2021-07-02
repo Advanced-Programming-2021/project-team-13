@@ -2,7 +2,6 @@ package controll.gameController;
 
 import model.Deck;
 import model.cards.Card;
-import model.cards.Monster;
 import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
@@ -13,7 +12,6 @@ import view.allmenu.DuelView;
 import view.allmenu.GameView;
 
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class DuelController {
     private final DuelView duelView;
