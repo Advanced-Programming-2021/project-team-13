@@ -43,7 +43,7 @@ public class MainView {
     }
 
     public void goToProfile(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ProfileMenu.fxml"));
         ((Stage) logoutButton.getScene().getWindow()).setScene(new Scene(root));
     }
 

@@ -2,10 +2,16 @@ package view.allMenu;
 
 import controll.ProfileController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
+
+import java.util.Optional;
 
 public class ProfileView {
     private final ProfileController profileController;
@@ -38,30 +44,46 @@ public class ProfileView {
         System.out.println("please enter a new password");
     }
 
-    public void run(String command) {
-        if (command.matches(Regex.CHANGE_NICKNAME))
-            changeNickName(Regex.getInputMatcher(command, Regex.CHANGE_NICKNAME));
-        else if (command.matches(Regex.CHANGE_PASSWORD1))
-            changePassword(Regex.getInputMatcher(command, Regex.CHANGE_PASSWORD1));
-        else if (command.matches(Regex.CHANGE_PASSWORD2))
-            changePassword(Regex.getInputMatcher(command, Regex.CHANGE_PASSWORD2));
-        else if (command.matches(Regex.EXIT_MENU))
-            ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
-        else
-            System.out.println("invalid command");
-
-    }
-
     @FXML
     private void changePassword() {
-        String currentPassword = inputMatcher.group("currentPassword");
-        String newPassword = inputMatcher.group("newPassword");
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setTitle("Enter current password");
+        textInputDialog.setHeaderText("Current");
+        textInputDialog.showAndWait();
+        if(textInputDialog.getEditor().getText().isEmpty()){
+            Alert alert = new Alert(AlertType.ERROR,"Empty Input",ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+        String currentPassword=textInputDialog.getEditor().getText();
+        TextInputDialog textInputDialog2 = new TextInputDialog();
+        textInputDialog2.setTitle("Enter new password");
+        textInputDialog2.showAndWait();
+        String newPassword = textInputDialog2.getEditor().getText();
         profileController.changePassword(currentPassword, newPassword);
+//        if (!newPassword.matches("\\w+")) {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Operation failed");
+//            alert.setContentText("invalid password format");
+//            alert.showAndWait();
+//            return;
+//        }
+//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+//                "are you sure?", ButtonType.OK, ButtonType.CANCEL);
+//        Optional<ButtonType> result = alert.showAndWait();
+//        if (result.isPresent() && result.get() == ButtonType.OK) {
+//            System.out.println(currentUser.getUsername());
+//            currentUser.setPassword(newPassword);
+//            Alert confirmedAlert = new Alert(Alert.AlertType.INFORMATION);
+//            confirmedAlert.setTitle("Operation successful");
+//            confirmedAlert.setContentText("password changed successfully");
+//            confirmedAlert.showAndWait();
+//        }
     }
 
     @FXML
     private void changeNickName() {
-        profileController.changeNickname(inputMatcher.group("nickname"));
+//        profileController.changeNickname(inputMatcher.group("nickname"));
     }
 
 }
