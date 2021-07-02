@@ -68,8 +68,8 @@ public class GameController {
         this.startingPlayer = startingPlayer;
         this.currentPlayer = startingPlayer;
         this.chain = new ArrayList<>();
-//        firstPlayer.getBoard().getDeck().shuffleMainDeck();
-//        secondPlayer.getBoard().getDeck().shuffleMainDeck();
+        firstPlayer.getBoard().getDeck().shuffleMainDeck();
+        secondPlayer.getBoard().getDeck().shuffleMainDeck();
         for (Card allCard : firstPlayer.getBoard().getDeck().getAllCards()) {
             allCard.setCardOwner(firstPlayer);
         }
@@ -100,14 +100,6 @@ public class GameController {
         return normalSummonHappened;
     }
 
-    public boolean isRitualSummonHappened() {
-        return ritualSummonHappened;
-    }
-
-    public boolean isSpecialSummonHappened() {
-        return specialSummonHappened;
-    }
-
     public boolean isFlipSummonHappened() {
         return flipSummonHappened;
     }
@@ -116,16 +108,8 @@ public class GameController {
         return isInAttack;
     }
 
-    public void setCurrentPhase(Phase currentPhase) {
-        this.currentPhase = currentPhase;
-    }
-
     public void addNotToDrawCardTurn(int turn) {
         notToDrawCardTurns.add(turn);
-    }
-
-    public ArrayList<Integer> getNotToDrawCardTurns() {
-        return notToDrawCardTurns;
     }
 
     public Player getCurrentPlayer() {
@@ -144,10 +128,6 @@ public class GameController {
 
     public void setCanContinue(boolean canContinue) {
         this.canContinue = canContinue;
-    }
-
-    public boolean getCanContinue() {
-        return canContinue;
     }
 
     public Player getStartingPlayer() {
@@ -319,10 +299,6 @@ public class GameController {
         checkTrapActivation();
         if (canContinue) {
             activateSpecial(ourMonster, rivalMonster);
-//            if (!rivalMonster.isAttackable()) {
-//                gameView.printCantAttackMonster();
-//                return;
-//            }
             monsterByMonsterAttack(rivalMonster, ourMonster);
         }
         attackingCard = null;
@@ -361,11 +337,7 @@ public class GameController {
                 ourMonster.setAttackPointInGame(0);
             }
         }
-        if (messengerOfPeace(ourMonster)) {
-            gameView.printCantAttackBecauseOfMessenger();
-            gameView.printMap();
-            return true;
-        } else if (rivalMonster.getCardName().equalsIgnoreCase("Marshmallon")) {
+        else if (rivalMonster.getCardName().equalsIgnoreCase("Marshmallon")) {
             marshmallon(ourMonster, rivalMonster);
             gameView.printMap();
             return true;
@@ -588,14 +560,6 @@ public class GameController {
     }
 
 
-    private boolean messengerOfPeace(Monster attacker) {
-        if (!checkForActive(currentPlayer, "Messenger of peace")
-                && !checkForActive(currentPlayer.getRivalPlayer(), "Messenger of peace"))
-            return false;
-        return attacker.getAttackPointInGame() >= 1500;
-    }
-
-
     public void activeEffect() {
         if (currentPlayer.getSelectedCard() == null) {
             gameView.printNoCardSelected();
@@ -650,11 +614,6 @@ public class GameController {
             gameView.printSpellZoneIsFull();
             return;
         }
-        if (!checkPreparation(currentPlayer.getSelectedCard())) {
-            gameView.printPrepsNotDone();
-            return;
-        }
-
         if (spell.getType().equals("Equip")) {
             int tries = -1;
             int num = 0;
@@ -662,18 +621,17 @@ public class GameController {
             while (tries == -1) {
                 gameView.printSelectMonsterFromBoard();
                 String answer = gameView.getAnswer();
+                if (answer.equals("abort")) {
+                    gameView.printAbortedFromEquipSpell();
+                    return;
+                }
                 if (answer.matches("^(\\d+) ([\\w]+ [\\w]+)$")) {
                     String[] answerSpilt = answer.split(" ");
                     num = Integer.parseInt(answerSpilt[0]);
                     board = answerSpilt[1] + " " + answerSpilt[2];
-                    if (board.equals("abort")) {
-                        gameView.printAbortedFromEquipSpell();
-                        return;
-                    }
                     if (checkCorrectEquipInput(num, board, spell))
                         tries = 0;
                 } else gameView.printInvalidCommand();
-
             }
             currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
             if (board.equalsIgnoreCase("our board"))
@@ -693,6 +651,25 @@ public class GameController {
         currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
         spell.setZone(Zone.SPELL_TRAP_ZONE);
         gameView.printMap();
+        if (spell.isActivated())
+            checkForAbsorption();
+        checkTrapActivation();
+    }
+
+    private void checkForAbsorption() {
+        findAbsorption(currentPlayer);
+        findAbsorption(currentPlayer.getRivalPlayer());
+    }
+
+    private void findAbsorption(Player player) {
+        for (Cell cell : player.getBoard().getSpellOrTrap()) {
+            if (cell.getCard() != null)
+                if (cell.getCard().getCardName().equals("Spell Absorption")) {
+                    player.increaseHealth(500);
+                    player.getBoard().getGraveyard().addCard(cell.getCard());
+                    player.getCardsInHand().remove(cell.getCard());
+                }
+        }
     }
 
     private boolean checkCorrectEquipInput(int num, String board, Spell spell) {
@@ -734,6 +711,7 @@ public class GameController {
         spell.setActivated(true);
         gameView.printSpellActivated();
         gameView.printMap();
+        checkTrapActivation();
     }
 
     private void findEffect(Spell spell) {
@@ -748,16 +726,8 @@ public class GameController {
             raigeki();
         else if (effectName.startsWith("Harp"))
             harpie();
-//        else if (effectName.equalsIgnoreCase("Swords of Revealing Light"))
-//            swordsOfRevealingLight();
         else if (effectName.equalsIgnoreCase("Dark Hole"))
             darkHole();
-//        else if (effectName.equalsIgnoreCase("Supply Squad"))
-//            supplySquad();
-//        else if(effectName.equalsIgnoreCase("Ring of Defense"))
-//            ringOfDefense();
-//        else if (effectName.equalsIgnoreCase("Spell Absorption"))
-//            spellAbsorption();
         else if (effectName.equalsIgnoreCase("Messenger of peace"))
             activeMessenger(spell);
         else if (effectName.equalsIgnoreCase("Twin Twisters"))
@@ -782,11 +752,6 @@ public class GameController {
         currentPlayer.addCardToHand();
         currentPlayer.addCardToHand();
     }
-
-//    private void terraforming() {
-//        gameView.printSelectNum();
-//        currentPlayer.addCardToHand();
-//    }
 
     private void twinTwisters() {
         while (true) {
@@ -835,12 +800,6 @@ public class GameController {
                     } else gameView.printInvalidCommand();
                 }
             } else gameView.printInvalidCommand();
-        }
-    }
-
-    private void showCardsInHand(Player player) {
-        for (int i = 0; i < player.getCardsInHand().size(); i++) {
-            gameView.printCardInHand(player.getCardsInHand().get(i), i);
         }
     }
 
@@ -916,7 +875,7 @@ public class GameController {
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
             }
         }
-        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell() != null)
+        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                     .addCard(currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard());
     }
@@ -929,7 +888,7 @@ public class GameController {
         }
     }
 
-    private void monsterReborn() { //چقد توابعش سمیه!!!
+    private void monsterReborn() {
         gameView.selectGraveyard();
         Player graveyardOwner = null;
         String graveyardName = gameView.getAnswer();
@@ -948,17 +907,6 @@ public class GameController {
         graveyard.getShowGraveyardController().selectCardFromGraveyard(gameView.getNum(), graveyardOwner);
         specialSummon();
 
-    }
-
-
-    private boolean checkPreparation(Card card) {
-/*        if (card.getCardName().equalsIgnoreCase("Twin Twisters"))
-            return twinTwistersCheck();
-        else if (card.getCardName().equalsIgnoreCase("Messenger of peace"))
-            return checkMessenger();
-        else if (card.getCardName().equalsIgnoreCase("Supply Squad"))
-            return supplySquad();*/
-        return true;
     }
 
     private boolean spellActive(Spell spell) {
@@ -1282,11 +1230,10 @@ public class GameController {
                 gameView.printWhoseTurn();
                 turnsPlayed++;
             }
-            gameView.printCurrentPhase();//to complete
+            gameView.printCurrentPhase();
         } else if (currentPhase == Phase.BATTLE_PHASE) {
             currentPhase = Phase.MAIN_PHASE_2;
             gameView.printCurrentPhase();
-            //to comp
         } else if (currentPhase == Phase.MAIN_PHASE_2) {
             reset();
             currentPhase = Phase.END_PHASE;

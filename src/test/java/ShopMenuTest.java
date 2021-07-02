@@ -56,14 +56,5 @@ public class ShopMenuTest {
         shopView.run("shop show --all");
 //        WTF????
     }
-
-    @org.junit.Test
-    public void testBuySomeCard() {
-        shopView.run("shop buy Call Of The Haunted");
-        shopView.run("shop buy Call Of The Haunted");
-        shopView.run("shop buy Call Of The Haunted");
-        shopView.run("shop buy Battle Ox");
-        assertEquals(100000 - (3500 * 3 + 2900), user.getMoney());
-    }
 }
 

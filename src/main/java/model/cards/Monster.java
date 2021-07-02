@@ -60,6 +60,20 @@ public class Monster extends Card {
         equipSpellSword = new ArrayList<>();
     }
 
+    public Monster(Monster that){
+        super(that);
+        setAttackNum(that.attackNum);
+        setDefenseNum(that.defenseNum);
+        setLevel(that.level);
+        setMonsterAttribute(that.monsterAttribute);
+        setMonsterCardType(that.monsterCardType);
+        setMonsterType(that.monsterType);
+        setAttackPointInGame(that.attackNum);
+        setDefencePointInGame(that.defenseNum);
+        commandKnightsActive = new ArrayList<>();
+        equipSpellSword = new ArrayList<>();
+    }
+
     public void setCommandKnightsActive(ArrayList<Monster> commandKnightsActive) {
         this.commandKnightsActive = commandKnightsActive;
     }
@@ -265,10 +279,6 @@ public class Monster extends Card {
         defencePointInGame -= amount;
     }
 
-
-  /*  public ArrayList<Monster> getMonsterOnBoard() {
-        return cardOwner.getMonsterOnBoard();
-    }*/
 
     public int howManyTributeNeed() {
         switch (this.level) {

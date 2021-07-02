@@ -16,7 +16,6 @@ public class Deck implements Comparable<Deck> {
     private ArrayList<Card> allCards = new ArrayList<>();
     private ArrayList<Card> allCardsInMainDeck = new ArrayList<>();
     private ArrayList<Card> allCardsInSideDeck = new ArrayList<>();
-    //private ArrayList<Deck> allPlayersDecks = new ArrayList<>();
     private boolean isValid;
     private boolean isActive;
     private int numberOfCards;
@@ -36,52 +35,28 @@ public class Deck implements Comparable<Deck> {
         this.allCards = new ArrayList<>();
         this.allCardsInMainDeck = new ArrayList<>();
         this.allCardsInSideDeck = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            ArrayList<ArrayList<Card>> allArraysToCopy = new ArrayList<>();
-            ArrayList<ArrayList<Card>> allArrays = new ArrayList<>();
-            allArraysToCopy.add(that.allCardsInSideDeck);
-            allArraysToCopy.add(that.allCardsInMainDeck);
-            allArraysToCopy.add(that.allCards);
-            allArrays.add(allCardsInSideDeck);
-            allArrays.add(allCardsInMainDeck);
-            allArrays.add(allCards);
-            for (Card card : allArraysToCopy.get(i)) {
-                card.setZone(Zone.DECK_ZONE);
-                if (card instanceof Monster){
-                    ((Monster) card).setAttackNum(((Monster) card).getAttackNum());
-                    ((Monster) card).setAttackedInThisTurn(false);
-                    ((Monster) card).setSetInThisTurn(false);
-                    ((Monster) card).setActiveAbility(false);
-                    ((Monster) card).setAttackable(false);
-                    ((Monster) card).setDefenseNum(((Monster) card).getDefenseNum());
-                    ((Monster) card).setLevel(((Monster) card).getLevel());
-                    ((Monster) card).setMonsterAttribute(((Monster) card).getMonsterAttribute());
-                    ((Monster) card).setMonsterCardType(((Monster) card).getMonsterCardType());
-                    ((Monster) card).setMonsterType(((Monster) card).getMonsterType());
-                    ((Monster) card).setAttackPointInGame(((Monster) card).getAttackNum());
-                    ((Monster) card).setDefencePointInGame(((Monster) card).getDefenseNum());
-                    ((Monster) card).setCommandKnightsActive(new ArrayList<>());
-                    ((Monster) card).setEquipSpellSword(new ArrayList<>());
-                } else if (card instanceof Spell){
-                    ((Spell) card).setEquippedMonster(null);
-                } else if (card instanceof Trap){
-                    ((Trap) card).setEffectedCard(null);
-                    ((Trap) card).setTrapAction(null);
-                }
-                allArrays.get(i).add(card);
+        for (Card cardToCopy : that.allCards) {
+            Card card = null;
+            cardToCopy.setZone(Zone.DECK_ZONE);
+            if (cardToCopy instanceof Monster) {
+                card = new Monster((Monster) cardToCopy);
+            } else if (cardToCopy instanceof Spell) {
+                card = new Spell((Spell) cardToCopy);
+                ((Spell) card).setEquippedMonster(null);
+            } else if (cardToCopy instanceof Trap) {
+                card = new Trap((Trap) cardToCopy);
+                ((Trap) card).setEffectedCard(null);
+                ((Trap) card).setTrapAction(null);
             }
+            if (that.allCardsInMainDeck.contains(cardToCopy))
+                allCardsInMainDeck.add(card);
+            else if (that.allCardsInSideDeck.contains(cardToCopy))
+                allCardsInSideDeck.add(card);
+            allCards.add(card);
         }
+
     }
 
-
-    /*public Deck getDeckByName(String name) {
-        for (Deck allPlayersDeck : allPlayersDecks) {
-            if (allPlayersDeck.name.equals(name))
-                return allPlayersDeck;
-        }
-        return null;
-    }
-*/
 
     public static int getMinCardsInMainDeck() {
         return MIN_CARDS_IN_MAIN_DECK;

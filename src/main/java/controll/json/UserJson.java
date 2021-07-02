@@ -2,6 +2,8 @@ package controll.json;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.com.google.gson.reflect.TypeToken;
+import model.cards.Card;
+import model.cards.Trap;
 import model.players.User;
 
 import java.io.FileWriter;
@@ -16,6 +18,14 @@ public class UserJson {
         YaGson mapper = new YaGson();
         FileWriter jsonFile;
         try {
+            for (User user : User.getAllUsers()){
+                for (Card card : user.getCards()){
+                    card.setCardOwner(null);
+                    if (card instanceof Trap){
+                        ((Trap)card).setTrapAction(null);
+                    }
+                }
+            }
             String json = mapper.toJson(User.getAllUsers(), User.class);
             jsonFile = new FileWriter("UserJson.json");
             jsonFile.write(json);

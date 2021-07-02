@@ -29,7 +29,7 @@ public class User implements Comparable<User> {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.money = 10000000;
+        this.money = 100000;
         this.score = 0;
         this.winNum = 0;
         this.loseNum = 0;
@@ -173,11 +173,6 @@ public class User implements Comparable<User> {
         return "- " + this.nickname + ": " + this.score;
     }
 
-    //
-//    public boolean equals() {
-//
-//    }
-//
     public ArrayList<Deck> getAllDecks() {
         return allDecks;
     }
