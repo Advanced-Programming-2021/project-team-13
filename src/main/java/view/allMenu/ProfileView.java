@@ -1,22 +1,30 @@
 package view.allMenu;
 
 import controll.ProfileController;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
+import javafx.stage.Stage;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class ProfileView {
     private final ProfileController profileController;
     public Button changeNicknameBtn;
     public Button changePasswordBtn;
+    public Button backBtn;
 
 
     public ProfileView() {
@@ -24,24 +32,34 @@ public class ProfileView {
     }
 
     public void printNicknameChanged() {
-        System.out.println("nickname changed successfully!");
+        Alert alert = new Alert(AlertType.INFORMATION,"nickname changed successfully!",ButtonType.OK);
+        alert.setHeaderText("Successful");
+        alert.showAndWait();
     }
 
     public void printNicknameExists(String newNickname) {
-        System.out.println("user with nickname " + newNickname + " already exists");
-
+        Alert alert = new Alert(AlertType.ERROR,"user with nickname " + newNickname +
+                " already exists",ButtonType.OK);
+        alert.setHeaderText("Failed");
+        alert.showAndWait();
     }
 
     public void printPasswordChanged() {
-        System.out.println("password changed successfully!");
+        Alert alert = new Alert(AlertType.INFORMATION,"password changed successfully!",ButtonType.OK);
+        alert.setHeaderText("Successful");
+        alert.showAndWait();
     }
 
     public void printInvalidPassword() {
-        System.out.println("current password is invalid");
+        Alert alert = new Alert(AlertType.ERROR,"current password is invalid",ButtonType.OK);
+        alert.setHeaderText("Failed");
+        alert.showAndWait();
     }
 
     public void printSamePassword() {
-        System.out.println("please enter a new password");
+        Alert alert = new Alert(AlertType.ERROR,"please enter a new password",ButtonType.OK);
+        alert.setHeaderText("Failed");
+        alert.showAndWait();
     }
 
     @FXML
@@ -50,9 +68,8 @@ public class ProfileView {
         textInputDialog.setTitle("Enter current password");
         textInputDialog.setHeaderText("Current");
         textInputDialog.showAndWait();
-        if(textInputDialog.getEditor().getText().isEmpty()){
-            Alert alert = new Alert(AlertType.ERROR,"Empty Input",ButtonType.OK);
-            alert.showAndWait();
+        if(textInputDialog.getEditor().getText().isEmpty()) {
+            emptyInputError();
             return;
         }
         String currentPassword=textInputDialog.getEditor().getText();
@@ -81,9 +98,26 @@ public class ProfileView {
 //        }
     }
 
-    @FXML
-    private void changeNickName() {
-//        profileController.changeNickname(inputMatcher.group("nickname"));
+    private void emptyInputError() {
+        Alert alert = new Alert(AlertType.ERROR,"Empty Input",ButtonType.OK);
+        alert.showAndWait();
     }
 
+    @FXML
+    private void changeNickName() {
+        TextInputDialog textInputDialog = new TextInputDialog();
+        textInputDialog.setTitle("Enter new nickName");
+        textInputDialog.setHeaderText("new Nickname");
+        textInputDialog.showAndWait();
+        if(textInputDialog.getEditor().getText().isEmpty()) {
+            emptyInputError();
+            return;
+        }
+        profileController.changeNickname(textInputDialog.getEditor().getText());
+    }
+
+    public void goBack(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
+        ((Stage)backBtn.getScene().getWindow()).setScene(new Scene(root));
+    }
 }

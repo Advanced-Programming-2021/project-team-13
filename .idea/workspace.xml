@@ -4,39 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="major fixes">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment=" fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameWinMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameWinMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/MainView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/ProfileView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/LoginMenuTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MainMenuTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ProfileMenuTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ScoreboardTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ShopMenuTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/MainController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/ProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/ProfileController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/ShopController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/ShopController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/enums/Face.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/Face.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/enums/MonsterType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/enums/Phase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/enums/Phase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/DeckView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/GameView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/LoginView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/MainView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ProfileView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/Regex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/Regex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ScoreboardView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ShopView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ViewMaster.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +147,7 @@
       <workItem from="1619979340694" duration="15000" />
       <workItem from="1620006019340" duration="7497000" />
       <workItem from="1625212976852" duration="96000" />
-      <workItem from="1625213085927" duration="1793000" />
+      <workItem from="1625213085927" duration="4145000" />
     </task>
     <task id="LOCAL-00001" summary="to ro khoda ...">
       <created>1618921103490</created>
@@ -234,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625213910456</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary=" fixes">
+      <created>1625215031661</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1625215031662</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,7 +239,8 @@
     <MESSAGE value="4 SpellEffect" />
     <MESSAGE value="alot of spells completed but I sure they all have bugs" />
     <MESSAGE value="major fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="major fixes" />
+    <MESSAGE value=" fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value=" fixes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
