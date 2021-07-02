@@ -3,7 +3,7 @@ package controll;
 import view.Menu;
 import model.players.User;
 import view.ViewMaster;
-import view.allMenu.LoginView;
+import view.allmenu.LoginView;
 
 
 public class LoginController {

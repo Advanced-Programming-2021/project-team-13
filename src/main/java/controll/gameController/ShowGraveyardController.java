@@ -3,7 +3,7 @@ package controll.gameController;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
-import view.allMenu.ShowGraveyardView;
+import view.allmenu.ShowGraveyardView;
 
 public class ShowGraveyardController {
     private final ShowGraveyardView showGraveyardView;
