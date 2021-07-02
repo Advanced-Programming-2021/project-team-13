@@ -55,7 +55,7 @@ public class ScoreboardTest {
         User.getAllUsers().clear();
     }
 
-    @Test
+   /* @Test
     public void scoreboardTest1() {
         new ScoreboardView().run("scoreboard show");
         Assert.assertEquals("1- Amrossein: 6000\r\n" + "1- NIMA: 6000\r\n" + "1- WhoMan: 6000\r\n" + "4- shahin: 5000\r\n" +
@@ -79,6 +79,6 @@ public class ScoreboardTest {
     public void scoreboardTest3() {
         new ScoreboardView().run("menu exit");
         Assert.assertEquals(ViewMaster.getCurrentMenu(), Menu.MAIN_MENU);
-    }
+    }*/
 
 }

@@ -5,7 +5,7 @@ import model.players.Player;
 import model.players.User;
 import view.Menu;
 import view.ViewMaster;
-import view.allMenu.GameView;
+import view.allmenu.GameView;
 
 public class GameWinMenu {
     private final GameView gameView;
