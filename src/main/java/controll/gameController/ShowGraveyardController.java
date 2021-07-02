@@ -5,7 +5,6 @@ import model.cards.Monster;
 import model.players.Player;
 import view.allMenu.ShowGraveyardView;
 
-
 public class ShowGraveyardController {
     private final ShowGraveyardView showGraveyardView;
     private final Player currentPlayer;
