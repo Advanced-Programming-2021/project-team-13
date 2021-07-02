@@ -5,7 +5,8 @@ import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import model.players.User;
 import view.ViewMaster;
-import view.allmenu.ShopView;
+import view.allMenu.ShopView;
+
 
 import java.io.FileNotFoundException;
 import java.util.TreeMap;

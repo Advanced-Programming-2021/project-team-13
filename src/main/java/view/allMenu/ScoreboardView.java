@@ -1,4 +1,4 @@
-package view.allmenu;
+package view.allMenu;
 
 import controll.ScoreboardController;
 import javafx.application.Application;

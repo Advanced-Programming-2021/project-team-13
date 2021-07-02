@@ -1,4 +1,5 @@
-package view.allmenu;
+package view.allMenu;
+
 import controll.gameController.GameController;
 import enums.AttackOrDefense;
 import enums.Face;

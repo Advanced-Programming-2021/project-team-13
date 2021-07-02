@@ -2,7 +2,7 @@ package controll;
 
 import view.Menu;
 import view.ViewMaster;
-import view.allmenu.MainView;
+import view.allMenu.MainView;
 
 
 public class MainController {
