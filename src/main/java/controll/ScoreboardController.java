@@ -1,7 +1,7 @@
 package controll;
 
 import model.players.User;
-import view.allMenu.ScoreboardView;
+import view.allmenu.ScoreboardView;
 
 import java.util.ArrayList;
 import java.util.Collections;

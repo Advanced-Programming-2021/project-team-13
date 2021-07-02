@@ -1,4 +1,4 @@
-package view.allMenu;
+package view.allmenu;
 
 import controll.gameController.GameController;
 import enums.AttackOrDefense;
@@ -13,6 +13,7 @@ import model.players.Player;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
+import view.allmenu.ShowGraveyardView;
 
 import java.util.ArrayList;
 import java.util.List;

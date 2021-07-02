@@ -2,7 +2,7 @@ package controll;
 
 import model.players.User;
 import view.ViewMaster;
-import view.allMenu.ProfileView;
+import view.allmenu.ProfileView;
 
 
 import java.util.ArrayList;

@@ -68,14 +68,6 @@ public class DuelController {
         startDuel(firstPlayer, aiPlayer, rounds);
     }
 
-    public void startAIDuelAI(int rounds) {
-        AIPlayer aiPlayer = new AIPlayer(new Deck(ViewMaster.getUser().getActiveDeck()));
-        AIPlayer aiPlayer2 = new AIPlayer(new Deck(ViewMaster.getUser().getActiveDeck()));
-        aiPlayer.setNickname("Abbas BooAzaar1");
-        aiPlayer.setNickname("Abbas BooAzaar2");
-        startDuel(aiPlayer2, aiPlayer, rounds);
-    }
-
     private void startTwoPlayerDuel(User user, User rivalUser, int rounds) {
         Player firstPlayer = new Player(user);
         Player secondPlayer = new Player(rivalUser);

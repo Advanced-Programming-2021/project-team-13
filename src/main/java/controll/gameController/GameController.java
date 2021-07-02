@@ -9,8 +9,8 @@ import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
 import view.ViewMaster;
-import view.allMenu.GameView;
-import view.allMenu.ShowGraveyardView;
+import view.allmenu.GameView;
+import view.allmenu.ShowGraveyardView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
