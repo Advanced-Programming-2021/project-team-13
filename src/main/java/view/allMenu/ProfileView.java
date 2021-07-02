@@ -1,15 +1,16 @@
-package view.allmenu;
+package view.allMenu;
 
 import controll.ProfileController;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
-import java.util.regex.Matcher;
-
 public class ProfileView {
     private final ProfileController profileController;
-
+    public Button changeNicknameBtn;
+    public Button changePasswordBtn;
 
 
     public ProfileView() {
@@ -51,15 +52,15 @@ public class ProfileView {
 
     }
 
-    private void changePassword(Matcher inputMatcher) {
-        inputMatcher.find();
+    @FXML
+    private void changePassword() {
         String currentPassword = inputMatcher.group("currentPassword");
         String newPassword = inputMatcher.group("newPassword");
         profileController.changePassword(currentPassword, newPassword);
     }
 
-    private void changeNickName(Matcher inputMatcher) {
-        inputMatcher.find();
+    @FXML
+    private void changeNickName() {
         profileController.changeNickname(inputMatcher.group("nickname"));
     }
 

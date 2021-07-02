@@ -9,8 +9,8 @@ import model.players.Player;
 import model.players.User;
 import view.Menu;
 import view.ViewMaster;
-import view.allmenu.DuelView;
-import view.allmenu.GameView;
+import view.allMenu.DuelView;
+import view.allMenu.GameView;
 
 import java.util.Random;
 import java.util.stream.Collectors;

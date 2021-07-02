@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="fxml.ProfileMenu"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.allMenu.ProfileView">
+    <Button fx:id="changeNicknameBtn" layoutX="904.0" layoutY="57.0" mnemonicParsing="false" onAction="#changeNickName"
+            prefHeight="56.0" prefWidth="289.0" text="Change Nickname">
+        <font>
+            <Font name="System Bold Italic" size="27.0"/>
+        </font>
+    </Button>
+    <Button fx:id="changePasswordBtn" layoutX="904.0" layoutY="163.0" mnemonicParsing="false" onAction="#changePassword"
+            prefHeight="56.0" prefWidth="289.0" text="Change Password">
+        <font>
+            <Font name="System Bold Italic" size="27.0"/>
+        </font>
+    </Button>
 </AnchorPane>

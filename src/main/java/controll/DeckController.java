@@ -11,7 +11,7 @@ import model.cards.Trap;
 import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import view.ViewMaster;
-import view.allmenu.DeckView;
+import view.allMenu.DeckView;
 
 
 import java.io.FileNotFoundException;
