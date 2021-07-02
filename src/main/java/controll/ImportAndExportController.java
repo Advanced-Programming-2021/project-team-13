@@ -3,7 +3,7 @@ package controll;
 import com.gilecode.yagson.YaGson;
 import model.cards.Card;
 import view.ViewMaster;
-import view.allMenu.ImportAndExportView;
+import view.allmenu.ImportAndExportView;
 
 import java.io.FileWriter;
 import java.nio.file.Files;

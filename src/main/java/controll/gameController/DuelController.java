@@ -2,18 +2,15 @@ package controll.gameController;
 
 import model.Deck;
 import model.cards.Card;
-import model.cards.Monster;
 import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
 import model.players.User;
 import view.Menu;
 import view.ViewMaster;
-import view.allMenu.DuelView;
-import view.allMenu.GameView;
+import view.allmenu.*;
 
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class DuelController {
     private final DuelView duelView;
@@ -69,14 +66,6 @@ public class DuelController {
         AIPlayer aiPlayer = new AIPlayer(new Deck(user.getActiveDeck()));
         aiPlayer.setNickname("Abbas BooAzaar");
         startDuel(firstPlayer, aiPlayer, rounds);
-    }
-
-    public void startAIDuelAI(int rounds) {
-        AIPlayer aiPlayer = new AIPlayer(new Deck(ViewMaster.getUser().getActiveDeck()));
-        AIPlayer aiPlayer2 = new AIPlayer(new Deck(ViewMaster.getUser().getActiveDeck()));
-        aiPlayer.setNickname("Abbas BooAzaar1");
-        aiPlayer.setNickname("Abbas BooAzaar2");
-        startDuel(aiPlayer2, aiPlayer, rounds);
     }
 
     private void startTwoPlayerDuel(User user, User rivalUser, int rounds) {

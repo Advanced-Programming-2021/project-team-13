@@ -1,7 +1,7 @@
 package view;
 
 import model.players.User;
-import view.allMenu.*;
+import view.allmenu.*;
 import java.io.IOException;
 import java.util.Scanner;
 

@@ -1,6 +1,6 @@
 package controll;
 
-import controll.json.UserJson;
+
 import enums.CardType;
 import enums.Face;
 import model.Deck;
@@ -11,19 +11,15 @@ import model.cards.Trap;
 import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import view.ViewMaster;
-import view.allMenu.DeckView;
-
+import view.allmenu.DeckView;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 public class DeckController {
-    private DeckView deckView;
-    private MonsterCSV monsterCSV = new MonsterCSV();
-    private SpellTrapCSV spellTrapCSV = new SpellTrapCSV();
+    private final DeckView deckView;
 
     public DeckController(DeckView deckView) {
         this.deckView = deckView;
@@ -85,12 +81,6 @@ public class DeckController {
             deckView.printCardDoesntExist(cardName);
     }
 
-   /* private void addToHashMap(String name) {
-
-    }*/
-
-
-    /////// Constructors need changes for effective version !!!!!!!!!!!!!!!!!!!!!!!!!!
     public Card findCard(String cardName) { ////// Spell,Trap,Monster Constructor Work Just For noEffect BRANCH
         MonsterCSV monster = null;
         SpellTrapCSV spellOrTrap = null;
@@ -191,7 +181,7 @@ public class DeckController {
             try {
                 monsterCSV = MonsterCSV.findMonster(cardName);
                 spellTrapCSV = SpellTrapCSV.findSpellTrap(cardName);
-            } catch (FileNotFoundException e) {
+            } catch (FileNotFoundException ignored) {
             }
             for (int i = 0; i < userCards.get(cardName); i++) {
                 if (monsterCSV == null)

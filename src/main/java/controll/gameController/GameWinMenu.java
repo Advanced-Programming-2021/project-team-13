@@ -5,8 +5,7 @@ import model.players.Player;
 import model.players.User;
 import view.Menu;
 import view.ViewMaster;
-import view.allMenu.GameView;
-
+import view.allmenu.GameView;
 
 public class GameWinMenu {
     private final GameView gameView;
@@ -25,7 +24,7 @@ public class GameWinMenu {
 
 
     public void announceWinner(Player winner) {
-        if (winner == null) {
+        if (winner == null) {//this is when game is ended draw
             drawState();
         } else {
             winOrLoseState(winner);
@@ -63,14 +62,12 @@ public class GameWinMenu {
             if (startingRounds == 1) {
                 user.addLosts(1);
                 user.addMoney(100);
-                gameView.printUserWonSingleGame(((AIPlayer) loser).getNickname(),
-                        winner.getWonRounds(), loser.getWonRounds());
+                gameView.printUserWonSingleGame(((AIPlayer) winner).getNickname(), winner.getWonRounds(), loser.getWonRounds());
             } else {
                 if (winner.getWonRounds() == 2) {
                     user.addLosts(1);
                     user.addMoney(300);
-                    gameView.printUserWonSingleGame(((AIPlayer) winner).getNickname(),
-                            winner.getWonRounds(), loser.getWonRounds());
+                    gameView.printUserWonSingleGame(((AIPlayer) winner).getNickname(), winner.getWonRounds(), loser.getWonRounds());
                     ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
                 } else {
                     loser.renewPlayer();

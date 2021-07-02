@@ -1,4 +1,4 @@
-package view.allMenu;
+package view.allmenu;
 
 import model.Deck;
 import controll.DeckController;
