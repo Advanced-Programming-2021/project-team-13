@@ -78,24 +78,6 @@ public class ProfileView {
         textInputDialog2.showAndWait();
         String newPassword = textInputDialog2.getEditor().getText();
         profileController.changePassword(currentPassword, newPassword);
-//        if (!newPassword.matches("\\w+")) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Operation failed");
-//            alert.setContentText("invalid password format");
-//            alert.showAndWait();
-//            return;
-//        }
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-//                "are you sure?", ButtonType.OK, ButtonType.CANCEL);
-//        Optional<ButtonType> result = alert.showAndWait();
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            System.out.println(currentUser.getUsername());
-//            currentUser.setPassword(newPassword);
-//            Alert confirmedAlert = new Alert(Alert.AlertType.INFORMATION);
-//            confirmedAlert.setTitle("Operation successful");
-//            confirmedAlert.setContentText("password changed successfully");
-//            confirmedAlert.showAndWait();
-//        }
     }
 
     private void emptyInputError() {
