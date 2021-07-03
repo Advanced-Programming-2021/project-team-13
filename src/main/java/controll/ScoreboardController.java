@@ -1,15 +1,15 @@
 package controll;
 
 import model.players.User;
-import view.allmenu.ScoreboardLabel;
+import view.allmenu.ScoreboardView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class ScoreboardController {
-    private final ScoreboardLabel scoreboardView;
+    private final ScoreboardView scoreboardView;
 
-    public ScoreboardController(ScoreboardLabel scoreboardView) {
+    public ScoreboardController(ScoreboardView scoreboardView) {
         this.scoreboardView = scoreboardView;
     }
 
