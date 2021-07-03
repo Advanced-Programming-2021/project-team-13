@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allMenu.MainView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.MainView">
    <right>
        <AnchorPane prefHeight="600.0" prefWidth="258.0" BorderPane.alignment="CENTER">
            <VBox layoutX="45.0" layoutY="206.0" prefHeight="247.0" prefWidth="146.0" spacing="10.0">
