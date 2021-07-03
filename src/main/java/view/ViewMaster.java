@@ -12,7 +12,7 @@ public class ViewMaster {
     private static User user;
     private final LoginView loginView;
     private final ShopView shopView;
-    private final ScoreboardView scoreboardView;
+    private final ScoreboardLabel scoreboardView;
     private final ProfileView profileView;
     private final MainView mainView;
     private final DeckView deckView;
@@ -23,7 +23,7 @@ public class ViewMaster {
     private ViewMaster() {
         loginView = new LoginView();
         shopView = new ShopView();
-        scoreboardView = new ScoreboardView();
+        scoreboardView = new ScoreboardLabel();
         profileView = new ProfileView();
         mainView = new MainView();
         deckView = new DeckView();

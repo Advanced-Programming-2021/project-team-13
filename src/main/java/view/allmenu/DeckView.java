@@ -1,16 +1,32 @@
 package view.allmenu;
 
-import model.Deck;
 import controll.DeckController;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import model.Deck;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 
 
-public class DeckView {
+public class DeckView implements Initializable {
+    @FXML
+    private VBox cardVBox;
+    @FXML
+    private AnchorPane cardShowZone;
+    @FXML
+    private GridPane sideDeck;
+    @FXML
+    private GridPane mainDeck;
     private DeckController deckController;
 
     public DeckView() {
@@ -185,5 +201,11 @@ public class DeckView {
         System.out.println("Deck: " + deckName);
         System.out.println(isSide ? "Side" : "Main" + "deck:");
         System.out.println("Monsters:");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        mainDeck.setGridLinesVisible(true);
+        sideDeck.setGridLinesVisible(true);
     }
 }

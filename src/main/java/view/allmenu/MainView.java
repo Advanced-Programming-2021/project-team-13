@@ -117,7 +117,7 @@ public class MainView {
                 new CustomButton("shop", () -> {
                     try {
                         goToShop();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }),
@@ -147,13 +147,13 @@ public class MainView {
     }
 
     public void goToDeckMenu() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginMenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/DeckMenu.fxml"));
         ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
     }
 
     public void goToScoreBoard() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginMenu.fxml"));
-        ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
+        ScoreboardView scoreboardView = new ScoreboardView();
+        scoreboardView.start((Stage) pane.getScene().getWindow());
     }
 
     public void goToProfile() throws IOException {
@@ -161,9 +161,9 @@ public class MainView {
         ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
     }
 
-    public void goToShop() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginMenu.fxml"));
-        ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
+    public void goToShop() throws Exception {
+        ShopView shopView = new ShopView();
+        shopView.start((Stage) pane.getScene().getWindow());
     }
 
     public void goToImport() throws IOException {
