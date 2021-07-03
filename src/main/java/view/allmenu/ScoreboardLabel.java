@@ -9,9 +9,9 @@ import javafx.scene.layout.AnchorPane;
 
 import java.util.Objects;
 
-public class ScoreboardView {
+public class ScoreboardLabel {
     private static Image image =
-            new Image(Objects.requireNonNull(ScoreboardView.class.getResource("/scoreboardImage/background.png")).toExternalForm());
+            new Image(Objects.requireNonNull(ScoreboardLabel.class.getResource("/scoreboardImage/background.png")).toExternalForm());
     private static String nickName, scoreText, rankText;
     private static Image profileImage;
     @FXML
@@ -28,8 +28,8 @@ public class ScoreboardView {
     private AnchorPane parent;
 
     public AnchorPane getLabel(String nickName, Image profileImage, int score, int rank) {
-        ScoreboardView.nickName = nickName;
-        ScoreboardView.profileImage = profileImage;
+        ScoreboardLabel.nickName = nickName;
+        ScoreboardLabel.profileImage = profileImage;
         scoreText = score + "";
         rankText = rank + "";
         try {

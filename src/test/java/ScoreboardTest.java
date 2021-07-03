@@ -1,12 +1,9 @@
 import model.players.User;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import view.Menu;
 import view.ViewMaster;
-import view.allmenu.ScoreboardView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
