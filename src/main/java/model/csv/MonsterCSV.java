@@ -92,7 +92,7 @@ public class MonsterCSV {
                 .build()
                 .parse();
         for (MonsterCSV monsterCSV : monsters)
-            if (name.replace("-", "_").equalsIgnoreCase(monsterCSV.getName()))
+            if (name.equalsIgnoreCase(monsterCSV.getName().replaceAll("[\\s,.\\-_;':()]", "")))
                 return monsterCSV;
         return null;
     }
@@ -103,6 +103,6 @@ public class MonsterCSV {
                 .build()
                 .parse();
         for (MonsterCSV monsterCSV : monsters)
-            cards.put(monsterCSV.getName().replace("_", "-"), monsterCSV.getDescription());
+            cards.put(monsterCSV.getName().replaceAll("[ ,.\\-_;':()]", ""), monsterCSV.getDescription());
     }
 }

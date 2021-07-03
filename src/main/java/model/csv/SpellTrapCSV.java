@@ -57,7 +57,7 @@ public class SpellTrapCSV {
                 .build()
                 .parse();
         for (SpellTrapCSV spellTrapCsv : spellsAndTraps)
-            if (name.equalsIgnoreCase(spellTrapCsv.getName()))
+            if (name.equalsIgnoreCase(spellTrapCsv.getName().replaceAll("[ ,.\\-_;':()]", "")))
                 return spellTrapCsv;
         return null;
     }
@@ -69,6 +69,6 @@ public class SpellTrapCSV {
                 .build()
                 .parse();
         for (SpellTrapCSV spellTrapCsv : spellsAndTraps)
-            cards.put(spellTrapCsv.getName(), spellTrapCsv.getDescription());
+            cards.put(spellTrapCsv.getName().replaceAll("[ ,.\\-_;':()]", ""), spellTrapCsv.getDescription());
     }
 }

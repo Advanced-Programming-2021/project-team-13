@@ -17,7 +17,6 @@ import java.util.Objects;
 
 public class ScoreboardView {
     private static Stage stage;
-    private final Button backButton = new Button("Back");
     private final Image normalButtonImage =
             new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/back.png")).toExternalForm());
     private final Image clickedButton =
@@ -56,8 +55,6 @@ public class ScoreboardView {
         buttonImage.setTranslateY(65 * 10);
         buttonImage.setOnMouseClicked(event -> {
             counter = 1;
-        });
-        backButton.setOnMouseClicked(event -> {
             try {
                 goToMainMenu();
             } catch (IOException e) {
@@ -68,10 +65,12 @@ public class ScoreboardView {
         buttonImage.setOnMouseExited(event -> buttonImage.setImage(normalButtonImage));
         anchorPane.getChildren().add(buttonImage);
     }
+
     private void goToMainMenu() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
-        ((Stage)backButton.getScene().getWindow()).setScene(new Scene(root));
+        ((Stage) buttonImage.getScene().getWindow()).setScene(new Scene(root));
     }
+
     public void printScoreBoard(User user, int rank) {
         AnchorPane anchorPane = scoreboardLabel.getLabel(user.getNickname(), new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/tas.png")).toExternalForm()), user.getScore(), rank);
         anchorPane.setTranslateY(counter * 50);

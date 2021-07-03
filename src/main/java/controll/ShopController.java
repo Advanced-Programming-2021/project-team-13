@@ -26,39 +26,7 @@ public class ShopController {
         } catch (Exception ignored) {
         }
     }
-
-    public void buyCard(String cardName) {
-        MonsterCSV monsterCard = null;
-        SpellTrapCSV spellOrTrap = null;
-        try {
-            monsterCard = MonsterCSV.findMonster(cardName);
-            spellOrTrap = SpellTrapCSV.findSpellTrap(cardName);
-        } catch (FileNotFoundException e) {
-        }
-        if (monsterCard == null
-                && spellOrTrap == null) {
-            shopView.printInvalidCard();
-            return;
-        }
-        if (monsterCard != null) buy(monsterCard.getPrice(), cardName);
-        else buy(spellOrTrap.getPrice(), cardName);
-    }
-
-    private void buy(int price, String cardName) {
-        User user = ViewMaster.getUser();
-        if (user.getMoney() < price) shopView.printNotEnoughMoney();
-        else {
-            user.addMoney(-price);
-            user.addCard(cardName);
-        }
-    }
-
-
-    public void sortAllCards() {
-        shopView.showAllCards(cards);
-    }
-
-    public void showCard(String cardName) {
+    public String[] getDetail(String cardName) {
         MonsterCSV monsterCSV = null;
         try {
             monsterCSV = MonsterCSV.findMonster(cardName);
@@ -68,20 +36,20 @@ public class ShopController {
             SpellTrapCSV spellTrapCSV = null;
             try {
                 spellTrapCSV = SpellTrapCSV.findSpellTrap(cardName);
+                assert spellTrapCSV != null;
+                String detail = spellTrapCSV.getPrice() + "-" + "Name: " + spellTrapCSV.getName() +
+                        "\nType: " + spellTrapCSV.getType() + "\nIcon: " + spellTrapCSV.getIcon();
+                return detail.split("-");
             } catch (Exception ignore) {
             }
-            if (spellTrapCSV == null)
-                shopView.printInvalidCard();
-            else
-                shopView.printSpellAndTrap(spellTrapCSV.getIcon(), spellTrapCSV.getDescription(), spellTrapCSV.getName(),
-                        spellTrapCSV.getType() == CardType.SPELL ? "Spell" : "Trap");
-
-        } else
-            shopView.printMonsterCard(monsterCSV.getAttack(), monsterCSV.getDefence(), monsterCSV.getLevel(), monsterCSV.getName()
-                    , monsterCSV.getDescription(), monsterCSV.getMonsterType());
-
+        } else {
+            String detail = monsterCSV.getPrice() + "-" + "Name: " + monsterCSV.getName() +
+                    "\nLevel: " + monsterCSV.getLevel() +
+                    "\nType: " + monsterCSV.getCardType() +
+                    "\nAttack: " + monsterCSV.getAttack() + "\nDefense: " + monsterCSV.getDefence();
+            return detail.split("-");
+        }
+        return null;
     }
-
-
 }
 

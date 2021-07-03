@@ -1,8 +1,10 @@
 package model.players;
 
+import javafx.scene.image.Image;
 import model.Deck;
 import model.cards.Card;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,6 +24,7 @@ public class User implements Comparable<User> {
     private int loseNum;
     private int drawNum;
     private HashMap<String, Integer> allCards;
+    private HashMap<String, javafx.scene.image.Image> cardsImage;
     private ArrayList<Deck> allDecks;
     private ArrayList<Card> cards;
 
@@ -35,6 +38,7 @@ public class User implements Comparable<User> {
         this.loseNum = 0;
         this.drawNum = 0;
         allCards = new HashMap<>();
+        cardsImage = new HashMap<>();
         allDecks = new ArrayList<>();
         allUsers.add(this);
     }
@@ -65,6 +69,10 @@ public class User implements Comparable<User> {
             allCards.put(cardName, allCards.get(cardName) + 1);
         else
             allCards.put(cardName, 1);
+    }
+
+    public HashMap<String, Image> getCardsImage() {
+        return cardsImage;
     }
 
     public void setMoney(long money) {
