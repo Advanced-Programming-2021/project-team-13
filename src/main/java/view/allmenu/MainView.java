@@ -6,9 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class MainView {
     private final MainController mainController;
@@ -19,6 +25,8 @@ public class MainView {
     public Button shopButton;
     public Button importButton;
     public Button logoutButton;
+    public AnchorPane leftPane;
+
 
     public MainView() {
         mainController = new MainController(this);
@@ -62,5 +70,9 @@ public class MainView {
         ((Stage) logoutButton.getScene().getWindow()).setScene(new Scene(root));
     }
 
+
+    public void fade(MouseEvent mouseEvent) {
+
+    }
 
 }

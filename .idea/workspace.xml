@@ -4,22 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/ScoreboardLabel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/scoreboardImage/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/scoreboardImage/background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/scoreboardImage/clicked.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/scoreboardImage/tower.png" afterDir="false" />
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment=" fixes">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ScoreboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameWinMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameWinMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allMenu/ScoreboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/scoreboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/scoreboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ScoreboardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ScoreboardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/ImportAndExportView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ImportAndExportView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/ScoreboardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ShopView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allMenu/ShowGraveyardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ShowGraveyardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/LoginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/LoginMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/RegisterMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/RegisterMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controll/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/MainController.class" afterDir="false" />
@@ -44,7 +48,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ul7X1DTomobqSRc1mkHdk7gyA4" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -66,7 +72,14 @@
       <recent name="F:\AP Project\project-team-13\src\main\resources\backClicked" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="YuGiOh" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ScoreboardView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="view.allmenu.ScoreboardView" />
       <module name="YuGiOh" />
@@ -80,8 +93,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.ScoreboardView" />
       </list>
     </recent_temporary>
@@ -108,5 +133,16 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_battleTest.ic" NAME="GameTest.battleTest Coverage Results" MODIFIED="1624645611916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1624657991342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$All_in_YuGiOh.ic" NAME="All in YuGiOh Coverage Results" MODIFIED="1624660089167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_spellTest.ic" NAME="GameTest.spellTest Coverage Results" MODIFIED="1624652309029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_AITest.ic" NAME="GameTest.AITest Coverage Results" MODIFIED="1624645990912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_TTest.ic" NAME="GameTest.TTest Coverage Results" MODIFIED="1624656745910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
