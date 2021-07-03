@@ -3,6 +3,7 @@ package view.allmenu;
 import controll.MainController;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -15,7 +16,9 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -38,6 +41,7 @@ public class MainView {
     private Image background2;
     private Image background3;
     private ImageView imageView;
+
     public MainView() {
         mainController = new MainController(this);
     }
@@ -76,7 +80,7 @@ public class MainView {
 //        box.setBackground(new Background(new BackgroundFill(
 //                Color.web("black", 0.5), null, null)
 //        ));
-        imageView=new ImageView();
+        imageView = new ImageView();
         imageView.setImage(background1);
         pane.getChildren().addAll(
                 imageView,
@@ -85,10 +89,10 @@ public class MainView {
     }
 
     public void timelineHandler(){
+
                 Timeline tenSecondsWonder = new Timeline(
                         new KeyFrame(Duration.seconds(10),
                                 new EventHandler<ActionEvent>() {
-
                                     @Override
                                     public void handle(ActionEvent event) {
                                         changeBackground();
@@ -99,18 +103,30 @@ public class MainView {
     }
 
     private void changeBackground() {
-        if(imageView.getImage().equals(background1))
-            imageView.setImage(background2);
-        else if(imageView.getImage().equals(background2))
-            imageView.setImage(background3);
-        else if(imageView.getImage().equals(background3))
-            imageView.setImage(background1);
+        backgroundTransition(background1, background2);
+        backgroundTransition(background2, background3);
+        backgroundTransition(background3, background1);
+    }
+
+    private void backgroundTransition(Image backgroundI, Image backgroundII) {
+        if(imageView.getImage().equals(backgroundI)) {
+            KeyFrame keyFrame1On = new KeyFrame(Duration.seconds(0), new KeyValue(imageView.imageProperty(), backgroundI));
+            KeyFrame startFadeOut = new KeyFrame(Duration.seconds(1), new KeyValue(imageView.opacityProperty(), 1.0));
+            KeyFrame endFadeOut = new KeyFrame(Duration.seconds(2), new KeyValue(imageView.opacityProperty(), 0.0));
+            KeyFrame keyFrame2On = new KeyFrame(Duration.seconds(2), new KeyValue(imageView.imageProperty(), backgroundII));
+            KeyFrame endFadeIn = new KeyFrame(Duration.seconds(4), new KeyValue(imageView.opacityProperty(), 1.0));
+            Timeline timelineOn = new Timeline(keyFrame1On, startFadeOut, endFadeOut, keyFrame2On, endFadeIn);
+            timelineOn.setAutoReverse(true);
+            timelineOn.setCycleCount(1);
+            timelineOn.play();
+        }
     }
 
     private Node[] setNodes() {
-        return new Node[]{new MenuItem("duel", () -> {
-            goToDuelMenu();
-        }),
+        return new Node[]{
+                new MenuItem("duel", () -> {
+                    goToDuelMenu();
+                }),
                 new MenuItem("deck", () -> {
                     try {
                         goToDeckMenu();
