@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.menuItems.CustomButtons;
+import model.menuItems.CustomButton;
 
 import java.io.IOException;
 
@@ -45,9 +45,9 @@ public class ProfileView {
 
     private Node[] setNodes() {
         return new Node[]{
-                new CustomButtons("Change Nickname", this::changeNickName),
-                new CustomButtons("Change Password", this::changePassword),
-                new CustomButtons("Back", () -> {
+                new CustomButton("Change Nickname", this::changeNickName),
+                new CustomButton("Change Password", this::changePassword),
+                new CustomButton("Back", () -> {
                     try {
                         goBack();
                     } catch (IOException e) {

@@ -13,8 +13,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class CustomButtons extends StackPane {
-    public CustomButtons(String name, Runnable action) {
+public class CustomButton extends StackPane {
+    public CustomButton(String name, Runnable action) {
         LinearGradient gradient = new LinearGradient(
                 0, 0.5, 1, 0.5, true, CycleMethod.NO_CYCLE,
                 new Stop(0.1, Color.web("black", 1)),
