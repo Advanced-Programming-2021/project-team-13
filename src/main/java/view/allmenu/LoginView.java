@@ -1,6 +1,5 @@
 package view.allmenu;
 
-import com.sun.istack.internal.NotNull;
 import controll.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,13 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.menuItems.CustomButton;
 
 import java.io.IOException;
 
@@ -43,6 +38,9 @@ public class LoginView {
         loginController = new LoginController(this);
     }
 
+    public void initialize(){
+    }
+
     public void setLogin() throws IOException {
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("/fxml/LoginMenu.fxml"));
@@ -65,7 +63,7 @@ public class LoginView {
         ((Stage)registerButton.getScene().getWindow()).setScene(new Scene(root));
     }
 
-    public void exit(ActionEvent event) {
+    public void exit() {
         ((Stage)exitButton.getScene().getWindow()).close();
     }
 
