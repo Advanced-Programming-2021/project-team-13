@@ -1,7 +1,10 @@
 package view.allmenu;
 
 import controll.MainController;
-import javafx.animation.*;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,9 +40,7 @@ public class MainView {
     private Image background1;
     private Image background2;
     private Image background3;
-    private ImageView imageView1;
-    private ImageView imageView2;
-    private ImageView imageView3;
+    private ImageView imageView;
 
     public MainView() {
         mainController = new MainController(this);
@@ -79,14 +80,10 @@ public class MainView {
 //        box.setBackground(new Background(new BackgroundFill(
 //                Color.web("black", 0.5), null, null)
 //        ));
-        imageView1 = new ImageView();
-        imageView2 = new ImageView();
-        imageView3 = new ImageView();
-        imageView1.setImage(background1);
-        imageView2.setImage(background2);
-        imageView3.setImage(background3);
+        imageView = new ImageView();
+        imageView.setImage(background1);
         pane.getChildren().addAll(
-                imageView1,
+                imageView,
                 box);
         timelineHandler();
     }
@@ -112,12 +109,12 @@ public class MainView {
     }
 
     private void backgroundTransition(Image backgroundI, Image backgroundII) {
-        if(imageView1.getImage().equals(backgroundI)) {
-            KeyFrame keyFrame1On = new KeyFrame(Duration.seconds(0), new KeyValue(imageView1.imageProperty(), backgroundI));
-            KeyFrame startFadeOut = new KeyFrame(Duration.seconds(1), new KeyValue(imageView1.opacityProperty(), 1.0));
-            KeyFrame endFadeOut = new KeyFrame(Duration.seconds(2), new KeyValue(imageView1.opacityProperty(), 0.0));
-            KeyFrame keyFrame2On = new KeyFrame(Duration.seconds(2), new KeyValue(imageView1.imageProperty(), backgroundII));
-            KeyFrame endFadeIn = new KeyFrame(Duration.seconds(4), new KeyValue(imageView1.opacityProperty(), 1.0));
+        if(imageView.getImage().equals(backgroundI)) {
+            KeyFrame keyFrame1On = new KeyFrame(Duration.seconds(0), new KeyValue(imageView.imageProperty(), backgroundI));
+            KeyFrame startFadeOut = new KeyFrame(Duration.seconds(1), new KeyValue(imageView.opacityProperty(), 1.0));
+            KeyFrame endFadeOut = new KeyFrame(Duration.seconds(2), new KeyValue(imageView.opacityProperty(), 0.0));
+            KeyFrame keyFrame2On = new KeyFrame(Duration.seconds(2), new KeyValue(imageView.imageProperty(), backgroundII));
+            KeyFrame endFadeIn = new KeyFrame(Duration.seconds(4), new KeyValue(imageView.opacityProperty(), 1.0));
             Timeline timelineOn = new Timeline(keyFrame1On, startFadeOut, endFadeOut, keyFrame2On, endFadeIn);
             timelineOn.setAutoReverse(true);
             timelineOn.setCycleCount(1);
@@ -126,9 +123,10 @@ public class MainView {
     }
 
     private Node[] setNodes() {
-        return new Node[]{new MenuItem("duel", () -> {
-            goToDuelMenu();
-        }),
+        return new Node[]{
+                new MenuItem("duel", () -> {
+                    goToDuelMenu();
+                }),
                 new MenuItem("deck", () -> {
                     try {
                         goToDeckMenu();
