@@ -1,5 +1,6 @@
 package view.allmenu;
 
+import com.sun.istack.internal.NotNull;
 import controll.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,7 +42,10 @@ public class LoginView {
         loginController = new LoginController(this);
     }
     public void initialize(){
-        
+//        Image background = new Image("/loginPics/lo.jpg",
+//                1280,720,false,true);
+//        ImageView imageView=new ImageView(background);
+//        pane.getChildren().addAll(imageView);
     }
     public void setLogin() throws IOException {
         Stage primaryStage = new Stage();
