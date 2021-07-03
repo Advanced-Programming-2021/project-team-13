@@ -17,8 +17,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         ViewMaster.getViewMaster().run();
-        SceneController.startDeckMenu(primaryStage);
-        primaryStage.show();
+//        SceneController.startDeckMenu(primaryStage);
+//        primaryStage.show();
     }
 
     @Override

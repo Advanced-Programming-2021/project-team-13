@@ -26,7 +26,6 @@ public class DeckController {
     }
 
     public void createDeck(String deckName) {
-
         if (ViewMaster.getUser().getDeckByName(deckName) != null)
             deckView.printDeckExists(deckName);
         else {
