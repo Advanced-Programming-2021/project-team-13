@@ -1,42 +1,29 @@
 package view.allmenu;
 
 import controll.MainController;
-import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.menuItems.CustomButton;
 
 import java.io.IOException;
 
 public class MainView {
     private final MainController mainController;
     public BorderPane pane;
-    public AnimationTimer animationTimer;
     private Image background1;
     private Image background2;
     private Image background3;
@@ -44,24 +31,6 @@ public class MainView {
 
     public MainView() {
         mainController = new MainController(this);
-    }
-
-    private static class MenuItem extends StackPane {
-        MenuItem(String name, Runnable action) {
-            LinearGradient gradient = new LinearGradient(
-                    0, 0.5, 1, 0.5, true, CycleMethod.NO_CYCLE,
-                    new Stop(0.1, Color.web("black", 1)),
-                    new Stop(1.0, Color.web("black", 0.5)));
-            Rectangle bg = new Rectangle(250, 38, gradient);
-            Text text = new Text(name);
-            text.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.ITALIC, 22));
-            setOnMouseClicked(e->{action.run(); });
-            text.fillProperty().bind(
-                    Bindings.when(hoverProperty()).then(Color.WHITE).otherwise(Color.GREY)
-            );
-            text.setEffect(new Bloom(0.2));
-            getChildren().addAll(bg, text);
-        }
     }
 
     public void initialize() {
@@ -77,9 +46,6 @@ public class MainView {
         );
         box.setTranslateX(1280 - 300);
         box.setTranslateY(200);
-//        box.setBackground(new Background(new BackgroundFill(
-//                Color.web("black", 0.5), null, null)
-//        ));
         imageView = new ImageView();
         imageView.setImage(background1);
         pane.getChildren().addAll(
@@ -124,45 +90,45 @@ public class MainView {
 
     private Node[] setNodes() {
         return new Node[]{
-                new MenuItem("duel", () -> {
+                new CustomButton("duel", () -> {
                     goToDuelMenu();
                 }),
-                new MenuItem("deck", () -> {
+                new CustomButton("deck", () -> {
                     try {
                         goToDeckMenu();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }),
-                new MenuItem("scoreboard", () -> {
+                new CustomButton("scoreboard", () -> {
                     try {
                         goToScoreBoard();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }),
-                new MenuItem("profile", () -> {
+                new CustomButton("profile", () -> {
                     try {
                         goToProfile();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }),
-                new MenuItem("shop", () -> {
+                new CustomButton("shop", () -> {
                     try {
                         goToShop();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }),
-                new MenuItem("import/export", () -> {
+                new CustomButton("import/export", () -> {
                     try {
                         goToImport();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }),
-                new MenuItem("logout", () -> {
+                new CustomButton("logout", () -> {
                     try {
                         goToLoginMenu();
                     } catch (IOException e) {
