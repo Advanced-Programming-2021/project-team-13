@@ -1,5 +1,6 @@
 package view.allmenu;
 
+import com.sun.istack.internal.NotNull;
 import controll.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,6 +37,7 @@ public class LoginView {
     public TextField regNicknameField;
     public Button backButton;
     public Label regNotifLabel;
+    public AnchorPane pane;
 
     public LoginView() {
         loginController = new LoginController(this);
@@ -66,6 +74,10 @@ public class LoginView {
         String username = regUsernameField.getText();
         String password = regPasswordField.getText();
         String nickname = regNicknameField.getText();
+        if(username.isEmpty()||password.isEmpty()||nickname.isEmpty()){
+            regNotifLabel.setText("please fill all needed required fields");
+            return false;
+        }
         return loginController.registerUser(username, password, nickname);
     }
 
@@ -89,6 +101,7 @@ public class LoginView {
     }
 
     public void printUserCreated() {
+        regNotifLabel.setStyle("-fx-text-fill: green ");
         regNotifLabel.setText("user created successfully!");
     }
 
