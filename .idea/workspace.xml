@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="login">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/loginPics/ix.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/registerPic/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/registerPic/aa.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/registerPic/ex.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/registerPic/x.jpg" afterDir="false" />
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="reg">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/menuItems/CustomButtons.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/profile/a.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/LoginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/LoginMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/RegisterMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/RegisterMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/loginPics/a.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/loginPics/a.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/ProfileMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +88,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -109,7 +116,7 @@
       <updated>1625228365062</updated>
       <workItem from="1625291107828" duration="16895000" />
       <workItem from="1625314452172" duration="40000" />
-      <workItem from="1625317097848" duration="2133000" />
+      <workItem from="1625317097848" duration="4056000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -174,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625314167426</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="reg">
+      <created>1625320021535</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1625320021535</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +210,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="main" />
     <MESSAGE value="login" />
-    <option name="LAST_COMMIT_MESSAGE" value="login" />
+    <MESSAGE value="reg" />
+    <option name="LAST_COMMIT_MESSAGE" value="reg" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
