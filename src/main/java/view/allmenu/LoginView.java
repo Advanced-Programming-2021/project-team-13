@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,11 +31,14 @@ public class LoginView {
     public TextField regNicknameField;
     public Button backButton;
     public Label regNotifLabel;
+    public AnchorPane pane;
 
     public LoginView() {
         loginController = new LoginController(this);
     }
-
+    public void initialize(){
+        
+    }
     public void setLogin() throws IOException {
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("/fxml/LoginMenu.fxml"));
