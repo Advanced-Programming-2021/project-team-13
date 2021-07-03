@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="login">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/loginPics/a.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/loginPics/b.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/loginPics/lo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/loginPics/ix.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/registerPic/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/registerPic/aa.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/registerPic/ex.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/registerPic/x.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/LoginMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/LoginMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/RegisterMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/RegisterMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/loginPics/a.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/loginPics/a.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,19 +92,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -116,7 +107,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1625228365062</updated>
-      <workItem from="1625291107828" duration="16675000" />
+      <workItem from="1625291107828" duration="16895000" />
+      <workItem from="1625314452172" duration="40000" />
+      <workItem from="1625317097848" duration="2133000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -174,7 +167,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625305875380</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="login">
+      <created>1625314167426</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1625314167426</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
