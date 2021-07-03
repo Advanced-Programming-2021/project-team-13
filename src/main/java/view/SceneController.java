@@ -10,7 +10,7 @@ import java.net.URL;
 
 public class SceneController {
 
-    public static void startDeckMenu (Stage primaryStage) throws IOException {
+    public static void startDeckMenu(Stage primaryStage) throws IOException {
         URL url = SceneController.class.getResource("/fxml/DeckMenu.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Parent parent = fxmlLoader.load();

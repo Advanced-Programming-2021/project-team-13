@@ -1,16 +1,25 @@
 package view.allmenu;
 
+import javafx.fxml.FXML;
+import javafx.scene.effect.*;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BorderPane;
 import model.Deck;
 import controll.DeckController;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
 
 public class DeckView {
+    @FXML
+    private BorderPane parent;
     private DeckController deckController;
 
     public DeckView() {

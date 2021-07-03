@@ -43,7 +43,6 @@ public class ScoreboardController {
         int rank = 1;
         int counter = 1;
         for (int i = 0; i < allUsers.size(); i++) {
-            scoreboardView.printScoreBoard(allUsers.get(i), rank);
             if (i < allUsers.size() - 1
                     && allUsers.get(i).getScore() == allUsers.get(i + 1).getScore()) {
                 counter++;

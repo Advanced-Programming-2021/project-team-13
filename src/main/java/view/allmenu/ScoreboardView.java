@@ -2,18 +2,16 @@ package view.allmenu;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
-public class ScoreboardLabel {
+public class ScoreboardView {
     private static Image image =
-            new Image(Objects.requireNonNull(ScoreboardLabel.class.getResource("/scoreboardImage/background.png")).toExternalForm());
+            new Image(Objects.requireNonNull(ScoreboardView.class.getResource("/scoreboardImage/background.png")).toExternalForm());
     private static String nickName, scoreText, rankText;
     private static Image profileImage;
     @FXML
@@ -30,8 +28,8 @@ public class ScoreboardLabel {
     private AnchorPane parent;
 
     public AnchorPane getLabel(String nickName, Image profileImage, int score, int rank) {
-        ScoreboardLabel.nickName = nickName;
-        ScoreboardLabel.profileImage = profileImage;
+        ScoreboardView.nickName = nickName;
+        ScoreboardView.profileImage = profileImage;
         scoreText = score + "";
         rankText = rank + "";
         try {
