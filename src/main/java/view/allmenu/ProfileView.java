@@ -21,9 +21,6 @@ import java.io.IOException;
 
 public class ProfileView {
     private final ProfileController profileController;
-    //    public Button changeNicknameBtn;
-//    public Button changePasswordBtn;
-//    public Button backBtn;
     public BorderPane pane;
     private Image background;
     private ImageView imageView;
