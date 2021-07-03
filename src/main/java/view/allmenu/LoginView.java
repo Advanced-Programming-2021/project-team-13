@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,12 +42,7 @@ public class LoginView {
     public LoginView() {
         loginController = new LoginController(this);
     }
-    public void initialize(){
-//        Image background = new Image("/loginPics/lo.jpg",
-//                1280,720,false,true);
-//        ImageView imageView=new ImageView(background);
-//        pane.getChildren().addAll(imageView);
-    }
+
     public void setLogin() throws IOException {
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("/fxml/LoginMenu.fxml"));
@@ -78,6 +74,10 @@ public class LoginView {
         String username = regUsernameField.getText();
         String password = regPasswordField.getText();
         String nickname = regNicknameField.getText();
+        if(username.isEmpty()||password.isEmpty()||nickname.isEmpty()){
+            regNotifLabel.setText("please fill all needed required fields");
+            return false;
+        }
         return loginController.registerUser(username, password, nickname);
     }
 
@@ -101,6 +101,7 @@ public class LoginView {
     }
 
     public void printUserCreated() {
+        regNotifLabel.setStyle("-fx-text-fill: green ");
         regNotifLabel.setText("user created successfully!");
     }
 

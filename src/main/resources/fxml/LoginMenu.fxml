@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.effect.Light.Distant ?>
 
-<AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;-fx-background-image:url('/loginPics/lo.jpg'); -fx-background-position:center" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.LoginView">
+<AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;-fx-background-image:url('/loginPics/a.jpg'); -fx-background-position:center" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.LoginView">
    <Button fx:id="loginButton" layoutX="870.0" layoutY="179.0" mnemonicParsing="false" onAction="#goToMainMenu" opacity="0.88" prefHeight="26.0" prefWidth="356.0" text="login" textFill="#23337a">
       <font>
          <Font name="System Bold" size="14.0" />
