@@ -32,7 +32,7 @@
 }
 
 #mainDeckBack , #sideDeckBack {
-    -fx-background-color: rgba(0 ,0 , 0 ,0.7);
+    -fx-background-color: rgba(0 ,0 , 0 ,0.5);
 }
 
 #cardVBox {
