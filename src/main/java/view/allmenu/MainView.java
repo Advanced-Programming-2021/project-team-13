@@ -1,13 +1,16 @@
 package view.allmenu;
 
 import controll.MainController;
+import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -22,14 +25,18 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
 public class MainView {
     private final MainController mainController;
     public BorderPane pane;
-
-
+    public AnimationTimer animationTimer;
+    private Image background1;
+    private Image background2;
+    private Image background3;
+    private ImageView imageView;
     public MainView() {
         mainController = new MainController(this);
     }
@@ -53,7 +60,11 @@ public class MainView {
 
     public void initialize() {
 
-        Image background = new Image(getClass().getResource("/mainMenuImages/1.jpg").toExternalForm(),
+       background1 = new Image(getClass().getResource("/mainMenuImages/1.jpg").toExternalForm(),
+                1280, 720, false, true);
+        background2 = new Image(getClass().getResource("/mainMenuImages/2.jpg").toExternalForm(),
+                1280, 720, false, true);
+        background3 = new Image(getClass().getResource("/mainMenuImages/3.jpg").toExternalForm(),
                 1280, 720, false, true);
         VBox box = new VBox(20,
                 setNodes()
@@ -63,10 +74,35 @@ public class MainView {
         box.setBackground(new Background(new BackgroundFill(
                 Color.web("black", 0.6), null, null)
         ));
-
+        imageView=new ImageView();
+        imageView.setImage(background1);
         pane.getChildren().addAll(
-                new ImageView(background),
+                imageView,
                 box);
+        timelineHandler();
+    }
+
+    public void timelineHandler(){
+                Timeline tenSecondsWonder = new Timeline(
+                        new KeyFrame(Duration.seconds(10),
+                                new EventHandler<ActionEvent>() {
+
+                                    @Override
+                                    public void handle(ActionEvent event) {
+                                        changeBackground();
+                                    }
+                                }));
+                tenSecondsWonder.setCycleCount(Timeline.INDEFINITE);
+                tenSecondsWonder.play();
+    }
+
+    private void changeBackground() {
+        if(imageView.getImage().equals(background1))
+            imageView.setImage(background2);
+        else if(imageView.getImage().equals(background2))
+            imageView.setImage(background3);
+        else if(imageView.getImage().equals(background3))
+            imageView.setImage(background1);
     }
 
     private Node[] setNodes() {
