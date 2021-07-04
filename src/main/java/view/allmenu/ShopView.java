@@ -1,9 +1,9 @@
 package view.allmenu;
 
 import controll.ShopController;
+import controll.json.UserJson;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,9 +21,6 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.players.User;
-import view.Menu;
-import view.Regex;
 import view.ViewMaster;
 
 import javax.imageio.ImageIO;
@@ -32,11 +29,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
 
 public class ShopView {
-    private static Stage stage;
     private Timeline messageTimer;
     private final Image backButtonImage =
             new Image(getClass().getResource("/shopImage/backButton.png").toExternalForm());
@@ -67,19 +61,18 @@ public class ShopView {
     private int selectedCardPrice;
     private final FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".jpg");
 
-    public void start(Stage primaryStage) throws Exception {
-        stage = primaryStage;
+    public void start(Stage primaryStage) {
         try {
             AnchorPane root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/shop.fxml")));
             primaryStage.setScene(new Scene(root, 1280, 720));
             primaryStage.show();
         } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
+
     @FXML
     public void initialize() {
-        ViewMaster.setUser(new User("", "", ""));
         shopController = new ShopController(this);
         scrollPane.fitToHeightProperty().set(true);
         scrollPane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
@@ -101,9 +94,11 @@ public class ShopView {
     }
 
     private void goToMainMenu() throws IOException {
+        new UserJson().update();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
         ((Stage) backButton.getScene().getWindow()).setScene(new Scene(root));
     }
+
     private void createBuyButton() {
         button.setOnMouseEntered(e -> {
             if (button.getImage() == allowBuy)
@@ -115,9 +110,7 @@ public class ShopView {
         });
         button.setOnMouseClicked(e -> {
             if (button.getImage() == allowBuyShadow) {
-                ViewMaster.getUser().addCard(selectedCardName);
-                ViewMaster.getUser().getCardsImage().put(selectedCardName, cardImage.getImage());
-                ViewMaster.getUser().addMoney(-selectedCardPrice);
+                shopController.buyCard(ViewMaster.getUser() , selectedCardName , selectedCardPrice);
                 message.setOpacity(1);
                 shopButtonImage(selectedCardPrice);
                 messageTimer.play();

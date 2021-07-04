@@ -1,10 +1,8 @@
 package model.players;
 
-import javafx.scene.image.Image;
 import model.Deck;
 import model.cards.Card;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,10 +21,9 @@ public class User implements Comparable<User> {
     private int winNum;
     private int loseNum;
     private int drawNum;
-    private HashMap<String, Integer> allCards;
-    private HashMap<String, javafx.scene.image.Image> cardsImage;
+    private HashMap<String, Integer> cardNameToNumber;
     private ArrayList<Deck> allDecks;
-    private ArrayList<Card> cards;
+    private ArrayList<Card> allCards;
 
     public User(String username, String password, String nickname) {
         this.username = username;
@@ -37,8 +34,8 @@ public class User implements Comparable<User> {
         this.winNum = 0;
         this.loseNum = 0;
         this.drawNum = 0;
-        allCards = new HashMap<>();
-        cardsImage = new HashMap<>();
+        cardNameToNumber = new HashMap<>();
+        allCards = new ArrayList<>();
         allDecks = new ArrayList<>();
         allUsers.add(this);
     }
@@ -59,20 +56,15 @@ public class User implements Comparable<User> {
         return null;
     }
 
-    public ArrayList<Card> getCards() {
-        return cards;
-    }
-
     public void addCard(String cardName) {
         cardName = cardName.replace("_", "-");
-        if (allCards.containsKey(cardName))
-            allCards.put(cardName, allCards.get(cardName) + 1);
-        else
-            allCards.put(cardName, 1);
-    }
-
-    public HashMap<String, Image> getCardsImage() {
-        return cardsImage;
+        if (cardNameToNumber.containsKey(cardName)) {
+            Integer num = cardNameToNumber.get(cardName);
+            cardNameToNumber.replace(cardName, num + 1);
+        } else {
+            allCards.add(Card.findCardFromCsv(cardName));
+            cardNameToNumber.put(cardName, 1);
+        }
     }
 
     public void setMoney(long money) {
@@ -103,7 +95,11 @@ public class User implements Comparable<User> {
         money += moneyToAdd;
     }
 
-    public HashMap<String, Integer> getAllCards() {
+    public HashMap<String, Integer> getCardNameToNumber() {
+        return cardNameToNumber;
+    }
+
+    public ArrayList<Card> getAllCards() {
         return allCards;
     }
 

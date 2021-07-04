@@ -12,38 +12,31 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class ImageLoader {
-    private final HashMap<String, Image> cardsImage = new HashMap<String, Image>();
-    private final File monsterFile = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/Monsters");
-    private final File spellTrapFile = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/SpellTrap");
-    private final FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".png");
-    private BufferedImage bufferedImage = null;
+    private static final HashMap<String, Image> cardsImage = new HashMap<>();
+    private static final File monsterFile = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/Monsters");
+    private static final File spellTrapFile = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/SpellTrap");
+    private static final FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".jpg");
 
-    public void load() {
+    public static void load() {
         loadMonster();
         loadSpellAndTrap();
     }
 
-    private void loadMonster() {
-        if (monsterFile.isDirectory()) {
-            for (File file : Objects.requireNonNull(monsterFile.listFiles(filenameFilter))) {
-                try {
-                    bufferedImage = ImageIO.read(file);
-                    Image cardImage = SwingFXUtils.toFXImage(bufferedImage, null);
-                    cardsImage.put(file.getName().replaceAll(".png", ""), cardImage);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    private static void loadMonster() {
+        addCard(monsterFile);
     }
 
-    private void loadSpellAndTrap() {
+    private static void loadSpellAndTrap() {
+        addCard(spellTrapFile);
+    }
+
+    private static void addCard(File spellTrapFile) {
         if (spellTrapFile.isDirectory()) {
             for (File file : Objects.requireNonNull(spellTrapFile.listFiles(filenameFilter))) {
                 try {
-                    bufferedImage = ImageIO.read(file);
+                    BufferedImage bufferedImage = ImageIO.read(file);
                     Image cardImage = SwingFXUtils.toFXImage(bufferedImage, null);
-                    cardsImage.put(file.getName().replaceAll(".png", ""), cardImage);
+                    cardsImage.put(file.getName().replaceAll(".jpg", ""), cardImage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -51,12 +44,12 @@ public class ImageLoader {
         }
     }
 
-    public Image getCardImageByName(String cardName) {
+    public static Image getCardImageByName(String cardName) {
         cardName = cardName.replaceAll("[\\s\\-_*';\\.,^!]", "");
         return cardsImage.get(cardName);
     }
 
-    public HashMap<String, Image> getCardsImage() {
+    public static HashMap<String, Image> getCardsImage() {
         return cardsImage;
     }
 }

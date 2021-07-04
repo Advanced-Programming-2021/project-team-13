@@ -6,5 +6,5 @@ public enum MonsterAttribute {
     FIRE,
     WIND,
     LIGHT,
-    WATER;
+    WATER
 }

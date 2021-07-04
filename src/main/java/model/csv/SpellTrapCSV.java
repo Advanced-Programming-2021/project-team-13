@@ -2,7 +2,6 @@ package model.csv;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvToBeanBuilder;
-import enums.CardType;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -27,12 +26,8 @@ public class SpellTrapCSV {
         return name;
     }
 
-    public CardType getType() {
-        String s = "SPELL";
-        if (s.equalsIgnoreCase(type)) {
-            return CardType.SPELL;
-        }
-        return CardType.TRAP;
+    public String getType() {
+        return type;
     }
 
     public String getIcon() {
@@ -61,7 +56,6 @@ public class SpellTrapCSV {
                 return spellTrapCsv;
         return null;
     }
-
 
     public static void getNameAndDescription(TreeMap<String, String> cards) throws Exception {
         List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))

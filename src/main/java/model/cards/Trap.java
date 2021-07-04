@@ -1,27 +1,29 @@
 package model.cards;
 
 import controll.gameController.TrapAction;
-import enums.CardType;
 import enums.Face;
+import javafx.scene.image.Image;
 
 public class Trap extends Card {
     private TrapAction trapAction;
-    private Card EffectedCard;
+    private Card effectedCard;
     private String type;
     private int setTurn;
     private int activatedTurn;
 
-    public Trap(String name, CardType cardType, String description, Face face,
-                int price, String type) {
-        super(name, cardType, description, face, price);
+    public Trap(String name, String description, Face face, int price, String type , Image image) {
+        super(name, description, face, price , image);
         this.type = type;
         setTurn = -1;
     }
 
-    public Trap(Trap that){
+    public Trap(Trap that) {
         super(that);
         this.type = that.type;
         this.setTurn = -1;
+        trapAction = null;
+        effectedCard = null;
+        activatedTurn = that.activatedTurn;
     }
 
     public int getActivatedTurn() {
@@ -41,7 +43,7 @@ public class Trap extends Card {
     }
 
     public Card getEffectedCard() {
-        return EffectedCard;
+        return effectedCard;
     }
 
     public TrapAction getTrapAction() {
@@ -49,7 +51,7 @@ public class Trap extends Card {
     }
 
     public void setEffectedCard(Card effectedCard) {
-        EffectedCard = effectedCard;
+        this.effectedCard = effectedCard;
     }
 
     public void setTrapAction(TrapAction trapAction) {
