@@ -62,6 +62,13 @@ public class UserDeck {
         return numberOfCardsInSide;
     }
 
+    public void setNumberOfCardsInMain(int numberOfCardsInMain) {
+        this.numberOfCardsInMain = numberOfCardsInMain;
+    }
+
+    public void setNumberOfCardsInSide(int numberOfCardsInSide) {
+        this.numberOfCardsInSide = numberOfCardsInSide;
+    }
 
     public void addNewCard(String cardName, boolean isSide) {
         if (isSide) {

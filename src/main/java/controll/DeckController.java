@@ -2,10 +2,23 @@ package controll;
 
 
 import model.UserDeck;
+import model.cards.Card;
 import model.players.User;
 import view.ViewMaster;
 
 public class DeckController {
+
+    public String renameDeck(User user , String deckName){
+        if (deckName == null || deckName.length() == 0) {
+            return "invalidDeckName";
+        } else {
+            UserDeck userDeck = user.getDeckByName(deckName.trim());
+            if (!userDeck.getName().equals(deckName)) {
+                user.getAllDecks().add(new UserDeck(deckName.trim()));
+                return "renamed";
+            } else return "repetitive";
+        }
+    }
 
     public String createDeck(User user, String deckName) {
         if (deckName == null || deckName.length() == 0) {
@@ -79,8 +92,8 @@ public class DeckController {
     }
 
     private boolean doesHaveCard(User user, String cardName) {
-        for (String card : user.getCardNameToNumber().keySet()) {
-            if (card.equalsIgnoreCase(cardName.replace("_", "-")))
+        for (Card card : user.getAllCards()) {
+            if (card.getCardName().equalsIgnoreCase(cardName.replace("_", "-")))
                 return true;
         }
         return false;

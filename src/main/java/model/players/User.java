@@ -155,6 +155,13 @@ public class User implements Comparable<User> {
         return null;
     }
 
+    public Card getCardByName(String cardName) {
+        for (Card card : allCards)
+            if (card.getCardName().equalsIgnoreCase(cardName))
+                return card;
+        return null;
+    }
+
     public static ArrayList<User> getAllUsers() {
         return allUsers;
     }
