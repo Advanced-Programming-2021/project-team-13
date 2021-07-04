@@ -14,48 +14,6 @@
 <?import javafx.scene.effect.Light.Distant ?>
 
 <AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;-fx-background-image:url('/loginPics/a.jpg'); -fx-background-position:center" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.LoginView">
-   <Button fx:id="loginButton" layoutX="870.0" layoutY="179.0" mnemonicParsing="false" onAction="#goToMainMenu" opacity="0.88" prefHeight="26.0" prefWidth="356.0" text="login" textFill="#23337a">
-      <font>
-         <Font name="System Bold" size="14.0" />
-      </font>
-      <effect>
-         <Lighting diffuseConstant="0.8" specularConstant="0.0" specularExponent="8.05" surfaceScale="1.88">
-            <bumpInput>
-               <Shadow />
-            </bumpInput>
-            <light>
-               <Light.Distant azimuth="65.19" elevation="125.75" />
-            </light>
-         </Lighting>
-      </effect></Button>
-   <Button fx:id="registerButton" layoutX="222.0" layoutY="134.0" mnemonicParsing="false" onAction="#goToRegisterMenu" prefHeight="30.0" prefWidth="207.0" text="register" textFill="#0030a1">
-      <font>
-         <Font name="System Bold" size="14.0" />
-      </font>
-      <effect>
-         <Lighting diffuseConstant="0.79" specularConstant="0.51" specularExponent="25.98" surfaceScale="2.9">
-            <bumpInput>
-               <Shadow />
-            </bumpInput>
-            <light>
-               <Light.Distant azimuth="290.61" elevation="28.18" />
-            </light>
-         </Lighting>
-      </effect></Button>
-   <Button fx:id="exitButton" layoutX="36.0" layoutY="631.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: crimson;" text="Quit game" textFill="#130606">
-      <font>
-         <Font name="System Bold" size="12.0" />
-      </font>
-      <effect>
-         <Lighting diffuseConstant="1.3" specularConstant="0.0" specularExponent="40.0" surfaceScale="2.52">
-            <bumpInput>
-               <Shadow />
-            </bumpInput>
-            <light>
-               <Light.Distant azimuth="0.0" />
-            </light>
-         </Lighting>
-      </effect></Button>
    <Label fx:id="notifLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="107.0" layoutY="246.0" prefHeight="18.0" prefWidth="386.0" />
    <Label layoutX="56.0" layoutY="141.0" text="dont have an account?" textFill="#f72500">
       <font>
