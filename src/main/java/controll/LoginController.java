@@ -1,32 +1,16 @@
 package controll;
 
-import view.Menu;
 import model.players.User;
+import view.Menu;
 import view.ViewMaster;
 import view.allmenu.LoginView;
+import view.allmenu.RegisterView;
 
 
 public class LoginController {
     private final LoginView loginView;
-
     public LoginController(LoginView loginView) {
         this.loginView = loginView;
-    }
-
-    public boolean registerUser(String username, String password, String nickname) {
-        if (username != null && password != null && nickname != null) {
-            if (User.getUserByUsername(username) != null) {
-                loginView.printUsernameExists(username);
-                return false;
-            }
-            if (User.getUserByNickname(nickname) != null) {
-                loginView.printNicknameExists(nickname);
-                return false;
-            }
-            new User(username, password, nickname);
-            loginView.printUserCreated();
-            return true;
-        }return false;
     }
 
     public boolean loginUser(String username, String password) {
@@ -42,5 +26,4 @@ public class LoginController {
             return true;
         } return false;
     }
-
 }
