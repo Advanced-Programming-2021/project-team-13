@@ -1,13 +1,17 @@
 package view.allmenu;
 
 import controll.DeckController;
+import controll.ImageLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Deck;
+import model.cards.Card;
 import model.players.User;
 import view.Menu;
 import view.Regex;
@@ -212,11 +216,19 @@ public class DeckView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         mainDeck.setGridLinesVisible(true);
         sideDeck.setGridLinesVisible(true);
+        cardVBox.setSpacing(20);
         user = ViewMaster.getUser();
         addCardToScrollPane();
     }
 
     private void addCardToScrollPane() {
-
+        for (Card card : user.getAllCards()){
+            Image image = ImageLoader.getCardImageByName(card.getCardName());
+            card.setImage(image);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(42.1 * 2);
+            imageView.setFitHeight(61.4 * 2);
+            cardVBox.getChildren().add(imageView);
+        }
     }
 }

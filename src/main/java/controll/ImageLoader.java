@@ -15,7 +15,7 @@ public class ImageLoader {
     private static final HashMap<String, Image> cardsImage = new HashMap<>();
     private static final File monsterFile = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/Monsters");
     private static final File spellTrapFile = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/SpellTrap");
-    private static final FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".png");
+    private static final FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".jpg");
 
     public static void load() {
         loadMonster();
@@ -36,7 +36,7 @@ public class ImageLoader {
                 try {
                     BufferedImage bufferedImage = ImageIO.read(file);
                     Image cardImage = SwingFXUtils.toFXImage(bufferedImage, null);
-                    cardsImage.put(file.getName().replaceAll(".png", ""), cardImage);
+                    cardsImage.put(file.getName().replaceAll(".jpg", ""), cardImage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

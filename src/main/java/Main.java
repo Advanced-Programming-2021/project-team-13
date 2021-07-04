@@ -10,17 +10,18 @@ import view.ViewMaster;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        new ImageLoader().load();
+        ImageLoader.load();
         new UserJson().loadDataBase();
-        new User("a", "a", "a");
+        User user = User.getUserByUsername("ali");
+        ViewMaster.setUser(user);
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ViewMaster.getViewMaster().run();
-//        SceneController.startDeckMenu(primaryStage);
-//        primaryStage.show();
+//        ViewMaster.getViewMaster().run();
+        SceneController.startDeckMenu(primaryStage);
+        primaryStage.show();
     }
 
     @Override

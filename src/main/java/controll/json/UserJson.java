@@ -19,14 +19,15 @@ public class UserJson {
         YaGson mapper = new YaGson();
         FileWriter jsonFile;
         try {
-//            for (User user : User.getAllUsers()) {
-//                for (Card card : user.getCards()) {
-//                    card.setCardOwner(null);
-//                    if (card instanceof Trap) {
-//                        ((Trap) card).setTrapAction(null);
-//                    }
-//                }
-//            }
+            for (User user : User.getAllUsers()) {
+                for (Card card : user.getAllCards()) {
+                    card.setImage(null);
+                    card.setCardOwner(null);
+                    if (card instanceof Trap) {
+                        ((Trap) card).setTrapAction(null);
+                    }
+                }
+            }
             String json = mapper.toJson(User.getAllUsers(), User.class);
             jsonFile = new FileWriter("src/main/resources/Users.json");
             jsonFile.write(json);
