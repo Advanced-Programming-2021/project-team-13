@@ -5,10 +5,7 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.Phase;
 import enums.Zone;
-import model.Board;
-import model.Cell;
-import model.Deck;
-import model.Graveyard;
+import model.*;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
@@ -21,17 +18,17 @@ public class AIPlayer extends Player {
     private int roundsNumberThatDoNotAttack = 0;
     private String nickname;
 
-    public AIPlayer(Deck deck) {
-        super(deck);
+    public AIPlayer(PlayerDeck playerDeck) {
+        super(playerDeck);
         comparator = Comparator.comparing(Monster::getAttackPointInGame, Comparator.reverseOrder())
                 .thenComparing(Monster::getDefencePointInGame, Comparator.reverseOrder());
     }
 
-    public void renewPlayer(Deck deck) {
+    public void renewPlayer(UserDeck userDeck) {
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
-        this.board = new Board(new Deck(deck), new Graveyard(this), this);
+        this.board = new Board(new PlayerDeck(userDeck), new Graveyard(this), this);
         this.selectedCard = null;
         this.cardsInHand = new ArrayList<>();
         this.isAttacking = false;

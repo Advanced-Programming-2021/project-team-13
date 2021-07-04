@@ -4,8 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="deckView is editing 2">
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="json is okey">
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/UserDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/PlayerDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/csv/SpellTrap.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/SpellTrap.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DeckMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DeckMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shopImage/SpellTrap/Call of the Hunted.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shopImage/SpellTrap/CallOfTheHunted.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/deckMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/deckMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/testCases/gameTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/testCases/gameTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Deck.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625406626812</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="json is okey">
+      <created>1625406814729</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1625406814729</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,18 +288,19 @@
     <MESSAGE value="login" />
     <MESSAGE value="deckView is editing 1" />
     <MESSAGE value="deckView is editing 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="deckView is editing 2" />
+    <MESSAGE value="json is okey" />
+    <option name="LAST_COMMIT_MESSAGE" value="json is okey" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java</url>
-          <line>234</line>
+          <line>89</line>
           <properties class="view.allmenu.DeckView" method="addCardToScrollPane">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="69" />
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

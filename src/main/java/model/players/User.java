@@ -1,6 +1,6 @@
 package model.players;
 
-import model.Deck;
+import model.UserDeck;
 import model.cards.Card;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class User implements Comparable<User> {
     private int loseNum;
     private int drawNum;
     private HashMap<String, Integer> cardNameToNumber;
-    private ArrayList<Deck> allDecks;
+    private ArrayList<UserDeck> allUserDecks;
     private ArrayList<Card> allCards;
 
     public User(String username, String password, String nickname) {
@@ -36,7 +36,7 @@ public class User implements Comparable<User> {
         this.drawNum = 0;
         cardNameToNumber = new HashMap<>();
         allCards = new ArrayList<>();
-        allDecks = new ArrayList<>();
+        allUserDecks = new ArrayList<>();
         allUsers.add(this);
     }
 
@@ -71,8 +71,8 @@ public class User implements Comparable<User> {
         this.money = money;
     }
 
-    public void addDeck(Deck deck) {
-        allDecks.add(deck);
+    public void addDeck(UserDeck userDeck) {
+        allUserDecks.add(userDeck);
     }
 
     public void addScore(int scoreToAdd) {
@@ -147,10 +147,10 @@ public class User implements Comparable<User> {
         return drawNum;
     }
 
-    public Deck getActiveDeck() {
-        for (Deck allDeck : allDecks) {
-            if (allDeck.isActive())
-                return allDeck;
+    public UserDeck getActiveDeck() {
+        for (UserDeck userDeck : allUserDecks) {
+            if (userDeck.isActive())
+                return userDeck;
         }
         return null;
     }
@@ -177,14 +177,14 @@ public class User implements Comparable<User> {
         return "- " + this.nickname + ": " + this.score;
     }
 
-    public ArrayList<Deck> getAllDecks() {
-        return allDecks;
+    public ArrayList<UserDeck> getAllDecks() {
+        return allUserDecks;
     }
 
-    public Deck getDeckByName(String deckName) {
-        for (Deck deck : allDecks) {
-            if (deck.getName().equals(deckName))
-                return deck;
+    public UserDeck getDeckByName(String deckName) {
+        for (UserDeck userDeck : allUserDecks) {
+            if (userDeck.getName().equals(deckName))
+                return userDeck;
         }
         return null;
     }

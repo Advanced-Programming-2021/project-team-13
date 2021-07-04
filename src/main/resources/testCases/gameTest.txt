@@ -45,52 +45,52 @@ shop buy Terratiger, the Empowered Warrior
 shop buy The Tricky
 shop buy Spiral Serpent
 menu exit
-menu enter deck
-deck create testDeck
-deck set-activate testDeck
-deck add-card --card Mirror Force --deck testDeck
-deck add-card --card Trap Hole --deck testDeck
-deck add-card --card Negate Attack --deck testDeck
-deck add-card --card Torrential Tribute --deck testDeck
-deck add-card --card command knight --deck testDeck
-deck add-card --card Magic Cylinder --deck testDeck
-deck add-card --card Call of The Haunted --deck testDeck
-deck add-card --card Magic Jammer --deck testDeck
-deck add-card --card Mind Crush --deck testDeck
-deck add-card --card Horn IMp --deck testDeck
-deck add-card --card Scanner --deck testDeck
-deck add-card --card Time Seal --deck testDeck
-deck add-card --card yomi ship --deck testDeck
-deck add-card --card suijin --deck testDeck
-deck add-card --card fireyarou --deck testDeck
-deck add-card --card Curtain of the Dark Ones --deck testDeck
-deck add-card --card Feral Imp --deck testDeck
-deck add-card --card Dark Magician --deck testDeck
-deck add-card --card Wattkid --deck testDeck
-deck add-card --card Baby Dragon --deck testDeck
-deck add-card --card Baby Dragon --deck testDeck
-deck add-card --card Hero of the East --deck testDeck
-deck add-card --card Crawling dragon --deck testDeck
-deck add-card --card Flame Manipulator --deck testDeck
-deck add-card --card Blue_Eyes White Dragon --deck testDeck
-deck add-card --card Slot Machine --deck testDeck
-deck add-card --card Haniwa --deck testDeck
-deck add-card --card Man_Eater Bug --deck testDeck
-deck add-card --card Gate Guardian --deck testDeck
-deck add-card --card bitron --deck testDeck
-deck add-card --card Marshmallon --deck testDeck
-deck add-card --card Beast King Barbaros --deck testDeck
-deck add-card --card Leotron --deck testDeck
-deck add-card --card The Calculator --deck testDeck
-deck add-card --card Alexandrite Dragon --deck testDeck
-deck add-card --card Mirage Dragon --deck testDeck
-deck add-card --card Exploder Dragon --deck testDeck
-deck add-card --card Warrior Dai Grepher --deck testDeck
-deck add-card --card Dark Blade --deck testDeck
-deck add-card --card Wattaildragon --deck testDeck
-deck add-card --card Terratiger, the Empowered Warrior --deck testDeck
-deck add-card --card The Tricky --deck testDeck
-deck add-card --card Spiral Serpent --deck testDeck
+menu enter playerDeck
+playerDeck create testDeck
+playerDeck set-activate testDeck
+playerDeck add-card --card Mirror Force --playerDeck testDeck
+playerDeck add-card --card Trap Hole --playerDeck testDeck
+playerDeck add-card --card Negate Attack --playerDeck testDeck
+playerDeck add-card --card Torrential Tribute --playerDeck testDeck
+playerDeck add-card --card command knight --playerDeck testDeck
+playerDeck add-card --card Magic Cylinder --playerDeck testDeck
+playerDeck add-card --card Call of The Haunted --playerDeck testDeck
+playerDeck add-card --card Magic Jammer --playerDeck testDeck
+playerDeck add-card --card Mind Crush --playerDeck testDeck
+playerDeck add-card --card Horn IMp --playerDeck testDeck
+playerDeck add-card --card Scanner --playerDeck testDeck
+playerDeck add-card --card Time Seal --playerDeck testDeck
+playerDeck add-card --card yomi ship --playerDeck testDeck
+playerDeck add-card --card suijin --playerDeck testDeck
+playerDeck add-card --card fireyarou --playerDeck testDeck
+playerDeck add-card --card Curtain of the Dark Ones --playerDeck testDeck
+playerDeck add-card --card Feral Imp --playerDeck testDeck
+playerDeck add-card --card Dark Magician --playerDeck testDeck
+playerDeck add-card --card Wattkid --playerDeck testDeck
+playerDeck add-card --card Baby Dragon --playerDeck testDeck
+playerDeck add-card --card Baby Dragon --playerDeck testDeck
+playerDeck add-card --card Hero of the East --playerDeck testDeck
+playerDeck add-card --card Crawling dragon --playerDeck testDeck
+playerDeck add-card --card Flame Manipulator --playerDeck testDeck
+playerDeck add-card --card Blue_Eyes White Dragon --playerDeck testDeck
+playerDeck add-card --card Slot Machine --playerDeck testDeck
+playerDeck add-card --card Haniwa --playerDeck testDeck
+playerDeck add-card --card Man_Eater Bug --playerDeck testDeck
+playerDeck add-card --card Gate Guardian --playerDeck testDeck
+playerDeck add-card --card bitron --playerDeck testDeck
+playerDeck add-card --card Marshmallon --playerDeck testDeck
+playerDeck add-card --card Beast King Barbaros --playerDeck testDeck
+playerDeck add-card --card Leotron --playerDeck testDeck
+playerDeck add-card --card The Calculator --playerDeck testDeck
+playerDeck add-card --card Alexandrite Dragon --playerDeck testDeck
+playerDeck add-card --card Mirage Dragon --playerDeck testDeck
+playerDeck add-card --card Exploder Dragon --playerDeck testDeck
+playerDeck add-card --card Warrior Dai Grepher --playerDeck testDeck
+playerDeck add-card --card Dark Blade --playerDeck testDeck
+playerDeck add-card --card Wattaildragon --playerDeck testDeck
+playerDeck add-card --card Terratiger, the Empowered Warrior --playerDeck testDeck
+playerDeck add-card --card The Tricky --playerDeck testDeck
+playerDeck add-card --card Spiral Serpent --playerDeck testDeck
 menu exit
 menu exit
 user login --password 1234 --username homaan
@@ -138,52 +138,52 @@ shop buy Terratiger, the Empowered Warrior
 shop buy The Tricky
 shop buy Spiral Serpent
 menu exit
-menu enter deck
-deck create testDeck
-deck set-activate testDeck
-deck add-card --card Mirror Force --deck testDeck
-deck add-card --card Negate Attack --deck testDeck
-deck add-card --card Trap Hole --deck testDeck
-deck add-card --card Torrential Tribute --deck testDeck
-deck add-card --card command knight --deck testDeck
-deck add-card --card Magic Cylinder --deck testDeck
-deck add-card --card Call of The Haunted --deck testDeck
-deck add-card --card Magic Jammer --deck testDeck
-deck add-card --card Mind Crush --deck testDeck
-deck add-card --card Horn IMp --deck testDeck
-deck add-card --card Scanner --deck testDeck
-deck add-card --card Time Seal --deck testDeck
-deck add-card --card yomi ship --deck testDeck
-deck add-card --card suijin --deck testDeck
-deck add-card --card fireyarou --deck testDeck
-deck add-card --card Curtain of the Dark Ones --deck testDeck
-deck add-card --card Feral Imp --deck testDeck
-deck add-card --card Dark Magician --deck testDeck
-deck add-card --card Wattkid --deck testDeck
-deck add-card --card Baby Dragon --deck testDeck
-deck add-card --card Baby Dragon --deck testDeck
-deck add-card --card Hero of the East --deck testDeck
-deck add-card --card Crawling dragon --deck testDeck
-deck add-card --card Flame Manipulator --deck testDeck
-deck add-card --card Blue_Eyes White Dragon --deck testDeck
-deck add-card --card Slot Machine --deck testDeck
-deck add-card --card Haniwa --deck testDeck
-deck add-card --card Man_Eater Bug --deck testDeck
-deck add-card --card Gate Guardian --deck testDeck
-deck add-card --card bitron --deck testDeck
-deck add-card --card Marshmallon --deck testDeck
-deck add-card --card Beast King Barbaros --deck testDeck
-deck add-card --card Leotron --deck testDeck
-deck add-card --card The Calculator --deck testDeck
-deck add-card --card Alexandrite Dragon --deck testDeck
-deck add-card --card Mirage Dragon --deck testDeck
-deck add-card --card Exploder Dragon --deck testDeck
-deck add-card --card Warrior Dai Grepher --deck testDeck
-deck add-card --card Dark Blade --deck testDeck
-deck add-card --card Wattaildragon --deck testDeck
-deck add-card --card Terratiger, the Empowered Warrior --deck testDeck
-deck add-card --card The Tricky --deck testDeck
-deck add-card --card Spiral Serpent --deck testDeck
+menu enter playerDeck
+playerDeck create testDeck
+playerDeck set-activate testDeck
+playerDeck add-card --card Mirror Force --playerDeck testDeck
+playerDeck add-card --card Negate Attack --playerDeck testDeck
+playerDeck add-card --card Trap Hole --playerDeck testDeck
+playerDeck add-card --card Torrential Tribute --playerDeck testDeck
+playerDeck add-card --card command knight --playerDeck testDeck
+playerDeck add-card --card Magic Cylinder --playerDeck testDeck
+playerDeck add-card --card Call of The Haunted --playerDeck testDeck
+playerDeck add-card --card Magic Jammer --playerDeck testDeck
+playerDeck add-card --card Mind Crush --playerDeck testDeck
+playerDeck add-card --card Horn IMp --playerDeck testDeck
+playerDeck add-card --card Scanner --playerDeck testDeck
+playerDeck add-card --card Time Seal --playerDeck testDeck
+playerDeck add-card --card yomi ship --playerDeck testDeck
+playerDeck add-card --card suijin --playerDeck testDeck
+playerDeck add-card --card fireyarou --playerDeck testDeck
+playerDeck add-card --card Curtain of the Dark Ones --playerDeck testDeck
+playerDeck add-card --card Feral Imp --playerDeck testDeck
+playerDeck add-card --card Dark Magician --playerDeck testDeck
+playerDeck add-card --card Wattkid --playerDeck testDeck
+playerDeck add-card --card Baby Dragon --playerDeck testDeck
+playerDeck add-card --card Baby Dragon --playerDeck testDeck
+playerDeck add-card --card Hero of the East --playerDeck testDeck
+playerDeck add-card --card Crawling dragon --playerDeck testDeck
+playerDeck add-card --card Flame Manipulator --playerDeck testDeck
+playerDeck add-card --card Blue_Eyes White Dragon --playerDeck testDeck
+playerDeck add-card --card Slot Machine --playerDeck testDeck
+playerDeck add-card --card Haniwa --playerDeck testDeck
+playerDeck add-card --card Man_Eater Bug --playerDeck testDeck
+playerDeck add-card --card Gate Guardian --playerDeck testDeck
+playerDeck add-card --card bitron --playerDeck testDeck
+playerDeck add-card --card Marshmallon --playerDeck testDeck
+playerDeck add-card --card Beast King Barbaros --playerDeck testDeck
+playerDeck add-card --card Leotron --playerDeck testDeck
+playerDeck add-card --card The Calculator --playerDeck testDeck
+playerDeck add-card --card Alexandrite Dragon --playerDeck testDeck
+playerDeck add-card --card Mirage Dragon --playerDeck testDeck
+playerDeck add-card --card Exploder Dragon --playerDeck testDeck
+playerDeck add-card --card Warrior Dai Grepher --playerDeck testDeck
+playerDeck add-card --card Dark Blade --playerDeck testDeck
+playerDeck add-card --card Wattaildragon --playerDeck testDeck
+playerDeck add-card --card Terratiger, the Empowered Warrior --playerDeck testDeck
+playerDeck add-card --card The Tricky --playerDeck testDeck
+playerDeck add-card --card Spiral Serpent --playerDeck testDeck
 menu exit
 menu enter duel
 duel --second-player nima --new --rounds 1

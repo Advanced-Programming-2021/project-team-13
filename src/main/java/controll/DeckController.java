@@ -1,67 +1,61 @@
 package controll;
 
 
-import model.Deck;
-import model.cards.Card;
+import model.UserDeck;
 import model.players.User;
 import view.ViewMaster;
-import view.allmenu.DeckView;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class DeckController {
-    private final DeckView deckView;
 
-    public DeckController(DeckView deckView) {
-        this.deckView = deckView;
-    }
-
-    public boolean createDeck(User user, String deckName) {
-        if (user.getDeckByName(deckName) != null)
-            return false;
-        else {
-            user.getAllDecks().add(new Deck(deckName));
-            return true;
+    public String createDeck(User user, String deckName) {
+        if (deckName == null || deckName.length() == 0) {
+            return "invalidDeckName";
+        } else {
+            if (user.getDeckByName(deckName.trim()) != null)
+                return "hasDeck";
+            else {
+                user.getAllDecks().add(new UserDeck(deckName.trim()));
+                return "created";
+            }
         }
     }
 
     public boolean deleteDeck(User user, String deckName) {
-        Deck deck = user.getDeckByName(deckName);
-        if (deck == null)
+        UserDeck userDeck = user.getDeckByName(deckName);
+        if (userDeck == null)
             return false;
         else {
-            ViewMaster.getUser().getAllDecks().remove(deck);
+            ViewMaster.getUser().getAllDecks().remove(userDeck);
             return true;
         }
     }
 
     public boolean activeDeck(User user, String deckName) {
-        Deck deck = user.getDeckByName(deckName);
-        if (deck == null)
+        UserDeck userDeck = user.getDeckByName(deckName);
+        if (userDeck == null)
             return false;
         else {
-            for (Deck deck1 : user.getAllDecks())
-                if (!deck1.getName().equals(deckName))
-                    deck1.setActive(false);
-            deck.setActive(true);
+            for (UserDeck userDeck1 : user.getAllDecks())
+                if (!userDeck1.getName().equals(deckName))
+                    userDeck1.setActive(false);
+            userDeck.setActive(true);
             return true;
         }
     }
 
     public String addCard(User user, String cardName, String deckName, boolean isSide) {
         if (doesHaveCard(user, cardName)) {
-            Deck deck = user.getDeckByName(deckName.trim());
-            if (deck == null)
+            UserDeck userDeck = user.getDeckByName(deckName.trim());
+            if (userDeck == null)
                 return "noDeckExists";
             else {
-                if (isDeckFull(deck, isSide))
+                if (isDeckFull(userDeck, isSide))
                     return "deckIsFull";
                 else {
-                    if (areThereThree(deck, cardName))
+                    if (areThereThree(userDeck, cardName, isSide))
                         return "threeCardExists";
                     else {
-                        deck.addNewCard(Card.findCardFromCsv(cardName), isSide);
+                        userDeck.addNewCard(cardName, isSide);
                         return "added";
                     }
                 }
@@ -69,24 +63,19 @@ public class DeckController {
         } else return "noCardExists";
     }
 
-    //should change
-    private boolean areThereThree(Deck deck, String cardName) {
-        int counter = 0;
-        for (Card card : deck.getAllCardsInMainDeck())
-            if (card.getCardName().equalsIgnoreCase(cardName))
-                counter++;
-        for (Card card : deck.getAllCardsInSideDeck())
-            if (card.getCardName().equalsIgnoreCase(cardName))
-                counter++;
-        return (counter == 3);
+    private boolean areThereThree(UserDeck userDeck, String cardName, boolean isSide) {
+        if (isSide)
+            return userDeck.getCardNameToNumberInSide().get(cardName) == 3;
+        else
+            return userDeck.getCardNameToNumberInMain().get(cardName) == 3;
     }
 
-    //should change
-    private boolean isDeckFull(Deck deck, boolean isSide) {
+
+    private boolean isDeckFull(UserDeck userDeck, boolean isSide) {
         if (isSide)
-            return (deck.getAllCardsInSideDeck().size() == 12);
+            return (userDeck.getNumberOfCardsInSide() == 12);
         else
-            return (deck.getAllCardsInMainDeck().size() == 60);
+            return (userDeck.getNumberOfCardsInMain() == 60);
     }
 
     private boolean doesHaveCard(User user, String cardName) {
@@ -98,35 +87,22 @@ public class DeckController {
     }
 
     public String removeCard(User user, String cardName, String deckName, boolean isSide) {
-        Deck deck = user.getDeckByName(deckName);
-        if (deck == null)
+        UserDeck userDeck = user.getDeckByName(deckName);
+        if (userDeck == null)
             return "noDeckExists";
         else {
-            Card card = deck.getCardByName(cardName, isSide);
-            if (card != null) {
-                deck.removeCard(card, isSide);
+            boolean hasCard = false;
+            if (isSide) {
+                if (userDeck.getCardNameToNumberInSide().containsKey(cardName))
+                    hasCard = true;
+            } else {
+                if (userDeck.getCardNameToNumberInMain().containsKey(cardName))
+                    hasCard = true;
+            }
+            if (hasCard) {
+                userDeck.removeCard(cardName, isSide);
                 return "removed";
             } else return "noCardExists";
         }
-    }
-
-    public void showDecks(User user) {
-        ArrayList<Deck> decks = user.getAllDecks();
-        Deck activeDeck = null;
-        for (Deck deck : decks) {
-            if (deck.isActive()) {
-                activeDeck = deck;
-                break;
-            }
-        }
-        Collections.sort(decks);
-        if (decks.size() == 0)
-            deckView.printEmptyDecksList();
-        else if (activeDeck == null)
-            deckView.printAllUserDeckWithoutActiveDeck(decks);
-        else if (decks.size() == 1)
-            deckView.printDeckListOnlyHaveActiveDeck(activeDeck);
-        else
-            deckView.printAllUserDecks(decks, activeDeck);
     }
 }

@@ -1,6 +1,6 @@
 package controll.gameController;
 
-import model.Deck;
+import model.PlayerDeck;
 import model.cards.Card;
 import model.cards.Trap;
 import model.players.AIPlayer;
@@ -63,7 +63,7 @@ public class DuelController {
 
     private void startAIDuel(User user, int rounds) {
         Player firstPlayer = new Player(user);
-        AIPlayer aiPlayer = new AIPlayer(new Deck(user.getActiveDeck()));
+        AIPlayer aiPlayer = new AIPlayer(new PlayerDeck(user.getActiveDeck()));
         aiPlayer.setNickname("Abbas BooAzaar");
         startDuel(firstPlayer, aiPlayer, rounds);
     }

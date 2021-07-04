@@ -3,39 +3,57 @@ package view.allmenu;
 import controll.DeckController;
 import controll.ImageLoader;
 import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.control.*;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Deck;
+import model.UserDeck;
 import model.cards.Card;
 import model.players.User;
-import view.Menu;
-import view.Regex;
+import view.SceneController;
 import view.ViewMaster;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
 
 
 public class DeckView implements Initializable {
     @FXML
-    private AnchorPane textBack;
+    private VBox leftVBox;
+    @FXML
+    private AnchorPane mainDeckBack;
+    @FXML
+    private AnchorPane sideDeckBack;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private Label deckName;
+    @FXML
+    private AnchorPane yesNoBack;
+    @FXML
+    private VBox yesNoVBox;
+    @FXML
+    private BorderPane back;
+    @FXML
+    private TextArea textArea;
     @FXML
     private ImageView cardImage;
     @FXML
     private VBox cardVBox;
-    @FXML
-    private VBox yesNoVBox;
     @FXML
     private AnchorPane cardShowZone;
     @FXML
@@ -44,181 +62,12 @@ public class DeckView implements Initializable {
     private GridPane mainDeck;
 
     private Image backImage;
-    private DeckController deckController;
+    private final DeckController deckController;
     private User user;
+    private UserDeck currentPlayerDeck;
 
     public DeckView() {
-        deckController = new DeckController(this);
-    }
-
-    public void deckCreated() {
-        System.out.println("deck created successfully!");
-    }
-
-    public DeckController getDeckController() {
-        return deckController;
-    }
-
-    public void printDeckExists(String deckName) {
-        System.out.println("deck with name " + deckName + " already exists");
-    }
-
-    public void deckDeleted() {
-        System.out.println("deck deleted successfully");
-    }
-
-    public void printDeckDoesntExists(String deckName) {
-        System.out.println("deck with name " + deckName + " does not exist");
-    }
-
-    public void printDeckActivated() {
-        System.out.println("deck activated successfully");
-    }
-
-    public void printAddCardSuccessfully() {
-        System.out.println("card added to deck successfully");
-    }
-
-    public void deckIsFull(String mainOrSide) {
-        System.out.println(mainOrSide + " deck is full");
-    }
-
-    public void printCardRemoved() {
-        System.out.println("card removed form deck successfully");
-    }
-
-    public void printAllUserDecks(ArrayList<Deck> decks, Deck activeDeck) {
-        System.out.println("Decks:\n" +
-                "Active deck:");
-        System.out.println(activeDeck);
-        System.out.println("Other decks:");
-        for (Deck deck : decks) {
-            if (deck != activeDeck)
-                System.out.println(deck);
-        }
-    }
-
-    public void run(String command) {
-        if (command.matches(Regex.CREATE_DECK))
-            createDeck(Regex.getInputMatcher(command, Regex.CREATE_DECK));
-        else if (command.matches(Regex.DELETE_DECK))
-            deleteDeck(Regex.getInputMatcher(command, Regex.DELETE_DECK));
-        else if (command.matches(Regex.ACTIVE_DECK))
-            activeDeck(Regex.getInputMatcher(command, Regex.ACTIVE_DECK));
-        else if (command.matches(Regex.ADD_CARD_TO_DECK1)
-                || command.matches(Regex.ADD_CARD_TO_DECK2)
-                || command.matches(Regex.ADD_CARD_TO_DECK3))
-            addCard(command);
-        else if (command.matches(Regex.REMOVE_CARD_FROM_DECK)
-                || command.matches(Regex.REMOVE_CARD_FROM_DECK2)
-                || command.matches(Regex.REMOVE_CARD_FROM_DECK1))
-            removeCard(command);
-//        else if (command.matches(Regex.SHOW_DECKS))
-//            deckController.showDecks();
-        else if (command.matches(Regex.SHOW_ONE_DECK)
-                || command.matches(Regex.SHOW_ONE_DECK2))
-            showSpecificDeck(command);
-//        else if (command.matches(Regex.DECK_SHOW_CARDS))
-//            deckController.showCards();
-        else if (command.matches(Regex.EXIT_MENU))
-            ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
-        else
-            System.out.println("invalid command");
-
-    }
-
-    private void showSpecificDeck(String command) {
-        String deckName = Regex.getDeckNameForSpecificShow(command);
-        boolean isSide = command.contains("--side");
-//        deckController.showSpecificDeck(deckName, isSide);
-    }
-
-    private void removeCard(String command) {
-        String cardName = Regex.getCardName(command);
-        String deckName = Regex.getDeckName(command);
-        boolean isSide = command.contains("--side");
-//        deckController.removeCard(cardName, deckName, isSide);
-    }
-
-    private void addCard(String command) {
-        String cardName = Regex.getCardName(command);
-        String deckName = Regex.getDeckName(command);
-        boolean isSide = command.contains("--side");
-//        deckController.addCard(cardName, deckName, isSide);
-    }
-
-    private void activeDeck(Matcher inputMatcher) {
-        inputMatcher.find();
-        String deckName = inputMatcher.group("deckName");
-//        deckController.activeDeck(deckName);
-    }
-
-    private void deleteDeck(Matcher inputMatcher) {
-        inputMatcher.find();
-        String deckName = inputMatcher.group("deckName");
-//        deckController.deleteDeck(deckName);
-    }
-
-    private void createDeck(Matcher inputMatcher) {
-        inputMatcher.find();
-        String deckName = inputMatcher.group("deckName");
-//        deckController.createDeck(deckName);
-    }
-
-    public void printInvalidCommand() {
-        System.out.println("invalid command");
-    }
-
-    public void printCardDoesntExist(String cardName) {
-        System.out.println("card with name " + cardName + " does not exist");
-    }
-
-    public void printThereAreThree(String cardName, String deckName) {
-        System.out.println("there are already three cards with name " + cardName + " in deck " + deckName);
-    }
-
-    public void printCardDoesntExistInDeck(String cardName, String mainOrSide) {
-        System.out.println("card with name " + cardName + " does not exist in " + mainOrSide + " deck");
-    }
-
-    public void printEmptyDecksList() {
-        System.out.println("Decks:\n" +
-                "Active deck:\n" +
-                "Other decks:");
-    }
-
-    public void printAllUserDeckWithoutActiveDeck(ArrayList<Deck> decks) {
-        System.out.println("Decks:\n" +
-                "Active deck:\n" +
-                "Other decks:");
-        for (Deck deck : decks) {
-            System.out.println(deck);
-        }
-    }
-
-    public void printBeforeNonMonster() {
-        System.out.println("Spell and Traps:");
-    }
-
-    public void printDeckListOnlyHaveActiveDeck(Deck activeDeck) {
-        System.out.println("Decks:\n" +
-                "Active deck:");
-        System.out.println(activeDeck);
-        System.out.println("Other decks:");
-    }
-
-    public void printCard(String cardName, String description) {
-        System.out.println(cardName + ":" + description);
-    }
-
-    public void printMonster(String cardName, String cardDescription) {
-        System.out.println(cardName + ": " + cardDescription);
-    }
-
-    public void printBeforeMonster(String deckName, boolean isSide) {
-        System.out.println("Deck: " + deckName);
-        System.out.println(isSide ? "Side" : "Main" + "deck:");
-        System.out.println("Monsters:");
+        deckController = new DeckController();
     }
 
     @Override
@@ -229,6 +78,12 @@ public class DeckView implements Initializable {
         backImage = ImageLoader.getCardImageByName("Unknown");
         cardImage.setImage(backImage);
         user = ViewMaster.getUser();
+        if (user.getAllDecks().size() != 0) {
+            currentPlayerDeck = user.getAllDecks().get(0);
+            deckName.setText(currentPlayerDeck.getName());
+        } else {
+            deckName.setText("Please Create New Deck");
+        }
         addCardToScrollPane();
     }
 
@@ -241,19 +96,24 @@ public class DeckView implements Initializable {
             imageView.setFitHeight(61.4 * 2);
             cardVBox.getChildren().add(imageView);
             imageView.setOnMouseEntered(event -> showCard(card, imageView));
-            imageView.setOnMouseExited(event -> stopShowCard(card, imageView));
+            imageView.setOnMouseExited(event -> stopShowCard(imageView));
         }
     }
 
-    private void stopShowCard(Card card, ImageView imageView) {
+    private void stopShowCard(ImageView imageView) {
         imageView.getScene().setCursor(Cursor.DEFAULT);
-        addCardTransition(backImage);
-
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), event -> {
+            addCardTransition(backImage);
+            addText(null);
+        });
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
     }
 
     private void showCard(Card card, ImageView imageView) {
         imageView.getScene().setCursor(Cursor.HAND);
         addCardTransition(imageView.getImage());
+        addText(card.getCardDescription());
     }
 
     private void addCardTransition(Image secondImage) {
@@ -273,5 +133,132 @@ public class DeckView implements Initializable {
         rotator.setInterpolator(Interpolator.LINEAR);
         rotator.setCycleCount(1);
         rotator.play();
+    }
+
+    private void addText(String text) {
+        textArea.prefHeight(254);
+        textArea.setText(text);
+    }
+
+    private void blurBackground() {
+        leftVBox.setEffect(new GaussianBlur(15));
+        mainDeckBack.setEffect(new GaussianBlur(15));
+        sideDeckBack.setEffect(new GaussianBlur(15));
+        scrollPane.setEffect(new GaussianBlur(15));
+        scrollPane.setDisable(true);
+        mainDeckBack.setDisable(true);
+        sideDeckBack.setDisable(true);
+        leftVBox.setDisable(true);
+        yesNoBack.setVisible(true);
+    }
+
+    private void undoBlurBackground() {
+        leftVBox.setEffect(null);
+        mainDeckBack.setEffect(null);
+        sideDeckBack.setEffect(null);
+        scrollPane.setEffect(null);
+        scrollPane.setDisable(false);
+        mainDeckBack.setDisable(false);
+        sideDeckBack.setDisable(false);
+        leftVBox.setDisable(false);
+        yesNoBack.setVisible(false);
+    }
+
+    public void renameDeck(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void createNewDeck() {
+        blurBackground();
+        yesNoVBox.getChildren().clear();
+        yesNoVBox.setAlignment(Pos.CENTER);
+        Label label = new Label("Enter Deck Name :");
+        TextField textField = new TextField();
+        textField.setPromptText("Deck Name");
+        textField.setAlignment(Pos.CENTER);
+        textField.setStyle("-fx-background-color: rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px");
+        MyButton myButton = new MyButton("Create");
+        Label text = new Label();
+        text.setStyle("-fx-text-fill: red");
+        yesNoVBox.setAlignment(Pos.CENTER);
+        yesNoVBox.setSpacing(30);
+        yesNoVBox.getChildren().addAll(label, textField, myButton, text);
+        myButton.setOnAction(event -> createDeck(textField, text));
+    }
+
+    private void createDeck(TextField textField, Label text) {
+        String ans = deckController.createDeck(user, textField.getText());
+        if (ans.equals("invalidDeckName")) {
+            text.setText("Enter a valid Deck Name!");
+        } else if (ans.equals("hasDeck")) {
+            text.setText("deck with name " + textField.getText() + " already exists");
+        } else if (ans.equals("created")) {
+            yesNoVBox.getChildren().clear();
+            yesNoVBox.getChildren().add(text);
+            text.setText("deck created successfully!");
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), e -> undoBlurBackground());
+            Timeline timeline = new Timeline(keyFrame);
+            timeline.play();
+            currentPlayerDeck = user.getDeckByName(textField.getText().trim());
+            deckName.setText(currentPlayerDeck.getName());
+        }
+    }
+
+    public void saveDeck(ActionEvent actionEvent) {
+    }
+
+    public void loadDeck(ActionEvent actionEvent) {
+    }
+
+    public void activeDeck(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void deleteDeck(ActionEvent actionEvent) {
+        blurBackground();
+        yesNoVBox.getChildren().clear();
+        yesNoVBox.setAlignment(Pos.CENTER);
+        yesNoVBox.setSpacing(30);
+        if (currentPlayerDeck == null) {
+            Label label = new Label("Create A Deck At First!");
+            HBox hBox = new HBox();
+            MyButton button = new MyButton("Create Deck");
+            button.setOnAction(event -> createNewDeck());
+            MyButton button1 = new MyButton("Close");
+            button1.setOnAction(event -> undoBlurBackground());
+            hBox.setAlignment(Pos.CENTER);
+            hBox.getChildren().addAll(button, button1);
+            hBox.setSpacing(50);
+            yesNoVBox.getChildren().addAll(label, hBox);
+        } else {
+            Label label = new Label("Are you Sure You Want To Delete This Deck?");
+            HBox hBox = new HBox();
+            MyButton myButton = new MyButton("Yes");
+            MyButton myButton1 = new MyButton("No");
+            myButton.setOnAction(event -> deleteCurrentDeck());
+            myButton1.setOnAction(event -> undoBlurBackground());
+            hBox.setAlignment(Pos.CENTER);
+            hBox.getChildren().addAll(label, myButton, myButton1);
+            hBox.setSpacing(50);
+            yesNoVBox.getChildren().addAll(label, hBox);
+        }
+    }
+
+    private void deleteCurrentDeck() {
+    }
+
+    @FXML
+    private void back() throws IOException {
+        Stage stage = ((Stage) textArea.getScene().getWindow());
+        SceneController.startMainMenu(stage);
+    }
+}
+
+class MyButton extends Button {
+    public MyButton(String text) {
+        super(text);
+        this.setFont(Font.font("Comic Sans MS", 18));
+        this.setPrefWidth(134);
+        this.setPrefHeight(56);
     }
 }

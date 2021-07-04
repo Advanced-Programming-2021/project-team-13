@@ -8,7 +8,6 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 134px 56px;
-    -fx-font-family: "Comic Sans MS";
 }
 
 .button:hover {
@@ -17,7 +16,6 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 134px 56px;
-    -fx-font-family: "Comic Sans MS";
 }
 
 .scroll-pane {
@@ -39,6 +37,14 @@
 }
 
 .text-area {
+    -fx-background-color: transparent;
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-border-radius: 0 0 0 0;
+}
+
+.text-area .content {
     -fx-background-color: transparent;
 }
 

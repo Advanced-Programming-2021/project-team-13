@@ -4,7 +4,6 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
-import model.players.AIPlayer;
 import model.players.Player;
 
 public class Board {
@@ -13,12 +12,12 @@ public class Board {
     private final Cell[] spellOrTrap;
     private final Cell[] monsterCells;
     private final Cell fieldSpell;
-    private Deck deck;
+    private PlayerDeck playerDeck;
     private Graveyard graveyard;
 
 
-    public Board(Deck deck, Graveyard graveyard, Player player) {
-        this.deck = deck;
+    public Board(PlayerDeck playerDeck, Graveyard graveyard, Player player) {
+        this.playerDeck = playerDeck;
         this.graveyard = graveyard;
         spellOrTrap = new Cell[5];
         monsterCells = new Cell[5];
@@ -33,8 +32,8 @@ public class Board {
         this.fieldSpell.setCard(fieldSpell);
     }
 
-    public void setDeck(Deck deck) {
-        this.deck = deck;
+    public void setDeck(PlayerDeck playerDeck) {
+        this.playerDeck = playerDeck;
     }
 
     public void setGraveyard(Graveyard graveyard) {
@@ -53,8 +52,8 @@ public class Board {
         return fieldSpell;
     }
 
-    public Deck getDeck() {
-        return deck;
+    public PlayerDeck getDeck() {
+        return playerDeck;
     }
 
     public Graveyard getGraveyard() {
