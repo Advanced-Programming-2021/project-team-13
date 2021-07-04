@@ -18,7 +18,7 @@ public class CustomButton extends StackPane {
         LinearGradient gradient = new LinearGradient(
                 0, 0.5, 1, 0.5, true, CycleMethod.NO_CYCLE,
                 new Stop(0.1, Color.web("black", 1)),
-                new Stop(1.0, Color.web("black", 0.5)));
+                new Stop(1.0, Color.web("black", 0.2)));
         Rectangle bg = new Rectangle(250, 38, gradient);
         Text text = new Text(name);
         text.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.ITALIC, 22));

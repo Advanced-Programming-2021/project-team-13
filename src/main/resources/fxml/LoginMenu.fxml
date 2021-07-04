@@ -14,7 +14,7 @@
 <?import javafx.scene.effect.Light.Distant ?>
 
 <AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;-fx-background-image:url('/loginPics/a.jpg'); -fx-background-position:center" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.LoginView">
-   <Label fx:id="notifLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="107.0" layoutY="246.0" prefHeight="18.0" prefWidth="386.0" />
+   <Label fx:id="notifLabel" alignment="CENTER" contentDisplay="CENTER" />
    <Label layoutX="56.0" layoutY="141.0" text="dont have an account?" textFill="#f72500">
       <font>
          <Font name="System Bold Italic" size="12.0" />

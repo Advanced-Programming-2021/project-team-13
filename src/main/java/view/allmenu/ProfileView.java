@@ -1,5 +1,7 @@
 package view.allmenu;
 
+import com.talanlabs.avatargenerator.Avatar;
+import com.talanlabs.avatargenerator.eightbit.EightBitAvatar;
 import controll.ProfileController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,31 +16,45 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.menuItems.CustomButton;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class ProfileView {
     private final ProfileController profileController;
     public BorderPane pane;
-    private Image background;
-    private ImageView imageView;
-
+    private ImageView avatarPic;
     public ProfileView() {
         profileController = new ProfileController(this);
     }
 
     public void initialize() {
-        background = new Image(getClass().getResource("/profile/a.jpg").toExternalForm(),
+        Circle circle = new Circle(1280-120,150,100, Color.web("black",1));
+        circle.setFill(new ImagePattern(new Image("/profile/2.png"),60,51,200,200,false));
+        Image background = new Image(getClass().getResource("/profile/a.jpg").toExternalForm(),
                 1280, 720, false, true);
-        imageView=new ImageView(background);
+        ImageView imageView = new ImageView(background);
+        circle.setOnMouseClicked(event -> {
+            FileDialog dialog = new FileDialog((Frame)null, "Select picture to set as avatar");
+            dialog.setMode(FileDialog.LOAD);
+            dialog.setVisible(true);
+            String file = dialog.getDirectory()+dialog.getFile();
+            System.out.println(file);
+//            circle.setFill(new ImagePattern
+//                    (new Image(file),60,51,200,200,false));
+        });
         VBox vbox = new VBox(20, setNodes());
         vbox.setTranslateY(400);
         vbox.setTranslateX(1280-300);
         pane.getChildren().addAll(
                 imageView,
-                vbox
+                vbox,
+                circle
         );
     }
 
