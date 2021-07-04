@@ -10,11 +10,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model.menuItems.CustomButton;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
@@ -33,6 +37,15 @@ public class LoginView {
     }
 
     public void initialize(){
+        StackPane stackPane = new StackPane(notifLabel);
+        stackPane.prefWidth(50);
+        notifLabel.setFont(Font.font("verdana",FontWeight.BOLD,18));
+        notifLabel.setTextFill(Paint.valueOf("red"));
+        stackPane.setStyle("-fx-background-color: black");
+        stackPane.setTranslateX(1280-420);
+        stackPane.setTranslateY(250);
+//        stackPane.maxWidth(400);
+//        stackPane.maxHeight(400);
         CustomButton exit = new CustomButton("Quit Game", this::exit);
         CustomButton register= new CustomButton("Register", ()->{
             try {
@@ -59,7 +72,7 @@ public class LoginView {
         register.setTranslateY(130);
         register.setTranslateX(200);
         register.setStyle("-fx-background-color:#1F51FF");
-        pane.getChildren().addAll(exit,login,register);
+        pane.getChildren().addAll(exit,login,register,stackPane);
 
 
     }
@@ -102,6 +115,7 @@ public class LoginView {
     }
 
     public void printInvalidUsernameOrPassword() {
+        notifLabel.setStyle("-fx-fill: red");
         notifLabel.setText("Username and password didn’t match!");
     }
 
