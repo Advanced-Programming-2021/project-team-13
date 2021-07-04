@@ -2,14 +2,18 @@ package view.allmenu;
 
 import controll.DeckController;
 import controll.ImageLoader;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 import model.Deck;
 import model.cards.Card;
 import model.players.User;
@@ -25,6 +29,10 @@ import java.util.regex.Matcher;
 
 public class DeckView implements Initializable {
     @FXML
+    private AnchorPane textBack;
+    @FXML
+    private ImageView cardImage;
+    @FXML
     private VBox cardVBox;
     @FXML
     private VBox yesNoVBox;
@@ -35,6 +43,7 @@ public class DeckView implements Initializable {
     @FXML
     private GridPane mainDeck;
 
+    private Image backImage;
     private DeckController deckController;
     private User user;
 
@@ -217,18 +226,52 @@ public class DeckView implements Initializable {
         mainDeck.setGridLinesVisible(true);
         sideDeck.setGridLinesVisible(true);
         cardVBox.setSpacing(20);
+        backImage = ImageLoader.getCardImageByName("Unknown");
+        cardImage.setImage(backImage);
         user = ViewMaster.getUser();
         addCardToScrollPane();
     }
 
     private void addCardToScrollPane() {
-        for (Card card : user.getAllCards()){
+        for (Card card : user.getAllCards()) {
             Image image = ImageLoader.getCardImageByName(card.getCardName());
             card.setImage(image);
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(42.1 * 2);
             imageView.setFitHeight(61.4 * 2);
             cardVBox.getChildren().add(imageView);
+            imageView.setOnMouseEntered(event -> showCard(card, imageView));
+            imageView.setOnMouseExited(event -> stopShowCard(card, imageView));
         }
+    }
+
+    private void stopShowCard(Card card, ImageView imageView) {
+        imageView.getScene().setCursor(Cursor.DEFAULT);
+        addCardTransition(backImage);
+
+    }
+
+    private void showCard(Card card, ImageView imageView) {
+        imageView.getScene().setCursor(Cursor.HAND);
+        addCardTransition(imageView.getImage());
+    }
+
+    private void addCardTransition(Image secondImage) {
+        RotateTransition rotator = new RotateTransition(Duration.millis(1000), cardImage);
+        rotator.setAxis(Rotate.Y_AXIS);
+        rotator.setFromAngle(0);
+        rotator.setToAngle(90);
+        rotator.setInterpolator(Interpolator.LINEAR);
+        rotator.setCycleCount(1);
+        rotator.play();
+        rotator.setDelay(Duration.millis(1000));
+        cardImage.setImage(secondImage);
+        rotator = new RotateTransition(Duration.millis(1000), cardImage);
+        rotator.setAxis(Rotate.Y_AXIS);
+        rotator.setFromAngle(90);
+        rotator.setToAngle(0);
+        rotator.setInterpolator(Interpolator.LINEAR);
+        rotator.setCycleCount(1);
+        rotator.play();
     }
 }

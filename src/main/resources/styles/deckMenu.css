@@ -38,6 +38,15 @@
     -fx-background-color: transparent;
 }
 
+.text-area {
+    -fx-background-color: transparent;
+}
+
+#textScrollPane {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0 0 0 0;
+}
+
 #yesNoBack {
     -fx-background-image: url(../deckMenuImages/yesNoBack.jpg);
 }
