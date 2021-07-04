@@ -1,14 +1,15 @@
 package model.cards;
 
 import enums.*;
+import javafx.scene.image.Image;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Monster extends Card {
     private Monster attacker;
     private Monster attackedMonster;
     private MonsterCardType monsterCardType;
-    private SummonType summonType;
     private Card fieldSpell;
     private MonsterAttribute monsterAttribute;
     private AttackOrDefense attackOrDefense;
@@ -43,10 +44,10 @@ public class Monster extends Card {
     }
 
 
-    public Monster(String name, CardType cardType, Face face, int price, String description, String monsterType,
+    public Monster(String name, Face face, int price, String description, String monsterType,
                    MonsterCardType monsterCardType, MonsterAttribute monsterAttribute,
-                   int attackNum, int defenseNum, int level) {
-        super(name, cardType, description, face, price);
+                   int attackNum, int defenseNum, int level , Image image) {
+        super(name, description, face, price , image);
         if (name.equalsIgnoreCase("scanner")) isScanner = true;
         setAttackNum(attackNum);
         setDefenseNum(defenseNum);
@@ -205,14 +206,6 @@ public class Monster extends Card {
 
     public void setAttackOrDefense(AttackOrDefense attackOrDefense) {
         this.attackOrDefense = attackOrDefense;
-    }
-
-    public SummonType getSummonType() {
-        return summonType;
-    }
-
-    public void setSummonType(SummonType summonType) {
-        this.summonType = summonType;
     }
 
     public MonsterAttribute getMonsterAttribute() {

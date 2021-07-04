@@ -8,6 +8,9 @@ import model.cards.Trap;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+
+//many edit should happen before game starts!!!
 
 public class Deck implements Comparable<Deck> {
     private final static int MIN_CARDS_IN_MAIN_DECK = 40;
@@ -16,11 +19,15 @@ public class Deck implements Comparable<Deck> {
     private ArrayList<Card> allCards = new ArrayList<>();
     private ArrayList<Card> allCardsInMainDeck = new ArrayList<>();
     private ArrayList<Card> allCardsInSideDeck = new ArrayList<>();
+    private HashMap<String, Integer> cardNameToNumberInMain;
+    private HashMap<String, Integer> cardNameToNumberInSide;
     private boolean isValid;
     private boolean isActive;
     private int numberOfCards;
 
     public Deck(String name) {
+        cardNameToNumberInMain = new HashMap<>();
+        cardNameToNumberInSide = new HashMap<>();
         setName(name);
         setValid(false);
         setNumberOfCards(0);
@@ -135,6 +142,7 @@ public class Deck implements Comparable<Deck> {
         this.isActive = isActive;
     }
 
+    //should change
     public void addNewCard(Card card, boolean isSide) {
         setNumberOfCards(getNumberOfCards() + 1);
         if (isSide)
@@ -151,6 +159,7 @@ public class Deck implements Comparable<Deck> {
         return name;
     }
 
+    //should change
     public Card getCardByName(String cardName, boolean isSide) {
         if (isSide) {
             for (Card card : getAllCardsInSideDeck())

@@ -1,22 +1,14 @@
 package controll;
 
 
-import enums.CardType;
-import enums.Face;
 import model.Deck;
 import model.cards.Card;
-import model.cards.Monster;
-import model.cards.Spell;
-import model.cards.Trap;
-import model.csv.MonsterCSV;
-import model.csv.SpellTrapCSV;
+import model.players.User;
 import view.ViewMaster;
 import view.allmenu.DeckView;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.TreeMap;
 
 public class DeckController {
     private final DeckView deckView;
@@ -25,88 +17,59 @@ public class DeckController {
         this.deckView = deckView;
     }
 
-    public void createDeck(String deckName) {
-        if (ViewMaster.getUser().getDeckByName(deckName) != null)
-            deckView.printDeckExists(deckName);
+    public boolean createDeck(User user, String deckName) {
+        if (user.getDeckByName(deckName) != null)
+            return false;
         else {
-            ViewMaster.getUser().getAllDecks().add(new Deck(deckName));
-            deckView.deckCreated();
+            user.getAllDecks().add(new Deck(deckName));
+            return true;
         }
     }
 
-    public void deleteDeck(String deckName) {
-        Deck deck = ViewMaster.getUser().getDeckByName(deckName);
+    public boolean deleteDeck(User user, String deckName) {
+        Deck deck = user.getDeckByName(deckName);
         if (deck == null)
-            deckView.printDeckDoesntExists(deckName);
+            return false;
         else {
             ViewMaster.getUser().getAllDecks().remove(deck);
-            deckView.deckDeleted();
+            return true;
         }
     }
 
-    public void activeDeck(String deckName) {
-        Deck deck = ViewMaster.getUser().getDeckByName(deckName);
+    public boolean activeDeck(User user, String deckName) {
+        Deck deck = user.getDeckByName(deckName);
         if (deck == null)
-            deckView.printDeckDoesntExists(deckName);
+            return false;
         else {
-            deckView.printDeckActivated();
+            for (Deck deck1 : user.getAllDecks())
+                if (!deck1.getName().equals(deckName))
+                    deck1.setActive(false);
             deck.setActive(true);
+            return true;
         }
     }
 
-    public void addCard(String cardName, String deckName, boolean isSide) {
-        if (cardName == null
-                || deckName == null) {
-            deckView.printInvalidCommand();
-            return;
-        }
-        if (doesHaveCard(cardName)) {
-            Deck deck = ViewMaster.getUser().getDeckByName(deckName.trim());
+    public String addCard(User user, String cardName, String deckName, boolean isSide) {
+        if (doesHaveCard(user, cardName)) {
+            Deck deck = user.getDeckByName(deckName.trim());
             if (deck == null)
-                deckView.printCardDoesntExist(deckName);
+                return "noDeckExists";
             else {
                 if (isDeckFull(deck, isSide))
-                    deckView.deckIsFull(isSide ? "side" : "main");
+                    return "deckIsFull";
                 else {
                     if (areThereThree(deck, cardName))
-                        deckView.printThereAreThree(cardName, deck.getName());
+                        return "threeCardExists";
                     else {
-                        deck.addNewCard(findCard(cardName), isSide);
-                        deckView.printAddCardSuccessfully();
+                        deck.addNewCard(Card.findCardFromCsv(cardName), isSide);
+                        return "added";
                     }
                 }
             }
-        } else
-            deckView.printCardDoesntExist(cardName);
+        } else return "noCardExists";
     }
 
-    public Card findCard(String cardName) { ////// Spell,Trap,Monster Constructor Work Just For noEffect BRANCH
-        MonsterCSV monster = null;
-        SpellTrapCSV spellOrTrap = null;
-        try {
-            monster = MonsterCSV.findMonster(cardName.trim());
-        } catch (FileNotFoundException ignored) {
-        }
-        try {
-            spellOrTrap = SpellTrapCSV.findSpellTrap(cardName.trim());
-        } catch (FileNotFoundException ignored) {
-        }
-        if (monster != null)
-            return new Monster(monster.getName().replace("_", "-"), CardType.MONSTER, Face.DOWN,
-                    monster.getPrice(), monster.getDescription()
-                    , monster.getMonsterType(), monster.getCardType(), monster.getAttribute()
-                    , monster.getAttack(), monster.getDefence(), monster.getLevel());
-        else {
-            if (spellOrTrap.getType() == CardType.SPELL)
-                return new Spell(spellOrTrap.getName(), CardType.SPELL, spellOrTrap.getDescription(),
-                        Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
-            else
-                return new Trap(spellOrTrap.getName(), CardType.TRAP, spellOrTrap.getDescription(),
-                        Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon());
-        }
-
-    }
-
+    //should change
     private boolean areThereThree(Deck deck, String cardName) {
         int counter = 0;
         for (Card card : deck.getAllCardsInMainDeck())
@@ -118,42 +81,37 @@ public class DeckController {
         return (counter == 3);
     }
 
+    //should change
     private boolean isDeckFull(Deck deck, boolean isSide) {
         if (isSide)
-            return (deck.getAllCardsInSideDeck().size() == 15);
+            return (deck.getAllCardsInSideDeck().size() == 12);
         else
             return (deck.getAllCardsInMainDeck().size() == 60);
     }
 
-    private boolean doesHaveCard(String cardName) {
-        for (String card : ViewMaster.getUser().getAllCards().keySet()) {
+    private boolean doesHaveCard(User user, String cardName) {
+        for (String card : user.getCardNameToNumber().keySet()) {
             if (card.equalsIgnoreCase(cardName.replace("_", "-")))
                 return true;
         }
         return false;
     }
 
-    public void removeCard(String cardName, String deckName, boolean isSide) {
-        if (cardName == null
-                || deckName == null) {
-            deckView.printInvalidCommand();
-            return;
-        }
-        Deck deck = ViewMaster.getUser().getDeckByName(deckName);
+    public String removeCard(User user, String cardName, String deckName, boolean isSide) {
+        Deck deck = user.getDeckByName(deckName);
         if (deck == null)
-            deckView.printDeckDoesntExists(deckName);
+            return "noDeckExists";
         else {
             Card card = deck.getCardByName(cardName, isSide);
             if (card != null) {
                 deck.removeCard(card, isSide);
-                deckView.printCardRemoved();
-            } else
-                deckView.printCardDoesntExistInDeck(cardName, isSide ? "side" : "main");
+                return "removed";
+            } else return "noCardExists";
         }
     }
 
-    public void showDecks() {
-        ArrayList<Deck> decks = ViewMaster.getUser().getAllDecks();
+    public void showDecks(User user) {
+        ArrayList<Deck> decks = user.getAllDecks();
         Deck activeDeck = null;
         for (Deck deck : decks) {
             if (deck.isActive()) {
@@ -170,55 +128,5 @@ public class DeckController {
             deckView.printDeckListOnlyHaveActiveDeck(activeDeck);
         else
             deckView.printAllUserDecks(decks, activeDeck);
-    }
-
-    public void showCards() {
-        MonsterCSV monsterCSV = null;
-        SpellTrapCSV spellTrapCSV = null;
-        TreeMap<String, Integer> userCards = new TreeMap<>(ViewMaster.getUser().getAllCards());
-        for (String cardName : userCards.keySet()) {
-            try {
-                monsterCSV = MonsterCSV.findMonster(cardName);
-                spellTrapCSV = SpellTrapCSV.findSpellTrap(cardName);
-            } catch (FileNotFoundException ignored) {
-            }
-            for (int i = 0; i < userCards.get(cardName); i++) {
-                if (monsterCSV == null)
-                    deckView.printCard(cardName, spellTrapCSV.getDescription());
-                else
-                    deckView.printCard(cardName, monsterCSV.getDescription());
-            }
-            monsterCSV = null;
-            spellTrapCSV = null;
-        }
-    }
-
-    public void showSpecificDeck(String deckName, boolean isSide) {
-        if (deckName == null) {
-            deckView.printInvalidCommand();
-            return;
-        }
-        Deck deck = ViewMaster.getUser().getDeckByName(deckName);
-        if (deck == null) {
-            deckView.printDeckDoesntExists(deckName);
-            return;
-        }
-        ArrayList<Card> cards;
-        if (isSide)
-            cards = deck.getAllCardsInSideDeck();
-        else
-            cards = deck.getAllCardsInMainDeck();
-        Collections.sort(cards);
-        deckView.printBeforeMonster(deckName, isSide);
-        for (Card card : cards) {
-            if (card instanceof Monster)
-                deckView.printMonster(card.getCardName(), card.getCardDescription());
-        }
-        deckView.printBeforeNonMonster();
-        for (Card card : cards) {
-            if (!(card instanceof Monster))
-                deckView.printMonster(card.getCardName(), card.getCardDescription());
-
-        }
     }
 }

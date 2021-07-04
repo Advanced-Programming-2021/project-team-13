@@ -1,21 +1,23 @@
 package model.cards;
 
-import enums.CardType;
 import enums.Face;
+import javafx.scene.image.Image;
 
 public class Spell extends Card {
     private Monster equippedMonster;
     private String type;
     private boolean isSetINThisTurn = false;
 
-    public Spell(String name, CardType cardType, String description, Face face, int price, String type) {
-        super(name, cardType, description, face, price);
+    public Spell(String name, String description, Face face, int price, String type , Image image) {
+        super(name, description, face, price , image);
         this.type = type;
     }
 
-    public Spell(Spell that){
+    public Spell(Spell that) {
         super(that);
         this.type = that.type;
+        equippedMonster = null;
+        isSetINThisTurn = false;
     }
 
     public String getType() {

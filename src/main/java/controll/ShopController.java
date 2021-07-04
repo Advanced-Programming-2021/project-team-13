@@ -1,12 +1,9 @@
 package controll;
 
-import enums.CardType;
 import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import model.players.User;
-import view.ViewMaster;
 import view.allmenu.ShopView;
-
 
 import java.io.FileNotFoundException;
 import java.util.TreeMap;
@@ -26,6 +23,7 @@ public class ShopController {
         } catch (Exception ignored) {
         }
     }
+
     public String[] getDetail(String cardName) {
         MonsterCSV monsterCSV = null;
         try {
@@ -33,7 +31,7 @@ public class ShopController {
         } catch (Exception ignore) {
         }
         if (monsterCSV == null) {
-            SpellTrapCSV spellTrapCSV = null;
+            SpellTrapCSV spellTrapCSV;
             try {
                 spellTrapCSV = SpellTrapCSV.findSpellTrap(cardName);
                 assert spellTrapCSV != null;
@@ -50,6 +48,11 @@ public class ShopController {
             return detail.split("-");
         }
         return null;
+    }
+
+    public void buyCard(User user, String cardName, int cardPrice) {
+        user.addCard(cardName);
+        user.addMoney(-cardPrice);
     }
 }
 

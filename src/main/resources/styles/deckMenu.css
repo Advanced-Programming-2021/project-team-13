@@ -8,6 +8,7 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 134px 56px;
+    -fx-font-family: "Comic Sans MS";
 }
 
 .button:hover {
@@ -16,11 +17,17 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
     -fx-background-size: 134px 56px;
+    -fx-font-family: "Comic Sans MS";
 }
 
 .scroll-pane {
     -fx-background-color: rgba(0 ,0 , 0 ,0.7);
     -fx-background-radius: 0px 15px 15px 0px;
+}
+
+.label {
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 18px;
 }
 
 .scroll-pane .scroll-bar {
@@ -29,6 +36,10 @@
 
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
+}
+
+#yesNoBack {
+    -fx-background-image: url(../deckMenuImages/yesNoBack.jpg);
 }
 
 #mainDeckBack , #sideDeckBack {

@@ -1,41 +1,81 @@
 package model.cards;
 
-import enums.CardType;
+import controll.ImageLoader;
 import enums.Face;
 import enums.Zone;
-import model.Cell;
+import javafx.scene.image.Image;
+import model.csv.MonsterCSV;
+import model.csv.SpellTrapCSV;
 import model.players.Player;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.io.FileNotFoundException;
 
 public class Card implements Comparable<Card> {
     protected String cardName;
-    protected CardType cardType;
     protected String cardDescription;
     protected Face face;
     protected Player cardOwner;
     protected Zone zone;
     protected int price;
     protected boolean activated = false;
+    private Image image;
 
 
-    public Card(String name, CardType cardType, String description, Face face, int price) {
+    public Card(String name, String description, Face face, int price, Image image) {
         this.cardName = name;
-        this.cardType = cardType;
         this.cardDescription = description;
         this.face = face;
         this.price = price;
         this.zone = Zone.DECK_ZONE;
+        this.image = image;
     }
 
-    public Card (Card that){
+    public Card(Card that) {
         this.cardName = that.cardName;
-        this.cardType = that.cardType;
         this.cardDescription = that.cardDescription;
         this.face = that.face;
         this.price = that.price;
+        this.image = that.image;
         this.zone = Zone.DECK_ZONE;
+        cardOwner = null;
+        activated = false;
+    }
+
+    public static Card findCardFromCsv(String cardName) {
+        MonsterCSV monster = null;
+        SpellTrapCSV spellOrTrap = null;
+        try {
+            monster = MonsterCSV.findMonster(cardName.trim());
+        } catch (FileNotFoundException ignored) {
+        }
+        try {
+            spellOrTrap = SpellTrapCSV.findSpellTrap(cardName.trim());
+        } catch (FileNotFoundException ignored) {
+        }
+        if (monster != null)
+            return new Monster(monster.getName().replace("_", "-"), Face.DOWN,
+                    monster.getPrice(), monster.getDescription()
+                    , monster.getMonsterType(), monster.getCardType(), monster.getAttribute()
+                    , monster.getAttack(), monster.getDefence(), monster.getLevel() ,
+                    ImageLoader.getCardImageByName(monster.getName()));
+        else {
+            if (spellOrTrap.getType().equalsIgnoreCase("spell"))
+                return new Spell(spellOrTrap.getName(), spellOrTrap.getDescription(),
+                        Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon() ,
+                        ImageLoader.getCardImageByName(spellOrTrap.getName()));
+            else
+                return new Trap(spellOrTrap.getName(), spellOrTrap.getDescription(),
+                        Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon(),
+                        ImageLoader.getCardImageByName(spellOrTrap.getName()));
+        }
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public String getCardName() {
@@ -44,14 +84,6 @@ public class Card implements Comparable<Card> {
 
     public void setCardName(String cardName) {
         this.cardName = cardName;
-    }
-
-    public CardType getCardType() { ///// need the value of enum
-        return cardType;
-    }
-
-    public void setCardType(CardType cardType) {
-        this.cardType = cardType;
     }
 
     public String getCardDescription() {
@@ -100,4 +132,5 @@ public class Card implements Comparable<Card> {
     public String toString() {
         return this.cardName + " : " + this.cardDescription;
     }
+
 }

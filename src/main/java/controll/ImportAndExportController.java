@@ -21,7 +21,7 @@ public class ImportAndExportController {
         try {
             String json = new String(Files.readAllBytes(Paths.get(cardName)));
             Card card = mapper.fromJson(json, Card.class);
-            ViewMaster.getUser().getCards().add(card);
+            ViewMaster.getUser().getAllCards().add(card);
             importAndExportView.printSuccessful("imported");
         } catch (Exception e) {
             importAndExportView.printCantFindFile();
@@ -30,8 +30,10 @@ public class ImportAndExportController {
 
     public void exportCard(String cardName) {
         YaGson mapper = new YaGson();
-        if (ViewMaster.getUser().getAllCards().containsKey(cardName)) {
-            Card card = ViewMaster.getViewMaster().getDeckView().getDeckController().findCard(cardName);
+        if (ViewMaster.getUser().getCardNameToNumber().containsKey(cardName)) {
+            Card card = Card.findCardFromCsv(cardName);
+            card.setImage(null);
+            card.setCardOwner(null);
             String json = mapper.toJson(card);
             try {
                 FileWriter FW = new FileWriter(cardName);

@@ -8,6 +8,7 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Deck;
+import model.players.User;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
@@ -22,12 +23,16 @@ public class DeckView implements Initializable {
     @FXML
     private VBox cardVBox;
     @FXML
+    private VBox yesNoVBox;
+    @FXML
     private AnchorPane cardShowZone;
     @FXML
     private GridPane sideDeck;
     @FXML
     private GridPane mainDeck;
+
     private DeckController deckController;
+    private User user;
 
     public DeckView() {
         deckController = new DeckController(this);
@@ -95,13 +100,13 @@ public class DeckView implements Initializable {
                 || command.matches(Regex.REMOVE_CARD_FROM_DECK2)
                 || command.matches(Regex.REMOVE_CARD_FROM_DECK1))
             removeCard(command);
-        else if (command.matches(Regex.SHOW_DECKS))
-            deckController.showDecks();
+//        else if (command.matches(Regex.SHOW_DECKS))
+//            deckController.showDecks();
         else if (command.matches(Regex.SHOW_ONE_DECK)
                 || command.matches(Regex.SHOW_ONE_DECK2))
             showSpecificDeck(command);
-        else if (command.matches(Regex.DECK_SHOW_CARDS))
-            deckController.showCards();
+//        else if (command.matches(Regex.DECK_SHOW_CARDS))
+//            deckController.showCards();
         else if (command.matches(Regex.EXIT_MENU))
             ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
         else
@@ -112,39 +117,39 @@ public class DeckView implements Initializable {
     private void showSpecificDeck(String command) {
         String deckName = Regex.getDeckNameForSpecificShow(command);
         boolean isSide = command.contains("--side");
-        deckController.showSpecificDeck(deckName, isSide);
+//        deckController.showSpecificDeck(deckName, isSide);
     }
 
     private void removeCard(String command) {
         String cardName = Regex.getCardName(command);
         String deckName = Regex.getDeckName(command);
         boolean isSide = command.contains("--side");
-        deckController.removeCard(cardName, deckName, isSide);
+//        deckController.removeCard(cardName, deckName, isSide);
     }
 
     private void addCard(String command) {
         String cardName = Regex.getCardName(command);
         String deckName = Regex.getDeckName(command);
         boolean isSide = command.contains("--side");
-        deckController.addCard(cardName, deckName, isSide);
+//        deckController.addCard(cardName, deckName, isSide);
     }
 
     private void activeDeck(Matcher inputMatcher) {
         inputMatcher.find();
         String deckName = inputMatcher.group("deckName");
-        deckController.activeDeck(deckName);
+//        deckController.activeDeck(deckName);
     }
 
     private void deleteDeck(Matcher inputMatcher) {
         inputMatcher.find();
         String deckName = inputMatcher.group("deckName");
-        deckController.deleteDeck(deckName);
+//        deckController.deleteDeck(deckName);
     }
 
     private void createDeck(Matcher inputMatcher) {
         inputMatcher.find();
         String deckName = inputMatcher.group("deckName");
-        deckController.createDeck(deckName);
+//        deckController.createDeck(deckName);
     }
 
     public void printInvalidCommand() {
@@ -205,8 +210,13 @@ public class DeckView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         mainDeck.setGridLinesVisible(true);
         sideDeck.setGridLinesVisible(true);
+        user = ViewMaster.getUser();
+        addCardToScrollPane();
+    }
+
+    private void addCardToScrollPane() {
+
     }
 }

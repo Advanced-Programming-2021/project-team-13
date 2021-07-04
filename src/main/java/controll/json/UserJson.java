@@ -14,23 +14,25 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class UserJson {
+
     public void update() {
         YaGson mapper = new YaGson();
         FileWriter jsonFile;
         try {
-            for (User user : User.getAllUsers()){
-                for (Card card : user.getCards()){
-                    card.setCardOwner(null);
-                    if (card instanceof Trap){
-                        ((Trap)card).setTrapAction(null);
-                    }
-                }
-            }
+//            for (User user : User.getAllUsers()) {
+//                for (Card card : user.getCards()) {
+//                    card.setCardOwner(null);
+//                    if (card instanceof Trap) {
+//                        ((Trap) card).setTrapAction(null);
+//                    }
+//                }
+//            }
             String json = mapper.toJson(User.getAllUsers(), User.class);
-            jsonFile = new FileWriter("src/main/java/resources/UserJson.json");
+            jsonFile = new FileWriter("src/main/resources/Users.json");
             jsonFile.write(json);
             jsonFile.close();
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -38,12 +40,13 @@ public class UserJson {
         String json;
         try {
             YaGson mapper = new YaGson();
-            json = new String(Files.readAllBytes(Paths.get("src/main/java/resources/UserJson.json")));
+            json = new String(Files.readAllBytes(Paths.get("src/main/resources/Users.json")));
             Type type = new TypeToken<ArrayList<User>>() {
             }.getType();
             User.setAllUsers(mapper.fromJson(json, type));
 
-        } catch (IOException ignored) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
