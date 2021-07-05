@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.DuelView">
+<BorderPane prefHeight="720" fx:id="pane" prefWidth="1280" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.DuelView">
    <top>
       <AnchorPane prefHeight="197.0" prefWidth="1342.0" BorderPane.alignment="CENTER" />
    </top>
@@ -24,6 +24,6 @@
        </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="364.0" prefWidth="818.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="364.0" fx:id="rightPane" prefWidth="818.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

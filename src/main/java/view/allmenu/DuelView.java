@@ -2,17 +2,17 @@ package view.allmenu;
 
 import controll.gameController.DuelController;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import model.menuItems.CustomButton;
 import model.players.User;
 import view.Regex;
-import view.ViewMaster;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.regex.Matcher;
 
 public class DuelView {
@@ -21,20 +21,45 @@ public class DuelView {
     public ImageView paperImg;
     public ImageView scissorsImg;
     public Button playRPS;
-    public int numberToReturn=-1;
+    public int numberToReturn = -1;
+    public BorderPane pane;
+    public AnchorPane rightPane;
+
+
     public DuelView() {
         duelController = new DuelController(this);
     }
 
-    public void initialize(){
+    public void initialize() {
         Bloom glow = new Bloom();
-        setBtnEffects(glow,scissorsImg,"/duelMenuPics/rps/scissors.bmp",3);
-        setBtnEffects(glow,paperImg,"/duelMenuPics/rps/paper.bmp",1);
-        setBtnEffects(glow,rockImg,"/duelMenuPics/rps/rock.bmp",2);
+        setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3);
+        setBtnEffects(glow, paperImg, "/duelMenuPics/rps/paper.bmp", 1);
+        setBtnEffects(glow, rockImg, "/duelMenuPics/rps/rock.bmp", 2);
+        setBackGround(pane, "/duelMenuPics/moon.gif");
+        VBox vBox = new VBox(20, getNodes());
+        rightPane.getChildren().add(vBox);
     }
 
-    private void setBtnEffects(Bloom glow, ImageView view, String url,int numberToReturn) {
-        Image  image = new Image(url);
+    private Node[] getNodes() {
+        return new Node[]{
+            new CustomButton("AI duel", () -> {
+//                startAIDuel();
+            }), new CustomButton("2 Player duel", () -> {
+
+            })
+        };
+    }
+//    public void startAIDuel(){
+//        duelController.validateAIDuelGame(rounds);
+//    }
+    private void setBackGround(BorderPane pane, String url) {
+        Image background = new Image(url, 1280, 720, false, true);
+        pane.setBackground(new Background(new BackgroundImage(background, BackgroundRepeat.REPEAT,
+                BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+    }
+
+    private void setBtnEffects(Bloom glow, ImageView view, String url, int numberToReturn) {
+        Image image = new Image(url);
         view.setImage(image);
         view.setOnMouseEntered(event -> {
             glow.setThreshold(0.75);
@@ -45,39 +70,42 @@ public class DuelView {
         });
         view.setOnMouseClicked(event -> {
             Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
-                    .forEach(x->x.setOpacity(1));
-            if( Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
-                    .filter(x->x!=view).filter(x->x.getOpacity()==0.4).count()==2)
+                    .forEach(x -> x.setOpacity(1));
+            if (Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
+                    .filter(x -> x != view).filter(x -> x.getOpacity() == 0.4).count() == 2)
                 Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
-                        .filter(x->x!=view)
-                        .forEach(x->x.setOpacity(1));
-            else
-            Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
-                    .filter(x->x!=view)
-                    .forEach(x->x.setOpacity(0.4));
+                        .filter(x -> x != view)
+                        .forEach(x -> x.setOpacity(1));
+            else {
+                Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
+                        .filter(x -> x != view)
+                        .forEach(x -> x.setOpacity(0.4));
+            }
+            this.numberToReturn = numberToReturn;
         });
 
     }
 
     public void run(String command) {
         if (command.matches(Regex.TWO_PLAYER_DUEL)) {
-            Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
-            Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
-            Matcher duelerMatcher = Regex.getInputMatcher(command, Regex.SECOND_PLAYER);
-            if (newMatcher.find(0) && roundMatcher.find(0) && duelerMatcher.find(0)) {
-                int rounds = Integer.parseInt(roundMatcher.group("rounds"));
-                String playerUsername = duelerMatcher.group("playerUsername");
-                duelController.validateTwoPlayerDuelGame(rounds, playerUsername);
-            } else printInvalidCommand();
-        } else if (command.matches(Regex.AI_DUEL)) {
-            Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
-            Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
-            Matcher aiMatcher = Regex.getInputMatcher(command, Regex.AI);
-            if (newMatcher.find(0) && roundMatcher.find(0) && aiMatcher.find(0)) {
-                int rounds = Integer.parseInt(roundMatcher.group("rounds"));
-                duelController.validateAIDuelGame(rounds);
-            } else printInvalidCommand();
-        } else printInvalidCommand();
+//            Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
+//            Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
+//            Matcher duelerMatcher = Regex.getInputMatcher(command, Regex.SECOND_PLAYER);
+//            if (newMatcher.find(0) && roundMatcher.find(0) && duelerMatcher.find(0)) {
+//            int rounds = Integer.parseInt(roundMatcher.group("rounds"));
+//            String playerUsername = duelerMatcher.group("playerUsername");
+//            duelController.validateTwoPlayerDuelGame(rounds, playerUsername);
+//            } else printInvalidCommand();
+//        } else if (command.matches(Regex.AI_DUEL)) {
+//            Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
+//            Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
+//            Matcher aiMatcher = Regex.getInputMatcher(command, Regex.AI);
+//            if (newMatcher.find(0) && roundMatcher.find(0) && aiMatcher.find(0)) {
+//                int rounds = Integer.parseInt(roundMatcher.group("rounds"));
+
+//            } else printInvalidCommand();
+//        } else printInvalidCommand();
+        }
     }
 
     public void printUserNotFound() {
@@ -118,5 +146,6 @@ public class DuelView {
     }
 
     public void playRPS(ActionEvent event) {
+
     }
 }
