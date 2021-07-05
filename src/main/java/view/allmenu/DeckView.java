@@ -2,6 +2,7 @@ package view.allmenu;
 
 import controll.DeckController;
 import controll.ImageLoader;
+import controll.json.UserJson;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
@@ -11,7 +12,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Cell;
 import model.UserDeck;
 import model.cards.Card;
 import model.players.User;
@@ -29,7 +33,9 @@ import view.ViewMaster;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 
 public class DeckView implements Initializable {
@@ -58,9 +64,9 @@ public class DeckView implements Initializable {
     @FXML
     private AnchorPane cardShowZone;
     @FXML
-    private GridPane sideDeck;
+    private TilePane sideDeck;
     @FXML
-    private GridPane mainDeck;
+    private TilePane mainDeck;
 
     private Image backImage;
     private final DeckController deckController;
@@ -73,25 +79,28 @@ public class DeckView implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mainDeck.setGridLinesVisible(true);
-        sideDeck.setGridLinesVisible(true);
+        mainDeck.setHgap(2);
+        mainDeck.setVgap(2);
+        sideDeck.setHgap(2);
+        sideDeck.setVgap(2);
         mainDeck.setOnDragOver(this::handleDragOver);
         mainDeck.setOnDragDropped(this::handleDragDropped);
         sideDeck.setOnDragOver(this::handleDragOver);
         sideDeck.setOnDragDropped(this::handleDragDropped);
         scrollPane.setOnDragOver(this::handleDragOver);
-        scrollPane.setOnDragDropped(this::handleDragOver);
+        scrollPane.setOnDragDropped(this::handleDragDropped);
+        yesNoVBox.setSpacing(15);
         cardVBox.setSpacing(20);
         backImage = ImageLoader.getCardImageByName("Unknown");
         cardImage.setImage(backImage);
         user = ViewMaster.getUser();
+        addCardToScrollPane();
         if (user.getAllDecks().size() != 0) {
             currentPlayerDeck = user.getAllDecks().get(0);
-            deckName.setText(currentPlayerDeck.getName());
+            loadSingleDeck(currentPlayerDeck);
         } else {
-            deckName.setText("Please Create New Deck");
+            deckName.setText("Please Create Or Load Deck");
         }
-        addCardToScrollPane();
     }
 
     private void addCardToScrollPane() {
@@ -105,63 +114,155 @@ public class DeckView implements Initializable {
             imageView.setOnMouseEntered(event -> showCard(card, imageView));
             imageView.setOnMouseExited(event -> stopShowCard(imageView));
             imageView.setOnDragDetected(event -> handleDragDetection(event, imageView, card));
-            imageView.setOnDragDone(event -> setDragDone(event, imageView));
-        }
-    }
-
-    private void setDragDone(DragEvent event, ImageView imageView) {
-        if (mainDeck.getChildren().contains(imageView)) {
-
-        } else if (sideDeck.getChildren().contains(imageView)) {
-
-        } else if (cardVBox.getChildren().contains(imageView)) {
-            System.out.println("hello");
         }
     }
 
     private void handleDragDropped(DragEvent event) {
         String cardName = event.getDragboard().getString();
+        ImageView sourceImageView;
+        if (!(event.getGestureSource() instanceof ImageView))
+            return;
+        else sourceImageView = (ImageView) event.getGestureSource();
         ImageView imageView = new ImageView();
-        imageView.setImage(ImageLoader.getCardImageByName(cardName));
+        imageView.setImage(sourceImageView.getImage());
         if (event.getTarget().equals(mainDeck)) {
-            System.out.println("olala");
-            if (currentPlayerDeck != null) {
-                String answer = deckController.addCard(user, cardName, currentPlayerDeck.getName(), false);
-                if (answer.equals("added")) {
-                    addCardToDeck(mainDeck , imageView , false , cardName);
-                    //control card disable in scroll
-                } else if (answer.equals("")) {
-
-                }
-            } else createNewDeck();
+            System.out.println("dropped in main");
+            if (mainDeck.getChildren().contains(sourceImageView))
+                return;
+            String answer = deckController.addCard(user, cardName, currentPlayerDeck, false);
+            switch (answer) {
+                case "added":
+                    addCardToDeck(mainDeck, imageView, cardName);
+                    disableCardInSource(currentPlayerDeck.getCardNameToNumberInMain(), event, cardName);
+                    if (sideDeck.getChildren().contains(sourceImageView))
+                        removeCard(sideDeck, sourceImageView, cardName, true);
+                    break;
+                case "threeCardExists":
+                    showDeckHasThreeCard(false, cardName);
+                    break;
+                case "deckIsFull":
+                    showDeckIsFull(false);
+                    break;
+                case "noDeckExists":
+                    showCreateDeckFirst();
+                    break;
+            }
         } else if (event.getTarget().equals(sideDeck)) {
-            System.out.println("giligili");
-            if (currentPlayerDeck != null) {
-                String answer = deckController.addCard(user , cardName , currentPlayerDeck.getName() , true);
-                if (answer.equals("added")) {
-                    addCardToDeck(sideDeck , imageView , true , cardName);
-                } else if (answer.equals("threeCardExists")) {
-
-                }
-            } else createNewDeck();
+            System.out.println("dropped in side");
+            if (sideDeck.getChildren().contains(sourceImageView))
+                return;
+            String answer = deckController.addCard(user, cardName, currentPlayerDeck, true);
+            switch (answer) {
+                case "added":
+                    addCardToDeck(sideDeck, imageView, cardName);
+                    disableCardInSource(currentPlayerDeck.getCardNameToNumberInSide(), event, cardName);
+                    if (mainDeck.getChildren().contains(sourceImageView))
+                        removeCard(mainDeck, sourceImageView, cardName, false);
+                    break;
+                case "threeCardExists":
+                    showDeckHasThreeCard(true, cardName);
+                    break;
+                case "deckIsFull":
+                    showDeckIsFull(true);
+                    break;
+                case "noDeckExists":
+                    showCreateDeckFirst();
+                    break;
+            }
+        } else if (cardVBox.getChildren().contains(event.getTarget())
+                || event.getTarget().equals(scrollPane) || event.getTarget().equals(cardVBox)) {
+            System.out.println("dropped in scroll");
+            if (mainDeck.getChildren().contains(sourceImageView)) {
+                removeCard(mainDeck, sourceImageView, cardName, false);
+                disableCardInTarget(sourceImageView, currentPlayerDeck.getCardNameToNumberInMain(), cardName);
+            } else if (sideDeck.getChildren().contains(sourceImageView)) {
+                removeCard(sideDeck, sourceImageView, cardName, true);
+                disableCardInTarget(sourceImageView, currentPlayerDeck.getCardNameToNumberInSide(), cardName);
+            }
         }
     }
 
-    private void addCardToDeck(GridPane gridPane, ImageView imageView, boolean isSide, String cardName) {
+    private void removeCard(TilePane sourceGridPane, ImageView sourceImageView, String cardName, boolean isSide) {
+        String answer = deckController.removeCard(user, cardName, currentPlayerDeck.getName(), isSide);
+        if (answer.equals("removed")) {
+            sourceGridPane.getChildren().remove(sourceImageView);
+        }
+    }
+
+    private void disableCardInSource(HashMap<String, Integer> cardNameToNumberInDeck, DragEvent event, String cardName) {
+        if (event.getGestureSource() instanceof ImageView) {
+            ImageView imageView1 = (ImageView) event.getGestureSource();
+            if (cardVBox.getChildren().contains(imageView1)) {
+                int numberInDeck = cardNameToNumberInDeck.getOrDefault(cardName, 0);
+                String cardName2 = cardName.replaceAll("[\\s-_';.,!]", "");
+                int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName2, 0);
+                if (numberInDeck == shoppedNumber) {
+                    imageView1.setDisable(true);
+                    ColorAdjust colorAdjust = new ColorAdjust();
+                    colorAdjust.setBrightness(-0.5);
+                    imageView1.setEffect(colorAdjust);
+                } else {
+                    imageView1.setDisable(false);
+                    imageView1.setEffect(null);
+                }
+            }
+        }
+    }
+
+    private void disableCardInTarget(ImageView sourceImageView, HashMap<String, Integer> cardNameToNumberInDeck, String cardName) {
+        for (Node node : cardVBox.getChildren()) {
+            if (node instanceof ImageView) {
+                if (sourceImageView.getImage().equals(((ImageView) node).getImage())) {
+                    int numberInDeck = cardNameToNumberInDeck.getOrDefault(cardName, 0);
+                    String cardName2 = cardName.replaceAll("[\\s-_';.,!]", "");
+                    int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName2, 0);
+                    if (numberInDeck == shoppedNumber) {
+                        node.setDisable(true);
+                        ColorAdjust colorAdjust = new ColorAdjust();
+                        colorAdjust.setBrightness(-0.5);
+                        node.setEffect(colorAdjust);
+                    } else {
+                        node.setDisable(false);
+                        node.setEffect(null);
+                    }
+                }
+            }
+        }
+    }
+
+    private void showDeckHasThreeCard(boolean isSide, String cardName) {
+        blurBackground();
+        String main = "Main";
+        if (isSide) main = "Side";
+        Label label = new Label("You Already Have Three " + cardName + " Card In Your " + main + " Deck");
+        addTimeLine(label);
+    }
+
+    private void showDeckIsFull(boolean isSide) {
+        blurBackground();
+        String main = "Main";
+        if (isSide) main = "Side";
+        Label label = new Label(main + " Deck Is Full");
+        addTimeLine(label);
+    }
+
+    private void addTimeLine(Label label) {
+        label.setStyle("-fx-text-fill: red");
+        yesNoVBox.getChildren().clear();
+        yesNoVBox.getChildren().add(label);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(2000), e -> undoBlurBackground());
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
+    }
+
+    private void addCardToDeck(TilePane tilePane, ImageView imageView, String cardName) {
         imageView.setFitWidth(42.1 * 1.5);
         imageView.setFitHeight(61.4 * 1.5);
         Card card = user.getCardByName(cardName);
         imageView.setOnMouseEntered(e -> showCard(card, imageView));
         imageView.setOnMouseExited(e -> stopShowCard(imageView));
         imageView.setOnDragDetected(e -> handleDragDetection(e, imageView, card));
-        imageView.setOnDragDone(e -> setDragDone(e, imageView));
-        int cardNum = currentPlayerDeck.getNumberOfCardsInMain();
-        if (isSide)
-            cardNum = currentPlayerDeck.getNumberOfCardsInSide();
-        int columnIndex = cardNum % gridPane.getColumnConstraints().size();
-        int rowIndex = (cardNum - columnIndex) / gridPane.getColumnConstraints().size();
-        currentPlayerDeck.setNumberOfCardsInMain(cardNum + 1);
-        gridPane.add(imageView, columnIndex, rowIndex);
+        tilePane.getChildren().add(imageView);
     }
 
     private void handleDragOver(DragEvent event) {
@@ -246,33 +347,35 @@ public class DeckView implements Initializable {
     private void renameDeck() {
         blurBackground();
         yesNoVBox.getChildren().clear();
-        yesNoVBox.setAlignment(Pos.CENTER);
         Label label = new Label("Enter New Deck Name :");
         TextField textField = new TextField();
         textField.setPromptText("Deck Name");
         textField.setAlignment(Pos.CENTER);
-        textField.setStyle("-fx-background-color: rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px");
+        textField.setMaxWidth(200);
+        textField.setStyle("-fx-background-color: rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px; -fx-text-fill: white");
         MyButton myButton = new MyButton("Change");
         Label text = new Label();
         text.setStyle("-fx-text-fill: red");
-        yesNoVBox.setSpacing(30);
         yesNoVBox.getChildren().addAll(label, textField, myButton, text);
         myButton.setOnAction(event -> renameCurrentDeck(textField, text));
     }
 
     private void renameCurrentDeck(TextField textField, Label text) {
-        String answer = deckController.renameDeck(user, textField.getText());
-        if (answer.equals("invalidDeckName")) {
-            text.setText("Invalid Deck Name , Enter Another Name!");
-        } else if (answer.equals("repetitive")) {
-            text.setText("Repetitive Deck Name ! Enter Another Name");
-        } else if (answer.equals("renamed")) {
-            text.setText("Renamed Deck Name!");
-            KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), e -> undoBlurBackground());
-            Timeline timeline = new Timeline(keyFrame);
-            timeline.play();
-            currentPlayerDeck = user.getDeckByName(textField.getText().trim());
-            deckName.setText(currentPlayerDeck.getName());
+        String answer = deckController.renameDeck(user, currentPlayerDeck.getName(), textField.getText());
+        switch (answer) {
+            case "invalidDeckName":
+                text.setText("Invalid Deck Name , Enter Another Name!");
+                break;
+            case "repetitive":
+                text.setText("Repetitive Deck Name , Enter Another Name!");
+                break;
+            case "renamed":
+                text.setText("Renamed Deck Name!");
+                KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), e -> undoBlurBackground());
+                Timeline timeline = new Timeline(keyFrame);
+                timeline.play();
+                deckName.setText(currentPlayerDeck.getName());
+                break;
         }
     }
 
@@ -280,47 +383,203 @@ public class DeckView implements Initializable {
     private void createNewDeck() {
         blurBackground();
         yesNoVBox.getChildren().clear();
-        yesNoVBox.setAlignment(Pos.CENTER);
-        Label label2 = new Label("Creating A New Deck");
         Label label = new Label("Please Enter Deck Name :");
         TextField textField = new TextField();
         textField.setPromptText("Deck Name");
         textField.setAlignment(Pos.CENTER);
-        textField.setStyle("-fx-background-color: rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px");
+        textField.setStyle("-fx-background-color: rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px; -fx-text-fill: white");
+        textField.setMaxWidth(200);
         MyButton myButton = new MyButton("Create");
+        MyButton myButton1 = new MyButton("Close");
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setSpacing(30);
+        hBox.getChildren().addAll(myButton , myButton1);
         Label text = new Label();
-        text.setStyle("-fx-text-fill: red");
-        yesNoVBox.setAlignment(Pos.CENTER);
-        yesNoVBox.setSpacing(30);
-        yesNoVBox.getChildren().addAll(label2 , label, textField, myButton, text);
+        myButton1.setOnAction(event -> undoBlurBackground());
         myButton.setOnAction(event -> createDeck(textField, text));
+        text.setStyle("-fx-text-fill: red");
+        yesNoVBox.getChildren().addAll(label, textField, hBox, text);
     }
 
     private void createDeck(TextField textField, Label text) {
         String ans = deckController.createDeck(user, textField.getText());
-        if (ans.equals("invalidDeckName")) {
-            text.setText("Enter a valid Deck Name!");
-        } else if (ans.equals("hasDeck")) {
-            text.setText("Deck With Name " + textField.getText() + " Already Exists");
-        } else if (ans.equals("created")) {
-            yesNoVBox.getChildren().clear();
-            yesNoVBox.getChildren().add(text);
-            text.setText("Deck Created Successfully!");
-            KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), e -> undoBlurBackground());
-            Timeline timeline = new Timeline(keyFrame);
-            timeline.play();
-            currentPlayerDeck = user.getDeckByName(textField.getText().trim());
-            deckName.setText(currentPlayerDeck.getName());
+        switch (ans) {
+            case "invalidDeckName":
+                text.setText("Enter a valid Deck Name!");
+                break;
+            case "hasDeck":
+                text.setText("Deck With Name " + textField.getText() + " Already Exists");
+                break;
+            case "created":
+                yesNoVBox.getChildren().clear();
+                yesNoVBox.getChildren().add(text);
+                text.setText("Deck Created Successfully!");
+                text.setStyle("-fx-font-size: 25");
+                yesNoVBox.setAlignment(Pos.CENTER);
+                KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), e -> {
+                    undoBlurBackground();
+                    renewDeckView();
+                    yesNoVBox.setAlignment(Pos.TOP_CENTER);
+                });
+                Timeline timeline = new Timeline(keyFrame);
+                timeline.play();
+                currentPlayerDeck = user.getDeckByName(textField.getText().trim());
+                deckName.setText(currentPlayerDeck.getName());
+                break;
         }
     }
 
-    public void saveDeck(ActionEvent actionEvent) {
+    private void renewDeckView() {
+        mainDeck.getChildren().clear();
+        sideDeck.getChildren().clear();
+        for (Node node : cardVBox.getChildren()) {
+            if (node instanceof ImageView) {
+                ImageView imageView = (ImageView) node;
+                imageView.setDisable(false);
+                imageView.setEffect(null);
+            }
+        }
     }
 
-    public void loadDeck(ActionEvent actionEvent) {
+
+    private void showCreateDeckFirst() {
+        blurBackground();
+        yesNoVBox.getChildren().clear();
+        Label label = new Label("Please Create A Deck At First!");
+        MyButton myButton = new MyButton("Create Deck");
+        MyButton myButton1 = new MyButton("Close");
+        HBox box = new HBox();
+        box.setSpacing(20);
+        box.setAlignment(Pos.CENTER);
+        yesNoVBox.setAlignment(Pos.CENTER);
+        box.getChildren().addAll(myButton, myButton1);
+        myButton.setOnAction(event -> createNewDeck());
+        myButton1.setOnAction(event -> undoBlurBackground());
+        yesNoVBox.getChildren().addAll(label, box);
     }
 
-    public void activeDeck(ActionEvent actionEvent) {
+    @FXML
+    private void saveDeck() {
+        new UserJson().update();
+        blurBackground();
+        yesNoVBox.getChildren().clear();
+        Label label = new Label("Saved");
+        label.setStyle("-fx-text-fill: red ; -fx-font-size: 25");
+        yesNoVBox.setAlignment(Pos.CENTER);
+        yesNoVBox.getChildren().add(label);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(2000), event -> {
+            undoBlurBackground();
+            yesNoVBox.setAlignment(Pos.TOP_CENTER);
+        });
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
+    }
+
+    @FXML
+    private void loadDeck() {
+        blurBackground();
+        yesNoVBox.getChildren().clear();
+        HBox firstHBox = new HBox();
+        HBox secondHBox = new HBox();
+        firstHBox.setAlignment(Pos.CENTER);
+        secondHBox.setAlignment(Pos.CENTER);
+        firstHBox.setSpacing(7);
+        secondHBox.setSpacing(7);
+        for (int i = 0; i < user.getAllDecks().size(); i++) {
+            UserDeck userDeck = user.getAllDecks().get(i);
+            MyLabel myLabel = new MyLabel(userDeck.getName());
+            myLabel.setOnMouseClicked(event -> loadSingleDeck(userDeck));
+            if (i < 8) {
+                firstHBox.getChildren().add(myLabel);
+            } else {
+                secondHBox.getChildren().add(myLabel);
+            }
+        }
+        if (user.getAllDecks().size() == 0) {
+            Label label = new Label("You Have No Deck");
+            yesNoVBox.getChildren().add(label);
+            KeyFrame keyFrame = new KeyFrame(Duration.millis(2000), event -> undoBlurBackground());
+            Timeline timeline = new Timeline(keyFrame);
+            timeline.play();
+        } else {
+            Label label = new Label("All " + user.getNickname() + " Decks");
+            MyButton close = new MyButton("Back");
+            close.setOnAction(event -> undoBlurBackground());
+            label.setStyle("-fx-text-fill: green;-fx-font-size: 25");
+            yesNoVBox.getChildren().addAll(label, firstHBox, secondHBox , close);
+        }
+    }
+
+    private void loadSingleDeck(UserDeck userDeck) {
+        undoBlurBackground();
+        this.currentPlayerDeck = userDeck;
+        deckName.setText(userDeck.getName());
+        mainDeck.getChildren().clear();
+        sideDeck.getChildren().clear();
+        Set<String> mainDeckCards = userDeck.getCardNameToNumberInMain().keySet();
+        Set<String> sideDeckCards = userDeck.getCardNameToNumberInSide().keySet();
+        for (Node node : cardVBox.getChildren()) {
+            if (node instanceof ImageView) {
+                ImageView imageView = (ImageView) node;
+                imageView.setDisable(false);
+                imageView.setEffect(null);
+            }
+        }
+        for (String str : mainDeckCards) {
+            for (int i = 0; i < userDeck.getCardNameToNumberInMain().getOrDefault(str, 0); i++) {
+                loadCard(str, mainDeck, false);
+            }
+        }
+        for (String str : sideDeckCards) {
+            for (int i = 0; i < userDeck.getCardNameToNumberInSide().getOrDefault(str, 0); i++) {
+                loadCard(str, sideDeck, true);
+            }
+        }
+    }
+
+    private void loadCard(String str, TilePane sideDeck, boolean isSide) {
+        Card card = user.getCardByName(str);
+        Image image = ImageLoader.getCardImageByName(str);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(42.1 * 1.5);
+        imageView.setFitHeight(61.4 * 1.5);
+        imageView.setOnMouseEntered(event -> showCard(card, imageView));
+        imageView.setOnMouseExited(event -> stopShowCard(imageView));
+        imageView.setOnDragDetected(event -> handleDragDetection(event, imageView, card));
+        sideDeck.getChildren().add(imageView);
+        if (isSide)
+            disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInSide(), card.getCardName());
+        else
+            disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInMain(), card.getCardName());
+    }
+
+    @FXML
+    private void activeDeck(ActionEvent actionEvent) {
+        String answer = deckController.activeDeck(user , currentPlayerDeck);
+        switch (answer){
+            case "noDeckExists":
+                showCreateDeckFirst();
+                break;
+            case "invalidDeck":
+                showText("You Cannot Activate This Deck");
+                break;
+            case "activated":
+                showText(currentPlayerDeck.getName()+" is Activated !");
+                break;
+        }
+    }
+
+    private void showText(String text){
+        blurBackground();
+        Label label = new Label(text);
+        label.setStyle("-fx-text-fill: red");
+        yesNoVBox.setAlignment(Pos.CENTER);
+        yesNoVBox.getChildren().clear();
+        yesNoVBox.getChildren().add(label);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event -> undoBlurBackground());
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
     }
 
     @FXML
@@ -328,33 +587,42 @@ public class DeckView implements Initializable {
         blurBackground();
         yesNoVBox.getChildren().clear();
         yesNoVBox.setAlignment(Pos.CENTER);
-        yesNoVBox.setSpacing(30);
-        if (currentPlayerDeck == null) {
-            Label label = new Label("Create A Deck At First!");
-            HBox hBox = new HBox();
-            MyButton button = new MyButton("Create Deck");
-            button.setOnAction(event -> createNewDeck());
-            MyButton button1 = new MyButton("Close");
-            button1.setOnAction(event -> undoBlurBackground());
-            hBox.setAlignment(Pos.CENTER);
-            hBox.getChildren().addAll(button, button1);
-            hBox.setSpacing(50);
-            yesNoVBox.getChildren().addAll(label, hBox);
-        } else {
-            Label label = new Label("Are you Sure You Want To Delete This Deck?");
-            HBox hBox = new HBox();
-            MyButton myButton = new MyButton("Yes");
-            MyButton myButton1 = new MyButton("No");
-            myButton.setOnAction(event -> deleteCurrentDeck());
-            myButton1.setOnAction(event -> undoBlurBackground());
-            hBox.setAlignment(Pos.CENTER);
-            hBox.getChildren().addAll(label, myButton, myButton1);
-            hBox.setSpacing(50);
-            yesNoVBox.getChildren().addAll(label, hBox);
-        }
+        Label label = new Label("Are you Sure You Want To Delete This Deck?");
+        HBox hBox = new HBox();
+        MyButton myButton = new MyButton("Yes");
+        MyButton myButton1 = new MyButton("No");
+        myButton.setOnAction(event -> deleteCurrentDeck());
+        myButton1.setOnAction(event -> undoBlurBackground());
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(label, myButton, myButton1);
+        hBox.setSpacing(50);
+        yesNoVBox.getChildren().addAll(label, hBox);
     }
 
     private void deleteCurrentDeck() {
+        boolean deleteDeck = deckController.deleteDeck(user, currentPlayerDeck.getName());
+        if (deleteDeck) {
+            showDeckDeleted();
+        } else {
+            showCreateDeckFirst();
+        }
+    }
+
+    private void showDeckDeleted() {
+        blurBackground();
+        yesNoVBox.getChildren().clear();
+        Label label = new Label("Deck Deleted Successfully");
+        label.setStyle("-fx-text-fill: red");
+        yesNoVBox.getChildren().addAll(label);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), event -> {
+            undoBlurBackground();
+            yesNoVBox.setAlignment(Pos.TOP_CENTER);
+            renewDeckView();
+            currentPlayerDeck = null;
+        });
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
+        deckName.setText("Please Create Or Load Deck");
     }
 
     @FXML
@@ -370,5 +638,14 @@ class MyButton extends Button {
         this.setFont(Font.font("Comic Sans MS", 18));
         this.setPrefWidth(134);
         this.setPrefHeight(56);
+    }
+}
+
+class MyLabel extends Label {
+    public MyLabel(String text) {
+        super(text);
+        this.setStyle("-fx-font-family: 'Comic Sans MS';-fx-font-size: 18;-fx-text-fill: black");
+        this.setOnMouseEntered(event -> this.setStyle("-fx-cursor: hand;-fx-text-fill: red"));
+        this.setOnMouseExited(event -> this.setStyle("-fx-text-fill: black; -fx-cursor: default"));
     }
 }

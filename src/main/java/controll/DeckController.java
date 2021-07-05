@@ -4,17 +4,16 @@ package controll;
 import model.UserDeck;
 import model.cards.Card;
 import model.players.User;
-import view.ViewMaster;
 
 public class DeckController {
 
-    public String renameDeck(User user , String deckName){
-        if (deckName == null || deckName.length() == 0) {
+    public String renameDeck(User user, String deckName, String newName) {
+        if (newName == null || newName.length() == 0) {
             return "invalidDeckName";
         } else {
             UserDeck userDeck = user.getDeckByName(deckName.trim());
-            if (!userDeck.getName().equals(deckName)) {
-                user.getAllDecks().add(new UserDeck(deckName.trim()));
+            if (!deckName.equals(newName)) {
+                userDeck.setName(newName);
                 return "renamed";
             } else return "repetitive";
         }
@@ -38,27 +37,27 @@ public class DeckController {
         if (userDeck == null)
             return false;
         else {
-            ViewMaster.getUser().getAllDecks().remove(userDeck);
+            user.getAllDecks().remove(userDeck);
             return true;
         }
     }
 
-    public boolean activeDeck(User user, String deckName) {
-        UserDeck userDeck = user.getDeckByName(deckName);
+    public String activeDeck(User user, UserDeck userDeck) {
         if (userDeck == null)
-            return false;
+            return "noDeckExists";
+        if (!userDeck.isValid())
+            return "invalidDeck";
         else {
             for (UserDeck userDeck1 : user.getAllDecks())
-                if (!userDeck1.getName().equals(deckName))
+                if (userDeck1 != userDeck)
                     userDeck1.setActive(false);
             userDeck.setActive(true);
-            return true;
+            return "activated";
         }
     }
 
-    public String addCard(User user, String cardName, String deckName, boolean isSide) {
+    public String addCard(User user, String cardName, UserDeck userDeck, boolean isSide) {
         if (doesHaveCard(user, cardName)) {
-            UserDeck userDeck = user.getDeckByName(deckName.trim());
             if (userDeck == null)
                 return "noDeckExists";
             else {
@@ -77,12 +76,17 @@ public class DeckController {
     }
 
     private boolean areThereThree(UserDeck userDeck, String cardName, boolean isSide) {
-        if (isSide)
-            return userDeck.getCardNameToNumberInSide().get(cardName) == 3;
-        else
-            return userDeck.getCardNameToNumberInMain().get(cardName) == 3;
+        if (isSide) {
+            if (userDeck.getCardNameToNumberInSide().containsKey(cardName))
+                return userDeck.getCardNameToNumberInSide().get(cardName) == 3;
+            else
+                return false;
+        } else {
+            if (userDeck.getCardNameToNumberInMain().containsKey(cardName))
+                return userDeck.getCardNameToNumberInMain().get(cardName) == 3;
+            else return false;
+        }
     }
-
 
     private boolean isDeckFull(UserDeck userDeck, boolean isSide) {
         if (isSide)
