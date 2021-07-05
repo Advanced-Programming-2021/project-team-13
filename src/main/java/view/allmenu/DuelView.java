@@ -2,17 +2,26 @@ package view.allmenu;
 
 import controll.gameController.DuelController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import model.menuItems.CustomButton;
 import model.players.User;
 import view.Regex;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class DuelView {
@@ -30,6 +39,8 @@ public class DuelView {
     public VBox vBox;
     public HBox hBox;
     public HBox rpcHbox;
+    public Label notifLabel;
+    public Label rpcNotifLabel;
     private int numberToReturn = -1;
 
     public DuelView() {
@@ -45,8 +56,8 @@ public class DuelView {
         setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3);
         setBtnEffects(glow, paperImg, "/duelMenuPics/rps/paper.bmp", 1);
         setBtnEffects(glow, rockImg, "/duelMenuPics/rps/rock.bmp", 2);
-        setBackGround(pane, "/duelMenuPics/moon.gif",1);
-        vBox = new VBox(20, getFirstVboxNodes());
+        setBackGround(pane, "/duelMenuPics/moon.gif", 1);
+        vBox = new VBox(0, getFirstVboxNodes());
         rightPane.getChildren().add(vBox);
     }
 
@@ -56,12 +67,23 @@ public class DuelView {
                     startAIDuel();
                 }), new CustomButton("2 Player duel", () -> {
 
+        }), new CustomButton("Back", () -> {
+            try {
+                goBack();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         })
         };
     }
 
+    private void goBack() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
+        ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
+    }
+
     public void startAIDuel() {
-       getRounds();
+        getRounds();
     }
 
     private void getRounds() {
@@ -126,15 +148,7 @@ public class DuelView {
 //            String playerUsername = duelerMatcher.group("playerUsername");
 //            duelController.validateTwoPlayerDuelGame(rounds, playerUsername);
 //            } else printInvalidCommand();
-//        } else if (command.matches(Regex.AI_DUEL)) {
-//            Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
-//            Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
-//            Matcher aiMatcher = Regex.getInputMatcher(command, Regex.AI);
-//            if (newMatcher.find(0) && roundMatcher.find(0) && aiMatcher.find(0)) {
-//                int rounds = Integer.parseInt(roundMatcher.group("rounds"));
-
-//            } else printInvalidCommand();
-//        } else printInvalidCommand();
+//        }
         }
     }
 
@@ -143,19 +157,11 @@ public class DuelView {
     }
 
     public void printNoActiveDeck(String username) {
-        System.out.println(username + " has no active deck");
+        notifLabel.setText(username + " has no active deck");
     }
 
     public void printInvalidDeck(String username) {
-        System.out.println(username + "’s deck is invalid");
-    }
-
-    public void printInvalidNumberOfRound() {
-        System.out.println("number of rounds is not supported");
-    }
-
-    public void printInvalidCommand() {
-        System.out.println("invalid command");
+        notifLabel.setText(username + "’s deck is invalid");
     }
 
     public DuelController getDuelController() {
@@ -163,31 +169,20 @@ public class DuelView {
     }
 
     public int inputStonePaperScissor(User user) {
-//        AnchorPane rpc = new AnchorPane();
-//        rpc.setStyle("-fx-background-color:yellow");
-//        rpc.getChildren().addAll(rockImg,scissorsImg,paperImg);
-//        rightPane.setEffect(new GaussianBlur(15));
-//        rightPane.setDisable(true);
-//        downPane.setEffect(new GaussianBlur(15));
-//        downPane.setDisable(true);
-//        leftPane.setEffect(new GaussianBlur(15));
-//        leftPane.setDisable(true);
-//        upPane.setEffect(new GaussianBlur(15));
-//        upPane.setDisable(true);
-//        pane.getChildren().add(rpc);
-//        System.out.println("hey " + user.getNickname() + " !\nplease choose one to start Game: stone , paper , scissor");
-//        while(numberToReturn == -1) {
-//            System.out.println("choose a fuckin thing");
-//        }
+        sho();
         return numberToReturn;
     }
 
     private void sho() {
         rpc = new AnchorPane();
-        rpc.setStyle("-fx-background-color:yellow");
-        VBox box = new VBox(20, rpcHbox, new CustomButton("Start Game", () -> {
+        rpcNotifLabel = new Label("");
+        rpcNotifLabel.setTranslateX(35);
+        rpcNotifLabel.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.ITALIC, 18));
+        rpcNotifLabel.setStyle("-fx-text-fill:#fa6515");
+        rpcNotifLabel.setEffect(new Bloom(0.3));
+        VBox box = new VBox(25, rpcNotifLabel, rpcHbox, new CustomButton("Start Game", () -> {
             if (numberToReturn == -1)
-                System.out.println("you haven't chosen yet");
+                rpcNotifLabel.setText("you haven't chosen yet");
             else {
                 System.out.println(numberToReturn);
                 pane.getChildren().remove(rpc);
@@ -197,8 +192,8 @@ public class DuelView {
         rpc.getChildren().addAll(box);
         rpc.setStyle("-fx-background-color:yellow");
         blur();
-        rpc.setTranslateX(540);
-        rpc.setTranslateY(420);
+        rpc.setTranslateX(1280 - 350);
+        rpc.setTranslateY(250);
         pane.getChildren().add(rpc);
     }
 
@@ -225,10 +220,7 @@ public class DuelView {
     }
 
     public void printEqual() {
-        System.out.println("Equal!\ntry again!");
+        rpcNotifLabel.setText("Equal!\ntry again!");
     }
 
-    public void playRPS(ActionEvent event) {
-
-    }
 }

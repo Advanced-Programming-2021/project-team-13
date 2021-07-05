@@ -27,7 +27,6 @@ public class DuelController {
                 if (checkUserValidDeckForGame(user) && checkUserValidDeckForGame(rivalUser))
                     if (checkRoundNumber(rounds))
                         startTwoPlayerDuel(user, rivalUser, rounds);
-                    else duelView.printInvalidNumberOfRound();
         } else duelView.printUserNotFound();
     }
 
@@ -37,8 +36,6 @@ public class DuelController {
             if (checkUserValidDeckForGame(user))
                 if (checkRoundNumber(rounds))
                     startAIDuel(user, rounds);
-                else
-                    duelView.printInvalidNumberOfRound();
     }
 
     private void startDuel(Player firstPlayer, Player secondPlayer, int rounds) {
