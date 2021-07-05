@@ -22,7 +22,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 //        ViewMaster.getViewMaster().run();
         primaryStage.setOnHiding(event -> new UserJson().update());
-        SceneController.startDeckMenu(primaryStage);
+        SceneController.startGameMenu(primaryStage);
         primaryStage.show();
     }
 

@@ -25,4 +25,11 @@ public class SceneController {
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
     }
+    public static void startGameMenu(Stage primaryStage) throws IOException{
+        URL url = SceneController.class.getResource("/fxml/Game.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(url);
+        Parent parent = fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        primaryStage.setScene(scene);
+    }
 }

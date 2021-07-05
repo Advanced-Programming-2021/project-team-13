@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="duel">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" afterDir="false" />
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="just created game fxml">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/gamePics/a.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SceneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625490014960</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="just created game fxml">
+      <created>1625491766442</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1625491766442</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,7 +309,8 @@
     <MESSAGE value="profile pic" />
     <MESSAGE value="rpc" />
     <MESSAGE value="duel" />
-    <option name="LAST_COMMIT_MESSAGE" value="duel" />
+    <MESSAGE value="just created game fxml" />
+    <option name="LAST_COMMIT_MESSAGE" value="just created game fxml" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
