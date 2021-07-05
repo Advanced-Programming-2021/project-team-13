@@ -24,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Cell;
 import model.UserDeck;
 import model.cards.Card;
 import model.players.User;
@@ -389,10 +390,16 @@ public class DeckView implements Initializable {
         textField.setStyle("-fx-background-color: rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px; -fx-text-fill: white");
         textField.setMaxWidth(200);
         MyButton myButton = new MyButton("Create");
+        MyButton myButton1 = new MyButton("Close");
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setSpacing(30);
+        hBox.getChildren().addAll(myButton , myButton1);
         Label text = new Label();
-        text.setStyle("-fx-text-fill: red");
-        yesNoVBox.getChildren().addAll(label, textField, myButton, text);
+        myButton1.setOnAction(event -> undoBlurBackground());
         myButton.setOnAction(event -> createDeck(textField, text));
+        text.setStyle("-fx-text-fill: red");
+        yesNoVBox.getChildren().addAll(label, textField, hBox, text);
     }
 
     private void createDeck(TextField textField, Label text) {
@@ -547,7 +554,32 @@ public class DeckView implements Initializable {
             disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInMain(), card.getCardName());
     }
 
-    public void activeDeck(ActionEvent actionEvent) {
+    @FXML
+    private void activeDeck(ActionEvent actionEvent) {
+        String answer = deckController.activeDeck(user , currentPlayerDeck);
+        switch (answer){
+            case "noDeckExists":
+                showCreateDeckFirst();
+                break;
+            case "invalidDeck":
+                showText("You Cannot Activate This Deck");
+                break;
+            case "activated":
+                showText(currentPlayerDeck.getName()+" is Activated !");
+                break;
+        }
+    }
+
+    private void showText(String text){
+        blurBackground();
+        Label label = new Label(text);
+        label.setStyle("-fx-text-fill: red");
+        yesNoVBox.setAlignment(Pos.CENTER);
+        yesNoVBox.getChildren().clear();
+        yesNoVBox.getChildren().add(label);
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event -> undoBlurBackground());
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
     }
 
     @FXML

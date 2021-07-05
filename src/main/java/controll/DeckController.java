@@ -42,16 +42,17 @@ public class DeckController {
         }
     }
 
-    public boolean activeDeck(User user, String deckName) {
-        UserDeck userDeck = user.getDeckByName(deckName);
-        if (userDeck.isValid())
-            return false;
+    public String activeDeck(User user, UserDeck userDeck) {
+        if (userDeck == null)
+            return "noDeckExists";
+        if (!userDeck.isValid())
+            return "invalidDeck";
         else {
             for (UserDeck userDeck1 : user.getAllDecks())
-                if (!userDeck1.getName().equals(deckName))
+                if (userDeck1 != userDeck)
                     userDeck1.setActive(false);
             userDeck.setActive(true);
-            return true;
+            return "activated";
         }
     }
 
