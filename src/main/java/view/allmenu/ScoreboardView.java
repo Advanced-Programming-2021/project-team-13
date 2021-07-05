@@ -73,7 +73,7 @@ public class ScoreboardView {
 
     public void printScoreBoard(User user, int rank) {
         AnchorPane anchorPane = scoreboardLabel.getLabel(user.getNickname(), new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/tas.png")).toExternalForm()), user.getScore(), rank);
-        anchorPane.setTranslateY(counter * 50);
+        anchorPane.setTranslateY(counter * 45);
         anchorPane.setTranslateX(100);
         this.anchorPane.getChildren().add(anchorPane);
         counter++;

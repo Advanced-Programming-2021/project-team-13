@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import model.players.User;
 import view.SceneController;
 import view.ViewMaster;
+import view.allmenu.ShopView;
 
 public class Main extends Application {
 

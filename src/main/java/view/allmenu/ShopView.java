@@ -1,5 +1,6 @@
 package view.allmenu;
 
+import controll.ImageLoader;
 import controll.ShopController;
 import controll.json.UserJson;
 import javafx.animation.KeyFrame;
@@ -59,7 +60,6 @@ public class ShopView {
     private ImageView backButton;
     private String selectedCardName;
     private int selectedCardPrice;
-    private final FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".jpg");
 
     public void start(Stage primaryStage) {
         try {
@@ -110,7 +110,7 @@ public class ShopView {
         });
         button.setOnMouseClicked(e -> {
             if (button.getImage() == allowBuyShadow) {
-                shopController.buyCard(ViewMaster.getUser() , selectedCardName , selectedCardPrice);
+                shopController.buyCard(ViewMaster.getUser(), selectedCardName, selectedCardPrice);
                 message.setOpacity(1);
                 shopButtonImage(selectedCardPrice);
                 messageTimer.play();
@@ -124,66 +124,32 @@ public class ShopView {
         cardsPlace.setVgap(25);
         cardsPlace.setPrefTileWidth(160);
         cardsPlace.setPrefTileHeight(210);
-        loadMonster();
-        loadTrapAndSpell();
+        load();
     }
 
-    private void loadTrapAndSpell() {
-        BufferedImage image;
-        File spellTrap = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/SpellTrap");
-        if (spellTrap.isDirectory())
-            for (File file : Objects.requireNonNull(spellTrap.listFiles(filenameFilter))) {
-                try {
-                    image = ImageIO.read(file);
-                    Image fxImage = SwingFXUtils.toFXImage(image, null);
-                    ImageView imgView = new ImageView(fxImage);
-                    imgView.setFitWidth(160);
-                    imgView.setFitHeight(210);
-                    imgView.setOnMouseClicked(e -> {
-                        selectedCardName = file.getName().replace(".jpg", "");
-                        cardImage.setImage(fxImage);
-                        String[] detail = shopController.getDetail(file.getName().replace(".jpg", ""));
-                        shopButtonImage(Integer.parseInt(detail[0]));
-                        selectedCardPrice = Integer.parseInt(detail[0]);
-                        price.setText("Price: " + detail[0]);
-                        information.setText(detail[1]);
-                    });
-                    imgView.setOnMouseEntered(e -> setMouseEnterCard(imgView));
-                    imgView.setOnMouseExited(e -> setMouseExitCard(imgView));
-                    cardsPlace.getChildren().add(imgView);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-    }
-
-    private void loadMonster() {
-        BufferedImage image;
-        File monsterImg = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/Monsters");
-        if (monsterImg.isDirectory())
-            for (File file : Objects.requireNonNull(monsterImg.listFiles(filenameFilter))) {
-                try {
-                    image = ImageIO.read(file);
-                    Image fxImage = SwingFXUtils.toFXImage(image, null);
-                    ImageView imgView = new ImageView(fxImage);
-                    imgView.setFitWidth(160);
-                    imgView.setFitHeight(210);
-                    imgView.setOnMouseClicked(e -> {
-                        selectedCardName = file.getName().replace(".jpg", "");
-                        cardImage.setImage(fxImage);
-                        String[] detail = shopController.getDetail(file.getName().replace(".jpg", ""));
-                        shopButtonImage(Integer.parseInt(detail[0]));
-                        selectedCardPrice = Integer.parseInt(detail[0]);
-                        price.setText("Price: " + detail[0]);
-                        information.setText(detail[1]);
-                    });
-                    imgView.setOnMouseEntered(e -> setMouseEnterCard(imgView));
-                    imgView.setOnMouseExited(e -> setMouseExitCard(imgView));
-                    cardsPlace.getChildren().add(imgView);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            }
+    private void load() {
+        try {
+            ImageLoader.getCardsImage().forEach((name, image) ->
+            {
+                ImageView imgView = new ImageView(image);
+                imgView.setFitWidth(160);
+                imgView.setFitHeight(210);
+                imgView.setOnMouseClicked(e -> {
+                    selectedCardName = name;
+                    cardImage.setImage(image);
+                    String[] detail = shopController.getDetail(name);
+                    shopButtonImage(Integer.parseInt(detail[0]));
+                    selectedCardPrice = Integer.parseInt(detail[0]);
+                    price.setText("Price: " + detail[0]);
+                    information.setText(detail[1]);
+                });
+                imgView.setOnMouseEntered(e -> setMouseEnterCard(imgView));
+                imgView.setOnMouseExited(e -> setMouseExitCard(imgView));
+                cardsPlace.getChildren().add(imgView);
+            });
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void shopButtonImage(int price) {
