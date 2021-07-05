@@ -8,19 +8,19 @@
 
 <BorderPane prefHeight="720" fx:id="pane" prefWidth="1280" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.DuelView">
    <top>
-      <AnchorPane prefHeight="197.0" prefWidth="1342.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="197.0" fx:id="upPane" prefWidth="1342.0" BorderPane.alignment="CENTER" />
    </top>
    <bottom>
-      <AnchorPane prefHeight="158.0" prefWidth="1342.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="158.0"  fx:id="downPane" prefWidth="1342.0" BorderPane.alignment="CENTER" />
    </bottom>
    <left>
-       <AnchorPane prefHeight="364.0" prefWidth="566.0" BorderPane.alignment="CENTER">
-           <HBox layoutX="14.0" layoutY="14.0" prefHeight="66.0" prefWidth="341.0" spacing="10.0">
+       <AnchorPane prefHeight="364.0" fx:id="leftPane" prefWidth="566.0" BorderPane.alignment="CENTER">
+           <HBox  fx:id="rpcHbox" layoutX="14.0" layoutY="14.0" prefHeight="66.0" prefWidth="341.0" spacing="10.0">
                <ImageView fx:id="rockImg" fitHeight="92.0" fitWidth="113.0"  pickOnBounds="true" preserveRatio="true" />
                <ImageView fx:id="paperImg" fitHeight="92.0" fitWidth="113.0"  pickOnBounds="true" preserveRatio="true" />
                <ImageView fx:id="scissorsImg" fitHeight="92.0" fitWidth="113.0"  pickOnBounds="true" preserveRatio="true" />
            </HBox>
-           <Button fx:id="playRPS" layoutX="323.0" layoutY="170.0" mnemonicParsing="false" onAction="#playRPS" text="play" />
+<!--           <Button fx:id="playRPS" layoutX="323.0" layoutY="170.0" mnemonicParsing="false" onAction="#playRPS" text="play" />-->
        </AnchorPane>
    </left>
    <right>
