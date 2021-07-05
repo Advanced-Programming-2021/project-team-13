@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="login">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/profile/0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/profile/101755.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/profile/2.png" afterDir="false" />
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="profile pic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +103,7 @@
       <workItem from="1625314452172" duration="40000" />
       <workItem from="1625317097848" duration="8163000" />
       <workItem from="1625362882339" duration="10272000" />
+      <workItem from="1625411265823" duration="149000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -230,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625406626812</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="profile pic">
+      <created>1625411137035</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1625411137035</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +257,8 @@
     <MESSAGE value="login" />
     <MESSAGE value="deckView is editing 1" />
     <MESSAGE value="deckView is editing 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="deckView is editing 2" />
+    <MESSAGE value="profile pic" />
+    <option name="LAST_COMMIT_MESSAGE" value="profile pic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
