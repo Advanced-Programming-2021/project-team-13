@@ -1,17 +1,62 @@
 package view.allmenu;
 
 import controll.gameController.DuelController;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.effect.Bloom;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import model.players.User;
 import view.Regex;
 import view.ViewMaster;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.regex.Matcher;
 
 public class DuelView {
     private final DuelController duelController;
-
+    public ImageView rockImg;
+    public ImageView paperImg;
+    public ImageView scissorsImg;
+    public Button playRPS;
+    public int numberToReturn=-1;
     public DuelView() {
         duelController = new DuelController(this);
+    }
+
+    public void initialize(){
+        Bloom glow = new Bloom();
+        setBtnEffects(glow,scissorsImg,"/duelMenuPics/rps/scissors.bmp",3);
+        setBtnEffects(glow,paperImg,"/duelMenuPics/rps/paper.bmp",1);
+        setBtnEffects(glow,rockImg,"/duelMenuPics/rps/rock.bmp",2);
+    }
+
+    private void setBtnEffects(Bloom glow, ImageView view, String url,int numberToReturn) {
+        Image  image = new Image(url);
+        view.setImage(image);
+        view.setOnMouseEntered(event -> {
+            glow.setThreshold(0.75);
+            view.setEffect(glow);
+        });
+        view.setOnMouseExited(event -> {
+            view.setEffect(null);
+        });
+        view.setOnMouseClicked(event -> {
+            Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
+                    .forEach(x->x.setOpacity(1));
+            if( Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
+                    .filter(x->x!=view).filter(x->x.getOpacity()==0.4).count()==2)
+                Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
+                        .filter(x->x!=view)
+                        .forEach(x->x.setOpacity(1));
+            else
+            Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
+                    .filter(x->x!=view)
+                    .forEach(x->x.setOpacity(0.4));
+        });
+
     }
 
     public void run(String command) {
@@ -61,24 +106,10 @@ public class DuelView {
 
     public int inputStonePaperScissor(User user) {
         System.out.println("hey " + user.getNickname() + " !\nplease choose one to start Game: stone , paper , scissor");
-        int numberToReturn;
-        do {
-            String input = ViewMaster.scanner.nextLine().trim().toLowerCase();
-            switch (input) {
-                case "paper":
-                    numberToReturn = 1;
-                    break;
-                case "stone":
-                    numberToReturn = 2;
-                    break;
-                case "scissor":
-                    numberToReturn = 3;
-                    break;
-                default:
-                    numberToReturn = 4;
-                    System.out.println("please enter correct name again");
-            }
-        } while (numberToReturn == 4);
+        if(numberToReturn==0) {
+            System.out.println("choose a fuckin thing");
+            return 4;
+        }
         return numberToReturn;
     }
 
@@ -86,4 +117,6 @@ public class DuelView {
         System.out.println("Equal!\ntry again!");
     }
 
+    public void playRPS(ActionEvent event) {
+    }
 }
