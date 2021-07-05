@@ -22,6 +22,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.menuItems.CustomButton;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.IOException;
 
@@ -40,11 +42,20 @@ public class ProfileView {
                 1280, 720, false, true);
         ImageView imageView = new ImageView(background);
         circle.setOnMouseClicked(event -> {
-            FileDialog dialog = new FileDialog((Frame)null, "Select picture to set as avatar");
-            dialog.setMode(FileDialog.LOAD);
-            dialog.setVisible(true);
-            String file = dialog.getDirectory()+dialog.getFile();
-            System.out.println(file);
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "JPG & GIF Images", "jpg", "gif");
+            chooser.setFileFilter(filter);
+            int returnVal = chooser.showOpenDialog(null);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                System.out.println("You chose to open this file: " +
+                        chooser.getSelectedFile().getAbsolutePath());
+            }
+//            FileDialog dialog = new FileDialog((Frame)null, "Select picture to set as avatar");
+//            dialog.setMode(FileDialog.LOAD);
+//            dialog.setVisible(true);
+//            String file = dialog.getDirectory()+dialog.getFile();
+//            System.out.println(file);
 //            circle.setFill(new ImagePattern
 //                    (new Image(file),60,51,200,200,false));
         });

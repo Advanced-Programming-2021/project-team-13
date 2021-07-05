@@ -91,7 +91,11 @@ public class MainView {
     private Node[] setNodes() {
         return new Node[]{
                 new CustomButton("duel", () -> {
-                    goToDuelMenu();
+                    try {
+                        goToDuelMenu();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }),
                 new CustomButton("deck", () -> {
                     try {
@@ -142,8 +146,9 @@ public class MainView {
         System.out.println("menu navigation is not possible");
     }
 
-    public void goToDuelMenu() {
-
+    public void goToDuelMenu() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/DuelMenu.fxml"));
+        ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
     }
 
     public void goToDeckMenu() throws IOException {
