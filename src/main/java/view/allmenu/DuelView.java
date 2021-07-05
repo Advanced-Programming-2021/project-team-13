@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -22,20 +23,29 @@ public class DuelView {
     public Button playRPS;
     public BorderPane pane;
     public AnchorPane rightPane;
+    public AnchorPane leftPane;
+    public AnchorPane downPane;
+    public AnchorPane upPane;
+    public AnchorPane rpc;
     public VBox vBox;
     public HBox hBox;
+    public HBox rpcHbox;
     private int numberToReturn = -1;
-    private int rounds;
+
     public DuelView() {
         duelController = new DuelController(this);
     }
 
     public void initialize() {
+//        rockImg=new ImageView();
+//        paperImg=new ImageView();
+//        scissorsImg=new ImageView();
+        leftPane.getChildren().remove(rpcHbox);
         Bloom glow = new Bloom();
         setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3);
         setBtnEffects(glow, paperImg, "/duelMenuPics/rps/paper.bmp", 1);
         setBtnEffects(glow, rockImg, "/duelMenuPics/rps/rock.bmp", 2);
-        setBackGround(pane, "/duelMenuPics/moon.gif");
+        setBackGround(pane, "/duelMenuPics/moon.gif",1);
         vBox = new VBox(20, getFirstVboxNodes());
         rightPane.getChildren().add(vBox);
     }
@@ -52,17 +62,17 @@ public class DuelView {
 
     public void startAIDuel() {
        getRounds();
-//        duelController.validateAIDuelGame(rounds);
     }
 
     private void getRounds() {
         vBox.setVisible(false);
         hBox = new HBox(1, new CustomButton("1", () -> {
-            rounds=1;
+//            duelController.validateAIDuelGame(1);
+            sho();
             vBox.setVisible(true);
             pane.getChildren().remove(hBox);
         }), new CustomButton("3", () -> {
-            rounds=3;
+//            duelController.validateAIDuelGame(3);
             vBox.setVisible(true);
             pane.getChildren().remove(hBox);
         }));
@@ -72,7 +82,7 @@ public class DuelView {
 
     }
 
-    private void setBackGround(BorderPane pane, String url) {
+    private void setBackGround(BorderPane pane, String url,double opacity) {
         Image background = new Image(url, 1280, 720, false, true);
         pane.setBackground(new Background(new BackgroundImage(background, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
@@ -153,12 +163,65 @@ public class DuelView {
     }
 
     public int inputStonePaperScissor(User user) {
-        System.out.println("hey " + user.getNickname() + " !\nplease choose one to start Game: stone , paper , scissor");
-        if(numberToReturn==0) {
-            System.out.println("choose a fuckin thing");
-            return 4;
-        }
+//        AnchorPane rpc = new AnchorPane();
+//        rpc.setStyle("-fx-background-color:yellow");
+//        rpc.getChildren().addAll(rockImg,scissorsImg,paperImg);
+//        rightPane.setEffect(new GaussianBlur(15));
+//        rightPane.setDisable(true);
+//        downPane.setEffect(new GaussianBlur(15));
+//        downPane.setDisable(true);
+//        leftPane.setEffect(new GaussianBlur(15));
+//        leftPane.setDisable(true);
+//        upPane.setEffect(new GaussianBlur(15));
+//        upPane.setDisable(true);
+//        pane.getChildren().add(rpc);
+//        System.out.println("hey " + user.getNickname() + " !\nplease choose one to start Game: stone , paper , scissor");
+//        while(numberToReturn == -1) {
+//            System.out.println("choose a fuckin thing");
+//        }
         return numberToReturn;
+    }
+
+    private void sho() {
+        rpc = new AnchorPane();
+        rpc.setStyle("-fx-background-color:yellow");
+        VBox box = new VBox(20, rpcHbox, new CustomButton("Start Game", () -> {
+            if (numberToReturn == -1)
+                System.out.println("you haven't chosen yet");
+            else {
+                System.out.println(numberToReturn);
+                pane.getChildren().remove(rpc);
+                unBlur();
+            }
+        }));
+        rpc.getChildren().addAll(box);
+        rpc.setStyle("-fx-background-color:yellow");
+        blur();
+        rpc.setTranslateX(540);
+        rpc.setTranslateY(420);
+        pane.getChildren().add(rpc);
+    }
+
+    private void unBlur() {
+        rightPane.setEffect(null);
+        rightPane.setDisable(false);
+        downPane.setEffect(null);
+        downPane.setDisable(false);
+        leftPane.setEffect(null);
+        leftPane.setDisable(false);
+        upPane.setEffect(null);
+        upPane.setDisable(false);
+    }
+
+    private void blur() {
+        rightPane.setEffect(new GaussianBlur(15));
+        rightPane.setDisable(true);
+        downPane.setEffect(new GaussianBlur(15));
+        downPane.setDisable(true);
+        leftPane.setEffect(new GaussianBlur(15));
+        leftPane.setDisable(true);
+        upPane.setEffect(new GaussianBlur(15));
+        upPane.setDisable(true);
     }
 
     public void printEqual() {

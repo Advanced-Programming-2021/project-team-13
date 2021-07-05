@@ -7,6 +7,7 @@
     <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="duel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DuelMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DuelMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +250,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625464543410</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="duel">
+      <created>1625467318791</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1625467318791</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
