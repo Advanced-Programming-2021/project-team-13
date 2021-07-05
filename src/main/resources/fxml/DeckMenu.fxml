@@ -84,7 +84,7 @@
             <TilePane fx:id="sideDeck" layoutX="26.0" layoutY="7.0" prefColumns="12" prefHeight="129.0" prefRows="1" prefWidth="814.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
             </AnchorPane>
             <AnchorPane fx:id="yesNoBack" layoutX="192.0" layoutY="238.0" prefHeight="244.0" prefWidth="476.0" visible="false">
-                <VBox fx:id="yesNoVBox" layoutY="4.0" prefHeight="237.0" prefWidth="467.0" />
+                <VBox fx:id="yesNoVBox" alignment="TOP_CENTER" layoutY="4.0" prefHeight="237.0" prefWidth="467.0" />
             </AnchorPane>
         </AnchorPane>
     </center>

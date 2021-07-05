@@ -4,7 +4,6 @@ package controll;
 import model.UserDeck;
 import model.cards.Card;
 import model.players.User;
-import view.ViewMaster;
 
 public class DeckController {
 
@@ -38,7 +37,7 @@ public class DeckController {
         if (userDeck == null)
             return false;
         else {
-            ViewMaster.getUser().getAllDecks().remove(userDeck);
+            user.getAllDecks().remove(userDeck);
             return true;
         }
     }
@@ -56,9 +55,8 @@ public class DeckController {
         }
     }
 
-    public String addCard(User user, String cardName, String deckName, boolean isSide) {
+    public String addCard(User user, String cardName, UserDeck userDeck, boolean isSide) {
         if (doesHaveCard(user, cardName)) {
-            UserDeck userDeck = user.getDeckByName(deckName.trim());
             if (userDeck == null)
                 return "noDeckExists";
             else {
