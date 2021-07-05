@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="rpc">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/duelMenuPics/2.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/duelMenuPics/moon.gif" afterDir="false" />
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="duel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DuelMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DuelMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/registerPic/207988.gif" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625458648818</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="duel">
+      <created>1625464543410</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1625464543410</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +277,8 @@
     <MESSAGE value="deckView is editing 2" />
     <MESSAGE value="profile pic" />
     <MESSAGE value="rpc" />
-    <option name="LAST_COMMIT_MESSAGE" value="rpc" />
+    <MESSAGE value="duel" />
+    <option name="LAST_COMMIT_MESSAGE" value="duel" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

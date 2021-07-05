@@ -13,7 +13,6 @@ import model.players.User;
 import view.Regex;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
 
 public class DuelView {
     private final DuelController duelController;
@@ -21,11 +20,12 @@ public class DuelView {
     public ImageView paperImg;
     public ImageView scissorsImg;
     public Button playRPS;
-    public int numberToReturn = -1;
     public BorderPane pane;
     public AnchorPane rightPane;
-
-
+    public VBox vBox;
+    public HBox hBox;
+    private int numberToReturn = -1;
+    private int rounds;
     public DuelView() {
         duelController = new DuelController(this);
     }
@@ -36,22 +36,42 @@ public class DuelView {
         setBtnEffects(glow, paperImg, "/duelMenuPics/rps/paper.bmp", 1);
         setBtnEffects(glow, rockImg, "/duelMenuPics/rps/rock.bmp", 2);
         setBackGround(pane, "/duelMenuPics/moon.gif");
-        VBox vBox = new VBox(20, getNodes());
+        vBox = new VBox(20, getFirstVboxNodes());
         rightPane.getChildren().add(vBox);
     }
 
-    private Node[] getNodes() {
+    private Node[] getFirstVboxNodes() {
         return new Node[]{
-            new CustomButton("AI duel", () -> {
-//                startAIDuel();
-            }), new CustomButton("2 Player duel", () -> {
+                new CustomButton("AI duel", () -> {
+                    startAIDuel();
+                }), new CustomButton("2 Player duel", () -> {
 
-            })
+        })
         };
     }
-//    public void startAIDuel(){
+
+    public void startAIDuel() {
+       getRounds();
 //        duelController.validateAIDuelGame(rounds);
-//    }
+    }
+
+    private void getRounds() {
+        vBox.setVisible(false);
+        hBox = new HBox(1, new CustomButton("1", () -> {
+            rounds=1;
+            vBox.setVisible(true);
+            pane.getChildren().remove(hBox);
+        }), new CustomButton("3", () -> {
+            rounds=3;
+            vBox.setVisible(true);
+            pane.getChildren().remove(hBox);
+        }));
+        hBox.setTranslateX(440);
+        hBox.setTranslateY(275);
+        pane.getChildren().add(hBox);
+
+    }
+
     private void setBackGround(BorderPane pane, String url) {
         Image background = new Image(url, 1280, 720, false, true);
         pane.setBackground(new Background(new BackgroundImage(background, BackgroundRepeat.REPEAT,
