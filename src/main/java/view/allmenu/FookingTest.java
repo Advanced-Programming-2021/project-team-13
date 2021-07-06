@@ -2,15 +2,14 @@ package view.allmenu;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import model.players.Player;
-import model.players.User;
 
 public class FookingTest extends Application {
     public GridPane gridPane;
@@ -29,24 +28,33 @@ public class FookingTest extends Application {
         primaryStage.setScene(new Scene( loader.load()));
         primaryStage.show();
     }
-    public void initialize(){
+    public void initialize() {
+        gridPane.getChildren().clear();
+//        for (int i = 0; i < ; i++) {
+//
+//        }
         gridPane.setHgap(5);
         gridPane.setVgap(5);
-        String url= "/shopImage/Monsters/AxeRaider.jpg";
-        Image background = new Image(url,90,124,false,true);
-        for (Node child : centerPane.getChildren()) {
-            if(child instanceof StackPane) {
-                ImageView bbb = new ImageView(background);
-                ((StackPane) child).getChildren().add(bbb);
-            }
-            if(child instanceof GridPane){
-                for (Node node : (((GridPane) child).getChildren())) {
-                    if(node instanceof StackPane){
-                        ImageView bbb = new ImageView(background);
-                        ((StackPane) node).getChildren().add(bbb);
-                    }
-                }
-            }
-        }
+        centerPane.getChildren().stream().filter(x -> x instanceof StackPane).forEach(x -> ((StackPane) x).setStyle("-fx-background-image: url('/shopImage/Monsters/AxeRaider.jpg') " +
+                ";-fx-background-repeat:no-repeat;-fx-background-size:cover,auto"));
+        centerPane.getChildren().stream()
+                .filter(x -> x instanceof GridPane).map(x -> (GridPane) x)
+                .forEach(x -> x.getChildren()
+                        .forEach(a -> a.setStyle("-fx-background-image: url('/shopImage/Monsters/AxeRaider.jpg') " +
+                                ";-fx-background-repeat:no-repeat no-repeat;-fx-background-size:cover,auto")));
+//        for (Node child : centerPane.getChildren()) {
+//            if(child instanceof StackPane) {
+//                ImageView bbb = new ImageView(background);
+//                ((StackPane) child).getChildren().add(bbb);
+//            }
+//            if(child instanceof GridPane){
+//                for (Node node : (((GridPane) child).getChildren())) {
+//                    if(node instanceof StackPane){
+//                        ImageView bbb = new ImageView(background);
+//                        ((StackPane) node).getChildren().add(bbb);
+//                    }
+//                }
+//            }
+//        }
     }
 }

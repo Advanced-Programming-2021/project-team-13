@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="just created game fxml">
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" afterDir="false" />
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="frustrated af">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mainMenuImages/gobi.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mainMenuImages/juan.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mainMenuImages/main.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +143,7 @@
       <workItem from="1625314452172" duration="40000" />
       <workItem from="1625317097848" duration="8163000" />
       <workItem from="1625362882339" duration="10272000" />
-      <workItem from="1625547145133" duration="5695000" />
+      <workItem from="1625547145133" duration="7629000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -320,7 +313,21 @@
       <option name="project" value="LOCAL" />
       <updated>1625547150545</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="frustrated af">
+      <created>1625554821200</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1625554821200</updated>
+    </task>
+    <task id="LOCAL-00026" summary="frustrated af">
+      <created>1625554866577</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1625554866577</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +358,8 @@
     <MESSAGE value="duel" />
     <MESSAGE value="deck is edited" />
     <MESSAGE value="just created game fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="just created game fxml" />
+    <MESSAGE value="frustrated af" />
+    <option name="LAST_COMMIT_MESSAGE" value="frustrated af" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
