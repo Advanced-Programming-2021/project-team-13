@@ -4,12 +4,19 @@ import controll.gameController.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
+import model.players.User;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
@@ -22,7 +29,10 @@ import java.util.regex.Matcher;
 
 public class GameView {
     private final GameController gameController;
-
+    public StackPane rivalGraveyard;
+    public StackPane ourField;
+    public StackPane rivalField;
+    public StackPane ourGraveyard;
     public GameView(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
     }
@@ -868,4 +878,6 @@ public class GameView {
             }
         }
     }
+
+
 }
