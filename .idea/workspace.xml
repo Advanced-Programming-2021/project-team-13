@@ -7,6 +7,7 @@
     <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="frustrated af">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +144,7 @@
       <workItem from="1625314452172" duration="40000" />
       <workItem from="1625317097848" duration="8163000" />
       <workItem from="1625362882339" duration="10272000" />
-      <workItem from="1625547145133" duration="7629000" />
+      <workItem from="1625547145133" duration="17080000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -327,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625554866577</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="frustrated af">
+      <created>1625556882257</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1625556882257</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
