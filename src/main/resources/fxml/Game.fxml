@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane maxHeight="-Infinity" fx:id="motherPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080" prefWidth="1440" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.FookingTest">
+<BorderPane maxHeight="-Infinity" fx:id="motherPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.FookingTest">
    <top>
       <AnchorPane prefHeight="148.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
    </top>
@@ -23,11 +23,11 @@
       <AnchorPane prefHeight="414.0" prefWidth="354.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
-       <AnchorPane prefHeight="1080" fx:id="centerPane" prefWidth="700" BorderPane.alignment="CENTER">
-<!--           <ImageView fitHeight="1080" fitWidth="700" layoutX="-4.0" layoutY="3.0" pickOnBounds="true"-->
-<!--                      preserveRatio="true">-->
-<!--               <Image url="@../gamePics/a.jpg"/>-->
-<!--           </ImageView>-->
+       <AnchorPane prefHeight="689.0" fx:id="centerPane" prefWidth="678.0" BorderPane.alignment="CENTER">
+           <ImageView fitHeight="677.0" fitWidth="650.0" layoutX="-4.0" layoutY="3.0" pickOnBounds="true"
+                      preserveRatio="true">
+               <Image url="@../gamePics/a.jpg"/>
+           </ImageView>
            <GridPane layoutX="108.0" layoutY="114.0" maxHeight="-Infinity" fx:id="gridPane" maxWidth="-Infinity"
                      minHeight="-Infinity"
                      minWidth="-Infinity" prefHeight="462.0" prefWidth="438.0">

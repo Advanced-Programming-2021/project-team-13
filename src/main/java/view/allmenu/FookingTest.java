@@ -30,9 +30,6 @@ public class FookingTest extends Application {
         primaryStage.show();
     }
     public void initialize(){
-        String url1= "/shopImage/Monsters/AxeRaider.jpg";
-        Image background1 = new Image(url1,90,124,false,true);
-        gridPane.setBackground(new Background(new BackgroundImage(background1,BackgroundRepeat.REPEAT,BackgroundRepeat.REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT)));
         gridPane.setHgap(5);
         gridPane.setVgap(5);
         String url= "/shopImage/Monsters/AxeRaider.jpg";
