@@ -9,11 +9,9 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -21,13 +19,16 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
-import model.menuItems.CustomButton;
+import model.menuItems.CustomSanButtons;
 import model.players.AIPlayer;
 import model.players.Player;
 import view.Menu;
@@ -42,8 +43,7 @@ import java.util.regex.Matcher;
 
 public class GameView {
     public AnchorPane rightPane;
-    public ImageView surrenderBtn;
-    public StackPane surrenderStack;
+    public StackPane notifStackPane;
     private GameController gameController;
     public GridPane gridPane;
     public BorderPane motherPane;
@@ -60,11 +60,7 @@ public class GameView {
     public Circle rivalHp;
     public Label rivalHpPoint;
     public Label ourHpPoint;
-    public VBox controlBtns;
-    public StackPane attack;
-    public StackPane summon;
-    public StackPane set;
-    public StackPane activate;
+    public Text text;
     public Player firstPlayer;
     public Player secondPlayer;
     private boolean tributePhase = false;
@@ -78,14 +74,16 @@ public class GameView {
     }
 
     public GameView() {
+
     }
 
     public void init() {
+        setupNotifStackPane();
+        VBox buttonBox = new VBox(10, buttonBoxNodes());
+        buttonBox.setTranslateY(350);
+        buttonBox.setTranslateX(50);
+        rightPane.getChildren().add(buttonBox);
         initHp();
-        surrenderStack.setOnMouseEntered(e -> {
-            surrenderBtn.setEffect(new ColorAdjust(-0.72, 0, 0, 0));
-        });
-        surrenderStack.setOnMouseExited(e -> surrenderBtn.setEffect(null));
         centerPane.setAlignment(Pos.CENTER);
         leftPane.setStyle("-fx-background-image: url('/gamePics/1.png');-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
         rightPane.setStyle("-fx-background-image: url('/gamePics/1.png');-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
@@ -94,22 +92,40 @@ public class GameView {
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
     }
 
-    private void controlButtons() {
-        controlBtns.setSpacing(13.333);
-        attack = new CustomButton("attack", () -> {
-        });
-        summon = new CustomButton("summon", () -> {
-        });
-        set = new CustomButton("set", () -> {
-        });
-        activate = new CustomButton("activate", () -> {
-        });
-        Arrays.stream(new StackPane[]{activate, summon, set, attack}).forEach(e -> e.setVisible(false));
-        StackPane surrender = new CustomButton("surrender", () -> {
-        });
-        surrender.setStyle("-fx-background-color: crimson");
-        controlBtns.getChildren().addAll(attack, summon, set, activate, surrender);
-        controlBtns.setTranslateX(-46.666);
+    private void setupNotifStackPane() {
+        text = new Text();
+        VBox vBox = new VBox(20, text, new CustomSanButtons("proceed", () -> {
+            text.setText("");
+            notifStackPane.setVisible(false);
+            deBlur();
+        }));
+        text.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
+        text.setEffect(new Bloom(0.3));
+        notifStackPane = new StackPane();
+        notifStackPane.getChildren().add(vBox);
+        vBox.setStyle("-fx-background-image: url('/gamePics/notif.jpg');");
+        notifStackPane.setPrefHeight(150);
+        notifStackPane.setPrefWidth(200);
+        vBox.setPrefHeight(150);
+        vBox.setPrefWidth(200);
+        notifStackPane.setAlignment(Pos.CENTER);
+        notifStackPane.setTranslateY(300);
+        notifStackPane.setTranslateX(600);
+        notifStackPane.setVisible(false);
+        motherPane.getChildren().add(notifStackPane);
+    }
+
+    private Node[] buttonBoxNodes() {
+        return new Node[]{new CustomSanButtons("attack", () -> {
+        })
+                , new CustomSanButtons("direct attack", () -> {
+
+        }), new CustomSanButtons("next phase", () -> {
+            gameController.nextPhase();
+        })
+                , new CustomSanButtons("surrender", () -> {
+
+        })};
     }
 
     public boolean isTributePhase() {
@@ -696,8 +712,29 @@ public class GameView {
     }
 
     public void printCurrentPhase() {
-        System.out.println(gameController.getCurrentPhase().getPhaseName());
+        notifStackPane.setVisible(true);
+        blur();
+        text.setText(gameController.getCurrentPhase().getPhaseName());
     }
+
+    private void blur() {
+        leftPane.setOpacity(0.3);
+        leftPane.setDisable(true);
+        rightPane.setDisable(true);
+        rightPane.setOpacity(0.3);
+        centerPane.setOpacity(0.3);
+        centerPane.setDisable(true);
+    }
+
+    private void deBlur() {
+        leftPane.setOpacity(1);
+        leftPane.setDisable(false);
+        rightPane.setDisable(false);
+        rightPane.setOpacity(1);
+        centerPane.setOpacity(1);
+        centerPane.setDisable(false);
+    }
+
 
     public void printUserWonWholeGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
