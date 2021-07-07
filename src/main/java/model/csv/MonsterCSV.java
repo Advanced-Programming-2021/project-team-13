@@ -92,7 +92,7 @@ public class MonsterCSV {
                 .build()
                 .parse();
         for (MonsterCSV monsterCSV : monsters)
-            if (name.equalsIgnoreCase(monsterCSV.getName().replaceAll("[\\s,.\\-_;':()]", ""))
+            if (name.replaceAll("[\\s,.\\-_;':()]", "").equalsIgnoreCase(monsterCSV.getName().replaceAll("[\\s,.\\-_;':()]", ""))
             || monsterCSV.getName().replaceAll("[\\s,.\\-_;':()]", "").contains(name))
                 return monsterCSV;
         return null;

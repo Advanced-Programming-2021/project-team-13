@@ -1,7 +1,6 @@
 package view.allmenu;
 
 import controll.gameController.DuelController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -18,6 +17,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model.menuItems.CustomButton;
+import model.players.Player;
 import model.players.User;
 import view.Regex;
 import view.ViewMaster;
@@ -232,4 +232,11 @@ public class DuelView {
         rpcNotifLabel.setText("Equal!\ntry again!");
     }
 
+    public GameView startGame(Player firstPlayer,Player secondPlayer,Player currentPlayer,int rounds)
+            throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
+        ((Stage) pane.getScene().getWindow()).setScene(new Scene(loader.load()));
+        ((GameView)loader.getController()).setup(firstPlayer,secondPlayer,currentPlayer,rounds);
+        return loader.getController();
+    }
 }

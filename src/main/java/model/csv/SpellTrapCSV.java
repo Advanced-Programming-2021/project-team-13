@@ -47,18 +47,23 @@ public class SpellTrapCSV {
     }
 
     public static SpellTrapCSV findSpellTrap(String name) throws FileNotFoundException {
-        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
+        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>
+                (new FileReader(System
+                        .getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
                 .withType(SpellTrapCSV.class)
                 .build()
                 .parse();
         for (SpellTrapCSV spellTrapCsv : spellsAndTraps)
-            if (name.equalsIgnoreCase(spellTrapCsv.getName().replaceAll("[ ,.\\-_;':()]", "")))
+            if (name.replaceAll("[ ,.\\-_;':()]", "")
+                    .equalsIgnoreCase(spellTrapCsv.getName().replaceAll("[ ,.\\-_;':()]", "")))
                 return spellTrapCsv;
         return null;
     }
 
     public static void getNameAndDescription(TreeMap<String, String> cards) throws Exception {
-        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
+        List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder
+                <SpellTrapCSV>(new FileReader
+                (System.getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
                 .withType(SpellTrapCSV.class)
                 .build()
                 .parse();
