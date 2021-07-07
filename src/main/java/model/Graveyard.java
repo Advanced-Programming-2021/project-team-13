@@ -19,7 +19,7 @@ public class Graveyard {
 
     public Monster getMonsterFromGraveyard(String name) {
         for (Card card : allCards) {
-            if (card instanceof Monster && card.getCardName().equals(name))
+            if (card instanceof Monster && card.getCardNameInGame().equals(name))
                 return (Monster) card;
         }
         return null;

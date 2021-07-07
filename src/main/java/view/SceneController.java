@@ -1,8 +1,10 @@
 package view;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,11 +27,15 @@ public class SceneController {
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
     }
-    public static void startGameMenu(Stage primaryStage) throws IOException{
-        URL url = SceneController.class.getResource("/fxml/Game.fxml");
+
+    public static void startCardCreator(Stage primaryStage) throws IOException {
+        URL url = SceneController.class.getResource("/fxml/CardCreatorMenu.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Parent parent = fxmlLoader.load();
         Scene scene = new Scene(parent);
+        URL cursor = SceneController.class.getResource("/cardCreatorImages/mouse4.png");
+        Image image = new Image(cursor.toExternalForm());
+        scene.setCursor(new ImageCursor(image));
         primaryStage.setScene(scene);
     }
 }

@@ -9,7 +9,8 @@ import model.players.Player;
 import model.players.User;
 import view.Menu;
 import view.ViewMaster;
-import view.allmenu.*;
+import view.allmenu.DuelView;
+import view.allmenu.GameView;
 
 import java.net.URL;
 import java.util.Random;
@@ -88,7 +89,7 @@ public class DuelController {
             Card card = player.getBoard().getDeck().getAllCards().get(i);
             if (card instanceof Trap) {
                 Trap trap = (Trap) card;
-                TrapAction trapAction = TrapAction.allTrapEffects.get(trap.getCardName());
+                TrapAction trapAction = TrapAction.allTrapEffects.get(trap.getCardNameInGame());
                 if (trapAction instanceof MagicCylinder) {
                     trapAction = new MagicCylinder();
                 } else if (trapAction instanceof CallOfTheHaunted) {

@@ -68,7 +68,7 @@ public class Trap extends Card {
 
     @Override
     public String toString() {
-        return "Name: " + cardName + " Trap"
+        return "Name: " + cardNameInGame + " Trap"
                 + "\nType: " + type + "\nDescription: " + cardDescription;
     }
 

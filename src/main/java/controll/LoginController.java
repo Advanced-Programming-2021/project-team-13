@@ -4,11 +4,11 @@ import model.players.User;
 import view.Menu;
 import view.ViewMaster;
 import view.allmenu.LoginView;
-import view.allmenu.RegisterView;
 
 
 public class LoginController {
     private final LoginView loginView;
+
     public LoginController(LoginView loginView) {
         this.loginView = loginView;
     }
@@ -24,6 +24,7 @@ public class LoginController {
             ViewMaster.setUser(user);
             ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
             return true;
-        } return false;
+        }
+        return false;
     }
 }

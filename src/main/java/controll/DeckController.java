@@ -97,7 +97,7 @@ public class DeckController {
 
     private boolean doesHaveCard(User user, String cardName) {
         for (Card card : user.getAllCards()) {
-            if (card.getCardName().equalsIgnoreCase(cardName.replace("_", "-")))
+            if (card.getCardNameInGame().equalsIgnoreCase(cardName.replace("_", "-")))
                 return true;
         }
         return false;

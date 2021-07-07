@@ -38,14 +38,14 @@ public class Player {
     }
 
     public Player(PlayerDeck playerDeck) {
-        playerDeck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
-                || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
-                || e.getCardName().equalsIgnoreCase("Skull Guardian")
-                || e.getCardName().equalsIgnoreCase("Crab Turtle"));
-        playerDeck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
-                || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
-                || e.getCardName().equalsIgnoreCase("Skull Guardian")
-                || e.getCardName().equalsIgnoreCase("Crab Turtle"));
+            playerDeck.getAllCardsInMainDeck().removeIf(e -> e.getCardNameInGame().equalsIgnoreCase("scanner")
+                    || e.getCardNameInGame().equalsIgnoreCase("Advanced Ritual Art")
+                    || e.getCardNameInGame().equalsIgnoreCase("Skull Guardian")
+                    || e.getCardNameInGame().equalsIgnoreCase("Crab Turtle"));
+            playerDeck.getAllCardsInSideDeck().removeIf(e -> e.getCardNameInGame().equalsIgnoreCase("scanner")
+                    || e.getCardNameInGame().equalsIgnoreCase("Advanced Ritual Art")
+                    || e.getCardNameInGame().equalsIgnoreCase("Skull Guardian")
+                    || e.getCardNameInGame().equalsIgnoreCase("Crab Turtle"));
         this.wonRounds = 0;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;

@@ -46,7 +46,7 @@ public class ImageLoader {
 
     public static Image getCardImageByName(String cardName) {
         cardName = cardName.replaceAll("[\\s\\-_*';\\.,^!]", "");
-        return cardsImage.get(cardName);
+        return cardsImage.getOrDefault(cardName , cardsImage.get("createCard"));
     }
 
     public static HashMap<String, Image> getCardsImage() {

@@ -1,5 +1,6 @@
 package controll;
 
+import model.cards.Card;
 import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import model.players.User;
@@ -10,7 +11,7 @@ import java.util.TreeMap;
 
 public class ShopController {
     private final ShopView shopView;
-    private TreeMap<String, String> cards = new TreeMap<>();
+    private final TreeMap<String, String> cards = new TreeMap<>();
 
     public ShopController(ShopView shopView) {
         this.shopView = shopView;
@@ -50,8 +51,8 @@ public class ShopController {
         return null;
     }
 
-    public void buyCard(User user, String cardName, int cardPrice) {
-        user.addCard(cardName);
+    public void buyCard(User user, Card card, int cardPrice) {
+        user.addCard(card);
         user.addMoney(-cardPrice);
     }
 }

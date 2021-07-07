@@ -7,11 +7,12 @@ import view.allmenu.MainView;
 
 public class MainController {
     private final MainView mainView;
-    public MainController(MainView mainView){
+
+    public MainController(MainView mainView) {
         this.mainView = mainView;
     }
 
-    public void enterMenu(String menuToEnter){
+    public void enterMenu(String menuToEnter) {
         if (menuToEnter.equalsIgnoreCase("login"))
             mainView.printMenuNavigationImpossible();
         else if (menuToEnter.equalsIgnoreCase("main"))

@@ -70,4 +70,16 @@ public class SpellTrapCSV {
         for (SpellTrapCSV spellTrapCsv : spellsAndTraps)
             cards.put(spellTrapCsv.getName().replaceAll("[ ,.\\-_;':()]", ""), spellTrapCsv.getDescription());
     }
+
+    public static List<SpellTrapCSV> getAllSpellCSV() throws FileNotFoundException {
+        return new CsvToBeanBuilder<SpellTrapCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
+                .withType(SpellTrapCSV.class)
+                .build()
+                .parse();
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
