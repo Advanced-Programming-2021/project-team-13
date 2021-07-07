@@ -3,7 +3,6 @@ package model.cards;
 import enums.*;
 import javafx.scene.image.Image;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Monster extends Card {
@@ -290,7 +289,7 @@ public class Monster extends Card {
 
     @Override
     public String toString() {
-        return "Name: " + cardName + "\nLevel: " + level
+        return "Name: " + cardNameInGame + "\nLevel: " + level
                 + "\nType: " + monsterType + "\nATK: " + attackNum
                 + "\nDEF: " + defenseNum + "\nDescription: " + cardDescription;
     }

@@ -106,4 +106,16 @@ public class MonsterCSV {
         for (MonsterCSV monsterCSV : monsters)
             cards.put(monsterCSV.getName().replaceAll("[ ,.\\-_;':()]", ""), monsterCSV.getDescription());
     }
+
+    public static List<MonsterCSV> getAllCSVCards () throws FileNotFoundException {
+        return new CsvToBeanBuilder<MonsterCSV>(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\model\\csv\\" + "Monster.csv"))
+               .withType(MonsterCSV.class)
+               .build()
+               .parse();
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

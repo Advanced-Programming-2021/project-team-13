@@ -38,7 +38,7 @@ public class Spell extends Card {
 
     @Override
     public String toString() {
-        return "Name: " + cardName + "Spell"
+        return "Name: " + cardNameInGame + "Spell"
                 + "\nType: " + type + "Description: " + cardDescription;
     }
 

@@ -4,11 +4,61 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="deck is edited">
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="deck is done">
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/CardCreatorView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/D15Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/contin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/counter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/hand.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/help09_01_03_01a.dds.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/help09_01_03_01b.dds.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/help09_01_03_01c.dds.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/help09_01_03_01d.dds.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/mouse4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/CardCreatorMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shopImage/Monsters/createCard.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/cardCreator.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ShopController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/CardCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/Effect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/EffectHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/ShowGraveyardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/ShowGraveyardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/TrapAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/TrapAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/enums/MonsterCardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/MonsterCardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Spell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/csv/MonsterCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/MonsterCSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/csv/SpellTrapCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/SpellTrapCSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SceneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ShopView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/deckMenuImages/back2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cardCreatorImages/back2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DeckMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DeckMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/deckMenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/deckMenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/ProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controll/ShopController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/ShopController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +68,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -53,6 +104,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/scoreboardImage" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -62,11 +114,38 @@
       <recent name="F:\AP Project\project-team-13\src\main\resources\scoreboardImage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\project-team-13\src\main\resources\cardCreatorImages" />
       <recent name="F:\AP Project\project-team-13\src\main\resources\scoreboardImage" />
       <recent name="F:\AP Project\project-team-13\src\main\resources\backClicked" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
+    <configuration name="CardCreatorMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.allmenu.CardCreatorMenu" />
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.allmenu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="D15Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.allmenu.D15Controller" />
+      <module name="YuGiOh" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.allmenu.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="YuGiOh" />
@@ -87,15 +166,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -103,6 +180,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.D15Controller" />
+        <item itemvalue="Application.CardCreatorMenu" />
         <item itemvalue="Application.ScoreboardView" />
       </list>
     </recent_temporary>
@@ -119,6 +198,7 @@
       <workItem from="1625314452172" duration="40000" />
       <workItem from="1625317097848" duration="8163000" />
       <workItem from="1625362882339" duration="10272000" />
+      <workItem from="1625566731480" duration="54074000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -281,7 +361,21 @@
       <option name="project" value="LOCAL" />
       <updated>1625510637788</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="deck is done">
+      <created>1625511608544</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1625511608544</updated>
+    </task>
+    <task id="LOCAL-00025" summary="deck is done">
+      <created>1625511646051</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1625511646051</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,7 +405,8 @@
     <MESSAGE value="rpc" />
     <MESSAGE value="duel" />
     <MESSAGE value="deck is edited" />
-    <option name="LAST_COMMIT_MESSAGE" value="deck is edited" />
+    <MESSAGE value="deck is done" />
+    <option name="LAST_COMMIT_MESSAGE" value="deck is done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -326,16 +421,11 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java</url>
-          <line>557</line>
+          <line>548</line>
           <properties class="view.allmenu.DeckView" method="activeDeck">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java</url>
-          <line>128</line>
-          <option name="timeStamp" value="94" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

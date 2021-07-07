@@ -56,14 +56,13 @@ public class User implements Comparable<User> {
         return null;
     }
 
-    public void addCard(String cardName) {
-        cardName = cardName.replace("_", "-");
-        if (cardNameToNumber.containsKey(cardName)) {
-            Integer num = cardNameToNumber.get(cardName);
-            cardNameToNumber.replace(cardName, num + 1);
+    public void addCard(Card card) {
+        if (cardNameToNumber.containsKey(card.getCardName())) {
+            Integer num = cardNameToNumber.get(card.getCardName());
+            cardNameToNumber.replace(card.getCardName(), num + 1);
         } else {
-            allCards.add(Card.findCardFromCsv(cardName));
-            cardNameToNumber.put(cardName, 1);
+            allCards.add(card);
+            cardNameToNumber.put(card.getCardName(), 1);
         }
     }
 
@@ -157,7 +156,7 @@ public class User implements Comparable<User> {
 
     public Card getCardByName(String cardName) {
         for (Card card : allCards)
-            if (card.getCardName().equalsIgnoreCase(cardName))
+            if (card.getCardNameInGame().equalsIgnoreCase(cardName))
                 return card;
         return null;
     }

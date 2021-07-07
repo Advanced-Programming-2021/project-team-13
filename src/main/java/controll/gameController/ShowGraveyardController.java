@@ -29,7 +29,7 @@ public class ShowGraveyardController {
         monsterCounter = counter;
     }
 
-    public void selectCardFromGraveyard(int number,Player player) {
+    public void selectCardFromGraveyard(int number, Player player) {
         for (Card card : player.getBoard().getGraveyard().getAllCards()) {
             if (card instanceof Monster) {
                 number--;

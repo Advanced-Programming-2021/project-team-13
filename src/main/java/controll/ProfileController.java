@@ -4,7 +4,6 @@ import model.players.User;
 import view.ViewMaster;
 import view.allmenu.ProfileView;
 
-
 import java.util.ArrayList;
 
 public class ProfileController {

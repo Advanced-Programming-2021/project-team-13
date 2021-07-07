@@ -70,13 +70,13 @@ public class AIPlayer extends Player {
             List<Monster> monsters = getSortedHandsMonsterBasedOnAttackAndDefence();
             if (monsters == null) return;
             for (Monster monster : monsters) {
-                if (monster.getCardName().equalsIgnoreCase("Beast King Barbaros"))
+                if (monster.getCardNameInGame().equalsIgnoreCase("Beast King Barbaros"))
                     if (summonBarbaros(monster, GC))
                         return;
-                if (monster.getCardName().equalsIgnoreCase("the tricky"))
+                if (monster.getCardNameInGame().equalsIgnoreCase("the tricky"))
                     summonTricky(monster, monsters, GC);
                 int numberOfTribute = monster.howManyTributeNeed();
-                if (monster.getCardName().equalsIgnoreCase("Terratiger, the Empowered Warrior")) {
+                if (monster.getCardNameInGame().equalsIgnoreCase("Terratiger, the Empowered Warrior")) {
                     if (summonTerratiger(monster, monsters, GC))
                         return;
                 }
@@ -137,7 +137,7 @@ public class AIPlayer extends Player {
             for (Monster monster1 : monsters) {
                 if (monster1.getLevel() <= 4) {
                     getBoard().putMonsterInBoard(monster1);
-                    if (monster1.getCardName().equalsIgnoreCase("Mirage Dragon")) {
+                    if (monster1.getCardNameInGame().equalsIgnoreCase("Mirage Dragon")) {
                         gc.getCurrentPlayer().getRivalPlayer().setCanActiveTrap(false);
                         monster1.setActiveAbility(true);
                     }
@@ -217,9 +217,9 @@ public class AIPlayer extends Player {
     private Monster faceDownAttack(List<Monster> faceDownMonster, Monster monster) {
         if (faceDownMonster.size() == 0) return null;
         for (Monster faceUpMonster : faceDownMonster) {
-            if (!faceUpMonster.getCardName().equalsIgnoreCase("yomi ship") && !faceUpMonster.getCardName()
+            if (!faceUpMonster.getCardNameInGame().equalsIgnoreCase("yomi ship") && !faceUpMonster.getCardNameInGame()
                     .equalsIgnoreCase("suijin")
-                    && !faceUpMonster.getCardName().equalsIgnoreCase("Marshmallon"))
+                    && !faceUpMonster.getCardNameInGame().equalsIgnoreCase("Marshmallon"))
                 if (faceUpMonster.getAttackPointInGame() < monster.getAttackPointInGame())
                     return faceUpMonster;
         }
@@ -244,9 +244,9 @@ public class AIPlayer extends Player {
                 return null;
         }
         for (Monster faceUpMonster : faceUpMonsters) {
-            if (!faceUpMonster.getCardName().equalsIgnoreCase("yomi ship") && !faceUpMonster.getCardName()
+            if (!faceUpMonster.getCardNameInGame().equalsIgnoreCase("yomi ship") && !faceUpMonster.getCardNameInGame()
                     .equalsIgnoreCase("suijin")
-                    && !faceUpMonster.getCardName().equalsIgnoreCase("Marshmallon"))
+                    && !faceUpMonster.getCardNameInGame().equalsIgnoreCase("Marshmallon"))
                 if (faceUpMonster.getAttackPointInGame() < monster.getAttackPointInGame())
                     return faceUpMonster;
         }

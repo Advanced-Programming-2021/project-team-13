@@ -12,16 +12,14 @@ import model.players.Player;
 
 public abstract class EffectHandler {
     protected static GameController gameController;
+    protected Card card;
+    protected EffectHandler nextHandler;
+    public EffectHandler(Card card) {
+        this.card = card;
+    }
 
     public static void setGameController(GameController gameController) {
         EffectHandler.gameController = gameController;
-    }
-
-    protected Card card;
-    protected EffectHandler nextHandler;
-
-    public EffectHandler(Card card) {
-        this.card = card;
     }
 
     public void setNextHandler(EffectHandler nextHandler) {
@@ -63,7 +61,6 @@ class HasNormalOrFlipSummonHappened extends EffectHandler {
         }
     }
 }
-
 
 
 class IsInAttack extends EffectHandler {
@@ -235,14 +232,14 @@ class HasSummonedMonsterPowerMoreThan1000 extends EffectHandler {
 
 class EnemyHasAnyCardInHand extends EffectHandler {
 
-    public EnemyHasAnyCardInHand (Card card){
+    public EnemyHasAnyCardInHand(Card card) {
         super(card);
     }
 
     @Override
     public boolean canActivate() {
         Player rival = card.getCardOwner().getRivalPlayer();
-        if (rival.getCardsInHand().size() != 0){
+        if (rival.getCardsInHand().size() != 0) {
             if (nextHandler != null)
                 return nextHandler.canActivate();
             else return true;

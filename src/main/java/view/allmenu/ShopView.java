@@ -22,6 +22,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.cards.Card;
 import view.ViewMaster;
 
 import javax.imageio.ImageIO;
@@ -110,7 +111,8 @@ public class ShopView {
         });
         button.setOnMouseClicked(e -> {
             if (button.getImage() == allowBuyShadow) {
-                shopController.buyCard(ViewMaster.getUser(), selectedCardName, selectedCardPrice);
+                Card card = Card.findCardFromCsv(selectedCardName);
+                shopController.buyCard(ViewMaster.getUser(), card, selectedCardPrice);
                 message.setOpacity(1);
                 shopButtonImage(selectedCardPrice);
                 messageTimer.play();

@@ -24,7 +24,6 @@ import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Cell;
 import model.UserDeck;
 import model.cards.Card;
 import model.players.User;
@@ -105,6 +104,7 @@ public class DeckView implements Initializable {
 
     private void addCardToScrollPane() {
         for (Card card : user.getAllCards()) {
+            System.out.println(card.getCardName());
             Image image = ImageLoader.getCardImageByName(card.getCardName());
             card.setImage(image);
             ImageView imageView = new ImageView(image);
@@ -126,7 +126,6 @@ public class DeckView implements Initializable {
         ImageView imageView = new ImageView();
         imageView.setImage(sourceImageView.getImage());
         if (event.getTarget().equals(mainDeck)) {
-            System.out.println("dropped in main");
             if (mainDeck.getChildren().contains(sourceImageView))
                 return;
             String answer = deckController.addCard(user, cardName, currentPlayerDeck, false);
@@ -148,7 +147,6 @@ public class DeckView implements Initializable {
                     break;
             }
         } else if (event.getTarget().equals(sideDeck)) {
-            System.out.println("dropped in side");
             if (sideDeck.getChildren().contains(sourceImageView))
                 return;
             String answer = deckController.addCard(user, cardName, currentPlayerDeck, true);
@@ -274,19 +272,13 @@ public class DeckView implements Initializable {
     private void handleDragDetection(MouseEvent event, ImageView imageView, Card card) {
         Dragboard dragboard = imageView.startDragAndDrop(TransferMode.ANY);
         ClipboardContent clipboardContent = new ClipboardContent();
-        clipboardContent.putString(card.getCardName());
+        clipboardContent.putString(card.getCardNameInGame());
         dragboard.setContent(clipboardContent);
         event.consume();
     }
 
     private void stopShowCard(ImageView imageView) {
         imageView.getScene().setCursor(Cursor.DEFAULT);
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), event -> {
-            addCardTransition(backImage);
-            addText(null);
-        });
-        Timeline timeline = new Timeline(keyFrame);
-        timeline.play();
     }
 
     private void showCard(Card card, ImageView imageView) {
@@ -394,7 +386,7 @@ public class DeckView implements Initializable {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER);
         hBox.setSpacing(30);
-        hBox.getChildren().addAll(myButton , myButton1);
+        hBox.getChildren().addAll(myButton, myButton1);
         Label text = new Label();
         myButton1.setOnAction(event -> undoBlurBackground());
         myButton.setOnAction(event -> createDeck(textField, text));
@@ -441,7 +433,6 @@ public class DeckView implements Initializable {
             }
         }
     }
-
 
     private void showCreateDeckFirst() {
         blurBackground();
@@ -507,7 +498,7 @@ public class DeckView implements Initializable {
             MyButton close = new MyButton("Back");
             close.setOnAction(event -> undoBlurBackground());
             label.setStyle("-fx-text-fill: green;-fx-font-size: 25");
-            yesNoVBox.getChildren().addAll(label, firstHBox, secondHBox , close);
+            yesNoVBox.getChildren().addAll(label, firstHBox, secondHBox, close);
         }
     }
 
@@ -549,15 +540,15 @@ public class DeckView implements Initializable {
         imageView.setOnDragDetected(event -> handleDragDetection(event, imageView, card));
         sideDeck.getChildren().add(imageView);
         if (isSide)
-            disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInSide(), card.getCardName());
+            disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInSide(), card.getCardNameInGame());
         else
-            disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInMain(), card.getCardName());
+            disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInMain(), card.getCardNameInGame());
     }
 
     @FXML
     private void activeDeck(ActionEvent actionEvent) {
-        String answer = deckController.activeDeck(user , currentPlayerDeck);
-        switch (answer){
+        String answer = deckController.activeDeck(user, currentPlayerDeck);
+        switch (answer) {
             case "noDeckExists":
                 showCreateDeckFirst();
                 break;
@@ -565,19 +556,19 @@ public class DeckView implements Initializable {
                 showText("You Cannot Activate This Deck");
                 break;
             case "activated":
-                showText(currentPlayerDeck.getName()+" is Activated !");
+                showText(currentPlayerDeck.getName() + " is Activated !");
                 break;
         }
     }
 
-    private void showText(String text){
+    private void showText(String text) {
         blurBackground();
         Label label = new Label(text);
         label.setStyle("-fx-text-fill: red");
         yesNoVBox.setAlignment(Pos.CENTER);
         yesNoVBox.getChildren().clear();
         yesNoVBox.getChildren().add(label);
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event -> undoBlurBackground());
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), event -> undoBlurBackground());
         Timeline timeline = new Timeline(keyFrame);
         timeline.play();
     }
@@ -600,9 +591,13 @@ public class DeckView implements Initializable {
     }
 
     private void deleteCurrentDeck() {
-        boolean deleteDeck = deckController.deleteDeck(user, currentPlayerDeck.getName());
-        if (deleteDeck) {
-            showDeckDeleted();
+        if (currentPlayerDeck != null) {
+            boolean deleteDeck = deckController.deleteDeck(user, currentPlayerDeck.getName());
+            if (deleteDeck) {
+                showDeckDeleted();
+            } else {
+                showCreateDeckFirst();
+            }
         } else {
             showCreateDeckFirst();
         }

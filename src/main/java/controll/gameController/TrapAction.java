@@ -14,13 +14,13 @@ public abstract class TrapAction implements Effect {
         setAllTrapEffects();
     }
 
-    public static void setGameController(GameController gameController) {
-        TrapAction.gameController = gameController;
-    }
-
     protected Trap trap;
     protected EffectHandler startActionCheck;
     protected ArrayList<CardCommand> cardCommands;
+
+    public static void setGameController(GameController gameController) {
+        TrapAction.gameController = gameController;
+    }
 
     private static void setAllTrapEffects() {
         allTrapEffects = new HashMap<>();
@@ -31,8 +31,8 @@ public abstract class TrapAction implements Effect {
         allTrapEffects.put("Magic Cylinder", new MagicCylinder());
         allTrapEffects.put("Negate Attack", new NegateAttack());
         allTrapEffects.put("Torrential Tribute", new TorrentialTribute());
-        allTrapEffects.put("Mirror Force" , new MirrorForce());
-        allTrapEffects.put("Trap Hole" , new TrapHole());
+        allTrapEffects.put("Mirror Force", new MirrorForce());
+        allTrapEffects.put("Trap Hole", new TrapHole());
     }
 
     public Trap getTrap() {
@@ -78,20 +78,20 @@ class CallOfTheHaunted extends TrapAction {
     private EffectHandler endActionCheck2;
     private ArrayList<CardCommand> endCommands;
 
-    public void setEndActionCheck1(EffectHandler endActionCheck1) {
-        this.endActionCheck1 = endActionCheck1;
-    }
-
-    public void setEndActionCheck2(EffectHandler endActionCheck2) {
-        this.endActionCheck2 = endActionCheck2;
-    }
-
     public EffectHandler getEndActionCheck1() {
         return endActionCheck1;
     }
 
+    public void setEndActionCheck1(EffectHandler endActionCheck1) {
+        this.endActionCheck1 = endActionCheck1;
+    }
+
     public EffectHandler getEndActionCheck2() {
         return endActionCheck2;
+    }
+
+    public void setEndActionCheck2(EffectHandler endActionCheck2) {
+        this.endActionCheck2 = endActionCheck2;
     }
 
     @Override
@@ -108,7 +108,7 @@ class CallOfTheHaunted extends TrapAction {
         setEndActionCheck1(effectHandler1);
         setEndActionCheck2(effectHandler2);
         cardCommands = new ArrayList<>();
-        CardCommand cardCommand = new BringMonsterBackFromGraveYardToBoard(card , this);
+        CardCommand cardCommand = new BringMonsterBackFromGraveYardToBoard(card, this);
         cardCommands.add(cardCommand);
         setTrapCommands(cardCommands);
         endCommands = new ArrayList<>();
@@ -231,7 +231,7 @@ class MirrorForce extends TrapAction {
     }
 }
 
-class TrapHole extends TrapAction{
+class TrapHole extends TrapAction {
 
     @Override
     public void setCard(Card card) {

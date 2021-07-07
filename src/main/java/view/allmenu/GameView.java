@@ -13,7 +13,6 @@ import model.players.Player;
 import view.Menu;
 import view.Regex;
 import view.ViewMaster;
-import view.allmenu.ShowGraveyardView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -271,7 +270,7 @@ public class GameView {
     }
 
     public void printAddedNewCard(Card card) {
-        System.out.println("new card added to the hand : " + card.getCardName());
+        System.out.println("new card added to the hand : " + card.getCardNameInGame());
     }
 
     public void printInvalidSelection() {
@@ -610,7 +609,7 @@ public class GameView {
         int counter = 0;
         for (int i = 0; i < gameController.getCurrentPlayer().getCardsInHand().size(); i++) {
             Card card = gameController.getCurrentPlayer().getCardsInHand().get(i);
-            System.out.println(++counter + ". " + card.getCardName());
+            System.out.println(++counter + ". " + card.getCardNameInGame());
         }
         while (true) {
             System.out.println("Enter Monster Number: ");
@@ -671,7 +670,7 @@ public class GameView {
     }
 
     public void printCardInHand(Card card, int i) {
-        System.out.println(card.getCardName() + " : " + i);
+        System.out.println(card.getCardNameInGame() + " : " + i);
     }
 
     public void printCantAttackDirectly() {
@@ -747,7 +746,7 @@ public class GameView {
     }
 
     public void printCardAddedToHand(Card card) {
-        System.out.println("new card added to hand : " + card.getCardName());
+        System.out.println("new card added to hand : " + card.getCardNameInGame());
     }
 
     public int chooseMonsterForSummonScanner(List<Monster> rivalGraveYardMonsters) {
@@ -758,7 +757,7 @@ public class GameView {
         while (true) {
             AtomicInteger i = new AtomicInteger();
             System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
-            rivalGraveYardMonsters.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardName() + " : "
+            rivalGraveYardMonsters.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardNameInGame() + " : "
                     + e.getCardDescription()));
             String command = ViewMaster.scanner.nextLine();
             try {
@@ -800,7 +799,7 @@ public class GameView {
     }
 
     public boolean wantToActivateTrap(Trap trap) {
-        System.out.println("do you want to activate your trap " + trap.getCardName() + " ?(YES/NO)");
+        System.out.println("do you want to activate your trap " + trap.getCardNameInGame() + " ?(YES/NO)");
         while (true) {
             String yesOrNo = ViewMaster.scanner.nextLine().trim();
             if (yesOrNo.equalsIgnoreCase("yes")) {
@@ -852,7 +851,7 @@ public class GameView {
     public int getInputForTerraforming(List<Spell> fieldSpells) {
         int counter = 0;
         for (Spell fieldSpell : fieldSpells) {
-            System.out.println(++counter + "- " + fieldSpell.getCardName() + ": " + fieldSpell.getCardDescription());
+            System.out.println(++counter + "- " + fieldSpell.getCardNameInGame() + ": " + fieldSpell.getCardDescription());
         }
         while (true) {
             System.out.println("Enter Spell Number");

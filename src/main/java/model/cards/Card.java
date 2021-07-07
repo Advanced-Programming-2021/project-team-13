@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 
 public class Card implements Comparable<Card> {
     protected String cardName;
+    protected String cardNameInGame;
     protected String cardDescription;
     protected Face face;
     protected Player cardOwner;
@@ -22,15 +23,17 @@ public class Card implements Comparable<Card> {
 
 
     public Card(String name, String description, Face face, int price, Image image) {
-        this.cardName = name;
+        this.cardNameInGame = name;
         this.cardDescription = description;
         this.face = face;
         this.price = price;
         this.zone = Zone.DECK_ZONE;
         this.image = image;
+        this.cardName = cardNameInGame;
     }
 
     public Card(Card that) {
+        this.cardNameInGame = that.cardNameInGame;
         this.cardName = that.cardName;
         this.cardDescription = that.cardDescription;
         this.face = that.face;
@@ -56,18 +59,26 @@ public class Card implements Comparable<Card> {
             return new Monster(monster.getName().replace("_", "-"), Face.DOWN,
                     monster.getPrice(), monster.getDescription()
                     , monster.getMonsterType(), monster.getCardType(), monster.getAttribute()
-                    , monster.getAttack(), monster.getDefence(), monster.getLevel() ,
+                    , monster.getAttack(), monster.getDefence(), monster.getLevel(),
                     ImageLoader.getCardImageByName(monster.getName()));
         else {
             if (spellOrTrap.getType().equalsIgnoreCase("spell"))
                 return new Spell(spellOrTrap.getName(), spellOrTrap.getDescription(),
-                        Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon() ,
+                        Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon(),
                         ImageLoader.getCardImageByName(spellOrTrap.getName()));
             else
                 return new Trap(spellOrTrap.getName(), spellOrTrap.getDescription(),
                         Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon(),
                         ImageLoader.getCardImageByName(spellOrTrap.getName()));
         }
+    }
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public String getCardName() {
+        return cardName;
     }
 
     public void setImage(Image image) {
@@ -78,12 +89,12 @@ public class Card implements Comparable<Card> {
         return image;
     }
 
-    public String getCardName() {
-        return cardName;
+    public String getCardNameInGame() {
+        return cardNameInGame;
     }
 
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
+    public void setCardNameInGame(String cardNameInGame) {
+        this.cardNameInGame = cardNameInGame;
     }
 
     public String getCardDescription() {
@@ -124,13 +135,13 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card o) {
-        if (o.getCardName().compareTo(cardName) < 0) return 1;
+        if (o.getCardNameInGame().compareTo(cardNameInGame) < 0) return 1;
         return -1;
     }
 
     @Override
     public String toString() {
-        return this.cardName + " : " + this.cardDescription;
+        return this.cardNameInGame + " : " + this.cardDescription;
     }
 
 }
