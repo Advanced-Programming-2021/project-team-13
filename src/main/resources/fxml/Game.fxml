@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -9,7 +10,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
@@ -20,7 +20,7 @@
        </StackPane>
    </center>
    <right>
-       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="266.666" style="-fx-background-color: #191970;" BorderPane.alignment="CENTER">
+       <AnchorPane fx:id="rightPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="266.666" style="-fx-background-color: #191970;" BorderPane.alignment="CENTER">
            <Label layoutX="54" layoutY="36.0" prefHeight="23.333333" prefWidth="219.33333" text="Rival player : " textFill="#cc2c10">
               <font>
                   <Font name="System Bold Italic" size="16" />
@@ -41,18 +41,16 @@
                <Bloom threshold="0.19" />
             </effect>
          </Label>
-           <AnchorPane layoutY="388" prefHeight="332" prefWidth="266.66666" style="-fx-background-color: grey;">
-               <Label layoutX="42" layoutY="4" prefHeight="34.6666" prefWidth="161.333333" text="controll center"
-                      textFill="#efefef">
+           <StackPane layoutX="66.0" layoutY="595.0" fx:id="surrenderStack" prefHeight="50.0" prefWidth="134.0">
+               <ImageView fitHeight="75" fitWidth="130" fx:id="surrenderBtn" pickOnBounds="true" preserveRatio="true">
+                   <Image url="/gamePics/sugoroku_btn_s.dds.png"/>
+               </ImageView>
+               <Label text="surrender">
                    <font>
-                       <Font name="System Bold Italic" size="22.66666"/>
+                       <Font name="Comic Sans MS Bold Italic" size="16"/>
                    </font>
-                   <effect>
-                       <Bloom threshold="0.22"/>
-                   </effect>
                </Label>
-               <VBox fx:id="controlBtns" layoutX="100" layoutY="74" prefHeight="133.333" prefWidth="66.666666"/>
-           </AnchorPane>
+           </StackPane>
        </AnchorPane>
    </right>
    <left>
@@ -82,7 +80,7 @@
          <Circle fx:id="ourHp" fill="DODGERBLUE" layoutX="61.333" layoutY="81.3333" radius="24.666" stroke="BLACK" strokeType="INSIDE" />
          <Label fx:id="ourHpPoint" layoutX="112" layoutY="62.666" prefHeight="37.333" prefWidth="121.333" text="8000" textFill="#ea3939">
             <font>
-               <Font name="System Bold Italic" size="26" />
+               <Font name="System Bold Italic" size="26"/>
             </font>
             <effect>
                <Bloom threshold="0.19" />
