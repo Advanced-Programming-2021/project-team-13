@@ -89,7 +89,7 @@ public class GameView {
 
     private void setupNotifStackPane() {
         text = new Text();
-        VBox vBox = new VBox(20,text,new CustomSanButtons("proceed",()->{
+        VBox vBox = new VBox(30, new Text(""), text, new CustomSanButtons("proceed", () -> {
             text.setText("");
             notifStackPane.setVisible(false);
             deBlur();
@@ -99,10 +99,15 @@ public class GameView {
         notifStackPane = new StackPane();
         notifStackPane.getChildren().add(vBox);
         vBox.setStyle("-fx-background-image: url('/gamePics/notif.jpg');");
-        notifStackPane.setPrefHeight(150);
-        notifStackPane.setPrefWidth(200);
-        vBox.setPrefHeight(150);
-        vBox.setPrefWidth(200);
+        notifStackPane.setPrefHeight(200);
+        notifStackPane.setPrefWidth(250);
+        notifStackPane.setMinHeight(200);
+        notifStackPane.setMinWidth(250);
+        vBox.setPrefHeight(200);
+        vBox.setPrefWidth(250);
+        vBox.setMinHeight(200);
+        vBox.setMinWidth(250);
+        vBox.setAlignment(Pos.TOP_CENTER);
         notifStackPane.setAlignment(Pos.CENTER);
         notifStackPane.setTranslateY(300);
         notifStackPane.setTranslateX(600);
@@ -119,7 +124,7 @@ public class GameView {
             gameController.nextPhase();
         })
                 , new CustomSanButtons("surrender", () -> {
-
+            gameController.surrender();
         })};
     }
 
@@ -673,7 +678,8 @@ public class GameView {
         centerPane.setOpacity(0.3);
         centerPane.setDisable(true);
     }
-    private void deBlur(){
+
+    private void deBlur() {
         leftPane.setOpacity(1);
         leftPane.setDisable(false);
         rightPane.setDisable(false);
