@@ -28,7 +28,6 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,18 +60,16 @@ public class GameView {
     public Player secondPlayer;
 
     public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
-        gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
-        this.firstPlayer=firstPlayer;
-        this.secondPlayer=secondPlayer;
+        this.firstPlayer = firstPlayer;
+        this.secondPlayer = secondPlayer;
         init();
+        gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
     }
 
-    public GameView(){
+    public GameView() {
     }
 
     public void init() {
-        Player ourPlayer=firstPlayer instanceof AIPlayer?secondPlayer:firstPlayer;
-        Player rivalPlayer=firstPlayer instanceof AIPlayer?firstPlayer:secondPlayer;
         initHp();
         centerPane.setAlignment(Pos.CENTER);
         initGridPanes();
@@ -99,37 +96,47 @@ public class GameView {
     }
 
     private void initGridPanes() {
-        Player ourPlayer=firstPlayer instanceof AIPlayer?secondPlayer:firstPlayer;
-        Player rivalPlayer=firstPlayer instanceof AIPlayer?firstPlayer:secondPlayer;
-        System.out.println(ourPlayer+"        "+rivalPlayer);
-        System.out.println(ourPlayer.getBoard()+"        "+rivalPlayer.getBoard());
+        Player ourPlayer = firstPlayer instanceof AIPlayer ? secondPlayer : firstPlayer;
+        Player rivalPlayer = firstPlayer instanceof AIPlayer ? firstPlayer : secondPlayer;
+        System.out.println(ourPlayer + "        " + rivalPlayer);
+        System.out.println(ourPlayer.getBoard() + "        " + rivalPlayer.getBoard());
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 StackPane stackPane = new StackPane();
                 gridPaneSetup(null, stackPane);
                 if (i < 2) {
-                    if(i==0)
-                        rivalPlayer.getBoard().getMonsters()[j].setPicture(stackPane);
-                    if(i==1)
-                        rivalPlayer.getBoard().getSpellOrTrap()[j].setPicture(stackPane);
+                    if (i == 0)
+                        rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+                    if (i == 1)
+                        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
                     stackPane.rotateProperty().set(180);
-                }
-                else{
-                    if(i==2)
-                        ourPlayer.getBoard().getMonsters()[j].setPicture(stackPane);
-                    if(i==3)
-                        ourPlayer.getBoard().getSpellOrTrap()[j].setPicture(stackPane);
+                } else {
+                    if (i == 2)
+                        ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+                    if (i == 3)
+                        ourPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
                 }
                 gridPane.add(stackPane, j, i);
             }
         }
-        ArrayList<StackPane> hand = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 StackPane stackPane = new StackPane();
-//                ourPlayer.getCardsInHand()
                 gridPaneSetup(null, stackPane);
+                stackPane.setOnMouseClicked(e -> {
+             /*       if (gameController.getCurrentPlayer().getSelectedCard() == null)
+                        gameController.getCurrentPlayer()
+                                .setSelectedCard(gameController.getCurrentPlayer()
+                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane) - 1));
+                    else */{
+                        gameController.getCurrentPlayer()
+                                .setSelectedCard(gameController.getCurrentPlayer()
+                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
+                        gameController.normalSummon((Monster) gameController.getCurrentPlayer().getSelectedCard(), AttackOrDefense.ATTACK);
+                    }
+                });
                 leftGrid.add(stackPane, i, j);
+                ourPlayer.getCardsInHandImage().add(stackPane);
             }
         }
         leftGrid.setGridLinesVisible(true);
@@ -168,7 +175,7 @@ public class GameView {
         });
     }
 
-    private void gridPaneSetup(Image background, StackPane stackPane) {
+    public void gridPaneSetup(Image background, StackPane stackPane) {
         stackPane.setPrefWidth(93.3333);
         stackPane.setPrefHeight(126.6666);
         ImageView cardImages = new ImageView(background);

@@ -23,7 +23,7 @@ public class Card implements Comparable<Card> {
     private ImageView imageView;
 
     public Card(String name, String description, Face face, int price, Image image) {
-        imageView=new ImageView(image);
+        imageView = new ImageView(image);
         this.cardName = name;
         this.cardDescription = description;
         this.face = face;
@@ -71,6 +71,10 @@ public class Card implements Comparable<Card> {
                         Face.DOWN, spellOrTrap.getPrice(), spellOrTrap.getIcon(),
                         ImageLoader.getCardImageByName(spellOrTrap.getName()));
         }
+    }
+
+    public ImageView getImageView() {
+        return imageView;
     }
 
     public void setImage(Image image) {

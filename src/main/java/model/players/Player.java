@@ -1,12 +1,14 @@
 package model.players;
 
 import enums.Zone;
+import javafx.scene.layout.StackPane;
 import model.Board;
 import model.PlayerDeck;
 import model.Graveyard;
 import model.cards.Card;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class Player {
 
@@ -18,6 +20,7 @@ public class Player {
     protected Board board;
     protected Card selectedCard;
     protected ArrayList<Card> cardsInHand;
+    protected ArrayList<StackPane> cardsInHandImage;
     protected boolean isSetOrSummonInThisTurn = false;
     protected boolean canActiveTrap = true;
     protected boolean isAttacking;
@@ -29,25 +32,26 @@ public class Player {
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
         isAI = false;
-        this.board = new Board(new PlayerDeck(user.getActiveDeck()), new Graveyard(this),this);
+        this.board = new Board(new PlayerDeck(user.getActiveDeck()), new Graveyard(this), this);
         cardsInHand = new ArrayList<>();
+        cardsInHandImage = new ArrayList<>();
     }
 
     public Player(PlayerDeck playerDeck) {
-            playerDeck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
-                    || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
-                    || e.getCardName().equalsIgnoreCase("Skull Guardian")
-                    || e.getCardName().equalsIgnoreCase("Crab Turtle"));
-            playerDeck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
-                    || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
-                    || e.getCardName().equalsIgnoreCase("Skull Guardian")
-                    || e.getCardName().equalsIgnoreCase("Crab Turtle"));
+        playerDeck.getAllCardsInMainDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
+                || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
+                || e.getCardName().equalsIgnoreCase("Skull Guardian")
+                || e.getCardName().equalsIgnoreCase("Crab Turtle"));
+        playerDeck.getAllCardsInSideDeck().removeIf(e -> e.getCardName().equalsIgnoreCase("scanner")
+                || e.getCardName().equalsIgnoreCase("Advanced Ritual Art")
+                || e.getCardName().equalsIgnoreCase("Skull Guardian")
+                || e.getCardName().equalsIgnoreCase("Crab Turtle"));
         this.wonRounds = 0;
         this.lifePoint = 8000;
         this.maxLifePoint = 0;
         isAI = true;
         user = null;
-        this.board = new Board(playerDeck, new Graveyard(this),this);
+        this.board = new Board(playerDeck, new Graveyard(this), this);
         cardsInHand = new ArrayList<>();
     }
 
@@ -63,11 +67,15 @@ public class Player {
         this.cardsInHand = cardsInHand;
     }
 
+    public ArrayList<StackPane> getCardsInHandImage() {
+        return cardsInHandImage;
+    }
+
     public void renewPlayer() {
         this.cardsInHand = new ArrayList<>();
         this.lifePoint = 8000;
         this.isAttacking = false;
-        this.board = new Board(new PlayerDeck(user.getActiveDeck()), new Graveyard(this),this);
+        this.board = new Board(new PlayerDeck(user.getActiveDeck()), new Graveyard(this), this);
         this.selectedCard = null;
         this.cardsInHand = new ArrayList<>();
         this.isAttacking = false;
