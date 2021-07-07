@@ -24,7 +24,7 @@ public abstract class TrapAction implements Effect {
 
     private static void setAllTrapEffects() {
         allTrapEffects = new HashMap<>();
-        allTrapEffects.put("Call of The Haunted", new CallOfTheHaunted());
+        allTrapEffects.put("Call Of The Haunted", new CallOfTheHaunted());
         allTrapEffects.put("Time Seal", new TimeSeal());
         allTrapEffects.put("Magic Jammer", new MagicJammer());
         allTrapEffects.put("Mind Crush", new MindCrush());

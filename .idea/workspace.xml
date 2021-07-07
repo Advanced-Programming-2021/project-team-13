@@ -7,15 +7,14 @@
     <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="game board">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameWinMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameWinMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/csv/MonsterCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/MonsterCSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/csv/SpellTrapCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/csv/SpellTrapCSV.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/players/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/players/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/TrapAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/TrapAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/cards/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +153,7 @@
       <workItem from="1625362882339" duration="10272000" />
       <workItem from="1625547145133" duration="24662000" />
       <workItem from="1625633624339" duration="5661000" />
-      <workItem from="1625651724486" duration="3585000" />
+      <workItem from="1625651724486" duration="12321000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -380,7 +379,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625639407606</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="game board">
+      <created>1625655536231</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1625655536231</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,16 +440,6 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="95" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java</url>
-          <line>128</line>
-          <option name="timeStamp" value="94" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java</url>
-          <line>189</line>
-          <option name="timeStamp" value="96" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

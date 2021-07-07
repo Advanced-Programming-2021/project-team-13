@@ -22,6 +22,7 @@ public class UserJson {
             for (User user : User.getAllUsers()) {
                 for (Card card : user.getAllCards()) {
                     card.setImage(null);
+                    card.setImageView(null);
                     card.setCardOwner(null);
                     if (card instanceof Trap) {
                         ((Trap) card).setTrapAction(null);

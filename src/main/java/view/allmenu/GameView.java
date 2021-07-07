@@ -28,6 +28,7 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,15 +57,22 @@ public class GameView {
     public StackPane summon;
     public StackPane set;
     public StackPane activate;
+    public Player firstPlayer;
+    public Player secondPlayer;
 
     public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
+        this.firstPlayer=firstPlayer;
+        this.secondPlayer=secondPlayer;
+        init();
     }
 
     public GameView(){
     }
 
-    public void initialize() {
+    public void init() {
+        Player ourPlayer=firstPlayer instanceof AIPlayer?secondPlayer:firstPlayer;
+        Player rivalPlayer=firstPlayer instanceof AIPlayer?firstPlayer:secondPlayer;
         initHp();
         centerPane.setAlignment(Pos.CENTER);
         initGridPanes();
@@ -73,7 +81,7 @@ public class GameView {
     }
 
     private void controlButtons() {
-        controlBtns.setSpacing(20);
+        controlBtns.setSpacing(13.333);
         attack = new CustomButton("attack", () -> {
         });
         summon = new CustomButton("summon", () -> {
@@ -87,37 +95,53 @@ public class GameView {
         });
         surrender.setStyle("-fx-background-color: crimson");
         controlBtns.getChildren().addAll(attack, summon, set, activate, surrender);
-        controlBtns.setTranslateX(-70);
+        controlBtns.setTranslateX(-46.666);
     }
 
     private void initGridPanes() {
         Image background = new Image("/shopImage/Monsters/AxeRaider.jpg");
         Image background2 = new Image("/shopImage/Monsters/Bitron.jpg");
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
+        Player ourPlayer=firstPlayer instanceof AIPlayer?secondPlayer:firstPlayer;
+        Player rivalPlayer=firstPlayer instanceof AIPlayer?firstPlayer:secondPlayer;
+        System.out.println(ourPlayer+"        "+rivalPlayer);
+        System.out.println(ourPlayer.getBoard()+"        "+rivalPlayer.getBoard());
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
                 StackPane stackPane = new StackPane();
                 gridPaneSetup(background, stackPane);
-                if (j < 2) {
+                if (i < 2) {
+                    if(i==0)
+                        rivalPlayer.getBoard().getMonsters()[j].setPicture(stackPane);
+                    if(i==1)
+                        rivalPlayer.getBoard().getSpellOrTrap()[j].setPicture(stackPane);
                     stackPane.rotateProperty().set(180);
                 }
-                gridPane.add(stackPane, i, j);
+                else{
+                    if(i==2)
+                        ourPlayer.getBoard().getMonsters()[j].setPicture(stackPane);
+                    if(i==3)
+                        ourPlayer.getBoard().getSpellOrTrap()[j].setPicture(stackPane);
+                }
+                gridPane.add(stackPane, j, i);
             }
         }
+        ArrayList<StackPane> hand = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 StackPane stackPane = new StackPane();
+//                ourPlayer.getCardsInHand()
                 gridPaneSetup(background2, stackPane);
                 leftGrid.add(stackPane, i, j);
             }
         }
         leftGrid.setGridLinesVisible(true);
-        leftGrid.setVgap(5);
-        leftGrid.setHgap(5);
+        leftGrid.setVgap(3.3333);
+        leftGrid.setHgap(3.3333);
         fourOtherCards(background);
-        gridPane.setTranslateX(20);
-        gridPane.setTranslateY(50);
-        gridPane.setHgap(10);
-        gridPane.setVgap(30);
+        gridPane.setTranslateX(13.3333);
+        gridPane.setTranslateY(33.3333);
+        gridPane.setHgap(6.6666);
+        gridPane.setVgap(20);
     }
 
     private void initHp() {
@@ -125,7 +149,7 @@ public class GameView {
         Arrays.stream(new Circle[]{ourHp, rivalHp}).forEach(e -> {
             e.setFill(hp);
             e.setStroke(Color.RED);
-            e.setStrokeWidth(5);
+            e.setStrokeWidth(3.3333);
             final RotateTransition[] rotation = new RotateTransition[1];
             setHpRotation(rotation, e);
         });
@@ -147,12 +171,12 @@ public class GameView {
     }
 
     private void gridPaneSetup(Image background, StackPane stackPane) {
-        stackPane.setPrefWidth(140);
-        stackPane.setPrefHeight(190);
+        stackPane.setPrefWidth(93.3333);
+        stackPane.setPrefHeight(126.6666);
         ImageView cardImages = new ImageView(background);
         setEffectsCardImages(cardImages);
-        cardImages.setFitWidth(140);
-        cardImages.setFitHeight(190);
+        cardImages.setFitWidth(93.3333);
+        cardImages.setFitHeight(126.6666);
         stackPane.getChildren().add(cardImages);
     }
 
@@ -163,27 +187,27 @@ public class GameView {
         rivalField = new StackPane();
         rivalField.rotateProperty().set(180);
         rivalGraveyard.rotateProperty().set(180);
-        VBox our = new VBox(30, rivalGraveyard, ourField);
-        VBox rivals = new VBox(30, rivalField, ourGraveyard);
+        VBox our = new VBox(20, rivalGraveyard, ourField);
+        VBox rivals = new VBox(20, rivalField, ourGraveyard);
         Arrays.stream(new VBox[]{our, rivals}).forEach(e -> {
-            e.setPrefWidth(140);
-            e.setMaxHeight(190);
-            e.setMaxWidth(140);
-            e.setPrefHeight(190);
+            e.setPrefWidth(93.3333);
+            e.setMaxHeight(126.6666);
+            e.setMaxWidth(93.3333);
+            e.setPrefHeight(126.6666);
         });
         Arrays.stream(new StackPane[]{ourField, rivalField, ourGraveyard, rivalGraveyard}).forEach(x -> {
-            x.setPrefWidth(140);
-            x.setPrefHeight(190);
+            x.setPrefWidth(93.3333);
+            x.setPrefHeight(126.6666);
             ImageView cardImages = new ImageView(background);
             setEffectsCardImages(cardImages);
-            cardImages.setFitWidth(140);
-            cardImages.setFitHeight(190);
+            cardImages.setFitWidth(93.3333);
+            cardImages.setFitHeight(126.6666);
             x.getChildren().add(cardImages);
         });
-        our.setTranslateX(-450);
-        our.setTranslateY(40);
-        rivals.setTranslateX(470);
-        rivals.setTranslateY(60);
+        our.setTranslateX(-300);
+        our.setTranslateY(26.666);
+        rivals.setTranslateX(313.3333);
+        rivals.setTranslateY(40);
         centerPane.getChildren().addAll(our, rivals);
     }
 

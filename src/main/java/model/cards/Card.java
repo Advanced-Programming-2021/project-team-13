@@ -4,6 +4,7 @@ import controll.ImageLoader;
 import enums.Face;
 import enums.Zone;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import model.csv.MonsterCSV;
 import model.csv.SpellTrapCSV;
 import model.players.Player;
@@ -19,9 +20,10 @@ public class Card implements Comparable<Card> {
     protected int price;
     protected boolean activated = false;
     private Image image;
-
+    private ImageView imageView;
 
     public Card(String name, String description, Face face, int price, Image image) {
+        imageView=new ImageView(image);
         this.cardName = name;
         this.cardDescription = description;
         this.face = face;
@@ -36,6 +38,7 @@ public class Card implements Comparable<Card> {
         this.face = that.face;
         this.price = that.price;
         this.image = that.image;
+        imageView=new ImageView(that.image);
         this.zone = Zone.DECK_ZONE;
         cardOwner = null;
         activated = false;
@@ -76,6 +79,9 @@ public class Card implements Comparable<Card> {
 
     public Image getImage() {
         return image;
+    }
+    public void setImageView(ImageView imageView){
+        this.imageView=imageView;
     }
 
     public String getCardName() {
