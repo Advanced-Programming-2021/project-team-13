@@ -41,16 +41,6 @@
                <Bloom threshold="0.19" />
             </effect>
          </Label>
-           <StackPane layoutX="66.0" layoutY="595.0" fx:id="surrenderStack" prefHeight="50.0" prefWidth="134.0">
-               <ImageView fitHeight="75" fitWidth="130" fx:id="surrenderBtn" pickOnBounds="true" preserveRatio="true">
-                   <Image url="/gamePics/sugoroku_btn_s.dds.png"/>
-               </ImageView>
-               <Label text="surrender">
-                   <font>
-                       <Font name="Comic Sans MS Bold Italic" size="16"/>
-                   </font>
-               </Label>
-           </StackPane>
        </AnchorPane>
    </right>
    <left>
