@@ -5,19 +5,23 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.cards.Card;
 import model.cards.Monster;
@@ -63,6 +67,8 @@ public class GameView {
     public StackPane activate;
     public Player firstPlayer;
     public Player secondPlayer;
+    private boolean tributePhase = false;
+    private int numberOfTribute = 0;
 
     public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         this.firstPlayer = firstPlayer;
@@ -76,10 +82,10 @@ public class GameView {
 
     public void init() {
         initHp();
-        surrenderStack.setOnMouseEntered(e->{
-            surrenderBtn.setEffect(new ColorAdjust(-0.72,0,0,0));
+        surrenderStack.setOnMouseEntered(e -> {
+            surrenderBtn.setEffect(new ColorAdjust(-0.72, 0, 0, 0));
         });
-        surrenderStack.setOnMouseExited(e->surrenderBtn.setEffect(null));
+        surrenderStack.setOnMouseExited(e -> surrenderBtn.setEffect(null));
         centerPane.setAlignment(Pos.CENTER);
         leftPane.setStyle("-fx-background-image: url('/gamePics/1.png');-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
         rightPane.setStyle("-fx-background-image: url('/gamePics/1.png');-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
@@ -106,6 +112,14 @@ public class GameView {
         controlBtns.setTranslateX(-46.666);
     }
 
+    public boolean isTributePhase() {
+        return tributePhase;
+    }
+
+    public void setTributePhase(boolean tributePhase) {
+        this.tributePhase = tributePhase;
+    }
+
     private void initGridPanes() {
         Player ourPlayer = firstPlayer instanceof AIPlayer ? secondPlayer : firstPlayer;
         Player rivalPlayer = firstPlayer instanceof AIPlayer ? firstPlayer : secondPlayer;
@@ -122,8 +136,21 @@ public class GameView {
                         rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
                     stackPane.rotateProperty().set(180);
                 } else {
-                    if (i == 2)
+                    if (i == 2) {
                         ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+                        stackPane.setOnMouseClicked(event -> {
+                            if (tributePhase) {
+                                if (numberOfTribute < (gameController).getNumberOfTributeNeeded()) {
+                                    stackPane.getChildren().removeAll();
+                                    numberOfTribute++;
+                                } else {
+                                    numberOfTribute = 0;
+                                    tributePhase = false;
+                                    notifyAll();
+                                }
+                            }
+                        });
+                    }
                     if (i == 3)
                         ourPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
                 }
@@ -135,16 +162,25 @@ public class GameView {
                 StackPane stackPane = new StackPane();
                 gridPaneSetup(null, stackPane);
                 stackPane.setOnMouseClicked(e -> {
-             /*       if (gameController.getCurrentPlayer().getSelectedCard() == null)
-                        gameController.getCurrentPlayer()
-                                .setSelectedCard(gameController.getCurrentPlayer()
-                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane) - 1));
-                    else */{
-                        gameController.getCurrentPlayer()
-                                .setSelectedCard(gameController.getCurrentPlayer()
-                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
-                        gameController.normalSummon((Monster) gameController.getCurrentPlayer().getSelectedCard(), AttackOrDefense.ATTACK);
-                    }
+                    if (!tributePhase)
+                        if (e.getButton() == MouseButton.PRIMARY)
+                            if (gameController.getCurrentPlayer().getSelectedCard() != null
+                                    && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
+                                    .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane))) {
+                                gameController.getCurrentPlayer()
+                                        .setSelectedCard(gameController.getCurrentPlayer()
+                                                .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
+                                monsterSummon(gameController.getCurrentPlayer().getSelectedCard());
+//                            gameController.normalSummon((Monster) gameController.getCurrentPlayer().getSelectedCard(), AttackOrDefense.ATTACK);
+                            } else
+                                gameController.getCurrentPlayer()
+                                        .setSelectedCard(gameController.getCurrentPlayer()
+                                                .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
+                        else if (gameController.getCurrentPlayer().getSelectedCard() != null
+                                && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
+                                .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane) - 1)) {
+                            setMonsterSpellTrap(gameController.getCurrentPlayer().getSelectedCard());
+                        }
                 });
                 leftGrid.add(stackPane, j, i);
                 ourPlayer.getCardsInHandImage().add(stackPane);
@@ -159,6 +195,23 @@ public class GameView {
         gridPane.setHgap(6.6666);
         gridPane.setVgap(20);
     }
+
+    private void setMonsterSpellTrap(Card selectedCard) {
+        try {
+            gameController.set();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void monsterSummon(Card selectedCard) {
+        try {
+            gameController.checksBeforeSummon();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
     private void initHp() {
         ImagePattern hp = new ImagePattern(new Image("/gamePics/hp3.jpg"));
@@ -260,7 +313,7 @@ public class GameView {
     }
 
     public void run(String command) {
-        if (command.equals("select --hand --force"))
+ /*       if (command.equals("select --hand --force"))
             handCheat();
         else if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
             selectCard(command);
@@ -300,7 +353,7 @@ public class GameView {
         else if (command.equals("map"))
             printMap();
         else System.out.println("invalid command");
-        gameController.findWinner();
+        gameController.findWinner();*/
     }
 
     private void handCheat() {
