@@ -1,5 +1,6 @@
 package controll.gameController;
 
+import javafx.fxml.FXMLLoader;
 import model.PlayerDeck;
 import model.cards.Card;
 import model.cards.Trap;
@@ -11,10 +12,12 @@ import view.ViewMaster;
 import view.allmenu.DuelView;
 import view.allmenu.GameView;
 
+import java.net.URL;
 import java.util.Random;
 
 public class DuelController {
     private final DuelView duelView;
+    private Random random = new Random();
 
     public DuelController(DuelView duelView) {
         this.duelView = duelView;
@@ -31,12 +34,19 @@ public class DuelController {
         } else duelView.printUserNotFound();
     }
 
-    public void validateAIDuelGame(int rounds) {
+    /*    public void validateAIDuelGame(int rounds) {
+            User user = ViewMaster.getUser();
+            if (checkUserHasActiveDeck(user))
+                if (checkUserValidDeckForGame(user))
+                    if (checkRoundNumber(rounds))
+                        startAIDuel(user, rounds);
+        }*/
+
+    public boolean validateAIDuelGame() {
         User user = ViewMaster.getUser();
         if (checkUserHasActiveDeck(user))
-            if (checkUserValidDeckForGame(user))
-                if (checkRoundNumber(rounds))
-                    startAIDuel(user, rounds);
+            return checkUserValidDeckForGame(user);
+        return false;
     }
 
     private void startDuel(Player firstPlayer, Player secondPlayer, int rounds) {
@@ -45,25 +55,27 @@ public class DuelController {
         setPlayersTrapActions(firstPlayer);
         setPlayersTrapActions(secondPlayer);
         GameView gameView;
-        Player player = findPlayerToStart(firstPlayer, secondPlayer);
-        if (player == firstPlayer) {
-            gameView = new GameView(firstPlayer, secondPlayer, firstPlayer, rounds);
-        } else {
-            gameView = new GameView(firstPlayer, secondPlayer, secondPlayer, rounds);
+        try {
+            gameView=duelView.startGame(firstPlayer, secondPlayer, firstPlayer, rounds);
+            GameController gameController = gameView.getGameController();
+            TrapAction.setGameController(gameController);
+            CardCommand.setGameController(gameController);
+            EffectHandler.setGameController(gameController);
+            ViewMaster.getViewMaster().setGameView(gameView);
+            ViewMaster.setCurrentMenu(Menu.GAME_MENU);
+        }catch (Exception ignored){
+                ignored.printStackTrace();
         }
-        GameController gameController = gameView.getGameController();
-        TrapAction.setGameController(gameController);
-        CardCommand.setGameController(gameController);
-        EffectHandler.setGameController(gameController);
-        ViewMaster.getViewMaster().setGameView(gameView);
-        ViewMaster.setCurrentMenu(Menu.GAME_MENU);
     }
 
-    private void startAIDuel(User user, int rounds) {
+    public void startAIDuel(User user, int rounds, int result) {
         Player firstPlayer = new Player(user);
         AIPlayer aiPlayer = new AIPlayer(new PlayerDeck(user.getActiveDeck()));
         aiPlayer.setNickname("Abbas BooAzaar");
-        startDuel(firstPlayer, aiPlayer, rounds);
+        if (result == 1)
+            startDuel(firstPlayer, aiPlayer, rounds);
+        else
+            startDuel(aiPlayer, firstPlayer, rounds);
     }
 
     private void startTwoPlayerDuel(User user, User rivalUser, int rounds) {
@@ -104,7 +116,7 @@ public class DuelController {
         }
     }
 
-    private Player findPlayerToStart(Player player, Player rivalPlayer) {
+    /*private Player findPlayerToStart(Player player, Player rivalPlayer) {
         Player userToStart = null;
         Random random = new Random();
         do {
@@ -138,6 +150,16 @@ public class DuelController {
                 duelView.printEqual();
         } while (userToStart == null);
         return userToStart;
+    }*/
+    // sang = 2 kaqaz = 1 gheichi = 3
+    public int findPlayerToStart(int playerNumber) {
+        int rivalNumber = random.nextInt() % 3 + 1;
+        if (rivalNumber == playerNumber) return 0;
+        if (rivalNumber == 1 && playerNumber == 2) return 2;
+        if (rivalNumber == 1 && playerNumber == 3) return 1;
+        if (rivalNumber == 2 && playerNumber == 1) return 1;
+        if (rivalNumber == 2 && playerNumber == 3) return 2;
+        else return 1;
     }
 
     private boolean checkRoundNumber(int rounds) {

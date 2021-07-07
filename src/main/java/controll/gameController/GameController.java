@@ -1,6 +1,8 @@
 package controll.gameController;
 
 import enums.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
@@ -25,11 +27,11 @@ public class GameController {
     private final Player startingPlayer;
     private final ArrayList<Integer> notToDrawCardTurns;
     private final ArrayList<Trap> chain;
-    private final int startingRounds;
     private Card attackingCard;
     private Card summonedCard;
     private Player currentPlayer;
     private Phase currentPhase;
+    private final int startingRounds;
     private int turnsPlayed;
     private int unitedCalcCurrent;
     private int unitedCalcRival;
@@ -41,6 +43,24 @@ public class GameController {
     private boolean flipSummonHappened;
     private boolean ritualSummonHappened;
     private boolean anySummonHappened;
+
+
+    public static boolean checkForDeathAction(Card card) {
+        if (card instanceof Monster) {
+            Monster monster = (Monster) card;
+            if (card.getCardName().equalsIgnoreCase("Yomi Ship"))
+                yomiShip(monster);
+            if (card.getCardName().equalsIgnoreCase("Exploder Dragon"))
+                if (monster.getAttacker() != null)
+                    monster.getAttacker().getCardOwner().getBoard().getGraveyard().addCard(monster.getAttacker());
+        }
+        return false;
+    }
+
+    public static void yomiShip(Monster monster) {
+        if (monster.getAttacker() != null)
+            monster.getAttacker().getCardOwner().getBoard().getGraveyard().addCard(monster.getAttacker());
+    }
 
 
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
@@ -59,8 +79,12 @@ public class GameController {
             allCard.setCardOwner(secondPlayer);
         }
         for (int i = 0; i < 6; i++) {
-            firstPlayer.addCardToHand();
-            secondPlayer.addCardToHand();
+            Card card = firstPlayer.addCardToHand();
+            Card card1 = secondPlayer.addCardToHand();
+            if (secondPlayer instanceof AIPlayer)
+                gameView.gridPaneSetup(card.getImage(), firstPlayer.getCardsInHandImage().get(firstPlayer.getCardsInHand().size() - 1));
+            else
+                gameView.gridPaneSetup(card1.getImage(), secondPlayer.getCardsInHandImage().get(secondPlayer.getCardsInHand().size() - 1));
         }
         this.startingRounds = startingRounds;
         turnsPlayed = 0;
@@ -72,23 +96,6 @@ public class GameController {
         specialSummonHappened = false;
         ritualSummonHappened = false;
         anySummonHappened = false;
-    }
-
-    public static boolean checkForDeathAction(Card card) {
-        if (card instanceof Monster) {
-            Monster monster = (Monster) card;
-            if (card.getCardNameInGame().equalsIgnoreCase("Yomi Ship"))
-                yomiShip(monster);
-            if (card.getCardNameInGame().equalsIgnoreCase("Exploder Dragon"))
-                if (monster.getAttacker() != null)
-                    monster.getAttacker().getCardOwner().getBoard().getGraveyard().addCard(monster.getAttacker());
-        }
-        return false;
-    }
-
-    public static void yomiShip(Monster monster) {
-        if (monster.getAttacker() != null)
-            monster.getAttacker().getCardOwner().getBoard().getGraveyard().addCard(monster.getAttacker());
     }
 
     public boolean isAnySummonHappened() {
@@ -1302,6 +1309,12 @@ public class GameController {
             if (checkScannerEffect(monster, true)) return;
         summonedCard = monster;
         gameView.printSummonSuccessfully();
+        for (int i = currentPlayer.getCardsInHand().indexOf(monster); i < currentPlayer.getCardsInHand().size(); i++) {
+            currentPlayer.getCardsInHandImage().get(i).getChildren().removeAll();
+            if (i + 1 < currentPlayer.getCardsInHand().size())
+                currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
+        }
+        //currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(monster)).getChildren().removeAll();
         currentPlayer.getCardsInHand().remove(monster);
         monster.setSetInThisTurn(true);
         monster.setZone(Zone.MONSTER_ZONE);
@@ -1747,6 +1760,7 @@ public class GameController {
 
     public void addCardToHand() {
         Card card = currentPlayer.addCardToHand();
+        gameView.gridPaneSetup(card.getImage(), currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().size() - 1));
         gameView.printCardAddedToHand(card);
     }
 

@@ -1,7 +1,6 @@
 package view.allmenu;
 
 import controll.gameController.DuelController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -18,8 +17,10 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model.menuItems.CustomButton;
+import model.players.Player;
 import model.players.User;
 import view.Regex;
+import view.ViewMaster;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -63,10 +64,7 @@ public class DuelView {
 
     private Node[] getFirstVboxNodes() {
         return new Node[]{
-                new CustomButton("AI duel", () -> {
-                    startAIDuel();
-                }), new CustomButton("2 Player duel", () -> {
-
+                new CustomButton("AI duel", this::startAIDuel), new CustomButton("2 Player duel", () -> {
         }), new CustomButton("Back", () -> {
             try {
                 goBack();
@@ -83,18 +81,21 @@ public class DuelView {
     }
 
     public void startAIDuel() {
-        getRounds();
+        if (duelController.validateAIDuelGame())
+            getRounds();
+        else
+            notifLabel.setText("You Do Not Have Active/Valid Deck");
+
     }
 
     private void getRounds() {
         vBox.setVisible(false);
         hBox = new HBox(1, new CustomButton("1", () -> {
-//            duelController.validateAIDuelGame(1);
             sho();
             vBox.setVisible(true);
             pane.getChildren().remove(hBox);
         }), new CustomButton("3", () -> {
-//            duelController.validateAIDuelGame(3);
+            sho();
             vBox.setVisible(true);
             pane.getChildren().remove(hBox);
         }));
@@ -104,7 +105,7 @@ public class DuelView {
 
     }
 
-    private void setBackGround(BorderPane pane, String url,double opacity) {
+    private void setBackGround(BorderPane pane, String url, double opacity) {
         Image background = new Image(url, 1280, 720, false, true);
         pane.setBackground(new Background(new BackgroundImage(background, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
@@ -185,8 +186,16 @@ public class DuelView {
                 rpcNotifLabel.setText("you haven't chosen yet");
             else {
                 System.out.println(numberToReturn);
-                pane.getChildren().remove(rpc);
-                unBlur();
+                int result = duelController.findPlayerToStart(numberToReturn);
+                if (result == 0)
+                    rpcNotifLabel.setText("Equal, try again");
+                else if (result == 1) {
+                    rpcNotifLabel.setText("You Start The Game");
+                    duelController.startAIDuel(ViewMaster.getUser(), 1, 1);
+                } else {
+                    rpcNotifLabel.setText("AI Start The Game");
+                    duelController.startAIDuel(ViewMaster.getUser(), 1, 1);
+                }
             }
         }));
         rpc.getChildren().addAll(box);
@@ -223,4 +232,11 @@ public class DuelView {
         rpcNotifLabel.setText("Equal!\ntry again!");
     }
 
+    public GameView startGame(Player firstPlayer,Player secondPlayer,Player currentPlayer,int rounds)
+            throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
+        ((Stage) pane.getScene().getWindow()).setScene(new Scene(loader.load()));
+        ((GameView)loader.getController()).setup(firstPlayer,secondPlayer,currentPlayer,rounds);
+        return loader.getController();
+    }
 }

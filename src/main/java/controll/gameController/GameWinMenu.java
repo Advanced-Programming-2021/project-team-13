@@ -5,6 +5,7 @@ import model.players.Player;
 import model.players.User;
 import view.Menu;
 import view.ViewMaster;
+import view.allmenu.DuelView;
 import view.allmenu.GameView;
 
 public class GameWinMenu {
@@ -128,15 +129,36 @@ public class GameWinMenu {
 
     private void runNewGame() {
         GameView gameView;
+        DuelView duelView =new DuelView();
         if (startingPlayer == firstPlayer) {
-            gameView = new GameView(firstPlayer, secondPlayer, secondPlayer, startingRounds);
+            try {
+                gameView=duelView.startGame(firstPlayer, secondPlayer, secondPlayer, startingRounds);
+                GameController gameController = gameView.getGameController();
+                TrapAction.setGameController(gameController);
+                CardCommand.setGameController(gameController);
+                EffectHandler.setGameController(gameController);
+                ViewMaster.getViewMaster().setGameView(gameView);
+                ViewMaster.setCurrentMenu(Menu.GAME_MENU);
+            }catch (Exception ignored){
+                ignored.printStackTrace();
+            }
         } else {
-            gameView = new GameView(firstPlayer, secondPlayer, firstPlayer, startingRounds);
+            try {
+                gameView=duelView.startGame(firstPlayer, secondPlayer, firstPlayer, startingRounds);
+                GameController gameController = gameView.getGameController();
+                TrapAction.setGameController(gameController);
+                CardCommand.setGameController(gameController);
+                EffectHandler.setGameController(gameController);
+                ViewMaster.getViewMaster().setGameView(gameView);
+                ViewMaster.setCurrentMenu(Menu.GAME_MENU);
+            }catch (Exception ignored){
+                ignored.printStackTrace();
+            }
         }
-        ViewMaster.getViewMaster().setGameView(gameView);
-        GameController gameController = gameView.getGameController();
-        TrapAction.setGameController(gameController);
-        CardCommand.setGameController(gameController);
-        EffectHandler.setGameController(gameController);
+//        ViewMaster.getViewMaster().setGameView(gameView);
+//        GameController gameController = gameView.getGameController();
+//        TrapAction.setGameController(gameController);
+//        CardCommand.setGameController(gameController);
+//        EffectHandler.setGameController(gameController);
     }
 }

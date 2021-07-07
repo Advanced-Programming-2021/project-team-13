@@ -115,6 +115,7 @@ public class Board {
         for (Cell monsterCell : monsterCells) {
             if (monsterCell.getCard() == null) {
                 monsterCell.setCard(monster);
+                monsterCell.setPicture(monster.getImage());
                 return;
             }
         }

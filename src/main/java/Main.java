@@ -12,7 +12,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         ImageLoader.load();
         new UserJson().loadDataBase();
-        User user = User.getUserByUsername("ali");
+        User user = User.getUserByUsername("a");
         ViewMaster.setUser(user);
         launch(args);
     }
@@ -22,6 +22,7 @@ public class Main extends Application {
 //        ViewMaster.getViewMaster().run();
         primaryStage.setOnHiding(event -> new UserJson().update());
         SceneController.startDeckMenu(primaryStage);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

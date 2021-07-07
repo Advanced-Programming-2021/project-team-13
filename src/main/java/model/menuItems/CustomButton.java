@@ -22,7 +22,7 @@ public class CustomButton extends StackPane {
         Rectangle bg = new Rectangle(250, 38, gradient);
         Text text = new Text(name);
         text.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.ITALIC, 22));
-        setOnMouseClicked(e->{action.run(); });
+        setOnMouseClicked(e-> action.run());
         text.fillProperty().bind(
                 Bindings.when(hoverProperty()).then(Color.WHITE).otherwise(Color.GREY)
         );
