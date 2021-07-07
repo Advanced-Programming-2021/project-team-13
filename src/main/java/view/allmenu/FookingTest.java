@@ -1,10 +1,12 @@
 package view.allmenu;
 
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
@@ -16,6 +18,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.menuItems.CustomButton;
 
 import java.util.Arrays;
 
@@ -35,6 +38,11 @@ public class FookingTest extends Application {
     public Circle rivalHp;
     public Label rivalHpPoint;
     public Label ourHpPoint;
+    public VBox controlBtns;
+    public StackPane attack;
+    public StackPane summon;
+    public StackPane set;
+    public StackPane activate;
 
     public static void main(String[] args) {
         launch(args);
@@ -50,15 +58,27 @@ public class FookingTest extends Application {
     }
 
     public void initialize() {
-        ImagePattern hp = new ImagePattern(new Image("/gamePics/hp3.jpg"));
-        Arrays.stream(new Circle[]{ourHp,rivalHp}).forEach(e->{
-            e.setFill(hp);
-            e.setStroke(Color.RED);
-            e.setStrokeWidth(5);
-            final RotateTransition[] rotation = new RotateTransition[1];
-            setHpRotation(rotation,e);
-        });
+        initHp();
         centerPane.setAlignment(Pos.CENTER);
+        initGridPanes();
+        controlButtons();
+        centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
+    }
+
+    private void controlButtons() {
+        controlBtns.setSpacing(20);
+        attack=new CustomButton("attack",()->{});
+        summon=new CustomButton("summon",()->{});
+        set=new CustomButton("set",()->{});
+        activate=new CustomButton("activate",()->{});
+        Arrays.stream(new StackPane[]{activate,summon,set,attack}).forEach(e->e.setVisible(false));
+        StackPane surrender=new CustomButton("surrender",()->{});
+        surrender.setStyle("-fx-background-color: crimson");
+        controlBtns.getChildren().addAll(attack,summon,set,activate,surrender);
+        controlBtns.setTranslateX(-70);
+    }
+
+    private void initGridPanes() {
         Image background = new Image("/shopImage/Monsters/AxeRaider.jpg");
         Image background2 = new Image("/shopImage/Monsters/Bitron.jpg");
         for (int i = 0; i < 5; i++) {
@@ -86,7 +106,17 @@ public class FookingTest extends Application {
         gridPane.setTranslateY(50);
         gridPane.setHgap(10);
         gridPane.setVgap(30);
-        centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
+    }
+
+    private void initHp() {
+        ImagePattern hp = new ImagePattern(new Image("/gamePics/hp3.jpg"));
+        Arrays.stream(new Circle[]{ourHp,rivalHp}).forEach(e->{
+            e.setFill(hp);
+            e.setStroke(Color.RED);
+            e.setStrokeWidth(5);
+            final RotateTransition[] rotation = new RotateTransition[1];
+            setHpRotation(rotation,e);
+        });
     }
 
     private void setHpRotation(RotateTransition[] rotation,Circle hp) {
@@ -155,10 +185,20 @@ public class FookingTest extends Application {
             view.setEffect(null);
         });
         view.setOnMouseClicked(e-> {
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
+            Arrays.stream(new StackPane[]{activate,summon,set,attack}).forEach(a->a.setVisible(true));
             if(view.getParent().getRotate()!=180) {
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setNode(selectedCard);
+                fadeTransition.play();
                 selectedCard.setImage(view.getImage());
             }
             else {
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setNode(rivalSelectedCard);
+                fadeTransition.play();
                 rivalSelectedCard.setImage(view.getImage());
             }
         });

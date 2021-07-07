@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="game board">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/gamePics/hp1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/gamePics/hp2.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/gamePics/hp3.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" afterDir="false" />
@@ -137,7 +134,7 @@
       <workItem from="1625317097848" duration="8163000" />
       <workItem from="1625362882339" duration="10272000" />
       <workItem from="1625547145133" duration="24662000" />
-      <workItem from="1625633624339" duration="3426000" />
+      <workItem from="1625633624339" duration="4970000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -349,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625633910007</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="game board">
+      <created>1625637906568</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1625637906568</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,9 +385,9 @@
     <MESSAGE value="deck is edited" />
     <MESSAGE value="just created game fxml" />
     <MESSAGE value="frustrated af" />
-    <MESSAGE value="game board" />
     <MESSAGE value="game" />
-    <option name="LAST_COMMIT_MESSAGE" value="game" />
+    <MESSAGE value="game board" />
+    <option name="LAST_COMMIT_MESSAGE" value="game board" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -411,13 +415,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java</url>
-          <line>157</line>
+          <line>190</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" line="157">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/src/main/java/view/allmenu/FookingTest.java" line="190">
         <watch expression="view.getRotate()" />
       </inline-watch>
     </watches-manager>
