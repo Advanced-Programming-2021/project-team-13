@@ -1,5 +1,7 @@
 package view.allmenu;
 
+import javafx.animation.Animation;
+import javafx.animation.RotateTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -9,7 +11,11 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Arrays;
 
@@ -24,13 +30,11 @@ public class FookingTest extends Application {
     public AnchorPane leftPane;
     public GridPane leftGrid;
     public ImageView selectedCard;
-    public Label cardDamage;
-    public Label cardDescription;
-    public Label cardName;
     public ImageView rivalSelectedCard;
-    public Label rivalCardName;
-    public Label rivalCardDamage;
-    public Label rivalCardDescription;
+    public Circle ourHp;
+    public Circle rivalHp;
+    public Label rivalHpPoint;
+    public Label ourHpPoint;
 
     public static void main(String[] args) {
         launch(args);
@@ -46,22 +50,21 @@ public class FookingTest extends Application {
     }
 
     public void initialize() {
-        Arrays.stream(new Label[]{cardDamage, cardDescription, cardName,
-                rivalCardDamage, rivalCardName, rivalCardDescription})
-                .forEach(e -> e.setVisible(false));
+        ImagePattern hp = new ImagePattern(new Image("/gamePics/hp3.jpg"));
+        Arrays.stream(new Circle[]{ourHp,rivalHp}).forEach(e->{
+            e.setFill(hp);
+            e.setStroke(Color.RED);
+            e.setStrokeWidth(5);
+            final RotateTransition[] rotation = new RotateTransition[1];
+            setHpRotation(rotation,e);
+        });
         centerPane.setAlignment(Pos.CENTER);
         Image background = new Image("/shopImage/Monsters/AxeRaider.jpg");
         Image background2 = new Image("/shopImage/Monsters/Bitron.jpg");
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
                 StackPane stackPane = new StackPane();
-                stackPane.setPrefWidth(140);
-                stackPane.setPrefHeight(190);
-                ImageView cardImages = new ImageView(background);
-                setEffectsCardImages(cardImages);
-                cardImages.setFitWidth(140);
-                cardImages.setFitHeight(190);
-                stackPane.getChildren().add(cardImages);
+                gridPaneSetup(background, stackPane);
                 if (j < 2) {
                     stackPane.rotateProperty().set(180);
                 }
@@ -71,13 +74,7 @@ public class FookingTest extends Application {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 StackPane stackPane = new StackPane();
-                stackPane.setPrefWidth(140);
-                stackPane.setPrefHeight(190);
-                ImageView cardImages = new ImageView(background2);
-                setEffectsCardImages(cardImages);
-                cardImages.setFitWidth(140);
-                cardImages.setFitHeight(190);
-                stackPane.getChildren().add(cardImages);
+                gridPaneSetup(background2, stackPane);
                 leftGrid.add(stackPane, i, j);
             }
         }
@@ -90,6 +87,31 @@ public class FookingTest extends Application {
         gridPane.setHgap(10);
         gridPane.setVgap(30);
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
+    }
+
+    private void setHpRotation(RotateTransition[] rotation,Circle hp) {
+        hp.setOnMouseEntered(e->{
+            rotation[0] = new RotateTransition(Duration.millis(2000),hp);
+            rotation[0].setFromAngle(-30);
+            rotation[0].setToAngle(30);
+            rotation[0].setAutoReverse(true);
+            rotation[0].setCycleCount(Animation.INDEFINITE);
+            rotation[0].play();
+        });
+        hp.setOnMouseExited(e->{
+            hp.setRotate(0);
+            rotation[0].stop();
+        });
+    }
+
+    private void gridPaneSetup(Image background, StackPane stackPane) {
+        stackPane.setPrefWidth(140);
+        stackPane.setPrefHeight(190);
+        ImageView cardImages = new ImageView(background);
+        setEffectsCardImages(cardImages);
+        cardImages.setFitWidth(140);
+        cardImages.setFitHeight(190);
+        stackPane.getChildren().add(cardImages);
     }
 
     private void fourOtherCards(Image background) {
@@ -135,12 +157,9 @@ public class FookingTest extends Application {
         view.setOnMouseClicked(e-> {
             if(view.getParent().getRotate()!=180) {
                 selectedCard.setImage(view.getImage());
-                Arrays.stream(new Label[]{cardDamage, cardDescription, cardName}).forEach(a -> a.setVisible(true));
             }
             else {
                 rivalSelectedCard.setImage(view.getImage());
-                Arrays.stream(new Label[]{rivalCardDescription,
-                        rivalCardDamage ,rivalCardName}).forEach(a -> a.setVisible(true));
             }
         });
     }
