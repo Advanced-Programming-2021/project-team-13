@@ -99,8 +99,6 @@ public class GameView {
     }
 
     private void initGridPanes() {
-        Image background = new Image("/shopImage/Monsters/AxeRaider.jpg");
-        Image background2 = new Image("/shopImage/Monsters/Bitron.jpg");
         Player ourPlayer=firstPlayer instanceof AIPlayer?secondPlayer:firstPlayer;
         Player rivalPlayer=firstPlayer instanceof AIPlayer?firstPlayer:secondPlayer;
         System.out.println(ourPlayer+"        "+rivalPlayer);
@@ -108,7 +106,7 @@ public class GameView {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 StackPane stackPane = new StackPane();
-                gridPaneSetup(background, stackPane);
+                gridPaneSetup(null, stackPane);
                 if (i < 2) {
                     if(i==0)
                         rivalPlayer.getBoard().getMonsters()[j].setPicture(stackPane);
@@ -130,14 +128,14 @@ public class GameView {
             for (int j = 0; j < 3; j++) {
                 StackPane stackPane = new StackPane();
 //                ourPlayer.getCardsInHand()
-                gridPaneSetup(background2, stackPane);
+                gridPaneSetup(null, stackPane);
                 leftGrid.add(stackPane, i, j);
             }
         }
         leftGrid.setGridLinesVisible(true);
         leftGrid.setVgap(3.3333);
         leftGrid.setHgap(3.3333);
-        fourOtherCards(background);
+        fourOtherCards(null);
         gridPane.setTranslateX(13.3333);
         gridPane.setTranslateY(33.3333);
         gridPane.setHgap(6.6666);

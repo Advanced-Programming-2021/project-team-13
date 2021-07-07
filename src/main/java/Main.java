@@ -22,6 +22,7 @@ public class Main extends Application {
 //        ViewMaster.getViewMaster().run();
         primaryStage.setOnHiding(event -> new UserJson().update());
         SceneController.startDeckMenu(primaryStage);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
