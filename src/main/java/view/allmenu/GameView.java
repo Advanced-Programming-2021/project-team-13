@@ -81,8 +81,8 @@ public class GameView {
         });
         surrenderStack.setOnMouseExited(e->surrenderBtn.setEffect(null));
         centerPane.setAlignment(Pos.CENTER);
-        leftPane.setStyle("-fx-background-image: url('/gamePics/Campaign_11_HelpBG1.dds.png')");
-        rightPane.setStyle("-fx-background-image: url('/gamePics/GUI_T_Detail_ComboBase01.dds2.png')");
+        leftPane.setStyle("-fx-background-image: url('/gamePics/1.png');-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
+        rightPane.setStyle("-fx-background-image: url('/gamePics/1.png');-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
         initGridPanes();
 //        controlButtons();
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
@@ -146,7 +146,7 @@ public class GameView {
                         gameController.normalSummon((Monster) gameController.getCurrentPlayer().getSelectedCard(), AttackOrDefense.ATTACK);
                     }
                 });
-                leftGrid.add(stackPane, i, j);
+                leftGrid.add(stackPane, j, i);
                 ourPlayer.getCardsInHandImage().add(stackPane);
             }
         }
@@ -238,7 +238,7 @@ public class GameView {
         });
         view.setOnMouseClicked(e -> {
             FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
-            Arrays.stream(new StackPane[]{activate, summon, set, attack}).forEach(a -> a.setVisible(true));
+//            Arrays.stream(new StackPane[]{activate, summon, set, attack}).forEach(a -> a.setVisible(true));
             if (view.getParent().getRotate() != 180) {
                 fadeTransition.setFromValue(0);
                 fadeTransition.setToValue(1);

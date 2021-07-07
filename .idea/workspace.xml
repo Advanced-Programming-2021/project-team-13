@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="game board">
-      <change afterPath="$PROJECT_DIR$/src/main/java/model/menuItems/CustomSanButtons.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/gamePics/Campaign_11_HelpBG1.dds.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/gamePics/GUI_T_Detail_ComboBase01.dds2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/gamePics/sugoroku_btn_s.dds.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/gamePics/1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +148,7 @@
       <workItem from="1625633624339" duration="5661000" />
       <workItem from="1625651724486" duration="13625000" />
       <workItem from="1625670812198" duration="2325000" />
-      <workItem from="1625673151749" duration="965000" />
+      <workItem from="1625673151749" duration="1691000" />
     </task>
     <task id="LOCAL-00001" summary="main">
       <created>1625258730921</created>
@@ -399,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625666176540</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="game board">
+      <created>1625674134386</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1625674134386</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
