@@ -8,8 +8,10 @@ import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -36,6 +38,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
 public class GameView {
+    public AnchorPane rightPane;
+    public ImageView surrenderBtn;
+    public StackPane surrenderStack;
     private GameController gameController;
     public GridPane gridPane;
     public BorderPane motherPane;
@@ -74,9 +79,15 @@ public class GameView {
         Player ourPlayer=firstPlayer instanceof AIPlayer?secondPlayer:firstPlayer;
         Player rivalPlayer=firstPlayer instanceof AIPlayer?firstPlayer:secondPlayer;
         initHp();
+        surrenderStack.setOnMouseEntered(e->{
+            surrenderBtn.setEffect(new ColorAdjust(-0.72,0,0,0));
+        });
+        surrenderStack.setOnMouseExited(e->surrenderBtn.setEffect(null));
         centerPane.setAlignment(Pos.CENTER);
+        leftPane.setStyle("-fx-background-image: url('/gamePics/Campaign_11_HelpBG1.dds.png')");
+        rightPane.setStyle("-fx-background-image: url('/gamePics/GUI_T_Detail_ComboBase01.dds2.png')");
         initGridPanes();
-        controlButtons();
+//        controlButtons();
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
     }
 
