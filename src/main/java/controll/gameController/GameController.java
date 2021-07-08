@@ -659,7 +659,7 @@ public class GameController {
                     board = answerSpilt[1] + " " + answerSpilt[2];
                     if (checkCorrectEquipInput(num, board, spell))
                         tries = 0;
-                } else gameView.printInvalidCommand();
+                }
             }
             currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
             if (board.equalsIgnoreCase("our board"))
@@ -822,12 +822,12 @@ public class GameController {
                                         return;
                                     }
                                     gameView.printInvalidSelection();
-                                } else gameView.printInvalidCommand();
+                                }
                             }
                         } else gameView.printInvalidSelection();
-                    } else gameView.printInvalidCommand();
+                    }
                 }
-            } else gameView.printInvalidCommand();
+            }
         }
     }
 
@@ -861,7 +861,7 @@ public class GameController {
                 if (checkForTrapOrSpell(num)) {
                     check = true;
                 } else gameView.printInvalidSelection();
-            } else gameView.printInvalidCommand();
+            }
         }
         currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                 .addCard(currentPlayer.getRivalPlayer().getBoard()

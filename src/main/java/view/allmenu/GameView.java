@@ -751,12 +751,12 @@ public class GameView {
             } else if (spellMatcher.find()) {
                 int cardAddress = Integer.parseInt(opponentWithFieldMatcher.group("cardAddress"));
                 gameController.selectOpponentSpellOrTrap(cardAddress);
-            } else printInvalidCommand();
+            }
         } else if (opponentMatcher.find(0)) {
             Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
             if (fieldMatcher.find()) {
                 gameController.selectOpponentFieldCard();
-            } else printInvalidCommand();
+            }
         } else {
             Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.PLAYER_MONSTER);
             Matcher spellMatcher = Regex.getInputMatcher(command, Regex.PLAYER_SPELL);
@@ -774,8 +774,7 @@ public class GameView {
             } else if (fieldMatcher.find()) {
                 if (command.matches(Regex.FIELD_SELECT))
                     gameController.selectPlayerFieldCard();
-                else printInvalidCommand();
-            } else printInvalidCommand();
+            }
         }
     }
 
@@ -784,12 +783,14 @@ public class GameView {
     }
 
     public void printNoCardSelected() {
-        System.out.println("no card is selected yet");
+        createNotification("no card is selected yet", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
-    public void printInvalidCommand() {
-        System.out.println("invalid command");
-    }
 
     public void printCardSelected() {
         System.out.println("card selected");
@@ -808,15 +809,30 @@ public class GameView {
     }
 
     public void printCantAttack() {
-        System.out.println("you can’t attack with this card");
+        createNotification("you can’t attack with this card", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printWrongPhase() {
-        System.out.println("you can’t do this action in this phase");
+        createNotification("you can’t do this action in this phase", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printAlreadyAttacked() {
-        System.out.println("this card already attacked");
+        createNotification("this card already attacked", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNoCardToAttack() {
@@ -824,31 +840,61 @@ public class GameView {
     }
 
     public void printOpponentMonsterDestroyed(int attackDifference) {
-        System.out.println("your opponent’s monster is destroyed " +
-                "and your opponent receives " + attackDifference + " battle damage");
+        createNotification("your opponent’s monster is destroyed " +
+                "and your opponent receives " + attackDifference + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printBothMonstersDestroyed() {
-        System.out.println("both you and your opponent monster cards" +
-                " are destroyed and no one receives damage");
+        createNotification("both you and your opponent monster cards" +
+                " are destroyed and no one receives damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printYourCardIsDestroyed(int attackDifference) {
-        System.out.println("Your monster card is destroyed " +
-                "and you received " + attackDifference + " battle damage");
+        createNotification("Your monster card is destroyed " +
+                "and you received " + attackDifference + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNoCardDestroyed() {
-        System.out.println("no card is destroyed");
+        createNotification("no card is destroyed", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printDefensePositionDestroyed() {
-        System.out.println("the defense position monster is destroyed");
+        createNotification("the defense position monster is destroyed", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNoCardDestroyedYouReceivedDamage(int attackDifference) {
-        System.out.println("no card is destroyed and you" +
-                " received " + attackDifference + " battle damage");
+        createNotification("no card is destroyed and you" +
+                " received " + attackDifference + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printDefensePositionDestroyedHidden(String rivalMonsterName) {
@@ -867,15 +913,30 @@ public class GameView {
     }
 
     public void printOpponentCardsName(String name) {
-        System.out.println("opponent’s monster card was " + name);
+        createNotification("opponent’s monster card was " + name, new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printYourOpponentReceivesDamage(int attackNum) {
-        System.out.println("your opponent receives " + attackNum + " battle damage");
+        createNotification("your opponent receives " + attackNum + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantSummon() {
-        System.out.println("you can’t summon this card");
+        createNotification("you can’t summon this card", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNotInMainPhase() {
@@ -883,15 +944,30 @@ public class GameView {
     }
 
     public void printMonsterZoneFull() {
-        System.out.println("monster card zone is full");
+        createNotification("monster card zone is full", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printAlreadySetOrSummon() {
-        System.out.println("you already summoned/set on this turn");
+        createNotification("you already summoned/set on this turn", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSummonSuccessfully() {
-        System.out.println("summoned successfully");
+        createNotification("summoned successfully", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNoMonsterOnThisAddress() {
@@ -916,11 +992,21 @@ public class GameView {
     }
 
     public void printCantSet() {
-        System.out.println("you can’t set this card");
+        createNotification("you can’t set this card", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSetSuccessfully() {
-        System.out.println("set successfully");
+        createNotification("set successfully", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantChangePosition() {
@@ -974,12 +1060,22 @@ public class GameView {
 
     public void printWhoseTurn() {
         if (gameController.getCurrentPlayer() instanceof AIPlayer) {
-            System.out.println("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
-            text.setText("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
+            createNotification("Its " + ((AIPlayer) gameController.getCurrentPlayer())
+                    .getNickname() + "’s turn", new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
         }
         else {
-            System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
-            text.setText("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+            createNotification("Its " + gameController.getCurrentPlayer().getUser()
+                    .getNickname() + "’s turn", new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
         }
 
         notifStackPane.setVisible(true);
@@ -1047,12 +1143,22 @@ public class GameView {
     }
 
     public void printNoCardDestroyedRivalReceivedDamage(int attackDifference) {
-        System.out.println("no card is destroyed and rival" +
-                " received " + attackDifference + " battle damage");
+        createNotification("no card is destroyed and rival" +
+                " received " + attackDifference + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printYouReceivedDamage(int amount) {
-        System.out.println("you received " + amount + " damage");
+        createNotification("you received " + amount + " damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public boolean doYouWantTributeBarBaros() {// :| WTF
@@ -1136,27 +1242,57 @@ public class GameView {
     }
 
     public void printActiveOnlyForSpellsAndTrap() {
-        System.out.println("activate effect is only for spell cards.");
+        createNotification("activate effect is only for spell cards", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantActiveThisTurn() {
-        System.out.println("you can’t activate an effect on this turn");
+        createNotification("you can’t activate an effect on this turn", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printAlreadyActivated() {
-        System.out.println("you have already activated this card");
+        createNotification("you have already activated this card", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSpellZoneIsFull() {
-        System.out.println("spell zone is full");
+        createNotification("spell zone is full", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printPrepsNotDone() {
-        System.out.println("preparations of this spell are not done yet");
+        createNotification("preparations of this spell are not done yet", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantSpecialSummon() {
-        System.out.println("there is no way you could special summon a monster");
+        createNotification("there is no way you could special summon a monster", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void getTributeTheTricky() {
@@ -1237,9 +1373,19 @@ public class GameView {
 
     public void playerChanged(Player currentPlayer) {
         if (currentPlayer instanceof AIPlayer)
-            System.out.println("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname());//// added this to show changed turn
+            createNotification("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname(), new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
         else
-            System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());
+            createNotification("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername(), new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
     }
 
     public void printRitualSummonError() {
@@ -1300,7 +1446,12 @@ public class GameView {
     }
 
     public void printCardAddedToHand(Card card) {
-        System.out.println("new card added to hand : " + card.getCardNameInGame());
+        createNotification("new card added to hand : " + card.getCardNameInGame(), new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public int chooseMonsterForSummonScanner(List<Monster> rivalGraveYardMonsters) {
@@ -1361,7 +1512,6 @@ public class GameView {
             } else if (yesOrNo.equalsIgnoreCase("no")) {
                 return false;
             } else {
-                printInvalidCommand();
             }
         }
     }
