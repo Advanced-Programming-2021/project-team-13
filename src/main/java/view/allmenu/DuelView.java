@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import model.menuItems.CustomButton;
 import model.players.Player;
 import model.players.User;
-import view.Regex;
 import view.ViewMaster;
 
 import java.io.IOException;
@@ -54,7 +53,7 @@ public class DuelView {
         setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3);
         setBtnEffects(glow, paperImg, "/duelMenuPics/rps/paper.bmp", 1);
         setBtnEffects(glow, rockImg, "/duelMenuPics/rps/rock.bmp", 2);
-        setBackGround(pane, "/duelMenuPics/moon.gif", 1);
+        setBackGround(pane, "/duelMenuPics/moon.gif");
         vBox = new VBox(0, getFirstVboxNodes());
         rightPane.getChildren().add(vBox);
     }
@@ -102,7 +101,7 @@ public class DuelView {
 
     }
 
-    private void setBackGround(BorderPane pane, String url, double opacity) {
+    private void setBackGround(BorderPane pane, String url) {
         Image background = new Image(url, 1280, 720, false, true);
         pane.setBackground(new Background(new BackgroundImage(background, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
@@ -214,11 +213,11 @@ public class DuelView {
         rpcNotifLabel.setText("Equal!\ntry again!");
     }
 
-    public GameView startGame(Player firstPlayer,Player secondPlayer,Player currentPlayer,int rounds)
+    public GameView startGame(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds)
             throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
         ((Stage) pane.getScene().getWindow()).setScene(new Scene(loader.load()));
-        ((GameView)loader.getController()).setup(firstPlayer,secondPlayer,currentPlayer,rounds);
+        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds);
         return loader.getController();
     }
 }

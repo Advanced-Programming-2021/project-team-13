@@ -1,6 +1,5 @@
 package controll.gameController;
 
-import javafx.fxml.FXMLLoader;
 import model.PlayerDeck;
 import model.cards.Card;
 import model.cards.Trap;
@@ -12,7 +11,6 @@ import view.ViewMaster;
 import view.allmenu.DuelView;
 import view.allmenu.GameView;
 
-import java.net.URL;
 import java.util.Random;
 
 public class DuelController {
@@ -56,15 +54,15 @@ public class DuelController {
         setPlayersTrapActions(secondPlayer);
         GameView gameView;
         try {
-            gameView=duelView.startGame(firstPlayer, secondPlayer, firstPlayer, rounds);
+            gameView = duelView.startGame(firstPlayer, secondPlayer, firstPlayer, rounds);
             GameController gameController = gameView.getGameController();
             TrapAction.setGameController(gameController);
             CardCommand.setGameController(gameController);
             EffectHandler.setGameController(gameController);
             ViewMaster.getViewMaster().setGameView(gameView);
             ViewMaster.setCurrentMenu(Menu.GAME_MENU);
-        }catch (Exception ignored){
-                ignored.printStackTrace();
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
     }
 

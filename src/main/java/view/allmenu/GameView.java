@@ -74,7 +74,7 @@ public class GameView {
     public Pane rivalSelectedPane;
     public Player firstPlayer;
     public Player secondPlayer;
-    public Player  ourPlayer;
+    public Player ourPlayer;
     public Player rivalPlayer;
 
     private boolean tributePhase = false;
@@ -92,7 +92,6 @@ public class GameView {
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
     }
-
 
 
     public void init() {
@@ -215,8 +214,7 @@ public class GameView {
         stackPane.setOnMouseClicked(e -> {
             if (stackPane.getEffect() == null) {
                 stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
-            }
-            else
+            } else
                 stackPane.setEffect(null);
             rivalSelectedPane = stackPane;
             rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getMonsters())
@@ -230,18 +228,20 @@ public class GameView {
     private void ourMonsterCellSetups(Player ourPlayer, int j, StackPane stackPane) {
         ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
         final int x = j;
-        stackPane.setOnMouseEntered(e->{
-                stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.GREEN));
+        stackPane.setOnMouseEntered(e -> {
+            stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.GREEN));
         });
-        stackPane.setOnMouseExited(e->{
+        stackPane.setOnMouseExited(e -> {
             stackPane.setEffect(null);
         });
         stackPane.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY)
+                gameController.getCurrentPlayer().setSelectedCard(ourPlayer.getBoard().getMonsters()[x].getCard());
             ourSelectedPane = stackPane;
             ourSelectedCell = Arrays.stream(ourPlayer.getBoard().getMonsters())
                     .filter(Objects::nonNull).filter(a -> a.getPicture() == stackPane).findFirst()
                     .get();
-            System.out.println(ourSelectedCell.getCard().getCardName() + "    "+ourSelectedCell
+            System.out.println(ourSelectedCell.getCard().getCardName() + "    " + ourSelectedCell
                     .getPicture() + "         " + getIndexOfnn(ourSelectedCell));
             System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
             if (tributePhase) {
@@ -249,18 +249,46 @@ public class GameView {
                         && ourPlayer.getBoard().getMonsters()[x].getCard() != null) {
                     gameController.tribute(stackPane, x);
                     numberOfTribute++;
-                } else {
-                    numberOfTribute = 0;
-                    tributePhase = false;
-                    gameController.summonWithTribute();
+                    if (numberOfTribute == (gameController).getNumberOfTributeNeeded()) {
+                        numberOfTribute = 0;
+                        tributePhase = false;
+                        gameController.summonWithTribute();
+                    }
                 }
+            }
+            if (event.getButton() == MouseButton.MIDDLE)
+                if (gameController.getCurrentPlayer().getSelectedCard() == ourPlayer.getBoard().getMonsters()[x].getCard())
+                    changePosition();
+            if (event.getButton() == MouseButton.SECONDARY) {
+                if (gameController.getCurrentPlayer().getSelectedCard() == ourPlayer.getBoard().getMonsters()[x].getCard())
+                    flipSummon();
             }
         });
     }
 
+    private void changePosition() {
+        try {
+            gameController.changeSet();
+        } catch (Exception e) {
+            text.setText(e.getMessage());
+            notifStackPane.setVisible(true);
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void flipSummon() {
+        try {
+            gameController.flipSummon();
+        } catch (Exception e) {
+            text.setText(e.getMessage());
+            notifStackPane.setVisible(true);
+            System.out.println(e.getMessage());
+        }
+    }
+
     private String getIndexOfnn(Cell ourSelectedCell) {
         for (int i = 0; i < ourPlayer.getBoard().getMonsters().length; i++) {
-            if(ourSelectedCell==ourPlayer.getBoard().getMonsters()[i])
+            if (ourSelectedCell == ourPlayer.getBoard().getMonsters()[i])
                 return String.valueOf(i);
         }
         return "fuck you nigga";
@@ -533,11 +561,11 @@ public class GameView {
         showGraveyardView.run(command);
     }
 
-    private void changeSet(Matcher inputMatcher) {
+  /*  private void changeSet(Matcher inputMatcher) {
         inputMatcher.find();
         String position = inputMatcher.group("position");
         gameController.changeSet(position);
-    }
+    }*/
 
     private void directAttack() {
         gameController.directAttack(false);

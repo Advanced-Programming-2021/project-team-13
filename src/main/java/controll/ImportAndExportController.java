@@ -2,47 +2,52 @@ package controll;
 
 import com.gilecode.yagson.YaGson;
 import model.cards.Card;
-import view.ViewMaster;
-import view.allmenu.ImportAndExportView;
+import model.players.User;
 
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ImportAndExportController {
-    private final ImportAndExportView importAndExportView;
 
-    public ImportAndExportController(ImportAndExportView importAndExportView) {
-        this.importAndExportView = importAndExportView;
-    }
-
-    public void importCard(String cardName) {
+    public boolean importCard(User user, String cardName) {
         YaGson mapper = new YaGson();
         try {
-            String json = new String(Files.readAllBytes(Paths.get(cardName)));
+            String json = new String(Files.readAllBytes(Paths.get(cardName + ".json")));
             Card card = mapper.fromJson(json, Card.class);
-            ViewMaster.getUser().getAllCards().add(card);
-            importAndExportView.printSuccessful("imported");
+            boolean hasCard = false;
+            for (Card card1 : user.getAllCards()) {
+                if (card1.getCardName().equals(card.getCardName())) {
+                    hasCard = true;
+                    break;
+                }
+            }
+            if (!hasCard)
+                user.addCard(card);
+            return true;
         } catch (Exception e) {
-            importAndExportView.printCantFindFile();
+            e.printStackTrace();
+            return false;
         }
     }
 
-    public void exportCard(String cardName) {
+    public String exportCard(User user, Card card) {
         YaGson mapper = new YaGson();
-        if (ViewMaster.getUser().getCardNameToNumber().containsKey(cardName)) {
-            Card card = Card.findCardFromCsv(cardName);
+        if (user.getCardNameToNumber().containsKey(card.getCardName())) {
             card.setImage(null);
             card.setCardOwner(null);
             String json = mapper.toJson(card);
             try {
-                FileWriter FW = new FileWriter(cardName);
+                FileWriter FW = new FileWriter(card.getCardName() + ".json");
                 FW.write(json);
                 FW.close();
-                importAndExportView.printSuccessful("exported");
-            } catch (Exception ignored) {
+                return "crated";
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "failed";
             }
-        } else
-            importAndExportView.printCantFindCard(cardName);
+        } else {
+            return "createCardFirst";
+        }
     }
 }

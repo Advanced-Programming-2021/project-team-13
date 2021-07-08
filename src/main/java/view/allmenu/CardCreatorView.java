@@ -8,6 +8,7 @@ import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -258,6 +259,26 @@ public class CardCreatorView implements Initializable {
         }
     }
 
+    @FXML
+    private void runMainMenu() throws IOException {
+        Stage stage = ((Stage) effectCombo.getScene().getWindow());
+        SceneController.startMainMenu(stage);
+    }
+
+
+    public void importCard(ActionEvent actionEvent) {
+
+    }
+
+    public void exportCard(ActionEvent actionEvent) {
+    }
+
+    public void addTimeline() {
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), event -> undoBlur());
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
+    }
+
     private void blurBackGround() {
         firstBack.setEffect(new GaussianBlur(20));
         secondBack.setEffect(new GaussianBlur(20));
@@ -270,15 +291,4 @@ public class CardCreatorView implements Initializable {
         thirdBack.setVisible(false);
     }
 
-    @FXML
-    private void runMainMenu() throws IOException {
-        Stage stage = ((Stage) effectCombo.getScene().getWindow());
-        SceneController.startMainMenu(stage);
-    }
-
-    public void addTimeline() {
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), event -> undoBlur());
-        Timeline timeline = new Timeline(keyFrame);
-        timeline.play();
-    }
 }
