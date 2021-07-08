@@ -88,6 +88,8 @@ public class GameController {
         this.startingRounds = startingRounds;
         turnsPlayed = 0;
         currentPhase = Phase.DRAW_PHASE;
+        if (firstPlayer instanceof AIPlayer)
+            playAI();
         notToDrawCardTurns = new ArrayList<>();
         canContinue = true;
         isInAttack = false;
@@ -1415,11 +1417,7 @@ public class GameController {
             }
             numberOfTributeNeeded = numberOfTribute;
             gameView.setTributePhase(true);
-            
-/*            if (!getTribute(numberOfTribute)) {
-                gameView.printMap();
-                return;
-            }*/
+
         }
         normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
@@ -1904,6 +1902,7 @@ public class GameController {
     }
 
     public void tribute(StackPane stackPane, int cellNumber) {
+        getCurrentPlayer().getBoard().getMonsters()[cellNumber].setCard(null);
         stackPane.getChildren().removeAll();
     }
 }

@@ -169,7 +169,7 @@ public class GameView {
                         stackPane.setOnMouseClicked(event -> {
                             if (tributePhase) {
                                 if (numberOfTribute < (gameController).getNumberOfTributeNeeded()
-                                        && stackPane.getChildren() != null) {
+                                        && ourPlayer.getBoard().getMonsters()[x].getCard() != null) {
                                     gameController.tribute(stackPane, x);
                                     numberOfTribute++;
                                 } else {
