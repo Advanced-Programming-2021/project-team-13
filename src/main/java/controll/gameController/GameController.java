@@ -1,8 +1,8 @@
 package controll.gameController;
 
 import enums.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
@@ -43,7 +43,7 @@ public class GameController {
     private boolean flipSummonHappened;
     private boolean ritualSummonHappened;
     private boolean anySummonHappened;
-
+    private int numberOfTributeNeeded = 0;
 
     public static boolean checkForDeathAction(Card card) {
         if (card instanceof Monster) {
@@ -89,6 +89,8 @@ public class GameController {
         this.startingRounds = startingRounds;
         turnsPlayed = 0;
         currentPhase = Phase.DRAW_PHASE;
+        if (firstPlayer instanceof AIPlayer)
+            playAI();
         notToDrawCardTurns = new ArrayList<>();
         canContinue = true;
         isInAttack = false;
@@ -96,6 +98,14 @@ public class GameController {
         specialSummonHappened = false;
         ritualSummonHappened = false;
         anySummonHappened = false;
+    }
+
+    public int getNumberOfTributeNeeded() {
+        return numberOfTributeNeeded;
+    }
+
+    public void setNumberOfTributeNeeded(int numberOfTributeNeeded) {
+        this.numberOfTributeNeeded = numberOfTributeNeeded;
     }
 
     public boolean isAnySummonHappened() {
@@ -165,6 +175,8 @@ public class GameController {
             currentPlayer = secondPlayer;
         else
             currentPlayer = firstPlayer;
+        if (currentPlayer instanceof AIPlayer)
+            playAI();
         gameView.playerChanged(currentPlayer);
     }
 
@@ -1275,31 +1287,31 @@ public class GameController {
     }
 
 
-    public void checksBeforeSummon() {
-        if (currentPlayer.getSelectedCard() == null)
+    public void checksBeforeSummon() throws Exception {
+     /*   if (currentPlayer.getSelectedCard() == null)
             gameView.printNoCardSelected();
-        else {
-            if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
-                    && currentPlayer.getSelectedCard() instanceof Monster
-                    && ((Monster) currentPlayer.getSelectedCard()).getMonsterCardType() != MonsterCardType.RITUAL
-                    && !(currentPlayer.getSelectedCard()).getCardNameInGame().equalsIgnoreCase("the tricky")) {
-                if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
-                    gameView.printNotInMainPhase();
-                else {
-                    if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
-                        if (currentPlayer.isSetOrSummonInThisTurn())
-                            gameView.printAlreadySetOrSummon();
-                        else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Beast king barbaros"))
-                            beatsKingBarbaros((Monster) currentPlayer.getSelectedCard());
-                        else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Terratiger, the Empowered Warrior"))
-                            terratiger((Monster) currentPlayer.getSelectedCard());
-                        else
-                            summonAndSpecifyTribute();
-                    } else gameView.printMonsterZoneFull();
-                }
-            } else gameView.printCantSummon();
-        }
+        else*/
+        if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
+                && currentPlayer.getSelectedCard() instanceof Monster
+                && ((Monster) currentPlayer.getSelectedCard()).getMonsterCardType() != MonsterCardType.RITUAL
+                && !(currentPlayer.getSelectedCard()).getCardNameInGame().equalsIgnoreCase("the tricky")) {
+            if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
+                throw new Exception("action not allowed in this phase");
+            else {
+                if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
+                    if (false)//currentPlayer.getCardsInHand().indexOf(card)
+                        throw new Exception("you already summoned/set on this turn");
+                    else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Beast king barbaros"))
+                        beatsKingBarbaros((Monster) currentPlayer.getSelectedCard());
+                    else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Terratiger, the Empowered Warrior"))
+                        terratiger((Monster) currentPlayer.getSelectedCard());
+                    else
+                        summonAndSpecifyTribute();
+                } else throw new Exception("monster card zone is full");
+            }
+        } else throw new Exception("you can’t summon this card");
     }
+
 
     public void normalSummon(Monster monster, AttackOrDefense position) {
         anySummonHappened = true;
@@ -1309,12 +1321,7 @@ public class GameController {
             if (checkScannerEffect(monster, true)) return;
         summonedCard = monster;
         gameView.printSummonSuccessfully();
-        for (int i = currentPlayer.getCardsInHand().indexOf(monster); i < currentPlayer.getCardsInHand().size(); i++) {
-            currentPlayer.getCardsInHandImage().get(i).getChildren().removeAll();
-            if (i + 1 < currentPlayer.getCardsInHand().size())
-                currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
-        }
-        //currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(monster)).getChildren().removeAll();
+        removeCardFromHandScene(monster);
         currentPlayer.getCardsInHand().remove(monster);
         monster.setSetInThisTurn(true);
         monster.setZone(Zone.MONSTER_ZONE);
@@ -1399,7 +1406,7 @@ public class GameController {
         anySummonHappened = false;
     }
 
-    private void summonAndSpecifyTribute() {
+    private void summonAndSpecifyTribute() throws Exception {
         Monster monster = (Monster) currentPlayer.getSelectedCard();
         int numberOfTribute = monster.howManyTributeNeed();
         if (numberOfTribute != 0) {
@@ -1407,12 +1414,12 @@ public class GameController {
             if (numberOfMonsterInOurBoard < numberOfTribute) {
                 currentPlayer.setSelectedCard(null);
                 gameView.printThereArentEnoughMonsterForTribute();
-                return;
+                throw new Exception("there are not enough cards for tribute");
             }
-            if (!getTribute(numberOfTribute)) {
-                gameView.printMap();
-                return;
-            }
+            summonedCard = monster;
+            numberOfTributeNeeded = numberOfTribute;
+            gameView.setTributePhase(true);
+            throw new Exception("Tribute " + numberOfTribute + " Monsters");
         }
         normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
@@ -1456,7 +1463,7 @@ public class GameController {
     }
 
     private boolean getTribute(int numberOfTribute) {
-        ArrayList<Monster> tributeMonster = new ArrayList<>();
+/*        ArrayList<Monster> tributeMonster = new ArrayList<>();
         for (int i = 0; i < numberOfTribute; i++) {
             gameView.getTribute();
             Monster monster = (Monster) currentPlayer.getSelectedCard();
@@ -1473,40 +1480,42 @@ public class GameController {
         }
         for (Monster monster : tributeMonster) {
             currentPlayer.getBoard().getGraveyard().addCard(monster);
-        }
+        }*/
         return true;
     }
 
-    public void set() {
-        if (currentPlayer.getSelectedCard() == null)
+    public void set() throws Exception {
+     /*   if (currentPlayer.getSelectedCard() == null)
             gameView.printNoCardSelected();
-        else {
-            if (currentPlayer.getSelectedCard().getZone() == Zone.IN_HAND) {
-                if (currentPlayer.getSelectedCard() instanceof Monster)
-                    setMonster((Monster) currentPlayer.getSelectedCard());
-                else
-                    setSpellAndTrap();
-            } else
-                gameView.printCantSet();
-        }
+        else*/
+        /*   if (currentPlayer.getSelectedCard().getZone() == Zone.IN_HAND) {*/
+        if (currentPlayer.getSelectedCard() instanceof Monster)
+            setMonster((Monster) currentPlayer.getSelectedCard());
+        else
+            setSpellAndTrap();
+/*    } else
+            gameView.printCantSet();*/
+
     }
 
-    private void setSpellAndTrap() {
+    private void setSpellAndTrap() throws Exception {
         if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
             if (currentPlayer.getSelectedCard() instanceof Spell && ((Spell) currentPlayer.getSelectedCard())
                     .getType().equalsIgnoreCase("field")) {
                 if (currentPlayer.getBoard().getFieldSpell().getCard() != null) {
                     Spell spell = (Spell) currentPlayer.getSelectedCard();
+                    removeCardFromHandScene(spell);
                     spell.setFace(Face.UP);
                     spell.setZone(Zone.FIELD);
                     currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
                     currentPlayer.setSelectedCard(null);
                     gameView.printMap();
                     checkTrapActivation();
-                } else gameView.printSpellZoneIsFull();
+                } else throw new Exception("spell zone is full");
             } else if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
-                currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
                 Card card = currentPlayer.getSelectedCard();
+                removeCardFromHandScene(card);
+                currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
                 card.setZone(Zone.SPELL_TRAP_ZONE);
                 card.setFace(Face.DOWN);
                 if (currentPlayer.getSelectedCard() instanceof Spell)
@@ -1519,16 +1528,16 @@ public class GameController {
                 gameView.printMap();
                 checkTrapActivation();
             } else
-                gameView.printSpellZoneIsFull();
+                throw new Exception("spell zone is full");
         } else
-            gameView.printNotInMainPhase();
+            throw new Exception("action not allowed in this phase");
     }
 
-    private void setMonster(Monster selectedCard) {
+    private void setMonster(Monster selectedCard) throws Exception {
         if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
             if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
                 if (currentPlayer.isSetOrSummonInThisTurn())
-                    gameView.printAlreadySetOrSummon();
+                    throw new Exception("you already summoned/set on this turn");
                 else {
                     selectedCard.setZone(Zone.MONSTER_ZONE);
                     selectedCard.setFace(Face.DOWN);
@@ -1536,15 +1545,25 @@ public class GameController {
                     currentPlayer.setSetOrSummonInThisTurn(true);
                     currentPlayer.setSelectedCard(null);
                     gameView.printSetSuccessfully();
+                    removeCardFromHandScene(selectedCard);
                     currentPlayer.getCardsInHand().remove(selectedCard);
                     currentPlayer.getBoard().putMonsterInBoard(selectedCard);
                     gameView.printMap();
                     checkTrapActivation();
                 }
             } else
-                gameView.printMonsterZoneFull();
+                throw new Exception("monster card zone is full");
         } else
-            gameView.printNotInMainPhase();
+            throw new Exception("action not allowed in this phase");
+    }
+
+    private void removeCardFromHandScene(Card card) {
+        currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(card)).getChildren().removeIf(e -> e instanceof ImageView);
+        for (int i = currentPlayer.getCardsInHand().indexOf(card); i < currentPlayer.getCardsInHandImage().size(); i++) {
+            currentPlayer.getCardsInHandImage().get(i).getChildren().removeIf(e -> e instanceof ImageView);
+            if (i + 1 < currentPlayer.getCardsInHandImage().size())
+                currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
+        }
     }
 
     public void changeSet(String position) {
@@ -1882,5 +1901,19 @@ public class GameController {
     private void checkTrapActivation() {
         activateRivalPlayerTrap();
         runChain();
+    }
+
+    public void tribute(StackPane stackPane, int cellNumber) {
+        getCurrentPlayer().getBoard().getMonsters()[cellNumber].setCard(null);
+        stackPane.getChildren().removeIf(e -> e instanceof ImageView);
+    }
+
+    public void summonWithTribute() {
+        normalSummonHappened = true;
+        removeCardFromHandScene(summonedCard);
+        normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
+        checkTrapActivation();
+        normalSummonHappened = false;
+        anySummonHappened = false;
     }
 }

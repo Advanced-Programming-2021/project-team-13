@@ -115,7 +115,7 @@ public class Board {
         for (Cell monsterCell : monsterCells) {
             if (monsterCell.getCard() == null) {
                 monsterCell.setCard(monster);
-                monsterCell.setPicture(monster.getImage());
+                monsterCell.setPicture(monster.getImage(), monster.getFace(), monster.getAttackOrDefense());
                 return;
             }
         }
@@ -146,6 +146,7 @@ public class Board {
             for (Cell cell : spellOrTrap) {
                 if (cell.getCard() == null) {
                     cell.setCard(selectedCard);
+                    cell.setPicture(selectedCard.getImage(), selectedCard.getFace(), null);
                     return;
                 }
             }
@@ -155,6 +156,7 @@ public class Board {
     private void putTrap(Trap selectedCard) {
         for (Cell cell : spellOrTrap) {
             if (cell.getCard() == null) {
+                cell.setPicture(selectedCard.getImage(), selectedCard.getFace(), null);
                 cell.setCard(selectedCard);
                 return;
             }
