@@ -218,9 +218,9 @@ public class GameView {
                 gridPaneSetup(null, stackPane);
                 if (i < 2) {
                     if (i == 0)
-                        rivalMonsterCellSetup(rivalPlayer, j, stackPane);
+                        rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
                     if (i == 1)
-                    rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+                        rivalMonsterCellSetup(rivalPlayer, j, stackPane);
                 } else {
                     if (i == 2) {
                         ourMonsterCellSetups(ourPlayer, j, stackPane);
@@ -234,7 +234,13 @@ public class GameView {
     }
 
     private void rivalMonsterCellSetup(Player rivalPlayer, int j, StackPane stackPane) {
-        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+        rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+        stackPane.setOnMouseEntered(e -> {
+            stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
+        });
+        stackPane.setOnMouseExited(e -> {
+            stackPane.setEffect(null);
+        });
         stackPane.setOnMouseClicked(e -> {
             if (stackPane.getEffect() == null) {
                 stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
@@ -259,6 +265,10 @@ public class GameView {
             stackPane.setEffect(null);
         });
         stackPane.setOnMouseClicked(event -> {
+            if (stackPane.getEffect() == null) {
+                stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.GREEN));
+            } else
+                stackPane.setEffect(null);
             if (event.getButton() == MouseButton.PRIMARY)
                 gameController.getCurrentPlayer().setSelectedCard(ourPlayer.getBoard().getMonsters()[x].getCard());
             ourSelectedPane = stackPane;
@@ -316,14 +326,6 @@ public class GameView {
             });
             System.out.println(e.getMessage());
         }
-    }
-
-    private String getIndexOfnn(Cell ourSelectedCell) {
-        for (int i = 0; i < ourPlayer.getBoard().getMonsters().length; i++) {
-            if (ourSelectedCell == ourPlayer.getBoard().getMonsters()[i])
-                return String.valueOf(i);
-        }
-        return "fuck you nigga";
     }
 
     private void leftGrid(Player ourPlayer) {
