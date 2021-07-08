@@ -1,8 +1,6 @@
 package controll.gameController;
 
 import enums.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.Cell;
 import model.cards.Card;
@@ -1298,7 +1296,7 @@ public class GameController {
                 throw new Exception("action not allowed in this phase");
             else {
                 if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
-                    if (currentPlayer.isSetOrSummonInThisTurn())
+                    if (false)//currentPlayer.getCardsInHand().indexOf(card)
                         throw new Exception("you already summoned/set on this turn");
                     else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Beast king barbaros"))
                         beatsKingBarbaros((Monster) currentPlayer.getSelectedCard());
@@ -1320,12 +1318,7 @@ public class GameController {
             if (checkScannerEffect(monster, true)) return;
         summonedCard = monster;
         gameView.printSummonSuccessfully();
-        currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(monster)).getChildren().removeAll();
-        for (int i = currentPlayer.getCardsInHand().indexOf(monster); i < currentPlayer.getCardsInHand().size(); i++) {
-            currentPlayer.getCardsInHandImage().get(i).getChildren().removeAll();
-            if (i + 1 < currentPlayer.getCardsInHand().size())
-                currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
-        }
+        removeCardFromHandScene(monster);
         currentPlayer.getCardsInHand().remove(monster);
         monster.setSetInThisTurn(true);
         monster.setZone(Zone.MONSTER_ZONE);
@@ -1422,7 +1415,7 @@ public class GameController {
             }
             numberOfTributeNeeded = numberOfTribute;
             gameView.setTributePhase(true);
-            wait();
+            
 /*            if (!getTribute(numberOfTribute)) {
                 gameView.printMap();
                 return;
@@ -1511,6 +1504,7 @@ public class GameController {
                     .getType().equalsIgnoreCase("field")) {
                 if (currentPlayer.getBoard().getFieldSpell().getCard() != null) {
                     Spell spell = (Spell) currentPlayer.getSelectedCard();
+                    removeCardFromHandScene(spell);
                     spell.setFace(Face.UP);
                     spell.setZone(Zone.FIELD);
                     currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
@@ -1519,8 +1513,9 @@ public class GameController {
                     checkTrapActivation();
                 } else throw new Exception("spell zone is full");
             } else if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
-                currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
                 Card card = currentPlayer.getSelectedCard();
+                removeCardFromHandScene(card);
+                currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
                 card.setZone(Zone.SPELL_TRAP_ZONE);
                 card.setFace(Face.DOWN);
                 if (currentPlayer.getSelectedCard() instanceof Spell)
@@ -1550,6 +1545,7 @@ public class GameController {
                     currentPlayer.setSetOrSummonInThisTurn(true);
                     currentPlayer.setSelectedCard(null);
                     gameView.printSetSuccessfully();
+                    removeCardFromHandScene(selectedCard);
                     currentPlayer.getCardsInHand().remove(selectedCard);
                     currentPlayer.getBoard().putMonsterInBoard(selectedCard);
                     gameView.printMap();
@@ -1559,6 +1555,15 @@ public class GameController {
                 throw new Exception("monster card zone is full");
         } else
             throw new Exception("action not allowed in this phase");
+    }
+
+    private void removeCardFromHandScene(Card card) {
+        currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(card)).getChildren().removeAll();
+        for (int i = currentPlayer.getCardsInHand().indexOf(card); i < currentPlayer.getCardsInHand().size(); i++) {
+            currentPlayer.getCardsInHandImage().get(i).getChildren().removeAll();
+            if (i + 1 < currentPlayer.getCardsInHand().size())
+                currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
+        }
     }
 
     public void changeSet(String position) {

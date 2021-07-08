@@ -8,6 +8,7 @@ import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -44,6 +45,10 @@ import java.util.regex.Matcher;
 public class GameView {
     public AnchorPane rightPane;
     public StackPane notifStackPane;
+    public AnchorPane tributeContainer;
+    public TilePane tributeCardsPlace;
+    public Label tributeNumber;
+    public ImageView cancelTribute;
     private GameController gameController;
     public GridPane gridPane;
     public BorderPane motherPane;
@@ -94,7 +99,7 @@ public class GameView {
 
     private void setupNotifStackPane() {
         text = new Text();
-        VBox vBox = new VBox(20, text, new CustomSanButtons("proceed", () -> {
+        VBox vBox = new VBox(30, new Text(""), text, new CustomSanButtons("proceed", () -> {
             text.setText("");
             notifStackPane.setVisible(false);
             deBlur();
@@ -104,10 +109,15 @@ public class GameView {
         notifStackPane = new StackPane();
         notifStackPane.getChildren().add(vBox);
         vBox.setStyle("-fx-background-image: url('/gamePics/notif.jpg');");
-        notifStackPane.setPrefHeight(150);
-        notifStackPane.setPrefWidth(200);
-        vBox.setPrefHeight(150);
-        vBox.setPrefWidth(200);
+        notifStackPane.setPrefHeight(200);
+        notifStackPane.setPrefWidth(500);
+        notifStackPane.setMinHeight(200);
+        notifStackPane.setMinWidth(250);
+        vBox.setPrefHeight(200);
+        vBox.setPrefWidth(250);
+        vBox.setMinHeight(200);
+        vBox.setMinWidth(250);
+        vBox.setAlignment(Pos.TOP_CENTER);
         notifStackPane.setAlignment(Pos.CENTER);
         notifStackPane.setTranslateY(300);
         notifStackPane.setTranslateX(600);
@@ -117,6 +127,7 @@ public class GameView {
 
     private Node[] buttonBoxNodes() {
         return new Node[]{new CustomSanButtons("attack", () -> {
+            attack(0);
         })
                 , new CustomSanButtons("direct attack", () -> {
 
@@ -124,7 +135,7 @@ public class GameView {
             gameController.nextPhase();
         })
                 , new CustomSanButtons("surrender", () -> {
-
+            gameController.surrender();
         })};
     }
 
@@ -164,7 +175,6 @@ public class GameView {
                                 } else {
                                     numberOfTribute = 0;
                                     tributePhase = false;
-                                    notifyAll();
                                 }
                             }
                         });
@@ -180,7 +190,7 @@ public class GameView {
                 StackPane stackPane = new StackPane();
                 gridPaneSetup(null, stackPane);
                 stackPane.setOnMouseClicked(e -> {
-                    if (!tributePhase)
+                    if (!tributePhase) {
                         if (e.getButton() == MouseButton.PRIMARY)
                             if (gameController.getCurrentPlayer().getSelectedCard() != null
                                     && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
@@ -194,11 +204,13 @@ public class GameView {
                                 gameController.getCurrentPlayer()
                                         .setSelectedCard(gameController.getCurrentPlayer()
                                                 .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
-                        else if (gameController.getCurrentPlayer().getSelectedCard() != null
-                                && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
-                                .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane) - 1)) {
-                            setMonsterSpellTrap(gameController.getCurrentPlayer().getSelectedCard());
-                        }
+                        if (e.getButton() == MouseButton.SECONDARY)
+                            if (gameController.getCurrentPlayer().getSelectedCard() != null
+                                    && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
+                                    .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane))) {
+                                setMonsterSpellTrap(gameController.getCurrentPlayer().getSelectedCard());
+                            }
+                    }
                 });
                 leftGrid.add(stackPane, j, i);
                 ourPlayer.getCardsInHandImage().add(stackPane);
@@ -218,6 +230,8 @@ public class GameView {
         try {
             gameController.set();
         } catch (Exception e) {
+            text.setText(e.getMessage());
+            notifStackPane.setVisible(true);
             System.out.println(e.getMessage());
         }
     }
@@ -226,6 +240,8 @@ public class GameView {
         try {
             gameController.checksBeforeSummon();
         } catch (Exception e) {
+            text.setText(e.getMessage());
+            notifStackPane.setVisible(true);
             System.out.println(e.getMessage());
         }
     }
@@ -372,6 +388,48 @@ public class GameView {
             printMap();
         else System.out.println("invalid command");
         gameController.findWinner();*/
+
+//        if (command.equals("select --hand --force"))
+//            handCheat();
+//        else if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
+//            selectCard(command);
+//        else if (command.equals("next phase"))
+//            gameController.nextPhase();
+//        else if (command.equals("summon"))
+//            gameController.checksBeforeSummon();
+//        else if (command.equals("set"))
+//            gameController.set();
+//        else if (command.matches(Regex.CHANGE_SET))
+//            changeSet(Regex.getInputMatcher(command, Regex.CHANGE_SET));
+//        else if (command.equals("flip-summon"))
+//            gameController.flipSummon();
+//        else if (command.matches(Regex.ATTACK))
+//            attack(Regex.getInputMatcher(command, Regex.ATTACK));
+//        else if (command.equals("attack direct"))
+//            directAttack();
+//        else if (command.equals("show graveyard"))
+//            showGraveyard(command);
+//        else if (command.equals("card show --selected"))
+//            gameController.showSelectedCard();
+//        else if (command.matches("surrender")) {
+//            gameController.surrender();
+//            return;
+//        } else if (command.equals("active effect"))
+//            gameController.activeEffect();
+//        else if (command.matches("increase --money \\d+"))
+//            increaseMoney(command);
+//        else if (command.matches("increase --LP \\d+"))
+//            increaseLp(command);
+//        else if (command.matches("duel set-winner \\w+"))
+//            setWinner(command);
+//        else if (command.equals("special summon"))
+//            gameController.checksBeforeSpecialSummon(false);
+//        else if (command.equals("phase"))
+//            printCurrentPhase();
+//        else if (command.equals("map"))
+//            printMap();
+//        else System.out.println("invalid command");
+        gameController.findWinner();
     }
 
     private void handCheat() {
@@ -412,11 +470,10 @@ public class GameView {
         gameController.directAttack(false);
     }
 
-    private void attack(Matcher inputMatcher) {
-        if (inputMatcher.find()) {
+    private void attack(int x) {
+/*            if()
             int monsterNumber = Integer.parseInt(inputMatcher.group(1));
-            gameController.attack(monsterNumber);
-        }
+            gameController.attack(monsterNumber);*/
     }
 
     private void printNotThoseMoves() {
@@ -510,6 +567,7 @@ public class GameView {
             gameController.deselectCard();
             return;
         }
+
         Matcher opponentWithFieldMatcher = Regex.getInputMatcher(command, Regex.OPPONENT_WITH_FIELD);
         Matcher opponentMatcher = Regex.getInputMatcher(command, Regex.OPPONENT);
         if (opponentWithFieldMatcher.find(0)) {
@@ -1189,5 +1247,16 @@ public class GameView {
         }
     }
 
+    public Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+        Node result = null;
+        ObservableList<Node> children = gridPane.getChildren();
+        for (Node node : children) {
+            if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+        return result;
+    }
 
 }
