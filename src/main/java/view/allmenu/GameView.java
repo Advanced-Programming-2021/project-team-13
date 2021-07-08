@@ -76,7 +76,7 @@ public class GameView {
     public Player secondPlayer;
     public Player ourPlayer;
     public Player rivalPlayer;
-
+    public VBox vBox;
     private boolean tributePhase = false;
     private int numberOfTribute = 0;
 
@@ -112,31 +112,43 @@ public class GameView {
     }
 
     private void setupNotifStackPane() {
-        text = new Text();
-        VBox vBox = new VBox(30, new Text(""), text, new CustomSanButtons("proceed", () -> {
-            text.setText("");
-            notifStackPane.setVisible(false);
-            deBlur();
-        }));
-        text.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
-        text.setEffect(new Bloom(0.3));
+        vBox = new VBox();
+        vBox.setSpacing(30);
         notifStackPane = new StackPane();
         notifStackPane.getChildren().add(vBox);
-        vBox.setStyle("-fx-background-image: url('/gamePics/notif.jpg');");
-        notifStackPane.setPrefHeight(200);
-        notifStackPane.setPrefWidth(500);
-        notifStackPane.setMinHeight(200);
-        notifStackPane.setMinWidth(250);
         vBox.setPrefHeight(200);
         vBox.setPrefWidth(250);
         vBox.setMinHeight(200);
         vBox.setMinWidth(250);
         vBox.setAlignment(Pos.TOP_CENTER);
+        vBox.setStyle("-fx-background-image: url('/gamePics/notif.jpg');");
+        notifStackPane.setMinHeight(300);
+        notifStackPane.setMinWidth(500);
+        notifStackPane.setPrefHeight(300);
+        notifStackPane.setPrefWidth(500);
         notifStackPane.setAlignment(Pos.CENTER);
         notifStackPane.setTranslateY(300);
         notifStackPane.setTranslateX(600);
         notifStackPane.setVisible(false);
         motherPane.getChildren().add(notifStackPane);
+    }
+    public void createNotification(String text,Node[] nodes){
+        blur();
+        notifStackPane.setVisible(true);
+        vBox.getChildren().clear();
+        this.text = new Text(text);
+        this.text.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
+        this.text.setEffect(new Bloom(0.2));
+        vBox.getChildren().addAll(new Text(""),this.text);
+        vBox.getChildren().addAll(nodes);
+    }
+
+    public void printCurrentPhase() {
+        CustomSanButtons[] custom=new CustomSanButtons[]{new CustomSanButtons("proceed", () -> {
+            notifStackPane.setVisible(false);
+            deBlur();
+        })};
+        createNotification(gameController.getCurrentPhase().getPhaseName(),custom);
     }
 
     private Node[] buttonBoxNodes() {
@@ -270,8 +282,12 @@ public class GameView {
         try {
             gameController.changeSet();
         } catch (Exception e) {
-            text.setText(e.getMessage());
-            notifStackPane.setVisible(true);
+            createNotification(e.getMessage(),new Node[]{
+                    new CustomSanButtons("proceed",()->{
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
             System.out.println(e.getMessage());
         }
     }
@@ -280,8 +296,12 @@ public class GameView {
         try {
             gameController.flipSummon();
         } catch (Exception e) {
-            text.setText(e.getMessage());
-            notifStackPane.setVisible(true);
+            createNotification(e.getMessage(),new Node[]{
+                    new CustomSanButtons("proceed",()->{
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
             System.out.println(e.getMessage());
         }
     }
@@ -332,8 +352,12 @@ public class GameView {
         try {
             gameController.set();
         } catch (Exception e) {
-            text.setText(e.getMessage());
-            notifStackPane.setVisible(true);
+            createNotification(e.getMessage(),new Node[]{
+                    new CustomSanButtons("proceed",()->{
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
             System.out.println(e.getMessage());
         }
     }
@@ -342,7 +366,12 @@ public class GameView {
         try {
             gameController.checksBeforeSummon();
         } catch (Exception e) {
-            text.setText(e.getMessage());
+            createNotification(e.getMessage(),new Node[]{
+                    new CustomSanButtons("proceed",()->{
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
             notifStackPane.setVisible(true);
             System.out.println(e.getMessage());
         }
@@ -572,7 +601,15 @@ public class GameView {
     }
 
     private void attack() {
-//            if(selectedcard)
+            if(ourSelectedCell==null){
+                createNotification("you haven't selected yet",new Node[]{
+                        new CustomSanButtons("Ok",()->{
+                            notifStackPane.setVisible(false);
+                            deBlur();
+                        })
+                });
+                return;
+            }
 //            int monsterNumber = Integer.parseInt(inputMatcher.group(1));
 //            gameController.attack(monsterNumber);
     }
@@ -872,11 +909,7 @@ public class GameView {
         System.out.println("you can’t flip summon this card");
     }
 
-    public void printCurrentPhase() {
-        notifStackPane.setVisible(true);
-        blur();
-        text.setText(gameController.getCurrentPhase().getPhaseName());
-    }
+
 
     private void blur() {
         leftPane.setOpacity(0.3);
