@@ -127,10 +127,10 @@ public class GameView {
         vBox.setSpacing(30);
         notifStackPane = new StackPane();
         notifStackPane.getChildren().add(vBox);
-        vBox.setPrefHeight(200);
-        vBox.setPrefWidth(250);
-        vBox.setMinHeight(200);
-        vBox.setMinWidth(250);
+        vBox.setPrefHeight(300);
+        vBox.setPrefWidth(500);
+        vBox.setMinHeight(300);
+        vBox.setMinWidth(500);
         vBox.setAlignment(Pos.TOP_CENTER);
         vBox.setStyle("-fx-background-image: url('/gamePics/notif.jpg');");
         notifStackPane.setMinHeight(300);
@@ -218,8 +218,9 @@ public class GameView {
                 gridPaneSetup(null, stackPane);
                 if (i < 2) {
                     if (i == 0)
-                        rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
-                    if (i == 1) rivalMonsterCellSetup(rivalPlayer, j, stackPane);
+                        rivalMonsterCellSetup(rivalPlayer, j, stackPane);
+                    if (i == 1)
+                    rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
                 } else {
                     if (i == 2) {
                         ourMonsterCellSetups(ourPlayer, j, stackPane);
@@ -242,8 +243,8 @@ public class GameView {
             rivalSelectedPane = stackPane;
             rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getMonsters())
                     .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
-            System.out.println(rivalSelectedPane);
-            System.out.println(rivalSelectedCard);
+//            System.out.println(rivalSelectedPane);
+//            System.out.println(rivalSelectedCard);
         });
         stackPane.rotateProperty().set(180);
     }
@@ -264,9 +265,9 @@ public class GameView {
             ourSelectedCell = Arrays.stream(ourPlayer.getBoard().getMonsters())
                     .filter(Objects::nonNull).filter(a -> a.getPicture() == stackPane).findFirst()
                     .get();
-            System.out.println(ourSelectedCell.getCard().getCardName() + "    " + ourSelectedCell
-                    .getPicture() + "         " + getIndexOfnn(ourSelectedCell));
-            System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
+//            System.out.println(ourSelectedCell.getCard().getCardName() + "    " + ourSelectedCell
+//                    .getPicture() + "         " + getIndexOfnn(ourSelectedCell));
+//            System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
             if (tributePhase) {
                 if (numberOfTribute < (gameController).getNumberOfTributeNeeded()
                         && ourPlayer.getBoard().getMonsters()[x].getCard() != null) {
@@ -612,17 +613,37 @@ public class GameView {
     }
 
     private void attack() {
-            if(ourSelectedCell==null){
-                createNotification("you haven't selected yet",new Node[]{
-                        new CustomSanButtons("Ok",()->{
-                            notifStackPane.setVisible(false);
-                            deBlur();
-                        })
-                });
-                return;
+        if (ourSelectedCell == null || rivalSelectedCell == null) {
+            createNotification("you haven't selected yet!", new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
+            return;
+        }
+        gameController.attack(getCellNumber(rivalSelectedCell));
+    }
+
+    public int getCellNumber(Cell selected) {
+        int num = 0;
+        for (int i = 0; i < rivalPlayer.getBoard().getMonsters().length; i++) {
+            if (selected == rivalPlayer.getBoard().getMonsters()[i]) {
+                num = i;
+                break;
             }
-//            int monsterNumber = Integer.parseInt(inputMatcher.group(1));
-//            gameController.attack(monsterNumber);
+        }
+        if (num == 0)
+            return 5;
+        if (num == 1)
+            return 3;
+        if (num == 2)
+            return 1;
+        if (num == 3)
+            return 2;
+        if (num == 4)
+            return 4;
+        return -19;//////////////this is bullshit
     }
 
     private void printNotThoseMoves() {
