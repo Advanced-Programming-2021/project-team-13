@@ -101,7 +101,11 @@ public class AIPlayer extends Player {
         if (traps.size() > 0)
             if (getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
                 GC.getCurrentPlayer().setSelectedCard(traps.get(0));
-                GC.set();
+                try {
+                    GC.set();
+                } catch (Exception e) {
+
+                }
             }
     }
 

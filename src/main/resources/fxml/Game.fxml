@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane fx:id="motherPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.GameView">
+<BorderPane fx:id="motherPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.GameView">
    <center>
        <StackPane fx:id="centerPane" prefHeight="720" prefWidth="814" BorderPane.alignment="CENTER">
            <GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" />
+           <AnchorPane fx:id="tributeContainer" prefHeight="637.0" prefWidth="746.0" visible="false">
+               <TilePane fx:id="tributeCardsPlace" layoutX="44.0" layoutY="79.0" prefHeight="563.0" prefWidth="659.0"/>
+               <Label fx:id="tributeNumber" alignment="CENTER" layoutX="191.0" layoutY="14.0" prefHeight="54.0"
+                      prefWidth="366.0">
+                   <font>
+                       <Font name="System Bold Italic" size="21.0"/>
+                   </font>
+               </Label>
+               <ImageView fx:id="cancelTribute" fitHeight="40.0" fitWidth="88.0" layoutX="330.0" layoutY="666.0"
+                          pickOnBounds="true" preserveRatio="true"/>
+           </AnchorPane>
        </StackPane>
    </center>
    <right>
@@ -70,7 +75,7 @@
          <Circle fx:id="ourHp" fill="DODGERBLUE" layoutX="61.333" layoutY="81.3333" radius="24.666" stroke="BLACK" strokeType="INSIDE" />
          <Label fx:id="ourHpPoint" layoutX="112" layoutY="62.666" prefHeight="37.333" prefWidth="121.333" text="8000" textFill="#ea3939">
             <font>
-               <Font name="System Bold Italic" size="26"/>
+               <Font name="System Bold Italic" size="26" />
             </font>
             <effect>
                <Bloom threshold="0.19" />
