@@ -154,10 +154,12 @@ public class GameView {
                 } else {
                     if (i == 2) {
                         ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+                        final int x = j;
                         stackPane.setOnMouseClicked(event -> {
                             if (tributePhase) {
-                                if (numberOfTribute < (gameController).getNumberOfTributeNeeded()) {
-                                    stackPane.getChildren().removeAll();
+                                if (numberOfTribute < (gameController).getNumberOfTributeNeeded()
+                                        && stackPane.getChildren() != null) {
+                                    gameController.tribute(stackPane, x);
                                     numberOfTribute++;
                                 } else {
                                     numberOfTribute = 0;

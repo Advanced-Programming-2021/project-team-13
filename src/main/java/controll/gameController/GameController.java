@@ -3,6 +3,7 @@ package controll.gameController;
 import enums.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
@@ -173,6 +174,8 @@ public class GameController {
             currentPlayer = secondPlayer;
         else
             currentPlayer = firstPlayer;
+        if (currentPlayer instanceof AIPlayer)
+            playAI();
         gameView.playerChanged(currentPlayer);
     }
 
@@ -1893,5 +1896,9 @@ public class GameController {
     private void checkTrapActivation() {
         activateRivalPlayerTrap();
         runChain();
+    }
+
+    public void tribute(StackPane stackPane, int cellNumber) {
+        stackPane.getChildren().removeAll();
     }
 }
