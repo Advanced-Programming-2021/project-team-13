@@ -2,6 +2,7 @@ package model;
 
 import controll.gameController.GameController;
 import enums.Zone;
+import javafx.scene.image.ImageView;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
@@ -34,7 +35,7 @@ public class Graveyard {
             return;
         if (allCards.contains(card))
             return;
-        if (card.getZone() == Zone.IN_HAND){
+        if (card.getZone() == Zone.IN_HAND) {
             card.getCardOwner().getCardsInHand().remove(card);
         }
         card.setZone(Zone.GRAVEYARD);
@@ -43,6 +44,7 @@ public class Graveyard {
             for (Cell monster : owner.getBoard().getMonsters()) {
                 if (monster.getCard() == card) {
                     monster.setCard(null);
+                    monster.getPicture().getChildren().removeIf(e -> e instanceof ImageView);
                     break;
                 }
             }
@@ -52,6 +54,7 @@ public class Graveyard {
             for (Cell cell : owner.getBoard().getSpellOrTrap()) {
                 if (cell.getCard() == card) {
                     cell.setCard(null);
+                    cell.getPicture().getChildren().removeIf(e -> e instanceof ImageView);
                     break;
                 }
             }
@@ -66,9 +69,9 @@ public class Graveyard {
         allCards.remove(card);
     }
 
-    public boolean hasMonster(){
-        for (Card card : allCards){
-            if (card instanceof Monster){
+    public boolean hasMonster() {
+        for (Card card : allCards) {
+            if (card instanceof Monster) {
                 return true;
             }
         }
