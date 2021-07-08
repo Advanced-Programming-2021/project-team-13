@@ -36,6 +36,8 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.exceptions.KingBarbarosException;
+import model.exceptions.ManEaterBugException;
 import model.menuItems.CustomSanButtons;
 import model.players.AIPlayer;
 import model.players.Player;
@@ -48,6 +50,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.prefs.BackingStoreException;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -88,6 +91,10 @@ public class GameView {
     public CustomSanButtons directAttack;
     public ProgressBar progressBar;
     private boolean tributePhase = false;
+    private boolean killOpponentMonsterPhase = false;
+    private boolean isSummoning = false;
+    private int numberOfOpponentMonster = 0;
+    private int numberOfOpponentMonsterNeeded = 0;
     private int numberOfTribute = 0;
 
     public GameView() {
@@ -173,23 +180,24 @@ public class GameView {
         notifStackPane.setVisible(false);
         motherPane.getChildren().add(notifStackPane);
     }
-    public void createNotification(String text,Node[] nodes){
+
+    public void createNotification(String text, Node[] nodes) {
         blur();
         notifStackPane.setVisible(true);
         vBox.getChildren().clear();
         this.text = new Text(text);
         this.text.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
         this.text.setEffect(new Bloom(0.2));
-        vBox.getChildren().addAll(new Text(""),this.text);
+        vBox.getChildren().addAll(new Text(""), this.text);
         vBox.getChildren().addAll(nodes);
     }
 
     public void printCurrentPhase() {
-        CustomSanButtons[] custom=new CustomSanButtons[]{new CustomSanButtons("proceed", () -> {
+        CustomSanButtons[] custom = new CustomSanButtons[]{new CustomSanButtons("proceed", () -> {
             notifStackPane.setVisible(false);
             deBlur();
         })};
-        createNotification(gameController.getCurrentPhase().getPhaseName(),custom);
+        createNotification(gameController.getCurrentPhase().getPhaseName(), custom);
     }
 
     private Node[] buttonBoxNodes() {
@@ -279,6 +287,17 @@ public class GameView {
             fadeTransition.setNode(selectedCard);
             rivalSelectedCard.setImage(((ImageView) rivalSelectedCell.getPicture().getChildren().get(0)).getImage());
             fadeTransition.play();
+            if (killOpponentMonsterPhase) {
+                if (rivalSelectedCell.getCard() != null) {
+                    rivalPlayer.getBoard().getGraveyard().addCard(rivalSelectedCell.getCard());
+                    numberOfOpponentMonster++;
+                    if (numberOfOpponentMonster == numberOfOpponentMonsterNeeded) {
+                        numberOfOpponentMonster = 0;
+                        numberOfOpponentMonsterNeeded = 0;
+                        killOpponentMonsterPhase = false;
+                    }
+                }
+            }
 //            System.out.println(rivalSelectedPane);
 //            System.out.println(rivalSelectedCard);
         });
@@ -381,9 +400,21 @@ public class GameView {
     private void flipSummon() {
         try {
             gameController.flipSummon();
+        } catch (ManEaterBugException e) {
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("YES", () -> {
+                        killOpponentMonsterPhase = true;
+                        numberOfOpponentMonsterNeeded = 1;
+                        deBlur();
+                        notifStackPane.setVisible(false);
+                    }), new CustomSanButtons("NO", () -> {
+                notifStackPane.setVisible(false);
+                deBlur();
+            })
+            });
         } catch (Exception e) {
-            createNotification(e.getMessage(),new Node[]{
-                    new CustomSanButtons("proceed",()->{
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("proceed", () -> {
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -398,7 +429,7 @@ public class GameView {
                 StackPane stackPane = new StackPane();
                 gridPaneSetup(null, stackPane);
                 stackPane.setOnMouseClicked(e -> {
-                    if (!tributePhase) {
+                    if (!tributePhase && !killOpponentMonsterPhase) {
                         if (e.getButton() == MouseButton.PRIMARY)
                             if (gameController.getCurrentPlayer().getSelectedCard() != null
                                     && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
@@ -430,8 +461,8 @@ public class GameView {
         try {
             gameController.set();
         } catch (Exception e) {
-            createNotification(e.getMessage(),new Node[]{
-                    new CustomSanButtons("proceed",()->{
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("proceed", () -> {
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -443,9 +474,24 @@ public class GameView {
     private void monsterSummon(Card selectedCard) {
         try {
             gameController.checksBeforeSummon();
+        } catch (KingBarbarosException e) {
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("YES", () -> {
+                        gameController.setNumberOfTributeNeeded(3);
+                        tributePhase = true;
+                        numberOfTribute = 0;
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    }), new CustomSanButtons("NO", () -> {
+                gameController.barbarosNormalSummon();
+                notifStackPane.setVisible(false);
+                deBlur();
+            })
+            });
+            notifStackPane.setVisible(true);
         } catch (Exception e) {
-            createNotification(e.getMessage(),new Node[]{
-                    new CustomSanButtons("proceed",()->{
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("proceed", () -> {
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -1070,7 +1116,6 @@ public class GameView {
     }
 
 
-
     private void blur() {
         leftPane.setOpacity(0.3);
         leftPane.setDisable(true);
@@ -1107,8 +1152,7 @@ public class GameView {
                         deBlur();
                     })
             });
-        }
-        else {
+        } else {
             createNotification("Its " + gameController.getCurrentPlayer().getUser()
                     .getNickname() + "’s turn", new Node[]{
                     new CustomSanButtons("Ok", () -> {
