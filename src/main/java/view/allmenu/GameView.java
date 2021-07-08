@@ -5,7 +5,6 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
 import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.ObservableList;
@@ -13,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -80,6 +80,10 @@ public class GameView {
     private boolean tributePhase = false;
     private int numberOfTribute = 0;
 
+    public GameView() {
+
+    }
+
     public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
@@ -89,9 +93,7 @@ public class GameView {
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
     }
 
-    public GameView() {
 
-    }
 
     public void init() {
         setupNotifStackPane();
@@ -101,8 +103,10 @@ public class GameView {
         rightPane.getChildren().add(buttonBox);
         initHp();
         centerPane.setAlignment(Pos.CENTER);
-        leftPane.setStyle("-fx-background-image: url('/gamePics/1.png');-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
-        rightPane.setStyle("-fx-background-image: url('/gamePics/1.png');-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
+        leftPane.setStyle("-fx-background-image: url('/gamePics/1.png')" +
+                ";-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
+        rightPane.setStyle("-fx-background-image: url('/gamePics/1.png')" +
+                ";-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
         initGridPanes();
 //        controlButtons();
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
@@ -160,7 +164,7 @@ public class GameView {
 
     private void initGridPanes() {
         centerPane(ourPlayer, rivalPlayer);
-        leftGridPane(ourPlayer);
+//        leftGridPane(ourPlayer);
         leftGrid.setGridLinesVisible(true);
         leftGrid.setVgap(3.3333);
         leftGrid.setHgap(3.3333);
@@ -171,30 +175,44 @@ public class GameView {
         gridPane.setVgap(20);
     }
 
-    private void leftGridPane(Player ourPlayer) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                StackPane stackPane = new StackPane();
-                gridPaneSetup(null, stackPane);
-                stackPane.setOnMouseClicked(e -> {
-             /*       if (gameController.getCurrentPlayer().getSelectedCard() == null)
-                        gameController.getCurrentPlayer()
-                                .setSelectedCard(gameController.getCurrentPlayer()
-                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane) - 1));
-                    else */{
-                        gameController.getCurrentPlayer()
-                                .setSelectedCard(gameController.getCurrentPlayer()
-                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
-                        gameController.normalSummon((Monster) gameController.getCurrentPlayer().getSelectedCard(), AttackOrDefense.ATTACK);
-                    }
-                });
-                leftGrid.add(stackPane, j, i);
-                ourPlayer.getCardsInHandImage().add(stackPane);
-            }
-        }
-    }
+//    private void leftGridPane(Player ourPlayer) {
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 3; j++) {
+//                StackPane stackPane = new StackPane();
+//                gridPaneSetup(null, stackPane);
+//                stackPane.setOnMouseClicked(e -> {
+//             /*       if (gameController.getCurrentPlayer().getSelectedCard() == null)
+//                        gameController.getCurrentPlayer()
+//                                .setSelectedCard(gameController.getCurrentPlayer()
+//                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane) - 1));
+//                    else */{
+//                        gameController.getCurrentPlayer()
+//                                .setSelectedCard(gameController.getCurrentPlayer()
+//                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
+//                        gameController.normalSummon((Monster) gameController.getCurrentPlayer().getSelectedCard(), AttackOrDefense.ATTACK);
+//                    }
+//                });
+//                leftGrid.add(stackPane, j, i);
+//                ourPlayer.getCardsInHandImage().add(stackPane);
+//            }
+//        }
+//    }
 
     private void centerPane(Player ourPlayer, Player rivalPlayer) {
+        centerGrid(ourPlayer, rivalPlayer);
+        leftGrid(ourPlayer);
+        leftGrid.setGridLinesVisible(true);
+        leftGrid.setVgap(3.3333);
+        leftGrid.setHgap(3.3333);
+        fourOtherCards(null);
+        gridPane.setTranslateX(13.3333);
+        gridPane.setTranslateY(33.3333);
+        gridPane.setHgap(6.6666);
+        gridPane.setVgap(20);
+
+    }
+
+    private void centerGrid(Player ourPlayer, Player rivalPlayer) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 StackPane stackPane = new StackPane();
@@ -202,25 +220,10 @@ public class GameView {
                 if (i < 2) {
                     if (i == 0)
                         rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
-                    if (i == 1)
-                        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
-                    stackPane.rotateProperty().set(180);
+                    if (i == 1) rivalMonsterCellSetup(rivalPlayer, j, stackPane);
                 } else {
                     if (i == 2) {
-                        ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
-                        final int x = j;
-                        stackPane.setOnMouseClicked(event -> {
-                            if (tributePhase) {
-                                if (numberOfTribute < (gameController).getNumberOfTributeNeeded()
-                                        && stackPane.getChildren() != null) {
-                                    gameController.tribute(stackPane, x);
-                                    numberOfTribute++;
-                                } else {
-                                    numberOfTribute = 0;
-                                    tributePhase = false;
-                                }
-                            }
-                        });
+                        ourMonsterCellSetups(ourPlayer, j, stackPane);
                     }
                     if (i == 3)
                         ourPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
@@ -228,6 +231,64 @@ public class GameView {
                 gridPane.add(stackPane, j, i);
             }
         }
+    }
+
+    private void rivalMonsterCellSetup(Player rivalPlayer, int j, StackPane stackPane) {
+        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+        stackPane.setOnMouseClicked(e -> {
+            if (stackPane.getEffect() == null) {
+                stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
+            }
+            else
+                stackPane.setEffect(null);
+            rivalSelectedPane = stackPane;
+            rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getMonsters())
+                    .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
+            System.out.println(rivalSelectedPane);
+            System.out.println(rivalSelectedCard);
+        });
+        stackPane.rotateProperty().set(180);
+    }
+
+    private void ourMonsterCellSetups(Player ourPlayer, int j, StackPane stackPane) {
+        ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+        final int x = j;
+        stackPane.setOnMouseEntered(e->{
+                stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.GREEN));
+        });
+        stackPane.setOnMouseExited(e->{
+            stackPane.setEffect(null);
+        });
+        stackPane.setOnMouseClicked(event -> {
+            ourSelectedPane = stackPane;
+            ourSelectedCell = Arrays.stream(ourPlayer.getBoard().getMonsters())
+                    .filter(Objects::nonNull).filter(a -> a.getPicture() == stackPane).findFirst()
+                    .get();
+            System.out.println(ourSelectedCell.getCard().getCardName() + "    "+ourSelectedCell
+                    .getPicture() + "         " + getIndexOfnn(ourSelectedCell));
+            System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
+            if (tributePhase) {
+                if (numberOfTribute < (gameController).getNumberOfTributeNeeded()
+                        && stackPane.getChildren() != null) {
+                    gameController.tribute(stackPane, x);
+                    numberOfTribute++;
+                } else {
+                    numberOfTribute = 0;
+                    tributePhase = false;
+                }
+            }
+        });
+    }
+
+    private String getIndexOfnn(Cell ourSelectedCell) {
+        for (int i = 0; i < ourPlayer.getBoard().getMonsters().length; i++) {
+            if(ourSelectedCell==ourPlayer.getBoard().getMonsters()[i])
+                return String.valueOf(i);
+        }
+        return "fuck you nigga";
+    }
+
+    private void leftGrid(Player ourPlayer) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 StackPane stackPane = new StackPane();
@@ -259,14 +320,6 @@ public class GameView {
                 ourPlayer.getCardsInHandImage().add(stackPane);
             }
         }
-        leftGrid.setGridLinesVisible(true);
-        leftGrid.setVgap(3.3333);
-        leftGrid.setHgap(3.3333);
-        fourOtherCards(null);
-        gridPane.setTranslateX(13.3333);
-        gridPane.setTranslateY(33.3333);
-        gridPane.setHgap(6.6666);
-        gridPane.setVgap(20);
     }
 
     private void setMonsterSpellTrap(Card selectedCard) {
@@ -321,16 +374,6 @@ public class GameView {
         stackPane.setPrefHeight(126.6666);
         ImageView cardImages = new ImageView(background);
         setEffectsCardImages(cardImages);
-        stackPane.setOnMouseClicked(e->{
-            if(Arrays.stream(ourPlayer.getBoard().getMonsters()).filter(Objects::nonNull)
-                    .anyMatch(x->x.getPicture()==stackPane))
-                ourSelectedPane=stackPane;
-            else if(Arrays.stream(rivalPlayer.getBoard().getMonsters()).filter(Objects::nonNull)
-                    .anyMatch(x->x.getPicture()==stackPane))
-                rivalSelectedPane = stackPane;
-            if(ourSelectedPane==null &&rivalSelectedPane==null )
-                System.out.println("shit");
-        });
         cardImages.setFitWidth(93.3333);
         cardImages.setFitHeight(126.6666);
         stackPane.getChildren().add(cardImages);
@@ -370,7 +413,7 @@ public class GameView {
     private void setEffectsCardImages(ImageView view) {
         Bloom glow = new Bloom();
         view.setOnMouseEntered(event -> {
-            glow.setThreshold(0.75);
+            glow.setThreshold(0.5);
             view.setEffect(glow);
         });
         view.setOnMouseExited(event -> {
@@ -378,7 +421,6 @@ public class GameView {
         });
         view.setOnMouseClicked(e -> {
             FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
-//            Arrays.stream(new StackPane[]{activate, summon, set, attack}).forEach(a -> a.setVisible(true));
             if (view.getParent().getRotate() != 180) {
                 fadeTransition.setFromValue(0);
                 fadeTransition.setToValue(1);

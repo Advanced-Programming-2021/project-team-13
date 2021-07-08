@@ -49,9 +49,6 @@ public class DuelView {
     }
 
     public void initialize() {
-//        rockImg=new ImageView();
-//        paperImg=new ImageView();
-//        scissorsImg=new ImageView();
         leftPane.getChildren().remove(rpcHbox);
         Bloom glow = new Bloom();
         setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3);
@@ -139,20 +136,6 @@ public class DuelView {
 
     }
 
-    public void run(String command) {
-        if (command.matches(Regex.TWO_PLAYER_DUEL)) {
-//            Matcher newMatcher = Regex.getInputMatcher(command, Regex.NEW);
-//            Matcher roundMatcher = Regex.getInputMatcher(command, Regex.ROUNDS);
-//            Matcher duelerMatcher = Regex.getInputMatcher(command, Regex.SECOND_PLAYER);
-//            if (newMatcher.find(0) && roundMatcher.find(0) && duelerMatcher.find(0)) {
-//            int rounds = Integer.parseInt(roundMatcher.group("rounds"));
-//            String playerUsername = duelerMatcher.group("playerUsername");
-//            duelController.validateTwoPlayerDuelGame(rounds, playerUsername);
-//            } else printInvalidCommand();
-//        }
-        }
-    }
-
     public void printUserNotFound() {
         System.out.println("there is no player with this username");
     }
@@ -185,7 +168,6 @@ public class DuelView {
             if (numberToReturn == -1)
                 rpcNotifLabel.setText("you haven't chosen yet");
             else {
-                System.out.println(numberToReturn);
                 int result = duelController.findPlayerToStart(numberToReturn);
                 if (result == 0)
                     rpcNotifLabel.setText("Equal, try again");
