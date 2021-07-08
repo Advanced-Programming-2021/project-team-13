@@ -1255,9 +1255,9 @@ public class GameController {
             reset();
             currentPhase = Phase.END_PHASE;
             currentPlayer.setSetOrSummonInThisTurn(false);
-            changeCurrentPlayer();
             gameView.printCurrentPhase();
             gameView.printWhoseTurn();
+            changeCurrentPlayer();
         }
     }
 

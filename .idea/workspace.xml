@@ -4,29 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="">
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="debugged deck and added thread to loading image">
+      <change afterPath="$PROJECT_DIR$/hossein.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/DuelViewCss.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/DeckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ImageLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controll/ImportAndExportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/ImportAndExportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/DuelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/json/UserJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/SceneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/SceneController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/CardCreatorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/CardCreatorView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ImportAndExportView.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/CardCreatorMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/CardCreatorMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/MainMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/MainMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/DuelMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/DuelMenu.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controll/DeckController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controll/DeckController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Cell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/model/Graveyard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Graveyard.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,6 +61,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/scoreboardImage" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -68,6 +72,7 @@
       <recent name="F:\AP Project\project-team-13\src\main\resources\scoreboardImage" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\project-team-13\src\main\resources\duelMenuPics" />
       <recent name="F:\AP Project\project-team-13\src\main\resources\scoreboardImage" />
       <recent name="F:\AP Project\project-team-13\src\main\resources\backClicked" />
     </key>
@@ -438,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625689459852</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="debugged deck and added thread to loading image">
+      <created>1625744395441</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1625744395441</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -472,7 +484,38 @@
     <MESSAGE value="frustrated af" />
     <MESSAGE value="game" />
     <MESSAGE value="game board" />
-    <option name="LAST_COMMIT_MESSAGE" value="game board" />
+    <MESSAGE value="debugged deck and added thread to loading image" />
+    <option name="LAST_COMMIT_MESSAGE" value="debugged deck and added thread to loading image" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
+          <line>172</line>
+          <properties class="controll.gameController.GameController" method="changeCurrentPlayer">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
+          <line>1218</line>
+          <properties class="controll.gameController.GameController" method="nextPhase">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="99" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/controll/ImportAndExportController.java</url>
+          <line>33</line>
+          <properties class="controll.ImportAndExportController" method="exportCard">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="100" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
