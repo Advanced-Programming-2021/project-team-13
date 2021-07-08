@@ -5,6 +5,7 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.ObservableList;
@@ -91,6 +92,16 @@ public class GameView {
         rivalPlayer = firstPlayer instanceof AIPlayer ? firstPlayer : secondPlayer;
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
+        AnimationTimer animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (gameController.isAITurn()) {
+                    gameController.playAI();
+                    gameController.setAITurn(false);
+                }
+            }
+        };
+        animationTimer.start();
     }
 
 
