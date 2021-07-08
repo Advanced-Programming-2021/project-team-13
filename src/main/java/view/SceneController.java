@@ -39,4 +39,9 @@ public class SceneController {
         URL url = SceneController.class.getResource("/fxml/CardCreatorMenu.fxml");
         loadUrl(primaryStage, url);
     }
+
+    public static void startDuelMenu(Stage primaryStage) throws IOException {
+        URL url = SceneController.class.getResource("/fxml/DuelMenu.fxml");
+        loadUrl(primaryStage, url);
+    }
 }

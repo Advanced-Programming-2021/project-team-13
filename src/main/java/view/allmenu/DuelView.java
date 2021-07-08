@@ -213,11 +213,11 @@ public class DuelView {
         rpcNotifLabel.setText("Equal!\ntry again!");
     }
 
-    public GameView startGame(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds)
+    public GameView startGame(Player firstPlayer,Player secondPlayer,Player currentPlayer,int rounds)
             throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
         ((Stage) pane.getScene().getWindow()).setScene(new Scene(loader.load()));
-        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds);
+        ((GameView)loader.getController()).setup(firstPlayer,secondPlayer,currentPlayer,rounds);
         return loader.getController();
     }
 }

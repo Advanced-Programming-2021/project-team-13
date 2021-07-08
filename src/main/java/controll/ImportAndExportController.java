@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class ImportAndExportController {
 
-    public boolean importCard(User user, String cardName) {
+    public Card importCard(User user, String cardName) {
         YaGson mapper = new YaGson();
         try {
             String json = new String(Files.readAllBytes(Paths.get(cardName + ".json")));
@@ -22,30 +22,32 @@ public class ImportAndExportController {
                     break;
                 }
             }
-            if (!hasCard)
-                user.addCard(card);
-            return true;
+            if (hasCard)
+                return card;
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
-    public String exportCard(User user, Card card) {
+    public String exportCard(Card card) {
         YaGson mapper = new YaGson();
-        if (user.getCardNameToNumber().containsKey(card.getCardName())) {
+        if (card != null) {
             card.setImage(null);
             card.setCardOwner(null);
+            card.setImageView(null);
             String json = mapper.toJson(card);
             try {
                 FileWriter FW = new FileWriter(card.getCardName() + ".json");
                 FW.write(json);
                 FW.close();
-                return "crated";
+                return "created";
             } catch (Exception e) {
                 e.printStackTrace();
                 return "failed";
             }
+
         } else {
             return "createCardFirst";
         }

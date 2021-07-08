@@ -1,6 +1,7 @@
 package view.allmenu;
 
 import controll.ImageLoader;
+import controll.ImportAndExportController;
 import controll.ShopController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -21,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -68,6 +70,8 @@ public class CardCreatorView implements Initializable {
     @FXML
     private ImageView image;
 
+    private ImportAndExportController importAndExportController;
+    private Card createdCard;
     private int defNum;
     private int attNum;
     private int priceNum;
@@ -85,6 +89,7 @@ public class CardCreatorView implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         user = ViewMaster.getUser();
         monsterNames = new ArrayList<>();
+        importAndExportController = new ImportAndExportController();
         monsterCSVArrayList = new ArrayList<>();
         try {
             allMonsters = MonsterCSV.getAllCSVCards();
@@ -218,6 +223,14 @@ public class CardCreatorView implements Initializable {
         return label;
     }
 
+    private Button getButton(String text) {
+        Button button = new Button(text);
+        button.setFont(Font.font("Comic Sans MS", 18));
+        button.setPrefWidth(134);
+        button.setPrefHeight(56);
+        return button;
+    }
+
     @FXML
     private void createCard() {
         if (cardName.getText().length() == 0 || cardName.getText() == null) {
@@ -245,6 +258,7 @@ public class CardCreatorView implements Initializable {
                         Card card = new Monster(cardName.getText(), null, priceNum, description.getText()
                                 , effectingMonster.getMonsterType(), effectingMonster.getCardType()
                                 , effectingMonster.getAttribute(), attNum, defNum, levelNum, cardImage);
+                        createdCard = card;
                         card.setCardNameInGame(effectingMonster.getName());
                         new ShopController(null).buyCard(user, card, priceNum);
                         addTimeline();
@@ -265,12 +279,65 @@ public class CardCreatorView implements Initializable {
         SceneController.startMainMenu(stage);
     }
 
-
-    public void importCard(ActionEvent actionEvent) {
-
+    @FXML
+    private void importCard(ActionEvent actionEvent) {
+        blurBackGround();
+        thirdBackVBox.getChildren().clear();
+        thirdBackVBox.getChildren().add(getLabel("Please Enter Card Name To Import:"));
+        TextField textField = new TextField();
+        textField.setPromptText("Card Name");
+        textField.setAlignment(Pos.CENTER);
+        Button button = getButton("Close");
+        Button button1 = getButton("Find");
+        HBox hBox = new HBox();
+        Label label = getLabel(null);
+        hBox.getChildren().addAll(button, button1);
+        thirdBackVBox.getChildren().addAll(textField, hBox, label);
+        button.setOnAction(event -> undoBlur());
+        button1.setOnAction(event -> {
+            if (textField.getText().length() == 0) {
+                label.setText("Enter A Card Name");
+            } else {
+                Card ans = importAndExportController.importCard(user, textField.getText());
+                if (ans == null){
+                    label.setText("Failed To Load Card");
+                    addTimeline();
+                } else {
+                    undoBlur();
+                    cardName.setText(ans.getCardName());
+                    description.setText(ans.getCardDescription());
+                    createdCard = ans;
+                    att.setText(String.valueOf(((Monster)ans).getAttackNum()));
+                    def.setText(String.valueOf(((Monster)ans).getDefenseNum()));
+                    level.setText(String.valueOf(((Monster)ans).getLevel()));
+                }
+            }
+        });
     }
 
-    public void exportCard(ActionEvent actionEvent) {
+    @FXML
+    private void exportCard() {
+        String answer = importAndExportController.exportCard(createdCard);
+        switch (answer) {
+            case "createCardFirst":
+                blurBackGround();
+                thirdBackVBox.getChildren().clear();
+                thirdBackVBox.getChildren().add(getLabel("Create Card First !"));
+                addTimeline();
+                break;
+            case "failed":
+                blurBackGround();
+                thirdBackVBox.getChildren().clear();
+                thirdBackVBox.getChildren().add(getLabel("Failed To Create Card !"));
+                addTimeline();
+                break;
+            case "created":
+                blurBackGround();
+                thirdBackVBox.getChildren().clear();
+                thirdBackVBox.getChildren().add(getLabel("Card Saved !"));
+                addTimeline();
+                break;
+        }
     }
 
     public void addTimeline() {
