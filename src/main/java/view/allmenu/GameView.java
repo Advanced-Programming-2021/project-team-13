@@ -5,6 +5,7 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.ObservableList;
@@ -91,6 +92,16 @@ public class GameView {
         rivalPlayer = firstPlayer instanceof AIPlayer ? firstPlayer : secondPlayer;
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
+        AnimationTimer animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (gameController.isAITurn()) {
+                    gameController.setAITurn(false);
+                    gameController.playAI();
+                }
+            }
+        };
+        animationTimer.start();
     }
 
 
@@ -939,10 +950,17 @@ public class GameView {
     }
 
     public void printWhoseTurn() {
-        if (gameController.getCurrentPlayer() instanceof AIPlayer)
+        if (gameController.getCurrentPlayer() instanceof AIPlayer) {
             System.out.println("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
-        else
+            text.setText("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
+        }
+        else {
             System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+            text.setText("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+        }
+
+        notifStackPane.setVisible(true);
+        System.out.println();
     }
 
     public void showCard(Card card) {

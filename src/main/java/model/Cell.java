@@ -42,6 +42,9 @@ public class Cell {
             cardImages = new ImageView(unknown);
         if (attackOrDefense == AttackOrDefense.DEFENSE)
             cardImages.setRotate(90);
+        if (attackOrDefense == AttackOrDefense.ATTACK
+                && getPicture().getRotate() == 90)
+            getPicture().setRotate(0);
         cardImages.setFitWidth(93.3333);
         cardImages.setFitHeight(126.6666);
         this.picture.getChildren().add(cardImages);

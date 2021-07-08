@@ -44,6 +44,7 @@ public class GameController {
     private boolean ritualSummonHappened;
     private boolean anySummonHappened;
     private int numberOfTributeNeeded = 0;
+    private boolean isAITurn = false;
 
     public static boolean checkForDeathAction(Card card) {
         if (card instanceof Monster) {
@@ -69,6 +70,8 @@ public class GameController {
         this.secondPlayer = secondPlayer;
         this.startingPlayer = startingPlayer;
         this.currentPlayer = startingPlayer;
+        if (currentPlayer instanceof AIPlayer)
+            isAITurn = true;
         this.chain = new ArrayList<>();
         firstPlayer.getBoard().getDeck().shuffleMainDeck();
         secondPlayer.getBoard().getDeck().shuffleMainDeck();
@@ -98,6 +101,16 @@ public class GameController {
         specialSummonHappened = false;
         ritualSummonHappened = false;
         anySummonHappened = false;
+        if (currentPlayer instanceof AIPlayer)
+            isAITurn = true;
+    }
+
+    public boolean isAITurn() {
+        return isAITurn;
+    }
+
+    public void setAITurn(boolean AITurn) {
+        isAITurn = AITurn;
     }
 
     public int getNumberOfTributeNeeded() {
@@ -175,8 +188,6 @@ public class GameController {
             currentPlayer = secondPlayer;
         else
             currentPlayer = firstPlayer;
-        if (currentPlayer instanceof AIPlayer)
-            playAI();
         gameView.playerChanged(currentPlayer);
     }
 
@@ -1259,6 +1270,8 @@ public class GameController {
             gameView.printCurrentPhase();
             gameView.printWhoseTurn();
         }
+        if (currentPlayer instanceof AIPlayer)
+            isAITurn = true;
     }
 
     private void reset() {
@@ -1558,11 +1571,13 @@ public class GameController {
     }
 
     private void removeCardFromHandScene(Card card) {
-        currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(card)).getChildren().removeIf(e -> e instanceof ImageView);
-        for (int i = currentPlayer.getCardsInHand().indexOf(card); i < currentPlayer.getCardsInHandImage().size(); i++) {
-            currentPlayer.getCardsInHandImage().get(i).getChildren().removeIf(e -> e instanceof ImageView);
-            if (i + 1 < currentPlayer.getCardsInHandImage().size())
-                currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
+        if (!(currentPlayer instanceof AIPlayer)) {
+            //currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(card)).getChildren().removeIf(e -> e instanceof ImageView);
+            for (int i = currentPlayer.getCardsInHand().indexOf(card); i < currentPlayer.getCardsInHandImage().size(); i++) {
+                currentPlayer.getCardsInHandImage().get(i).getChildren().removeIf(e -> e instanceof ImageView);
+                if (i + 1 < currentPlayer.getCardsInHandImage().size())
+                    currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
+            }
         }
     }
 
@@ -1570,36 +1585,37 @@ public class GameController {
  /*       if (currentPlayer.getSelectedCard() == null)
             gameView.printNoCardSelected();
         else {*/
-         /*   if (currentPlayer.getSelectedCard() instanceof Monster) {*/
-                if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
-                    Monster monster = (Monster) currentPlayer.getSelectedCard();
+        /*   if (currentPlayer.getSelectedCard() instanceof Monster) {*/
+        if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
+            Monster monster = (Monster) currentPlayer.getSelectedCard();
                    /* if (monster.getFace() == Face.UP && monster.getAttackOrDefense() == AttackOrDefense.ATTACK
                             && position.equals("attack"))
                         gameView.printAlreadyInWantedPosition();
                     else if ((monster.getFace() == Face.UP && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE
                             && position.equals("defense")))
                         gameView.printAlreadyInWantedPosition();*/
-                    /*else {*/
-                        if (monster.getHaveChangePositionInThisTurn())
-                            throw new Exception("you already changed this card position in this turn");
-                        else {
-                            monster.setHaveChangePositionInThisTurn(true);
+            /*else {*/
+            if (monster.getHaveChangePositionInThisTurn())
+                throw new Exception("you already changed this card position in this turn");
+            else {
+                monster.setHaveChangePositionInThisTurn(true);
                     /*        if (position.equals("attack")) monster.setAttackOrDefense(AttackOrDefense.ATTACK);
                             else monster.setAttackOrDefense(AttackOrDefense.DEFENSE);*/
-                            changePosition();
-                            currentPlayer.setSelectedCard(null);
-                            gameView.printMap();
-                            checkTrapActivation();
-                            throw new Exception("monster card position changed successfully");
+                changePosition();
+                currentPlayer.setSelectedCard(null);
+                gameView.printMap();
+                checkTrapActivation();
+                throw new Exception("monster card position changed successfully");
 
-                        }
-                  /*  }*/
+            }
+            /*  }*/
 
-                } else
-                    throw new Exception("action not allowed in this phase");
+        } else
+            throw new Exception("action not allowed in this phase");
 /*            } else
                 gameView.printCantChangePosition();*/
-        }
+    }
+
     //}
     public void flipSummon() throws Exception {
 /*        if (currentPlayer.getSelectedCard() == null)
@@ -1782,12 +1798,14 @@ public class GameController {
 
     public void addCardToHand() {
         Card card = currentPlayer.addCardToHand();
-        gameView.gridPaneSetup(card.getImage(), currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().size() - 1));
+        if (!(currentPlayer instanceof AIPlayer))
+            gameView.gridPaneSetup(card.getImage(), currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().size() - 1));
         gameView.printCardAddedToHand(card);
     }
 
     public void playAI() {
-        ((AIPlayer) currentPlayer).play(currentPhase, this);
+        if (currentPlayer instanceof AIPlayer)
+            ((AIPlayer) currentPlayer).play(currentPhase, this);
     }
 
     public boolean checkTributeLevelForRitualSummon(ArrayList<Monster> tributes, Monster ritualMonster) {
@@ -1914,7 +1932,6 @@ public class GameController {
 
     public void summonWithTribute() {
         normalSummonHappened = true;
-        removeCardFromHandScene(summonedCard);
         normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
         checkTrapActivation();
         normalSummonHappened = false;
