@@ -7,12 +7,13 @@ import model.players.User;
 
 public class DeckController {
 
-    public String renameDeck(User user, String deckName, String newName) {
-        if (newName == null || newName.length() == 0) {
+    public String renameDeck(User user, UserDeck userDeck, String newName) {
+        if (userDeck == null){
+            return "noDeckExists";
+        } else if (newName == null || newName.length() == 0) {
             return "invalidDeckName";
         } else {
-            UserDeck userDeck = user.getDeckByName(deckName.trim());
-            if (!deckName.equals(newName)) {
+            if (!userDeck.getName().equals(newName)) {
                 userDeck.setName(newName);
                 return "renamed";
             } else return "repetitive";

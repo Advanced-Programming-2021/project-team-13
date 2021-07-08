@@ -12,11 +12,13 @@ import java.net.URL;
 
 public class SceneController {
 
-    public static void startDeckMenu(Stage primaryStage) throws IOException {
-        URL url = SceneController.class.getResource("/fxml/DeckMenu.fxml");
+    private static void loadUrl(Stage primaryStage, URL url) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(url);
         Parent parent = fxmlLoader.load();
         Scene scene = new Scene(parent);
+        URL cursor = SceneController.class.getResource("/cardCreatorImages/mouse4.png");
+        Image image = new Image(cursor.toExternalForm());
+        scene.setCursor(new ImageCursor(image));
         primaryStage.setScene(scene);
     }
 
@@ -28,14 +30,13 @@ public class SceneController {
         primaryStage.setScene(scene);
     }
 
+    public static void startDeckMenu(Stage primaryStage) throws IOException {
+        URL url = SceneController.class.getResource("/fxml/DeckMenu.fxml");
+        loadUrl(primaryStage, url);
+    }
+
     public static void startCardCreator(Stage primaryStage) throws IOException {
         URL url = SceneController.class.getResource("/fxml/CardCreatorMenu.fxml");
-        FXMLLoader fxmlLoader = new FXMLLoader(url);
-        Parent parent = fxmlLoader.load();
-        Scene scene = new Scene(parent);
-        URL cursor = SceneController.class.getResource("/cardCreatorImages/mouse4.png");
-        Image image = new Image(cursor.toExternalForm());
-        scene.setCursor(new ImageCursor(image));
-        primaryStage.setScene(scene);
+        loadUrl(primaryStage, url);
     }
 }
