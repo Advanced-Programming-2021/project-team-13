@@ -23,6 +23,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
@@ -37,6 +38,7 @@ import view.ViewMaster;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
@@ -60,12 +62,21 @@ public class GameView {
     public Label rivalHpPoint;
     public Label ourHpPoint;
     public Text text;
+    public Cell ourSelectedCell;
+    public Cell rivalSelectedCell;
+    public Pane ourSelectedPane;
+    public Pane rivalSelectedPane;
     public Player firstPlayer;
     public Player secondPlayer;
+    public Player  ourPlayer;
+    public Player rivalPlayer;
+
 
     public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
+        ourPlayer = firstPlayer instanceof AIPlayer ? secondPlayer : firstPlayer;
+        rivalPlayer = firstPlayer instanceof AIPlayer ? firstPlayer : secondPlayer;
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
     }
@@ -118,7 +129,7 @@ public class GameView {
 
     private Node[] buttonBoxNodes() {
         return new Node[]{new CustomSanButtons("attack", () -> {
-            attack(0);
+            attack();
         })
                 , new CustomSanButtons("direct attack", () -> {
 
@@ -131,29 +142,19 @@ public class GameView {
     }
 
     private void initGridPanes() {
-        Player ourPlayer = firstPlayer instanceof AIPlayer ? secondPlayer : firstPlayer;
-        Player rivalPlayer = firstPlayer instanceof AIPlayer ? firstPlayer : secondPlayer;
-        System.out.println(ourPlayer + "        " + rivalPlayer);
-        System.out.println(ourPlayer.getBoard() + "        " + rivalPlayer.getBoard());
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                StackPane stackPane = new StackPane();
-                gridPaneSetup(null, stackPane);
-                if (i < 2) {
-                    if (i == 0)
-                        rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
-                    if (i == 1)
-                        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
-                    stackPane.rotateProperty().set(180);
-                } else {
-                    if (i == 2)
-                        ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
-                    if (i == 3)
-                        ourPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
-                }
-                gridPane.add(stackPane, j, i);
-            }
-        }
+        centerPane(ourPlayer, rivalPlayer);
+        leftGridPane(ourPlayer);
+        leftGrid.setGridLinesVisible(true);
+        leftGrid.setVgap(3.3333);
+        leftGrid.setHgap(3.3333);
+        fourOtherCards(null);
+        gridPane.setTranslateX(13.3333);
+        gridPane.setTranslateY(33.3333);
+        gridPane.setHgap(6.6666);
+        gridPane.setVgap(20);
+    }
+
+    private void leftGridPane(Player ourPlayer) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 StackPane stackPane = new StackPane();
@@ -174,14 +175,28 @@ public class GameView {
                 ourPlayer.getCardsInHandImage().add(stackPane);
             }
         }
-        leftGrid.setGridLinesVisible(true);
-        leftGrid.setVgap(3.3333);
-        leftGrid.setHgap(3.3333);
-        fourOtherCards(null);
-        gridPane.setTranslateX(13.3333);
-        gridPane.setTranslateY(33.3333);
-        gridPane.setHgap(6.6666);
-        gridPane.setVgap(20);
+    }
+
+    private void centerPane(Player ourPlayer, Player rivalPlayer) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                StackPane stackPane = new StackPane();
+                gridPaneSetup(null, stackPane);
+                if (i < 2) {
+                    if (i == 0)
+                        rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+                    if (i == 1)
+                        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+                    stackPane.rotateProperty().set(180);
+                } else {
+                    if (i == 2)
+                        ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+                    if (i == 3)
+                        ourPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+                }
+                gridPane.add(stackPane, j, i);
+            }
+        }
     }
 
     private void initHp() {
@@ -215,6 +230,16 @@ public class GameView {
         stackPane.setPrefHeight(126.6666);
         ImageView cardImages = new ImageView(background);
         setEffectsCardImages(cardImages);
+        stackPane.setOnMouseClicked(e->{
+            if(Arrays.stream(ourPlayer.getBoard().getMonsters()).filter(Objects::nonNull)
+                    .anyMatch(x->x.getPicture()==stackPane))
+                ourSelectedPane=stackPane;
+            else if(Arrays.stream(rivalPlayer.getBoard().getMonsters()).filter(Objects::nonNull)
+                    .anyMatch(x->x.getPicture()==stackPane))
+                rivalSelectedPane = stackPane;
+            if(ourSelectedPane==null &&rivalSelectedPane==null )
+                System.out.println("shit");
+        });
         cardImages.setFitWidth(93.3333);
         cardImages.setFitHeight(126.6666);
         stackPane.getChildren().add(cardImages);
@@ -366,9 +391,9 @@ public class GameView {
     }
 
     private void attack() {
-            if()
-            int monsterNumber = Integer.parseInt(inputMatcher.group(1));
-            gameController.attack(monsterNumber);
+//            if(selectedcard)
+//            int monsterNumber = Integer.parseInt(inputMatcher.group(1));
+//            gameController.attack(monsterNumber);
     }
 
     private void printNotThoseMoves() {
