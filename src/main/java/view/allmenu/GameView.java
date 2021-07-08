@@ -175,6 +175,7 @@ public class GameView {
                                 } else {
                                     numberOfTribute = 0;
                                     tributePhase = false;
+                                    gameController.summonWithTribute();
                                 }
                             }
                         });

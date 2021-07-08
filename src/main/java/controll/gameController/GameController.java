@@ -1,6 +1,7 @@
 package controll.gameController;
 
 import enums.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.Cell;
 import model.cards.Card;
@@ -1415,9 +1416,10 @@ public class GameController {
                 gameView.printThereArentEnoughMonsterForTribute();
                 throw new Exception("there are not enough cards for tribute");
             }
+            summonedCard = monster;
             numberOfTributeNeeded = numberOfTribute;
             gameView.setTributePhase(true);
-
+            throw new Exception("Tribute " + numberOfTribute + " Monsters");
         }
         normalSummonHappened = true;
         normalSummon(monster, AttackOrDefense.ATTACK);
@@ -1556,10 +1558,10 @@ public class GameController {
     }
 
     private void removeCardFromHandScene(Card card) {
-        currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(card)).getChildren().removeAll();
-        for (int i = currentPlayer.getCardsInHand().indexOf(card); i < currentPlayer.getCardsInHand().size(); i++) {
-            currentPlayer.getCardsInHandImage().get(i).getChildren().removeAll();
-            if (i + 1 < currentPlayer.getCardsInHand().size())
+        currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(card)).getChildren().removeIf(e -> e instanceof ImageView);
+        for (int i = currentPlayer.getCardsInHand().indexOf(card); i < currentPlayer.getCardsInHandImage().size(); i++) {
+            currentPlayer.getCardsInHandImage().get(i).getChildren().removeIf(e -> e instanceof ImageView);
+            if (i + 1 < currentPlayer.getCardsInHandImage().size())
                 currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
         }
     }
@@ -1903,6 +1905,15 @@ public class GameController {
 
     public void tribute(StackPane stackPane, int cellNumber) {
         getCurrentPlayer().getBoard().getMonsters()[cellNumber].setCard(null);
-        stackPane.getChildren().removeAll();
+        stackPane.getChildren().removeIf(e -> e instanceof ImageView);
+    }
+
+    public void summonWithTribute() {
+        normalSummonHappened = true;
+        removeCardFromHandScene(summonedCard);
+        normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
+        checkTrapActivation();
+        normalSummonHappened = false;
+        anySummonHappened = false;
     }
 }
