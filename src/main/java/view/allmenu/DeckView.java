@@ -11,7 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
@@ -112,7 +112,7 @@ public class DeckView implements Initializable {
             imageView.setFitHeight(61.4 * 2);
             cardVBox.getChildren().add(imageView);
             imageView.setOnMouseEntered(event -> showCard(card, imageView));
-            imageView.setOnMouseExited(event -> stopShowCard(imageView));
+            imageView.setOnMouseExited(event -> stopShowCard());
             imageView.setOnDragDetected(event -> handleDragDetection(event, imageView, card));
         }
     }
@@ -258,7 +258,7 @@ public class DeckView implements Initializable {
         imageView.setFitHeight(61.4 * 1.5);
         Card card = user.getCardByName(cardName);
         imageView.setOnMouseEntered(e -> showCard(card, imageView));
-        imageView.setOnMouseExited(e -> stopShowCard(imageView));
+        imageView.setOnMouseExited(e -> stopShowCard());
         imageView.setOnDragDetected(e -> handleDragDetection(e, imageView, card));
         tilePane.getChildren().add(imageView);
     }
@@ -270,6 +270,9 @@ public class DeckView implements Initializable {
     }
 
     private void handleDragDetection(MouseEvent event, ImageView imageView, Card card) {
+        URL url = getClass().getResource("/cardCreatorImages/hand.png");
+        Image image = new Image(url.toExternalForm());
+        back.getScene().setCursor(new ImageCursor(image));
         Dragboard dragboard = imageView.startDragAndDrop(TransferMode.ANY);
         ClipboardContent clipboardContent = new ClipboardContent();
         clipboardContent.putString(card.getCardNameInGame());
@@ -277,12 +280,16 @@ public class DeckView implements Initializable {
         event.consume();
     }
 
-    private void stopShowCard(ImageView imageView) {
-        imageView.getScene().setCursor(Cursor.DEFAULT);
+    private void stopShowCard() {
+        URL url = getClass().getResource("/cardCreatorImages/mouse4.png");
+        Image image = new Image(url.toExternalForm());
+        back.getScene().setCursor(new ImageCursor(image));
     }
 
     private void showCard(Card card, ImageView imageView) {
-        imageView.getScene().setCursor(Cursor.HAND);
+        URL url = getClass().getResource("/cardCreatorImages/hand.png");
+        Image image = new Image(url.toExternalForm());
+        back.getScene().setCursor(new ImageCursor(image));
         addCardTransition(imageView.getImage());
         addText(card.getCardDescription());
     }
@@ -337,9 +344,12 @@ public class DeckView implements Initializable {
 
     @FXML
     private void renameDeck() {
+        if (currentPlayerDeck == null) {
+            showCreateDeckFirst();
+        }
         blurBackground();
         yesNoVBox.getChildren().clear();
-        Label label = new Label("Enter New Deck Name :");
+        Label label = new Label("Enter New Name For Deck:");
         TextField textField = new TextField();
         textField.setPromptText("Deck Name");
         textField.setAlignment(Pos.CENTER);
@@ -353,7 +363,7 @@ public class DeckView implements Initializable {
     }
 
     private void renameCurrentDeck(TextField textField, Label text) {
-        String answer = deckController.renameDeck(user, currentPlayerDeck.getName(), textField.getText());
+        String answer = deckController.renameDeck(user, currentPlayerDeck, textField.getText());
         switch (answer) {
             case "invalidDeckName":
                 text.setText("Invalid Deck Name , Enter Another Name!");
@@ -536,7 +546,7 @@ public class DeckView implements Initializable {
         imageView.setFitWidth(42.1 * 1.5);
         imageView.setFitHeight(61.4 * 1.5);
         imageView.setOnMouseEntered(event -> showCard(card, imageView));
-        imageView.setOnMouseExited(event -> stopShowCard(imageView));
+        imageView.setOnMouseExited(event -> stopShowCard());
         imageView.setOnDragDetected(event -> handleDragDetection(event, imageView, card));
         sideDeck.getChildren().add(imageView);
         if (isSide)
@@ -640,7 +650,7 @@ class MyLabel extends Label {
     public MyLabel(String text) {
         super(text);
         this.setStyle("-fx-font-family: 'Comic Sans MS';-fx-font-size: 18;-fx-text-fill: black");
-        this.setOnMouseEntered(event -> this.setStyle("-fx-cursor: hand;-fx-text-fill: red"));
-        this.setOnMouseExited(event -> this.setStyle("-fx-text-fill: black; -fx-cursor: default"));
+        this.setOnMouseEntered(event -> this.setStyle("-fx-text-fill: red"));
+        this.setOnMouseExited(event -> this.setStyle("-fx-text-fill: black"));
     }
 }
