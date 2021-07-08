@@ -46,4 +46,12 @@ public class Cell {
         cardImages.setFitHeight(126.6666);
         this.picture.getChildren().add(cardImages);
     }
+
+    public void setPictureUP() {
+        ImageView cardImages = new ImageView(monsterImage);
+        cardImages.setFitWidth(93.3333);
+        cardImages.setFitHeight(126.6666);
+        picture.getChildren().clear();
+        picture.getChildren().add(cardImages);
+    }
 }

@@ -1293,18 +1293,18 @@ public class GameController {
         else*/
         if (currentPlayer.getCardsInHand().contains(currentPlayer.getSelectedCard())
                 && currentPlayer.getSelectedCard() instanceof Monster
-                && ((Monster) currentPlayer.getSelectedCard()).getMonsterCardType() != MonsterCardType.RITUAL
-                && !(currentPlayer.getSelectedCard()).getCardNameInGame().equalsIgnoreCase("the tricky")) {
+                /*&& ((Monster) currentPlayer.getSelectedCard()).getMonsterCardType() != MonsterCardType.RITUAL
+                && !(currentPlayer.getSelectedCard()).getCardNameInGame().equalsIgnoreCase("the tricky")*/) {
             if (currentPhase != Phase.MAIN_PHASE_1 && currentPhase != Phase.MAIN_PHASE_2)
                 throw new Exception("action not allowed in this phase");
             else {
                 if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
                     if (false)//currentPlayer.getCardsInHand().indexOf(card)
                         throw new Exception("you already summoned/set on this turn");
-                    else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Beast king barbaros"))
+/*                    else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Beast king barbaros"))
                         beatsKingBarbaros((Monster) currentPlayer.getSelectedCard());
                     else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Terratiger, the Empowered Warrior"))
-                        terratiger((Monster) currentPlayer.getSelectedCard());
+                        terratiger((Monster) currentPlayer.getSelectedCard());*/
                     else
                         summonAndSpecifyTribute();
                 } else throw new Exception("monster card zone is full");
@@ -1317,8 +1317,8 @@ public class GameController {
         anySummonHappened = true;
         if (monster.getCardNameInGame().equalsIgnoreCase("Mirage Dragon"))
             mirageDragonEffect(monster);
-        if (monster.getCardNameInGame().equalsIgnoreCase("scanner"))
-            if (checkScannerEffect(monster, true)) return;
+/*        if (monster.getCardNameInGame().equalsIgnoreCase("scanner"))
+            if (checkScannerEffect(monster, true)) return;*/
         summonedCard = monster;
         gameView.printSummonSuccessfully();
         removeCardFromHandScene(monster);
@@ -1566,76 +1566,79 @@ public class GameController {
         }
     }
 
-    public void changeSet(String position) {
-        if (currentPlayer.getSelectedCard() == null)
+    public void changeSet() throws Exception {
+ /*       if (currentPlayer.getSelectedCard() == null)
             gameView.printNoCardSelected();
-        else {
-            if (currentPlayer.getSelectedCard() instanceof Monster) {
+        else {*/
+         /*   if (currentPlayer.getSelectedCard() instanceof Monster) {*/
                 if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
                     Monster monster = (Monster) currentPlayer.getSelectedCard();
-                    if (monster.getFace() == Face.UP && monster.getAttackOrDefense() == AttackOrDefense.ATTACK
+                   /* if (monster.getFace() == Face.UP && monster.getAttackOrDefense() == AttackOrDefense.ATTACK
                             && position.equals("attack"))
                         gameView.printAlreadyInWantedPosition();
                     else if ((monster.getFace() == Face.UP && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE
                             && position.equals("defense")))
-                        gameView.printAlreadyInWantedPosition();
-                    else {
+                        gameView.printAlreadyInWantedPosition();*/
+                    /*else {*/
                         if (monster.getHaveChangePositionInThisTurn())
-                            gameView.printAlreadyChangePositionInThisTurn();
+                            throw new Exception("you already changed this card position in this turn");
                         else {
                             monster.setHaveChangePositionInThisTurn(true);
-                            if (position.equals("attack")) monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-                            else monster.setAttackOrDefense(AttackOrDefense.DEFENSE);
-                            gameView.printChangeSetSuccessfully();
+                    /*        if (position.equals("attack")) monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+                            else monster.setAttackOrDefense(AttackOrDefense.DEFENSE);*/
+                            changePosition();
                             currentPlayer.setSelectedCard(null);
                             gameView.printMap();
                             checkTrapActivation();
+                            throw new Exception("monster card position changed successfully");
+
                         }
-                    }
+                  /*  }*/
 
                 } else
-                    gameView.printNotInMainPhase();
-            } else
-                gameView.printCantChangePosition();
+                    throw new Exception("action not allowed in this phase");
+/*            } else
+                gameView.printCantChangePosition();*/
         }
-    }
-
-    public void flipSummon() {
-        if (currentPlayer.getSelectedCard() == null)
+    //}
+    public void flipSummon() throws Exception {
+/*        if (currentPlayer.getSelectedCard() == null)
             gameView.printNoCardSelected();
-        else {
-            if (currentPlayer.getSelectedCard().getZone() == Zone.MONSTER_ZONE) {
-                if (getCurrentPhase() == Phase.MAIN_PHASE_1 || getCurrentPhase() == Phase.MAIN_PHASE_2) {
-                    Monster monster = (Monster) currentPlayer.getSelectedCard();
-                    if (monster.isSetInThisTurn() ||
-                            !(monster.getFace() == Face.DOWN && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE))
-                        gameView.printCantFlipSummon();
-                    else {
-                        currentPlayer.setSelectedCard(null);
-                        currentPlayer.getCardsInHand().remove(monster);
-                        monster.setFace(Face.UP);
-                        monster.setAttackOrDefense(AttackOrDefense.ATTACK);
-                        gameView.printMap();
-                        summonedCard = monster;
-                        flipSummonHappened = true;
-                        anySummonHappened = true;
-                        checkTrapActivation();
-                        if (canContinue) {
+        else {*/
+        if (currentPlayer.getSelectedCard().getZone() == Zone.MONSTER_ZONE) {
+            if (getCurrentPhase() == Phase.MAIN_PHASE_1 || getCurrentPhase() == Phase.MAIN_PHASE_2) {
+                Monster monster = (Monster) currentPlayer.getSelectedCard();
+                if (monster.isSetInThisTurn() ||
+                        !(monster.getFace() == Face.DOWN && monster.getAttackOrDefense() == AttackOrDefense.DEFENSE))
+                    throw new Exception("you can’t flip summon this card");
+                else {
+                    Arrays.stream(currentPlayer.getBoard().getMonsters()).filter(cell -> cell.getCard() == monster)
+                            .findFirst().get().setPictureUP();
+                    currentPlayer.setSelectedCard(null);
+                    currentPlayer.getCardsInHand().remove(monster);
+                    monster.setFace(Face.UP);
+                    monster.setAttackOrDefense(AttackOrDefense.ATTACK);
+                    gameView.printMap();
+                    summonedCard = monster;
+                    flipSummonHappened = true;
+                    anySummonHappened = true;
+                    checkTrapActivation();
+/*                        if (canContinue) {
                             if (monster.getCardNameInGame().equalsIgnoreCase("man-eater bug")
                                     || monster.getCardNameInGame().equalsIgnoreCase("gate guardian"))
                                 manEaterBugFlipSummon(monster);
                             gameView.printFlipSummonSuccessfully();
-                        }
-                        anySummonHappened = false;
-                        flipSummonHappened = false;
-                        canContinue = true;
-                        summonedCard = null;
-                    }
-                } else
-                    gameView.printNotInMainPhase();
+                        }*/
+                    anySummonHappened = false;
+                    flipSummonHappened = false;
+                    canContinue = true;
+                    summonedCard = null;
+                }
             } else
-                gameView.printCantChangePosition();
-        }
+                throw new Exception("action not allowed in this phase");
+        } else
+            throw new Exception("you can’t change this card position");
+        //}
     }
 
     private void manEaterBugFlipSummon(Monster manEaterBug) {
@@ -1904,6 +1907,7 @@ public class GameController {
     }
 
     public void tribute(StackPane stackPane, int cellNumber) {
+        getCurrentPlayer().getBoard().getGraveyard().addCard(getCurrentPlayer().getBoard().getMonsters()[cellNumber].getCard());
         getCurrentPlayer().getBoard().getMonsters()[cellNumber].setCard(null);
         stackPane.getChildren().removeIf(e -> e instanceof ImageView);
     }
@@ -1915,5 +1919,13 @@ public class GameController {
         checkTrapActivation();
         normalSummonHappened = false;
         anySummonHappened = false;
+    }
+
+    public void changePosition() {
+        Monster monster = (Monster) currentPlayer.getSelectedCard();
+        monster.setAttackOrDefense(monster.getAttackOrDefense() == AttackOrDefense.ATTACK ? AttackOrDefense.DEFENSE : AttackOrDefense.ATTACK);
+        StackPane stackPane = Arrays.stream(currentPlayer.getBoard().getMonsters()).filter(e -> e.getCard() == monster)
+                .findFirst().get().getPicture();
+        stackPane.setRotate(stackPane.getRotate() == 90 ? 0 : 90);
     }
 }
