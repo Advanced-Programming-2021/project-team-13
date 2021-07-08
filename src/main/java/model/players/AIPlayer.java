@@ -64,7 +64,6 @@ public class AIPlayer extends Player {
     }
 
     private void mainPhaseMove(GameController GC) {
-        System.out.println("Im HERE");
         activeSpell(GC);
         setTrap(GC);
         if (!isSetOrSummonInThisTurn()) {

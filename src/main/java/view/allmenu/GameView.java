@@ -96,8 +96,8 @@ public class GameView {
             @Override
             public void handle(long now) {
                 if (gameController.isAITurn()) {
-                    gameController.playAI();
                     gameController.setAITurn(false);
+                    gameController.playAI();
                 }
             }
         };
@@ -917,10 +917,17 @@ public class GameView {
     }
 
     public void printWhoseTurn() {
-        if (gameController.getCurrentPlayer() instanceof AIPlayer)
+        if (gameController.getCurrentPlayer() instanceof AIPlayer) {
             System.out.println("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
-        else
+            text.setText("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
+        }
+        else {
             System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+            text.setText("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+        }
+
+        notifStackPane.setVisible(true);
+        System.out.println();
     }
 
     public void showCard(Card card) {

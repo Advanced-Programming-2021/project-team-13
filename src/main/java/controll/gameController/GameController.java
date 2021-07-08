@@ -188,8 +188,6 @@ public class GameController {
             currentPlayer = secondPlayer;
         else
             currentPlayer = firstPlayer;
-        if (currentPlayer instanceof AIPlayer)
-            isAITurn = true;
         gameView.playerChanged(currentPlayer);
     }
 
@@ -1272,6 +1270,8 @@ public class GameController {
             gameView.printCurrentPhase();
             gameView.printWhoseTurn();
         }
+        if (currentPlayer instanceof AIPlayer)
+            isAITurn = true;
     }
 
     private void reset() {
@@ -1571,11 +1571,13 @@ public class GameController {
     }
 
     private void removeCardFromHandScene(Card card) {
-        currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(card)).getChildren().removeIf(e -> e instanceof ImageView);
-        for (int i = currentPlayer.getCardsInHand().indexOf(card); i < currentPlayer.getCardsInHandImage().size(); i++) {
-            currentPlayer.getCardsInHandImage().get(i).getChildren().removeIf(e -> e instanceof ImageView);
-            if (i + 1 < currentPlayer.getCardsInHandImage().size())
-                currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
+        if (!(currentPlayer instanceof AIPlayer)) {
+            //currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().indexOf(card)).getChildren().removeIf(e -> e instanceof ImageView);
+            for (int i = currentPlayer.getCardsInHand().indexOf(card); i < currentPlayer.getCardsInHandImage().size(); i++) {
+                currentPlayer.getCardsInHandImage().get(i).getChildren().removeIf(e -> e instanceof ImageView);
+                if (i + 1 < currentPlayer.getCardsInHandImage().size())
+                    currentPlayer.getCardsInHandImage().get(i).getChildren().addAll(currentPlayer.getCardsInHandImage().get(i + 1).getChildren());
+            }
         }
     }
 
@@ -1796,13 +1798,14 @@ public class GameController {
 
     public void addCardToHand() {
         Card card = currentPlayer.addCardToHand();
-        gameView.gridPaneSetup(card.getImage(), currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().size() - 1));
+        if (!(currentPlayer instanceof AIPlayer))
+            gameView.gridPaneSetup(card.getImage(), currentPlayer.getCardsInHandImage().get(currentPlayer.getCardsInHand().size() - 1));
         gameView.printCardAddedToHand(card);
     }
 
     public void playAI() {
-        System.out.println("IM HEREEEEEEE");
-        ((AIPlayer) currentPlayer).play(currentPhase, this);
+        if (currentPlayer instanceof AIPlayer)
+            ((AIPlayer) currentPlayer).play(currentPhase, this);
     }
 
     public boolean checkTributeLevelForRitualSummon(ArrayList<Monster> tributes, Monster ritualMonster) {
@@ -1929,7 +1932,6 @@ public class GameController {
 
     public void summonWithTribute() {
         normalSummonHappened = true;
-        removeCardFromHandScene(summonedCard);
         normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
         checkTrapActivation();
         normalSummonHappened = false;

@@ -27,7 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 //        ViewMaster.getViewMaster().run();
         primaryStage.setOnHiding(event -> UserJson.update());
-        SceneController.startCardCreator(primaryStage);
+        SceneController.startDeckMenu(primaryStage);
         primaryStage.setResizable(false);
         primaryStage.show();
     }
