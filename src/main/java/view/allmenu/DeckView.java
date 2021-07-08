@@ -67,7 +67,6 @@ public class DeckView implements Initializable {
     @FXML
     private TilePane mainDeck;
 
-    private Image backImage;
     private final DeckController deckController;
     private User user;
     private UserDeck currentPlayerDeck;
@@ -90,7 +89,7 @@ public class DeckView implements Initializable {
         scrollPane.setOnDragDropped(this::handleDragDropped);
         yesNoVBox.setSpacing(15);
         cardVBox.setSpacing(20);
-        backImage = ImageLoader.getCardImageByName("Unknown");
+        Image backImage = ImageLoader.getCardImageByName("Unknown");
         cardImage.setImage(backImage);
         user = ViewMaster.getUser();
         addCardToScrollPane();
@@ -104,7 +103,6 @@ public class DeckView implements Initializable {
 
     private void addCardToScrollPane() {
         for (Card card : user.getAllCards()) {
-            System.out.println(card.getCardName());
             Image image = ImageLoader.getCardImageByName(card.getCardName());
             card.setImage(image);
             ImageView imageView = new ImageView(image);
@@ -169,7 +167,6 @@ public class DeckView implements Initializable {
             }
         } else if (cardVBox.getChildren().contains(event.getTarget())
                 || event.getTarget().equals(scrollPane) || event.getTarget().equals(cardVBox)) {
-            System.out.println("dropped in scroll");
             if (mainDeck.getChildren().contains(sourceImageView)) {
                 removeCard(mainDeck, sourceImageView, cardName, false);
                 disableCardInTarget(sourceImageView, currentPlayerDeck.getCardNameToNumberInMain(), cardName);
@@ -192,8 +189,7 @@ public class DeckView implements Initializable {
             ImageView imageView1 = (ImageView) event.getGestureSource();
             if (cardVBox.getChildren().contains(imageView1)) {
                 int numberInDeck = cardNameToNumberInDeck.getOrDefault(cardName, 0);
-                String cardName2 = cardName.replaceAll("[\\s-_';.,!]", "");
-                int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName2, 0);
+                int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName, 0);
                 if (numberInDeck == shoppedNumber) {
                     imageView1.setDisable(true);
                     ColorAdjust colorAdjust = new ColorAdjust();
@@ -212,8 +208,7 @@ public class DeckView implements Initializable {
             if (node instanceof ImageView) {
                 if (sourceImageView.getImage().equals(((ImageView) node).getImage())) {
                     int numberInDeck = cardNameToNumberInDeck.getOrDefault(cardName, 0);
-                    String cardName2 = cardName.replaceAll("[\\s-_';.,!]", "");
-                    int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName2, 0);
+                    int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName, 0);
                     if (numberInDeck == shoppedNumber) {
                         node.setDisable(true);
                         ColorAdjust colorAdjust = new ColorAdjust();
@@ -230,9 +225,11 @@ public class DeckView implements Initializable {
 
     private void showDeckHasThreeCard(boolean isSide, String cardName) {
         blurBackground();
+        yesNoVBox.setAlignment(Pos.CENTER);
         String main = "Main";
         if (isSide) main = "Side";
-        Label label = new Label("You Already Have Three " + cardName + " Card In Your " + main + " Deck");
+        Label label = new Label("You Already Have Three " + cardName + "\n Card In Your " + main + " Deck");
+        label.setAlignment(Pos.CENTER);
         addTimeLine(label);
     }
 
@@ -363,7 +360,7 @@ public class DeckView implements Initializable {
     }
 
     private void renameCurrentDeck(TextField textField, Label text) {
-        String answer = deckController.renameDeck(user, currentPlayerDeck, textField.getText());
+        String answer = deckController.renameDeck(currentPlayerDeck, textField.getText());
         switch (answer) {
             case "invalidDeckName":
                 text.setText("Invalid Deck Name , Enter Another Name!");
@@ -462,7 +459,7 @@ public class DeckView implements Initializable {
 
     @FXML
     private void saveDeck() {
-        new UserJson().update();
+        UserJson.update();
         blurBackground();
         yesNoVBox.getChildren().clear();
         Label label = new Label("Saved");

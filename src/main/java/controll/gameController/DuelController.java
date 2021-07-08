@@ -1,6 +1,5 @@
 package controll.gameController;
 
-import javafx.fxml.FXMLLoader;
 import model.PlayerDeck;
 import model.cards.Card;
 import model.cards.Trap;
@@ -12,7 +11,6 @@ import view.ViewMaster;
 import view.allmenu.DuelView;
 import view.allmenu.GameView;
 
-import java.net.URL;
 import java.util.Random;
 
 public class DuelController {
