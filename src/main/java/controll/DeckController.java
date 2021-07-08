@@ -7,7 +7,7 @@ import model.players.User;
 
 public class DeckController {
 
-    public String renameDeck(User user, UserDeck userDeck, String newName) {
+    public String renameDeck(UserDeck userDeck, String newName) {
         if (userDeck == null){
             return "noDeckExists";
         } else if (newName == null || newName.length() == 0) {

@@ -10,24 +10,30 @@ import view.ViewMaster;
 public class Main extends Application {
 
     public static void main(String[] args) {
-        ImageLoader.load();
-        new UserJson().loadDataBase();
-        User user = User.getUserByUsername("ali");
-        ViewMaster.setUser(user);
-        launch(args);
+        new ImageLoader().start();
+        UserJson userJson = new UserJson();
+        userJson.start();
+        try {
+            userJson.join();
+            User user = User.getUserByUsername("ali");
+            ViewMaster.setUser(user);
+            launch(args);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 //        ViewMaster.getViewMaster().run();
-        primaryStage.setOnHiding(event -> new UserJson().update());
-        SceneController.startDeckMenu(primaryStage);
+        primaryStage.setOnHiding(event -> UserJson.update());
+        SceneController.startCardCreator(primaryStage);
         primaryStage.setResizable(false);
         primaryStage.show();
     }
 
     @Override
     public void stop() {
-        new UserJson().update();
+        UserJson.update();
     }
 }

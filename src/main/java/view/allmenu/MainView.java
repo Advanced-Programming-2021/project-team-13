@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.menuItems.CustomButton;
+import view.SceneController;
 
 import java.io.IOException;
 
@@ -34,8 +35,7 @@ public class MainView {
     }
 
     public void initialize() {
-
-       background1 = new Image(getClass().getResource("/mainMenuImages/1.jpg").toExternalForm(),
+        background1 = new Image(getClass().getResource("/mainMenuImages/1.jpg").toExternalForm(),
                 1280, 720, false, true);
         background2 = new Image(getClass().getResource("/mainMenuImages/2.jpg").toExternalForm(),
                 1280, 720, false, true);
@@ -54,18 +54,17 @@ public class MainView {
         timelineHandler();
     }
 
-    public void timelineHandler(){
-
-                Timeline tenSecondsWonder = new Timeline(
-                        new KeyFrame(Duration.seconds(10),
-                                new EventHandler<ActionEvent>() {
-                                    @Override
-                                    public void handle(ActionEvent event) {
-                                        changeBackground();
-                                    }
-                                }));
-                tenSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-                tenSecondsWonder.play();
+    public void timelineHandler() {
+        Timeline tenSecondsWonder = new Timeline(
+                new KeyFrame(Duration.seconds(10),
+                        new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                changeBackground();
+                            }
+                        }));
+        tenSecondsWonder.setCycleCount(Timeline.INDEFINITE);
+        tenSecondsWonder.play();
     }
 
     private void changeBackground() {
@@ -75,7 +74,7 @@ public class MainView {
     }
 
     private void backgroundTransition(Image backgroundI, Image backgroundII) {
-        if(imageView.getImage().equals(backgroundI)) {
+        if (imageView.getImage().equals(backgroundI)) {
             KeyFrame keyFrame1On = new KeyFrame(Duration.seconds(0), new KeyValue(imageView.imageProperty(), backgroundI));
             KeyFrame startFadeOut = new KeyFrame(Duration.seconds(1), new KeyValue(imageView.opacityProperty(), 1.0));
             KeyFrame endFadeOut = new KeyFrame(Duration.seconds(2), new KeyValue(imageView.opacityProperty(), 0.0));
@@ -152,8 +151,8 @@ public class MainView {
     }
 
     public void goToDeckMenu() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/DeckMenu.fxml"));
-        ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
+        Stage stage = (Stage) pane.getScene().getWindow();
+        SceneController.startDeckMenu(stage);
     }
 
     public void goToScoreBoard() throws IOException {
@@ -172,8 +171,8 @@ public class MainView {
     }
 
     public void goToImport() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/LoginMenu.fxml"));
-        ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
+        Stage stage = (Stage) pane.getScene().getWindow();
+        SceneController.startCardCreator(stage);
     }
 
     public void goToLoginMenu() throws IOException {

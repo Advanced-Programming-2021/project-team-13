@@ -11,11 +11,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class ImageLoader {
+public class ImageLoader extends Thread {
     private static final HashMap<String, Image> cardsImage = new HashMap<>();
     private static final File monsterFile = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/Monsters");
     private static final File spellTrapFile = new File(System.getProperty("user.dir") + "/src/main/resources/shopImage/SpellTrap");
     private static final FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".jpg");
+
+    @Override
+    public void start() {
+        load();
+    }
 
     public static void load() {
         loadMonster();

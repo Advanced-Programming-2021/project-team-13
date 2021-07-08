@@ -13,9 +13,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class UserJson {
+public class UserJson extends Thread{
 
-    public void update() {
+    @Override
+    public void start() {
+        loadDataBase();
+    }
+
+    public static void update() {
         YaGson mapper = new YaGson();
         FileWriter jsonFile;
         try {
@@ -38,7 +43,7 @@ public class UserJson {
         }
     }
 
-    public void loadDataBase() {
+    public static void loadDataBase() {
         String json;
         try {
             YaGson mapper = new YaGson();
