@@ -175,29 +175,6 @@ public class GameView {
         gridPane.setVgap(20);
     }
 
-//    private void leftGridPane(Player ourPlayer) {
-//        for (int i = 0; i < 3; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                StackPane stackPane = new StackPane();
-//                gridPaneSetup(null, stackPane);
-//                stackPane.setOnMouseClicked(e -> {
-//             /*       if (gameController.getCurrentPlayer().getSelectedCard() == null)
-//                        gameController.getCurrentPlayer()
-//                                .setSelectedCard(gameController.getCurrentPlayer()
-//                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane) - 1));
-//                    else */{
-//                        gameController.getCurrentPlayer()
-//                                .setSelectedCard(gameController.getCurrentPlayer()
-//                                        .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
-//                        gameController.normalSummon((Monster) gameController.getCurrentPlayer().getSelectedCard(), AttackOrDefense.ATTACK);
-//                    }
-//                });
-//                leftGrid.add(stackPane, j, i);
-//                ourPlayer.getCardsInHandImage().add(stackPane);
-//            }
-//        }
-//    }
-
     private void centerPane(Player ourPlayer, Player rivalPlayer) {
         centerGrid(ourPlayer, rivalPlayer);
         leftGrid(ourPlayer);
