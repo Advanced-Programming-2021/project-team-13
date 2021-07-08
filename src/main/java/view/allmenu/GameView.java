@@ -269,12 +269,13 @@ public class GameView {
             System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
             if (tributePhase) {
                 if (numberOfTribute < (gameController).getNumberOfTributeNeeded()
-                        && stackPane.getChildren() != null) {
+                        && ourPlayer.getBoard().getMonsters()[x].getCard() != null) {
                     gameController.tribute(stackPane, x);
                     numberOfTribute++;
                 } else {
                     numberOfTribute = 0;
                     tributePhase = false;
+                    gameController.summonWithTribute();
                 }
             }
         });
