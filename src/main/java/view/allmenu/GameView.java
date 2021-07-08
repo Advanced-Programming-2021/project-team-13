@@ -4,15 +4,20 @@ import controll.gameController.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
+import enums.Phase;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -78,6 +83,10 @@ public class GameView {
     public Player ourPlayer;
     public Player rivalPlayer;
     public VBox vBox;
+    public VBox buttonBox;
+    public CustomSanButtons attack;
+    public CustomSanButtons directAttack;
+    public ProgressBar progressBar;
     private boolean tributePhase = false;
     private int numberOfTribute = 0;
 
@@ -92,13 +101,27 @@ public class GameView {
         rivalPlayer = firstPlayer instanceof AIPlayer ? firstPlayer : secondPlayer;
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
+        buttonBox.getChildren().addAll(buttonBoxNodes());
         AnimationTimer animationTimer = new AnimationTimer() {
+            final ColorAdjust colorAdjust = new ColorAdjust();
             @Override
             public void handle(long now) {
                 if (gameController.isAITurn()) {
                     gameController.setAITurn(false);
                     gameController.playAI();
                 }
+                rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
+                ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
+                Arrays.stream(new CustomSanButtons[]{attack, directAttack}).forEach(x -> {
+                    x.setEffect(colorAdjust);
+                    if (gameController.getCurrentPhase() != Phase.BATTLE_PHASE) {
+                        colorAdjust.setSaturation(-1);
+                        x.setDisable(true);
+                    } else {
+                        colorAdjust.setSaturation(0);
+                        x.setDisable(false);
+                    }
+                });
             }
         };
         animationTimer.start();
@@ -107,7 +130,7 @@ public class GameView {
 
     public void init() {
         setupNotifStackPane();
-        VBox buttonBox = new VBox(10, buttonBoxNodes());
+        buttonBox = new VBox(10);
         buttonBox.setTranslateY(350);
         buttonBox.setTranslateX(50);
         rightPane.getChildren().add(buttonBox);
@@ -118,8 +141,15 @@ public class GameView {
         rightPane.setStyle("-fx-background-image: url('/gamePics/1.png')" +
                 ";-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
         initGridPanes();
-//        controlButtons();
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
+        rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
+        ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
+        progressBar = new ProgressBar();
+        progressBar.setStyle("-fx-fill: crimson");
+        DoubleProperty doubleProperty = new SimpleDoubleProperty();
+        doubleProperty.set(ourPlayer.getLifePoint());
+        progressBar.progressProperty().bind(doubleProperty);
+        leftPane.getChildren().add(progressBar);
     }
 
     private void setupNotifStackPane() {
@@ -163,12 +193,10 @@ public class GameView {
     }
 
     private Node[] buttonBoxNodes() {
-        return new Node[]{new CustomSanButtons("attack", () -> {
-            attack();
-        })
-                , new CustomSanButtons("direct attack", () -> {
-
-        }), new CustomSanButtons("next phase", () -> {
+        attack = new CustomSanButtons("attack", this::attack);
+        directAttack = new CustomSanButtons("direct attack", this::directAttack);
+        return new Node[]{attack
+                , directAttack, new CustomSanButtons("next phase", () -> {
             gameController.nextPhase();
         })
                 , new CustomSanButtons("surrender", () -> {
@@ -186,20 +214,17 @@ public class GameView {
 
     private void initGridPanes() {
         centerPane(ourPlayer, rivalPlayer);
-//        leftGridPane(ourPlayer);
-        leftGrid.setGridLinesVisible(true);
-        leftGrid.setVgap(3.3333);
-        leftGrid.setHgap(3.3333);
-        fourOtherCards(null);
-        gridPane.setTranslateX(13.3333);
-        gridPane.setTranslateY(33.3333);
-        gridPane.setHgap(6.6666);
-        gridPane.setVgap(20);
+        leftPane();
     }
 
     private void centerPane(Player ourPlayer, Player rivalPlayer) {
         centerGrid(ourPlayer, rivalPlayer);
         leftGrid(ourPlayer);
+        leftPane();
+
+    }
+
+    private void leftPane() {
         leftGrid.setGridLinesVisible(true);
         leftGrid.setVgap(3.3333);
         leftGrid.setHgap(3.3333);
@@ -208,7 +233,6 @@ public class GameView {
         gridPane.setTranslateY(33.3333);
         gridPane.setHgap(6.6666);
         gridPane.setVgap(20);
-
     }
 
     private void centerGrid(Player ourPlayer, Player rivalPlayer) {
@@ -234,6 +258,7 @@ public class GameView {
     }
 
     private void rivalMonsterCellSetup(Player rivalPlayer, int j, StackPane stackPane) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
         rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
         stackPane.setOnMouseEntered(e -> {
             stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
@@ -249,6 +274,11 @@ public class GameView {
             rivalSelectedPane = stackPane;
             rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getMonsters())
                     .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+            fadeTransition.setNode(selectedCard);
+            rivalSelectedCard.setImage(((ImageView) rivalSelectedCell.getPicture().getChildren().get(0)).getImage());
+            fadeTransition.play();
 //            System.out.println(rivalSelectedPane);
 //            System.out.println(rivalSelectedCard);
         });
@@ -256,6 +286,7 @@ public class GameView {
     }
 
     private void ourMonsterCellSetups(Player ourPlayer, int j, StackPane stackPane) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
         ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
         final int x = j;
         stackPane.setOnMouseEntered(e -> {
@@ -275,6 +306,12 @@ public class GameView {
             ourSelectedCell = Arrays.stream(ourPlayer.getBoard().getMonsters())
                     .filter(Objects::nonNull).filter(a -> a.getPicture() == stackPane).findFirst()
                     .get();
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+            fadeTransition.setNode(selectedCard);
+            System.out.println(((ImageView) ourSelectedPane.getChildren().get(0)).getImage());
+            selectedCard.setImage(((ImageView) ourSelectedCell.getPicture().getChildren().get(0)).getImage());
+            fadeTransition.play();
 //            System.out.println(ourSelectedCell.getCard().getCardName() + "    " + ourSelectedCell
 //                    .getPicture() + "         " + getIndexOfnn(ourSelectedCell));
 //            System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
@@ -300,12 +337,39 @@ public class GameView {
         });
     }
 
+    private void setEffectsCardImages(ImageView view) {
+        Bloom glow = new Bloom();
+        view.setOnMouseEntered(event -> {
+            glow.setThreshold(0.5);
+            view.setEffect(glow);
+        });
+        view.setOnMouseExited(event -> {
+            view.setEffect(null);
+        });
+        view.setOnMouseClicked(e -> {
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
+            if (view.getParent().getRotate() != 180) {
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setNode(selectedCard);
+                fadeTransition.play();
+                selectedCard.setImage(view.getImage());
+            } else {
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setNode(rivalSelectedCard);
+                fadeTransition.play();
+                rivalSelectedCard.setImage(view.getImage());
+            }
+        });
+    }
+
     private void changePosition() {
         try {
             gameController.changeSet();
         } catch (Exception e) {
-            createNotification(e.getMessage(),new Node[]{
-                    new CustomSanButtons("proceed",()->{
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("proceed", () -> {
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -459,32 +523,6 @@ public class GameView {
         centerPane.getChildren().addAll(our, rivals);
     }
 
-    private void setEffectsCardImages(ImageView view) {
-        Bloom glow = new Bloom();
-        view.setOnMouseEntered(event -> {
-            glow.setThreshold(0.5);
-            view.setEffect(glow);
-        });
-        view.setOnMouseExited(event -> {
-            view.setEffect(null);
-        });
-        view.setOnMouseClicked(e -> {
-            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
-            if (view.getParent().getRotate() != 180) {
-                fadeTransition.setFromValue(0);
-                fadeTransition.setToValue(1);
-                fadeTransition.setNode(selectedCard);
-                fadeTransition.play();
-                selectedCard.setImage(view.getImage());
-            } else {
-                fadeTransition.setFromValue(0);
-                fadeTransition.setToValue(1);
-                fadeTransition.setNode(rivalSelectedCard);
-                fadeTransition.play();
-                rivalSelectedCard.setImage(view.getImage());
-            }
-        });
-    }
 
     public GameController getGameController() {
         return gameController;
@@ -895,6 +933,8 @@ public class GameView {
                     deBlur();
                 })
         });
+        rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
+        ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
     }
 
     public void printDefensePositionDestroyedHidden(String rivalMonsterName) {
@@ -1150,6 +1190,7 @@ public class GameView {
                     deBlur();
                 })
         });
+
     }
 
     public void printYouReceivedDamage(int amount) {
@@ -1511,7 +1552,6 @@ public class GameView {
                 return true;
             } else if (yesOrNo.equalsIgnoreCase("no")) {
                 return false;
-            } else {
             }
         }
     }
