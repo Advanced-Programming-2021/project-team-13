@@ -4,22 +4,27 @@ import controll.gameController.DuelController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.menuItems.CustomButton;
+import model.menuItems.CustomSanButtons;
 import model.players.Player;
 import model.players.User;
 import view.ViewMaster;
@@ -39,10 +44,13 @@ public class DuelView {
     public AnchorPane downPane;
     public AnchorPane upPane;
     public AnchorPane rpc;
+    public StackPane notifStackPane;
     public VBox vBox;
+    public VBox notif;
     public HBox hBox;
     public HBox rpcHbox;
     public Label notifLabel;
+    public Text text;
     public Label rpcNotifLabel;
     private int numberToReturn = -1;
     private int round = 0;
@@ -52,6 +60,7 @@ public class DuelView {
     }
 
     public void initialize() {
+        setupNotifStackPane();
         leftPane.getChildren().remove(rpcHbox);
         Bloom glow = new Bloom();
         setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3);
@@ -60,6 +69,43 @@ public class DuelView {
         setBackGround(pane, "/duelMenuPics/moon.gif");
         vBox = new VBox(0, getFirstVboxNodes());
         rightPane.getChildren().add(vBox);
+    }
+
+    private void setupNotifStackPane() {
+        notif = new VBox();
+        notif.setSpacing(30);
+        notifStackPane = new StackPane();
+        notifStackPane.getChildren().add(notif);
+        notif.setPrefHeight(300);
+        notif.setPrefWidth(700);
+        notif.setMinHeight(300);
+        notif.setMinWidth(700);
+        notif.setAlignment(Pos.TOP_CENTER);
+        notif.setStyle("-fx-background-image: url('/duelMenuPics/notif.gif');-fx-background-size: cover,auto");
+        notifStackPane.setMinHeight(300);
+        notifStackPane.setMinWidth(700);
+        notifStackPane.setPrefHeight(300);
+        notifStackPane.setPrefWidth(700);
+        notifStackPane.setAlignment(Pos.CENTER);
+        notifStackPane.setTranslateY(350);
+        notifStackPane.setTranslateX(650);
+        notifStackPane.setVisible(false);
+        pane.getChildren().add(notifStackPane);
+    }
+
+    public void createNotification(String text, Node[] nodes) {
+        blur();
+        notifStackPane.setVisible(true);
+        notif.getChildren().clear();
+        notifLabel.setText(text);
+        notifLabel.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 30));
+        notifLabel.setTextFill(Color.SILVER);
+        notifLabel.setEffect(new Bloom(0.2));
+        notif.getChildren().addAll(new Text(""), notifLabel);
+        for (Node node : nodes) {
+            node.resize(150,75);
+        }
+        notif.getChildren().addAll(nodes);
     }
 
     private Node[] getFirstVboxNodes() {
@@ -84,7 +130,12 @@ public class DuelView {
         if (duelController.validateAIDuelGame())
             getRounds();
         else
-            notifLabel.setText("You Do Not Have Active/Valid Deck");
+            createNotification("You Do Not Have Active/Valid Deck",new Node[]{
+                    new CustomButton("proceed",()->{
+                        unBlur();
+                        notifStackPane.setVisible(false);
+                    })
+            });
     }
 
     private void getRounds() {
@@ -145,11 +196,21 @@ public class DuelView {
     }
 
     public void printNoActiveDeck(String username) {
-        notifLabel.setText(username + " has no active deck");
+        createNotification(username + " has no active deck",new Node[]{
+                new CustomButton("proceed",()->{
+                    unBlur();
+                    notifStackPane.setVisible(false);
+                })
+        });
     }
 
     public void printInvalidDeck(String username) {
-        notifLabel.setText(username + "’s deck is invalid");
+        createNotification(username + "’s deck is invalid",new Node[]{
+                new CustomButton("proceed",()->{
+                    unBlur();
+                    notifStackPane.setVisible(false);
+                })
+        });
     }
 
     public int inputStonePaperScissor(User user) {
@@ -158,6 +219,7 @@ public class DuelView {
     }
 
     private void sho() {
+        rightPane.setVisible(false);
         rpc = new AnchorPane();
         rpcNotifLabel = new Label("");
         rpcNotifLabel.setTranslateX(35);
@@ -165,21 +227,41 @@ public class DuelView {
         rpcNotifLabel.setStyle("-fx-text-fill:#fa6515");
         rpcNotifLabel.setEffect(new Bloom(0.3));
         VBox box = new VBox(25, rpcNotifLabel, rpcHbox, new CustomButton("Start Game", () -> {
-            if (numberToReturn == -1)
-                rpcNotifLabel.setText("you haven't chosen yet");
+            if (numberToReturn == -1) {
+                rpc.setVisible(false);
+                createNotification("you haven't chosen yet", new Node[]{
+                        new CustomButton("proceed", () -> {
+                            unBlur();
+                            rpc.setVisible(true);
+                            notifStackPane.setVisible(false);
+                        })
+                });
+            }
             else {
                 int result = duelController.findPlayerToStart(numberToReturn);
-                if (result == 0)
-                    rpcNotifLabel.setText("Equal, try again");
+                if (result == 0) {
+                    rpc.setVisible(false);
+                    createNotification("Equal", new Node[]{
+                            new CustomButton("Try again", () -> {
+                                unBlur();
+                                rpc.setVisible(true);
+                                notifStackPane.setVisible(false);
+                            })
+                    });
+                }
                 else if (result == 1) {
-                    rpcNotifLabel.setText("You Start The Game");
+                    rpc.setVisible(false);
+                    createNotification("You Start The Game",new Node[]{
+                    });
                     KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event ->
                             duelController.startAIDuel(ViewMaster.getUser(), round, 1));
                     Timeline timeline = new Timeline(keyFrame);
                     timeline.setCycleCount(1);
                     timeline.play();
                 } else {
-                    rpcNotifLabel.setText("AI Start The Game");
+                    rpc.setVisible(false);
+                    createNotification("AI Start The Game",new Node[]{
+                    });
                     KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event ->
                             duelController.startAIDuel(ViewMaster.getUser(), round, 2));
                     Timeline timeline = new Timeline(keyFrame);

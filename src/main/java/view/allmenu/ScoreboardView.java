@@ -84,7 +84,9 @@ public class ScoreboardView {
     }
 
     public void printScoreBoard(User user, int rank) {
-        AnchorPane anchorPane = scoreboardLabel.getLabel(user.getNickname(), new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/tas.png")).toExternalForm()), user.getScore(), rank);
+        AnchorPane anchorPane = scoreboardLabel.getLabel(user.getNickname(),
+                user.getImage() == null ? new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/tas.png"))
+                        .toExternalForm()) : user.getImage(), user.getScore(), rank);
         tilePane.getChildren().add(anchorPane);
     }
 
