@@ -15,8 +15,6 @@ public class Main extends Application {
         userJson.start();
         try {
             userJson.join();
-            User user = User.getUserByUsername("ali");
-            ViewMaster.setUser(user);
             launch(args);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -25,11 +23,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        ViewMaster.getViewMaster().run();
+        ViewMaster.getViewMaster().run();
         primaryStage.setOnHiding(event -> UserJson.update());
-        SceneController.startDeckMenu(primaryStage);
         primaryStage.setResizable(false);
-        primaryStage.show();
     }
 
     @Override

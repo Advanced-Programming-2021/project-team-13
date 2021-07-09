@@ -1,0 +1,19 @@
+
+
+.graveyard {
+    -fx-background-color: rgba(0 ,0 , 0 ,0.5);
+}
+
+.graveyardButton {
+    -fx-background-color: none;
+    -fx-background-image: url(../deckMenuImages/button.png) ;
+    -fx-background-size: 146 71;
+    -fx-background-position: center;
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 18px;
+    -fx-text-fill: black;
+}
+
+.graveyardButton:hover {
+    -fx-background-image: url(../deckMenuImages/blueButton.png);
+}
