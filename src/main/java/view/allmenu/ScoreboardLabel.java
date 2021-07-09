@@ -6,8 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import model.players.User;
+import view.ViewMaster;
 
+import javax.swing.text.View;
 import java.util.Objects;
 
 public class ScoreboardLabel {
@@ -56,6 +60,9 @@ public class ScoreboardLabel {
                 background.setImage(image);
                 break;
         }
+        if (nickName.equalsIgnoreCase(ViewMaster.getUser().getNickname()))
+            parent.setBorder(new Border(new BorderStroke(Color.ROYALBLUE,
+                    BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
         profile.setImage(profileImage);
         this.rank.setText(rankText);
         this.score.setText(scoreText);

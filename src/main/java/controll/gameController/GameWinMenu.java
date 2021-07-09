@@ -1,5 +1,7 @@
 package controll.gameController;
 
+import javafx.scene.Node;
+import model.menuItems.CustomSanButtons;
 import model.players.AIPlayer;
 import model.players.Player;
 import model.players.User;
@@ -98,7 +100,7 @@ public class GameWinMenu {
     }
 
     private void noAiWin(Player winner, Player loser) {
-        User winnerUser = winner.getUser();
+        /*User winnerUser = winner.getUser();
         User loserUser = loser.getUser();
         gameView.printUserWonSingleGame(winnerUser.getUsername(), winner.getWonRounds(), loser.getWonRounds());
         if (startingRounds == 1) {
@@ -124,37 +126,43 @@ public class GameWinMenu {
                 //go to deck to change!!!!!!!!!!
                 runNewGame();
             }
-        }
+        }*/
     }
 
     private void runNewGame() {
-        GameView gameView;
-        DuelView duelView =new DuelView();
-        if (startingPlayer == firstPlayer) {
-            try {
-                gameView=duelView.startGame(firstPlayer, secondPlayer, secondPlayer, startingRounds);
-                GameController gameController = gameView.getGameController();
-                TrapAction.setGameController(gameController);
-                CardCommand.setGameController(gameController);
-                EffectHandler.setGameController(gameController);
-                ViewMaster.getViewMaster().setGameView(gameView);
-                ViewMaster.setCurrentMenu(Menu.GAME_MENU);
-            }catch (Exception ignored){
-                ignored.printStackTrace();
-            }
-        } else {
-            try {
-                gameView=duelView.startGame(firstPlayer, secondPlayer, firstPlayer, startingRounds);
-                GameController gameController = gameView.getGameController();
-                TrapAction.setGameController(gameController);
-                CardCommand.setGameController(gameController);
-                EffectHandler.setGameController(gameController);
-                ViewMaster.getViewMaster().setGameView(gameView);
-                ViewMaster.setCurrentMenu(Menu.GAME_MENU);
-            }catch (Exception ignored){
-                ignored.printStackTrace();
-            }
-        }
+        this.gameView.createNotification("Press Button To Start New Round",
+                new Node[]{
+                        new CustomSanButtons("Start", () -> {
+                            GameView gameView;
+                            DuelView duelView = new DuelView();
+                            if (startingPlayer == firstPlayer) {
+                                try {
+                                    gameView = duelView.startGame(firstPlayer, secondPlayer, secondPlayer, startingRounds);
+                                    GameController gameController = gameView.getGameController();
+                                    TrapAction.setGameController(gameController);
+                                    CardCommand.setGameController(gameController);
+                                    EffectHandler.setGameController(gameController);
+                                    ViewMaster.getViewMaster().setGameView(gameView);
+                                    ViewMaster.setCurrentMenu(Menu.GAME_MENU);
+                                } catch (Exception ignored) {
+                                    ignored.printStackTrace();
+                                }
+                            } else {
+                                try {
+                                    gameView = duelView.startGame(firstPlayer, secondPlayer, firstPlayer, startingRounds);
+                                    GameController gameController = gameView.getGameController();
+                                    TrapAction.setGameController(gameController);
+                                    CardCommand.setGameController(gameController);
+                                    EffectHandler.setGameController(gameController);
+                                    ViewMaster.getViewMaster().setGameView(gameView);
+                                    ViewMaster.setCurrentMenu(Menu.GAME_MENU);
+                                } catch (Exception ignored) {
+                                    ignored.printStackTrace();
+                                }
+                            }
+                        }
+                        )
+                });
 //        ViewMaster.getViewMaster().setGameView(gameView);
 //        GameController gameController = gameView.getGameController();
 //        TrapAction.setGameController(gameController);

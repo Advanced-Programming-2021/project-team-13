@@ -133,21 +133,26 @@ public class ShopView {
         try {
             ImageLoader.getCardsImage().forEach((name, image) ->
             {
-                ImageView imgView = new ImageView(image);
-                imgView.setFitWidth(160);
-                imgView.setFitHeight(210);
-                imgView.setOnMouseClicked(e -> {
-                    selectedCardName = name;
-                    cardImage.setImage(image);
-                    String[] detail = shopController.getDetail(name);
-                    shopButtonImage(Integer.parseInt(detail[0]));
-                    selectedCardPrice = Integer.parseInt(detail[0]);
-                    price.setText("Price: " + detail[0]);
-                    information.setText(detail[1]);
-                });
-                imgView.setOnMouseEntered(e -> setMouseEnterCard(imgView));
-                imgView.setOnMouseExited(e -> setMouseExitCard(imgView));
-                cardsPlace.getChildren().add(imgView);
+                if (!name.equalsIgnoreCase("Unknown.jpg")
+                        && !name.equalsIgnoreCase("Unknown")
+                && !name.equalsIgnoreCase("createdCard.jpg")
+                        && !name.equalsIgnoreCase("createdCard")) {
+                    ImageView imgView = new ImageView(image);
+                    imgView.setFitWidth(160);
+                    imgView.setFitHeight(210);
+                    imgView.setOnMouseClicked(e -> {
+                        selectedCardName = name;
+                        cardImage.setImage(image);
+                        String[] detail = shopController.getDetail(name);
+                        shopButtonImage(Integer.parseInt(detail[0]));
+                        selectedCardPrice = Integer.parseInt(detail[0]);
+                        price.setText("Price: " + detail[0]);
+                        information.setText(detail[1]);
+                    });
+                    imgView.setOnMouseEntered(e -> setMouseEnterCard(imgView));
+                    imgView.setOnMouseExited(e -> setMouseExitCard(imgView));
+                    cardsPlace.getChildren().add(imgView);
+                }
             });
         } catch (Exception e) {
             System.out.println(e.getMessage());

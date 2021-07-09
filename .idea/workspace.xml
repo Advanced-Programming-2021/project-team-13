@@ -4,8 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="showGraveyard is added">
+    <change afterPath="$PROJECT_DIR$/src/main/resources/gameWinMenu/back.png" afterDir="false" />
+    <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameWinMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameWinMenu.java" afterDir="false" />
+    <change beforePath="$PROJECT_DIR$/src/main/java/model/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Cell.java" afterDir="false" />
+    <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
+    <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
+    <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardLabel.java" afterDir="false" />
+    <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
+    <change beforePath="$PROJECT_DIR$/target/classes/model/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/model/Cell.class" afterDir="false" />
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="attack fixed">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/duelMenuPics/notif.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +28,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -38,57 +52,14 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/gamePics" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\project-team-13\src\main\resources\gamePics" />
-      <recent name="F:\AP Project\project-team-13\src\main\resources\scoreboardImage" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\AP Project\project-team-13\src\main\resources\scoreboardImage" />
-      <recent name="F:\AP Project\project-team-13\src\main\resources\backClicked" />
-    </key>
-  </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="FookingTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.allmenu.FookingTest" />
-      <module name="YuGiOh" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.allmenu.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.allmenu.GameView" />
-      <module name="YuGiOh" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.allmenu.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -113,408 +84,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.FookingTest" />
-        <item itemvalue="Application.GameView" />
-        <item itemvalue="Application.ScoreboardView" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="" />
-      <created>1625228365062</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1625228365062</updated>
-      <workItem from="1625291107828" duration="16895000" />
-      <workItem from="1625314452172" duration="40000" />
-      <workItem from="1625317097848" duration="8163000" />
-      <workItem from="1625362882339" duration="10272000" />
-      <workItem from="1625547145133" duration="24662000" />
-      <workItem from="1625633624339" duration="5661000" />
-      <workItem from="1625651724486" duration="13625000" />
-      <workItem from="1625670812198" duration="2325000" />
-      <workItem from="1625673151749" duration="1959000" />
-      <workItem from="1625684331654" duration="7505000" />
-    </task>
-    <task id="LOCAL-00001" summary="main">
-      <created>1625258730921</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1625258730921</updated>
-    </task>
-    <task id="LOCAL-00002" summary="main">
-      <created>1625258752385</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1625258752385</updated>
-    </task>
-    <task id="LOCAL-00003" summary="main">
-      <created>1625295640943</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1625295640944</updated>
-    </task>
-    <task id="LOCAL-00004" summary="main">
-      <created>1625296909405</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1625296909405</updated>
-    </task>
-    <task id="LOCAL-00005" summary="main">
-      <created>1625297970463</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1625297970463</updated>
-    </task>
-    <task id="LOCAL-00006" summary="main">
-      <created>1625303598006</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1625303598006</updated>
-    </task>
-    <task id="LOCAL-00007" summary="main">
-      <created>1625303689800</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1625303689800</updated>
-    </task>
-    <task id="LOCAL-00008" summary="login">
-      <created>1625305875379</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1625305875380</updated>
-    </task>
-    <task id="LOCAL-00009" summary="login">
-      <created>1625314167426</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1625314167426</updated>
-    </task>
-    <task id="LOCAL-00010" summary="reg">
-      <created>1625320021535</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1625320021535</updated>
-    </task>
-    <task id="LOCAL-00011" summary="profile">
-      <created>1625334281108</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1625334281108</updated>
-    </task>
-    <task id="LOCAL-00012" summary="profile">
-      <created>1625334309451</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1625334309451</updated>
-    </task>
-    <task id="LOCAL-00013" summary="login">
-      <created>1625335740188</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1625335740188</updated>
-    </task>
-    <task id="LOCAL-00014" summary="login">
-      <created>1625336879475</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1625336879475</updated>
-    </task>
-    <task id="LOCAL-00015" summary="login">
-      <created>1625337049978</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1625337049978</updated>
-    </task>
-    <task id="LOCAL-00016" summary="deckView is editing 1">
-      <created>1625397799144</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1625397799144</updated>
-    </task>
-    <task id="LOCAL-00017" summary="deckView is editing 2">
-      <created>1625406626811</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1625406626812</updated>
-    </task>
-    <task id="LOCAL-00018" summary="rpc">
-      <created>1625458648818</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1625458648818</updated>
-    </task>
-    <task id="LOCAL-00019" summary="duel">
-      <created>1625464543410</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1625464543410</updated>
-    </task>
-    <task id="LOCAL-00020" summary="duel">
-      <created>1625467318791</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1625467318791</updated>
-    </task>
-    <task id="LOCAL-00021" summary="duel">
-      <created>1625482919386</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1625482919386</updated>
-    </task>
-    <task id="LOCAL-00022" summary="duel">
-      <created>1625490014960</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1625490014960</updated>
-    </task>
-    <task id="LOCAL-00023" summary="deck is edited">
-      <created>1625510637788</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1625510637788</updated>
-    </task>
-    <task id="LOCAL-00024" summary="just created game fxml">
-      <created>1625547150545</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1625547150545</updated>
-    </task>
-    <task id="LOCAL-00025" summary="frustrated af">
-      <created>1625554821200</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1625554821200</updated>
-    </task>
-    <task id="LOCAL-00026" summary="frustrated af">
-      <created>1625554866577</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1625554866577</updated>
-    </task>
-    <task id="LOCAL-00027" summary="frustrated af">
-      <created>1625556882257</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1625556882257</updated>
-    </task>
-    <task id="LOCAL-00028" summary="frustrated af">
-      <created>1625580222557</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1625580222557</updated>
-    </task>
-    <task id="LOCAL-00029" summary="game board">
-      <created>1625590124792</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1625590124792</updated>
-    </task>
-    <task id="LOCAL-00030" summary="game">
-      <created>1625633910007</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1625633910007</updated>
-    </task>
-    <task id="LOCAL-00031" summary="game board">
-      <created>1625637906568</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1625637906568</updated>
-    </task>
-    <task id="LOCAL-00032" summary="game board">
-      <created>1625639407606</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1625639407606</updated>
-    </task>
-    <task id="LOCAL-00033" summary="game board">
-      <created>1625655536231</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1625655536231</updated>
-    </task>
-    <task id="LOCAL-00034" summary="game board">
-      <created>1625665119814</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1625665119814</updated>
-    </task>
-    <task id="LOCAL-00035" summary="game board">
-      <created>1625666176540</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1625666176540</updated>
-    </task>
-    <task id="LOCAL-00036" summary="game board">
-      <created>1625674134386</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1625674134386</updated>
-    </task>
-    <task id="LOCAL-00037" summary="game board">
-      <created>1625675091122</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1625675091122</updated>
-    </task>
-    <task id="LOCAL-00038" summary="game board">
-      <created>1625684350550</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1625684350550</updated>
-    </task>
-    <task id="LOCAL-00039" summary="game board">
-      <created>1625689004528</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1625689004528</updated>
-    </task>
-    <task id="LOCAL-00040" summary="game board">
-      <created>1625689459852</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1625689459852</updated>
-    </task>
-    <task id="LOCAL-00041" summary="game board">
-      <created>1625754108704</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1625754108704</updated>
-    </task>
-    <task id="LOCAL-00042" summary="game board">
-      <created>1625754441933</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1625754441933</updated>
-    </task>
-    <task id="LOCAL-00043" summary="game board">
-      <created>1625757075386</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1625757075386</updated>
-    </task>
-    <task id="LOCAL-00044" summary="attack fixed">
-      <created>1625758410584</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1625758410584</updated>
-    </task>
-    <task id="LOCAL-00045" summary="attack fixed">
-      <created>1625760681011</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1625760681011</updated>
-    </task>
-    <task id="LOCAL-00046" summary="attack fixed">
-      <created>1625773986738</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1625773986738</updated>
-    </task>
-    <task id="LOCAL-00047" summary="adding graveyard show&#10;not done yet">
-      <created>1625809801824</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1625809801824</updated>
-    </task>
-    <task id="LOCAL-00048" summary="duel debugged">
-      <created>1625830031571</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1625830031571</updated>
-    </task>
-    <task id="LOCAL-00049" summary="showGraveyard is added">
-      <created>1625835350051</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1625835350051</updated>
-    </task>
-    <option name="localTasksCounter" value="50" />
-    <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="main" />
@@ -531,38 +107,31 @@
     <MESSAGE value="frustrated af" />
     <MESSAGE value="game" />
     <MESSAGE value="game board" />
-    <MESSAGE value="attack fixed" />
     <MESSAGE value="adding graveyard show&#10;not done yet" />
     <MESSAGE value="duel debugged" />
-    <MESSAGE value="showGraveyard is added" />
-    <option name="LAST_COMMIT_MESSAGE" value="showGraveyard is added" />
+    <MESSAGE value="attack fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="attack fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
-          <line>100</line>
+          <line>95</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java</url>
-          <line>390</line>
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Main_java$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1624657991342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$All_in_YuGiOh.ic" NAME="All in YuGiOh Coverage Results" MODIFIED="1624660089167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_battleTest.ic" NAME="GameTest.battleTest Coverage Results" MODIFIED="1624645611916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_TTest.ic" NAME="GameTest.TTest Coverage Results" MODIFIED="1624656745910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_spellTest.ic" NAME="GameTest.spellTest Coverage Results" MODIFIED="1624652309029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_AITest.ic" NAME="GameTest.AITest Coverage Results" MODIFIED="1624645990912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Main_java$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1624647543177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_team_13$Main.ic" NAME="Main Coverage Results" MODIFIED="1625828087540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$All_in_YuGiOh.ic" NAME="All in YuGiOh Coverage Results" MODIFIED="1624657570102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_battleTest.ic" NAME="GameTest.battleTest Coverage Results" MODIFIED="1624656790598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_AITest.ic" NAME="GameTest.AITest Coverage Results" MODIFIED="1624645990912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_TTest.ic" NAME="GameTest.TTest Coverage Results" MODIFIED="1624656745910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_spellTest.ic" NAME="GameTest.spellTest Coverage Results" MODIFIED="1624652309029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -1,5 +1,6 @@
 package model.players;
 
+import javafx.scene.image.Image;
 import model.UserDeck;
 import model.cards.Card;
 
@@ -24,6 +25,7 @@ public class User implements Comparable<User> {
     private HashMap<String, Integer> cardNameToNumber;
     private ArrayList<UserDeck> allUserDecks;
     private ArrayList<Card> allCards;
+    private Image image = null;
 
     public User(String username, String password, String nickname) {
         this.username = username;
@@ -193,5 +195,13 @@ public class User implements Comparable<User> {
                 return userDeck;
         }
         return null;
+    }
+
+    public void setProfileImage(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }

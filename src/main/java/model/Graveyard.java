@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.cards.Card;
 import model.cards.Monster;
+import model.cards.Spell;
 import model.players.Player;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class Graveyard {
             return;
         if (allCards.contains(card))
             return;
-        if (card.getZone() == Zone.IN_HAND) {
+        if (card.getZone() == Zone.IN_HAND&& !(card instanceof Spell) ) {
             card.getCardOwner().getCardsInHand().remove(card);
         }
         card.setZone(Zone.GRAVEYARD);

@@ -40,7 +40,7 @@
    </center>
    <right>
        <AnchorPane fx:id="rightPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="266.666" style="-fx-background-color: #191970;" BorderPane.alignment="CENTER">
-           <Label layoutX="54" layoutY="36.0" prefHeight="23.333333" prefWidth="219.33333" text="Rival player : " textFill="#cc2c10">
+           <Label fx:id="rivalPlayerLabel" layoutX="54" layoutY="24.0" prefHeight="23.333333" prefWidth="219.33333" text="Rival player : " textFill="#cc2c10">
               <font>
                   <Font name="System Bold Italic" size="16" />
               </font>
@@ -64,7 +64,7 @@
    </right>
    <left>
        <AnchorPane fx:id="leftPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="266.666" style="-fx-background-color: #191970;" BorderPane.alignment="CENTER">
-           <Label layoutX="36.666" layoutY="24" prefHeight="23.333" prefWidth="219.333" text="Our player : " textFill="#0fcc58">
+           <Label fx:id="ourPlayerLabel" layoutX="36.666" layoutY="24" prefHeight="23.333" prefWidth="219.333" text="Our player : " textFill="#0fcc58">
               <font>
                   <Font name="System Bold Italic" size="16" />
               </font>
