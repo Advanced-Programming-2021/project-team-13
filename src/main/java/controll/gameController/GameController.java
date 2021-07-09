@@ -74,6 +74,7 @@ public class GameController {
 
 
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
+        gameView.setGameController(this);
         this.gameView = gameView;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
@@ -99,11 +100,9 @@ public class GameController {
                 gameView.gridPaneSetup(card1.getImage(), secondPlayer.getCardsInHandImage().get(secondPlayer.getCardsInHand().size() - 1));
         }
         this.startingRounds = startingRounds;
-        turnsPlayed = 0;
-        currentPhase = Phase.DRAW_PHASE;
-        if (firstPlayer instanceof AIPlayer)
-            playAI();
-        notToDrawCardTurns = new ArrayList<>();
+        this.turnsPlayed = 0;
+        this.currentPhase = Phase.DRAW_PHASE;
+        this.notToDrawCardTurns = new ArrayList<>();
         canContinue = true;
         isInAttack = false;
         normalSummonHappened = false;
@@ -112,6 +111,8 @@ public class GameController {
         anySummonHappened = false;
         if (currentPlayer instanceof AIPlayer)
             isAITurn = true;
+        if (firstPlayer instanceof AIPlayer)
+            playAI();
     }
 
     public boolean isAITurn() {

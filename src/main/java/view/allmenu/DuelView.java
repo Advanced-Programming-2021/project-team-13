@@ -1,6 +1,8 @@
 package view.allmenu;
 
 import controll.gameController.DuelController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -16,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.menuItems.CustomButton;
 import model.players.Player;
 import model.players.User;
@@ -81,7 +84,6 @@ public class DuelView {
             getRounds();
         else
             notifLabel.setText("You Do Not Have Active/Valid Deck");
-
     }
 
     private void getRounds() {
@@ -147,10 +149,6 @@ public class DuelView {
         notifLabel.setText(username + "’s deck is invalid");
     }
 
-    public DuelController getDuelController() {
-        return duelController;
-    }
-
     public int inputStonePaperScissor(User user) {
         sho();
         return numberToReturn;
@@ -172,10 +170,18 @@ public class DuelView {
                     rpcNotifLabel.setText("Equal, try again");
                 else if (result == 1) {
                     rpcNotifLabel.setText("You Start The Game");
-                    duelController.startAIDuel(ViewMaster.getUser(), 1, 1);
+                    KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event ->
+                            duelController.startAIDuel(ViewMaster.getUser(), 1, 1));
+                    Timeline timeline = new Timeline(keyFrame);
+                    timeline.setCycleCount(1);
+                    timeline.play();
                 } else {
                     rpcNotifLabel.setText("AI Start The Game");
-                    duelController.startAIDuel(ViewMaster.getUser(), 1, 1);
+                    KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event ->
+                            duelController.startAIDuel(ViewMaster.getUser(), 1, 2));
+                    Timeline timeline = new Timeline(keyFrame);
+                    timeline.setCycleCount(1);
+                    timeline.play();
                 }
             }
         }));
@@ -207,10 +213,6 @@ public class DuelView {
         leftPane.setDisable(true);
         upPane.setEffect(new GaussianBlur(15));
         upPane.setDisable(true);
-    }
-
-    public void printEqual() {
-        rpcNotifLabel.setText("Equal!\ntry again!");
     }
 
     public GameView startGame(Player firstPlayer,Player secondPlayer,Player currentPlayer,int rounds)

@@ -3,6 +3,7 @@ package model;
 import controll.gameController.GameController;
 import enums.Zone;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import model.cards.Card;
 import model.cards.Monster;
 import model.players.Player;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public class Graveyard {
     private final ArrayList<Card> allCards;
     private final Player owner;
+    private StackPane stackPane;
 
     public Graveyard(Player player) {
         owner = player;
@@ -59,6 +61,14 @@ public class Graveyard {
                 }
             }
         allCards.add(card);
+    }
+
+    public StackPane getStackPane() {
+        return stackPane;
+    }
+
+    public void setStackPane(StackPane stackPane) {
+        this.stackPane = stackPane;
     }
 
     public ArrayList<Card> getAllCards() {
