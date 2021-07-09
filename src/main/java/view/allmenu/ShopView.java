@@ -134,7 +134,9 @@ public class ShopView {
             ImageLoader.getCardsImage().forEach((name, image) ->
             {
                 if (!name.equalsIgnoreCase("Unknown.jpg")
-                        && !name.equalsIgnoreCase("Unknown")) {
+                        && !name.equalsIgnoreCase("Unknown")
+                && !name.equalsIgnoreCase("createdCard.jpg")
+                        && !name.equalsIgnoreCase("createdCard")) {
                     ImageView imgView = new ImageView(image);
                     imgView.setFitWidth(160);
                     imgView.setFitHeight(210);

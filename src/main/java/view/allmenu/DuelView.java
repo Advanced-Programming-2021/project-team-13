@@ -60,13 +60,22 @@ public class DuelView {
     }
 
     public void initialize() {
+        Bloom glow = new Bloom();
+        Thread t = new Thread(() -> setBackGround(pane, "/duelMenuPics/moon.gif"));
+        t.start();
+        new Thread(() -> setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3))
+                .start();
+        new Thread(() -> setBtnEffects(glow, paperImg, "/duelMenuPics/rps/paper.bmp", 1))
+                .start();
+        new Thread(() -> setBtnEffects(glow, rockImg, "/duelMenuPics/rps/rock.bmp", 2))
+                .start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         setupNotifStackPane();
         leftPane.getChildren().remove(rpcHbox);
-        Bloom glow = new Bloom();
-        setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3);
-        setBtnEffects(glow, paperImg, "/duelMenuPics/rps/paper.bmp", 1);
-        setBtnEffects(glow, rockImg, "/duelMenuPics/rps/rock.bmp", 2);
-        setBackGround(pane, "/duelMenuPics/moon.gif");
         vBox = new VBox(0, getFirstVboxNodes());
         rightPane.getChildren().add(vBox);
     }
@@ -103,7 +112,7 @@ public class DuelView {
         notifLabel.setEffect(new Bloom(0.2));
         notif.getChildren().addAll(new Text(""), notifLabel);
         for (Node node : nodes) {
-            node.resize(150,75);
+            node.resize(150, 75);
         }
         notif.getChildren().addAll(nodes);
     }
@@ -130,8 +139,8 @@ public class DuelView {
         if (duelController.validateAIDuelGame())
             getRounds();
         else
-            createNotification("You Do Not Have Active/Valid Deck",new Node[]{
-                    new CustomButton("proceed",()->{
+            createNotification("You Do Not Have Active/Valid Deck", new Node[]{
+                    new CustomButton("proceed", () -> {
                         unBlur();
                         notifStackPane.setVisible(false);
                     })
@@ -196,8 +205,8 @@ public class DuelView {
     }
 
     public void printNoActiveDeck(String username) {
-        createNotification(username + " has no active deck",new Node[]{
-                new CustomButton("proceed",()->{
+        createNotification(username + " has no active deck", new Node[]{
+                new CustomButton("proceed", () -> {
                     unBlur();
                     notifStackPane.setVisible(false);
                 })
@@ -205,8 +214,8 @@ public class DuelView {
     }
 
     public void printInvalidDeck(String username) {
-        createNotification(username + "’s deck is invalid",new Node[]{
-                new CustomButton("proceed",()->{
+        createNotification(username + "’s deck is invalid", new Node[]{
+                new CustomButton("proceed", () -> {
                     unBlur();
                     notifStackPane.setVisible(false);
                 })
@@ -236,8 +245,7 @@ public class DuelView {
                             notifStackPane.setVisible(false);
                         })
                 });
-            }
-            else {
+            } else {
                 int result = duelController.findPlayerToStart(numberToReturn);
                 if (result == 0) {
                     rpc.setVisible(false);
@@ -248,21 +256,20 @@ public class DuelView {
                                 notifStackPane.setVisible(false);
                             })
                     });
-                }
-                else if (result == 1) {
+                } else if (result == 1) {
                     rpc.setVisible(false);
-                    createNotification("You Start The Game",new Node[]{
+                    createNotification("You Start The Game", new Node[]{
                     });
-                    KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event ->
+                    KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), event ->
                             duelController.startAIDuel(ViewMaster.getUser(), round, 1));
                     Timeline timeline = new Timeline(keyFrame);
                     timeline.setCycleCount(1);
                     timeline.play();
                 } else {
                     rpc.setVisible(false);
-                    createNotification("AI Start The Game",new Node[]{
+                    createNotification("AI Start The Game", new Node[]{
                     });
-                    KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event ->
+                    KeyFrame keyFrame = new KeyFrame(Duration.millis(3000), event ->
                             duelController.startAIDuel(ViewMaster.getUser(), round, 2));
                     Timeline timeline = new Timeline(keyFrame);
                     timeline.setCycleCount(1);
@@ -300,11 +307,11 @@ public class DuelView {
         upPane.setDisable(true);
     }
 
-    public GameView startGame(Player firstPlayer,Player secondPlayer,Player currentPlayer,int rounds)
+    public GameView startGame(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds)
             throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
         ((Stage) pane.getScene().getWindow()).setScene(new Scene(loader.load()));
-        ((GameView)loader.getController()).setup(firstPlayer,secondPlayer,currentPlayer,rounds);
+        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds);
         return loader.getController();
     }
 }
