@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="motherPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.GameView">
+<BorderPane fx:id="motherPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" stylesheets="@../styles/GameCss.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.GameView">
    <center>
        <StackPane fx:id="centerPane" prefHeight="720" prefWidth="814" BorderPane.alignment="CENTER">
            <GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" />
            <AnchorPane fx:id="tributeContainer" prefHeight="637.0" prefWidth="746.0" visible="false">
-               <TilePane fx:id="tributeCardsPlace" layoutX="44.0" layoutY="79.0" prefHeight="563.0" prefWidth="659.0"/>
-               <Label fx:id="tributeNumber" alignment="CENTER" layoutX="191.0" layoutY="14.0" prefHeight="54.0"
-                      prefWidth="366.0">
+               <TilePane fx:id="tributeCardsPlace" layoutX="44.0" layoutY="79.0" prefHeight="563.0" prefWidth="659.0" />
+               <Label fx:id="tributeNumber" alignment="CENTER" layoutX="191.0" layoutY="14.0" prefHeight="54.0" prefWidth="366.0">
                    <font>
-                       <Font name="System Bold Italic" size="21.0"/>
+                       <Font name="System Bold Italic" size="21.0" />
                    </font>
                </Label>
-               <ImageView fx:id="cancelTribute" fitHeight="40.0" fitWidth="88.0" layoutX="330.0" layoutY="666.0"
-                          pickOnBounds="true" preserveRatio="true"/>
+               <ImageView fx:id="cancelTribute" fitHeight="40.0" fitWidth="88.0" layoutX="330.0" layoutY="666.0" pickOnBounds="true" preserveRatio="true" />
+           </AnchorPane>
+           <AnchorPane fx:id="showGraveyardBack" disable="true" prefHeight="200.0" prefWidth="200.0" styleClass="graveyard" visible="false">
+               <TilePane fx:id="graveyardTilepane" prefHeight="629.0" prefWidth="747.0" />
+               <Button fx:id="graveyardClose" layoutX="302.0" layoutY="644.0" mnemonicParsing="false" onAction="#closeGraveyardMenu" prefHeight="61.0" prefWidth="142.0" styleClass="graveyardButton" text="Close" />
            </AnchorPane>
        </StackPane>
    </center>

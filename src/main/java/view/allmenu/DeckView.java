@@ -32,7 +32,6 @@ import view.ViewMaster;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -130,7 +129,7 @@ public class DeckView implements Initializable {
             switch (answer) {
                 case "added":
                     addCardToDeck(mainDeck, imageView, cardName);
-                    disableCardInSource(currentPlayerDeck.getCardNameToNumberInMain(), event, cardName);
+                    disableCardInSource(event, cardName);
                     if (sideDeck.getChildren().contains(sourceImageView))
                         removeCard(sideDeck, sourceImageView, cardName, true);
                     break;
@@ -151,7 +150,7 @@ public class DeckView implements Initializable {
             switch (answer) {
                 case "added":
                     addCardToDeck(sideDeck, imageView, cardName);
-                    disableCardInSource(currentPlayerDeck.getCardNameToNumberInSide(), event, cardName);
+                    disableCardInSource(event, cardName);
                     if (mainDeck.getChildren().contains(sourceImageView))
                         removeCard(mainDeck, sourceImageView, cardName, false);
                     break;
@@ -169,10 +168,10 @@ public class DeckView implements Initializable {
                 || event.getTarget().equals(scrollPane) || event.getTarget().equals(cardVBox)) {
             if (mainDeck.getChildren().contains(sourceImageView)) {
                 removeCard(mainDeck, sourceImageView, cardName, false);
-                disableCardInTarget(sourceImageView, currentPlayerDeck.getCardNameToNumberInMain(), cardName);
+                disableCardInTarget(sourceImageView, cardName);
             } else if (sideDeck.getChildren().contains(sourceImageView)) {
                 removeCard(sideDeck, sourceImageView, cardName, true);
-                disableCardInTarget(sourceImageView, currentPlayerDeck.getCardNameToNumberInSide(), cardName);
+                disableCardInTarget(sourceImageView, cardName);
             }
         }
     }
@@ -184,42 +183,38 @@ public class DeckView implements Initializable {
         }
     }
 
-    private void disableCardInSource(HashMap<String, Integer> cardNameToNumberInDeck, DragEvent event, String cardName) {
+    private void disableCardInSource(DragEvent event, String cardName) {
         if (event.getGestureSource() instanceof ImageView) {
             ImageView imageView1 = (ImageView) event.getGestureSource();
             if (cardVBox.getChildren().contains(imageView1)) {
-                int numberInDeck = cardNameToNumberInDeck.getOrDefault(cardName, 0);
-                int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName, 0);
-                if (numberInDeck == shoppedNumber) {
-                    imageView1.setDisable(true);
-                    ColorAdjust colorAdjust = new ColorAdjust();
-                    colorAdjust.setBrightness(-0.5);
-                    imageView1.setEffect(colorAdjust);
-                } else {
-                    imageView1.setDisable(false);
-                    imageView1.setEffect(null);
+                disableOrEnableCard(cardName, imageView1);
+            }
+        }
+    }
+
+    private void disableCardInTarget(ImageView sourceImageView, String cardName) {
+        for (Node node : cardVBox.getChildren()) {
+            if (node instanceof ImageView) {
+                if (sourceImageView.getImage().equals(((ImageView) node).getImage())) {
+                    disableOrEnableCard(cardName, node);
+                    break;
                 }
             }
         }
     }
 
-    private void disableCardInTarget(ImageView sourceImageView, HashMap<String, Integer> cardNameToNumberInDeck, String cardName) {
-        for (Node node : cardVBox.getChildren()) {
-            if (node instanceof ImageView) {
-                if (sourceImageView.getImage().equals(((ImageView) node).getImage())) {
-                    int numberInDeck = cardNameToNumberInDeck.getOrDefault(cardName, 0);
-                    int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName, 0);
-                    if (numberInDeck == shoppedNumber) {
-                        node.setDisable(true);
-                        ColorAdjust colorAdjust = new ColorAdjust();
-                        colorAdjust.setBrightness(-0.5);
-                        node.setEffect(colorAdjust);
-                    } else {
-                        node.setDisable(false);
-                        node.setEffect(null);
-                    }
-                }
-            }
+    private void disableOrEnableCard(String cardName, Node node) {
+        int numberInDeck = currentPlayerDeck.getCardNameToNumberInMain().getOrDefault(cardName, 0);
+        numberInDeck += currentPlayerDeck.getCardNameToNumberInSide().getOrDefault(cardName, 0);
+        int shoppedNumber = user.getCardNameToNumber().getOrDefault(cardName, 0);
+        if (numberInDeck == shoppedNumber) {
+            node.setDisable(true);
+            ColorAdjust colorAdjust = new ColorAdjust();
+            colorAdjust.setBrightness(-0.5);
+            node.setEffect(colorAdjust);
+        } else {
+            node.setDisable(false);
+            node.setEffect(null);
         }
     }
 
@@ -526,17 +521,17 @@ public class DeckView implements Initializable {
         }
         for (String str : mainDeckCards) {
             for (int i = 0; i < userDeck.getCardNameToNumberInMain().getOrDefault(str, 0); i++) {
-                loadCard(str, mainDeck, false);
+                loadCard(str, mainDeck);
             }
         }
         for (String str : sideDeckCards) {
             for (int i = 0; i < userDeck.getCardNameToNumberInSide().getOrDefault(str, 0); i++) {
-                loadCard(str, sideDeck, true);
+                loadCard(str, sideDeck);
             }
         }
     }
 
-    private void loadCard(String str, TilePane sideDeck, boolean isSide) {
+    private void loadCard(String str, TilePane sideDeck) {
         Card card = user.getCardByName(str);
         Image image = ImageLoader.getCardImageByName(str);
         ImageView imageView = new ImageView(image);
@@ -546,10 +541,7 @@ public class DeckView implements Initializable {
         imageView.setOnMouseExited(event -> stopShowCard());
         imageView.setOnDragDetected(event -> handleDragDetection(event, imageView, card));
         sideDeck.getChildren().add(imageView);
-        if (isSide)
-            disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInSide(), card.getCardNameInGame());
-        else
-            disableCardInTarget(imageView, currentPlayerDeck.getCardNameToNumberInMain(), card.getCardNameInGame());
+        disableCardInTarget(imageView, card.getCardNameInGame());
     }
 
     @FXML

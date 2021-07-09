@@ -12,8 +12,10 @@ import javafx.animation.RotateTransition;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.Bloom;
@@ -61,6 +63,9 @@ public class GameView {
     public TilePane tributeCardsPlace;
     public Label tributeNumber;
     public ImageView cancelTribute;
+    public Button graveyardClose;
+    public TilePane graveyardTilepane;
+    public AnchorPane showGraveyardBack;
     private GameController gameController;
     public GridPane gridPane;
     public BorderPane motherPane;
@@ -1688,4 +1693,6 @@ public class GameView {
         return result;
     }
 
+    public void closeGraveyardMenu(ActionEvent actionEvent) {
+    }
 }
