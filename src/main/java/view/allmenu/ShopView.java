@@ -135,8 +135,8 @@ public class ShopView {
             {
                 if (!name.equalsIgnoreCase("Unknown.jpg")
                         && !name.equalsIgnoreCase("Unknown")
-                && !name.equalsIgnoreCase("createdCard.jpg")
-                        && !name.equalsIgnoreCase("createdCard")) {
+                        && !name.equalsIgnoreCase("createCard.jpg")
+                        && !name.equalsIgnoreCase("createCard")) {
                     ImageView imgView = new ImageView(image);
                     imgView.setFitWidth(160);
                     imgView.setFitHeight(210);
