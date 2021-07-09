@@ -21,8 +21,7 @@ public class Cell {
     private Image monsterImage;
     ImageView cardImages;
     private ColorAdjust colorAdjust = new ColorAdjust();
-    private ColorAdjust flipSummon = new ColorAdjust();
-    private Timeline summon = new Timeline(new KeyFrame(Duration.seconds(0.05), e -> {
+    private final Timeline summon = new Timeline(new KeyFrame(Duration.seconds(0.05), e -> {
         colorAdjust.setBrightness(colorAdjust.getBrightness() - 0.05);
     }));
 
@@ -69,7 +68,6 @@ public class Cell {
     public void setPictureUP() {
         picture.getChildren().clear();
         ImageView cardImages = new ImageView(monsterImage);
-
         picture.getChildren().add(cardImages);
         cardImages.setFitWidth(93.3333);
         cardImages.setFitHeight(126.6666);

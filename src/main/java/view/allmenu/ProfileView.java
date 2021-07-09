@@ -19,49 +19,50 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.menuItems.CustomButton;
+import view.ViewMaster;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.View;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 public class ProfileView {
     private final ProfileController profileController;
     public BorderPane pane;
+    @FXML
     private ImageView avatarPic;
+
     public ProfileView() {
         profileController = new ProfileController(this);
     }
 
     public void initialize() {
-        Circle circle = new Circle(1280-120,150,100, Color.web("black",1));
-        circle.setFill(new ImagePattern(new Image("/profile/2.png"),60,51,200,200,false));
+        Circle circle = new Circle(1280 - 120, 150, 100, Color.web("black", 1));
+        circle.setFill(new ImagePattern(ViewMaster.getUser().getImage() == null ? new Image("/profile/2.png") : ViewMaster.getUser().getImage()
+                , 60, 51, 200, 200, false));
         Image background = new Image(getClass().getResource("/profile/a.jpg").toExternalForm(),
                 1280, 720, false, true);
         ImageView imageView = new ImageView(background);
         circle.setOnMouseClicked(event -> {
-//            JFileChooser chooser = new JFileChooser();
-//            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-//                    "JPG & GIF Images", "jpg", "gif");
-//            chooser.setFileFilter(filter);
-//            int returnVal = chooser.showOpenDialog(null);
-//            if(returnVal == JFileChooser.APPROVE_OPTION) {
-//                System.out.println("You chose to open this file: " +
-//                        chooser.getSelectedFile().getAbsolutePath());
-//            }
-            FileDialog dialog = new FileDialog((Frame)null, "Select picture to set as avatar");
-            dialog.setMode(FileDialog.LOAD);
-            dialog.setVisible(true);
-            String file = dialog.getDirectory()+dialog.getFile();
-            System.out.println(file);
-            circle.setFill(new ImagePattern
-                    (new Image(file),60,51,200,200,false));
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select Profile Image");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image"
+                    , "*.png", "*.jpg", "*.jpeg", "*.tif", "*.tiff", "*.bmp", "*.gif"));
+            File file = fileChooser.showOpenDialog(pane.getScene().getWindow());
+            if (file != null && file.exists() && file.isFile()) {
+                Image image = new Image(file.toURI().toString());
+                circle.setFill(new ImagePattern(image, 60, 51, 200, 200, false));
+                ViewMaster.getUser().setProfileImage(image);
+            }
         });
         VBox vbox = new VBox(20, setNodes());
         vbox.setTranslateY(400);
-        vbox.setTranslateX(1280-300);
+        vbox.setTranslateX(1280 - 300);
         pane.getChildren().addAll(
                 imageView,
                 vbox,
@@ -98,19 +99,19 @@ public class ProfileView {
     }
 
     public void printPasswordChanged() {
-        Alert alert = new Alert(AlertType.INFORMATION,"password changed successfully!",ButtonType.OK);
+        Alert alert = new Alert(AlertType.INFORMATION, "password changed successfully!", ButtonType.OK);
         alert.setHeaderText("Successful");
         alert.showAndWait();
     }
 
     public void printInvalidPassword() {
-        Alert alert = new Alert(AlertType.ERROR,"current password is invalid",ButtonType.OK);
+        Alert alert = new Alert(AlertType.ERROR, "current password is invalid", ButtonType.OK);
         alert.setHeaderText("Failed");
         alert.showAndWait();
     }
 
     public void printSamePassword() {
-        Alert alert = new Alert(AlertType.ERROR,"please enter a new password",ButtonType.OK);
+        Alert alert = new Alert(AlertType.ERROR, "please enter a new password", ButtonType.OK);
         alert.setHeaderText("Failed");
         alert.showAndWait();
     }
@@ -121,11 +122,11 @@ public class ProfileView {
         textInputDialog.setTitle("Enter current password");
         textInputDialog.setHeaderText("Current");
         textInputDialog.showAndWait();
-        if(textInputDialog.getEditor().getText().isEmpty()) {
+        if (textInputDialog.getEditor().getText().isEmpty()) {
             emptyInputError();
             return;
         }
-        String currentPassword=textInputDialog.getEditor().getText();
+        String currentPassword = textInputDialog.getEditor().getText();
         TextInputDialog textInputDialog2 = new TextInputDialog();
         textInputDialog2.setTitle("Enter new password");
         textInputDialog2.showAndWait();
@@ -134,7 +135,7 @@ public class ProfileView {
     }
 
     private void emptyInputError() {
-        Alert alert = new Alert(AlertType.ERROR,"Empty Input",ButtonType.OK);
+        Alert alert = new Alert(AlertType.ERROR, "Empty Input", ButtonType.OK);
         alert.showAndWait();
     }
 
@@ -144,7 +145,7 @@ public class ProfileView {
         textInputDialog.setTitle("Enter new nickName");
         textInputDialog.setHeaderText("new Nickname");
         textInputDialog.showAndWait();
-        if(textInputDialog.getEditor().getText().isEmpty()) {
+        if (textInputDialog.getEditor().getText().isEmpty()) {
             emptyInputError();
             return;
         }
