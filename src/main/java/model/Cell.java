@@ -2,9 +2,15 @@ package model;
 
 import enums.AttackOrDefense;
 import enums.Face;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 import model.cards.Card;
 
 public class Cell {
@@ -12,6 +18,11 @@ public class Cell {
     private Card card;
     private StackPane picture;
     private Image monsterImage;
+    ImageView cardImages;
+    private Timeline summon = new Timeline(new KeyFrame(Duration.seconds(0.1), e -> {
+        cardImages.setOpacity(cardImages.getOpacity() + 0.1);
+    }));
+
 
     Cell(Card card) {
         this.card = card;
@@ -35,7 +46,6 @@ public class Cell {
 
     public void setPicture(Image picture, Face face, AttackOrDefense attackOrDefense) {
         monsterImage = picture;
-        ImageView cardImages;
         if (face == Face.UP)
             cardImages = new ImageView(picture);
         else
@@ -47,14 +57,17 @@ public class Cell {
             getPicture().setRotate(0);
         cardImages.setFitWidth(93.3333);
         cardImages.setFitHeight(126.6666);
+        cardImages.setOpacity(0);
         this.picture.getChildren().add(cardImages);
+        summon.setCycleCount(10);
+        summon.play();
     }
 
     public void setPictureUP() {
+        picture.getChildren().clear();
         ImageView cardImages = new ImageView(monsterImage);
+        picture.getChildren().add(cardImages);
         cardImages.setFitWidth(93.3333);
         cardImages.setFitHeight(126.6666);
-        picture.getChildren().clear();
-        picture.getChildren().add(cardImages);
     }
 }

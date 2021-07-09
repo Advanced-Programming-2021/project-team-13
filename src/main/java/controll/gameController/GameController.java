@@ -1,9 +1,14 @@
 package controll.gameController;
 
 import enums.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
@@ -48,6 +53,7 @@ public class GameController {
     private boolean anySummonHappened;
     private int numberOfTributeNeeded = 0;
     private boolean isAITurn = false;
+    private RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1));
 
     public static boolean checkForDeathAction(Card card) {
         if (card instanceof Monster) {
@@ -68,6 +74,7 @@ public class GameController {
 
 
     public GameController(GameView gameView, Player firstPlayer, Player secondPlayer, Player startingPlayer, int startingRounds) {
+        gameView.setGameController(this);
         this.gameView = gameView;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
@@ -93,11 +100,9 @@ public class GameController {
                 gameView.gridPaneSetup(card1.getImage(), secondPlayer.getCardsInHandImage().get(secondPlayer.getCardsInHand().size() - 1));
         }
         this.startingRounds = startingRounds;
-        turnsPlayed = 0;
-        currentPhase = Phase.DRAW_PHASE;
-        if (firstPlayer instanceof AIPlayer)
-            playAI();
-        notToDrawCardTurns = new ArrayList<>();
+        this.turnsPlayed = 0;
+        this.currentPhase = Phase.DRAW_PHASE;
+        this.notToDrawCardTurns = new ArrayList<>();
         canContinue = true;
         isInAttack = false;
         normalSummonHappened = false;
@@ -106,6 +111,8 @@ public class GameController {
         anySummonHappened = false;
         if (currentPlayer instanceof AIPlayer)
             isAITurn = true;
+        if (firstPlayer instanceof AIPlayer)
+            playAI();
     }
 
     public boolean isAITurn() {
@@ -624,7 +631,7 @@ public class GameController {
         checkTrapActivation();
     }
 
-    private void activateSpell() {
+    public void activateSpell() {
         if ((currentPhase != Phase.MAIN_PHASE_1) && (currentPhase != Phase.MAIN_PHASE_2)) {
             gameView.printCantActiveThisTurn();
             return;
@@ -680,6 +687,7 @@ public class GameController {
                 currentPlayer.getBoard().getGraveyard().addCard(spell);
         }
         currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
+        removeCardFromHandScene(spell);
         spell.setZone(Zone.SPELL_TRAP_ZONE);
         gameView.printMap();
         if (spell.isActivated())
@@ -736,6 +744,7 @@ public class GameController {
         if (currentPlayer.getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getBoard().getGraveyard().addCard(currentPlayer.getBoard().getFieldSpell().getCard());
         currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
+        removeCardFromHandScene(currentPlayer.getSelectedCard());
         spell.setZone(Zone.FIELD);
         currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
         currentPlayer.getBoard().setFieldSpell(spell);
@@ -1468,7 +1477,7 @@ public class GameController {
         normalSummonHappened = true;
         anySummonHappened = true;
         checkTrapActivation();
-        ((Monster) summonedCard).setAttackPointInGame(1900);
+        ((Monster) summonedCard).setAttackNum(1900);
         normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
         normalSummonHappened = false;
         anySummonHappened = false;
@@ -1969,7 +1978,12 @@ public class GameController {
         monster.setAttackOrDefense(monster.getAttackOrDefense() == AttackOrDefense.ATTACK ? AttackOrDefense.DEFENSE : AttackOrDefense.ATTACK);
         StackPane stackPane = Arrays.stream(currentPlayer.getBoard().getMonsters()).filter(e -> e.getCard() == monster)
                 .findFirst().get().getPicture();
-        stackPane.setRotate(stackPane.getRotate() == 90 ? 0 : 90);
+        rotateTransition.setNode(stackPane);
+        rotateTransition.setCycleCount(1);
+        rotateTransition.setFromAngle(stackPane.getRotate());
+        rotateTransition.setToAngle(stackPane.getRotate() == 90 ? 0 : 90);
+        rotateTransition.play();
+        //stackPane.setRotate(stackPane.getRotate() == 90 ? 0 : 90);
     }
 
 
