@@ -1,9 +1,14 @@
 package controll.gameController;
 
 import enums.*;
+import javafx.animation.KeyFrame;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import model.Cell;
 import model.cards.Card;
 import model.cards.Monster;
@@ -48,6 +53,7 @@ public class GameController {
     private boolean anySummonHappened;
     private int numberOfTributeNeeded = 0;
     private boolean isAITurn = false;
+    private RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1));
 
     public static boolean checkForDeathAction(Card card) {
         if (card instanceof Monster) {
@@ -625,7 +631,7 @@ public class GameController {
         checkTrapActivation();
     }
 
-    private void activateSpell() {
+    public void activateSpell() {
         if ((currentPhase != Phase.MAIN_PHASE_1) && (currentPhase != Phase.MAIN_PHASE_2)) {
             gameView.printCantActiveThisTurn();
             return;
@@ -681,6 +687,7 @@ public class GameController {
                 currentPlayer.getBoard().getGraveyard().addCard(spell);
         }
         currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
+        removeCardFromHandScene(spell);
         spell.setZone(Zone.SPELL_TRAP_ZONE);
         gameView.printMap();
         if (spell.isActivated())
@@ -737,6 +744,7 @@ public class GameController {
         if (currentPlayer.getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getBoard().getGraveyard().addCard(currentPlayer.getBoard().getFieldSpell().getCard());
         currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
+        removeCardFromHandScene(currentPlayer.getSelectedCard());
         spell.setZone(Zone.FIELD);
         currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
         currentPlayer.getBoard().setFieldSpell(spell);
@@ -1469,7 +1477,7 @@ public class GameController {
         normalSummonHappened = true;
         anySummonHappened = true;
         checkTrapActivation();
-        ((Monster) summonedCard).setAttackPointInGame(1900);
+        ((Monster) summonedCard).setAttackNum(1900);
         normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
         normalSummonHappened = false;
         anySummonHappened = false;
@@ -1970,7 +1978,12 @@ public class GameController {
         monster.setAttackOrDefense(monster.getAttackOrDefense() == AttackOrDefense.ATTACK ? AttackOrDefense.DEFENSE : AttackOrDefense.ATTACK);
         StackPane stackPane = Arrays.stream(currentPlayer.getBoard().getMonsters()).filter(e -> e.getCard() == monster)
                 .findFirst().get().getPicture();
-        stackPane.setRotate(stackPane.getRotate() == 90 ? 0 : 90);
+        rotateTransition.setNode(stackPane);
+        rotateTransition.setCycleCount(1);
+        rotateTransition.setFromAngle(stackPane.getRotate());
+        rotateTransition.setToAngle(stackPane.getRotate() == 90 ? 0 : 90);
+        rotateTransition.play();
+        //stackPane.setRotate(stackPane.getRotate() == 90 ? 0 : 90);
     }
 
 
