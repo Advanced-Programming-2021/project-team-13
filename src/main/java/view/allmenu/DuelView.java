@@ -45,6 +45,7 @@ public class DuelView {
     public Label notifLabel;
     public Label rpcNotifLabel;
     private int numberToReturn = -1;
+    private int round = 0;
 
     public DuelView() {
         duelController = new DuelController(this);
@@ -89,10 +90,12 @@ public class DuelView {
     private void getRounds() {
         vBox.setVisible(false);
         hBox = new HBox(1, new CustomButton("1", () -> {
+            round = 1;
             sho();
             vBox.setVisible(true);
             pane.getChildren().remove(hBox);
         }), new CustomButton("3", () -> {
+            round = 3;
             sho();
             vBox.setVisible(true);
             pane.getChildren().remove(hBox);
@@ -171,14 +174,14 @@ public class DuelView {
                 else if (result == 1) {
                     rpcNotifLabel.setText("You Start The Game");
                     KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event ->
-                            duelController.startAIDuel(ViewMaster.getUser(), 1, 1));
+                            duelController.startAIDuel(ViewMaster.getUser(), round, 1));
                     Timeline timeline = new Timeline(keyFrame);
                     timeline.setCycleCount(1);
                     timeline.play();
                 } else {
                     rpcNotifLabel.setText("AI Start The Game");
                     KeyFrame keyFrame = new KeyFrame(Duration.millis(3000) , event ->
-                            duelController.startAIDuel(ViewMaster.getUser(), 1, 2));
+                            duelController.startAIDuel(ViewMaster.getUser(), round, 2));
                     Timeline timeline = new Timeline(keyFrame);
                     timeline.setCycleCount(1);
                     timeline.play();
