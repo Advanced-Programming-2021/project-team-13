@@ -686,8 +686,8 @@ public class GameController {
             if (spell.getType().equals("Normal") || spell.getType().equals("Quick-play"))
                 currentPlayer.getBoard().getGraveyard().addCard(spell);
         }
-        currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
         removeCardFromHandScene(spell);
+        currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
         spell.setZone(Zone.SPELL_TRAP_ZONE);
         gameView.printMap();
         if (spell.isActivated())

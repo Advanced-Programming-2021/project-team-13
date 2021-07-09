@@ -21,7 +21,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -53,7 +52,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.prefs.BackingStoreException;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -178,15 +176,15 @@ public class GameView {
         notifStackPane = new StackPane();
         notifStackPane.getChildren().add(vBox);
         vBox.setPrefHeight(300);
-        vBox.setPrefWidth(500);
+        vBox.setPrefWidth(700);
         vBox.setMinHeight(300);
-        vBox.setMinWidth(500);
+        vBox.setMinWidth(700);
         vBox.setAlignment(Pos.TOP_CENTER);
         vBox.setStyle("-fx-background-image: url('/gamePics/notif.jpg');");
         notifStackPane.setMinHeight(300);
-        notifStackPane.setMinWidth(500);
+        notifStackPane.setMinWidth(700);
         notifStackPane.setPrefHeight(300);
-        notifStackPane.setPrefWidth(500);
+        notifStackPane.setPrefWidth(700);
         notifStackPane.setAlignment(Pos.CENTER);
         notifStackPane.setTranslateY(300);
         notifStackPane.setTranslateX(600);
@@ -272,6 +270,7 @@ public class GameView {
                     }
                     if (i == 3) {
                         ourPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+
                     }
                 }
                 gridPane.add(stackPane, j, i);
@@ -298,7 +297,7 @@ public class GameView {
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
             fadeTransition.setNode(selectedCard);
-            rivalSelectedCard.setImage(((ImageView) rivalSelectedCell.getPicture().getChildren().get(0)).getImage());
+            rivalSelectedCard.setImage(rivalSelectedCell.getCard().getImage());
             fadeTransition.play();
             if (killOpponentMonsterPhase) {
                 if (rivalSelectedCell.getCard() != null) {
@@ -311,8 +310,6 @@ public class GameView {
                     }
                 }
             }
-//            System.out.println(rivalSelectedPane);
-//            System.out.println(rivalSelectedCard);
         });
         stackPane.rotateProperty().set(180);
     }
@@ -352,12 +349,8 @@ public class GameView {
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
             fadeTransition.setNode(selectedCard);
-            System.out.println(((ImageView) ourSelectedPane.getChildren().get(0)).getImage());
-            selectedCard.setImage(((ImageView) ourSelectedCell.getPicture().getChildren().get(0)).getImage());
+            selectedCard.setImage(ourSelectedCell.getCard().getImage());
             fadeTransition.play();
-//            System.out.println(ourSelectedCell.getCard().getCardName() + "    " + ourSelectedCell
-//                    .getPicture() + "         " + getIndexOfnn(ourSelectedCell));
-//            System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
             if (tributePhase) {
                 if (numberOfTribute < (gameController).getNumberOfTributeNeeded()
                         && ourPlayer.getBoard().getMonsters()[x].getCard() != null) {
