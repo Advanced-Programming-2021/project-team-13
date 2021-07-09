@@ -21,6 +21,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -118,6 +119,7 @@ public class GameView {
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
         buttonBox.getChildren().addAll(buttonBoxNodes());
+
         AnimationTimer animationTimer = new AnimationTimer() {
             final ColorAdjust colorAdjust = new ColorAdjust();
             @Override
@@ -126,6 +128,7 @@ public class GameView {
                     gameController.setAITurn(false);
                     gameController.playAI();
                 }
+
                 rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
                 ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
                 Arrays.stream(new CustomSanButtons[]{attack, directAttack}).forEach(x -> {
@@ -245,7 +248,7 @@ public class GameView {
         leftGrid.setGridLinesVisible(true);
         leftGrid.setVgap(3.3333);
         leftGrid.setHgap(3.3333);
-        fourOtherCards(null);
+        fourOtherCards();
         gridPane.setTranslateX(13.3333);
         gridPane.setTranslateY(33.3333);
         gridPane.setHgap(6.6666);
@@ -259,15 +262,16 @@ public class GameView {
                 gridPaneSetup(null, stackPane);
                 if (i < 2) {
                     if (i == 0)
-                        rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+                        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
                     if (i == 1)
                         rivalMonsterCellSetup(rivalPlayer, j, stackPane);
                 } else {
                     if (i == 2) {
                         ourMonsterCellSetups(ourPlayer, j, stackPane);
                     }
-                    if (i == 3)
+                    if (i == 3) {
                         ourPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+                    }
                 }
                 gridPane.add(stackPane, j, i);
             }
@@ -277,17 +281,16 @@ public class GameView {
     private void rivalMonsterCellSetup(Player rivalPlayer, int j, StackPane stackPane) {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
         rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
-        stackPane.setOnMouseEntered(e -> {
-            stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
-        });
-        stackPane.setOnMouseExited(e -> {
-            stackPane.setEffect(null);
-        });
+        DropShadow shadow=new DropShadow(0, 0f, 0f, Color.CRIMSON);
+        stackPaneEffect(stackPane, shadow);
         stackPane.setOnMouseClicked(e -> {
-            if (stackPane.getEffect() == null) {
-                stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
+            Arrays.stream(rivalPlayer.getBoard().getMonsters()).map(Cell::getPicture).forEach(a->{
+                ((DropShadow)((Bloom)a.getEffect()).getInput()).setRadius(0);
+            });
+            if (shadow.getRadius()==0) {
+                shadow.setRadius(16);
             } else
-                stackPane.setEffect(null);
+                shadow.setRadius(0);
             rivalSelectedPane = stackPane;
             rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getMonsters())
                     .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
@@ -313,21 +316,32 @@ public class GameView {
         stackPane.rotateProperty().set(180);
     }
 
+    private void stackPaneEffect(StackPane stackPane, DropShadow shadow) {
+        Bloom bloom = new Bloom(1);
+        bloom.setInput(shadow);
+        stackPane.setEffect(bloom);
+        stackPane.setOnMouseEntered(e -> {
+            bloom.setThreshold(0.75);
+        });
+        stackPane.setOnMouseExited(e -> {
+            bloom.setThreshold(1);
+        });
+    }
+
     private void ourMonsterCellSetups(Player ourPlayer, int j, StackPane stackPane) {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
         ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
         final int x = j;
-        stackPane.setOnMouseEntered(e -> {
-            stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.GREEN));
-        });
-        stackPane.setOnMouseExited(e -> {
-            stackPane.setEffect(null);
-        });
+        DropShadow shadow=new DropShadow(0, 0f, 0f, Color.GREEN);
+        stackPaneEffect(stackPane, shadow);
         stackPane.setOnMouseClicked(event -> {
-            if (stackPane.getEffect() == null) {
-                stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.GREEN));
+            Arrays.stream(ourPlayer.getBoard().getMonsters()).map(Cell::getPicture).forEach(a->{
+                ((DropShadow)((Bloom)a.getEffect()).getInput()).setRadius(0);
+            });
+            if (shadow.getRadius()==0) {
+                shadow.setRadius(16);
             } else
-                stackPane.setEffect(null);
+               shadow.setRadius(0);
             if (event.getButton() == MouseButton.PRIMARY)
                 gameController.getCurrentPlayer().setSelectedCard(ourPlayer.getBoard().getMonsters()[x].getCard());
             ourSelectedPane = stackPane;
@@ -363,6 +377,41 @@ public class GameView {
                     flipSummon();
             }
         });
+    }
+
+    private void fourOtherCards() {
+        ourGraveyard = new StackPane();
+        rivalGraveyard = new StackPane();
+        ourField = new StackPane();
+        rivalField = new StackPane();
+        rivalField.rotateProperty().set(180);
+        rivalGraveyard.rotateProperty().set(180);
+        VBox our = new VBox(20, rivalGraveyard, ourField);
+        VBox rivals = new VBox(20, rivalField, ourGraveyard);
+        Arrays.stream(new VBox[]{our, rivals}).forEach(e -> {
+            e.setPrefWidth(93.3333);
+            e.setMaxHeight(126.6666);
+            e.setMaxWidth(93.3333);
+            e.setPrefHeight(126.6666);
+        });
+        ourPlayer.getBoard().getFieldSpell().setStackPane(ourField);
+        rivalPlayer.getBoard().getFieldSpell().setStackPane(rivalField);
+        ourPlayer.getBoard().getGraveyard().setStackPane(ourGraveyard);
+        rivalPlayer.getBoard().getGraveyard().setStackPane(rivalGraveyard);
+        Arrays.stream(new StackPane[]{ourField, rivalField, ourGraveyard, rivalGraveyard}).forEach(x -> {
+            x.setPrefWidth(93.3333);
+            x.setPrefHeight(126.6666);
+            ImageView cardImages = new ImageView();
+            setEffectsCardImages(cardImages);
+            cardImages.setFitWidth(93.3333);
+            cardImages.setFitHeight(126.6666);
+            x.getChildren().add(cardImages);
+        });
+        our.setTranslateX(-300);
+        our.setTranslateY(26.666);
+        rivals.setTranslateX(313.3333);
+        rivals.setTranslateY(40);
+        centerPane.getChildren().addAll(our, rivals);
     }
 
     private void setEffectsCardImages(ImageView view) {
@@ -547,36 +596,7 @@ public class GameView {
         stackPane.getChildren().add(cardImages);
     }
 
-    private void fourOtherCards(Image background) {
-        ourGraveyard = new StackPane();
-        rivalGraveyard = new StackPane();
-        ourField = new StackPane();
-        rivalField = new StackPane();
-        rivalField.rotateProperty().set(180);
-        rivalGraveyard.rotateProperty().set(180);
-        VBox our = new VBox(20, rivalGraveyard, ourField);
-        VBox rivals = new VBox(20, rivalField, ourGraveyard);
-        Arrays.stream(new VBox[]{our, rivals}).forEach(e -> {
-            e.setPrefWidth(93.3333);
-            e.setMaxHeight(126.6666);
-            e.setMaxWidth(93.3333);
-            e.setPrefHeight(126.6666);
-        });
-        Arrays.stream(new StackPane[]{ourField, rivalField, ourGraveyard, rivalGraveyard}).forEach(x -> {
-            x.setPrefWidth(93.3333);
-            x.setPrefHeight(126.6666);
-            ImageView cardImages = new ImageView(background);
-            setEffectsCardImages(cardImages);
-            cardImages.setFitWidth(93.3333);
-            cardImages.setFitHeight(126.6666);
-            x.getChildren().add(cardImages);
-        });
-        our.setTranslateX(-300);
-        our.setTranslateY(26.666);
-        rivals.setTranslateX(313.3333);
-        rivals.setTranslateY(40);
-        centerPane.getChildren().addAll(our, rivals);
-    }
+
 
 
     public GameController getGameController() {
