@@ -28,8 +28,13 @@
                <ImageView fx:id="cancelTribute" fitHeight="40.0" fitWidth="88.0" layoutX="330.0" layoutY="666.0" pickOnBounds="true" preserveRatio="true" />
            </AnchorPane>
            <AnchorPane fx:id="showGraveyardBack" disable="true" prefHeight="200.0" prefWidth="200.0" styleClass="graveyard" visible="false">
-               <TilePane fx:id="graveyardTilepane" prefHeight="629.0" prefWidth="747.0" />
+               <TilePane fx:id="graveyardTilepane" alignment="TOP_CENTER" prefHeight="629.0" prefWidth="747.0" />
                <Button fx:id="graveyardClose" layoutX="302.0" layoutY="644.0" mnemonicParsing="false" onAction="#closeGraveyardMenu" prefHeight="61.0" prefWidth="142.0" styleClass="graveyardButton" text="Close" />
+            <Label fx:id="noCardInGraveyard" layoutX="205.0" layoutY="341.0" text="No Card Is In GraveYard" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="27.0" />
+               </font>
+            </Label>
            </AnchorPane>
        </StackPane>
    </center>
