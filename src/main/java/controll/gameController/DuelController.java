@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class DuelController {
     private final DuelView duelView;
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public DuelController(DuelView duelView) {
         this.duelView = duelView;
@@ -61,19 +61,19 @@ public class DuelController {
             EffectHandler.setGameController(gameController);
             ViewMaster.getViewMaster().setGameView(gameView);
             ViewMaster.setCurrentMenu(Menu.GAME_MENU);
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public void startAIDuel(User user, int rounds, int result) {
-        Player firstPlayer = new Player(user);
+        Player player = new Player(user);
         AIPlayer aiPlayer = new AIPlayer(new PlayerDeck(user.getActiveDeck()));
         aiPlayer.setNickname("Abbas BooAzaar");
         if (result == 1)
-            startDuel(firstPlayer, aiPlayer, rounds);
+            startDuel(player, aiPlayer, rounds);
         else
-            startDuel(aiPlayer, firstPlayer, rounds);
+            startDuel(aiPlayer, player, rounds);
     }
 
     private void startTwoPlayerDuel(User user, User rivalUser, int rounds) {
@@ -114,41 +114,6 @@ public class DuelController {
         }
     }
 
-    /*private Player findPlayerToStart(Player player, Player rivalPlayer) {
-        Player userToStart = null;
-        Random random = new Random();
-        do {
-            int playerNumber;
-            int rivalNumber;
-            if (player instanceof AIPlayer) {
-                int number = random.nextInt() % 3;
-                playerNumber = number + 1;
-            } else playerNumber = duelView.inputStonePaperScissor(player.getUser());
-            if (rivalPlayer instanceof AIPlayer) {
-                int number = random.nextInt(3) % 3;
-                rivalNumber = number + 1;
-            } else rivalNumber = duelView.inputStonePaperScissor(rivalPlayer.getUser());
-            if (playerNumber == 3) {
-                if (rivalNumber == 2)
-                    userToStart = rivalPlayer;
-                else if (rivalNumber == 1)
-                    userToStart = player;
-            } else if (playerNumber == 2) {
-                if (rivalNumber == 1)
-                    userToStart = rivalPlayer;
-                else if (rivalNumber == 3)
-                    userToStart = player;
-            } else if (playerNumber == 1) {
-                if (rivalNumber == 2)
-                    userToStart = player;
-                else if (rivalNumber == 3)
-                    userToStart = rivalPlayer;
-            }
-            if (userToStart == null)
-                duelView.printEqual();
-        } while (userToStart == null);
-        return userToStart;
-    }*/
     // sang = 2 kaqaz = 1 gheichi = 3
     public int findPlayerToStart(int playerNumber) {
         int rivalNumber = random.nextInt() % 3 + 1;

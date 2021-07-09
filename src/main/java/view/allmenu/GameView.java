@@ -106,6 +106,10 @@ public class GameView {
 
     }
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
     public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
