@@ -12,16 +12,14 @@ import javafx.animation.RotateTransition;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -48,12 +46,12 @@ import view.Menu;
 import view.Regex;
 import view.ViewMaster;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.prefs.BackingStoreException;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -66,6 +64,7 @@ public class GameView {
     public Button graveyardClose;
     public TilePane graveyardTilepane;
     public AnchorPane showGraveyardBack;
+    public Label noCardInGraveyard;
     private GameController gameController;
     public GridPane gridPane;
     public BorderPane motherPane;
@@ -102,6 +101,7 @@ public class GameView {
     private int numberOfOpponentMonster = 0;
     private int numberOfOpponentMonsterNeeded = 0;
     private int numberOfTribute = 0;
+    private Image backImage ;
 
     public GameView() {
 
@@ -148,6 +148,8 @@ public class GameView {
 
 
     public void init() {
+        URL url = getClass().getResource("/gamePics/back.jpg");
+        backImage = new Image(url.toExternalForm());
         setupNotifStackPane();
         buttonBox = new VBox(10);
         buttonBox.setTranslateY(350);
@@ -381,7 +383,9 @@ public class GameView {
 
     private void fourOtherCards() {
         ourGraveyard = new StackPane();
+        setupGraveyard(ourGraveyard , ourPlayer);
         rivalGraveyard = new StackPane();
+        setupGraveyard(rivalGraveyard , rivalPlayer);
         ourField = new StackPane();
         rivalField = new StackPane();
         rivalField.rotateProperty().set(180);
@@ -412,6 +416,55 @@ public class GameView {
         rivals.setTranslateX(313.3333);
         rivals.setTranslateY(40);
         centerPane.getChildren().addAll(our, rivals);
+    }
+
+    private void setupGraveyard(StackPane graveyard , Player player) {
+        ImageView imageView = new ImageView(backImage);
+        imageView.setOnMouseClicked(event -> openGraveyard(player));
+        imageView.setFitWidth(90);
+        imageView.setFitHeight(120);
+        Label label = new Label();
+        label.setOnMouseClicked(event -> openGraveyard(player));
+        label.setLayoutX(37.5);
+        label.setLayoutY(40);
+        label.setStyle("-fx-font-family: 'Comic Sans MS'; -fx-font-size: 25px;-fx-text-fill: white");
+        AnimationTimer animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                label.setText(String.valueOf(player.getBoard().getGraveyard().getAllCards().size()));
+            }
+        };
+        animationTimer.start();
+        Group group = new Group();
+        group.getChildren().addAll(imageView , label);
+        graveyard.getChildren().add(group);
+    }
+
+    private void openGraveyard(Player player) {
+        vBox.setDisable(true);
+        leftPane.setDisable(true);
+        gridPane.setDisable(true);
+        tributeContainer.setDisable(true);
+        rightPane.setDisable(true);
+        GaussianBlur blur = new GaussianBlur(15);
+        leftPane.setEffect(blur);
+        gridPane.setEffect(blur);
+        tributeContainer.setEffect(blur);
+        rightPane.setEffect(blur);
+        vBox.setEffect(blur);
+        showGraveyardBack.setVisible(true);
+        showGraveyardBack.setDisable(false);
+        graveyardTilepane.getChildren().clear();
+        if (player.getBoard().getGraveyard().getAllCards().size() == 0){
+            noCardInGraveyard.setVisible(true);
+        } else {
+            for (Card card : player.getBoard().getGraveyard().getAllCards()) {
+                ImageView imageView = new ImageView(card.getImage());
+                imageView.setFitWidth(90);
+                imageView.setFitHeight(120);
+                graveyardTilepane.getChildren().add(imageView);
+            }
+        }
     }
 
     private void setEffectsCardImages(ImageView view) {
@@ -1697,6 +1750,19 @@ public class GameView {
         return result;
     }
 
-    public void closeGraveyardMenu(ActionEvent actionEvent) {
+    @FXML
+    private void closeGraveyardMenu() {
+        vBox.setDisable(false);
+        leftPane.setDisable(false);
+        gridPane.setDisable(false);
+        tributeContainer.setDisable(false);
+        rightPane.setDisable(false);
+        leftPane.setEffect(null);
+        gridPane.setEffect(null);
+        tributeContainer.setEffect(null);
+        rightPane.setEffect(null);
+        vBox.setEffect(null);
+        showGraveyardBack.setVisible(false);
+        showGraveyardBack.setDisable(true);
     }
 }
