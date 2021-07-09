@@ -1,6 +1,7 @@
 package controll.gameController;
 
 import enums.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import model.Cell;
@@ -8,6 +9,8 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.exceptions.KingBarbarosException;
+import model.exceptions.ManEaterBugException;
 import model.players.AIPlayer;
 import model.players.Player;
 import view.ViewMaster;
@@ -659,7 +662,7 @@ public class GameController {
                     board = answerSpilt[1] + " " + answerSpilt[2];
                     if (checkCorrectEquipInput(num, board, spell))
                         tries = 0;
-                } else gameView.printInvalidCommand();
+                }
             }
             currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
             if (board.equalsIgnoreCase("our board"))
@@ -822,12 +825,12 @@ public class GameController {
                                         return;
                                     }
                                     gameView.printInvalidSelection();
-                                } else gameView.printInvalidCommand();
+                                }
                             }
                         } else gameView.printInvalidSelection();
-                    } else gameView.printInvalidCommand();
+                    }
                 }
-            } else gameView.printInvalidCommand();
+            }
         }
     }
 
@@ -861,7 +864,7 @@ public class GameController {
                 if (checkForTrapOrSpell(num)) {
                     check = true;
                 } else gameView.printInvalidSelection();
-            } else gameView.printInvalidCommand();
+            }
         }
         currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                 .addCard(currentPlayer.getRivalPlayer().getBoard()
@@ -1314,9 +1317,9 @@ public class GameController {
                 if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
                     if (false)//currentPlayer.getCardsInHand().indexOf(card)
                         throw new Exception("you already summoned/set on this turn");
-/*                    else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Beast king barbaros"))
+                    else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Beast king barbaros"))
                         beatsKingBarbaros((Monster) currentPlayer.getSelectedCard());
-                    else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Terratiger, the Empowered Warrior"))
+                   /* else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Terratiger, the Empowered Warrior"))
                         terratiger((Monster) currentPlayer.getSelectedCard());*/
                     else
                         summonAndSpecifyTribute();
@@ -1441,17 +1444,10 @@ public class GameController {
         anySummonHappened = false;
     }
 
-    private void beatsKingBarbaros(Monster monster) {
+    private void beatsKingBarbaros(Monster monster) throws Exception {
         if (currentPlayer.getBoard().getNumberOfMonsterInBoard() >= 3) {
-            if (gameView.doYouWantTributeBarBaros()) {
-                gameView.getTributeForBarbaros();
-            } else {
-                monster.setAttackPointInGame(1900);
-                for (Cell cell : currentPlayer.getRivalPlayer().getBoard().getMonsters()) {
-                    currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
-                    cell.setCard(null);
-                }
-            }
+            summonedCard = monster;
+            throw new KingBarbarosException("Do You Want Tribute 3 Monsters?");
         }
         monster.setActiveAbility(true);
         normalSummonHappened = true;
@@ -1461,8 +1457,34 @@ public class GameController {
         anySummonHappened = false;
     }
 
+    public void barbarosEffectiveSummon() {
+        for (Cell cell : currentPlayer.getRivalPlayer().getBoard().getMonsters()) {
+            if (cell.getCard() != null)
+                currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
+            cell.setCard(null);
+            cell.getPicture().getChildren().clear();
+        }
+        ((Monster) summonedCard).setActiveAbility(true);
+        normalSummonHappened = true;
+        anySummonHappened = true;
+        checkTrapActivation();
+        ((Monster) summonedCard).setAttackPointInGame(1900);
+        normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
+        normalSummonHappened = false;
+        anySummonHappened = false;
+    }
+
+    public void barbarosNormalSummon() {
+        normalSummonHappened = true;
+        anySummonHappened = true;
+        normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
+        checkTrapActivation();
+        normalSummonHappened = false;
+        anySummonHappened = false;
+    }
+
     public boolean checkBarbarosInput(int monsterNumber1, int monsterNumber2, int monsterNumber3) {
-        if (monsterNumber1 <= 0 || monsterNumber1 >= 6
+/*        if (monsterNumber1 <= 0 || monsterNumber1 >= 6
                 || monsterNumber2 <= 0 || monsterNumber2 >= 6
                 || monsterNumber3 <= 0 || monsterNumber3 >= 6) return false;
         Monster monster1 = (Monster) currentPlayer.getBoard().getMonsterByAddress(monsterNumber1);
@@ -1471,7 +1493,7 @@ public class GameController {
         if (monster1 == null || monster2 == null || monster3 == null) return false;
         currentPlayer.getBoard().getGraveyard().addCard(monster1);
         currentPlayer.getBoard().getGraveyard().addCard(monster2);
-        currentPlayer.getBoard().getGraveyard().addCard(monster3);
+        currentPlayer.getBoard().getGraveyard().addCard(monster3);*/
         return true;
     }
 
@@ -1638,17 +1660,17 @@ public class GameController {
                     summonedCard = monster;
                     flipSummonHappened = true;
                     anySummonHappened = true;
-                    checkTrapActivation();
-/*                        if (canContinue) {
-                            if (monster.getCardNameInGame().equalsIgnoreCase("man-eater bug")
-                                    || monster.getCardNameInGame().equalsIgnoreCase("gate guardian"))
-                                manEaterBugFlipSummon(monster);
-                            gameView.printFlipSummonSuccessfully();
-                        }*/
                     anySummonHappened = false;
                     flipSummonHappened = false;
                     canContinue = true;
                     summonedCard = null;
+                    checkTrapActivation();
+                    if (canContinue) {
+                        if (monster.getCardNameInGame().equalsIgnoreCase("man-eater bug")
+                                || monster.getCardNameInGame().equalsIgnoreCase("gate guardian"))
+                            throw new ManEaterBugException("Do You Want Kill Rival Monster?(YES|NO)");
+                        gameView.printFlipSummonSuccessfully();
+                    }
                 }
             } else
                 throw new Exception("action not allowed in this phase");
@@ -1931,6 +1953,10 @@ public class GameController {
     }
 
     public void summonWithTribute() {
+        if (summonedCard.getCardName().equalsIgnoreCase("Beast king barbaros")) {
+            barbarosEffectiveSummon();
+            return;
+        }
         normalSummonHappened = true;
         normalSummon((Monster) summonedCard, AttackOrDefense.ATTACK);
         checkTrapActivation();
@@ -1945,4 +1971,6 @@ public class GameController {
                 .findFirst().get().getPicture();
         stackPane.setRotate(stackPane.getRotate() == 90 ? 0 : 90);
     }
+
+
 }

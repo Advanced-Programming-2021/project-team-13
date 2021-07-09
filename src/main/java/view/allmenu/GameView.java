@@ -4,15 +4,20 @@ import controll.gameController.GameController;
 import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
+import enums.Phase;
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.Bloom;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +36,8 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
+import model.exceptions.KingBarbarosException;
+import model.exceptions.ManEaterBugException;
 import model.menuItems.CustomSanButtons;
 import model.players.AIPlayer;
 import model.players.Player;
@@ -43,6 +50,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.prefs.BackingStoreException;
 import java.util.regex.Matcher;
 
 public class GameView {
@@ -78,7 +86,15 @@ public class GameView {
     public Player ourPlayer;
     public Player rivalPlayer;
     public VBox vBox;
+    public VBox buttonBox;
+    public CustomSanButtons attack;
+    public CustomSanButtons directAttack;
+    public ProgressBar progressBar;
     private boolean tributePhase = false;
+    private boolean killOpponentMonsterPhase = false;
+    private boolean isSummoning = false;
+    private int numberOfOpponentMonster = 0;
+    private int numberOfOpponentMonsterNeeded = 0;
     private int numberOfTribute = 0;
 
     public GameView() {
@@ -92,13 +108,27 @@ public class GameView {
         rivalPlayer = firstPlayer instanceof AIPlayer ? firstPlayer : secondPlayer;
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
+        buttonBox.getChildren().addAll(buttonBoxNodes());
         AnimationTimer animationTimer = new AnimationTimer() {
+            final ColorAdjust colorAdjust = new ColorAdjust();
             @Override
             public void handle(long now) {
                 if (gameController.isAITurn()) {
                     gameController.setAITurn(false);
                     gameController.playAI();
                 }
+                rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
+                ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
+                Arrays.stream(new CustomSanButtons[]{attack, directAttack}).forEach(x -> {
+                    x.setEffect(colorAdjust);
+                    if (gameController.getCurrentPhase() != Phase.BATTLE_PHASE) {
+                        colorAdjust.setSaturation(-1);
+                        x.setDisable(true);
+                    } else {
+                        colorAdjust.setSaturation(0);
+                        x.setDisable(false);
+                    }
+                });
             }
         };
         animationTimer.start();
@@ -107,7 +137,7 @@ public class GameView {
 
     public void init() {
         setupNotifStackPane();
-        VBox buttonBox = new VBox(10, buttonBoxNodes());
+        buttonBox = new VBox(10);
         buttonBox.setTranslateY(350);
         buttonBox.setTranslateX(50);
         rightPane.getChildren().add(buttonBox);
@@ -118,8 +148,15 @@ public class GameView {
         rightPane.setStyle("-fx-background-image: url('/gamePics/1.png')" +
                 ";-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
         initGridPanes();
-//        controlButtons();
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
+        rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
+        ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
+        progressBar = new ProgressBar();
+        progressBar.setStyle("-fx-fill: crimson");
+        DoubleProperty doubleProperty = new SimpleDoubleProperty();
+        doubleProperty.set(ourPlayer.getLifePoint());
+        progressBar.progressProperty().bind(doubleProperty);
+        leftPane.getChildren().add(progressBar);
     }
 
     private void setupNotifStackPane() {
@@ -127,10 +164,10 @@ public class GameView {
         vBox.setSpacing(30);
         notifStackPane = new StackPane();
         notifStackPane.getChildren().add(vBox);
-        vBox.setPrefHeight(200);
-        vBox.setPrefWidth(250);
-        vBox.setMinHeight(200);
-        vBox.setMinWidth(250);
+        vBox.setPrefHeight(300);
+        vBox.setPrefWidth(500);
+        vBox.setMinHeight(300);
+        vBox.setMinWidth(500);
         vBox.setAlignment(Pos.TOP_CENTER);
         vBox.setStyle("-fx-background-image: url('/gamePics/notif.jpg');");
         notifStackPane.setMinHeight(300);
@@ -143,32 +180,31 @@ public class GameView {
         notifStackPane.setVisible(false);
         motherPane.getChildren().add(notifStackPane);
     }
-    public void createNotification(String text,Node[] nodes){
+
+    public void createNotification(String text, Node[] nodes) {
         blur();
         notifStackPane.setVisible(true);
         vBox.getChildren().clear();
         this.text = new Text(text);
         this.text.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
         this.text.setEffect(new Bloom(0.2));
-        vBox.getChildren().addAll(new Text(""),this.text);
+        vBox.getChildren().addAll(new Text(""), this.text);
         vBox.getChildren().addAll(nodes);
     }
 
     public void printCurrentPhase() {
-        CustomSanButtons[] custom=new CustomSanButtons[]{new CustomSanButtons("proceed", () -> {
+        CustomSanButtons[] custom = new CustomSanButtons[]{new CustomSanButtons("proceed", () -> {
             notifStackPane.setVisible(false);
             deBlur();
         })};
-        createNotification(gameController.getCurrentPhase().getPhaseName(),custom);
+        createNotification(gameController.getCurrentPhase().getPhaseName(), custom);
     }
 
     private Node[] buttonBoxNodes() {
-        return new Node[]{new CustomSanButtons("attack", () -> {
-            attack();
-        })
-                , new CustomSanButtons("direct attack", () -> {
-
-        }), new CustomSanButtons("next phase", () -> {
+        attack = new CustomSanButtons("attack", this::attack);
+        directAttack = new CustomSanButtons("direct attack", this::directAttack);
+        return new Node[]{attack
+                , directAttack, new CustomSanButtons("next phase", () -> {
             gameController.nextPhase();
         })
                 , new CustomSanButtons("surrender", () -> {
@@ -186,20 +222,17 @@ public class GameView {
 
     private void initGridPanes() {
         centerPane(ourPlayer, rivalPlayer);
-//        leftGridPane(ourPlayer);
-        leftGrid.setGridLinesVisible(true);
-        leftGrid.setVgap(3.3333);
-        leftGrid.setHgap(3.3333);
-        fourOtherCards(null);
-        gridPane.setTranslateX(13.3333);
-        gridPane.setTranslateY(33.3333);
-        gridPane.setHgap(6.6666);
-        gridPane.setVgap(20);
+        leftPane();
     }
 
     private void centerPane(Player ourPlayer, Player rivalPlayer) {
         centerGrid(ourPlayer, rivalPlayer);
         leftGrid(ourPlayer);
+        leftPane();
+
+    }
+
+    private void leftPane() {
         leftGrid.setGridLinesVisible(true);
         leftGrid.setVgap(3.3333);
         leftGrid.setHgap(3.3333);
@@ -208,7 +241,6 @@ public class GameView {
         gridPane.setTranslateY(33.3333);
         gridPane.setHgap(6.6666);
         gridPane.setVgap(20);
-
     }
 
     private void centerGrid(Player ourPlayer, Player rivalPlayer) {
@@ -219,7 +251,8 @@ public class GameView {
                 if (i < 2) {
                     if (i == 0)
                         rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
-                    if (i == 1) rivalMonsterCellSetup(rivalPlayer, j, stackPane);
+                    if (i == 1)
+                        rivalMonsterCellSetup(rivalPlayer, j, stackPane);
                 } else {
                     if (i == 2) {
                         ourMonsterCellSetups(ourPlayer, j, stackPane);
@@ -233,7 +266,14 @@ public class GameView {
     }
 
     private void rivalMonsterCellSetup(Player rivalPlayer, int j, StackPane stackPane) {
-        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
+        rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
+        stackPane.setOnMouseEntered(e -> {
+            stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
+        });
+        stackPane.setOnMouseExited(e -> {
+            stackPane.setEffect(null);
+        });
         stackPane.setOnMouseClicked(e -> {
             if (stackPane.getEffect() == null) {
                 stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.RED));
@@ -242,13 +282,30 @@ public class GameView {
             rivalSelectedPane = stackPane;
             rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getMonsters())
                     .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
-            System.out.println(rivalSelectedPane);
-            System.out.println(rivalSelectedCard);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+            fadeTransition.setNode(selectedCard);
+            rivalSelectedCard.setImage(((ImageView) rivalSelectedCell.getPicture().getChildren().get(0)).getImage());
+            fadeTransition.play();
+            if (killOpponentMonsterPhase) {
+                if (rivalSelectedCell.getCard() != null) {
+                    rivalPlayer.getBoard().getGraveyard().addCard(rivalSelectedCell.getCard());
+                    numberOfOpponentMonster++;
+                    if (numberOfOpponentMonster == numberOfOpponentMonsterNeeded) {
+                        numberOfOpponentMonster = 0;
+                        numberOfOpponentMonsterNeeded = 0;
+                        killOpponentMonsterPhase = false;
+                    }
+                }
+            }
+//            System.out.println(rivalSelectedPane);
+//            System.out.println(rivalSelectedCard);
         });
         stackPane.rotateProperty().set(180);
     }
 
     private void ourMonsterCellSetups(Player ourPlayer, int j, StackPane stackPane) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
         ourPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
         final int x = j;
         stackPane.setOnMouseEntered(e -> {
@@ -258,15 +315,25 @@ public class GameView {
             stackPane.setEffect(null);
         });
         stackPane.setOnMouseClicked(event -> {
+            if (stackPane.getEffect() == null) {
+                stackPane.setEffect(new DropShadow(16, 0f, 0f, Color.GREEN));
+            } else
+                stackPane.setEffect(null);
             if (event.getButton() == MouseButton.PRIMARY)
                 gameController.getCurrentPlayer().setSelectedCard(ourPlayer.getBoard().getMonsters()[x].getCard());
             ourSelectedPane = stackPane;
             ourSelectedCell = Arrays.stream(ourPlayer.getBoard().getMonsters())
                     .filter(Objects::nonNull).filter(a -> a.getPicture() == stackPane).findFirst()
                     .get();
-            System.out.println(ourSelectedCell.getCard().getCardName() + "    " + ourSelectedCell
-                    .getPicture() + "         " + getIndexOfnn(ourSelectedCell));
-            System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+            fadeTransition.setNode(selectedCard);
+            System.out.println(((ImageView) ourSelectedPane.getChildren().get(0)).getImage());
+            selectedCard.setImage(((ImageView) ourSelectedCell.getPicture().getChildren().get(0)).getImage());
+            fadeTransition.play();
+//            System.out.println(ourSelectedCell.getCard().getCardName() + "    " + ourSelectedCell
+//                    .getPicture() + "         " + getIndexOfnn(ourSelectedCell));
+//            System.out.println(ourSelectedPane.getLayoutX() + "   " + ourSelectedPane.getLayoutY());
             if (tributePhase) {
                 if (numberOfTribute < (gameController).getNumberOfTributeNeeded()
                         && ourPlayer.getBoard().getMonsters()[x].getCard() != null) {
@@ -289,12 +356,39 @@ public class GameView {
         });
     }
 
+    private void setEffectsCardImages(ImageView view) {
+        Bloom glow = new Bloom();
+        view.setOnMouseEntered(event -> {
+            glow.setThreshold(0.5);
+            view.setEffect(glow);
+        });
+        view.setOnMouseExited(event -> {
+            view.setEffect(null);
+        });
+        view.setOnMouseClicked(e -> {
+            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
+            if (view.getParent().getRotate() != 180) {
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setNode(selectedCard);
+                fadeTransition.play();
+                selectedCard.setImage(view.getImage());
+            } else {
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.setNode(rivalSelectedCard);
+                fadeTransition.play();
+                rivalSelectedCard.setImage(view.getImage());
+            }
+        });
+    }
+
     private void changePosition() {
         try {
             gameController.changeSet();
         } catch (Exception e) {
-            createNotification(e.getMessage(),new Node[]{
-                    new CustomSanButtons("proceed",()->{
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("proceed", () -> {
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -306,9 +400,21 @@ public class GameView {
     private void flipSummon() {
         try {
             gameController.flipSummon();
+        } catch (ManEaterBugException e) {
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("YES", () -> {
+                        killOpponentMonsterPhase = true;
+                        numberOfOpponentMonsterNeeded = 1;
+                        deBlur();
+                        notifStackPane.setVisible(false);
+                    }), new CustomSanButtons("NO", () -> {
+                notifStackPane.setVisible(false);
+                deBlur();
+            })
+            });
         } catch (Exception e) {
-            createNotification(e.getMessage(),new Node[]{
-                    new CustomSanButtons("proceed",()->{
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("proceed", () -> {
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -317,21 +423,13 @@ public class GameView {
         }
     }
 
-    private String getIndexOfnn(Cell ourSelectedCell) {
-        for (int i = 0; i < ourPlayer.getBoard().getMonsters().length; i++) {
-            if (ourSelectedCell == ourPlayer.getBoard().getMonsters()[i])
-                return String.valueOf(i);
-        }
-        return "fuck you nigga";
-    }
-
     private void leftGrid(Player ourPlayer) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 StackPane stackPane = new StackPane();
                 gridPaneSetup(null, stackPane);
                 stackPane.setOnMouseClicked(e -> {
-                    if (!tributePhase) {
+                    if (!tributePhase && !killOpponentMonsterPhase) {
                         if (e.getButton() == MouseButton.PRIMARY)
                             if (gameController.getCurrentPlayer().getSelectedCard() != null
                                     && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
@@ -363,8 +461,8 @@ public class GameView {
         try {
             gameController.set();
         } catch (Exception e) {
-            createNotification(e.getMessage(),new Node[]{
-                    new CustomSanButtons("proceed",()->{
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("proceed", () -> {
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -376,9 +474,24 @@ public class GameView {
     private void monsterSummon(Card selectedCard) {
         try {
             gameController.checksBeforeSummon();
+        } catch (KingBarbarosException e) {
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("YES", () -> {
+                        gameController.setNumberOfTributeNeeded(3);
+                        tributePhase = true;
+                        numberOfTribute = 0;
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    }), new CustomSanButtons("NO", () -> {
+                gameController.barbarosNormalSummon();
+                notifStackPane.setVisible(false);
+                deBlur();
+            })
+            });
+            notifStackPane.setVisible(true);
         } catch (Exception e) {
-            createNotification(e.getMessage(),new Node[]{
-                    new CustomSanButtons("proceed",()->{
+            createNotification(e.getMessage(), new Node[]{
+                    new CustomSanButtons("proceed", () -> {
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -456,32 +569,6 @@ public class GameView {
         centerPane.getChildren().addAll(our, rivals);
     }
 
-    private void setEffectsCardImages(ImageView view) {
-        Bloom glow = new Bloom();
-        view.setOnMouseEntered(event -> {
-            glow.setThreshold(0.5);
-            view.setEffect(glow);
-        });
-        view.setOnMouseExited(event -> {
-            view.setEffect(null);
-        });
-        view.setOnMouseClicked(e -> {
-            FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
-            if (view.getParent().getRotate() != 180) {
-                fadeTransition.setFromValue(0);
-                fadeTransition.setToValue(1);
-                fadeTransition.setNode(selectedCard);
-                fadeTransition.play();
-                selectedCard.setImage(view.getImage());
-            } else {
-                fadeTransition.setFromValue(0);
-                fadeTransition.setToValue(1);
-                fadeTransition.setNode(rivalSelectedCard);
-                fadeTransition.play();
-                rivalSelectedCard.setImage(view.getImage());
-            }
-        });
-    }
 
     public GameController getGameController() {
         return gameController;
@@ -612,17 +699,37 @@ public class GameView {
     }
 
     private void attack() {
-            if(ourSelectedCell==null){
-                createNotification("you haven't selected yet",new Node[]{
-                        new CustomSanButtons("Ok",()->{
-                            notifStackPane.setVisible(false);
-                            deBlur();
-                        })
-                });
-                return;
+        if (ourSelectedCell == null || rivalSelectedCell == null) {
+            createNotification("you haven't selected yet!", new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
+            return;
+        }
+        gameController.attack(getCellNumber(rivalSelectedCell));
+    }
+
+    public int getCellNumber(Cell selected) {
+        int num = 0;
+        for (int i = 0; i < rivalPlayer.getBoard().getMonsters().length; i++) {
+            if (selected == rivalPlayer.getBoard().getMonsters()[i]) {
+                num = i;
+                break;
             }
-//            int monsterNumber = Integer.parseInt(inputMatcher.group(1));
-//            gameController.attack(monsterNumber);
+        }
+        if (num == 0)
+            return 5;
+        if (num == 1)
+            return 3;
+        if (num == 2)
+            return 1;
+        if (num == 3)
+            return 2;
+        if (num == 4)
+            return 4;
+        return -19;//////////////this is bullshit
     }
 
     private void printNotThoseMoves() {
@@ -728,12 +835,12 @@ public class GameView {
             } else if (spellMatcher.find()) {
                 int cardAddress = Integer.parseInt(opponentWithFieldMatcher.group("cardAddress"));
                 gameController.selectOpponentSpellOrTrap(cardAddress);
-            } else printInvalidCommand();
+            }
         } else if (opponentMatcher.find(0)) {
             Matcher fieldMatcher = Regex.getInputMatcher(command, Regex.FIELD);
             if (fieldMatcher.find()) {
                 gameController.selectOpponentFieldCard();
-            } else printInvalidCommand();
+            }
         } else {
             Matcher monsterMatcher = Regex.getInputMatcher(command, Regex.PLAYER_MONSTER);
             Matcher spellMatcher = Regex.getInputMatcher(command, Regex.PLAYER_SPELL);
@@ -751,8 +858,7 @@ public class GameView {
             } else if (fieldMatcher.find()) {
                 if (command.matches(Regex.FIELD_SELECT))
                     gameController.selectPlayerFieldCard();
-                else printInvalidCommand();
-            } else printInvalidCommand();
+            }
         }
     }
 
@@ -761,12 +867,14 @@ public class GameView {
     }
 
     public void printNoCardSelected() {
-        System.out.println("no card is selected yet");
+        createNotification("no card is selected yet", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
-    public void printInvalidCommand() {
-        System.out.println("invalid command");
-    }
 
     public void printCardSelected() {
         System.out.println("card selected");
@@ -785,15 +893,30 @@ public class GameView {
     }
 
     public void printCantAttack() {
-        System.out.println("you can’t attack with this card");
+        createNotification("you can’t attack with this card", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printWrongPhase() {
-        System.out.println("you can’t do this action in this phase");
+        createNotification("you can’t do this action in this phase", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printAlreadyAttacked() {
-        System.out.println("this card already attacked");
+        createNotification("this card already attacked", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNoCardToAttack() {
@@ -801,31 +924,63 @@ public class GameView {
     }
 
     public void printOpponentMonsterDestroyed(int attackDifference) {
-        System.out.println("your opponent’s monster is destroyed " +
-                "and your opponent receives " + attackDifference + " battle damage");
+        createNotification("your opponent’s monster is destroyed " +
+                "and your opponent receives " + attackDifference + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printBothMonstersDestroyed() {
-        System.out.println("both you and your opponent monster cards" +
-                " are destroyed and no one receives damage");
+        createNotification("both you and your opponent monster cards" +
+                " are destroyed and no one receives damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printYourCardIsDestroyed(int attackDifference) {
-        System.out.println("Your monster card is destroyed " +
-                "and you received " + attackDifference + " battle damage");
+        createNotification("Your monster card is destroyed " +
+                "and you received " + attackDifference + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNoCardDestroyed() {
-        System.out.println("no card is destroyed");
+        createNotification("no card is destroyed", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printDefensePositionDestroyed() {
-        System.out.println("the defense position monster is destroyed");
+        createNotification("the defense position monster is destroyed", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNoCardDestroyedYouReceivedDamage(int attackDifference) {
-        System.out.println("no card is destroyed and you" +
-                " received " + attackDifference + " battle damage");
+        createNotification("no card is destroyed and you" +
+                " received " + attackDifference + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
+        rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
+        ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
     }
 
     public void printDefensePositionDestroyedHidden(String rivalMonsterName) {
@@ -844,15 +999,30 @@ public class GameView {
     }
 
     public void printOpponentCardsName(String name) {
-        System.out.println("opponent’s monster card was " + name);
+        createNotification("opponent’s monster card was " + name, new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printYourOpponentReceivesDamage(int attackNum) {
-        System.out.println("your opponent receives " + attackNum + " battle damage");
+        createNotification("your opponent receives " + attackNum + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantSummon() {
-        System.out.println("you can’t summon this card");
+        createNotification("you can’t summon this card", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNotInMainPhase() {
@@ -860,15 +1030,30 @@ public class GameView {
     }
 
     public void printMonsterZoneFull() {
-        System.out.println("monster card zone is full");
+        createNotification("monster card zone is full", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printAlreadySetOrSummon() {
-        System.out.println("you already summoned/set on this turn");
+        createNotification("you already summoned/set on this turn", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSummonSuccessfully() {
-        System.out.println("summoned successfully");
+        createNotification("summoned successfully", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printNoMonsterOnThisAddress() {
@@ -893,11 +1078,21 @@ public class GameView {
     }
 
     public void printCantSet() {
-        System.out.println("you can’t set this card");
+        createNotification("you can’t set this card", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSetSuccessfully() {
-        System.out.println("set successfully");
+        createNotification("set successfully", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantChangePosition() {
@@ -919,7 +1114,6 @@ public class GameView {
     public void printCantFlipSummon() {
         System.out.println("you can’t flip summon this card");
     }
-
 
 
     private void blur() {
@@ -951,12 +1145,21 @@ public class GameView {
 
     public void printWhoseTurn() {
         if (gameController.getCurrentPlayer() instanceof AIPlayer) {
-            System.out.println("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
-            text.setText("Its " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
-        }
-        else {
-            System.out.println("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
-            text.setText("Its " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
+            createNotification("Its " + ((AIPlayer) gameController.getCurrentPlayer())
+                    .getNickname() + "’s turn", new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
+        } else {
+            createNotification("Its " + gameController.getCurrentPlayer().getUser()
+                    .getNickname() + "’s turn", new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
         }
 
         notifStackPane.setVisible(true);
@@ -1024,12 +1227,23 @@ public class GameView {
     }
 
     public void printNoCardDestroyedRivalReceivedDamage(int attackDifference) {
-        System.out.println("no card is destroyed and rival" +
-                " received " + attackDifference + " battle damage");
+        createNotification("no card is destroyed and rival" +
+                " received " + attackDifference + " battle damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
+
     }
 
     public void printYouReceivedDamage(int amount) {
-        System.out.println("you received " + amount + " damage");
+        createNotification("you received " + amount + " damage", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public boolean doYouWantTributeBarBaros() {// :| WTF
@@ -1113,27 +1327,57 @@ public class GameView {
     }
 
     public void printActiveOnlyForSpellsAndTrap() {
-        System.out.println("activate effect is only for spell cards.");
+        createNotification("activate effect is only for spell cards", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantActiveThisTurn() {
-        System.out.println("you can’t activate an effect on this turn");
+        createNotification("you can’t activate an effect on this turn", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printAlreadyActivated() {
-        System.out.println("you have already activated this card");
+        createNotification("you have already activated this card", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSpellZoneIsFull() {
-        System.out.println("spell zone is full");
+        createNotification("spell zone is full", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printPrepsNotDone() {
-        System.out.println("preparations of this spell are not done yet");
+        createNotification("preparations of this spell are not done yet", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantSpecialSummon() {
-        System.out.println("there is no way you could special summon a monster");
+        createNotification("there is no way you could special summon a monster", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void getTributeTheTricky() {
@@ -1214,9 +1458,19 @@ public class GameView {
 
     public void playerChanged(Player currentPlayer) {
         if (currentPlayer instanceof AIPlayer)
-            System.out.println("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname());//// added this to show changed turn
+            createNotification("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname(), new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
         else
-            System.out.println("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername());
+            createNotification("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername(), new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
     }
 
     public void printRitualSummonError() {
@@ -1277,7 +1531,12 @@ public class GameView {
     }
 
     public void printCardAddedToHand(Card card) {
-        System.out.println("new card added to hand : " + card.getCardNameInGame());
+        createNotification("new card added to hand : " + card.getCardNameInGame(), new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public int chooseMonsterForSummonScanner(List<Monster> rivalGraveYardMonsters) {
@@ -1337,8 +1596,6 @@ public class GameView {
                 return true;
             } else if (yesOrNo.equalsIgnoreCase("no")) {
                 return false;
-            } else {
-                printInvalidCommand();
             }
         }
     }
