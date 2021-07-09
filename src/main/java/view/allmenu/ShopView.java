@@ -5,7 +5,6 @@ import controll.ShopController;
 import controll.json.UserJson;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -25,10 +24,6 @@ import javafx.util.Duration;
 import model.cards.Card;
 import view.ViewMaster;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Objects;
 
