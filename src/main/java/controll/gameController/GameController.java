@@ -743,8 +743,8 @@ public class GameController {
     private void activateFieldSpell(Spell spell) {
         if (currentPlayer.getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getBoard().getGraveyard().addCard(currentPlayer.getBoard().getFieldSpell().getCard());
-        currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
         removeCardFromHandScene(currentPlayer.getSelectedCard());
+        currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
         spell.setZone(Zone.FIELD);
         currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
         currentPlayer.getBoard().setFieldSpell(spell);

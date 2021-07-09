@@ -83,6 +83,8 @@ public class GameView {
     public Text text;
     public Cell ourSelectedCell;
     public Cell rivalSelectedCell;
+    public Cell ourSelectedSpell;
+    public Cell rivalSelectedSpell;
     public Pane ourSelectedPane;
     public Pane rivalSelectedPane;
     public Player firstPlayer;
@@ -94,6 +96,7 @@ public class GameView {
     public CustomSanButtons attack;
     public CustomSanButtons directAttack;
     public ProgressBar progressBar;
+    public CustomSanButtons activate;
     private boolean tributePhase = false;
     private boolean killOpponentMonsterPhase = false;
     private boolean isSummoning = false;
@@ -117,9 +120,10 @@ public class GameView {
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
         buttonBox.getChildren().addAll(buttonBoxNodes());
-
+        ColorAdjust colorAdjust = new ColorAdjust();
+        activate.setEffect(colorAdjust);
         AnimationTimer animationTimer = new AnimationTimer() {
-            final ColorAdjust colorAdjust = new ColorAdjust();
+
 
             @Override
             public void handle(long now) {
@@ -131,6 +135,7 @@ public class GameView {
                 rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
                 ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
                 Arrays.stream(new CustomSanButtons[]{attack, directAttack}).forEach(x -> {
+                    final ColorAdjust colorAdjust = new ColorAdjust();
                     x.setEffect(colorAdjust);
                     if (gameController.getCurrentPhase() != Phase.BATTLE_PHASE) {
                         colorAdjust.setSaturation(-1);
@@ -140,6 +145,15 @@ public class GameView {
                         x.setDisable(false);
                     }
                 });
+
+                if (gameController.getCurrentPhase() != Phase.MAIN_PHASE_1 &&
+                        gameController.getCurrentPhase()!= Phase.MAIN_PHASE_2) {
+                    colorAdjust.setSaturation(-1);
+                    activate.setDisable(true);
+                } else {
+                    colorAdjust.setSaturation(0);
+                    activate.setDisable(false);
+                }
             }
         };
         animationTimer.start();
@@ -148,7 +162,7 @@ public class GameView {
 
     public void init() {
         setupNotifStackPane();
-        buttonBox = new VBox(10);
+        buttonBox = new VBox(0);
         buttonBox.setTranslateY(350);
         buttonBox.setTranslateX(50);
         rightPane.getChildren().add(buttonBox);
@@ -212,9 +226,10 @@ public class GameView {
     }
 
     private Node[] buttonBoxNodes() {
+        activate=new CustomSanButtons("activate",()-> gameController.activateSpell());
         attack = new CustomSanButtons("attack", this::attack);
         directAttack = new CustomSanButtons("direct attack", this::directAttack);
-        return new Node[]{attack
+        return new Node[]{activate,attack
                 , directAttack, new CustomSanButtons("next phase", () -> {
             gameController.nextPhase();
         })
@@ -244,7 +259,6 @@ public class GameView {
     }
 
     private void leftPane() {
-        leftGrid.setGridLinesVisible(true);
         leftGrid.setVgap(3.3333);
         leftGrid.setHgap(3.3333);
         fourOtherCards();
@@ -261,32 +275,59 @@ public class GameView {
                 gridPaneSetup(null, stackPane);
                 if (i < 2) {
                     if (i == 0)
-                        rivalPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+                        setSpell(rivalPlayer, j, stackPane);
                     if (i == 1)
                         rivalMonsterCellSetup(rivalPlayer, j, stackPane);
                 } else {
-                    if (i == 2) {
+                    if (i == 2)
                         ourMonsterCellSetups(ourPlayer, j, stackPane);
-                    }
-                    if (i == 3) {
-                        ourPlayer.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
-
-                    }
+                    if (i == 3)
+                        setSpell(ourPlayer, j, stackPane);
                 }
                 gridPane.add(stackPane, j, i);
             }
         }
     }
 
+    private void setSpell(Player player, int j, StackPane stackPane) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
+        player.getBoard().getSpellOrTrap()[j].setStackPane(stackPane);
+        DropShadow shadow = new DropShadow(0, 0f, 0f, Color.GOLD);
+        stackPaneEffect(stackPane, shadow);
+        stackPane.setOnMouseClicked(e -> {
+            Arrays.stream(player.getBoard().getSpellOrTrap()).map(Cell::getPicture).filter(Objects::nonNull)
+                    .forEach(a -> {
+                        ((DropShadow) ((Bloom) a.getEffect()).getInput()).setRadius(0);
+                    });
+            if (shadow.getRadius() == 0) {
+                shadow.setRadius(16);
+            } else
+                shadow.setRadius(0);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+            if (player == rivalPlayer) {
+                rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getSpellOrTrap())
+                        .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
+                fadeTransition.setNode(rivalSelectedCard);
+                rivalSelectedCard.setImage(rivalSelectedCell.getCard().getImage());
+            } else {
+                ourSelectedSpell = Arrays.stream(ourPlayer.getBoard().getSpellOrTrap())
+                        .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
+                fadeTransition.setNode(selectedCard);
+                selectedCard.setImage(ourSelectedSpell.getCard().getImage());
+            }
+            fadeTransition.play();
+        });
+    }
+
     private void rivalMonsterCellSetup(Player rivalPlayer, int j, StackPane stackPane) {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
         rivalPlayer.getBoard().getMonsters()[j].setStackPane(stackPane);
-        DropShadow shadow=new DropShadow(0, 0f, 0f, Color.CRIMSON);
+        DropShadow shadow = new DropShadow(0, 0f, 0f, Color.CRIMSON);
         stackPaneEffect(stackPane, shadow);
         stackPane.setOnMouseClicked(e -> {
-            Arrays.stream(rivalPlayer.getBoard().getMonsters()).map(Cell::getPicture).forEach(a->{
-                ((DropShadow)((Bloom)a.getEffect()).getInput()).setRadius(0);
-            });
+            Arrays.stream(rivalPlayer.getBoard().getMonsters()).map(Cell::getPicture)
+                    .forEach(a -> ((DropShadow) ((Bloom) a.getEffect()).getInput()).setRadius(0));
             if (shadow.getRadius()==0) {
                 shadow.setRadius(16);
             } else
@@ -1438,11 +1479,21 @@ public class GameView {
     }
 
     public void cantRitualSummon() {
-        System.out.println("there is no way you could ritual summon a monster");
+        createNotification("there is no way you could ritual summon a monster", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSpellActivated() {
-        System.out.println("spell activated");
+        createNotification("spell activated", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSelectSpellOrTrap() {
@@ -1474,7 +1525,12 @@ public class GameView {
     }
 
     public void printCantAttackDirectly() {
-        System.out.println("you can’t attack the opponent directly");
+        createNotification("you can’t attack the opponent directly", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSelectGraveyardHandOrDeck() {
@@ -1607,10 +1663,21 @@ public class GameView {
 
     public void printChangeTurn() {
         if (gameController.getCurrentPlayer() instanceof AIPlayer)
-            System.out.println("now it will be " + ((AIPlayer) gameController.getCurrentPlayer()).getNickname() + "’s turn");
+            createNotification("now it will be " + ((AIPlayer)
+                    gameController.getCurrentPlayer()).getNickname() + "’s turn", new Node[]{
+                    new CustomSanButtons("Ok", () -> {
+                        notifStackPane.setVisible(false);
+                        deBlur();
+                    })
+            });
         else
-            System.out.println("now it will be " + gameController.getCurrentPlayer().getUser().getNickname() + "’s turn");
-        printMap();
+        createNotification("now it will be " +
+                gameController.getCurrentPlayer().getUser().getNickname() + "’s turn", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public boolean wantToActivateTrap(Trap trap) {
@@ -1626,15 +1693,30 @@ public class GameView {
     }
 
     public void printCantAttackFacedDown() {
-        System.out.println("cant attack because card is faced down");
+        createNotification("cant attack because card is faced down", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printCantAttackItsOnDefense() {
-        System.out.println("cant attack because card is on defense");
+        createNotification("cant attack because card is on defense", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printThisCardCantBeEquippedByThisType() {
-        System.out.println("this equip spell cant be equipped by this type of monster");
+        createNotification("this equip spell cant be equipped by this type of monster", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printAbortedFromEquipSpell() {
@@ -1650,7 +1732,12 @@ public class GameView {
     }
 
     public void printSpellDestroyed() {
-        System.out.println("spell/trap is destroyed");
+        createNotification("spell/trap is destroyed", new Node[]{
+                new CustomSanButtons("Ok", () -> {
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void printSelectNextSpellOrAbort() {
