@@ -116,6 +116,7 @@ public class GameView {
         buttonBox.getChildren().addAll(buttonBoxNodes());
         AnimationTimer animationTimer = new AnimationTimer() {
             final ColorAdjust colorAdjust = new ColorAdjust();
+
             @Override
             public void handle(long now) {
                 if (gameController.isAITurn()) {
@@ -442,7 +443,10 @@ public class GameView {
                                 gameController.getCurrentPlayer()
                                         .setSelectedCard(gameController.getCurrentPlayer()
                                                 .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
-                                monsterSummon(gameController.getCurrentPlayer().getSelectedCard());
+                                if (gameController.getCurrentPlayer().getSelectedCard() instanceof Monster)
+                                    monsterSummon();
+                                else if (gameController.getCurrentPlayer().getSelectedCard() instanceof Spell)
+                                    gameController.activateSpell();
 //                            gameController.normalSummon((Monster) gameController.getCurrentPlayer().getSelectedCard(), AttackOrDefense.ATTACK);
                             } else
                                 gameController.getCurrentPlayer()
@@ -461,7 +465,6 @@ public class GameView {
             }
         }
     }
-
     private void setMonsterSpellTrap(Card selectedCard) {
         try {
             gameController.set();
@@ -476,7 +479,7 @@ public class GameView {
         }
     }
 
-    private void monsterSummon(Card selectedCard) {
+    private void monsterSummon() {
         try {
             gameController.checksBeforeSummon();
         } catch (KingBarbarosException e) {
