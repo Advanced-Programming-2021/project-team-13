@@ -1323,7 +1323,7 @@ public class GameController {
                 throw new Exception("action not allowed in this phase");
             else {
                 if (currentPlayer.getBoard().isThereEmptyPlaceMonsterZone()) {
-                    if (false)//currentPlayer.getCardsInHand().indexOf(card)
+                    if (currentPlayer.isSetOrSummonInThisTurn())//
                         throw new Exception("you already summoned/set on this turn");
                     else if (currentPlayer.getSelectedCard().getCardNameInGame().equalsIgnoreCase("Beast king barbaros"))
                         beatsKingBarbaros((Monster) currentPlayer.getSelectedCard());

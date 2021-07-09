@@ -256,12 +256,16 @@ public class GameView {
     }
 
     private Node[] buttonBoxNodes() {
-        activate = new CustomSanButtons("activate", () -> gameController.activateSpell());
+        activate = new CustomSanButtons("activate", () -> {
+            if (!tributePhase && !killOpponentMonsterPhase)
+                gameController.activateSpell();
+        });
         attack = new CustomSanButtons("attack", this::attack);
         directAttack = new CustomSanButtons("direct attack", this::directAttack);
         return new Node[]{activate, attack
                 , directAttack, new CustomSanButtons("next phase", () -> {
-            gameController.nextPhase();
+            if (!tributePhase && !killOpponentMonsterPhase)
+                gameController.nextPhase();
         })
                 , new CustomSanButtons("surrender", () -> {
             gameController.surrender();
