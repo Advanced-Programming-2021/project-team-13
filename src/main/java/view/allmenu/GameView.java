@@ -65,6 +65,8 @@ public class GameView {
     public TilePane graveyardTilepane;
     public AnchorPane showGraveyardBack;
     public Label noCardInGraveyard;
+    public Label ourPlayerLabel;
+    public Label rivalPlayerLabel;
     private GameController gameController;
     public GridPane gridPane;
     public BorderPane motherPane;
@@ -98,13 +100,14 @@ public class GameView {
     public CustomSanButtons directAttack;
     public ProgressBar progressBar;
     public CustomSanButtons activate;
+    private Image backImage ;
     private boolean tributePhase = false;
     private boolean killOpponentMonsterPhase = false;
     private boolean isSummoning = false;
     private int numberOfOpponentMonster = 0;
     private int numberOfOpponentMonsterNeeded = 0;
     private int numberOfTribute = 0;
-    private Image backImage ;
+
 
     public GameView() {
 
@@ -124,6 +127,10 @@ public class GameView {
         buttonBox.getChildren().addAll(buttonBoxNodes());
         ColorAdjust colorAdjust = new ColorAdjust();
         activate.setEffect(colorAdjust);
+        ourPlayerLabel.setText("Our player : " + ourPlayer.getUser().getNickname());
+        rivalPlayerLabel.setText("Rival player : " + ((AIPlayer)rivalPlayer).getNickname());
+        ourPlayerLabel.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
+        rivalPlayerLabel.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
         AnimationTimer animationTimer = new AnimationTimer() {
 
 
@@ -440,6 +447,8 @@ public class GameView {
         ourPlayer.getBoard().getGraveyard().setStackPane(ourGraveyard);
         rivalPlayer.getBoard().getGraveyard().setStackPane(rivalGraveyard);
         Arrays.stream(new StackPane[]{ourField, rivalField, ourGraveyard, rivalGraveyard}).forEach(x -> {
+            DropShadow shadow=new DropShadow(0, 0f, 0f, Color.BLACK);
+            stackPaneEffect(x, shadow);
             x.setPrefWidth(93.3333);
             x.setPrefHeight(126.6666);
             ImageView cardImages = new ImageView();
@@ -447,6 +456,12 @@ public class GameView {
             cardImages.setFitWidth(93.3333);
             cardImages.setFitHeight(126.6666);
             x.getChildren().add(cardImages);
+            x.setOnMouseClicked(a->{
+                if (shadow.getRadius()==0) {
+                    shadow.setRadius(16);
+                } else
+                    shadow.setRadius(0);
+            });
         });
         our.setTranslateX(-300);
         our.setTranslateY(26.666);

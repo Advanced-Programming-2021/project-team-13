@@ -39,6 +39,8 @@ public class DuelView {
     public AnchorPane downPane;
     public AnchorPane upPane;
     public AnchorPane rpc;
+    public StackPane notifStackPane;
+
     public VBox vBox;
     public HBox hBox;
     public HBox rpcHbox;
@@ -51,6 +53,8 @@ public class DuelView {
     }
 
     public void initialize() {
+        notifStackPane=new StackPane();
+
         leftPane.getChildren().remove(rpcHbox);
         Bloom glow = new Bloom();
         setBtnEffects(glow, scissorsImg, "/duelMenuPics/rps/scissors.bmp", 3);

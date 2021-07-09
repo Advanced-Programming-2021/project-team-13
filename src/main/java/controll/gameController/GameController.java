@@ -750,7 +750,6 @@ public class GameController {
         currentPlayer.getBoard().setFieldSpell(spell);
         spell.setActivated(true);
         gameView.printSpellActivated();
-        gameView.printMap();
         checkTrapActivation();
     }
 
@@ -1546,16 +1545,16 @@ public class GameController {
         if (currentPhase == Phase.MAIN_PHASE_1 || currentPhase == Phase.MAIN_PHASE_2) {
             if (currentPlayer.getSelectedCard() instanceof Spell && ((Spell) currentPlayer.getSelectedCard())
                     .getType().equalsIgnoreCase("field")) {
-                if (currentPlayer.getBoard().getFieldSpell().getCard() != null) {
-                    Spell spell = (Spell) currentPlayer.getSelectedCard();
-                    removeCardFromHandScene(spell);
-                    spell.setFace(Face.UP);
-                    spell.setZone(Zone.FIELD);
-                    currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
-                    currentPlayer.setSelectedCard(null);
-                    gameView.printMap();
-                    checkTrapActivation();
-                } else throw new Exception("spell zone is full");
+//                if (currentPlayer.getBoard().getFieldSpell().getCard() != null) {
+//                    Spell spell = (Spell) currentPlayer.getSelectedCard();
+//                    removeCardFromHandScene(spell);
+//                    spell.setFace(Face.UP);
+//                    spell.setZone(Zone.FIELD);
+//                    currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
+//                    currentPlayer.setSelectedCard(null);
+//                    gameView.printMap();
+//                    checkTrapActivation();
+//                } else throw new Exception("spell zone is full");
             } else if (currentPlayer.getBoard().getNumberOFSpellAndTrapInBoard() < 5) {
                 Card card = currentPlayer.getSelectedCard();
                 removeCardFromHandScene(card);

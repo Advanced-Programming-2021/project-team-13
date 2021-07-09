@@ -1,5 +1,6 @@
 package model;
 
+import enums.Face;
 import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
@@ -142,6 +143,7 @@ public class Board {
     private void putSpell(Spell selectedCard) {
         if (selectedCard.getType().equalsIgnoreCase("field")) {
             fieldSpell.setCard(selectedCard);
+            fieldSpell.setPicture(selectedCard.getImage(), Face.UP, null);
         } else {
             for (Cell cell : spellOrTrap) {
                 if (cell.getCard() == null) {
