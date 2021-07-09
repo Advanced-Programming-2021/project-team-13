@@ -1,11 +1,20 @@
 package view;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import model.players.User;
 import view.allmenu.*;
+
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class ViewMaster {
+    public static MediaPlayer goodInRed;
+    public static MediaPlayer daytona;
+    public static MediaPlayer shadows;
+    public static MediaPlayer[] songs;
     public static Scanner scanner = new Scanner(System.in);
     private static ViewMaster viewMaster;
     private static Menu currentMenu;
@@ -20,6 +29,15 @@ public class ViewMaster {
     private GameView gameView;
     private ShowGraveyardView showGraveyardView;
 
+    static {
+        goodInRed = new MediaPlayer(new Media(ViewMaster.class
+                .getResource("/gameMusic/goodInRed.mp3").toExternalForm()));
+        shadows = new MediaPlayer(new Media(ViewMaster.class
+                .getResource("/gameMusic/shadows.mp3").toExternalForm()));
+        daytona = new MediaPlayer(new Media(ViewMaster.class
+                .getResource("/gameMusic/daytona.mp3").toExternalForm()));
+        songs = new MediaPlayer[]{goodInRed, shadows, daytona};
+    }
     private ViewMaster() {
         loginView = new LoginView();
         shopView = new ShopView();
@@ -70,7 +88,21 @@ public class ViewMaster {
     }
 
     public void run() throws IOException {
+        startSong();
         loginView.setLogin();
     }
 
+    public static void startSong() {
+        Collections.shuffle(Arrays.asList(songs));
+        songs[0].play();
+        Arrays.stream(songs).forEach(
+                x -> {
+                    x.setVolume(0.3);
+                    x.setOnEndOfMedia(() -> {
+                        Collections.shuffle(Arrays.asList(songs));
+                        songs[0].play();
+                    });
+                }
+        );
+    }
 }

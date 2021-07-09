@@ -16,6 +16,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -257,6 +258,7 @@ public class DuelView {
                             })
                     });
                 } else if (result == 1) {
+                    stopSong();
                     rpc.setVisible(false);
                     createNotification("You Start The Game", new Node[]{
                     });
@@ -266,6 +268,7 @@ public class DuelView {
                     timeline.setCycleCount(1);
                     timeline.play();
                 } else {
+                    stopSong();
                     rpc.setVisible(false);
                     createNotification("AI Start The Game", new Node[]{
                     });
@@ -283,6 +286,10 @@ public class DuelView {
         rpc.setTranslateX(1280 - 350);
         rpc.setTranslateY(250);
         pane.getChildren().add(rpc);
+    }
+
+    private void stopSong() {
+        Arrays.stream(ViewMaster.songs).forEach(MediaPlayer::stop);
     }
 
     private void unBlur() {

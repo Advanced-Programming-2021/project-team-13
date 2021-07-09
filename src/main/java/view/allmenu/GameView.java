@@ -24,6 +24,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -58,6 +60,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
 public class GameView {
+    public static MediaPlayer gender;
     public AnchorPane rightPane;
     public StackPane notifStackPane;
     public AnchorPane tributeContainer;
@@ -112,7 +115,9 @@ public class GameView {
     private int numberOfTribute = 0;
     //private Image backImage;
     private AnimationTimer animationTimer;
-
+    static {
+        gender = new MediaPlayer(new Media(GameView.class.getResource("/gameMusic/gender.mp3").toExternalForm()));
+    }
     public GameView() {
 
     }
@@ -176,6 +181,10 @@ public class GameView {
             }
         };
         animationTimer.start();
+
+        gender.setVolume(0.2);
+        gender.setOnEndOfMedia(()->gender.play());
+        gender.play();
     }
 
 
@@ -418,6 +427,7 @@ public class GameView {
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
             fadeTransition.setNode(selectedCard);
+            if(ourSelectedCell!=null && ourSelectedCell.getCard()!=null)
             selectedCard.setImage(ourSelectedCell.getCard().getImage());
             fadeTransition.play();
             if (tributePhase) {
@@ -1290,9 +1300,11 @@ public class GameView {
     public void printUserWonWholeGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
         animationTimer.stop();
+        gender.stop();
+        ViewMaster.startSong();
         createNotification(username + " won the whole game with " +
                         "\nscore: " + winnerWonRounds + "-" + loserWonRounds,
-                new Node[]{new CustomSanButtons("Back To Main Menu", () -> {
+                new Node[]{new CustomSanButtons("Main Menu", () -> {
                     try {
                         SceneController.startMainMenu((Stage) notifStackPane.getScene().getWindow());
                     } catch (IOException e) {
@@ -1302,11 +1314,14 @@ public class GameView {
     }
 
     public void printUserWonSingleGame(String username, int winnerWonRounds, int loserWonRounds) {
+
         animationTimer.stop();
+        gender.stop();
+        ViewMaster.startSong();
         System.out.println(username + " won the game and the score is:" + winnerWonRounds + "-" + loserWonRounds);
         createNotification(username + " won the game and " +
                         "\nthe score is:" + winnerWonRounds + "-" + loserWonRounds,
-                new Node[]{new CustomSanButtons("Back To Main Menu", () -> {
+                new Node[]{new CustomSanButtons("Main Menu", () -> {
                     try {
                         SceneController.startMainMenu((Stage) notifStackPane.getScene().getWindow());
                     } catch (IOException e) {

@@ -18,6 +18,7 @@ public class GameWinMenu {
     private final Player startingPlayer;
 
     public GameWinMenu(GameController gameController) {
+        GameView.gender.stop();
         this.gameView = gameController.getGameView();
         this.startingRounds = gameController.getStartingRounds();
         this.firstPlayer = gameController.getFirstPlayer();
