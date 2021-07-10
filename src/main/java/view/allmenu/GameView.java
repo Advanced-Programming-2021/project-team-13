@@ -378,10 +378,10 @@ public class GameView {
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
             if (player == rivalPlayer) {
-                rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getSpellOrTrap())
+                rivalSelectedSpell = Arrays.stream(rivalPlayer.getBoard().getSpellOrTrap())
                         .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
                 fadeTransition.setNode(rivalSelectedCard);
-                rivalSelectedCard.setImage(rivalSelectedCell.getCard().getImage());
+                rivalSelectedCard.setImage(rivalSelectedSpell.getCard().getImage());
             } else {
                 ourSelectedSpell = Arrays.stream(ourPlayer.getBoard().getSpellOrTrap())
                         .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
