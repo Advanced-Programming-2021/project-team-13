@@ -329,8 +329,9 @@ public class DuelView {
     public GameView startGame(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds)
             throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
-        ((Stage) pane.getScene().getWindow()).setScene(new Scene(loader.load()));
-        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds);
+        Scene scene = new Scene(loader.load());
+        ((Stage) pane.getScene().getWindow()).setScene(scene);
+        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds , scene);
         return loader.getController();
     }
 }
