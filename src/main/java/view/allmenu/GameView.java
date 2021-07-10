@@ -1814,7 +1814,7 @@ public class GameView {
         showGraveyardBack.setDisable(true);
     }
 
-    public void showTrapIsActivating(Trap trap, int size) {
+    public void showTrapIsActivating(Trap trap) {
         Cell trapCell = null;
         for (Cell cell : trap.getCardOwner().getBoard().getSpellOrTrap()) {
             if (cell.getCard() == trap) {
@@ -1824,18 +1824,6 @@ public class GameView {
         }
         assert trapCell != null;
         trapCell.setPictureUP();
-        Circle circle = new Circle(10);
-        circle.setStroke(Color.WHITE);
-        circle.setStrokeWidth(0.5);
-        circle.setAccessibleText(String.valueOf(size));
-        circle.setLayoutX(37.5);
-        circle.setLayoutY(40);
-        trapCell.getPicture().getChildren().add(circle);
-        Cell finalTrapCell = trapCell;
-        KeyFrame keyFrame = new KeyFrame(Duration.millis(5000), event ->
-                finalTrapCell.getPicture().getChildren().remove(circle));
-        Timeline timeline = new Timeline(keyFrame);
-        timeline.play();
     }
 
     public void setGraveyardCardsOnClick(Player player) {
