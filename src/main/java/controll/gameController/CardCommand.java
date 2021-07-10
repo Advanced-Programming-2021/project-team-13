@@ -10,7 +10,6 @@ import model.cards.Spell;
 import model.cards.Trap;
 import model.players.AIPlayer;
 import model.players.Player;
-import view.ViewMaster;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -172,8 +171,7 @@ class AnnounceCardNameToRemove extends CardCommand {
             cardName = rival.getCardsInHand().get(0).getCardNameInGame();
             containsCard = true;
         } else {
-            System.out.println("please enter a card name to remove from rival hand : ");
-            cardName = ViewMaster.scanner.nextLine().trim();
+            cardName = gameController.getGameView().announceCardNameToRemove();
             for (Card card : rival.getCardsInHand()) {
                 if (card.getCardNameInGame().equalsIgnoreCase(cardName)) {
                     containsCard = true;

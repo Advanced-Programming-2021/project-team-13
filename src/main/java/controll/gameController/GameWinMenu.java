@@ -66,16 +66,17 @@ public class GameWinMenu {
             if (startingRounds == 1) {
                 user.addLosts(1);
                 user.addMoney(100);
-                gameView.printUserWonSingleGame(((AIPlayer) winner).getNickname(), winner.getWonRounds(), loser.getWonRounds());
+                gameView.printUserWonWholeGame(((AIPlayer) winner).getNickname(), winner.getWonRounds(), loser.getWonRounds());
             } else {
                 if (winner.getWonRounds() == 2) {
                     user.addLosts(1);
                     user.addMoney(300);
-                    gameView.printUserWonSingleGame(((AIPlayer) winner).getNickname(), winner.getWonRounds(), loser.getWonRounds());
+                    gameView.printUserWonWholeGame(((AIPlayer) winner).getNickname(), winner.getWonRounds(), loser.getWonRounds());
                     ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
                 } else {
                     loser.renewPlayer();
                     ((AIPlayer) winner).renewPlayer(loser.getUser().getActiveDeck());
+                    gameView.printUserWonSingleGame(((AIPlayer)winner).getNickname() , winner.getWonRounds() , loser.getWonRounds());
                     runNewGame();
                 }
             }
@@ -96,6 +97,7 @@ public class GameWinMenu {
                 } else {
                     winner.renewPlayer();
                     ((AIPlayer) loser).renewPlayer(winner.getUser().getActiveDeck());
+                    gameView.printUserWonSingleGame(user.getUsername(), winner.getWonRounds() , loser.getWonRounds());
                     runNewGame();
                 }
             }

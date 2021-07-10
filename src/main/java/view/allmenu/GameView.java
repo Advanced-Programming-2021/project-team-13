@@ -5,24 +5,26 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
 import enums.Phase;
-import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
-import javafx.animation.RotateTransition;
+import javafx.animation.*;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -47,17 +49,13 @@ import model.exceptions.ManEaterBugException;
 import model.menuItems.CustomSanButtons;
 import model.players.AIPlayer;
 import model.players.Player;
-import view.Menu;
 import view.Regex;
 import view.SceneController;
 import view.ViewMaster;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
@@ -132,7 +130,14 @@ public class GameView {
         this.gameController = gameController;
     }
 
-    public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds) {
+    public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds , Scene scene) {
+        scene.setOnKeyPressed(event -> {
+            if (event.isControlDown() && event.isShiftDown()){
+                if (event.getCode() == KeyCode.C){
+                    runCheats();
+                }
+            }
+        });
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         ourPlayer = firstPlayer instanceof AIPlayer ? secondPlayer : firstPlayer;
@@ -190,12 +195,50 @@ public class GameView {
         gender.play();
     }
 
+    private void runCheats() {
+        CustomSanButtons money = new CustomSanButtons("Money" , () -> {
+            gameController.moneyCheat(5000);
+            ViewMaster.btnSoundEffect();
+            notifStackPane.setVisible(false);
+            deBlur();
+        });
+        CustomSanButtons hand = new CustomSanButtons("Draw Card" , ()->{
+            gameController.addCardToHand();
+            ViewMaster.btnSoundEffect();
+            notifStackPane.setVisible(false);
+            deBlur();
+        });
+        CustomSanButtons winGame = new CustomSanButtons("Win Game" , ()->{
+            gameController.setDuelWinnerCheat(ourPlayer.getUser().getNickname());
+            ViewMaster.btnSoundEffect();
+            notifStackPane.setVisible(false);
+            deBlur();
+        });
+        CustomSanButtons lp = new CustomSanButtons("Life Point" , ()->{
+            gameController.lifePointCheat(1000);
+            ViewMaster.btnSoundEffect();
+            notifStackPane.setVisible(false);
+            deBlur();
+        });
+        CustomSanButtons close = new CustomSanButtons("Close" , () -> {
+            ViewMaster.btnSoundEffect();
+            notifStackPane.setVisible(false);
+            deBlur();
+        });
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().addAll(money , hand , winGame , lp , close);
+        hBox.setSpacing(5);
+        Node[] nodes = new Node[]{hBox};
+        createNotification("Choose Cheat" , nodes);
+    }
+
     private void setHpBar() {
         for (int i = 0; i < health.getChildren().size(); i++) {
-            health.getChildren().get(i).setVisible((double) ourPlayer.getLifePoint() / 1000 >= i+1);
+            health.getChildren().get(i).setVisible((double) ourPlayer.getLifePoint() / 1000 >= i + 1);
         }
         for (int i = 0; i < rivalHealth.getChildren().size(); i++) {
-            rivalHealth.getChildren().get(i).setVisible((double) rivalPlayer.getLifePoint() / 1000 >= i+1);
+            rivalHealth.getChildren().get(i).setVisible((double) rivalPlayer.getLifePoint() / 1000 >= i + 1);
         }
     }
 
@@ -218,12 +261,12 @@ public class GameView {
         rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
         ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
         health = new HBox();
-        rivalHealth=new HBox();
-        Arrays.stream(new HBox[]{rivalHealth,health}).forEach(x->{
+        rivalHealth = new HBox();
+        Arrays.stream(new HBox[]{rivalHealth, health}).forEach(x -> {
             x.setSpacing(2);
             for (int i = 0; i < 8; i++) {
-                Rectangle rectangle=new Rectangle(10, 20, Color.RED);
-                rectangle.setEffect(new DropShadow(5,Color.BLACK));
+                Rectangle rectangle = new Rectangle(10, 20, Color.RED);
+                rectangle.setEffect(new DropShadow(5, Color.BLACK));
                 x.getChildren().add(rectangle);
             }
             x.setStyle("-fx-background-color: black");
@@ -564,7 +607,7 @@ public class GameView {
         graveyard.getChildren().add(group);
     }
 
-    private void openGraveyard(Player player) {
+    public void openGraveyard(Player player) {
         ourGraveyard.setDisable(true);
         rivalGraveyard.setDisable(true);
         ourField.setDisable(true);
@@ -803,13 +846,6 @@ public class GameView {
         String amountString = Regex.getInputMatcher(command, "increase --money (\\d+)").group(1);
         int amount = Integer.parseInt(amountString);
         gameController.moneyCheat(amount);
-    }
-
-    public void showGraveyard(String command) {
-        ShowGraveyardView showGraveyardView = new ShowGraveyardView(gameController.getCurrentPlayer());
-        ViewMaster.getViewMaster().setShowGraveyardMenu(showGraveyardView);
-        ViewMaster.setCurrentMenu(Menu.SHOW_GRAVEYARD);
-        showGraveyardView.run(command);
     }
 
   /*  private void changeSet(Matcher inputMatcher) {
@@ -1203,6 +1239,8 @@ public class GameView {
                 new Node[]{new CustomSanButtons("Main Menu", () -> {
                     ViewMaster.btnSoundEffect();
                     try {
+                        Stage stage = ((Stage) notifStackPane.getScene().getWindow());
+                        System.out.println(stage);
                         SceneController.startMainMenu((Stage) notifStackPane.getScene().getWindow());
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -1665,15 +1703,22 @@ public class GameView {
     }
 
     public boolean wantToActivateTrap(Trap trap) {
-        System.out.println("do you want to activate your trap " + trap.getCardNameInGame() + " ?(YES/NO)");
-        while (true) {
-            String yesOrNo = ViewMaster.scanner.nextLine().trim();
-            if (yesOrNo.equalsIgnoreCase("yes")) {
-                return true;
-            } else if (yesOrNo.equalsIgnoreCase("no")) {
-                return false;
-            }
-        }
+        final boolean[] answer = new boolean[1];
+        CustomSanButtons yes = new CustomSanButtons("Yes", () -> {
+            ViewMaster.btnSoundEffect();
+            notifStackPane.setVisible(false);
+            deBlur();
+            answer[0] = true;
+        });
+        CustomSanButtons no = new CustomSanButtons("No", () -> {
+            ViewMaster.btnSoundEffect();
+            notifStackPane.setVisible(false);
+            deBlur();
+            answer[0] = false;
+        });
+        Node[] nodes = new Node[]{yes, no};
+        createNotification("do you want to activate your trap " + trap.getCardNameInGame() + " ?", nodes);
+        return answer[0];
     }
 
     public void printCantAttackFacedDown() {
@@ -1767,5 +1812,67 @@ public class GameView {
         rivalField.setEffect(null);
         showGraveyardBack.setVisible(false);
         showGraveyardBack.setDisable(true);
+    }
+
+    public void showTrapIsActivating(Trap trap, int size) {
+        Cell trapCell = null;
+        for (Cell cell : trap.getCardOwner().getBoard().getSpellOrTrap()) {
+            if (cell.getCard() == trap) {
+                trapCell = cell;
+                break;
+            }
+        }
+        assert trapCell != null;
+        trapCell.setPictureUP();
+        Circle circle = new Circle(10);
+        circle.setStroke(Color.WHITE);
+        circle.setStrokeWidth(0.5);
+        circle.setAccessibleText(String.valueOf(size));
+        circle.setLayoutX(37.5);
+        circle.setLayoutY(40);
+        trapCell.getPicture().getChildren().add(circle);
+        Cell finalTrapCell = trapCell;
+        KeyFrame keyFrame = new KeyFrame(Duration.millis(5000), event ->
+                finalTrapCell.getPicture().getChildren().remove(circle));
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
+    }
+
+    public void setGraveyardCardsOnClick(Player player) {
+        for (Node node : graveyardTilepane.getChildren()) {
+            if (node instanceof ImageView) {
+                ImageView imageView = (ImageView) node;
+                imageView.setOnMouseClicked(event -> {
+                    for (Card card : player.getBoard().getGraveyard().getAllCards()) {
+                        if (card.getImage().equals(imageView.getImage())) {
+                            player.setSelectedCard(card);
+                            for (Node node1 : graveyardTilepane.getChildren()) {
+                                if (node1 instanceof ImageView) {
+                                    node1.setOnMouseClicked(null);
+                                }
+                            }
+                            closeGraveyardMenu();
+                            break;
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    public String announceCardNameToRemove() {
+        final String[] answer = new String[1];
+        TextField textField = new TextField();
+        textField.setStyle("-fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px;-fx-background-color: transparent;" +
+                "-fx-background-radius: 5;-fx-border-radius: 5;-fx-border-width: 1px");
+        CustomSanButtons submit = new CustomSanButtons("Submit", () -> {
+            ViewMaster.btnSoundEffect();
+            notifStackPane.setVisible(false);
+            deBlur();
+            answer[0] = textField.getText();
+        });
+        Node[] nodes = new Node[]{textField, submit};
+        createNotification("please enter a card name to remove from rival hand : ", nodes);
+        return answer[0];
     }
 }

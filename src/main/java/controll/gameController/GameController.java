@@ -2,11 +2,7 @@ package controll.gameController;
 
 import controll.ImageLoader;
 import enums.*;
-import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
@@ -130,6 +126,10 @@ public class GameController {
 
     public void setNumberOfTributeNeeded(int numberOfTributeNeeded) {
         this.numberOfTributeNeeded = numberOfTributeNeeded;
+    }
+
+    public ArrayList<Trap> getChain() {
+        return chain;
     }
 
     public boolean isAnySummonHappened() {
@@ -1783,14 +1783,8 @@ public class GameController {
     }
 
     public void selectMonsterFromPlayerGraveyard(Player player) {
-        ShowGraveyardView showGraveyardView = new ShowGraveyardView(player);
-        showGraveyardView.run("show graveyard");
-        int monsterNum;
-        do {
-            showGraveyardView.printSelectCard();
-            monsterNum = ViewMaster.scanner.nextInt();
-        } while (monsterNum > showGraveyardView.getShowGraveyardController().getMonsterCounter());
-        showGraveyardView.getShowGraveyardController().selectCardFromGraveyard(monsterNum, player);
+        gameView.openGraveyard(player);
+        gameView.setGraveyardCardsOnClick(player);
     }
 
     public void moneyCheat(int amount) {
@@ -1875,10 +1869,8 @@ public class GameController {
         boolean activatedTrap = false;
         if (trapArrayList.size() != 0) {
             changeCurrentPlayer();
-            gameView.printChangeTurn();
             activatedTrap = addTrapToChain(trapArrayList);
             changeCurrentPlayer();
-            gameView.printChangeTurn();
         }
         if (activatedTrap)
             activateCurrentPlayerTrap();
@@ -1899,6 +1891,7 @@ public class GameController {
         boolean activatedTrap = false;
         if (currentPlayer instanceof AIPlayer) {
             for (Trap trap : trapArrayList) {
+                gameView.showTrapIsActivating(trap , chain.size());
                 trap.setActivated(true);
                 trap.setFace(Face.UP);
                 chain.add(trap);
@@ -1907,6 +1900,7 @@ public class GameController {
         } else {
             for (Trap trap : trapArrayList) {
                 if (gameView.wantToActivateTrap(trap)) {
+                    gameView.showTrapIsActivating(trap , chain.size());
                     trap.setActivated(true);
                     trap.setFace(Face.UP);
                     chain.add(trap);
