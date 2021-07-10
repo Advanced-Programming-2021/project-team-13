@@ -113,15 +113,17 @@ public class GameView {
     private boolean tributePhase = false;
     private boolean killOpponentMonsterPhase = false;
     private boolean isSummoning = false;
-    private boolean heartBeatStarted=false;
+    private boolean heartBeatStarted = false;
     private int numberOfOpponentMonster = 0;
     private int numberOfOpponentMonsterNeeded = 0;
     private int numberOfTribute = 0;
     //private Image backImage;
     private AnimationTimer animationTimer;
+
     static {
         gender = new MediaPlayer(new Media(GameView.class.getResource("/gameMusic/gender.mp3").toExternalForm()));
     }
+
     public GameView() {
 
     }
@@ -148,13 +150,15 @@ public class GameView {
         animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                if (ourField.getChildren().isEmpty() && rivalField.getChildren().isEmpty())
+                    changeCenterPanePic("/fields/normal.bmp");
                 if (gameController.isAITurn()) {
                     gameController.setAITurn(false);
                     gameController.playAI();
                 }
-                if(ourPlayer.getLifePoint()<=3000 && !heartBeatStarted){
+                if (ourPlayer.getLifePoint() <= 3000 && !heartBeatStarted) {
                     ViewMaster.heartbeatSoundEffect();
-                    heartBeatStarted=true;
+                    heartBeatStarted = true;
                 }
                 gameController.findWinner();
                 rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
@@ -184,7 +188,7 @@ public class GameView {
         animationTimer.start();
 
         gender.setVolume(0.2);
-        gender.setOnEndOfMedia(()->gender.play());
+        gender.setOnEndOfMedia(() -> gender.play());
         gender.play();
     }
 
@@ -204,7 +208,7 @@ public class GameView {
         rightPane.setStyle("-fx-background-image: url('/gamePics/1.png')" +
                 ";-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
         initGridPanes();
-        centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
+        centerPane.setStyle("-fx-background-image:url('/fields/normal.bmp'); -fx-background-size: cover,auto;");
         rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
         ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
         progressBar = new ProgressBar();
@@ -213,6 +217,11 @@ public class GameView {
         doubleProperty.set(ourPlayer.getLifePoint());
         progressBar.progressProperty().bind(doubleProperty);
         leftPane.getChildren().add(progressBar);
+    }
+
+    public void changeCenterPanePic(String url) {
+        System.out.println(url);
+        centerPane.setStyle("-fx-background-image:url('" + url + "'); -fx-background-size: cover,auto;");
     }
 
     private void setupNotifStackPane() {
@@ -439,8 +448,8 @@ public class GameView {
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
             fadeTransition.setNode(selectedCard);
-            if(ourSelectedCell!=null && ourSelectedCell.getCard()!=null)
-            selectedCard.setImage(ourSelectedCell.getCard().getImage());
+            if (ourSelectedCell != null && ourSelectedCell.getCard() != null)
+                selectedCard.setImage(ourSelectedCell.getCard().getImage());
             fadeTransition.play();
             if (tributePhase) {
                 if (numberOfTribute < (gameController).getNumberOfTributeNeeded()

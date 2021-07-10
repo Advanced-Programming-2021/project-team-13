@@ -120,7 +120,7 @@ public class DuelView {
 
     private Node[] getFirstVboxNodes() {
         return new Node[]{
-                new CustomButton("AI duel", ()->{
+                new CustomButton("AI duel", () -> {
                     ViewMaster.btnSoundEffect();
                     startAIDuel();
                 }), new CustomButton("2 Player duel", () -> {
