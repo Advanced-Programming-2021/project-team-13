@@ -332,8 +332,9 @@ public class DuelView {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
         if (stage == null)
             stage = (Stage) (pane.getScene().getWindow());
-        (stage).setScene(new Scene(loader.load()));
-        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds);
+        Scene scene = new Scene(loader.load());
+        (stage).setScene(scene);
+        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds , scene );
         return loader.getController();
     }
 }
