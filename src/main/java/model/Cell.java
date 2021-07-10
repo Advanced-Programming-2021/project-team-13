@@ -29,6 +29,12 @@ public class Cell {
         this.card = card;
     }
 
+    public Image getImage() {
+        if (card.getFace() == Face.DOWN)
+            return unknown;
+        return card.getImage();
+    }
+
     public Card getCard() {
         return card;
     }
