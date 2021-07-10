@@ -616,13 +616,7 @@ public class GameView {
         try {
             gameController.changeSet();
         } catch (Exception e) {
-            createNotification(e.getMessage(), new Node[]{
-                    new CustomSanButtons("proceed", () -> {
-                        ViewMaster.btnSoundEffect();
-                        notifStackPane.setVisible(false);
-                        deBlur();
-                    })
-            });
+            okNotif(e.getMessage(), "proceed");
             System.out.println(e.getMessage());
         }
     }
@@ -645,13 +639,7 @@ public class GameView {
             })
             });
         } catch (Exception e) {
-            createNotification(e.getMessage(), new Node[]{
-                    new CustomSanButtons("proceed", () -> {
-                        ViewMaster.btnSoundEffect();
-                        notifStackPane.setVisible(false);
-                        deBlur();
-                    })
-            });
+            okNotif(e.getMessage(), "proceed");
             System.out.println(e.getMessage());
         }
     }
@@ -703,13 +691,7 @@ public class GameView {
         try {
             gameController.set();
         } catch (Exception e) {
-            createNotification(e.getMessage(), new Node[]{
-                    new CustomSanButtons("proceed", () -> {
-                        ViewMaster.btnSoundEffect();
-                        notifStackPane.setVisible(false);
-                        deBlur();
-                    })
-            });
+            okNotif(e.getMessage(), "proceed");
             System.out.println(e.getMessage());
         }
     }
@@ -735,13 +717,7 @@ public class GameView {
             });
             notifStackPane.setVisible(true);
         } catch (Exception e) {
-            createNotification(e.getMessage(), new Node[]{
-                    new CustomSanButtons("proceed", () -> {
-                        ViewMaster.btnSoundEffect();
-                        notifStackPane.setVisible(false);
-                        deBlur();
-                    })
-            });
+            okNotif(e.getMessage(), "proceed");
             notifStackPane.setVisible(true);
             System.out.println(e.getMessage());
         }
@@ -833,13 +809,7 @@ public class GameView {
 
     private void attack() {
         if (ourSelectedCell == null || rivalSelectedCell == null) {
-            createNotification("you haven't selected yet!", new Node[]{
-                    new CustomSanButtons("Ok", () -> {
-                        ViewMaster.btnSoundEffect();
-                        notifStackPane.setVisible(false);
-                        deBlur();
-                    })
-            });
+            okNotif("you haven't selected yet!", "Ok");
             return;
         }
         gameController.attack(getCellNumber(rivalSelectedCell));
@@ -1001,13 +971,7 @@ public class GameView {
     }
 
     public void printNoCardSelected() {
-        createNotification("no card is selected yet", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("no card is selected yet", "Ok");
     }
 
 
@@ -1028,33 +992,15 @@ public class GameView {
     }
 
     public void printCantAttack() {
-        createNotification("you can’t attack with this card", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("you can’t attack with this card", "Ok");
     }
 
     public void printWrongPhase() {
-        createNotification("you can’t do this action in this phase", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("you can’t do this action in this phase", "Ok");
     }
 
     public void printAlreadyAttacked() {
-        createNotification("this card already attacked", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("this card already attacked", "Ok");
     }
 
     public void printNoCardToAttack() {
@@ -1073,14 +1019,8 @@ public class GameView {
     }
 
     public void printBothMonstersDestroyed() {
-        createNotification("both you and your opponent monster cards" +
-                " are destroyed and no one receives damage", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("both you and your opponent monster cards" +
+                " are destroyed and no one receives damage", "Ok");
     }
 
     public void printYourCardIsDestroyed(int attackDifference) {
@@ -1095,23 +1035,11 @@ public class GameView {
     }
 
     public void printNoCardDestroyed() {
-        createNotification("no card is destroyed", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("no card is destroyed", "Ok");
     }
 
     public void printDefensePositionDestroyed() {
-        createNotification("the defense position monster is destroyed", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("the defense position monster is destroyed", "Ok");
     }
 
     public void printNoCardDestroyedYouReceivedDamage(int attackDifference) {
@@ -1162,13 +1090,7 @@ public class GameView {
     }
 
     public void printCantSummon() {
-        createNotification("you can’t summon this card", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("you can’t summon this card", "Ok");
     }
 
     public void printNotInMainPhase() {
@@ -1176,37 +1098,19 @@ public class GameView {
     }
 
     public void printMonsterZoneFull() {
-        createNotification("monster card zone is full", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("monster card zone is full", "Ok");
     }
 
     public void printAlreadySetOrSummon() {
-        createNotification("you already summoned/set on this turn", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("you already summoned/set on this turn", "Ok");
     }
 
     public void printSummonSuccessfully() {
-        createNotification("summoned successfully", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("summoned successfully", "Ok");
     }
 
     public void printNoMonsterOnThisAddress() {
-        System.out.println("there no monsters one this address");
+        okNotif("there no monsters one this address","Ok");
     }
 
     public void printThereArentEnoughMonsterForTribute() {
@@ -1227,23 +1131,11 @@ public class GameView {
     }
 
     public void printCantSet() {
-        createNotification("you can’t set this card", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("you can’t set this card", "Ok");
     }
 
     public void printSetSuccessfully() {
-        createNotification("set successfully", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("set successfully", "Ok");
     }
 
     public void printCantChangePosition() {
@@ -1509,63 +1401,27 @@ public class GameView {
     }
 
     public void printActiveOnlyForSpellsAndTrap() {
-        createNotification("activate effect is only for spell cards", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("activate effect is only for spell cards", "Ok");
     }
 
     public void printCantActiveThisTurn() {
-        createNotification("you can’t activate an effect on this turn", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("you can’t activate an effect on this turn", "Ok");
     }
 
     public void printAlreadyActivated() {
-        createNotification("you have already activated this card", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("you have already activated this card", "Ok");
     }
 
     public void printSpellZoneIsFull() {
-        createNotification("spell zone is full", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("spell zone is full", "Ok");
     }
 
     public void printPrepsNotDone() {
-        createNotification("preparations of this spell are not done yet", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("preparations of this spell are not done yet", "Ok");
     }
 
     public void printCantSpecialSummon() {
-        createNotification("there is no way you could special summon a monster", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("there is no way you could special summon a monster", "Ok");
     }
 
     public void getTributeTheTricky() {
@@ -1601,23 +1457,11 @@ public class GameView {
     }
 
     public void cantRitualSummon() {
-        createNotification("there is no way you could ritual summon a monster", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("there is no way you could ritual summon a monster", "Ok");
     }
 
     public void printSpellActivated() {
-        createNotification("spell activated", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("spell activated", "Ok");
     }
 
     public void printSelectSpellOrTrap() {
@@ -1629,7 +1473,17 @@ public class GameView {
     }
 
     public void printSelectMonsterFromBoard() {
-        System.out.println("select a monster(1-5) from board(our board-rival board)");
+        okNotif("select a monster from board", "Ok");
+    }
+
+    private void okNotif(String message, String ok) {
+        createNotification(message, new Node[]{
+                new CustomSanButtons(ok, () -> {
+                    ViewMaster.btnSoundEffect();
+                    notifStackPane.setVisible(false);
+                    deBlur();
+                })
+        });
     }
 
     public void selectGraveyard() {
@@ -1649,13 +1503,7 @@ public class GameView {
     }
 
     public void printCantAttackDirectly() {
-        createNotification("you can’t attack the opponent directly", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("you can’t attack the opponent directly", "Ok");
     }
 
     public void printSelectGraveyardHandOrDeck() {
@@ -1672,13 +1520,7 @@ public class GameView {
                     })
             });
         else
-            createNotification("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername(), new Node[]{
-                    new CustomSanButtons("Ok", () -> {
-                        ViewMaster.btnSoundEffect();
-                        notifStackPane.setVisible(false);
-                        deBlur();
-                    })
-            });
+            okNotif("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername(), "Ok");
     }
 
     public void printRitualSummonError() {
@@ -1741,13 +1583,7 @@ public class GameView {
     }
 
     public void printCardAddedToHand(Card card) {
-        createNotification("new card added to hand : " + card.getCardNameInGame(), new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("new card added to hand : " + card.getCardNameInGame(), "Ok");
     }
 
     public int chooseMonsterForSummonScanner(List<Monster> rivalGraveYardMonsters) {
@@ -1826,33 +1662,15 @@ public class GameView {
     }
 
     public void printCantAttackFacedDown() {
-        createNotification("cant attack because card is faced down", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("cant attack because card is faced down", "Ok");
     }
 
     public void printCantAttackItsOnDefense() {
-        createNotification("cant attack because card is on defense", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("cant attack because card is on defense", "Ok");
     }
 
     public void printThisCardCantBeEquippedByThisType() {
-        createNotification("this equip spell cant be equipped by this type of monster", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("this equip spell cant be equipped by this type of monster", "Ok");
     }
 
     public void printAbortedFromEquipSpell() {
@@ -1868,13 +1686,7 @@ public class GameView {
     }
 
     public void printSpellDestroyed() {
-        createNotification("spell/trap is destroyed", new Node[]{
-                new CustomSanButtons("Ok", () -> {
-                    ViewMaster.btnSoundEffect();
-                    notifStackPane.setVisible(false);
-                    deBlur();
-                })
-        });
+        okNotif("spell/trap is destroyed", "Ok");
     }
 
     public void printSelectNextSpellOrAbort() {
