@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="rid of some spells">
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="some spells">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Graveyard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +97,7 @@
       <workItem from="1625852997502" duration="7349000" />
       <workItem from="1625884419839" duration="12174000" />
       <workItem from="1625911256731" duration="116000" />
-      <workItem from="1625913156841" duration="4355000" />
+      <workItem from="1625913156841" duration="5986000" />
     </task>
     <task id="LOCAL-00002" summary="attack fixed">
       <created>1625860404940</created>
@@ -155,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625924710100</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="some spells">
+      <created>1625925662768</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1625925662768</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,7 +201,8 @@
     <MESSAGE value="attack fixed" />
     <MESSAGE value="sound Effects" />
     <MESSAGE value="rid of some spells" />
-    <option name="LAST_COMMIT_MESSAGE" value="rid of some spells" />
+    <MESSAGE value="some spells" />
+    <option name="LAST_COMMIT_MESSAGE" value="some spells" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

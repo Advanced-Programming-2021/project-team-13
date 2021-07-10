@@ -51,8 +51,10 @@ public class Graveyard {
                     break;
                 }
             }
-        } else if (card == owner.getBoard().getFieldSpell().getCard())
+        } else if (card == owner.getBoard().getFieldSpell().getCard()) {
+            stackPane.getChildren().removeIf(e -> e instanceof ImageView);
             owner.getBoard().getFieldSpell().setCard(null);
+        }
         else
             for (Cell cell : owner.getBoard().getSpellOrTrap()) {
                 if (cell.getCard() == card) {
