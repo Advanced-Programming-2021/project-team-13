@@ -1,11 +1,13 @@
 package view;
 
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.players.User;
 import view.allmenu.*;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
@@ -19,6 +21,7 @@ public class ViewMaster {
     private static ViewMaster viewMaster;
     private static Menu currentMenu;
     private static User user;
+    private static boolean isMuted = false;
     private final LoginView loginView;
     private final ShopView shopView;
     private final ScoreboardLabel scoreboardView;
@@ -38,6 +41,7 @@ public class ViewMaster {
                 .getResource("/gameMusic/daytona.mp3").toExternalForm()));
         songs = new MediaPlayer[]{goodInRed, shadows, daytona};
     }
+
     private ViewMaster() {
         loginView = new LoginView();
         shopView = new ShopView();
@@ -49,6 +53,43 @@ public class ViewMaster {
         currentMenu = Menu.LOGIN_MENU;
     }
 
+    public static void playAudio(String place) {
+        if (isMuted)
+            return;
+        URL audio = ViewMaster.class.getResource(place);
+        AudioClip audioClip = new AudioClip(audio.toString());
+        audioClip.play();
+    }
+
+
+    public static void startSong() {
+        Collections.shuffle(Arrays.asList(songs));
+        songs[0].play();
+        Arrays.stream(songs).forEach(
+                x -> {
+                    x.setVolume(0.3);
+                    x.setOnEndOfMedia(() -> {
+                        Collections.shuffle(Arrays.asList(songs));
+                        songs[0].play();
+                    });
+                }
+        );
+    }
+    public static void btnSoundEffect(){
+        playAudio("/soundEffects/clk1.wav");
+    }
+    public static void attackSoundEffect(){
+        playAudio("/soundEffects/attack.wav");
+    }
+    public static void heartbeatSoundEffect(){
+        playAudio("/soundEffects/heartBeat.wav");
+    }
+    public static void beginBattleSoundEffect(){
+        playAudio("/soundEffects/letBattleBegin.wav");
+    }
+    public static void completeSoundEffect(){
+        playAudio("/soundEffects/complete.wav");
+    }
     public static void setUser(User user) {
         ViewMaster.user = user;
     }
@@ -92,17 +133,4 @@ public class ViewMaster {
         loginView.setLogin();
     }
 
-    public static void startSong() {
-        Collections.shuffle(Arrays.asList(songs));
-        songs[0].play();
-        Arrays.stream(songs).forEach(
-                x -> {
-                    x.setVolume(0.3);
-                    x.setOnEndOfMedia(() -> {
-                        Collections.shuffle(Arrays.asList(songs));
-                        songs[0].play();
-                    });
-                }
-        );
-    }
 }

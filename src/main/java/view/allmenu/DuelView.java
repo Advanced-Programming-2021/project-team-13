@@ -120,9 +120,14 @@ public class DuelView {
 
     private Node[] getFirstVboxNodes() {
         return new Node[]{
-                new CustomButton("AI duel", this::startAIDuel), new CustomButton("2 Player duel", () -> {
+                new CustomButton("AI duel", ()->{
+                    ViewMaster.btnSoundEffect();
+                    startAIDuel();
+                }), new CustomButton("2 Player duel", () -> {
+            ViewMaster.btnSoundEffect();
         }), new CustomButton("Back", () -> {
             try {
+                ViewMaster.btnSoundEffect();
                 goBack();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -184,6 +189,7 @@ public class DuelView {
             view.setEffect(null);
         });
         view.setOnMouseClicked(event -> {
+            ViewMaster.btnSoundEffect();
             Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
                     .forEach(x -> x.setOpacity(1));
             if (Arrays.stream(new ImageView[]{scissorsImg, paperImg, rockImg})
@@ -208,6 +214,7 @@ public class DuelView {
     public void printNoActiveDeck(String username) {
         createNotification(username + " has no active deck", new Node[]{
                 new CustomButton("proceed", () -> {
+                    ViewMaster.btnSoundEffect();
                     unBlur();
                     notifStackPane.setVisible(false);
                 })
@@ -217,6 +224,7 @@ public class DuelView {
     public void printInvalidDeck(String username) {
         createNotification(username + "’s deck is invalid", new Node[]{
                 new CustomButton("proceed", () -> {
+                    ViewMaster.btnSoundEffect();
                     unBlur();
                     notifStackPane.setVisible(false);
                 })
@@ -241,6 +249,7 @@ public class DuelView {
                 rpc.setVisible(false);
                 createNotification("you haven't chosen yet", new Node[]{
                         new CustomButton("proceed", () -> {
+                            ViewMaster.btnSoundEffect();
                             unBlur();
                             rpc.setVisible(true);
                             notifStackPane.setVisible(false);
@@ -252,6 +261,7 @@ public class DuelView {
                     rpc.setVisible(false);
                     createNotification("Equal", new Node[]{
                             new CustomButton("Try again", () -> {
+                                ViewMaster.btnSoundEffect();
                                 unBlur();
                                 rpc.setVisible(true);
                                 notifStackPane.setVisible(false);
@@ -259,6 +269,7 @@ public class DuelView {
                     });
                 } else if (result == 1) {
                     stopSong();
+                    ViewMaster.beginBattleSoundEffect();
                     rpc.setVisible(false);
                     createNotification("You Start The Game", new Node[]{
                     });
@@ -269,6 +280,7 @@ public class DuelView {
                     timeline.play();
                 } else {
                     stopSong();
+                    ViewMaster.beginBattleSoundEffect();
                     rpc.setVisible(false);
                     createNotification("AI Start The Game", new Node[]{
                     });

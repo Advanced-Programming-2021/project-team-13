@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import model.players.User;
+import view.ViewMaster;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -19,15 +20,18 @@ import java.util.Objects;
 public class ScoreboardView {
     private static Stage stage;
     private final Image normalButtonImage =
-            new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/back.png")).toExternalForm());
+            new Image(Objects.requireNonNull(getClass().getResource
+                    ("/scoreboardImage/back.png")).toExternalForm());
     private final Image clickedButton =
-            new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/clicked.png")).toExternalForm());
+            new Image(Objects.requireNonNull(getClass().getResource
+                    ("/scoreboardImage/clicked.png")).toExternalForm());
     private final ImageView buttonImage = new ImageView();
     private final ScoreboardController scoreboardController;
     private final AnchorPane anchorPane = new AnchorPane();
     private final ScoreboardLabel scoreboardLabel = new ScoreboardLabel();
     private final ImageView imageView =
-            new ImageView(new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/tower.png")).toExternalForm()));
+            new ImageView(new Image(Objects.requireNonNull(getClass()
+                    .getResource("/scoreboardImage/tower.png")).toExternalForm()));
     private final ScrollPane scrollPane = new ScrollPane();
     private final TilePane tilePane = new TilePane();
 
@@ -68,6 +72,7 @@ public class ScoreboardView {
         buttonImage.setFitHeight(40);
         buttonImage.setOnMouseClicked(event -> {
             try {
+                ViewMaster.btnSoundEffect();
                 goToMainMenu();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -85,7 +90,8 @@ public class ScoreboardView {
 
     public void printScoreBoard(User user, int rank) {
         AnchorPane anchorPane = scoreboardLabel.getLabel(user.getNickname(),
-                user.getImage() == null ? new Image(Objects.requireNonNull(getClass().getResource("/scoreboardImage/tas.png"))
+                user.getImage() == null ? new Image
+                        (Objects.requireNonNull(getClass().getResource("/scoreboardImage/tas.png"))
                         .toExternalForm()) : user.getImage(), user.getScore(), rank);
         tilePane.getChildren().add(anchorPane);
     }
