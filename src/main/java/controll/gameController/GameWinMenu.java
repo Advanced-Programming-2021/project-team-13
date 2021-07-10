@@ -76,6 +76,7 @@ public class GameWinMenu {
                 } else {
                     loser.renewPlayer();
                     ((AIPlayer) winner).renewPlayer(loser.getUser().getActiveDeck());
+                    gameView.printUserWonSingleGame(((AIPlayer)winner).getNickname() , winner.getWonRounds() , loser.getWonRounds());
                     runNewGame();
                 }
             }
@@ -96,6 +97,7 @@ public class GameWinMenu {
                 } else {
                     winner.renewPlayer();
                     ((AIPlayer) loser).renewPlayer(winner.getUser().getActiveDeck());
+                    gameView.printUserWonSingleGame(user.getUsername(), winner.getWonRounds() , loser.getWonRounds());
                     runNewGame();
                 }
             }
