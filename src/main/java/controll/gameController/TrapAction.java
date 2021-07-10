@@ -1,5 +1,9 @@
 package controll.gameController;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import model.cards.Card;
 import model.cards.Trap;
 
@@ -48,8 +52,18 @@ public abstract class TrapAction implements Effect {
     }
 
     public void run() {
-        for (CardCommand cardCommand : cardCommands)
-            cardCommand.execute();
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(2000), trap.getImageView());
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0.5);
+        fadeTransition.setAutoReverse(true);
+        fadeTransition.setCycleCount(1);
+        fadeTransition.play();
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2) , event -> {
+            for (CardCommand cardCommand : cardCommands)
+                cardCommand.execute();
+        }));
+        timeline.setDelay(Duration.millis(3000));
+        timeline.play();
     }
 }
 
