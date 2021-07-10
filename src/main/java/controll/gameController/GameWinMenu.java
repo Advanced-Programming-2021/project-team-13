@@ -27,11 +27,11 @@ public class GameWinMenu {
     }
 
 
-    public void announceWinner(Player winner) {
+    public void announceWinner(Player winner , boolean isSurrender) {
         if (winner == null) {//this is when game is ended draw
             drawState();
         } else {
-            winOrLoseState(winner);
+            winOrLoseState(winner , isSurrender);
         }
     }
 
@@ -43,10 +43,11 @@ public class GameWinMenu {
         }
     }
 
-    private void winOrLoseState(Player winner) {
+    private void winOrLoseState(Player winner , boolean isSurrender) {
         Player loser;
         if (winner == firstPlayer) loser = secondPlayer;
         else loser = firstPlayer;
+        if (!isSurrender)
         winner.addWonRounds(1);
         if (winner instanceof AIPlayer || loser instanceof AIPlayer) {
             withAiWin(winner, loser);
