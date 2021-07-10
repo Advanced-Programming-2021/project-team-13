@@ -655,7 +655,7 @@ public class GameController {
         if (spell.getType().equals("Equip")) {
                 gameView.printSelectMonsterFromBoard();
 //                    if(!checkCorrectEquipInput(num, spell))
-                        return;
+//                        return;
 //            currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
 //            if (board.equalsIgnoreCase("our board"))
 //                spell.setEquippedMonster
@@ -734,11 +734,11 @@ public class GameController {
 
     private void findEffect(Spell spell) {
         String effectName = spell.getCardNameInGame();
-        if (effectName.equalsIgnoreCase("Monster Reborn"))
-            monsterReborn();
-        else if (effectName.equalsIgnoreCase("Terraforming"))
-            terraforming();
-        else if (effectName.equalsIgnoreCase("Pot of Greed"))
+//        if (effectName.equalsIgnoreCase("Monster Reborn"))
+//            monsterReborn();
+//        else if (effectName.equalsIgnoreCase("Terraforming"))
+//            terraforming();
+       if (effectName.equalsIgnoreCase("Pot of Greed"))
             potOfGreed();
         else if (effectName.equalsIgnoreCase("Raigeki"))
             raigeki();
@@ -746,12 +746,12 @@ public class GameController {
             harpie();
         else if (effectName.equalsIgnoreCase("Dark Hole"))
             darkHole();
-        else if (effectName.equalsIgnoreCase("Messenger of peace"))
-            activeMessenger(spell);
-        else if (effectName.equalsIgnoreCase("Twin Twisters"))
-            twinTwisters();
-        else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
-            mysticalTyphoon();
+//        else if (effectName.equalsIgnoreCase("Messenger of peace"))
+//            activeMessenger(spell);
+//        else if (effectName.equalsIgnoreCase("Twin Twisters"))
+//            twinTwisters();
+//        else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
+//            mysticalTyphoon();
     }
 
     private void terraforming() {
