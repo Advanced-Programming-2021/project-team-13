@@ -118,7 +118,6 @@ public class GameView {
     private int numberOfOpponentMonster = 0;
     private int numberOfOpponentMonsterNeeded = 0;
     private int numberOfTribute = 0;
-    //private Image backImage;
     private AnimationTimer animationTimer;
 
     static {
@@ -381,7 +380,7 @@ public class GameView {
                 rivalSelectedSpell = Arrays.stream(rivalPlayer.getBoard().getSpellOrTrap())
                         .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
                 fadeTransition.setNode(rivalSelectedCard);
-                rivalSelectedCard.setImage(rivalSelectedSpell.getCard().getImage());
+                rivalSelectedCard.setImage(rivalSelectedSpell.getImage());
             } else {
                 ourSelectedSpell = Arrays.stream(ourPlayer.getBoard().getSpellOrTrap())
                         .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
@@ -411,8 +410,8 @@ public class GameView {
                     .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
-            fadeTransition.setNode(selectedCard);
-            rivalSelectedCard.setImage(rivalSelectedCell.getCard().getImage());
+            fadeTransition.setNode(rivalSelectedCard);
+            rivalSelectedCard.setImage(rivalSelectedCell.getImage());
             fadeTransition.play();
             if (killOpponentMonsterPhase) {
                 if (rivalSelectedCell.getCard() != null) {

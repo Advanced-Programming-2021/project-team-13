@@ -879,12 +879,16 @@ public class GameController {
 
     private void darkHole() {
         for (Cell monster : currentPlayer.getBoard().getMonsters()) {
-            if (monster.getCard() != null)
+            if (monster.getCard() != null) {
+                monster.getPicture().getChildren().clear();
                 currentPlayer.getBoard().getGraveyard().addCard(monster.getCard());
+            }
         }
         for (Cell monster : currentPlayer.getRivalPlayer().getBoard().getMonsters()) {
-            if (monster.getCard() != null)
+            if (monster.getCard() != null) {
+                monster.getPicture().getChildren().clear();
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(monster.getCard());
+            }
         }
         gameView.printAllMonstersDestroyed();
     }
@@ -892,19 +896,24 @@ public class GameController {
     private void harpie() {
         for (Cell cell : currentPlayer.getRivalPlayer().getBoard().getSpellOrTrap()) {
             if (cell.getCard() != null) {
+                cell.getPicture().getChildren().clear();
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
             }
         }
-        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null)
+        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null) {
+            currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getPicture().getChildren().clear();
             currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                     .addCard(currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard());
+        }
     }
 
 
     private void raigeki() {
         for (Cell monster : currentPlayer.getRivalPlayer().getBoard().getMonsters()) {
-            if (monster.getCard() != null)
+            if (monster.getCard() != null) {
+                monster.getPicture().getChildren().clear();
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(monster.getCard());
+            }
         }
     }
 
