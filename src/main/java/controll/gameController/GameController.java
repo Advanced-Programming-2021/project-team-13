@@ -1,5 +1,6 @@
 package controll.gameController;
 
+import controll.ImageLoader;
 import enums.*;
 import javafx.animation.RotateTransition;
 import javafx.scene.image.ImageView;
@@ -655,7 +656,7 @@ public class GameController {
         if (spell.getType().equals("Equip")) {
                 gameView.printSelectMonsterFromBoard();
 //                    if(!checkCorrectEquipInput(num, spell))
-                        return;
+//                        return;
 //            currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
 //            if (board.equalsIgnoreCase("our board"))
 //                spell.setEquippedMonster
@@ -722,6 +723,7 @@ public class GameController {
     private void activateFieldSpell(Spell spell) {
         if (currentPlayer.getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getBoard().getGraveyard().addCard(currentPlayer.getBoard().getFieldSpell().getCard());
+        gameView.changeCenterPanePic("/fields/" + spell.getCardName().replaceAll(" ","") + ".bmp");
         removeCardFromHandScene(currentPlayer.getSelectedCard());
         currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
         spell.setZone(Zone.FIELD);
@@ -734,11 +736,11 @@ public class GameController {
 
     private void findEffect(Spell spell) {
         String effectName = spell.getCardNameInGame();
-        if (effectName.equalsIgnoreCase("Monster Reborn"))
-            monsterReborn();
-        else if (effectName.equalsIgnoreCase("Terraforming"))
-            terraforming();
-        else if (effectName.equalsIgnoreCase("Pot of Greed"))
+//        if (effectName.equalsIgnoreCase("Monster Reborn"))
+//            monsterReborn();
+//        else if (effectName.equalsIgnoreCase("Terraforming"))
+//            terraforming();
+       if (effectName.equalsIgnoreCase("Pot of Greed"))
             potOfGreed();
         else if (effectName.equalsIgnoreCase("Raigeki"))
             raigeki();
@@ -746,12 +748,12 @@ public class GameController {
             harpie();
         else if (effectName.equalsIgnoreCase("Dark Hole"))
             darkHole();
-        else if (effectName.equalsIgnoreCase("Messenger of peace"))
-            activeMessenger(spell);
-        else if (effectName.equalsIgnoreCase("Twin Twisters"))
-            twinTwisters();
-        else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
-            mysticalTyphoon();
+//        else if (effectName.equalsIgnoreCase("Messenger of peace"))
+//            activeMessenger(spell);
+//        else if (effectName.equalsIgnoreCase("Twin Twisters"))
+//            twinTwisters();
+//        else if (effectName.equalsIgnoreCase("Mystical space typhoon"))
+//            mysticalTyphoon();
     }
 
     private void terraforming() {
@@ -767,8 +769,8 @@ public class GameController {
     }
 
     private void potOfGreed() {
-        currentPlayer.addCardToHand();
-        currentPlayer.addCardToHand();
+        addCardToHand();
+        addCardToHand();
     }
 
     private void twinTwisters() {
@@ -877,12 +879,16 @@ public class GameController {
 
     private void darkHole() {
         for (Cell monster : currentPlayer.getBoard().getMonsters()) {
-            if (monster.getCard() != null)
+            if (monster.getCard() != null) {
+                monster.getPicture().getChildren().clear();
                 currentPlayer.getBoard().getGraveyard().addCard(monster.getCard());
+            }
         }
         for (Cell monster : currentPlayer.getRivalPlayer().getBoard().getMonsters()) {
-            if (monster.getCard() != null)
+            if (monster.getCard() != null) {
+                monster.getPicture().getChildren().clear();
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(monster.getCard());
+            }
         }
         gameView.printAllMonstersDestroyed();
     }
@@ -890,19 +896,24 @@ public class GameController {
     private void harpie() {
         for (Cell cell : currentPlayer.getRivalPlayer().getBoard().getSpellOrTrap()) {
             if (cell.getCard() != null) {
+                cell.getPicture().getChildren().clear();
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(cell.getCard());
             }
         }
-        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null)
+        if (currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard() != null) {
+            currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getPicture().getChildren().clear();
             currentPlayer.getRivalPlayer().getBoard().getGraveyard()
                     .addCard(currentPlayer.getRivalPlayer().getBoard().getFieldSpell().getCard());
+        }
     }
 
 
     private void raigeki() {
         for (Cell monster : currentPlayer.getRivalPlayer().getBoard().getMonsters()) {
-            if (monster.getCard() != null)
+            if (monster.getCard() != null) {
+                monster.getPicture().getChildren().clear();
                 currentPlayer.getRivalPlayer().getBoard().getGraveyard().addCard(monster.getCard());
+            }
         }
     }
 

@@ -116,7 +116,6 @@ public class GameView {
     private int numberOfOpponentMonster = 0;
     private int numberOfOpponentMonsterNeeded = 0;
     private int numberOfTribute = 0;
-    //private Image backImage;
     private AnimationTimer animationTimer;
 
     static {
@@ -155,6 +154,8 @@ public class GameView {
         animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                if (ourField.getChildren().isEmpty() && rivalField.getChildren().isEmpty())
+                    changeCenterPanePic("/fields/normal.bmp");
                 if (gameController.isAITurn()) {
                     gameController.setAITurn(false);
                     gameController.playAI();
@@ -256,7 +257,7 @@ public class GameView {
         rightPane.setStyle("-fx-background-image: url('/gamePics/1.png')" +
                 ";-fx-background-size: cover,auto;-fx-background-repeat: no-repeat;");
         initGridPanes();
-        centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
+        centerPane.setStyle("-fx-background-image:url('/fields/normal.bmp'); -fx-background-size: cover,auto;");
         rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
         ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
         health = new HBox();
@@ -276,6 +277,10 @@ public class GameView {
         health.setTranslateX(80);
         rightPane.getChildren().add(rivalHealth);
         leftPane.getChildren().add(health);
+    }
+
+    public void changeCenterPanePic(String url) {
+        centerPane.setStyle("-fx-background-image:url('" + url + "'); -fx-background-size: cover,auto;");
     }
 
     private void setupNotifStackPane() {
@@ -415,10 +420,10 @@ public class GameView {
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
             if (player == rivalPlayer) {
-                rivalSelectedCell = Arrays.stream(rivalPlayer.getBoard().getSpellOrTrap())
+                rivalSelectedSpell = Arrays.stream(rivalPlayer.getBoard().getSpellOrTrap())
                         .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
                 fadeTransition.setNode(rivalSelectedCard);
-                rivalSelectedCard.setImage(rivalSelectedCell.getCard().getImage());
+                rivalSelectedCard.setImage(rivalSelectedSpell.getImage());
             } else {
                 ourSelectedSpell = Arrays.stream(ourPlayer.getBoard().getSpellOrTrap())
                         .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
@@ -448,8 +453,8 @@ public class GameView {
                     .filter(Objects::nonNull).filter(x -> x.getPicture() == stackPane).findFirst().get();
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
-            fadeTransition.setNode(selectedCard);
-            rivalSelectedCard.setImage(rivalSelectedCell.getCard().getImage());
+            fadeTransition.setNode(rivalSelectedCard);
+            rivalSelectedCard.setImage(rivalSelectedCell.getImage());
             fadeTransition.play();
             if (killOpponentMonsterPhase) {
                 if (rivalSelectedCell.getCard() != null) {

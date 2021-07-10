@@ -35,6 +35,7 @@ import java.util.Arrays;
 
 public class DuelView {
     private final DuelController duelController;
+    private static Stage stage = null;
     public ImageView rockImg;
     public ImageView paperImg;
     public ImageView scissorsImg;
@@ -120,7 +121,7 @@ public class DuelView {
 
     private Node[] getFirstVboxNodes() {
         return new Node[]{
-                new CustomButton("AI duel", ()->{
+                new CustomButton("AI duel", () -> {
                     ViewMaster.btnSoundEffect();
                     startAIDuel();
                 }), new CustomButton("2 Player duel", () -> {
@@ -329,9 +330,10 @@ public class DuelView {
     public GameView startGame(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds)
             throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Game.fxml"));
-        Scene scene = new Scene(loader.load());
-        ((Stage) pane.getScene().getWindow()).setScene(scene);
-        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds , scene);
+        if (stage == null)
+            stage = (Stage) (pane.getScene().getWindow());
+        (stage).setScene(new Scene(loader.load()));
+        ((GameView) loader.getController()).setup(firstPlayer, secondPlayer, currentPlayer, rounds);
         return loader.getController();
     }
 }
