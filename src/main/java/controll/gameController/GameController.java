@@ -654,32 +654,17 @@ public class GameController {
             return;
         }
         if (spell.getType().equals("Equip")) {
-            int tries = -1;
-            int num = 0;
-            String board = "";
-            while (tries == -1) {
                 gameView.printSelectMonsterFromBoard();
-                String answer = gameView.getAnswer();
-                if (answer.equals("abort")) {
-                    gameView.printAbortedFromEquipSpell();
-                    return;
-                }
-                if (answer.matches("^(\\d+) ([\\w]+ [\\w]+)$")) {
-                    String[] answerSpilt = answer.split(" ");
-                    num = Integer.parseInt(answerSpilt[0]);
-                    board = answerSpilt[1] + " " + answerSpilt[2];
-                    if (checkCorrectEquipInput(num, board, spell))
-                        tries = 0;
-                }
-            }
-            currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
-            if (board.equalsIgnoreCase("our board"))
-                spell.setEquippedMonster
-                        ((Monster) currentPlayer.getBoard().getMonsterByAddress(num));
-            else
-                spell.setEquippedMonster((Monster) currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(num));
-            spell.setActivated(true);
-            gameView.printSpellActivated();
+//                    if(!checkCorrectEquipInput(num, spell))
+                        return;
+//            currentPlayer.getBoard().putSpellAndTrapInBoard(currentPlayer.getSelectedCard());
+//            if (board.equalsIgnoreCase("our board"))
+//                spell.setEquippedMonster
+//                        ((Monster) currentPlayer.getBoard().getMonsterByAddress(num));
+//            else
+//                spell.setEquippedMonster((Monster) currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(num));
+//            spell.setActivated(true);
+//            gameView.printSpellActivated();
         } else {
             findEffect(spell);
             spell.setActivated(true);
@@ -712,15 +697,9 @@ public class GameController {
         }
     }
 
-    private boolean checkCorrectEquipInput(int num, String board, Spell spell) {
-        Monster monster;
-        if (!(0 < num && num < 6) || !(board.equals("our board") || board.equals("rival board"))) {
-            gameView.printInvalidSelection();
-            return false;
-        }
-        if (board.equals("our board"))
+    private boolean checkCorrectEquipInput(int num, Spell spell) {
+            Monster monster;
             monster = (Monster) currentPlayer.getBoard().getMonsterByAddress(num);
-        else monster = (Monster) currentPlayer.getRivalPlayer().getBoard().getMonsterByAddress(num);
         if (monster == null) {
             gameView.printNoMonsterOnThisAddress();
             return false;
