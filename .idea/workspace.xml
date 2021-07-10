@@ -4,26 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="attack fixed">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/soundEffects/attack.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/soundEffects/clk1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/soundEffects/complete.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/soundEffects/heartBeat.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/soundEffects/letBattleBegin.wav" afterDir="false" />
+    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="sound Effects">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/ViewMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/CardCreatorView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/CardCreatorView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DeckView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/DuelView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/MainView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ProfileView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/RegisterView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/RegisterView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardLabel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ScoreboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/allmenu/ShopView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/allmenu/ShopView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/Game.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +94,7 @@
       <updated>1625852833945</updated>
       <workItem from="1625852837604" duration="146000" />
       <workItem from="1625852997502" duration="7349000" />
-      <workItem from="1625884419839" duration="4108000" />
+      <workItem from="1625884419839" duration="7909000" />
     </task>
     <task id="LOCAL-00002" summary="attack fixed">
       <created>1625860404940</created>
@@ -119,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625860404940</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="sound Effects">
+      <created>1625888695109</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1625888695109</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,7 +147,8 @@
     <MESSAGE value="adding graveyard show&#10;not done yet" />
     <MESSAGE value="duel debugged" />
     <MESSAGE value="attack fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="attack fixed" />
+    <MESSAGE value="sound Effects" />
+    <option name="LAST_COMMIT_MESSAGE" value="sound Effects" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

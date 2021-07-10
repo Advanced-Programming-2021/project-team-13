@@ -9,8 +9,6 @@ import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -32,6 +30,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -103,6 +102,8 @@ public class GameView {
     public Player secondPlayer;
     public Player ourPlayer;
     public Player rivalPlayer;
+    public HBox health;
+    public HBox rivalHealth;
     public VBox vBox;
     public VBox buttonBox;
     public CustomSanButtons attack;
@@ -138,7 +139,6 @@ public class GameView {
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
         buttonBox.getChildren().addAll(buttonBoxNodes());
-        /*<<<<<<< HEAD*/
         ColorAdjust colorAdjust = new ColorAdjust();
         activate.setEffect(colorAdjust);
         ourPlayerLabel.setText("Our player : " + ourPlayer.getUser().getNickname());
@@ -170,7 +170,7 @@ public class GameView {
                         x.setDisable(false);
                     }
                 });
-
+                setHpBar();
                 if (gameController.getCurrentPhase() != Phase.MAIN_PHASE_1 &&
                         gameController.getCurrentPhase() != Phase.MAIN_PHASE_2) {
                     colorAdjust.setSaturation(-1);
@@ -182,12 +182,19 @@ public class GameView {
             }
         };
         animationTimer.start();
-
         gender.setVolume(0.2);
-        gender.setOnEndOfMedia(()->gender.play());
+        gender.setOnEndOfMedia(() -> gender.play());
         gender.play();
     }
 
+    private void setHpBar() {
+        for (int i = 0; i < health.getChildren().size(); i++) {
+            health.getChildren().get(i).setVisible((double) ourPlayer.getLifePoint() / 1000 >= i+1);
+        }
+        for (int i = 0; i < rivalHealth.getChildren().size(); i++) {
+            rivalHealth.getChildren().get(i).setVisible((double) rivalPlayer.getLifePoint() / 1000 >= i+1);
+        }
+    }
 
     public void init() {
         URL url = getClass().getResource("/gamePics/back.jpg");
@@ -207,12 +214,23 @@ public class GameView {
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
         rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
         ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
-        progressBar = new ProgressBar();
-        progressBar.setStyle("-fx-fill: crimson");
-        DoubleProperty doubleProperty = new SimpleDoubleProperty();
-        doubleProperty.set(ourPlayer.getLifePoint());
-        progressBar.progressProperty().bind(doubleProperty);
-        leftPane.getChildren().add(progressBar);
+        health = new HBox();
+        rivalHealth=new HBox();
+        Arrays.stream(new HBox[]{rivalHealth,health}).forEach(x->{
+            x.setSpacing(2);
+            for (int i = 0; i < 8; i++) {
+                Rectangle rectangle=new Rectangle(10, 20, Color.RED);
+                rectangle.setEffect(new DropShadow(5,Color.BLACK));
+                x.getChildren().add(rectangle);
+            }
+            x.setStyle("-fx-background-color: black");
+            x.setTranslateY(50);
+
+        });
+        rivalHealth.setTranslateX(110);
+        health.setTranslateX(80);
+        rightPane.getChildren().add(rivalHealth);
+        leftPane.getChildren().add(health);
     }
 
     private void setupNotifStackPane() {

@@ -40,7 +40,7 @@
    </center>
    <right>
        <AnchorPane fx:id="rightPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="266.666" style="-fx-background-color: #191970;" BorderPane.alignment="CENTER">
-           <Label fx:id="rivalPlayerLabel" layoutX="54" layoutY="24.0" prefHeight="23.333333" prefWidth="219.33333" text="Rival player : " textFill="#cc2c10">
+           <Label fx:id="rivalPlayerLabel" prefHeight="26.0" prefWidth="266.0" text="Rival player : " textFill="#cc2c10">
               <font>
                   <Font name="System Bold Italic" size="16" />
               </font>
@@ -51,8 +51,8 @@
            <AnchorPane layoutY="106" prefHeight="241.3333" prefWidth="266">
                 <ImageView fx:id="rivalSelectedCard" fitHeight="250" fitWidth="184.6666" layoutX="45.3333" pickOnBounds="true" preserveRatio="true" />
            </AnchorPane>
-         <Circle fx:id="rivalHp" fill="DODGERBLUE" layoutX="63.3333" layoutY="81.333333" radius="24.66666" stroke="BLACK" strokeType="INSIDE" />
-         <Label fx:id="rivalHpPoint" layoutX="110" layoutY="62.66666" prefHeight="37.33333" prefWidth="121.33333" text="8000" textFill="#ea3939">
+         <Circle fx:id="rivalHp" fill="DODGERBLUE" layoutX="230.0" layoutY="81.333333" radius="24.66666" stroke="BLACK" strokeType="INSIDE" />
+         <Label fx:id="rivalHpPoint" layoutX="125.0" layoutY="63.0" prefHeight="38.0" prefWidth="71.0" text="8000" textFill="#ea3939">
             <font>
                <Font name="System Bold Italic" size="26" />
             </font>
@@ -64,7 +64,7 @@
    </right>
    <left>
        <AnchorPane fx:id="leftPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="266.666" style="-fx-background-color: #191970;" BorderPane.alignment="CENTER">
-           <Label fx:id="ourPlayerLabel" layoutX="36.666" layoutY="24" prefHeight="23.333" prefWidth="219.333" text="Our player : " textFill="#0fcc58">
+           <Label fx:id="ourPlayerLabel" prefHeight="26.0" prefWidth="268.0" text="Our player : " textFill="#0fcc58">
               <font>
                   <Font name="System Bold Italic" size="16" />
               </font>
@@ -86,8 +86,8 @@
            <AnchorPane layoutY="106" prefHeight="248.666" prefWidth="266">
                 <ImageView fx:id="selectedCard" fitHeight="250" fitWidth="184.666" layoutX="50" pickOnBounds="true" preserveRatio="true" />
            </AnchorPane>
-         <Circle fx:id="ourHp" fill="DODGERBLUE" layoutX="61.333" layoutY="81.3333" radius="24.666" stroke="BLACK" strokeType="INSIDE" />
-         <Label fx:id="ourHpPoint" layoutX="112" layoutY="62.666" prefHeight="37.333" prefWidth="121.333" text="8000" textFill="#ea3939">
+         <Circle fx:id="ourHp" fill="DODGERBLUE" layoutX="50.0" layoutY="81.3333" radius="24.666" stroke="BLACK" strokeType="INSIDE" />
+         <Label fx:id="ourHpPoint" layoutX="80.0" layoutY="63.0" prefHeight="38.0" prefWidth="67.0" text="8000" textFill="#ea3939">
             <font>
                <Font name="System Bold Italic" size="26" />
             </font>
