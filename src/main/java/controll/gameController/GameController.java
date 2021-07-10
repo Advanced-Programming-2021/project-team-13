@@ -769,8 +769,8 @@ public class GameController {
     }
 
     private void potOfGreed() {
-        currentPlayer.addCardToHand();
-        currentPlayer.addCardToHand();
+        addCardToHand();
+        addCardToHand();
     }
 
     private void twinTwisters() {
