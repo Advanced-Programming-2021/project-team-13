@@ -5,9 +5,11 @@ import enums.AttackOrDefense;
 import enums.Face;
 import enums.MonsterCardType;
 import enums.Phase;
-import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -24,7 +26,6 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
@@ -55,7 +56,10 @@ import view.ViewMaster;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
@@ -130,10 +134,10 @@ public class GameView {
         this.gameController = gameController;
     }
 
-    public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds , Scene scene) {
+    public void setup(Player firstPlayer, Player secondPlayer, Player currentPlayer, int rounds, Scene scene) {
         scene.setOnKeyPressed(event -> {
-            if (event.isControlDown() && event.isShiftDown()){
-                if (event.getCode() == KeyCode.C){
+            if (event.isControlDown() && event.isShiftDown()) {
+                if (event.getCode() == KeyCode.C) {
                     runCheats();
                 }
             }
@@ -196,41 +200,41 @@ public class GameView {
     }
 
     private void runCheats() {
-        CustomSanButtons money = new CustomSanButtons("Money" , () -> {
+        CustomSanButtons money = new CustomSanButtons("Money", () -> {
             gameController.moneyCheat(5000);
             ViewMaster.btnSoundEffect();
             notifStackPane.setVisible(false);
             deBlur();
         });
-        CustomSanButtons hand = new CustomSanButtons("Draw Card" , ()->{
+        CustomSanButtons hand = new CustomSanButtons("Draw Card", () -> {
             gameController.addCardToHand();
             ViewMaster.btnSoundEffect();
             notifStackPane.setVisible(false);
             deBlur();
         });
-        CustomSanButtons winGame = new CustomSanButtons("Win Game" , ()->{
+        CustomSanButtons winGame = new CustomSanButtons("Win Game", () -> {
             gameController.setDuelWinnerCheat(ourPlayer.getUser().getNickname());
             ViewMaster.btnSoundEffect();
             notifStackPane.setVisible(false);
             deBlur();
         });
-        CustomSanButtons lp = new CustomSanButtons("Life Point" , ()->{
+        CustomSanButtons lp = new CustomSanButtons("Life Point", () -> {
             gameController.lifePointCheat(1000);
             ViewMaster.btnSoundEffect();
             notifStackPane.setVisible(false);
             deBlur();
         });
-        CustomSanButtons close = new CustomSanButtons("Close" , () -> {
+        CustomSanButtons close = new CustomSanButtons("Close", () -> {
             ViewMaster.btnSoundEffect();
             notifStackPane.setVisible(false);
             deBlur();
         });
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER);
-        hBox.getChildren().addAll(money , hand , winGame , lp , close);
+        hBox.getChildren().addAll(money, hand, winGame, lp, close);
         hBox.setSpacing(5);
         Node[] nodes = new Node[]{hBox};
-        createNotification("Choose Cheat" , nodes);
+        createNotification("Choose Cheat", nodes);
     }
 
     private void setHpBar() {
@@ -1161,7 +1165,7 @@ public class GameView {
     }
 
     public void printNoMonsterOnThisAddress() {
-        okNotif("there no monsters one this address","Ok");
+        okNotif("there no monsters one this address", "Ok");
     }
 
     public void printThereArentEnoughMonsterForTribute() {
@@ -1708,7 +1712,6 @@ public class GameView {
             ViewMaster.btnSoundEffect();
             notifStackPane.setVisible(false);
             deBlur();
-            answer[0] = true;
         });
         CustomSanButtons no = new CustomSanButtons("No", () -> {
             ViewMaster.btnSoundEffect();
