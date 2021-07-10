@@ -510,6 +510,10 @@ public class GameView {
     }
 
     private void openGraveyard(Player player) {
+        ourGraveyard.setDisable(true);
+        rivalGraveyard.setDisable(true);
+        ourField.setDisable(true);
+        rivalField.setDisable(true);
         vBox.setDisable(true);
         leftPane.setDisable(true);
         gridPane.setDisable(true);
@@ -521,6 +525,10 @@ public class GameView {
         tributeContainer.setEffect(blur);
         rightPane.setEffect(blur);
         vBox.setEffect(blur);
+        ourGraveyard.setEffect(blur);
+        rivalGraveyard.setEffect(blur);
+        ourField.setEffect(blur);
+        rivalField.setEffect(blur);
         showGraveyardBack.setVisible(true);
         showGraveyardBack.setDisable(false);
         graveyardTilepane.getChildren().clear();
@@ -1888,6 +1896,10 @@ public class GameView {
 
     @FXML
     private void closeGraveyardMenu() {
+        ourGraveyard.setDisable(false);
+        rivalGraveyard.setDisable(false);
+        ourField.setDisable(false);
+        rivalField.setDisable(false);
         vBox.setDisable(false);
         leftPane.setDisable(false);
         gridPane.setDisable(false);
@@ -1898,6 +1910,10 @@ public class GameView {
         tributeContainer.setEffect(null);
         rightPane.setEffect(null);
         vBox.setEffect(null);
+        ourGraveyard.setEffect(null);
+        rivalGraveyard.setEffect(null);
+        ourField.setEffect(null);
+        rivalField.setEffect(null);
         showGraveyardBack.setVisible(false);
         showGraveyardBack.setDisable(true);
     }
