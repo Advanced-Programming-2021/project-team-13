@@ -238,7 +238,6 @@ public class GameView {
     }
 
     public void changeCenterPanePic(String url) {
-        System.out.println(url);
         centerPane.setStyle("-fx-background-image:url('" + url + "'); -fx-background-size: cover,auto;");
     }
 
