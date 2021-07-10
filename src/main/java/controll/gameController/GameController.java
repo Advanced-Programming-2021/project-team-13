@@ -1,5 +1,6 @@
 package controll.gameController;
 
+import controll.ImageLoader;
 import enums.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
@@ -722,6 +723,7 @@ public class GameController {
     private void activateFieldSpell(Spell spell) {
         if (currentPlayer.getBoard().getFieldSpell().getCard() != null)
             currentPlayer.getBoard().getGraveyard().addCard(currentPlayer.getBoard().getFieldSpell().getCard());
+        gameView.changeCenterPanePic("/fields/" + spell.getCardName().replaceAll(" ","") + ".bmp");
         removeCardFromHandScene(currentPlayer.getSelectedCard());
         currentPlayer.getCardsInHand().remove(currentPlayer.getSelectedCard());
         spell.setZone(Zone.FIELD);

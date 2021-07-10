@@ -51,7 +51,7 @@ public class ImageLoader extends Thread {
 
     public static Image getCardImageByName(String cardName) {
         cardName = cardName.replaceAll("[\\s\\-_*';\\.,^!]", "");
-        return cardsImage.getOrDefault(cardName , cardsImage.get("createCard"));
+        return cardsImage.getOrDefault(cardName, cardsImage.get("createCard"));
     }
 
     public static HashMap<String, Image> getCardsImage() {
