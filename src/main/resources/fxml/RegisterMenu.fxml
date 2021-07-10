@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<AnchorPane maxHeight="-Infinity" fx:id="pane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image:url('/registerPic/ex.jpg') ;-fx-background-position:center" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.RegisterView">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" fx:id="pane" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="720.0"
+            prefWidth="1280.0"
+            style="-fx-background-image:url('/registerPic/ex.jpg') ;-fx-background-position:center" xmlns="http://javafx.com/javafx/16"
+            fx:controller="view.allmenu.RegisterView">
 
-               <TextField fx:id="regUsernameField" promptText="username" prefWidth="200" maxWidth="200"
-                          style="-fx-border-color: white; -fx-border-width: 0 0 3 0; -fx-background-color: transparent;-fx-font-size: 22;-fx-font-weight:bold ;  -fx-text-fill: #d9f800;">
-                   <effect>
-                       <Bloom threshold="0.0"/>
-                   </effect>
-               </TextField>
-               <TextField fx:id="regNicknameField"  promptText="nickname" prefWidth="200" maxWidth="200"
-                          style="-fx-border-color: white; -fx-background-color: transparent; -fx-border-width: 0 0 3 0;-fx-font-size: 22;-fx-font-weight:bold ;  -fx-text-fill: #d9f800;">
-                   <effect>
-                       <Bloom threshold="0.0"/>
-                   </effect>
-               </TextField>
-               <PasswordField fx:id="regPasswordField" promptText="password" prefWidth="200" maxWidth="200"
-                              style="-fx-border-color: white; -fx-background-color: transparent; -fx-border-width: 0 0 3 0;-fx-font-size: 22; -fx-font-weight:bold ; -fx-text-fill: #d9f800;">
-                   <effect>
-                       <Bloom threshold="0.1"/>
-                   </effect>
-               </PasswordField>
-           <Label fx:id="regNotifLabel" alignment="CENTER"
-                  prefWidth="350" textFill="#f20000">
-            <font>
-                <Font name="System Bold Italic" size="17"/>
-            </font>
-            <effect>
-                <Bloom threshold="0.0"/>
-            </effect>
-           </Label>
+    <TextField fx:id="regUsernameField" promptText="username" prefWidth="200" maxWidth="200"
+               style="-fx-border-color: white; -fx-border-width: 0 0 3 0; -fx-background-color: transparent;-fx-font-size: 22;-fx-font-weight:bold ;  -fx-text-fill: #d9f800;">
+        <effect>
+            <Bloom threshold="0.0"/>
+        </effect>
+    </TextField>
+    <TextField fx:id="regNicknameField" promptText="nickname" prefWidth="200" maxWidth="200"
+               style="-fx-border-color: white; -fx-background-color: transparent; -fx-border-width: 0 0 3 0;-fx-font-size: 22;-fx-font-weight:bold ;  -fx-text-fill: #d9f800;">
+        <effect>
+            <Bloom threshold="0.0"/>
+        </effect>
+    </TextField>
+    <PasswordField fx:id="regPasswordField" promptText="password" prefWidth="200" maxWidth="200"
+                   style="-fx-border-color: white; -fx-background-color: transparent; -fx-border-width: 0 0 3 0;-fx-font-size: 22; -fx-font-weight:bold ; -fx-text-fill: #d9f800;">
+        <effect>
+            <Bloom threshold="0.1"/>
+        </effect>
+    </PasswordField>
+    <Label fx:id="regNotifLabel" alignment="CENTER"
+           prefWidth="350" textFill="#f20000">
+        <font>
+            <Font name="System Bold Italic" size="17"/>
+        </font>
+        <effect>
+            <Bloom threshold="0.0"/>
+        </effect>
+    </Label>
 </AnchorPane>

@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.effect.Light.Distant ?>
-
-<AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;-fx-background-image:url('/loginPics/a.jpg'); -fx-background-position:center" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.LoginView">
-   <Label fx:id="notifLabel" alignment="CENTER" contentDisplay="CENTER" />
-   <Label layoutX="56.0" layoutY="141.0" text="dont have an account?" textFill="#f72500">
-      <font>
-         <Font name="System Bold Italic" size="12.0" />
-      </font>
-      <effect>
-         <Bloom />
-      </effect>
-   </Label>
-   <VBox layoutX="869.0" layoutY="54.0" prefHeight="94.0" prefWidth="364.0" spacing="20.0">
-      <TextField fx:id="usernameField" alignment="CENTER" promptText="username" style="-fx-border-color: white; -fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-text-fill: #ffffff;">
-         <effect>
-            <Bloom threshold="0.0" />
-         </effect>
-      </TextField>
-      <PasswordField fx:id="passwordField" alignment="CENTER" prefHeight="26.0" prefWidth="138.0" promptText="password" style="-fx-border-color: white; -fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-text-fill: #ffffff;">
-         <effect>
-            <Bloom threshold="0.0" />
-         </effect>
-      </PasswordField>
-   </VBox>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="pane" prefHeight="720.0"
+            prefWidth="1280.0"
+            style="-fx-background-color: black;-fx-background-image:url('/loginPics/a.jpg'); -fx-background-position:center" xmlns="http://javafx.com/javafx/16"
+            fx:controller="view.allmenu.LoginView">
+    <Label fx:id="notifLabel" alignment="CENTER" contentDisplay="CENTER"/>
+    <Label layoutX="56.0" layoutY="141.0" text="dont have an account?" textFill="#f72500">
+        <font>
+            <Font name="System Bold Italic" size="12.0"/>
+        </font>
+        <effect>
+            <Bloom/>
+        </effect>
+    </Label>
+    <VBox layoutX="869.0" layoutY="54.0" prefHeight="94.0" prefWidth="364.0" spacing="20.0">
+        <TextField fx:id="usernameField" alignment="CENTER" promptText="username"
+                   style="-fx-border-color: white; -fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-text-fill: #ffffff;">
+            <effect>
+                <Bloom threshold="0.0"/>
+            </effect>
+        </TextField>
+        <PasswordField fx:id="passwordField" alignment="CENTER" prefHeight="26.0" prefWidth="138.0"
+                       promptText="password"
+                       style="-fx-border-color: white; -fx-background-color: transparent; -fx-border-width: 0 0 1 0; -fx-text-fill: #ffffff;">
+            <effect>
+                <Bloom threshold="0.0"/>
+            </effect>
+        </PasswordField>
+    </VBox>
 </AnchorPane>

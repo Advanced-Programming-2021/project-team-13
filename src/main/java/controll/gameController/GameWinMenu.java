@@ -83,12 +83,14 @@ public class GameWinMenu {
             user = winner.getUser();
             if (startingRounds == 1) {
                 user.addWins(1);
+                user.addScore(1000);
                 user.addMoney(1000 + winner.getMaxLifePoint());
                 gameView.printUserWonWholeGame(user.getUsername(), winner.getWonRounds(), loser.getWonRounds());
             } else {
                 if (winner.getWonRounds() == 2) {
                     user.addWins(1);
                     user.addMoney(3000 + 3 * winner.getMaxLifePoint());
+                    user.addScore(3000);
                     gameView.printUserWonWholeGame(user.getUsername(), winner.getWonRounds(), loser.getWonRounds());
                     ViewMaster.setCurrentMenu(Menu.MAIN_MENU);
                 } else {
