@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model.menuItems.CustomButton;
+import view.ViewMaster;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,9 +47,13 @@ public class LoginView {
         stackPane.setTranslateY(250);
 //        stackPane.maxWidth(400);
 //        stackPane.maxHeight(400);
-        CustomButton exit = new CustomButton("Quit Game", this::exit);
+        CustomButton exit = new CustomButton("Quit Game", ()->{
+            ViewMaster.btnSoundEffect();
+            exit();
+        });
         CustomButton register= new CustomButton("Register", ()->{
             try {
+                ViewMaster.btnSoundEffect();
                 goToRegisterMenu();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -56,6 +61,7 @@ public class LoginView {
         });
         CustomButton login = new CustomButton("Login",()->{
             try {
+                ViewMaster.btnSoundEffect();
                 goToMainMenu();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,7 +88,7 @@ public class LoginView {
         FXMLLoader loader = new FXMLLoader(LoginView.class.getResource("/fxml/LoginMenu.fxml"));
         Parent root = loader.load();
         primaryStage.setResizable(false);
-        primaryStage.setTitle("you-gey-oh?:D");
+        primaryStage.setTitle("yo-gi-oh");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

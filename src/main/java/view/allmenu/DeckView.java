@@ -346,7 +346,8 @@ public class DeckView implements Initializable {
         textField.setPromptText("Deck Name");
         textField.setAlignment(Pos.CENTER);
         textField.setMaxWidth(200);
-        textField.setStyle("-fx-background-color: rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px; -fx-text-fill: white");
+        textField.setStyle("-fx-background-color: " +
+                "rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px; -fx-text-fill: white");
         MyButton myButton = new MyButton("Change");
         Label text = new Label();
         text.setStyle("-fx-text-fill: red");
@@ -381,7 +382,10 @@ public class DeckView implements Initializable {
         TextField textField = new TextField();
         textField.setPromptText("Deck Name");
         textField.setAlignment(Pos.CENTER);
-        textField.setStyle("-fx-background-color: rgba(0 ,0 , 0 ,0.5); -fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px; -fx-text-fill: white");
+        textField.setStyle(
+                "-fx-background-color: " +
+                        "rgba(0 ,0 , 0 ,0.5); " +
+                        "-fx-font-family: 'Comic Sans MS'; -fx-font-size: 18px; -fx-text-fill: white");
         textField.setMaxWidth(200);
         MyButton myButton = new MyButton("Create");
         MyButton myButton1 = new MyButton("Close");
@@ -390,8 +394,14 @@ public class DeckView implements Initializable {
         hBox.setSpacing(30);
         hBox.getChildren().addAll(myButton, myButton1);
         Label text = new Label();
-        myButton1.setOnAction(event -> undoBlurBackground());
-        myButton.setOnAction(event -> createDeck(textField, text));
+        myButton1.setOnAction(event -> {
+            ViewMaster.btnSoundEffect();
+            undoBlurBackground();
+        });
+        myButton.setOnAction(event -> {
+                    createDeck(textField, text);
+                }
+        );
         text.setStyle("-fx-text-fill: red");
         yesNoVBox.getChildren().addAll(label, textField, hBox, text);
     }
@@ -406,6 +416,7 @@ public class DeckView implements Initializable {
                 text.setText("Deck With Name " + textField.getText() + " Already Exists");
                 break;
             case "created":
+                ViewMaster.completeSoundEffect();
                 yesNoVBox.getChildren().clear();
                 yesNoVBox.getChildren().add(text);
                 text.setText("Deck Created Successfully!");
@@ -454,6 +465,7 @@ public class DeckView implements Initializable {
 
     @FXML
     private void saveDeck() {
+        ViewMaster.completeSoundEffect();
         UserJson.update();
         blurBackground();
         yesNoVBox.getChildren().clear();
@@ -471,6 +483,7 @@ public class DeckView implements Initializable {
 
     @FXML
     private void loadDeck() {
+        ViewMaster.btnSoundEffect();
         blurBackground();
         yesNoVBox.getChildren().clear();
         HBox firstHBox = new HBox();
@@ -498,7 +511,10 @@ public class DeckView implements Initializable {
         } else {
             Label label = new Label("All " + user.getNickname() + " Decks");
             MyButton close = new MyButton("Back");
-            close.setOnAction(event -> undoBlurBackground());
+            close.setOnAction(event -> {
+                ViewMaster.btnSoundEffect();
+                undoBlurBackground();
+            });
             label.setStyle("-fx-text-fill: green;-fx-font-size: 25");
             yesNoVBox.getChildren().addAll(label, firstHBox, secondHBox, close);
         }
@@ -581,8 +597,14 @@ public class DeckView implements Initializable {
         HBox hBox = new HBox();
         MyButton myButton = new MyButton("Yes");
         MyButton myButton1 = new MyButton("No");
-        myButton.setOnAction(event -> deleteCurrentDeck());
-        myButton1.setOnAction(event -> undoBlurBackground());
+        myButton.setOnAction(event -> {
+            ViewMaster.btnSoundEffect();
+            deleteCurrentDeck();
+        });
+        myButton1.setOnAction(event -> {
+            ViewMaster.btnSoundEffect();
+            undoBlurBackground();
+        });
         hBox.setAlignment(Pos.CENTER);
         hBox.getChildren().addAll(label, myButton, myButton1);
         hBox.setSpacing(50);

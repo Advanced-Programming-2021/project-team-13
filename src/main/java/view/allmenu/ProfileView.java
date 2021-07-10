@@ -1,7 +1,5 @@
 package view.allmenu;
 
-import com.talanlabs.avatargenerator.Avatar;
-import com.talanlabs.avatargenerator.eightbit.EightBitAvatar;
 import controll.ProfileController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +22,6 @@ import javafx.stage.Stage;
 import model.menuItems.CustomButton;
 import view.ViewMaster;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.View;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -73,10 +67,17 @@ public class ProfileView {
 
     private Node[] setNodes() {
         return new Node[]{
-                new CustomButton("Change Nickname", this::changeNickName),
-                new CustomButton("Change Password", this::changePassword),
+                new CustomButton("Change Nickname", () -> {
+                    ViewMaster.btnSoundEffect();
+                    changeNickName();
+                }),
+                new CustomButton("Change Password", () -> {
+                    ViewMaster.btnSoundEffect();
+                    changePassword();
+                }),
                 new CustomButton("Back", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goBack();
                     } catch (IOException e) {
                         e.printStackTrace();

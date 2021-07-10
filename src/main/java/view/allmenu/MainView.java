@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.menuItems.CustomButton;
 import view.SceneController;
+import view.ViewMaster;
 
 import java.io.IOException;
 
@@ -91,6 +92,7 @@ public class MainView {
         return new Node[]{
                 new CustomButton("duel", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goToDuelMenu();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -98,6 +100,7 @@ public class MainView {
                 }),
                 new CustomButton("deck", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goToDeckMenu();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -105,6 +108,7 @@ public class MainView {
                 }),
                 new CustomButton("scoreboard", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goToScoreBoard();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -112,6 +116,7 @@ public class MainView {
                 }),
                 new CustomButton("profile", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goToProfile();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -119,6 +124,7 @@ public class MainView {
                 }),
                 new CustomButton("shop", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goToShop();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -126,6 +132,7 @@ public class MainView {
                 }),
                 new CustomButton("import/export", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goToImport();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -133,6 +140,7 @@ public class MainView {
                 }),
                 new CustomButton("logout", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goToLoginMenu();
                     } catch (IOException e) {
                         e.printStackTrace();

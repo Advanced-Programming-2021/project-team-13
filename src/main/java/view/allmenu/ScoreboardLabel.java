@@ -2,21 +2,21 @@ package view.allmenu;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import model.players.User;
 import view.ViewMaster;
 
-import javax.swing.text.View;
 import java.util.Objects;
 
 public class ScoreboardLabel {
     private static Image image =
-            new Image(Objects.requireNonNull(ScoreboardLabel.class.getResource("/scoreboardImage/background.png")).toExternalForm());
+            new Image
+                    (Objects.requireNonNull
+                            (ScoreboardLabel.class.getResource
+                                    ("/scoreboardImage/background.png")).toExternalForm());
     private static String nickName, scoreText, rankText;
     private static Image profileImage;
     @FXML

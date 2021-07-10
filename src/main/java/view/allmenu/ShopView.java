@@ -5,7 +5,6 @@ import controll.ShopController;
 import controll.json.UserJson;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -25,10 +24,6 @@ import javafx.util.Duration;
 import model.cards.Card;
 import view.ViewMaster;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -111,6 +106,7 @@ public class ShopView {
         });
         button.setOnMouseClicked(e -> {
             if (button.getImage() == allowBuyShadow) {
+                ViewMaster.completeSoundEffect();
                 Card card = Card.findCardFromCsv(selectedCardName);
                 shopController.buyCard(ViewMaster.getUser(), card, selectedCardPrice);
                 message.setOpacity(1);
@@ -135,8 +131,8 @@ public class ShopView {
             {
                 if (!name.equalsIgnoreCase("Unknown.jpg")
                         && !name.equalsIgnoreCase("Unknown")
-                && !name.equalsIgnoreCase("createdCard.jpg")
-                        && !name.equalsIgnoreCase("createdCard")) {
+                        && !name.equalsIgnoreCase("createCard.jpg")
+                        && !name.equalsIgnoreCase("createCard")) {
                     ImageView imgView = new ImageView(image);
                     imgView.setFitWidth(160);
                     imgView.setFitHeight(210);
@@ -167,7 +163,8 @@ public class ShopView {
     }
 
     public void setMouseEnterCard(ImageView imgView) {
-        DropShadow dropShadow = new DropShadow(BlurType.ONE_PASS_BOX, Color.BLACK, 20, -1000, 0, -10);
+        DropShadow dropShadow = new
+                DropShadow(BlurType.ONE_PASS_BOX, Color.BLACK, 20, -1000, 0, -10);
         imgView.setFitWidth(175);
         imgView.setFitHeight(225);
         imgView.setEffect(dropShadow);
@@ -180,7 +177,8 @@ public class ShopView {
         imgView.setEffect(dropShadow);
     }
 
-    public void printMonsterCard(int attackNum, int defenseNum, int level, String cardName, String cardDescription, String monsterType) {
+    public void printMonsterCard
+            (int attackNum, int defenseNum, int level, String cardName, String cardDescription, String monsterType) {
         System.out.println("Name: " + cardName + "\nLevel: " + level
                 + "\nType: " + monsterType + "\nATK: " + attackNum
                 + "\nDEF: " + defenseNum + "\nDescription: " + cardDescription);

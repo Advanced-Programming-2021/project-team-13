@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.menuItems.CustomButton;
+import view.ViewMaster;
 
 import java.io.IOException;
 
@@ -52,6 +53,7 @@ public class RegisterView {
         return new Node[]{new CustomButton("Register", this::register),
                 new CustomButton("Back", () -> {
                     try {
+                        ViewMaster.btnSoundEffect();
                         goBack();
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -65,9 +67,11 @@ public class RegisterView {
         String password = regPasswordField.getText();
         String nickname = regNicknameField.getText();
         if (username.isEmpty() || password.isEmpty() || nickname.isEmpty()) {
+            ViewMaster.btnSoundEffect();
             regNotifLabel.setText("please fill all needed required fields");
             return false;
         }
+        ViewMaster.completeSoundEffect();
         return registerController.registerUser(username, password, nickname);
     }
 

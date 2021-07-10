@@ -9,8 +9,6 @@ import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -19,14 +17,20 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.effect.*;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -58,6 +62,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 
 public class GameView {
+    public static MediaPlayer gender;
     public AnchorPane rightPane;
     public StackPane notifStackPane;
     public AnchorPane tributeContainer;
@@ -97,6 +102,8 @@ public class GameView {
     public Player secondPlayer;
     public Player ourPlayer;
     public Player rivalPlayer;
+    public HBox health;
+    public HBox rivalHealth;
     public VBox vBox;
     public VBox buttonBox;
     public CustomSanButtons attack;
@@ -107,12 +114,15 @@ public class GameView {
     private boolean tributePhase = false;
     private boolean killOpponentMonsterPhase = false;
     private boolean isSummoning = false;
+    private boolean heartBeatStarted=false;
     private int numberOfOpponentMonster = 0;
     private int numberOfOpponentMonsterNeeded = 0;
     private int numberOfTribute = 0;
     //private Image backImage;
     private AnimationTimer animationTimer;
-
+    static {
+        gender = new MediaPlayer(new Media(GameView.class.getResource("/gameMusic/gender.mp3").toExternalForm()));
+    }
     public GameView() {
 
     }
@@ -129,7 +139,6 @@ public class GameView {
         init();
         gameController = new GameController(this, firstPlayer, secondPlayer, currentPlayer, rounds);
         buttonBox.getChildren().addAll(buttonBoxNodes());
-        /*<<<<<<< HEAD*/
         ColorAdjust colorAdjust = new ColorAdjust();
         activate.setEffect(colorAdjust);
         ourPlayerLabel.setText("Our player : " + ourPlayer.getUser().getNickname());
@@ -137,18 +146,15 @@ public class GameView {
         ourPlayerLabel.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
         rivalPlayerLabel.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.ITALIC, 22));
         animationTimer = new AnimationTimer() {
-            /*         final ColorAdjust colorAdjust = new ColorAdjust();*/
-            /*=======*/
-
-/*        AnimationTimer animationTimer = new AnimationTimer() {
-
->>>>>>> fdef025006178cfe6aebae74079e8fa7f3619118*/
-
             @Override
             public void handle(long now) {
                 if (gameController.isAITurn()) {
                     gameController.setAITurn(false);
                     gameController.playAI();
+                }
+                if(ourPlayer.getLifePoint()<=3000 && !heartBeatStarted){
+                    ViewMaster.heartbeatSoundEffect();
+                    heartBeatStarted=true;
                 }
                 gameController.findWinner();
                 rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
@@ -164,7 +170,7 @@ public class GameView {
                         x.setDisable(false);
                     }
                 });
-
+                setHpBar();
                 if (gameController.getCurrentPhase() != Phase.MAIN_PHASE_1 &&
                         gameController.getCurrentPhase() != Phase.MAIN_PHASE_2) {
                     colorAdjust.setSaturation(-1);
@@ -176,8 +182,19 @@ public class GameView {
             }
         };
         animationTimer.start();
+        gender.setVolume(0.2);
+        gender.setOnEndOfMedia(() -> gender.play());
+        gender.play();
     }
 
+    private void setHpBar() {
+        for (int i = 0; i < health.getChildren().size(); i++) {
+            health.getChildren().get(i).setVisible((double) ourPlayer.getLifePoint() / 1000 >= i+1);
+        }
+        for (int i = 0; i < rivalHealth.getChildren().size(); i++) {
+            rivalHealth.getChildren().get(i).setVisible((double) rivalPlayer.getLifePoint() / 1000 >= i+1);
+        }
+    }
 
     public void init() {
         URL url = getClass().getResource("/gamePics/back.jpg");
@@ -197,12 +214,23 @@ public class GameView {
         centerPane.setStyle("-fx-background-image:url('/gamePics/a.jpg'); -fx-background-size: cover,auto;");
         rivalHpPoint.setText(String.valueOf(rivalPlayer.getLifePoint()));
         ourHpPoint.setText(String.valueOf(ourPlayer.getLifePoint()));
-        progressBar = new ProgressBar();
-        progressBar.setStyle("-fx-fill: crimson");
-        DoubleProperty doubleProperty = new SimpleDoubleProperty();
-        doubleProperty.set(ourPlayer.getLifePoint());
-        progressBar.progressProperty().bind(doubleProperty);
-        leftPane.getChildren().add(progressBar);
+        health = new HBox();
+        rivalHealth=new HBox();
+        Arrays.stream(new HBox[]{rivalHealth,health}).forEach(x->{
+            x.setSpacing(2);
+            for (int i = 0; i < 8; i++) {
+                Rectangle rectangle=new Rectangle(10, 20, Color.RED);
+                rectangle.setEffect(new DropShadow(5,Color.BLACK));
+                x.getChildren().add(rectangle);
+            }
+            x.setStyle("-fx-background-color: black");
+            x.setTranslateY(50);
+
+        });
+        rivalHealth.setTranslateX(110);
+        health.setTranslateX(80);
+        rightPane.getChildren().add(rivalHealth);
+        leftPane.getChildren().add(health);
     }
 
     private void setupNotifStackPane() {
@@ -240,6 +268,7 @@ public class GameView {
 
     public void printCurrentPhase() {
         CustomSanButtons[] custom = new CustomSanButtons[]{new CustomSanButtons("proceed", () -> {
+            ViewMaster.btnSoundEffect();
             notifStackPane.setVisible(false);
             deBlur();
         })};
@@ -247,14 +276,27 @@ public class GameView {
     }
 
     private Node[] buttonBoxNodes() {
-        activate = new CustomSanButtons("activate", () -> gameController.activateSpell());
-        attack = new CustomSanButtons("attack", this::attack);
-        directAttack = new CustomSanButtons("direct attack", this::directAttack);
+        activate = new CustomSanButtons("activate", () -> {
+            ViewMaster.btnSoundEffect();
+            if (!tributePhase && !killOpponentMonsterPhase)
+                gameController.activateSpell();
+        });
+        attack = new CustomSanButtons("attack", () -> {
+            ViewMaster.attackSoundEffect();
+            attack();
+        });
+        directAttack = new CustomSanButtons("direct attack", () -> {
+            ViewMaster.attackSoundEffect();
+            directAttack();
+        });
         return new Node[]{activate, attack
                 , directAttack, new CustomSanButtons("next phase", () -> {
-            gameController.nextPhase();
+            ViewMaster.btnSoundEffect();
+            if (!tributePhase && !killOpponentMonsterPhase)
+                gameController.nextPhase();
         })
                 , new CustomSanButtons("surrender", () -> {
+            ViewMaster.btnSoundEffect();
             gameController.surrender();
         })};
     }
@@ -316,6 +358,7 @@ public class GameView {
         DropShadow shadow = new DropShadow(0, 0f, 0f, Color.GOLD);
         stackPaneEffect(stackPane, shadow);
         stackPane.setOnMouseClicked(e -> {
+            ViewMaster.btnSoundEffect();
             Arrays.stream(player.getBoard().getSpellOrTrap()).map(Cell::getPicture).filter(Objects::nonNull)
                     .forEach(a -> {
                         ((DropShadow) ((Bloom) a.getEffect()).getInput()).setRadius(0);
@@ -347,16 +390,11 @@ public class GameView {
         DropShadow shadow = new DropShadow(0, 0f, 0f, Color.CRIMSON);
         stackPaneEffect(stackPane, shadow);
         stackPane.setOnMouseClicked(e -> {
-            /*<<<<<<< HEAD*/
+            ViewMaster.btnSoundEffect();
             if (shadow.getRadius() == 0) {
                 Arrays.stream(rivalPlayer.getBoard().getMonsters()).map(Cell::getPicture).forEach(a -> {
                     ((DropShadow) ((Bloom) a.getEffect()).getInput()).setRadius(0);
                 });
-                /*=======*/
-/*                Arrays.stream(rivalPlayer.getBoard().getMonsters()).map(Cell::getPicture)
-                        .forEach(a -> ((DropShadow) ((Bloom) a.getEffect()).getInput()).setRadius(0));
-                if (shadow.getRadius() == 0) {*/
-                /*>>>>>>> fdef025006178cfe6aebae74079e8fa7f3619118*/
                 shadow.setRadius(16);
             } else
                 shadow.setRadius(0);
@@ -402,6 +440,7 @@ public class GameView {
         DropShadow shadow = new DropShadow(0, 0f, 0f, Color.GREEN);
         stackPaneEffect(stackPane, shadow);
         stackPane.setOnMouseClicked(event -> {
+            ViewMaster.btnSoundEffect();
             Arrays.stream(ourPlayer.getBoard().getMonsters()).map(Cell::getPicture).forEach(a -> {
                 ((DropShadow) ((Bloom) a.getEffect()).getInput()).setRadius(0);
             });
@@ -418,6 +457,7 @@ public class GameView {
             fadeTransition.setFromValue(0);
             fadeTransition.setToValue(1);
             fadeTransition.setNode(selectedCard);
+            if(ourSelectedCell!=null && ourSelectedCell.getCard()!=null)
             selectedCard.setImage(ourSelectedCell.getCard().getImage());
             fadeTransition.play();
             if (tributePhase) {
@@ -433,10 +473,12 @@ public class GameView {
                 }
             }
             if (event.getButton() == MouseButton.MIDDLE)
-                if (gameController.getCurrentPlayer().getSelectedCard() == ourPlayer.getBoard().getMonsters()[x].getCard())
+                if (gameController
+                        .getCurrentPlayer().getSelectedCard() == ourPlayer.getBoard().getMonsters()[x].getCard())
                     changePosition();
             if (event.getButton() == MouseButton.SECONDARY) {
-                if (gameController.getCurrentPlayer().getSelectedCard() == ourPlayer.getBoard().getMonsters()[x].getCard())
+                if (gameController
+                        .getCurrentPlayer().getSelectedCard() == ourPlayer.getBoard().getMonsters()[x].getCard())
                     flipSummon();
             }
         });
@@ -489,11 +531,17 @@ public class GameView {
 
     private void setupGraveyard(StackPane graveyard, Player player) {
         ImageView imageView = new ImageView(backImage);
-        imageView.setOnMouseClicked(event -> openGraveyard(player));
+        imageView.setOnMouseClicked(event -> {
+            ViewMaster.btnSoundEffect();
+            openGraveyard(player);
+        });
         imageView.setFitWidth(90);
         imageView.setFitHeight(120);
         Label label = new Label();
-        label.setOnMouseClicked(event -> openGraveyard(player));
+        label.setOnMouseClicked(event -> {
+            ViewMaster.btnSoundEffect();
+            openGraveyard(player);
+        });
         label.setLayoutX(37.5);
         label.setLayoutY(40);
         label.setStyle("-fx-font-family: 'Comic Sans MS'; -fx-font-size: 25px;-fx-text-fill: white");
@@ -554,6 +602,7 @@ public class GameView {
             view.setEffect(null);
         });
         view.setOnMouseClicked(e -> {
+            ViewMaster.btnSoundEffect();
             FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000));
             if (view.getParent().getRotate() != 180) {
                 fadeTransition.setFromValue(0);
@@ -577,6 +626,7 @@ public class GameView {
         } catch (Exception e) {
             createNotification(e.getMessage(), new Node[]{
                     new CustomSanButtons("proceed", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -591,11 +641,13 @@ public class GameView {
         } catch (ManEaterBugException e) {
             createNotification(e.getMessage(), new Node[]{
                     new CustomSanButtons("YES", () -> {
+                        ViewMaster.btnSoundEffect();
                         killOpponentMonsterPhase = true;
                         numberOfOpponentMonsterNeeded = 1;
                         deBlur();
                         notifStackPane.setVisible(false);
                     }), new CustomSanButtons("NO", () -> {
+                ViewMaster.btnSoundEffect();
                 notifStackPane.setVisible(false);
                 deBlur();
             })
@@ -603,6 +655,7 @@ public class GameView {
         } catch (Exception e) {
             createNotification(e.getMessage(), new Node[]{
                     new CustomSanButtons("proceed", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -620,11 +673,14 @@ public class GameView {
                     if (!tributePhase && !killOpponentMonsterPhase) {
                         if (e.getButton() == MouseButton.PRIMARY)
                             if (gameController.getCurrentPlayer().getSelectedCard() != null
-                                    && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
-                                    .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane))) {
+                                    && gameController.getCurrentPlayer().getSelectedCard()
+                                    == gameController.getCurrentPlayer()
+                                    .getCardsInHand().get(gameController.getCurrentPlayer()
+                                            .getCardsInHandImage().indexOf(stackPane))) {
                                 gameController.getCurrentPlayer()
                                         .setSelectedCard(gameController.getCurrentPlayer()
-                                                .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
+                                                .getCardsInHand().get(gameController.getCurrentPlayer()
+                                                        .getCardsInHandImage().indexOf(stackPane)));
                                 if (gameController.getCurrentPlayer().getSelectedCard() instanceof Monster)
                                     monsterSummon();
                                 else if (gameController.getCurrentPlayer().getSelectedCard() instanceof Spell)
@@ -633,11 +689,14 @@ public class GameView {
                             } else
                                 gameController.getCurrentPlayer()
                                         .setSelectedCard(gameController.getCurrentPlayer()
-                                                .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane)));
+                                                .getCardsInHand().get(gameController.getCurrentPlayer()
+                                                        .getCardsInHandImage().indexOf(stackPane)));
                         if (e.getButton() == MouseButton.SECONDARY)
                             if (gameController.getCurrentPlayer().getSelectedCard() != null
-                                    && gameController.getCurrentPlayer().getSelectedCard() == gameController.getCurrentPlayer()
-                                    .getCardsInHand().get(gameController.getCurrentPlayer().getCardsInHandImage().indexOf(stackPane))) {
+                                    && gameController.getCurrentPlayer().getSelectedCard()
+                                    == gameController.getCurrentPlayer()
+                                    .getCardsInHand().get(gameController.getCurrentPlayer()
+                                            .getCardsInHandImage().indexOf(stackPane))) {
                                 setMonsterSpellTrap(gameController.getCurrentPlayer().getSelectedCard());
                             }
                     }
@@ -654,6 +713,7 @@ public class GameView {
         } catch (Exception e) {
             createNotification(e.getMessage(), new Node[]{
                     new CustomSanButtons("proceed", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -668,12 +728,14 @@ public class GameView {
         } catch (KingBarbarosException e) {
             createNotification(e.getMessage(), new Node[]{
                     new CustomSanButtons("YES", () -> {
+                        ViewMaster.btnSoundEffect();
                         gameController.setNumberOfTributeNeeded(3);
                         tributePhase = true;
                         numberOfTribute = 0;
                         notifStackPane.setVisible(false);
                         deBlur();
                     }), new CustomSanButtons("NO", () -> {
+                ViewMaster.btnSoundEffect();
                 gameController.barbarosNormalSummon();
                 notifStackPane.setVisible(false);
                 deBlur();
@@ -683,6 +745,7 @@ public class GameView {
         } catch (Exception e) {
             createNotification(e.getMessage(), new Node[]{
                     new CustomSanButtons("proceed", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -735,88 +798,6 @@ public class GameView {
     }
 
     public void run(String command) {
- /*       if (command.equals("select --hand --force"))
-            handCheat();
-        else if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
-            selectCard(command);
-        else if (command.equals("next phase"))
-            gameController.nextPhase();
-        else if (command.equals("summon"))
-            gameController.checksBeforeSummon();
-        else if (command.equals("set"))
-            gameController.set();
-        else if (command.matches(Regex.CHANGE_SET))
-            changeSet(Regex.getInputMatcher(command, Regex.CHANGE_SET));
-        else if (command.equals("flip-summon"))
-            gameController.flipSummon();
-        else if (command.matches(Regex.ATTACK))
-            attack(Regex.getInputMatcher(command, Regex.ATTACK));
-        else if (command.equals("attack direct"))
-            directAttack();
-        else if (command.equals("show graveyard"))
-            showGraveyard(command);
-        else if (command.equals("card show --selected"))
-            gameController.showSelectedCard();
-        else if (command.matches("surrender")) {
-            gameController.surrender();
-            return;
-        } else if (command.equals("active effect"))
-            gameController.activeEffect();
-        else if (command.matches("increase --money \\d+"))
-            increaseMoney(command);
-        else if (command.matches("increase --LP \\d+"))
-            increaseLp(command);
-        else if (command.matches("duel set-winner \\w+"))
-            setWinner(command);
-        else if (command.equals("special summon"))
-            gameController.checksBeforeSpecialSummon(false);
-        else if (command.equals("phase"))
-            printCurrentPhase();
-        else if (command.equals("map"))
-            printMap();
-        else System.out.println("invalid command");
-        gameController.findWinner();*/
-
-//        if (command.equals("select --hand --force"))
-//            handCheat();
-//        else if (command.matches(Regex.PLAYER_SELECT) || command.matches(Regex.OPPONENT_SELECT) || command.matches(Regex.FIELD_SELECT))
-//            selectCard(command);
-//        else if (command.equals("next phase"))
-//            gameController.nextPhase();
-//        else if (command.equals("summon"))
-//            gameController.checksBeforeSummon();
-//        else if (command.equals("set"))
-//            gameController.set();
-//        else if (command.matches(Regex.CHANGE_SET))
-//            changeSet(Regex.getInputMatcher(command, Regex.CHANGE_SET));
-//        else if (command.equals("flip-summon"))
-//            gameController.flipSummon();
-//        else if (command.matches(Regex.ATTACK))
-//            attack(Regex.getInputMatcher(command, Regex.ATTACK));
-//        else if (command.equals("attack direct"))
-//            directAttack();
-//        else if (command.equals("show graveyard"))
-//            showGraveyard(command);
-//        else if (command.equals("card show --selected"))
-//            gameController.showSelectedCard();
-//        else if (command.matches("surrender")) {
-//            gameController.surrender();
-//            return;
-//        } else if (command.equals("active effect"))
-//            gameController.activeEffect();
-//        else if (command.matches("increase --money \\d+"))
-//            increaseMoney(command);
-//        else if (command.matches("increase --LP \\d+"))
-//            increaseLp(command);
-//        else if (command.matches("duel set-winner \\w+"))
-//            setWinner(command);
-//        else if (command.equals("special summon"))
-//            gameController.checksBeforeSpecialSummon(false);
-//        else if (command.equals("phase"))
-//            printCurrentPhase();
-//        else if (command.equals("map"))
-//            printMap();
-//        else System.out.println("invalid command");
         gameController.findWinner();
     }
 
@@ -862,6 +843,7 @@ public class GameView {
         if (ourSelectedCell == null || rivalSelectedCell == null) {
             createNotification("you haven't selected yet!", new Node[]{
                     new CustomSanButtons("Ok", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -1029,6 +1011,7 @@ public class GameView {
     public void printNoCardSelected() {
         createNotification("no card is selected yet", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1055,6 +1038,7 @@ public class GameView {
     public void printCantAttack() {
         createNotification("you can’t attack with this card", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1064,6 +1048,7 @@ public class GameView {
     public void printWrongPhase() {
         createNotification("you can’t do this action in this phase", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1073,6 +1058,7 @@ public class GameView {
     public void printAlreadyAttacked() {
         createNotification("this card already attacked", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1087,6 +1073,7 @@ public class GameView {
         createNotification("your opponent’s monster is destroyed " +
                 "and your opponent receives " + attackDifference + " battle damage", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1097,6 +1084,7 @@ public class GameView {
         createNotification("both you and your opponent monster cards" +
                 " are destroyed and no one receives damage", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1107,6 +1095,7 @@ public class GameView {
         createNotification("Your monster card is destroyed " +
                 "and you received " + attackDifference + " battle damage", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1116,6 +1105,7 @@ public class GameView {
     public void printNoCardDestroyed() {
         createNotification("no card is destroyed", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1125,6 +1115,7 @@ public class GameView {
     public void printDefensePositionDestroyed() {
         createNotification("the defense position monster is destroyed", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1135,6 +1126,7 @@ public class GameView {
         createNotification("no card is destroyed and you" +
                 " received " + attackDifference + " battle damage", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1170,6 +1162,7 @@ public class GameView {
     public void printYourOpponentReceivesDamage(int attackNum) {
         createNotification("your opponent receives " + attackNum + " battle damage", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1179,6 +1172,7 @@ public class GameView {
     public void printCantSummon() {
         createNotification("you can’t summon this card", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1192,6 +1186,7 @@ public class GameView {
     public void printMonsterZoneFull() {
         createNotification("monster card zone is full", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1201,6 +1196,7 @@ public class GameView {
     public void printAlreadySetOrSummon() {
         createNotification("you already summoned/set on this turn", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1210,6 +1206,7 @@ public class GameView {
     public void printSummonSuccessfully() {
         createNotification("summoned successfully", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1240,6 +1237,7 @@ public class GameView {
     public void printCantSet() {
         createNotification("you can’t set this card", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1249,6 +1247,7 @@ public class GameView {
     public void printSetSuccessfully() {
         createNotification("set successfully", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1298,9 +1297,12 @@ public class GameView {
     public void printUserWonWholeGame(String username, int winnerWonRounds, int loserWonRounds) {
         System.out.println(username + " won the whole game with score: " + winnerWonRounds + "-" + loserWonRounds);
         animationTimer.stop();
+        gender.stop();
+        ViewMaster.startSong();
         createNotification(username + " won the whole game with " +
                         "\nscore: " + winnerWonRounds + "-" + loserWonRounds,
-                new Node[]{new CustomSanButtons("Back To Main Menu", () -> {
+                new Node[]{new CustomSanButtons("Main Menu", () -> {
+                    ViewMaster.btnSoundEffect();
                     try {
                         SceneController.startMainMenu((Stage) notifStackPane.getScene().getWindow());
                     } catch (IOException e) {
@@ -1310,11 +1312,15 @@ public class GameView {
     }
 
     public void printUserWonSingleGame(String username, int winnerWonRounds, int loserWonRounds) {
+
         animationTimer.stop();
+        gender.stop();
+        ViewMaster.startSong();
         System.out.println(username + " won the game and the score is:" + winnerWonRounds + "-" + loserWonRounds);
         createNotification(username + " won the game and " +
                         "\nthe score is:" + winnerWonRounds + "-" + loserWonRounds,
-                new Node[]{new CustomSanButtons("Back To Main Menu", () -> {
+                new Node[]{new CustomSanButtons("Main Menu", () -> {
+                    ViewMaster.btnSoundEffect();
                     try {
                         SceneController.startMainMenu((Stage) notifStackPane.getScene().getWindow());
                     } catch (IOException e) {
@@ -1328,6 +1334,7 @@ public class GameView {
             createNotification("Its " + ((AIPlayer) gameController.getCurrentPlayer())
                     .getNickname() + "’s turn", new Node[]{
                     new CustomSanButtons("Ok", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -1336,6 +1343,7 @@ public class GameView {
             createNotification("Its " + gameController.getCurrentPlayer().getUser()
                     .getNickname() + "’s turn", new Node[]{
                     new CustomSanButtons("Ok", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -1410,6 +1418,7 @@ public class GameView {
         createNotification("no card is destroyed and rival" +
                 " received " + attackDifference + " battle damage", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1420,6 +1429,7 @@ public class GameView {
     public void printYouReceivedDamage(int amount) {
         createNotification("you received " + amount + " damage", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1509,6 +1519,7 @@ public class GameView {
     public void printActiveOnlyForSpellsAndTrap() {
         createNotification("activate effect is only for spell cards", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1518,6 +1529,7 @@ public class GameView {
     public void printCantActiveThisTurn() {
         createNotification("you can’t activate an effect on this turn", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1527,6 +1539,7 @@ public class GameView {
     public void printAlreadyActivated() {
         createNotification("you have already activated this card", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1536,6 +1549,7 @@ public class GameView {
     public void printSpellZoneIsFull() {
         createNotification("spell zone is full", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1545,6 +1559,7 @@ public class GameView {
     public void printPrepsNotDone() {
         createNotification("preparations of this spell are not done yet", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1554,6 +1569,7 @@ public class GameView {
     public void printCantSpecialSummon() {
         createNotification("there is no way you could special summon a monster", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1595,6 +1611,7 @@ public class GameView {
     public void cantRitualSummon() {
         createNotification("there is no way you could ritual summon a monster", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1604,6 +1621,7 @@ public class GameView {
     public void printSpellActivated() {
         createNotification("spell activated", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1641,6 +1659,7 @@ public class GameView {
     public void printCantAttackDirectly() {
         createNotification("you can’t attack the opponent directly", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1655,6 +1674,7 @@ public class GameView {
         if (currentPlayer instanceof AIPlayer)
             createNotification("Turn changed.\ncurrent player: " + ((AIPlayer) currentPlayer).getNickname(), new Node[]{
                     new CustomSanButtons("Ok", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -1662,6 +1682,7 @@ public class GameView {
         else
             createNotification("Turn changed.\ncurrent player: " + currentPlayer.getUser().getUsername(), new Node[]{
                     new CustomSanButtons("Ok", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -1702,7 +1723,9 @@ public class GameView {
                                     command = ViewMaster.scanner.nextLine();
                                 }
                                 gameController.ritualSummon(ritualMonster, tributes,
-                                        command.equalsIgnoreCase("attack") ? AttackOrDefense.ATTACK : AttackOrDefense.DEFENSE);
+                                        command.equalsIgnoreCase
+                                                ("attack")
+                                                ? AttackOrDefense.ATTACK : AttackOrDefense.DEFENSE);
                                 return;
                             } else
                                 System.out.println("selected monsters levels don’t match with ritual monster\n");
@@ -1728,6 +1751,7 @@ public class GameView {
     public void printCardAddedToHand(Card card) {
         createNotification("new card added to hand : " + card.getCardNameInGame(), new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1742,8 +1766,9 @@ public class GameView {
         while (true) {
             AtomicInteger i = new AtomicInteger();
             System.out.println("Choose One Of The Monsters To Scanner Be Like It In This Turn :");
-            rivalGraveYardMonsters.forEach(e -> System.out.println((i.incrementAndGet()) + ". " + e.getCardNameInGame() + " : "
-                    + e.getCardDescription()));
+            rivalGraveYardMonsters.forEach(e -> System.out.println(
+                    (i.incrementAndGet()) + ". " + e.getCardNameInGame() + " : "
+                            + e.getCardDescription()));
             String command = ViewMaster.scanner.nextLine();
             try {
                 int number = Integer.parseInt(command);
@@ -1780,6 +1805,7 @@ public class GameView {
             createNotification("now it will be " + ((AIPlayer)
                     gameController.getCurrentPlayer()).getNickname() + "’s turn", new Node[]{
                     new CustomSanButtons("Ok", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -1788,6 +1814,7 @@ public class GameView {
             createNotification("now it will be " +
                     gameController.getCurrentPlayer().getUser().getNickname() + "’s turn", new Node[]{
                     new CustomSanButtons("Ok", () -> {
+                        ViewMaster.btnSoundEffect();
                         notifStackPane.setVisible(false);
                         deBlur();
                     })
@@ -1809,6 +1836,7 @@ public class GameView {
     public void printCantAttackFacedDown() {
         createNotification("cant attack because card is faced down", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1818,6 +1846,7 @@ public class GameView {
     public void printCantAttackItsOnDefense() {
         createNotification("cant attack because card is on defense", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1827,6 +1856,7 @@ public class GameView {
     public void printThisCardCantBeEquippedByThisType() {
         createNotification("this equip spell cant be equipped by this type of monster", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1848,6 +1878,7 @@ public class GameView {
     public void printSpellDestroyed() {
         createNotification("spell/trap is destroyed", new Node[]{
                 new CustomSanButtons("Ok", () -> {
+                    ViewMaster.btnSoundEffect();
                     notifStackPane.setVisible(false);
                     deBlur();
                 })
@@ -1865,7 +1896,8 @@ public class GameView {
     public int getInputForTerraforming(List<Spell> fieldSpells) {
         int counter = 0;
         for (Spell fieldSpell : fieldSpells) {
-            System.out.println(++counter + "- " + fieldSpell.getCardNameInGame() + ": " + fieldSpell.getCardDescription());
+            System.out.println(++counter + "- " +
+                    fieldSpell.getCardNameInGame() + ": " + fieldSpell.getCardDescription());
         }
         while (true) {
             System.out.println("Enter Spell Number");

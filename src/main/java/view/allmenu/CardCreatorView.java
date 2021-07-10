@@ -139,12 +139,14 @@ public class CardCreatorView implements Initializable {
 
     private void effectComboSetOnAction() {
         effectCombo.setOnAction(event -> {
+            ViewMaster.btnSoundEffect();
             String cardName = effectCombo.getValue();
             if (!monsterNames.contains(cardName)) {
                 showMonster(cardName);
             }
         });
         effectCombo1.setOnAction(event -> {
+            ViewMaster.btnSoundEffect();
             String effectCard = effectCombo1.getValue();
             for (MonsterCSV monsterCSV : allMonsters) {
                 if (monsterCSV.getName().equals(effectCard)) {
@@ -163,6 +165,7 @@ public class CardCreatorView implements Initializable {
         CheckBox checkBox = new CheckBox();
         checkBox.setSelected(true);
         checkBox.setOnAction(event -> {
+            ViewMaster.btnSoundEffect();
             if (!checkBox.isSelected()) {
                 checkVBox.getChildren().remove(hBox);
                 monsterNames.remove(cardName);
@@ -293,8 +296,12 @@ public class CardCreatorView implements Initializable {
         Label label = getLabel(null);
         hBox.getChildren().addAll(button, button1);
         thirdBackVBox.getChildren().addAll(textField, hBox, label);
-        button.setOnAction(event -> undoBlur());
+        button.setOnAction(event -> {
+            ViewMaster.btnSoundEffect();
+            undoBlur();
+        });
         button1.setOnAction(event -> {
+            ViewMaster.btnSoundEffect();
             if (textField.getText().length() == 0) {
                 label.setText("Enter A Card Name");
             } else {
