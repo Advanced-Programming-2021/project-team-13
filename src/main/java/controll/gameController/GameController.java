@@ -283,11 +283,11 @@ public class GameController {
         if (checkEnded() != 4) {
             GameWinMenu gameWinMenu = new GameWinMenu(this);
             if (checkEnded() == 3) {
-                gameWinMenu.announceWinner(null);
+                gameWinMenu.announceWinner(null , false);
             } else if (checkEnded() == 2) {
-                gameWinMenu.announceWinner(currentPlayer.getRivalPlayer());
+                gameWinMenu.announceWinner(currentPlayer.getRivalPlayer() , false);
             } else {
-                gameWinMenu.announceWinner(currentPlayer);
+                gameWinMenu.announceWinner(currentPlayer , false);
             }
         }
     }
@@ -320,7 +320,7 @@ public class GameController {
             currentPlayer.setMaxLifePoint(currentPlayer.getMaxLifePoint());
         if (currentPlayer.getRivalPlayer().getLifePoint() > currentPlayer.getRivalPlayer().getMaxLifePoint())
             currentPlayer.getRivalPlayer().setMaxLifePoint(currentPlayer.getRivalPlayer().getLifePoint());
-        new GameWinMenu(this).announceWinner(currentPlayer.getRivalPlayer());
+        new GameWinMenu(this).announceWinner(currentPlayer.getRivalPlayer() , true);
     }
 
     public void attack(int monsterNumber) {
@@ -1237,7 +1237,7 @@ public class GameController {
                 if (currentPlayer.getBoard().getDeck().getAllCardsInMainDeck().size() != 0) {
                     addCardToHand();
                 } else {
-                    new GameWinMenu(this).announceWinner(currentPlayer.getRivalPlayer());
+                    new GameWinMenu(this).announceWinner(currentPlayer.getRivalPlayer() , false);
                 }
             }
         } else if (currentPhase == Phase.DRAW_PHASE) {
@@ -1806,7 +1806,7 @@ public class GameController {
         }
         if (winner != null) {
             GameWinMenu gameWinMenu = new GameWinMenu(this);
-            gameWinMenu.announceWinner(winner);
+            gameWinMenu.announceWinner(winner  , false);
         }
     }
 
@@ -1891,7 +1891,7 @@ public class GameController {
         boolean activatedTrap = false;
         if (currentPlayer instanceof AIPlayer) {
             for (Trap trap : trapArrayList) {
-                gameView.showTrapIsActivating(trap , chain.size());
+                gameView.showTrapIsActivating(trap);
                 trap.setActivated(true);
                 trap.setFace(Face.UP);
                 chain.add(trap);
@@ -1900,7 +1900,7 @@ public class GameController {
         } else {
             for (Trap trap : trapArrayList) {
                 if (gameView.wantToActivateTrap(trap)) {
-                    gameView.showTrapIsActivating(trap , chain.size());
+                    gameView.showTrapIsActivating(trap);
                     trap.setActivated(true);
                     trap.setFace(Face.UP);
                     chain.add(trap);
