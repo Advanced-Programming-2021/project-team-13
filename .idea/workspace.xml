@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a78ea3f-1e80-4ce3-9000-b6e28a0fde4c" name="Default Changelist" comment="surrender is fixed">
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,14 +18,13 @@
         <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="Class" />
-        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="309b472983523793182b37012b1e4fbd25dcc758" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,9 +38,6 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/resources/fxml/LoginMenu.fxml" root0="SKIP_HIGHLIGHTING" />
-  </component>
   <component name="ProjectId" id="1ul7X1DTomobqSRc1mkHdk7gyA4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -54,7 +50,6 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -73,6 +68,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -103,7 +109,6 @@
       <workItem from="1625884419839" duration="12174000" />
       <workItem from="1625911256731" duration="116000" />
       <workItem from="1625913156841" duration="4355000" />
-      <workItem from="1626114309539" duration="264000" />
     </task>
     <task id="LOCAL-00002" summary="attack fixed">
       <created>1625860404940</created>
@@ -168,35 +173,7 @@
       <option name="project" value="LOCAL" />
       <updated>1625927044145</updated>
     </task>
-    <task id="LOCAL-00011" summary="cheats added">
-      <created>1625927179703</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1625927179703</updated>
-    </task>
-    <task id="LOCAL-00012" summary="cheats added">
-      <created>1625927188164</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1625927188164</updated>
-    </task>
-    <task id="LOCAL-00013" summary="surrender is fixed">
-      <created>1625933118043</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1625933118043</updated>
-    </task>
-    <task id="LOCAL-00014" summary="surrender is fixed">
-      <created>1625933167715</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1625933167715</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,8 +213,7 @@
     <MESSAGE value="sound Effects" />
     <MESSAGE value="rid of some spells" />
     <MESSAGE value="cheats added" />
-    <MESSAGE value="surrender is fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="surrender is fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="cheats added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -247,14 +223,6 @@
           <line>97</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/controll/gameController/GameController.java</url>
-          <line>313</line>
-          <properties class="controll.gameController.GameController" method="surrender">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -262,12 +230,12 @@
     <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_battleTest.ic" NAME="GameTest.battleTest Coverage Results" MODIFIED="1624645611916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1624657991342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$All_in_YuGiOh.ic" NAME="All in YuGiOh Coverage Results" MODIFIED="1624660089167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_spellTest.ic" NAME="GameTest.spellTest Coverage Results" MODIFIED="1624652309029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1624647543177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/project_team_13$Main.ic" NAME="Main Coverage Results" MODIFIED="1625926119273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$All_in_YuGiOh.ic" NAME="All in YuGiOh Coverage Results" MODIFIED="1624657570102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_battleTest.ic" NAME="GameTest.battleTest Coverage Results" MODIFIED="1624656790598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Main_java$GameTest_AITest.ic" NAME="GameTest.AITest Coverage Results" MODIFIED="1624645990912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/project_team_13$Main.ic" NAME="Main Coverage Results" MODIFIED="1625828087540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Main_java$GameTest_TTest.ic" NAME="GameTest.TTest Coverage Results" MODIFIED="1624656745910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_spellTest.ic" NAME="GameTest.spellTest Coverage Results" MODIFIED="1624652309029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
