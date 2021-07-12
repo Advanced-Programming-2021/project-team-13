@@ -2,15 +2,12 @@ package model;
 
 import enums.AttackOrDefense;
 import enums.Face;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
-import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import model.cards.Card;
 

@@ -3,11 +3,9 @@ import controll.ImageLoader;
 import controll.json.UserJson;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.players.User;
-import view.SceneController;
 import view.ViewMaster;
 
-public class Main extends Application {
+public class ClientMain extends Application {
 
     public static void main(String[] args) {
         new ImageLoader().start();

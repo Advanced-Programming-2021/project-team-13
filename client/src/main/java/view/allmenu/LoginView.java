@@ -4,14 +4,11 @@ import controll.LoginController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -19,8 +16,6 @@ import javafx.stage.Stage;
 import model.menuItems.CustomButton;
 import view.ViewMaster;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 
