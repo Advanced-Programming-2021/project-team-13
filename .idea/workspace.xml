@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="f*ck git">
-      <change beforePath="$PROJECT_DIR$/.idea/cssdialects.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/java/controll/ChatRoomController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/java/view/allmenu/ChatRoomView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/chatRoomPic/sm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/chatRoomPic/w1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/chatRoomPic/w2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/chatRoomPic/w3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/fxml/ChatRoom.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YuGiOh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/YuGiOh.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients/clients.iml" beforeDir="false" afterPath="$PROJECT_DIR$/clients/clients.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/src/main/java/view/allmenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/clients/src/main/java/view/allmenu/MainView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +24,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Class" />
-        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -116,6 +121,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.ClientMain" />
       <item itemvalue="Application.ScoreboardView" />
@@ -154,6 +170,7 @@
       <workItem from="1625913156841" duration="4355000" />
       <workItem from="1626115161214" duration="1489000" />
       <workItem from="1626524530588" duration="7000" />
+      <workItem from="1626524595309" duration="11018000" />
     </task>
     <task id="LOCAL-00002" summary="attack fixed">
       <created>1625860404940</created>
@@ -225,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626116229676</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="f*ck git">
+      <created>1626524600922</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1626524600922</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
