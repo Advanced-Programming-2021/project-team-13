@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/YuGiOh.iml" filepath="$PROJECT_DIR$/YuGiOh.iml" />
+      <module fileurl="file://$PROJECT_DIR$/clients/clients.iml" filepath="$PROJECT_DIR$/clients/clients.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serverr/server.iml" filepath="$PROJECT_DIR$/serverr/server.iml" />
     </modules>
   </component>
 </project>

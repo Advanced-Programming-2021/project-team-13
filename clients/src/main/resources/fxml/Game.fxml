@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="motherPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" stylesheets="@../styles/GameCss.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.allmenu.GameView">
+   <center>
+       <StackPane fx:id="centerPane" prefHeight="720" prefWidth="814" BorderPane.alignment="CENTER">
+           <GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" />
+           <AnchorPane fx:id="tributeContainer" prefHeight="637.0" prefWidth="746.0" visible="false">
+               <TilePane fx:id="tributeCardsPlace" layoutX="44.0" layoutY="79.0" prefHeight="563.0" prefWidth="659.0" />
+               <Label fx:id="tributeNumber" alignment="CENTER" layoutX="191.0" layoutY="14.0" prefHeight="54.0" prefWidth="366.0">
+                   <font>
+                       <Font name="System Bold Italic" size="21.0" />
+                   </font>
+               </Label>
+               <ImageView fx:id="cancelTribute" fitHeight="40.0" fitWidth="88.0" layoutX="330.0" layoutY="666.0" pickOnBounds="true" preserveRatio="true" />
+           </AnchorPane>
+           <AnchorPane fx:id="showGraveyardBack" disable="true" prefHeight="200.0" prefWidth="200.0" styleClass="graveyard" visible="false">
+               <TilePane fx:id="graveyardTilepane" alignment="TOP_CENTER" prefHeight="629.0" prefWidth="747.0" />
+               <Button fx:id="graveyardClose" layoutX="302.0" layoutY="644.0" mnemonicParsing="false" onAction="#closeGraveyardMenu" prefHeight="61.0" prefWidth="142.0" styleClass="graveyardButton" text="Close" />
+            <Label fx:id="noCardInGraveyard" layoutX="205.0" layoutY="341.0" text="No Card Is In GraveYard" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Comic Sans MS Bold Italic" size="27.0" />
+               </font>
+            </Label>
+           </AnchorPane>
+       </StackPane>
+   </center>
+   <right>
+       <AnchorPane fx:id="rightPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="266.666" style="-fx-background-color: #191970;" BorderPane.alignment="CENTER">
+           <Label fx:id="rivalPlayerLabel" prefHeight="26.0" prefWidth="266.0" text="Rival player : " textFill="#cc2c10">
+              <font>
+                  <Font name="System Bold Italic" size="16" />
+              </font>
+            <effect>
+               <Bloom threshold="0.06" />
+            </effect>
+           </Label>
+           <AnchorPane layoutY="106" prefHeight="241.3333" prefWidth="266">
+                <ImageView fx:id="rivalSelectedCard" fitHeight="250" fitWidth="184.6666" layoutX="45.3333" pickOnBounds="true" preserveRatio="true" />
+           </AnchorPane>
+         <Circle fx:id="rivalHp" fill="DODGERBLUE" layoutX="230.0" layoutY="81.333333" radius="24.66666" stroke="BLACK" strokeType="INSIDE" />
+         <Label fx:id="rivalHpPoint" layoutX="125.0" layoutY="63.0" prefHeight="38.0" prefWidth="71.0" text="8000" textFill="#ea3939">
+            <font>
+               <Font name="System Bold Italic" size="26" />
+            </font>
+            <effect>
+               <Bloom threshold="0.19" />
+            </effect>
+         </Label>
+       </AnchorPane>
+   </right>
+   <left>
+       <AnchorPane fx:id="leftPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="266.666" style="-fx-background-color: #191970;" BorderPane.alignment="CENTER">
+           <Label fx:id="ourPlayerLabel" prefHeight="26.0" prefWidth="268.0" text="Our player : " textFill="#0fcc58">
+              <font>
+                  <Font name="System Bold Italic" size="16" />
+              </font>
+            <effect>
+               <Bloom threshold="0.06" />
+            </effect>
+           </Label>
+           <GridPane fx:id="leftGrid" layoutX="-1.333" layoutY="384.6666" prefHeight="334" prefWidth="266.666">
+               <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="6.666" prefWidth="66.666" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="6.666" prefWidth="66.666" />
+               </columnConstraints>
+               <rowConstraints>
+                   <RowConstraints minHeight="6.66" prefHeight="20" vgrow="SOMETIMES" />
+                   <RowConstraints minHeight="6.66" prefHeight="20" vgrow="SOMETIMES" />
+                   <RowConstraints minHeight="6.66" prefHeight="20" vgrow="SOMETIMES" />
+               </rowConstraints>
+           </GridPane>
+           <AnchorPane layoutY="106" prefHeight="248.666" prefWidth="266">
+                <ImageView fx:id="selectedCard" fitHeight="250" fitWidth="184.666" layoutX="50" pickOnBounds="true" preserveRatio="true" />
+           </AnchorPane>
+         <Circle fx:id="ourHp" fill="DODGERBLUE" layoutX="50.0" layoutY="81.3333" radius="24.666" stroke="BLACK" strokeType="INSIDE" />
+         <Label fx:id="ourHpPoint" layoutX="80.0" layoutY="63.0" prefHeight="38.0" prefWidth="67.0" text="8000" textFill="#ea3939">
+            <font>
+               <Font name="System Bold Italic" size="26" />
+            </font>
+            <effect>
+               <Bloom threshold="0.19" />
+            </effect>
+         </Label>
+       </AnchorPane>
+   </left>
+</BorderPane>

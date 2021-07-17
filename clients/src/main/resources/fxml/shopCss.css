@@ -1,0 +1,21 @@
+.root {
+    -fx-background-image: url('../shopImage/Back.png');
+
+}
+
+#scrollPane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+#cardsPlace {
+
+    -fx-background-color: transparent;
+}
+
+#selectedCardBackground {
+    -fx-background-color: rgba(0, 0, 0, 0.7);;
+}
