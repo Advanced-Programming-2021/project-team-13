@@ -18,7 +18,7 @@ public class ImageLoader extends Thread {
     private static final FilenameFilter filenameFilter = (dir, name) -> name.endsWith(".jpg");
 
     @Override
-    public void start() {
+    public void run() {
         load();
     }
 
