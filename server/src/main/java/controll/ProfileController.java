@@ -2,46 +2,21 @@ package controll;
 
 import model.players.User;
 
-
-import java.util.ArrayList;
-
 public class ProfileController {
-   /* public ProfileController() {
+
+    public String changeNickname(User user, String nickname) {
+        if (User.getUserByNickname(nickname) != null)
+            return "nickname exists";
+        user.setNickname(nickname);
+        return "nickname changed";
     }
 
-    public void changeNickname(String nickname) {
-        if (isNewNickname(nickname)) {
-            ViewMaster.getUser().setNickname(nickname);
-            profileView.printNicknameChanged();
-        } else
-            profileView.printNicknameExists(nickname);
-
+    public String changePassword(User user , String currentPassword, String newPassword) {
+        if (!user.getPassword().equals(currentPassword))
+            return "invalid current password";
+        else if (user.getPassword().equals(newPassword))
+            return "same password";
+        user.setPassword(newPassword);
+        return "password changed";
     }
-
-    public boolean isNewNickname(String nickname) {
-        ArrayList<User> users = User.getAllUsers();
-        for (User user : users)
-            if (nickname.equals(user.getNickname())) return false;
-        return true;
-    }
-
-    public void changePassword(String currentPassword, String newPassword) {
-        if (isPasswordCorrect(currentPassword))
-            if (checkNewPassword(newPassword, currentPassword))
-                profileView.printSamePassword();
-            else {
-                ViewMaster.getUser().setPassword(newPassword);
-                profileView.printPasswordChanged();
-            }
-        else
-            profileView.printInvalidPassword();
-    }
-
-    public boolean isPasswordCorrect(String currentPassword) {
-        return currentPassword.equals(ViewMaster.getUser().getPassword());
-    }
-
-    public boolean checkNewPassword(String newPassword, String currentPassword) {
-        return currentPassword.equals(newPassword);
-    }*/
 }

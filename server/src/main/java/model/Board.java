@@ -61,11 +61,11 @@ public class Board {
         return graveyard;
     }
 
-    public Card getMonsterByAddress(int cardAddress) {     // get The monster card ,, the numbers in array is based on DOC
+    public Card getMonsterByAddress(int cardAddress) {
         return getCard(cardAddress, monsterCells);
     }
 
-    public Card getSpellOrTrapByAddress(int cardAddress) {     // not the sure on the array nums!!!!!
+    public Card getSpellOrTrapByAddress(int cardAddress) {
         return getCard(cardAddress, spellOrTrap);
     }
 
