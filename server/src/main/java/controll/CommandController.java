@@ -15,6 +15,7 @@ public class CommandController {
     private final ScoreboardController scoreboardController = new ScoreboardController();
     private final ProfileController profileController = new ProfileController();
     private final ShopController shopController = new ShopController();
+    private final ChatMenuController chatMenuController = new ChatMenuController();
     private final Type type = new TypeToken<HashMap<String, Image>>() {
     }.getType();
 
@@ -32,6 +33,8 @@ public class CommandController {
             return scoreboardController.sortAllUsers();
         else if (command.startsWith("shop"))
             return shopController.getImage(type);
+        else if(command.startsWith("send message"))
+            return chatMenuController.sendMessageToAll(command);
         else if (command.startsWith("change password"))
             return profileController.changePassword(loggedInUser.get(commands[4]) , commands[2] , commands[3]);
         else if (command.startsWith("change nickname"))
@@ -39,4 +42,5 @@ public class CommandController {
 
         return "";
     }
+
 }
