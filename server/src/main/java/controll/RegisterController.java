@@ -2,8 +2,6 @@ package controll;
 
 import model.players.User;
 
-import java.util.UUID;
-
 public class RegisterController {
     public synchronized String registerUser(String username, String password, String nickname) {
         if (username != null && password != null && nickname != null) {

@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="Login controller arguments">
       <change afterPath="$PROJECT_DIR$/clients/src/main/java/controll/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
@@ -24,6 +25,34 @@
       <change beforePath="$PROJECT_DIR$/server/src/main/java/model/csv/MonsterCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/csv/MonsterCSV.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/model/csv/SpellTrapCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/csv/SpellTrapCSV.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/model/players/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/players/User.java" afterDir="false" />
+=======
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="f*ck git">
+      <change afterPath="$PROJECT_DIR$/clients/src/main/java/controll/ChatRoomController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/java/view/allmenu/ChatRoomView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/chatRoomPic/sm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/chatRoomPic/w1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/chatRoomPic/w2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/chatRoomPic/w3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/clients/src/main/resources/fxml/ChatRoom.fxml" afterDir="false" />
+    <list default="true" id="482bf60d-897c-4883-8d4b-b8bb76c6d007" name="Default Changelist" comment="f*ck git">
+      <change beforePath="$PROJECT_DIR$/.idea/cssdialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/src/main/java/view/allmenu/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/clients/src/main/java/view/allmenu/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/src/main/java/controll/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/clients/src/main/java/controll/ImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/src/main/java/controll/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/clients/src/main/java/controll/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/src/main/java/view/ViewMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/clients/src/main/java/view/ViewMaster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/src/main/resources/Users.json" beforeDir="false" afterPath="$PROJECT_DIR$/clients/src/main/resources/Users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/CommandController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/CommandController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/DeckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/DeckController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/ImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/gameController/DuelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/gameController/DuelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/gameController/EffectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/gameController/EffectHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/gameController/GameWinMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/gameController/GameWinMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/gameController/ShowGraveyardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/gameController/ShowGraveyardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/controll/gameController/TrapAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/controll/gameController/TrapAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/Board.java" afterDir="false" />
+>>>>>>> 198d21c1e3df1208350fb98f69cc195054bb943b
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +63,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="FxmlFile" />
         <option value="Enum" />
+        <option value="FxmlFile" />
+<<<<<<< HEAD
+        <option value="Enum" />
+=======
+>>>>>>> 198d21c1e3df1208350fb98f69cc195054bb943b
         <option value="Class" />
       </list>
     </option>
@@ -73,7 +106,11 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/clients/src/main/resources" />
+<<<<<<< HEAD
     <property name="project.structure.last.edited" value="Project" />
+=======
+    <property name="project.structure.last.edited" value="Problems" />
+>>>>>>> 198d21c1e3df1208350fb98f69cc195054bb943b
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -90,6 +127,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.ClientMain">
+<<<<<<< HEAD
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -99,6 +137,11 @@
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
+=======
+    <configuration name="ClientMain" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ClientMain" />
+      <module name="YuGiOh" />
+>>>>>>> 198d21c1e3df1208350fb98f69cc195054bb943b
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -137,16 +180,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <configuration name="SeverMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SeverMain" />
       <module name="servers" />
+=======
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+>>>>>>> 198d21c1e3df1208350fb98f69cc195054bb943b
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.SeverMain" />
+<<<<<<< HEAD
       <item itemvalue="Application.ClientMain" />
+=======
+>>>>>>> 198d21c1e3df1208350fb98f69cc195054bb943b
       <item itemvalue="Application.SeverMain (1)" />
       <item itemvalue="Application.SeverMain (2)" />
       <item itemvalue="Application.Database" />
@@ -154,8 +210,11 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ClientMain" />
+<<<<<<< HEAD
         <item itemvalue="Application.SeverMain (2)" />
         <item itemvalue="Application.Database" />
+=======
+>>>>>>> 198d21c1e3df1208350fb98f69cc195054bb943b
         <item itemvalue="Application.SeverMain (1)" />
         <item itemvalue="Application.SeverMain" />
       </list>
@@ -182,6 +241,8 @@
       <workItem from="1625911256731" duration="116000" />
       <workItem from="1625913156841" duration="4355000" />
       <workItem from="1626115161214" duration="1489000" />
+      <workItem from="1626524530588" duration="7000" />
+      <workItem from="1626524595309" duration="11018000" />
     </task>
     <task id="LOCAL-00002" summary="attack fixed">
       <created>1625860404940</created>
@@ -253,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626116229676</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="f*ck git">
+      <created>1626524600922</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1626524600922</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,15 +376,15 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Main_java$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1624647543177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$All_in_YuGiOh.ic" NAME="All in YuGiOh Coverage Results" MODIFIED="1624657570102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_battleTest.ic" NAME="GameTest.battleTest Coverage Results" MODIFIED="1624656790598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_TTest.ic" NAME="GameTest.TTest Coverage Results" MODIFIED="1624656745910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_AITest.ic" NAME="GameTest.AITest Coverage Results" MODIFIED="1624645990912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Main_java$GameTest_spellTest.ic" NAME="GameTest.spellTest Coverage Results" MODIFIED="1624652309029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Main_java$test_in_YuGiOh.ic" NAME="test in YuGiOh Coverage Results" MODIFIED="1621274724221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>test.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/Main_java$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1624647543177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/project_team_13$Main.ic" NAME="Main Coverage Results" MODIFIED="1625926119273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$All_in_YuGiOh.ic" NAME="All in YuGiOh Coverage Results" MODIFIED="1624657570102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_battleTest.ic" NAME="GameTest.battleTest Coverage Results" MODIFIED="1624656790598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_AITest.ic" NAME="GameTest.AITest Coverage Results" MODIFIED="1624645990912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_TTest.ic" NAME="GameTest.TTest Coverage Results" MODIFIED="1624656745910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Main_java$GameTest_spellTest.ic" NAME="GameTest.spellTest Coverage Results" MODIFIED="1624652309029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

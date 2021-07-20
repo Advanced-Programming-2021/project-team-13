@@ -3,16 +3,13 @@ package view;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
 import view.allmenu.*;
 
-import javax.xml.crypto.Data;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
-import java.rmi.server.ServerCloneException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
@@ -49,10 +46,10 @@ public class ViewMaster {
                 .getResource("/gameMusic/daytona.mp3").toExternalForm()));
         songs = new MediaPlayer[]{goodInRed, shadows, daytona};
         try {
-            socket = new Socket("localhost",1111);
+            socket = new Socket("localhost", 1111);
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
         }
     }
 
@@ -64,7 +61,7 @@ public class ViewMaster {
         mainView = new MainView();
         deckView = new DeckView();
         duelView = new DuelView();
-   /*     currentMenu = Menu.LOGIN_MENU;*/
+        /*     currentMenu = Menu.LOGIN_MENU;*/
     }
 
     public static void playAudio(String place) {
@@ -89,19 +86,24 @@ public class ViewMaster {
                 }
         );
     }
-    public static void btnSoundEffect(){
+
+    public static void btnSoundEffect() {
         playAudio("/soundEffects/clk1.wav");
     }
-    public static void attackSoundEffect(){
+
+    public static void attackSoundEffect() {
         playAudio("/soundEffects/attack.wav");
     }
-    public static void heartbeatSoundEffect(){
+
+    public static void heartbeatSoundEffect() {
         playAudio("/soundEffects/heartBeat.wav");
     }
-    public static void beginBattleSoundEffect(){
+
+    public static void beginBattleSoundEffect() {
         playAudio("/soundEffects/letBattleBegin.wav");
     }
-    public static void completeSoundEffect(){
+
+    public static void completeSoundEffect() {
         playAudio("/soundEffects/complete.wav");
     }
 /*

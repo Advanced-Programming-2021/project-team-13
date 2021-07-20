@@ -1,5 +1,4 @@
 package controll;
-
 import model.players.User;
 
 import java.util.HashMap;
@@ -10,6 +9,7 @@ public class CommandController {
     private final LoginController loginController = new LoginController();
     private final RegisterController registerController = new RegisterController();
     private final ScoreboardController scoreboardController = new ScoreboardController();
+    private final ProfileController profileController = new ProfileController();
     private final ShopController shopController = new ShopController();
 
     public static HashMap<String, User> getLoggedInUser() {
@@ -17,6 +17,7 @@ public class CommandController {
     }
 
     public String run(String command) {
+        String[] commands = command.split(" ");
         if (command.startsWith("login"))
             return loginController.loginUser(command.split(" ")[1], command.split(" ")[2]);
         else if (command.startsWith("register"))
@@ -29,6 +30,10 @@ public class CommandController {
             return shopController.getDetail(command.split(" ")[1]);
         else if (command.startsWith("buy"))
             return shopController.buy(command.split(" "));
+        else if (command.startsWith("change password"))
+            return profileController.changePassword(loggedInUser.get(commands[4]) , commands[2] , commands[3]);
+        else if (command.startsWith("change nickname"))
+            return profileController.changeNickname(loggedInUser.get(commands[3]) , commands[2]);
         return "";
     }
 }

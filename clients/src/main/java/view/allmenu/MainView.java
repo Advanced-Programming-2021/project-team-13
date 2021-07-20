@@ -131,6 +131,15 @@ public class MainView {
                         e.printStackTrace();
                     }
                 }),
+                new CustomButton("chat room", () -> {
+                    try {
+                        ViewMaster.btnSoundEffect();
+                        goToChatRoom();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }),
                 new CustomButton("import/export", () -> {
                     try {
                         ViewMaster.btnSoundEffect();
@@ -150,12 +159,21 @@ public class MainView {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                })};
+                })
+                };
+
     }
+
+
 
 
     public void printMenuNavigationImpossible() {//?????????????????????????
         System.out.println("menu navigation is not possible");
+    }
+
+    private void goToChatRoom() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ChatRoom.fxml"));
+        ((Stage) pane.getScene().getWindow()).setScene(new Scene(root));
     }
 
     public void goToDuelMenu() throws IOException {
