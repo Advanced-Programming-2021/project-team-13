@@ -31,7 +31,7 @@ public class User implements Comparable<User> {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
-        this.money = 1000000;
+        this.money = 12000;
         this.score = 0;
         this.winNum = 0;
         this.loseNum = 0;

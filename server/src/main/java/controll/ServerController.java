@@ -1,6 +1,8 @@
 package controll;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -23,16 +25,21 @@ public class ServerController {
                     try {
                         DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-
                         while (true) {
                             String input = dataInputStream.readUTF();
                             System.out.println(input);
-                            if (input.equalsIgnoreCase("exit")) break;
+                            if (input.startsWith("logout")) {
+                                CommandController.getLoggedInUser().remove(input.split(" ")[1]);
+                                dataOutputStream.writeUTF("");
+                                dataOutputStream.flush();
+                                break;
+                            }
                             String output = commandController.run(input);
                             System.out.println(output);
                             dataOutputStream.writeUTF(output);
                             dataOutputStream.flush();
                         }
+                        dataOutputStream.close();
                         dataInputStream.close();
                     } catch (Exception ignored) {
                     }
