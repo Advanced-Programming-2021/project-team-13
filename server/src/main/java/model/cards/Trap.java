@@ -3,8 +3,8 @@ package model.cards;
 import enums.Face;
 import javafx.scene.image.Image;
 
-public class Trap /*extends Card */{
-    /*private TrapAction trapAction;
+public class Trap extends Card {
+//    private TrapAction trapAction;
     private Card effectedCard;
     private String type;
     private int setTurn;
@@ -20,7 +20,7 @@ public class Trap /*extends Card */{
         super(that);
         this.type = that.type;
         this.setTurn = -1;
-        trapAction = null;
+//        trapAction = null;
         effectedCard = null;
         activatedTurn = that.activatedTurn;
     }
@@ -44,19 +44,19 @@ public class Trap /*extends Card */{
     public Card getEffectedCard() {
         return effectedCard;
     }
-
+/*
     public TrapAction getTrapAction() {
         return trapAction;
     }
-
+*/
     public void setEffectedCard(Card effectedCard) {
         this.effectedCard = effectedCard;
     }
-
+/*
     public void setTrapAction(TrapAction trapAction) {
         this.trapAction = trapAction;
     }
-
+*/
     public void setSetTurn(int setTurn) {
         this.setTurn = setTurn;
     }
@@ -71,4 +71,4 @@ public class Trap /*extends Card */{
                 + "\nType: " + type + "\nDescription: " + cardDescription;
     }
 
-*/}
+}

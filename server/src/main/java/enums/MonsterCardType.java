@@ -1,6 +1,6 @@
 package enums;
 
-public enum MonsterCardType { //Change MonsterType To MonsterCardType
+public enum MonsterCardType {
     NORMAL,
     EFFECTIVE,
     RITUAL
