@@ -2,6 +2,7 @@ package view.allmenu;
 
 import com.gilecode.yagson.YaGson;
 import com.google.common.reflect.TypeToken;
+import controll.ImageLoader;
 import controll.ShopController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -25,11 +26,8 @@ import view.ViewMaster;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.zip.DataFormatException;
-import java.util.zip.Inflater;
 
 public class ShopView {
     private final YaGson yaGson = new YaGson();
@@ -63,6 +61,7 @@ public class ShopView {
     private ImageView backButton;
     private String selectedCardName;
     private int selectedCardPrice;
+    private int currentPlayerMoney;
 
     public void start(Stage primaryStage) {
         try {
@@ -76,6 +75,12 @@ public class ShopView {
 
     @FXML
     public void initialize() {
+        try {
+            ViewMaster.dataOutputStream.writeUTF("money " + ViewMaster.getCurrentUserToken());
+            ViewMaster.dataOutputStream.flush();
+            currentPlayerMoney = Integer.parseInt(ViewMaster.dataInputStream.readUTF());
+        } catch (Exception e) {
+        }
         shopController = new ShopController();
         scrollPane.fitToHeightProperty().set(true);
         scrollPane.hbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
@@ -111,14 +116,16 @@ public class ShopView {
                 button.setImage(allowBuy);
         });
         button.setOnMouseClicked(e -> {
-     /*       if (button.getImage() == allowBuyShadow) {
+            if (button.getImage() == allowBuyShadow) {
                 ViewMaster.completeSoundEffect();
-                Card card = Card.findCardFromCsv(selectedCardName);
-                shopController.buyCard(ViewMaster.getUser(), card, selectedCardPrice);
+                System.out.println(currentPlayerMoney);
+                currentPlayerMoney -= selectedCardPrice;
+                System.out.println(currentPlayerMoney);
+                shopController.buyCard(selectedCardName, selectedCardPrice);
                 message.setOpacity(1);
                 shopButtonImage(selectedCardPrice);
                 messageTimer.play();
-            }*/
+            }
         });
     }
 
@@ -133,12 +140,7 @@ public class ShopView {
 
     private void load() {
         try {
-            ViewMaster.dataOutputStream.writeUTF("shop");
-            ViewMaster.dataOutputStream.flush();
-            String json = decrypt(ViewMaster.dataInputStream.readUTF());
-            System.out.println(json);
-            HashMap<String, Image> images = yaGson.fromJson(json, type);
-            images.forEach((name, image) ->
+            ImageLoader.getCardsImage().forEach((name, image) ->
             {
                 if (!name.equalsIgnoreCase("Unknown.jpg")
                         && !name.equalsIgnoreCase("Unknown")
@@ -148,13 +150,13 @@ public class ShopView {
                     imgView.setFitWidth(160);
                     imgView.setFitHeight(210);
                     imgView.setOnMouseClicked(e -> {
-              /*          selectedCardName = name;
+                        selectedCardName = name;
                         cardImage.setImage(image);
                         String[] detail = shopController.getDetail(name);
                         shopButtonImage(Integer.parseInt(detail[0]));
                         selectedCardPrice = Integer.parseInt(detail[0]);
                         price.setText("Price: " + detail[0]);
-                        information.setText(detail[1]);*/
+                        information.setText(detail[1]);
                     });
                     imgView.setOnMouseEntered(e -> setMouseEnterCard(imgView));
                     imgView.setOnMouseExited(e -> setMouseExitCard(imgView));
@@ -166,25 +168,11 @@ public class ShopView {
         }
     }
 
-    private String decrypt(String read) {
-        byte[] bytes = read.getBytes(StandardCharsets.UTF_8);
-        Inflater inflater = new Inflater();
-        byte[] b = new byte[15];
-        inflater.setInput(bytes);
-        int n = 0;
-        try {
-            n = inflater.inflate(b);
-            return new String(b, 0, n, StandardCharsets.UTF_8);
-        } catch (DataFormatException ignored) {
-        }
-        return null;
-    }
-
     private void shopButtonImage(int price) {
-   /*     if (price > ViewMaster.getUser().getMoney())
+        if (price > currentPlayerMoney)
             button.setImage(notAllowBuy);
         else
-            button.setImage(allowBuy);*/
+            button.setImage(allowBuy);
     }
 
     public void setMouseEnterCard(ImageView imgView) {

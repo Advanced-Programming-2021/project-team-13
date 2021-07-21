@@ -49,7 +49,7 @@ public class SpellTrapCSV {
     public static SpellTrapCSV findSpellTrap(String name) throws FileNotFoundException {
         List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder<SpellTrapCSV>
                 (new FileReader(System
-                        .getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
+                        .getProperty("user.dir") + "\\server\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
                 .withType(SpellTrapCSV.class)
                 .build()
                 .parse();
@@ -63,7 +63,7 @@ public class SpellTrapCSV {
     public static void getNameAndDescription(TreeMap<String, String> cards) throws Exception {
         List<SpellTrapCSV> spellsAndTraps = new CsvToBeanBuilder
                 <SpellTrapCSV>(new FileReader
-                (System.getProperty("user.dir") + "\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
+                (System.getProperty("user.dir") + "\\server\\src\\main\\java\\model\\CSV\\" + "SpellTrap.csv"))
                 .withType(SpellTrapCSV.class)
                 .build()
                 .parse();
