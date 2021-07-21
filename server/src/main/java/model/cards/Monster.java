@@ -49,7 +49,7 @@ public class Monster extends Card {
     public Monster(String name, Face face, int price, String description, String monsterType,
                    MonsterCardType monsterCardType, MonsterAttribute monsterAttribute,
                    int attackNum, int defenseNum, int level, Image image) {
-        /*    super(name, description, face, price , image);*/
+        super(name, description, face, price, image);
         if (name.equalsIgnoreCase("scanner")) isScanner = true;
         setAttackNum(attackNum);
         setDefenseNum(defenseNum);
@@ -64,7 +64,7 @@ public class Monster extends Card {
     }
 
     public Monster(Monster that) {
-        /*        super(that);*/
+        super(that);
         setAttackNum(that.attackNum);
         setDefenseNum(that.defenseNum);
         setLevel(that.level);

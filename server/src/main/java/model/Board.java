@@ -5,7 +5,6 @@ import model.cards.Card;
 import model.cards.Monster;
 import model.cards.Spell;
 import model.cards.Trap;
-import model.players.Player;
 
 public class Board {
 
@@ -17,7 +16,7 @@ public class Board {
     private Graveyard graveyard;
 
 
-    public Board(PlayerDeck playerDeck, Graveyard graveyard, Player player) {
+    public Board(PlayerDeck playerDeck, Graveyard graveyard) {
         this.playerDeck = playerDeck;
         this.graveyard = graveyard;
         spellOrTrap = new Cell[5];
@@ -116,7 +115,7 @@ public class Board {
         for (Cell monsterCell : monsterCells) {
             if (monsterCell.getCard() == null) {
                 monsterCell.setCard(monster);
-                /*monsterCell.setPicture(monster.getImage(), monster.getFace(), monster.getAttackOrDefense());*/
+                monsterCell.setPicture(monster.getImage(), monster.getFace(), monster.getAttackOrDefense());
                 return;
             }
         }
@@ -133,22 +132,22 @@ public class Board {
     }
 
     public void putSpellAndTrapInBoard(Card selectedCard) {
-   /*     if (selectedCard instanceof Trap)
+        if (selectedCard instanceof Trap)
             putTrap((Trap) selectedCard);
         else
             putSpell((Spell) selectedCard);
-*/
+
     }
 
     private void putSpell(Spell selectedCard) {
         if (selectedCard.getType().equalsIgnoreCase("field")) {
             fieldSpell.setCard(selectedCard);
-/*            fieldSpell.setPicture(selectedCard.getImage(), Face.UP, null);*/
+            fieldSpell.setPicture(selectedCard.getImage(), Face.UP, null);
         } else {
             for (Cell cell : spellOrTrap) {
                 if (cell.getCard() == null) {
-     /*               cell.setCard(selectedCard);
-                    cell.setPicture(selectedCard.getImage(), selectedCard.getFace(), null);*/
+                    cell.setCard(selectedCard);
+                    cell.setPicture(selectedCard.getImage(), selectedCard.getFace(), null);
                     return;
                 }
             }
@@ -158,8 +157,8 @@ public class Board {
     private void putTrap(Trap selectedCard) {
         for (Cell cell : spellOrTrap) {
             if (cell.getCard() == null) {
-           /*     cell.setPicture(selectedCard.getImage(), selectedCard.getFace(), null);
-                cell.setCard(selectedCard);*/
+                cell.setPicture(selectedCard.getImage(), selectedCard.getFace(), null);
+                cell.setCard(selectedCard);
                 return;
             }
         }

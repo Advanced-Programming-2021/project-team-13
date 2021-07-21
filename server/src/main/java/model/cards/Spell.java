@@ -9,12 +9,12 @@ public class Spell extends Card {
     private boolean isSetINThisTurn = false;
 
     public Spell(String name, String description, Face face, int price, String type , Image image) {
-/*        super(name, description, face, price , image);*/
+        super(name, description, face, price , image);
         this.type = type;
     }
 
     public Spell(Spell that) {
-    /*    super(that);*/
+        super(that);
         this.type = that.type;
         equippedMonster = null;
         isSetINThisTurn = false;

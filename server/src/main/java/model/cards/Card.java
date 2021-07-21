@@ -11,8 +11,8 @@ import model.players.Player;
 
 import java.io.FileNotFoundException;
 
-public class Card /*implements Comparable<Card>*/ {
-   /* protected String cardName;
+public class Card implements Comparable<Card> {
+    protected String cardName;
     protected String cardNameInGame;
     protected String cardDescription;
     protected Face face;
@@ -154,5 +154,4 @@ public class Card /*implements Comparable<Card>*/ {
     public String toString() {
         return this.cardNameInGame + " : " + this.cardDescription;
     }
-*/
 }
