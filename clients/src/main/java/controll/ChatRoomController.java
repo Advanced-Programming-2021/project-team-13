@@ -33,11 +33,8 @@ public class ChatRoomController {
             Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<HashMap<String, String>>>() {
             }.getType();
-            System.out.println(input);
-            System.out.println(type);
             return gson.fromJson(input,type);
         }catch (Exception e){
-            e.printStackTrace();
         }
         return null;
     }
