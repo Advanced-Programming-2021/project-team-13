@@ -1,9 +1,7 @@
 package controll;
 
 
-
-import java.io.FileNotFoundException;
-import java.util.TreeMap;
+import view.ViewMaster;
 
 public class ShopController {
     /*private final TreeMap<String, String> cards = new TreeMap<>();
@@ -18,33 +16,31 @@ public class ShopController {
         } catch (Exception ignored) {
         }
     }
+*/
+
 
     public String[] getDetail(String cardName) {
-        MonsterCSV monsterCSV = null;
         try {
-            monsterCSV = MonsterCSV.findMonster(cardName);
-        } catch (Exception ignore) {
-        }
-        if (monsterCSV == null) {
-            SpellTrapCSV spellTrapCSV;
-            try {
-                spellTrapCSV = SpellTrapCSV.findSpellTrap(cardName);
-                assert spellTrapCSV != null;
-                String detail = spellTrapCSV.getPrice() + "-" + "Name: " + spellTrapCSV.getName() +
-                        "\nType: " + spellTrapCSV.getType() + "\nIcon: " + spellTrapCSV.getIcon();
-                return detail.split("-");
-            } catch (Exception ignore) {
-            }
-        } else {
-            String detail = monsterCSV.getPrice() + "-" + "Name: " + monsterCSV.getName() +
-                    "\nLevel: " + monsterCSV.getLevel() +
-                    "\nType: " + monsterCSV.getCardType() +
-                    "\nAttack: " + monsterCSV.getAttack() + "\nDefense: " + monsterCSV.getDefence();
-            return detail.split("-");
+            ViewMaster.dataOutputStream.writeUTF("shop " + cardName);
+            ViewMaster.dataOutputStream.flush();
+            return ViewMaster.dataInputStream.readUTF().split("-");
+        } catch (Exception ignored) {
         }
         return null;
     }
 
+    public void buyCard(String selectedCardName, int cardPrice) {
+        try {
+            ViewMaster.dataOutputStream.writeUTF("buy " + selectedCardName + " " + ViewMaster.getCurrentUserToken()
+                    + " " + cardPrice);
+            ViewMaster.dataOutputStream.flush();
+            String answer = ViewMaster.dataInputStream.readUTF();
+        } catch (Exception e) {
+        }
+    }
+
+
+/*
     public void buyCard(User user, Card card, int cardPrice) {
         user.addCard(card);
         user.addMoney(-cardPrice);

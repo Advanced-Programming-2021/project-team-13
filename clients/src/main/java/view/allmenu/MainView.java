@@ -21,6 +21,7 @@ import model.menuItems.CustomButton;
 import view.SceneController;
 import view.ViewMaster;
 
+import javax.swing.text.View;
 import java.io.IOException;
 
 public class MainView {
@@ -150,6 +151,10 @@ public class MainView {
                 new CustomButton("logout", () -> {
                     try {
                         ViewMaster.btnSoundEffect();
+//                        ViewMaster.dataOutputStream.writeUTF("logout " + ViewMaster.getCurrentUserToken());
+//                        ViewMaster.dataOutputStream.flush();
+//                        ViewMaster.setCurrentUserToken(null);
+//                        ViewMaster.dataInputStream.readUTF();
                         goToLoginMenu();
                     } catch (IOException e) {
                         e.printStackTrace();
