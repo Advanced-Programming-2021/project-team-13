@@ -33,7 +33,8 @@ public class ChatRoomView {
     public Label notifLabel;
     public ImageView sendMessageImage;
     public AnchorPane rightPane;
-    private ArrayList<HashMap<String, String>> fff = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> hashMaps = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> marked = new ArrayList<>();
     private final ChatRoomController chatRoomController;
 
     public ChatRoomView(){
@@ -67,22 +68,24 @@ public class ChatRoomView {
     private synchronized void getMessages() {
         try {
             chatRoomController.getAllMessages().stream().forEach(x -> {
-                        if (!fff.contains(x))
-                            fff.add(x);
+                        if (!hashMaps.contains(x))
+                            hashMaps.add(x);
             }
             );
-            fff.stream().forEach(x -> {
-                String username = x.get("username");
-                String message = x.get("message");
-                System.out.println(message);
-                StackPane stackPane = new StackPane();
-                Text text = new Text(username + " : " + message);
-                Rectangle bg = new Rectangle(250, 50, Color.WHITE);
-                text.setFont(Font.font("Comic Sans MS", 18));
-                stackPane.getChildren().addAll(bg, text);
-                stackPane.setAlignment(Pos.TOP_LEFT);
-                stackPane.setTranslateX(15);
-                messageVbox.getChildren().add(stackPane);
+            hashMaps.stream().forEach(x -> {
+                if(!marked.contains(x)) {
+                    marked.add(x);
+                    String username = x.get("username");
+                    String message = x.get("message");
+                    StackPane stackPane = new StackPane();
+                    Text text = new Text(username + " : " + message);
+                    Rectangle bg = new Rectangle(250, 50, Color.WHITE);
+                    text.setFont(Font.font("Comic Sans MS", 18));
+                    stackPane.getChildren().addAll(bg, text);
+                    stackPane.setAlignment(Pos.TOP_LEFT);
+                    stackPane.setTranslateX(15);
+                    messageVbox.getChildren().add(stackPane);
+                }
             });
         } catch (Exception ignored) {
 
