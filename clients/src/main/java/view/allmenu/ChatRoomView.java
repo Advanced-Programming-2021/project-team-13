@@ -62,17 +62,22 @@ public class ChatRoomView {
             notifLabel.setText("Empty message!");
             return;
         }
-        chatRoomController.sendMessageToAll(textBox.getText());
-        StackPane stackPane = new StackPane();
-        Rectangle bg = new Rectangle(250, 50,Color.WHITE);
-        Text text = new Text(textBox.getText());
-        text.setFont(Font.font("Comic Sans MS", 18));
-        stackPane.getChildren().addAll(bg,text);
-        textBox.clear();
-        stackPane.setAlignment(Pos.TOP_LEFT);
-        stackPane.setTranslateX(15);
-        messageVbox.getChildren().add(stackPane);
 
+        String texts = textBox.getText();
+        textBox.clear();
+        chatRoomController.sendMessageToAll(texts);
+        chatRoomController.getAllMessages().stream().forEach(x->{
+            String username = x.get("username");
+            String message = x.get("message");
+            StackPane stackPane = new StackPane();
+            Text text = new Text(message);
+            Rectangle bg = new Rectangle(250, 50,Color.WHITE);
+            text.setFont(Font.font("Comic Sans MS", 18));
+            stackPane.getChildren().addAll(bg,text);
+            stackPane.setAlignment(Pos.TOP_LEFT);
+            stackPane.setTranslateX(15);
+            messageVbox.getChildren().add(stackPane);
+        });
     }
 
     private void goToMainMenu() throws IOException {

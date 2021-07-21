@@ -1,20 +1,26 @@
 package controll;
+
 import model.players.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class CommandController {
     private static final HashMap<String, User> loggedInUser = new HashMap<>();
+
+    public static HashMap<String, User> getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public static ArrayList<HashMap<String, String>> messages = new ArrayList<>();
     private final LoginController loginController = new LoginController();
     private final RegisterController registerController = new RegisterController();
     private final ScoreboardController scoreboardController = new ScoreboardController();
     private final ProfileController profileController = new ProfileController();
     private final ShopController shopController = new ShopController();
     private final ChatMenuController chatMenuController = new ChatMenuController();
-    public static HashMap<String, User> getLoggedInUser() {
-        return loggedInUser;
-    }
+
 
     public String run(String command) {
         String[] commands = command.split(" ");
@@ -28,6 +34,8 @@ public class CommandController {
             return String.valueOf(loggedInUser.get(command.split(" ")[1]).getMoney());
         else if (command.startsWith("send message"))
             return chatMenuController.sendMessageToAll(command);
+        else if(command.equalsIgnoreCase("get messages"))
+            return chatMenuController.getAllMessages();
         else if (command.startsWith("shop"))
             return shopController.getDetail(command.split(" ")[1]);
         else if (command.startsWith("buy"))
