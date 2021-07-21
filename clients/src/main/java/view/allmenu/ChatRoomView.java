@@ -33,7 +33,7 @@ public class ChatRoomView {
     public Label notifLabel;
     public ImageView sendMessageImage;
     public AnchorPane rightPane;
-    private ChatRoomController chatRoomController;
+    private final ChatRoomController chatRoomController;
 
     public ChatRoomView(){
         chatRoomController=new ChatRoomController(this);

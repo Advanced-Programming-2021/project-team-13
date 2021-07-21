@@ -1,11 +1,7 @@
 package controll;
 
-import org.json.JSONObject;
 import view.ViewMaster;
 import view.allmenu.ChatRoomView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ChatRoomController {
     private ChatRoomView chatRoomView;
