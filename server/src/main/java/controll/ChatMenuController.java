@@ -1,9 +1,10 @@
 package controll;
 
 
-import model.players.User;
+import com.gilecode.yagson.com.google.gson.Gson;
+import com.gilecode.yagson.com.google.gson.GsonBuilder;
 import org.json.JSONObject;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +27,8 @@ public class ChatMenuController {
     }
 
     public synchronized String getAllMessages() {
-        JSONObject jsonObject = new JSONObject(CommandController.messages);
-        return jsonObject.toString();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+        return gson.toJson(CommandController.messages);
     }
 }

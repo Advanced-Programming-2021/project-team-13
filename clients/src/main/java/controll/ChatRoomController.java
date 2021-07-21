@@ -31,8 +31,10 @@ public class ChatRoomController {
             ViewMaster.dataOutputStream.flush();
             String input = ViewMaster.dataInputStream.readUTF();
             Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<Map<String, String>>>() {
+            Type type = new TypeToken<ArrayList<HashMap<String, String>>>() {
             }.getType();
+            System.out.println(input);
+            System.out.println(type);
             return gson.fromJson(input,type);
         }catch (Exception e){
             e.printStackTrace();
